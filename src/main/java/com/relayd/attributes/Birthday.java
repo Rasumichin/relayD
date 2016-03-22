@@ -14,6 +14,9 @@ public class Birthday implements Serializable {
 
 	private Date value;
 
+	/**
+	 * Bloch, Joshua, Effective Java, 2nd Edition, Item 1, p. 5
+	 */
 	static public Birthday newInstance(Date aDate) {
 		validate(aDate);
 		return new Birthday(aDate);
