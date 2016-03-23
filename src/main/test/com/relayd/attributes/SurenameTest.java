@@ -18,10 +18,10 @@ public class SurenameTest {
 
 	@Test
 	public void testCreateValidObject() {
-		String value = "McFly";
-		Surename surename = Surename.newInstance(value);
+		final String NAME = "McFly";
+		Surename surename = Surename.newInstance(NAME);
 
-		assertEquals(value, surename.toString());
+		assertEquals(NAME, surename.toString());
 	}
 
 	@Test(expected = IllegalArgumentException.class)

@@ -17,7 +17,7 @@ public class BirthdayTest {
 
 	@Test
 	public void testCreateValidObject() {
-		Date date = new GregorianCalendar(1978, Calendar.OCTOBER, 21).getTime();
+		final Date date = new GregorianCalendar(1978, Calendar.OCTOBER, 21).getTime();
 
 		Birthday birthday = Birthday.newInstance(date);
 
