@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import com.relayd.attributes.Birthday;
 import com.relayd.attributes.Forename;
+import com.relayd.attributes.Shirtsize;
 import com.relayd.attributes.Surename;
 
 import static org.junit.Assert.*;
@@ -24,10 +25,11 @@ public class PersonTest {
 		sut.setSurename(Surename.newInstance("Jonas"));
 		sut.setForename(Forename.newInstance("Justus"));
 		sut.setBirthday(Birthday.newInstance(new GregorianCalendar(1956, Calendar.FEBRUARY, 6).getTime()));
+		sut.setShirtsize(Shirtsize.HerrenM);
 
 		String personAsString = sut.toString();
 
-		assertEquals("Justus Jonas, Geboren am: 06.02.1956", personAsString);
+		assertEquals("Justus Jonas, Geboren am: 06.02.1956, HerrenM", personAsString);
 	}
 
 	@Test
@@ -84,4 +86,18 @@ public class PersonTest {
 		assertEquals("Erwarte den neu gesetzten Surenamen.", CELVIN, forename.toString());
 	}
 
+	@Test
+	public void testChangeShirtsize() {
+		final Shirtsize HERREN_XXL = Shirtsize.HerrenXXL;
+		Person sut = Person.newInstance();
+
+		Shirtsize shirtsize = sut.getShirtsize();
+
+		assertNull(shirtsize);
+
+		sut.setShirtsize(HERREN_XXL);
+
+		shirtsize = sut.getShirtsize();
+		assertEquals(HERREN_XXL, shirtsize);
+	}
 }

@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import com.relayd.attributes.Birthday;
 import com.relayd.attributes.Forename;
+import com.relayd.attributes.Shirtsize;
 import com.relayd.attributes.Surename;
 
 /**
@@ -19,6 +20,7 @@ public class Person implements Serializable {
 	private Surename surename = null;
 	private Forename forename = null;
 	private Birthday birthday = null;
+	private Shirtsize shirtsize = null;
 
 	private Person() {
 		uuid = UUID.randomUUID();
@@ -56,8 +58,16 @@ public class Person implements Serializable {
 		forename = aForename;
 	}
 
+	public Shirtsize getShirtsize() {
+		return shirtsize;
+	}
+
+	public void setShirtsize(Shirtsize aShirtsize) {
+		shirtsize = aShirtsize;
+	}
+
 	@Override
 	public String toString() {
-		return getForename() + " " + getSurename() + ", " + getBirthday();
+		return getForename() + " " + getSurename() + ", " + getBirthday() + ", " + getShirtsize();
 	}
 }
