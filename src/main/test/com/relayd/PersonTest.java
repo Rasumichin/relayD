@@ -2,6 +2,7 @@ package com.relayd;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 
 import org.junit.Test;
 
@@ -26,10 +27,11 @@ public class PersonTest {
 		sut.setForename(Forename.newInstance("Justus"));
 		sut.setBirthday(Birthday.newInstance(new GregorianCalendar(1956, Calendar.FEBRUARY, 6).getTime()));
 		sut.setShirtsize(Shirtsize.HerrenM);
+		sut.setNationality(Locale.GERMANY);
 
 		String personAsString = sut.toString();
 
-		assertEquals("Justus Jonas, Geboren am: 06.02.1956, HerrenM", personAsString);
+		assertEquals("Justus Jonas, Geboren am: 06.02.1956, HerrenM, Deutschland", personAsString);
 	}
 
 	@Test
@@ -99,5 +101,20 @@ public class PersonTest {
 
 		shirtsize = sut.getShirtsize();
 		assertEquals(HERREN_XXL, shirtsize);
+	}
+
+	@Test
+	public void testChangeNationality() {
+		final Locale GERMANY = Locale.GERMANY;
+		Person sut = Person.newInstance();
+
+		Locale nationality = sut.getNationality();
+
+		assertNull(nationality);
+
+		sut.setNationality(GERMANY);
+
+		nationality = sut.getNationality();
+		assertEquals(GERMANY, nationality);
 	}
 }

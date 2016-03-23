@@ -1,6 +1,7 @@
 package com.relayd;
 
 import java.io.Serializable;
+import java.util.Locale;
 import java.util.UUID;
 
 import com.relayd.attributes.Birthday;
@@ -21,6 +22,7 @@ public class Person implements Serializable {
 	private Forename forename = null;
 	private Birthday birthday = null;
 	private Shirtsize shirtsize = null;
+	private Locale nationality = null;
 
 	private Person() {
 		uuid = UUID.randomUUID();
@@ -66,8 +68,23 @@ public class Person implements Serializable {
 		shirtsize = aShirtsize;
 	}
 
+	public Locale getNationality() {
+		return nationality;
+	}
+
+	public void setNationality(Locale aNationality) {
+		nationality = aNationality;
+	}
+
+	private String getDisplayCountry() {
+		if (getNationality() != null) {
+			return getNationality().getDisplayCountry();
+		}
+		return null;
+	}
+
 	@Override
 	public String toString() {
-		return getForename() + " " + getSurename() + ", " + getBirthday() + ", " + getShirtsize();
+		return getForename() + " " + getSurename() + ", " + getBirthday() + ", " + getShirtsize() + ", " + getDisplayCountry();
 	}
 }
