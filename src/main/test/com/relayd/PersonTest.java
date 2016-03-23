@@ -36,56 +36,52 @@ public class PersonTest {
 
 	@Test
 	public void testChangeSurenameFromPerson() {
-		final String KLINE = "Kline";
-		final String MC_FLY = "McFly";
+		final Surename FIRST_CHOICE = Surename.newInstance("McFly");
+		final Surename SECOND_CHOICE = Surename.newInstance("Kline");
 
 		Person sut = Person.newInstance();
 		Surename surename = sut.getSurename();
 
-		assertNull("Erwarte gültige Instanz.", surename);
+		assertNull("Erwarte keine gültige Instanz.", surename);
 
-		sut.setSurename(Surename.newInstance(MC_FLY));
-
-		surename = sut.getSurename();
-
-		assertNotNull(surename);
-		assertEquals("Erwarte den gesetzten Surenamen.", MC_FLY, surename.toString());
-
-		Surename newSurename = Surename.newInstance(KLINE);
-
-		sut.setSurename(newSurename);
+		sut.setSurename(FIRST_CHOICE);
 
 		surename = sut.getSurename();
 
 		assertNotNull(surename);
-		assertEquals("Erwarte den neu gesetzten Surenamen.", KLINE, surename.toString());
+		assertEquals("Erwarte den gesetzten Surenamen.", FIRST_CHOICE, surename);
+
+		sut.setSurename(SECOND_CHOICE);
+
+		surename = sut.getSurename();
+
+		assertNotNull(surename);
+		assertEquals("Erwarte den neu gesetzten Surenamen.", SECOND_CHOICE, surename);
 	}
 
 	@Test
 	public void testChangeForenameFromPerson() {
-		final String CELVIN = "Celvin";
-		final String MARTY = "Marty";
+		final Forename FIRST_CHOICE = Forename.newInstance("Marty");
+		final Forename SECOND_CHOICE = Forename.newInstance("Celvin");
 
 		Person sut = Person.newInstance();
 		Forename forename = sut.getForename();
 
 		assertNull(forename);
 
-		sut.setForename(Forename.newInstance(MARTY));
+		sut.setForename(FIRST_CHOICE);
 
 		forename = sut.getForename();
 
 		assertNotNull("Erwarte gültige Instanz.", forename);
-		assertEquals("Erwarte den gesetzten Surenamen.", MARTY, forename.toString());
+		assertEquals("Erwarte den gesetzten Surenamen.", FIRST_CHOICE, forename);
 
-		Forename newForename = Forename.newInstance(CELVIN);
-
-		sut.setForename(newForename);
+		sut.setForename(SECOND_CHOICE);
 
 		forename = sut.getForename();
 
 		assertNotNull(forename);
-		assertEquals("Erwarte den neu gesetzten Surenamen.", CELVIN, forename.toString());
+		assertEquals("Erwarte den neu gesetzten Surenamen.", SECOND_CHOICE, forename);
 	}
 
 	@Test
