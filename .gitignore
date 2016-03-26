@@ -1,6 +1,7 @@
-/target/
+target/
 /.classpath
 /.project
 /.settings/
 /nb-configuration.xml
 /relayD-api/nb-configuration.xml
+.DS_Store
