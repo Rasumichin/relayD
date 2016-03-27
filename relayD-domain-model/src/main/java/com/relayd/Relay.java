@@ -1,9 +1,7 @@
 package com.relayd;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.relayd.attributes.Relayname;
+import com.relayd.attributes.*;
+import java.util.*;
 
 /**
  * @author  schmollc (Christian@cloud.franke-net.com)
@@ -33,7 +31,7 @@ public class Relay {
 	}
 
 	public void addPerson(Person aPerson) {
-		// TODO -schmollc 23.03.2016- Verhindern das man mehr als die MAX_MEMBER hinzufügen kann.
+		// TODO -schmollc 23.03.2016- Verhindern das man mehr als die MAX_MEMBER hinzufuegen kann.
 		persons.add(aPerson);
 	}
 

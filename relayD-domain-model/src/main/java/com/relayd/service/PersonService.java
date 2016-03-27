@@ -1,9 +1,9 @@
 package com.relayd.service;
 
-import com.relayd.Person;
-import com.relayd.attributes.Surename;
-import com.relayd.ejb.PersonGateway;
-import com.relayd.ejb.orm.file.PersonGatewayFile;
+import com.relayd.*;
+import com.relayd.attributes.*;
+import com.relayd.ejb.*;
+import com.relayd.ejb.orm.file.*;
 
 /**
  * Diese Klasse befindt sich noch in der Businessschicht und leitet die
@@ -18,7 +18,7 @@ public class PersonService {
 
 	private PersonService() {
 		super();
-		// das wird dann später per Injection oder FactoryPattern entsprechend geholt.
+		// das wird dann spaeter per Injection oder FactoryPattern entsprechend geholt.
 		gateway = new PersonGatewayFile();
 	}
 

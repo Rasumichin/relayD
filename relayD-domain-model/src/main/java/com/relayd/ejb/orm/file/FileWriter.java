@@ -1,12 +1,11 @@
 package com.relayd.ejb.orm.file;
 
-import java.util.List;
-
-import com.relayd.Person;
+import com.relayd.*;
+import java.util.*;
 
 /**
  * Beispielhaftes lesen/schreiben auf eine Datei.
- * (Achtung, klappt nicht sauber da das Exception Handling an diesem Beispiel auﬂer acht gelassen wurde)
+ * (Achtung, klappt nicht sauber da das Exception Handling an diesem Beispiel ausser acht gelassen wurde)
  *
  * @author  schmollc (Christian@cloud.franke-net.com)
  * @since   26.03.2016

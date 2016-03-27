@@ -1,8 +1,8 @@
 package com.relayd.ejb.orm.nosql;
 
-import com.relayd.Person;
-import com.relayd.attributes.Surename;
-import com.relayd.ejb.PersonGateway;
+import com.relayd.*;
+import com.relayd.attributes.*;
+import com.relayd.ejb.*;
 
 /**
  * @author  schmollc (Christian@cloud.franke-net.com)
@@ -26,7 +26,7 @@ public class PersonGatewayNoSql implements PersonGateway {
 		//		BasicDBObject person = new BasicDBObject();
 		//		person.put("surename", aPerson.getSurename().toString());
 		//		person.put("foreename", aPerson.getForename().toString());
-		//		// usw. gehört eigentlich in eine MapperKlasse!
+		//		// usw. gehoert eigentlich in eine MapperKlasse!
 		//		persons.insert(person);
 	}
 }

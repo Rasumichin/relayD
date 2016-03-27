@@ -11,6 +11,7 @@
 
     <modules>
         <module>relayD-api</module>
+        <module>relayD-domain-model</module>
     </modules>
 
     <build>
@@ -56,4 +57,13 @@
             </plugins>
         </pluginManagement>
     </build>
+    
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 </project>
