@@ -1,5 +1,6 @@
 package com.relayd.web.api.jaxb;
 
+import java.util.*;
 import javax.xml.bind.annotation.*;
 
 /**
@@ -19,6 +20,21 @@ public class EventDTO {
 
     public EventDTO(String anId) {
         id = anId;
+    }
+    
+    public static List<EventDTO> getRandomEvents() {
+        List<EventDTO> result = new ArrayList<>();
+        String[] titles = {"Metro Duesseldorf Marathon", "Schmolleks Ennepetal Staffel Hulli Gulli", "Boston Marathon Relay Event"};
+
+        for (String eachTitle: Arrays.asList(titles)) {
+            EventDTO event = new EventDTO(UUID.randomUUID().toString());
+            event.setTitle(eachTitle);
+            event.setYear(2017);
+            event.setNumberOfParticipants(new Random().nextInt(4) * 4);
+            result.add(event);
+        }
+        
+        return result;
     }
 
     @XmlElement

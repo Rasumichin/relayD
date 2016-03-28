@@ -1,6 +1,7 @@
 package com.relayd.web.api.resource;
 
 import com.relayd.web.api.jaxb.*;
+import java.util.*;
 import javax.ws.rs.*;
 
 /**
@@ -12,9 +13,9 @@ import javax.ws.rs.*;
 public class EventsResource {
 
     @GET
-    @Produces("text/plain")
-    public String getEvents() {
-        return "list of events";
+    @Produces("application/json")
+    public List<EventDTO> getEvents() {
+        return EventDTO.getRandomEvents();
     }
 
     @Path("ping")
@@ -28,10 +29,8 @@ public class EventsResource {
     @GET
     @Produces("application/json")
     public EventDTO getEvent(@PathParam("id") String id) {
-        EventDTO event = new EventDTO(id);
-        event.setTitle("Duesseldorf Metro Marathon");
-        event.setYear(2017);
-        event.setNumberOfParticipants(24);
+        EventDTO event = EventDTO.getRandomEvents().get(0);
+        event.setId(id);
         
         return event;
     }
