@@ -1,10 +1,12 @@
 package com.relayd.web.api.resource;
 
+import com.relayd.web.api.jaxb.*;
 import javax.ws.rs.*;
 
 /**
  * @author Rasumichin (Erik@cloud.franke-net.com)
- * @since 27.03.2016 status initial
+ * @since 27.03.2016
+ * status initial
  */
 @Path("events")
 public class EventsResource {
@@ -24,8 +26,13 @@ public class EventsResource {
 
     @Path("{id}")
     @GET
-    @Produces("text/plain")
-    public String getEvent(@PathParam("id") String id) {
-        return "event with id '" + id + "'.";
+    @Produces("application/json")
+    public EventDTO getEvent(@PathParam("id") String id) {
+        EventDTO event = new EventDTO(id);
+        event.setTitle("Duesseldorf Metro Marathon");
+        event.setYear(2017);
+        event.setNumberOfParticipants(24);
+        
+        return event;
     }
 }
