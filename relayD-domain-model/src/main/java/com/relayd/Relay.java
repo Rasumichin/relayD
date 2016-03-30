@@ -1,7 +1,9 @@
 package com.relayd;
 
-import com.relayd.attributes.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.relayd.attributes.Relayname;
 
 /**
  * @author  schmollc (Christian@cloud.franke-net.com)
@@ -26,12 +28,11 @@ public class Relay {
 		return relayname;
 	}
 
-	public boolean isEmpty() {
-		return persons.isEmpty();
-	}
-
 	public void addPerson(Person aPerson) {
 		// TODO -schmollc 23.03.2016- Verhindern das man mehr als die MAX_MEMBER hinzufuegen kann.
+		if (isFull()) {
+			throw new IndexOutOfBoundsException("Nicht mehr als " + MAX_MEMBER + " Tielnehmer moeglich.");
+		}
 		persons.add(aPerson);
 	}
 
