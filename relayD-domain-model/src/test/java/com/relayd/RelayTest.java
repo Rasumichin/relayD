@@ -52,7 +52,7 @@ public class RelayTest {
 	 */
 	@Test
 	public void testAddPerson() {
-		Person person = createPersonJustusJonas();
+		Person person = new PersonBuilder().build();
 
 		boolean isFull = sut.isFull();
 
@@ -115,18 +115,27 @@ public class RelayTest {
 
 	@Test
 	public void testGetPersonForSurename() {
-		Person personJustusJonas = createPersonJustusJonas();
-		sut.addPerson(personJustusJonas);
-		Person personBobAndrews = createPersonBobAndrews();
-		sut.addPerson(personBobAndrews);
+		//@formatter:off
+		PersonBuilder builder = new PersonBuilder();
+		Person justusJonas = builder
+				.withForename(Forename.newInstance("Justus"))
+				.withSurename(Surename.newInstance("Jonas"))
+				.build();
+		Person bobAndrews = builder
+				.withForename(Forename.newInstance("Bob"))
+				.withSurename(Surename.newInstance("Andrews"))
+				.build();
+		//@formatter:on
+		sut.addPerson(justusJonas);
+		sut.addPerson(bobAndrews);
 
 		Person result = sut.getPerson(Surename.newInstance("Jonas"));
 
-		assertEquals(personJustusJonas, result);
+		assertEquals(justusJonas, result);
 	}
 
 	private void addPersonsToSUT(int count) {
-		Person person = createPersonJustusJonas();
+		Person person = new PersonBuilder().build();
 		for (int i = 0; i < count; i++) {
 			sut.addPerson(person);
 		}
@@ -134,23 +143,5 @@ public class RelayTest {
 
 	private int personCount(int value) {
 		return value;
-	}
-
-	private Person createPersonJustusJonas() {
-		//@formatter:off
-		return new PersonBuilder()
-								.withSurename(Surename.newInstance("Jonas"))
-								.withForename(Forename.newInstance("Justus"))
-								.build();
-		//@formatter:on
-	}
-
-	private Person createPersonBobAndrews() {
-		//@formatter:off
-		return new PersonBuilder()
-								.withSurename(Surename.newInstance("Andrews"))
-								.withForename(Forename.newInstance("Bob"))
-								.build();
-		//@formatter:on
 	}
 }
