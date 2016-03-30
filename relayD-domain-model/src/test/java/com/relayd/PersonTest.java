@@ -15,7 +15,8 @@ import static org.junit.Assert.*;
 
 /**
  * @author schmollc (Christian@cloud.franke-net.com)
- * @since 22.03.2016 status initial
+ * @since 22.03.2016
+ * status initial
  */
 public class PersonTest {
 
@@ -34,7 +35,7 @@ public class PersonTest {
 	}
 
 	@Test
-	public void testChangeSurenameFromPerson() {
+	public void testChangeSurename() {
 		final Surename FIRST_CHOICE = Surename.newInstance("McFly");
 		final Surename SECOND_CHOICE = Surename.newInstance("Kline");
 
@@ -59,14 +60,14 @@ public class PersonTest {
 	}
 
 	@Test
-	public void testChangeForenameFromPerson() {
+	public void testChangeForename() {
 		final Forename FIRST_CHOICE = Forename.newInstance("Marty");
 		final Forename SECOND_CHOICE = Forename.newInstance("Celvin");
 
 		Person sut = Person.newInstance();
 		Forename forename = sut.getForename();
 
-		assertNull(forename);
+		assertNull("Erwarte keine gueltige Instanz.", forename);
 
 		sut.setForename(FIRST_CHOICE);
 
@@ -90,12 +91,12 @@ public class PersonTest {
 
 		Shirtsize shirtsize = sut.getShirtsize();
 
-		assertNull(shirtsize);
+		assertNull("Erwarte keine gueltige Instanz.", shirtsize);
 
 		sut.setShirtsize(HERREN_XXL);
 
 		shirtsize = sut.getShirtsize();
-		assertEquals(HERREN_XXL, shirtsize);
+		assertEquals("Shirtsize ist nicht korrekt.", HERREN_XXL, shirtsize);
 	}
 
 	@Test
@@ -105,11 +106,11 @@ public class PersonTest {
 
 		Locale nationality = sut.getNationality();
 
-		assertNull(nationality);
+		assertNull("Erwarte keine gueltige Instanz.", nationality);
 
 		sut.setNationality(GERMANY);
 
 		nationality = sut.getNationality();
-		assertEquals(GERMANY, nationality);
+		assertEquals("Nationality ist nicht korrekt.", GERMANY, nationality);
 	}
 }
