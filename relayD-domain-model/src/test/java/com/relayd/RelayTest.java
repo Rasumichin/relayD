@@ -1,15 +1,9 @@
 package com.relayd;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.Locale;
-
 import org.junit.Test;
 
-import com.relayd.attributes.Birthday;
 import com.relayd.attributes.Forename;
 import com.relayd.attributes.Relayname;
-import com.relayd.attributes.Shirtsize;
 import com.relayd.attributes.Surename;
 
 import static org.junit.Assert.*;
@@ -20,10 +14,11 @@ import static org.junit.Assert.*;
  */
 public class RelayTest {
 
+	private Relay sut = Relay.newInstance();
+
 	@Test
 	public void testCreateInitialRelay() {
 		final String RELAYNAME = "Die vier ????";
-		Relay sut = Relay.newInstance();
 
 		sut.setRelayname(Relayname.newInstance(RELAYNAME));
 
@@ -34,7 +29,6 @@ public class RelayTest {
 	public void testChangeRelayname() {
 		final Relayname FIRST_CHOICE = Relayname.newInstance("Die vier ????");
 		final Relayname SECOND_CHOICE = Relayname.newInstance("The Walking Dead");
-		Relay sut = Relay.newInstance();
 
 		Relayname relayname = sut.getRelayname();
 
@@ -58,8 +52,7 @@ public class RelayTest {
 	 */
 	@Test
 	public void testAddPerson() {
-		Person person = createPerson();
-		Relay sut = Relay.newInstance();
+		Person person = createPersonJustusJonas();
 
 		boolean isFull = sut.isFull();
 
@@ -92,8 +85,6 @@ public class RelayTest {
 
 	@Test
 	public void testNoPersonInList() {
-		Relay sut = Relay.newInstance();
-
 		boolean isFull = sut.isFull();
 
 		assertFalse("Erwarte das Staffel nicht voll ist.", isFull);
@@ -101,9 +92,7 @@ public class RelayTest {
 
 	@Test
 	public void testAddOnePerson() {
-		Relay sut = Relay.newInstance();
-
-		addPersons(sut, personCount(1));
+		addPersonsToSUT(personCount(1));
 
 		boolean isFull = sut.isFull();
 
@@ -112,9 +101,7 @@ public class RelayTest {
 
 	@Test
 	public void testAddFourPerson() {
-		Relay sut = Relay.newInstance();
-
-		addPersons(sut, personCount(4));
+		addPersonsToSUT(personCount(4));
 
 		boolean isFull = sut.isFull();
 
@@ -123,13 +110,23 @@ public class RelayTest {
 
 	@Test(expected = IndexOutOfBoundsException.class)
 	public void testAddFivePerson() {
-		Relay sut = Relay.newInstance();
-
-		addPersons(sut, personCount(5));
+		addPersonsToSUT(personCount(5));
 	}
 
-	private void addPersons(Relay sut, int count) {
-		Person person = createPerson();
+	@Test
+	public void testGetPersonForSurename() {
+		Person personJustusJonas = createPersonJustusJonas();
+		sut.addPerson(personJustusJonas);
+		Person personBobAndrews = createPersonBobAndrews();
+		sut.addPerson(personBobAndrews);
+
+		Person result = sut.getPerson(Surename.newInstance("Jonas"));
+
+		assertEquals(personJustusJonas, result);
+	}
+
+	private void addPersonsToSUT(int count) {
+		Person person = createPersonJustusJonas();
 		for (int i = 0; i < count; i++) {
 			sut.addPerson(person);
 		}
@@ -139,13 +136,21 @@ public class RelayTest {
 		return value;
 	}
 
-	private Person createPerson() {
-		Person person = Person.newInstance();
-		person.setSurename(Surename.newInstance("Jonas"));
-		person.setForename(Forename.newInstance("Justus"));
-		person.setBirthday(Birthday.newInstance(new GregorianCalendar(1956, Calendar.FEBRUARY, 6).getTime()));
-		person.setShirtsize(Shirtsize.HerrenM);
-		person.setNationality(Locale.GERMANY);
-		return person;
+	private Person createPersonJustusJonas() {
+		//@formatter:off
+		return new PersonBuilder()
+								.withSurename(Surename.newInstance("Jonas"))
+								.withForename(Forename.newInstance("Justus"))
+								.build();
+		//@formatter:on
+	}
+
+	private Person createPersonBobAndrews() {
+		//@formatter:off
+		return new PersonBuilder()
+								.withSurename(Surename.newInstance("Andrews"))
+								.withForename(Forename.newInstance("Bob"))
+								.build();
+		//@formatter:on
 	}
 }
