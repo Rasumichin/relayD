@@ -1,8 +1,11 @@
 package com.relayd.web.api.resource;
 
 import com.relayd.web.api.jaxb.*;
+import java.net.*;
 import java.util.*;
+import java.util.logging.*;
 import javax.ws.rs.*;
+import javax.ws.rs.core.*;
 
 /**
  * @author Rasumichin (Erik@cloud.franke-net.com)
@@ -18,6 +21,23 @@ public class EventsResource {
         return EventDTO.getRandomEvents();
     }
 
+    @POST
+    @Consumes("application/json")
+    public Response addEvent(EventDTO anEvent, @Context UriInfo uriInfo) {
+        // TODO Erik, 2016-03-31: discuss the level of input validation here
+        URI newEventUri = null;
+        try {
+            // TODO Erik, 2016-03-31: Find out whether there is away to explicitely avoid the path separator.
+            newEventUri = new URI(uriInfo.getAbsolutePath().toString() + "/" + anEvent.getId());
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(EventsResource.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return Response.status(201)
+                .location(newEventUri)
+                .build();
+    }
+    
     @Path("ping")
     @GET
     @Produces("text/plain")

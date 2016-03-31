@@ -72,4 +72,12 @@ public class EventDTO {
     public void setNumberOfParticipants(Integer participants) {
         numberOfParticipants = participants;
     }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + " {"
+                + "id=" + id
+                + ", title=" + title
+                + ", year=" + year + "}";
+    }
 }
