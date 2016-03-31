@@ -37,6 +37,12 @@ public class EventDTO {
         return result;
     }
 
+    public static boolean isEventExistingFor(String anEventId) {
+        long randomValue = System.currentTimeMillis();
+        
+        return (randomValue % 2) == 0;
+    }
+    
     @XmlElement
     public String getId() {
         return id;
