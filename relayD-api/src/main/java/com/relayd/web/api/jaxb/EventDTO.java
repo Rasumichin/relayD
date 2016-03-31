@@ -22,6 +22,14 @@ public class EventDTO {
         id = anId;
     }
     
+    /**
+     * Creates always three instances with three static titles, each with a
+     * random id, a static year (2017) and a random number of particants
+     * (0, 4, 8 or 12).
+     *
+     * @return A list of three elements.
+     * 
+     */
     public static List<EventDTO> getRandomEvents() {
         List<EventDTO> result = new ArrayList<>();
         String[] titles = {"Metro Duesseldorf Marathon", "Schmolleks Ennepetal Staffel Hulli Gulli", "Boston Marathon Relay Event"};
@@ -37,6 +45,14 @@ public class EventDTO {
         return result;
     }
 
+    /**
+     * Fake the check whether a corresponding instance is existing for the
+     * given 'id'.
+     * 
+     * @param anEventId will not be considered for the algorythm
+     * @return true or false with a 50 percent probability for each case
+     * 
+     */
     public static boolean isEventExistingFor(String anEventId) {
         long randomValue = System.currentTimeMillis();
         
