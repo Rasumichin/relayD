@@ -43,6 +43,19 @@ public class EventsResource {
                 .build();
     }
     
+    @Path("{id}")
+    @PUT
+    @Consumes("application/json")
+    public Response updateEvent(@PathParam("id") String id, EventDTO anEvent) {
+        // Action here:
+        // Determine existing resource and persist new state of resource.
+        
+        // Other possible responses:
+        // - 404 not found
+        // - 304 not modified (state has not been changed)
+        return Response.status(200).build();
+    }
+    
     @Path("ping")
     @GET
     @Produces("text/plain")
