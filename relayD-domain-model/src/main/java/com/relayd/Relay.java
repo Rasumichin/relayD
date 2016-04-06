@@ -1,21 +1,27 @@
 package com.relayd;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import com.relayd.attributes.Relayname;
 import com.relayd.attributes.Surename;
 
 /**
+ * Eine Staffel ist ja eigentlich nichts anderes als eine Liste von Personen
+ * (oder Etappen) mit einem Namen.<p/>
+ *
+ * Vorteil: Es müssen nun solche Methoden wie isEmpty(), add(), remove() usw nicht
+ * mehr auf funktionalität getestet werden.<br/>
+ * Es reicht den Fokus auf die fachlichen Beschränkungen zu legen wie z.B. das erreichen der Max-Grenze
+ * (in diesem Fall 4)
+ *
  * @author  schmollc (Christian@cloud.franke-net.com)
  * @since   23.03.2016
  * status   initial
  */
-public class Relay {
+public class Relay extends ArrayList<Person> {
 
 	private static final int MAX_MEMBER = 4;
 	private Relayname relayname = null;
-	private List<Person> persons = new ArrayList<Person>();
 
 	public static Relay newInstance() {
 		return new Relay();
@@ -33,15 +39,15 @@ public class Relay {
 		if (isFull()) {
 			throw new IndexOutOfBoundsException("Nicht mehr als " + MAX_MEMBER + " Teilnehmer moeglich.");
 		}
-		persons.add(aPerson);
+		add(aPerson);
 	}
 
 	public boolean isFull() {
-		return persons.size() == MAX_MEMBER;
+		return size() == MAX_MEMBER;
 	}
 
 	public Person getPerson(Surename surename) {
-		for (Person person : persons) {
+		for (Person person : this) {
 			if (person.getSurename().equals(surename)) {
 				return person;
 			}
