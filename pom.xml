@@ -12,6 +12,7 @@
     <modules>
         <module>relayD-api</module>
         <module>relayD-domain-model</module>
+        <module>relayD-entity-model</module>
     </modules>
 
     <build>
