@@ -11,12 +11,12 @@ import org.junit.Test;
  * @since 22.04.2016
  * status initial
  */
-public class EventEntityTest {
+public class RelayEventEntityTest {
 	int LENGTH_OF_CORRECT_UUID_STRING = 36;
 
 	@Test
 	public void testInstanceIsCreatedWithValidIdentity() {
-		EventEntity sut = new EventEntity.Builder("title").build();
+		RelayEventEntity sut = new RelayEventEntity.Builder("title").build();
 		assertNotNull("Id of EventEntity must not be 'null' after createion.", sut.getId());
 		assertTrue("Id of EventEntity is not properly initialized.", sut.getId().length() == LENGTH_OF_CORRECT_UUID_STRING);
 	}
@@ -24,20 +24,20 @@ public class EventEntityTest {
 	@Test(expected=IllegalArgumentException.class)
 	public void testInstanceCannotBeCreatedWithouTitle() {
 		@SuppressWarnings("unused")
-		EventEntity sut= new EventEntity.Builder(null).build();
+		RelayEventEntity sut= new RelayEventEntity.Builder(null).build();
 	}
 	
 	@Test
 	public void testInstanceCreatedWithValidTitle() {
 		String validTitle = "My Event";
-		EventEntity sut = new EventEntity.Builder(validTitle).build();
+		RelayEventEntity sut = new RelayEventEntity.Builder(validTitle).build();
 		assertEquals("'title' has not been set correctly.", validTitle, sut.getTitle());
 	}
 
 	@Test
 	public void testInstanceCreatedWithValidYearHappened() {
 		Integer currentYear = Calendar.getInstance().get(Calendar.YEAR);
-		EventEntity sut = new EventEntity.Builder("title").withYearHappened(currentYear).build();
+		RelayEventEntity sut = new RelayEventEntity.Builder("title").withYearHappened(currentYear).build();
 		assertEquals("'YearHappened' has not been set correctly.", currentYear, sut.getYearHappened());
 	}
 
@@ -47,6 +47,6 @@ public class EventEntityTest {
 		Integer yearBeforeCurrentYear = currentYear - 1;
 		
 		@SuppressWarnings("unused")
-		EventEntity sut = new EventEntity.Builder("title").withYearHappened(yearBeforeCurrentYear).build();
+		RelayEventEntity sut = new RelayEventEntity.Builder("title").withYearHappened(yearBeforeCurrentYear).build();
 	}
 }

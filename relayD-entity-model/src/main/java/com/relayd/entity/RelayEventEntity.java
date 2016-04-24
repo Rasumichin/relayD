@@ -6,6 +6,7 @@ import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * JPA Entity class to represent the underlying RDBMS table which persists the 'Event' data.
@@ -17,7 +18,8 @@ import javax.persistence.Id;
  * 
  */
 @Entity
-public class EventEntity {
+@Table(name="RELAY_EVENT")
+public class RelayEventEntity {
 	
 	@Id
 	@Column(nullable=false, length=36)
@@ -55,12 +57,12 @@ public class EventEntity {
 			}
 		}
 
-		public EventEntity build() {
-			return new EventEntity(this);
+		public RelayEventEntity build() {
+			return new RelayEventEntity(this);
 		}
 	}
 	
-	private EventEntity(Builder aBuilder) {
+	private RelayEventEntity(Builder aBuilder) {
 		id = aBuilder.id;
 		title = aBuilder.title;
 		yearHappened = aBuilder.yearHappened;
@@ -71,7 +73,7 @@ public class EventEntity {
 	 * are not declared 'final'.
 	 * 
 	 */
-	protected EventEntity() {
+	protected RelayEventEntity() {
 	}
 	
 	public String getId() {
