@@ -17,7 +17,7 @@ public class RelayEventEntityTest {
 	@Test
 	public void testInstanceIsCreatedWithValidIdentity() {
 		RelayEventEntity sut = new RelayEventEntity.Builder("title").build();
-		assertNotNull("Id of EventEntity must not be 'null' after createion.", sut.getId());
+		assertNotNull("Id of EventEntity must not be 'null' after creation.", sut.getId());
 		assertTrue("Id of EventEntity is not properly initialized.", sut.getId().length() == LENGTH_OF_CORRECT_UUID_STRING);
 	}
 	
