@@ -5,5 +5,4 @@ target/
 /nb-configuration.xml
 /relayD-api/nb-configuration.xml
 .DS_Store
-META-INF/
 build.properties

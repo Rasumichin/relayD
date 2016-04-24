@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: relayD-api
+Bundle-SymbolicName: relayD-api
+Bundle-Version: 1.0.0.qualifier
+Export-Package: com.relayd.web.api,
+ com.relayd.web.api.jaxb,
+ com.relayd.web.api.resource

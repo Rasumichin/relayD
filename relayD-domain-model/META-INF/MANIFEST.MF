@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: relayD-domain-model
+Bundle-SymbolicName: relayD-domain-model
+Bundle-Version: 1.0.0.qualifier
+Export-Package: com.relayd,
+ com.relayd.attributes,
+ com.relayd.ejb,
+ com.relayd.ejb.orm.file,
+ com.relayd.ejb.orm.mysql,
+ com.relayd.ejb.orm.nosql,
+ com.relayd.service
