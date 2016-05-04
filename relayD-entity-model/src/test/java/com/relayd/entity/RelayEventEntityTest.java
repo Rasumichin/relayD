@@ -1,52 +1,53 @@
 package com.relayd.entity;
 
-import static org.junit.Assert.*;
-
-import java.util.Calendar;
-
 import org.junit.Test;
 
+import static org.junit.Assert.*;
+
 /**
- * @author Rasumichin (Erik@cloud.franke-net.com)
- * @since 22.04.2016
+ * @author schmollc (Christian@cloud.franke-net.com)
+ * @since 04.05.2016
  * status initial
  */
 public class RelayEventEntityTest {
-	int LENGTH_OF_CORRECT_UUID_STRING = 36;
 
 	@Test
-	public void testInstanceIsCreatedWithValidIdentity() {
-		RelayEventEntity sut = new RelayEventEntity.Builder("title").build();
-		assertNotNull("Id of EventEntity must not be 'null' after creation.", sut.getId());
-		assertTrue("Id of EventEntity is not properly initialized.", sut.getId().length() == LENGTH_OF_CORRECT_UUID_STRING);
+	public void testConstructorWithValidTitle() {
+		String title = "Marathon 2017";
+
+		RelayEventEntity entity = new RelayEventEntity.Builder(title).build();
+
+		assertNotNull("Erwarte gueltige Instanz.", entity);
+		assertNotNull("Erwarte gueltige [id].", entity.getId());
+		assertEquals("[title] nicht korrekt.", title, entity.getTitle());
+		assertNull("Erwarte null fuer [yearHappened].", entity.getYearHappened());
 	}
-	
-	@Test(expected=IllegalArgumentException.class)
-	public void testInstanceCannotBeCreatedWithouTitle() {
-		@SuppressWarnings("unused")
-		RelayEventEntity sut= new RelayEventEntity.Builder(null).build();
-	}
-	
-	@Test
-	public void testInstanceCreatedWithValidTitle() {
-		String validTitle = "My Event";
-		RelayEventEntity sut = new RelayEventEntity.Builder(validTitle).build();
-		assertEquals("'title' has not been set correctly.", validTitle, sut.getTitle());
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testConstructorWithInvalidTitle() {
+		String title = null;
+
+		new RelayEventEntity.Builder(title).build();
 	}
 
 	@Test
-	public void testInstanceCreatedWithValidYearHappened() {
-		Integer currentYear = Calendar.getInstance().get(Calendar.YEAR);
-		RelayEventEntity sut = new RelayEventEntity.Builder("title").withYearHappened(currentYear).build();
-		assertEquals("'YearHappened' has not been set correctly.", currentYear, sut.getYearHappened());
+	public void testConstructorWithValidYear() {
+		String title = "Marathon 2018";
+		Integer yearHappened = 2018;
+
+		RelayEventEntity entity = new RelayEventEntity.Builder(title).withYearHappened(yearHappened).build();
+
+		assertNotNull("Erwarte gueltige Instanz.", entity);
+		assertNotNull("Erwarte gueltige [id].", entity.getId());
+		assertEquals("[title] nicht korrekt.", title, entity.getTitle());
+		assertEquals("[yearHappend] nicht korrekt.", yearHappened, entity.getYearHappened());
 	}
 
-	@Test(expected=IllegalArgumentException.class)
-	public void testInstanceCreatedWithInvalidYearHappened() {
-		Integer currentYear = Calendar.getInstance().get(Calendar.YEAR);
-		Integer yearBeforeCurrentYear = currentYear - 1;
-		
-		@SuppressWarnings("unused")
-		RelayEventEntity sut = new RelayEventEntity.Builder("title").withYearHappened(yearBeforeCurrentYear).build();
+	@Test(expected = IllegalArgumentException.class)
+	public void testConstructorWithInvalidYear() {
+		String title = "Marathon 2014";
+		Integer yearHappened = 2014;
+
+		new RelayEventEntity.Builder(title).withYearHappened(yearHappened).build();
 	}
 }
