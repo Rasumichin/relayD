@@ -1,11 +1,12 @@
 package com.relayd.web.api.resource;
 
-import com.relayd.web.api.jaxb.*;
 import java.net.*;
 import java.util.*;
 import java.util.logging.*;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
+
+import com.relayd.client.jaxb.EventDTO;
 
 /**
  * @author Rasumichin (Erik@cloud.franke-net.com)
