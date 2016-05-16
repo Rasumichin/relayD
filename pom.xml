@@ -14,6 +14,7 @@
         <module>relayD-domain-model</module>
         <module>relayD-entity-model</module>
         <module>relayD-web</module>
+        <module>relayD-client</module>
     </modules>
 
     <build>

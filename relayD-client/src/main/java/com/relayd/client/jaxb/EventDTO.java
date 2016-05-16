@@ -1,4 +1,4 @@
-package com.relayd.web.api.jaxb;
+package com.relayd.client.jaxb;
 
 import java.util.*;
 import javax.xml.bind.annotation.*;

@@ -6,7 +6,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-import com.relayd.web.api.jaxb.EventDTO;
+import com.relayd.client.jaxb.EventDTO;
 
 /**
  * @author schmollc (Christian@cloud.franke-net.com)
