@@ -13,6 +13,7 @@
         <module>relayD-api</module>
         <module>relayD-domain-model</module>
         <module>relayD-entity-model</module>
+        <module>relayD-web</module>
     </modules>
 
     <build>
