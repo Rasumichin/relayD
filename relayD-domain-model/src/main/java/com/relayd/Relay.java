@@ -20,6 +20,8 @@ import com.relayd.attributes.Surename;
  */
 public class Relay extends ArrayList<Person> {
 
+	private static final long serialVersionUID = -1655301147830819436L;
+
 	private static final int MAX_MEMBER = 4;
 	private Relayname relayname = null;
 

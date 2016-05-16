@@ -12,6 +12,7 @@ import java.util.*;
  * status   initial
  */
 public class FileWriter {
+	@SuppressWarnings("unused")
 	private static final String FILE_NAME = "Persons.relayD";
 
 	public static List<Person> get() {
