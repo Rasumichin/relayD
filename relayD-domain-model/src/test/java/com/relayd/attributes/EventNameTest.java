@@ -21,4 +21,10 @@ public class EventNameTest {
 
 		assertEquals(eventName, result);
 	}
+
+	@SuppressWarnings("unused")
+	@Test(expected = IllegalArgumentException.class)
+	public void testEventNameMustNotBeNull() {
+		new EventName(null);
+	}
 }
