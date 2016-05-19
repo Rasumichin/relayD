@@ -31,7 +31,7 @@ public class PersonTest {
 
 		String personAsString = sut.toString();
 
-		assertEquals("Justus Jonas, Geboren am: 17.02.1956, HerrenM, Deutschland", personAsString);
+		assertEquals("Justus Jonas, Geboren am: 17.02.1956, HerrenM, Germany", personAsString);
 	}
 
 	@Test
