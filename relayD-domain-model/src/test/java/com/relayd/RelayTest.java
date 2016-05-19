@@ -16,6 +16,8 @@ public class RelayTest {
 
 	private Relay sut = Relay.newInstance();
 
+	//Comment for first test
+
 	@Test
 	public void testCreateInitialRelay() {
 		final String RELAYNAME = "Die vier ????";
