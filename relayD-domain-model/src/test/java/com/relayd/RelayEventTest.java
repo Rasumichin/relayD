@@ -5,6 +5,8 @@ import java.util.Date;
 
 import org.junit.Test;
 
+import com.relayd.attributes.EventName;
+
 import static org.junit.Assert.*;
 
 /**
@@ -16,12 +18,12 @@ public class RelayEventTest {
 
 	@Test
 	public void testCreateValidInstance() {
-		String eventName = "MetroGroup Marathon Düsseldorf";
+		EventName eventName = new EventName("MetroGroup Marathon Düsseldorf");
 		Date eventDate = Calendar.getInstance().getTime();
 
 		RelayEvent sut = new RelayEvent(eventName, eventDate);
 
-		String actualName = sut.getName();
+		EventName actualName = sut.getName();
 		Date actualEventDate = sut.getEventDate();
 
 		assertEquals("[Name] not correct.", eventName, actualName);

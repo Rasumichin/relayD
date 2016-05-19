@@ -2,6 +2,8 @@ package com.relayd;
 
 import java.util.Date;
 
+import com.relayd.attributes.EventName;
+
 /**
  * @author schmollc (Christian@relayd.de)
  * @since 19.05.2016
@@ -9,16 +11,16 @@ import java.util.Date;
  */
 public class RelayEvent {
 
-	private String name;
+	private EventName name;
 	private Date eventDate;
 
-	public RelayEvent(String aName, Date anEventDate) {
+	public RelayEvent(EventName anEventName, Date anEventDate) {
 		super();
-		name = aName;
+		name = anEventName;
 		eventDate = anEventDate;
 	}
 
-	public String getName() {
+	public EventName getName() {
 		return name;
 	}
 
