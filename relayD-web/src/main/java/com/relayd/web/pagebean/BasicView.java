@@ -38,10 +38,8 @@ public class BasicView implements Serializable {
 	public String getEventsPingRequest() {
 		String pathToResource = "resources/events/ping";
 		WebTarget webTarget = getWebTarget(pathToResource);
-		Response response = webTarget.request().get();
-		String result = response.readEntity(String.class);
 		
-		return result;
+		return getResultFromRestService(webTarget);
 	}
 
 	public void setRestTargetRoot(String targetRoot) {
@@ -54,5 +52,12 @@ public class BasicView implements Serializable {
 
 	WebTarget getWebTarget(String pathToResource) {
 		return getRestClient().target(getRestTargetRoot() + pathToResource);
+	}
+
+	public String getResultFromRestService(WebTarget webTarget) {
+		Response response = webTarget.request().get();
+		String result = response.readEntity(String.class);
+		
+		return result;
 	}
 }

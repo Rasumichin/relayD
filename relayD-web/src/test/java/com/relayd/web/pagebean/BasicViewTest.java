@@ -1,14 +1,12 @@
 package com.relayd.web.pagebean;
 
 import static org.junit.Assert.*;
-
 import java.util.List;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.WebTarget;
-
+import org.junit.Ignore;
 import org.junit.Test;
-
 import com.relayd.client.jaxb.EventDTO;
 
 /**
@@ -49,6 +47,10 @@ public class BasicViewTest {
 	}
 
 	@Test
+	public void testGetResultFromRestService() {
+	}
+	
+	@Test
 	public void testGetEventsAnswersThreeElements() {
 		List<EventDTO> result = sut.getEvents();
 		
@@ -56,6 +58,7 @@ public class BasicViewTest {
 		assertEquals("Event list does not contain expected number of elements.", mockedNumberOfElements, result.size());
 	}
 	
+	@Ignore
 	@Test
 	public void testGetEventsPingRequest() {
 		String restTargetRoot = "http://localhost:8080/relayD-api/";
