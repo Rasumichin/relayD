@@ -3,7 +3,7 @@ package com.relayd.attributes;
 import java.time.LocalDate;
 
 /**
- * @author  Rasumichin (Erik@relayd.com)
+ * @author  Rasumichin (Erik@relayd.de)
  * @since   24.05.2016
  * status   ready-for-review
  * 
