@@ -27,7 +27,7 @@ public class DefaultRestGetServiceTest {
 		DefaultRestGetService sut = new DefaultRestGetService(resourceUri);
 		
 		URI result = sut.getResourceUri();
-		assertNotNull("[webTarget] is 'null'.", result);
-		assertEquals("Given [resourceUri] does not match [webTarget]'s URI.", resourceUri, result);
+		assertNotNull("[resourceUri] is 'null'.", result);
+		assertEquals("Given [resourceUri] does not match the answered URI.", resourceUri, result);
 	}
 }

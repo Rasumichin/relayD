@@ -1,5 +1,7 @@
 package com.relayd.web.rest.client;
 
+import java.net.URI;
+
 /**
  * Intention is to provide a simple interface for performing JAX-RS GET service calls.
  * 
@@ -11,4 +13,5 @@ package com.relayd.web.rest.client;
 public interface RestGetService {
 
 	String getResult();
+	URI getResourceUri();
 }

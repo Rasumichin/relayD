@@ -41,6 +41,7 @@ public class DefaultRestGetService implements RestGetService {
 		return webTarget;
 	}
 
+	@Override
 	public URI getResourceUri() {
 		return getWebTarget().getUri();
 	}
