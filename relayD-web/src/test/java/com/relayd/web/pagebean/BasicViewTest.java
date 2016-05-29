@@ -27,10 +27,10 @@ public class BasicViewTest {
 	
 	@Test
 	public void testGetEventsPingRequest() throws URISyntaxException {
-		String restTargetRoot = "localhost:8080/relayD-api";
+		String uriAuthority = "localhost:8080";
 
 		String expectedResult = "Pong response from class EventsResource.";
-		String actualResult = sut.getEventsPingRequest(restTargetRoot);
+		String actualResult = sut.getEventsPingRequest(uriAuthority);
 
 		assertEquals("Result of ping request to EventsResource does not match.", expectedResult, actualResult);
 	}

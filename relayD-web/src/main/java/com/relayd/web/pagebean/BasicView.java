@@ -28,15 +28,22 @@ public class BasicView implements Serializable {
 		return EventDTO.getRandomEvents();
 	}
 
-	public String getEventsPingRequest(String authority) throws URISyntaxException {
-		// Build URI string as defined in https://en.wikipedia.org/wiki/Uniform_Resource_Identifier#Syntax
-		String scheme = "http:";
-		String pathToResource = "resources/events/ping";
-		String uriString = scheme + "//" + authority + "/" + pathToResource;
-		URI resourceUri = new URI(uriString);
+	public String getEventsPingRequest(String uriAuthority) throws URISyntaxException {
+		String pathToResource = "/relayD-api/resources/events/ping";
+		URI resourceUri = getResourceUri(uriAuthority, pathToResource);
 		
 		RestGetService restService = new DefaultRestGetService(resourceUri);
 		
 		return restService.getResult();
+	}
+
+	// TODO (Erik, 2016-05-29): This method DOES NOT belong here.
+	URI getResourceUri(String uriAuthority, String pathToResource) throws URISyntaxException {
+		// Build URI string as defined in https://en.wikipedia.org/wiki/Uniform_Resource_Identifier#Syntax
+		String scheme = "http:";
+		String uriString = scheme + "//" + uriAuthority + "/" + pathToResource;
+		URI resourceUri = new URI(uriString);
+		
+		return resourceUri;
 	}
 }
