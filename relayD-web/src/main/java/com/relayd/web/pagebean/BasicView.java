@@ -1,16 +1,16 @@
 package com.relayd.web.pagebean;
 
 import java.io.Serializable;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.Response;
 
 import com.relayd.client.jaxb.EventDTO;
+import com.relayd.web.rest.client.DefaultRestGetService;
+import com.relayd.web.rest.client.RestGetService;
 
 /**
  * @author schmollc (Christian@relayd.de)
@@ -24,40 +24,19 @@ import com.relayd.client.jaxb.EventDTO;
 public class BasicView implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	private String restTargetRoot;
-	private Client restClient = ClientBuilder.newClient();
-
-	Client getRestClient() {
-		return restClient;
-	}
-	
 	public List<EventDTO> getEvents() {
 		return EventDTO.getRandomEvents();
 	}
 
-	public String getEventsPingRequest() {
+	public String getEventsPingRequest(String authority) throws URISyntaxException {
+		// Build URI string as defined in https://en.wikipedia.org/wiki/Uniform_Resource_Identifier#Syntax
+		String scheme = "http:";
 		String pathToResource = "resources/events/ping";
-		WebTarget webTarget = getWebTarget(pathToResource);
+		String uriString = scheme + "//" + authority + "/" + pathToResource;
+		URI resourceUri = new URI(uriString);
 		
-		return getResultFromRestService(webTarget);
-	}
-
-	public void setRestTargetRoot(String targetRoot) {
-		restTargetRoot = targetRoot;
-	}
-
-	String getRestTargetRoot() {
-		return restTargetRoot;
-	}
-
-	WebTarget getWebTarget(String pathToResource) {
-		return getRestClient().target(getRestTargetRoot() + pathToResource);
-	}
-
-	public String getResultFromRestService(WebTarget webTarget) {
-		Response response = webTarget.request().get();
-		String result = response.readEntity(String.class);
+		RestGetService restService = new DefaultRestGetService(resourceUri);
 		
-		return result;
+		return restService.getResult();
 	}
 }
