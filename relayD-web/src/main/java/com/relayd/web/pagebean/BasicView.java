@@ -22,6 +22,7 @@ import com.relayd.web.rest.client.RestGetService;
  * @author Rasumichin (Erik@relayd.de)
  * @since 09.05.2016
  * status initial
+ * 
  */
 @ManagedBean
 @ViewScoped
@@ -55,9 +56,13 @@ public class BasicView implements Serializable {
 		String pathToResource = "/relayD-api/resources/events/ping";
 		URI resourceUri = getResourceUri(uriAuthority, pathToResource);
 
-		RestGetService restService = new DefaultRestGetService(resourceUri);
+		RestGetService restService = createRestGetService(resourceUri);
 
 		return restService.getResult();
+	}
+
+	RestGetService createRestGetService(URI resourceUri) {
+		return new DefaultRestGetService(resourceUri);
 	}
 
 	// TODO (Erik, 2016-05-29): This method DOES NOT belong here.

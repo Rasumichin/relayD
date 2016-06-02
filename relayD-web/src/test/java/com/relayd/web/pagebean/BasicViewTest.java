@@ -2,11 +2,13 @@ package com.relayd.web.pagebean;
 
 import static org.junit.Assert.*;
 
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 
 import org.junit.Test;
 import com.relayd.client.jaxb.EventDTO;
+import com.relayd.web.rest.client.RestGetService;
 
 /**
  * @author Rasumichin (Erik@relayd.com)
@@ -26,12 +28,39 @@ public class BasicViewTest {
 	}
 	
 	@Test
+	public void testCreateRestGetService() throws URISyntaxException {
+		URI uri = new URI("http://example.com/pathToResource");
+		RestGetService result = sut.createRestGetService(uri);
+		
+		assertNotNull("RestGetService has not been created.", result);
+	}
+	
+	@Test
 	public void testGetEventsPingRequest() throws URISyntaxException {
+		BasicView sutWithTestDoubleForRestGetService = new BasicView() {
+			private static final long serialVersionUID = 1L;
+			
+			@Override
+			RestGetService createRestGetService(URI resourceUri) {
+				return new RestGetService() {
+					
+					@Override
+					public String getResult() {
+						return "Pong response from class EventsResource.";
+					}
+					
+					@Override
+					public URI getResourceUri() {
+						return null;
+					}
+				};
+			}
+		};
 		String uriAuthority = "localhost:8080";
-
 		String expectedResult = "Pong response from class EventsResource.";
-		String actualResult = sut.getEventsPingRequest(uriAuthority);
 
-		assertEquals("Result of ping request to EventsResource does not match.", expectedResult, actualResult);
+		String actualResult = sutWithTestDoubleForRestGetService.getEventsPingRequest(uriAuthority);
+
+		assertEquals("RestGetService (EventsPing) has not been called correctly.", expectedResult, actualResult);
 	}
 }
