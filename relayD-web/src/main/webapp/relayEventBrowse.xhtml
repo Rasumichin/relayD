@@ -2,7 +2,10 @@
 <html
 	xmlns="http://www.w3c.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	>
 <h:head></h:head>
 <h:body>
 	<h3>Welcome to the REAL relay D!</h3>
@@ -15,19 +18,28 @@
 		<p:calendar id="date" value="#{basicView.date}" showOn="button" />
 		
 	    <p:commandButton value="Submit" update="form" actionListener="#{basicView.click}" icon="ui-icon-check" />
-		Please Refresh (F5) your browser after submit.....
+		
+		<p/>
+		
+		<p:dataTable
+			var="relayEvent"
+			value="#{basicView.relayEvents}"
+			resizableColumns="true">
+	     	<f:facet name="header">
+	        	List of Events
+	    	</f:facet>
+			<p:column headerText="Date" width = "250">
+				<h:outputText value="#{relayEvent.eventDate}" />
+			</p:column>
+	
+			<p:column headerText="Event">
+				<h:outputText value="#{relayEvent.name}" />
+			</p:column>
+			 <f:facet name="footer">
+	        	In total there are #{fn:length(basicView.relayEvents)} events.
+	    	</f:facet>
+			
+		</p:dataTable>
 	</h:form>
-
-	<p:dataTable
-		var="relayEvent"
-		value="#{basicView.relayEvents}">
-		<p:column headerText="Date">
-			<h:outputText value="#{relayEvent.eventDate}" />
-		</p:column>
-
-		<p:column headerText="Event">
-			<h:outputText value="#{relayEvent.name}" />
-		</p:column>
-	</p:dataTable>
 </h:body>
 </html>
