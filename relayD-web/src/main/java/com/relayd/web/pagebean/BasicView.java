@@ -62,7 +62,8 @@ public class BasicView implements Serializable {
 	}
 
 	RestGetService createRestGetService(URI resourceUri) {
-		return new DefaultRestGetService(resourceUri);
+		return new DefaultRestGetService.Buillder(resourceUri)
+				.build();
 	}
 
 	// TODO (Erik, 2016-05-29): This method DOES NOT belong here.

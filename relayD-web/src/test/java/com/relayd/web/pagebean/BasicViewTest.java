@@ -14,6 +14,7 @@ import com.relayd.web.rest.client.RestGetService;
  * @author Rasumichin (Erik@relayd.com)
  * @since 21.05.2016
  * status initial
+ * 
  */
 public class BasicViewTest {
 	
@@ -51,6 +52,11 @@ public class BasicViewTest {
 					
 					@Override
 					public URI getResourceUri() {
+						return null;
+					}
+
+					@Override
+					public String getMediaType() {
 						return null;
 					}
 				};

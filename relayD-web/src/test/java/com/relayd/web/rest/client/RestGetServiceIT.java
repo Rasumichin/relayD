@@ -3,6 +3,9 @@ package com.relayd.web.rest.client;
 import static org.junit.Assert.*;
 
 import java.net.URI;
+import java.net.URISyntaxException;
+
+import javax.ws.rs.core.MediaType;
 
 import org.junit.Test;
 
@@ -15,9 +18,11 @@ import org.junit.Test;
 public class RestGetServiceIT {
 	
 	@Test
-	public void testGetResultIsNotNull() throws Exception {
-		URI resourceUri = new URI("http://jsonplaceholder.typicode.com/users");
-		RestGetService sut = new DefaultRestGetService(resourceUri);
+	public void testGetResultCreatedWithBuilder() throws URISyntaxException {
+		URI resourceUri = new URI("http://jsonplaceholder.typicode.com/posts/1");
+		RestGetService sut = new DefaultRestGetService.Buillder(resourceUri)
+				.withMediaType(MediaType.TEXT_PLAIN)
+				.build();
 		
 		// TODO (Erik, 2016-05-29): Result type should be converted to a generic one (e. g. type "RestServiceResult")
 		String result = sut.getResult();
