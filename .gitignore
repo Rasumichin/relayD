@@ -6,3 +6,4 @@ target/
 /relayD-api/nb-configuration.xml
 .DS_Store
 build.properties
+.tern-project
