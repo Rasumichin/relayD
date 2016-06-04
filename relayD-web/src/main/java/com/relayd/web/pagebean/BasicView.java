@@ -8,7 +8,6 @@ import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
@@ -25,10 +24,8 @@ import com.relayd.web.rest.client.RestGetService;
  * @author Rasumichin (Erik@relayd.de)
  * @since 09.05.2016
  * status initial
- *
  */
 @ManagedBean
-@ViewScoped
 public class BasicView implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -102,20 +99,26 @@ public class BasicView implements Serializable {
 		gateway.set(relayEvent);
 	}
 
-	public void newRelayEvent(ActionEvent actionEvent) {
-		String notImplementedYet = "New not implemented yet.";
+	public void add(@SuppressWarnings("unused") ActionEvent actionEvent) {
+		String notImplementedYet = "Add not implemented yet.";
+		System.out.println(notImplementedYet);
+		addMessage(notImplementedYet);
+	}
+
+	public void edit(@SuppressWarnings("unused") ActionEvent actionEvent) {
+		String notImplementedYet = "Edit not implemented yet.";
+		System.out.println(notImplementedYet);
+		addMessage(notImplementedYet);
+	}
+
+	public void remove(@SuppressWarnings("unused") ActionEvent actionEvent) {
+		String notImplementedYet = "Remove not implemented yet.";
 		System.out.println(notImplementedYet);
 		addMessage(notImplementedYet);
 	}
 
 	public void addMessage(String summary) {
-		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, null);
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, "Please use Submit, Dude!");
 		FacesContext.getCurrentInstance().addMessage(null, message);
-	}
-
-	public void editRelayEvent(ActionEvent actionEvent) {
-		String notImplementedYet = "Edit not implemented yet.";
-		System.out.println(notImplementedYet);
-		addMessage(notImplementedYet);
 	}
 }
