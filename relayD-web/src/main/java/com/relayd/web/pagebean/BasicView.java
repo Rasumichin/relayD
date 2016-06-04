@@ -6,8 +6,11 @@ import java.net.URISyntaxException;
 import java.util.Date;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 
 import com.relayd.RelayEvent;
 import com.relayd.attributes.EventName;
@@ -22,7 +25,7 @@ import com.relayd.web.rest.client.RestGetService;
  * @author Rasumichin (Erik@relayd.de)
  * @since 09.05.2016
  * status initial
- * 
+ *
  */
 @ManagedBean
 @ViewScoped
@@ -97,5 +100,22 @@ public class BasicView implements Serializable {
 
 		RelayEvent relayEvent = new RelayEvent(eventName, eventDay);
 		gateway.set(relayEvent);
+	}
+
+	public void newRelayEvent(ActionEvent actionEvent) {
+		String notImplementedYet = "New not implemented yet.";
+		System.out.println(notImplementedYet);
+		addMessage(notImplementedYet);
+	}
+
+	public void addMessage(String summary) {
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, null);
+		FacesContext.getCurrentInstance().addMessage(null, message);
+	}
+
+	public void editRelayEvent(ActionEvent actionEvent) {
+		String notImplementedYet = "Edit not implemented yet.";
+		System.out.println(notImplementedYet);
+		addMessage(notImplementedYet);
 	}
 }

@@ -21,6 +21,13 @@
 		
 		<p/>
 		
+		<p:toolbar>
+	        <f:facet name="left">
+	            <p:commandButton value="New" actionListener="#{basicView.newRelayEvent}" icon="ui-icon-document"/>
+	            <p:commandButton value="Edit" actionListener="#{basicView.editRelayEvent}" icon="ui-icon-folder-open"/>
+	        </f:facet>
+        </p:toolbar>
+		
 		<p:dataTable
 			var="relayEvent"
 			value="#{basicView.relayEvents}"
