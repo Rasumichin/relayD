@@ -60,6 +60,15 @@ public class BasicViewTest {
 					public String getMediaType() {
 						return null;
 					}
+
+					@Override
+					public String getPath() {
+						return null;
+					}
+
+					@Override
+					public void setPath(String path) {
+					}
 				};
 			}
 		};

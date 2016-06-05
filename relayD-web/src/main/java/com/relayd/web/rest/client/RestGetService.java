@@ -15,4 +15,6 @@ public interface RestGetService {
 	<T> T getResult(Class<T> aClass);
 	URI getResourceUri();
 	String getMediaType();
+	String getPath();
+	void setPath(String path);
 }

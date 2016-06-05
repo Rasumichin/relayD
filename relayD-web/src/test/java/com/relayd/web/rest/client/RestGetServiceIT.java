@@ -21,8 +21,9 @@ public class RestGetServiceIT {
 	
 	@Test
 	public void testCallServiceAndReceiveJsonPayload() throws URISyntaxException {
-		URI resourceUri = new URI("http://jsonplaceholder.typicode.com/posts/1");
+		URI resourceUri = new URI("http://jsonplaceholder.typicode.com");
 		RestGetService sut = new DefaultRestGetService.Buillder(resourceUri)
+				.withPath("posts/1")
 				.withMediaType(MediaType.TEXT_PLAIN)
 				.build();
 		
@@ -31,7 +32,7 @@ public class RestGetServiceIT {
 	}
 	
 	@Test
-	public void testCallServiceAndDeliverTypeConvertedFromJson() throws URISyntaxException {
+	public void testCallRestServiceNativelyAndDeliverTypeConvertedFromJson() throws URISyntaxException {
 		URI resourceUri = new URI("http://jsonplaceholder.typicode.com");
 		Client client = ClientBuilder.newClient();
 		JsonPlaceholderPost result = client.target(resourceUri)
@@ -39,16 +40,20 @@ public class RestGetServiceIT {
 			.request(MediaType.APPLICATION_JSON)
 			.get(JsonPlaceholderPost.class);
 		assertNotNull("Conversion of JSON payload to a custom type was not correct.", result);
+		assertEquals("Custom type has not the correct [id].", 1, result.getId());
 	}
 
 	@Test
 	public void testCallServiceAndReceiveCustomType() throws URISyntaxException {
-		URI resourceUri = new URI("http://jsonplaceholder.typicode.com/posts/1");
+		URI resourceUri = new URI("http://jsonplaceholder.typicode.com");
+		int expectedId = 1;
 		RestGetService sut = new DefaultRestGetService.Buillder(resourceUri)
+				.withPath("posts/" + expectedId)
 				.withMediaType(MediaType.APPLICATION_JSON)
 				.build();
 		
 		JsonPlaceholderPost result = sut.getResult(JsonPlaceholderPost.class);
 		assertNotNull("Conversion of JSON payload to a custom type was not correct.", result);
+		assertEquals("Custom type has not the correct [id].", expectedId, result.getId());
 	}
 }

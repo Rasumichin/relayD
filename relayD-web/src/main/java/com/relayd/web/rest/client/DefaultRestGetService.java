@@ -5,7 +5,6 @@ import java.net.URI;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 /**
  * The default implementation of a 'RestGetSerive' hides the complexity of the JAX-RS 2.0 spec
@@ -19,6 +18,7 @@ import javax.ws.rs.core.Response;
 public class DefaultRestGetService implements RestGetService {
 	private WebTarget webTarget;
 	private String mediaType;
+	private String path;
 
 	private DefaultRestGetService(URI resourceUri) {
 		setWebTarget(resourceUri);
@@ -27,6 +27,7 @@ public class DefaultRestGetService implements RestGetService {
 	public static class Buillder {
 		private final URI uri;
 		private String mediaType = MediaType.TEXT_PLAIN;
+		private String path = "";
 
 		public Buillder(URI resourceUri) {
 			uri = resourceUri;
@@ -37,9 +38,15 @@ public class DefaultRestGetService implements RestGetService {
 			return this;
 		}
 
+		public Buillder withPath(String aPath) {
+			path = aPath;
+			return this;
+		}
+	
 		public RestGetService build() {
 			DefaultRestGetService restGetService = new DefaultRestGetService(uri);
 			restGetService.mediaType = mediaType;
+			restGetService.setPath(path);
 			
 			return restGetService;
 		}
@@ -54,9 +61,10 @@ public class DefaultRestGetService implements RestGetService {
 
 	@Override
 	public <T> T getResult(Class<T> aClass) {
-		Response response = getWebTarget().request(getMediaType()).get();
-		
-		return response.readEntity(aClass);
+		return getWebTarget()
+				.path(getPath())
+				.request(getMediaType())
+				.get(aClass);
 	}
 
 	private WebTarget getWebTarget() {
@@ -71,5 +79,18 @@ public class DefaultRestGetService implements RestGetService {
 	@Override
 	public String getMediaType() {
 		return mediaType;
+	}
+
+	@Override
+	public String getPath() {
+		return path;
+	}
+
+	@Override
+	public void setPath(String aPath) {
+		if (aPath == null) {
+			throw new IllegalArgumentException("[aPath] must not be 'null'.");
+		}
+		path = aPath;
 	}
 }

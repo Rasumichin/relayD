@@ -58,4 +58,46 @@ public class DefaultRestGetServiceTest {
 		String actualResult = sut.getMediaType();
 		assertEquals("[mediaType] is not as expected.", expectedResult, actualResult);
 	}
+
+	@Test
+	public void testGetDefaultPath() throws URISyntaxException {
+		URI resourceUri = getTestUri();
+		RestGetService sut = new DefaultRestGetService.Buillder(resourceUri).build();
+		
+		String expectedResult = "";
+		String actualResult = sut.getPath();
+		assertEquals("Default [path] is not as expected.", expectedResult, actualResult);
+	}
+
+	@Test
+	public void testGetPath() throws URISyntaxException {
+		URI resourceUri = getTestUri();
+		String expectedResult = "test/1";
+		RestGetService sut = new DefaultRestGetService.Buillder(resourceUri)
+				.withPath(expectedResult)
+				.build();
+		
+		String actualResult = sut.getPath();
+		assertEquals("[path] is not as expected.", expectedResult, actualResult);
+	}
+
+	@Test
+	public void testSetPath() throws URISyntaxException {
+		URI resourceUri = getTestUri();
+		RestGetService sut = new DefaultRestGetService.Buillder(resourceUri)
+				.withPath("test/1")
+				.build();
+		
+		String expectedResult = "test/2";
+		sut.setPath(expectedResult);
+		String actualResult = sut.getPath();
+		assertEquals("[path] is not as expected.", expectedResult, actualResult);
+	}
+
+	@Test(expected=IllegalArgumentException.class)
+	public void testSetPathWithIllegalNullValue() throws URISyntaxException {
+		URI resourceUri = getTestUri();
+		RestGetService sut = new DefaultRestGetService.Buillder(resourceUri).build();
+		sut.setPath(null);
+	}
 }
