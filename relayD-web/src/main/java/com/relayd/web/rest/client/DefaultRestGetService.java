@@ -15,6 +15,10 @@ import javax.ws.rs.core.MediaType;
  * status initial
  * 
  */
+// TODO (Erik, 2016-06-05): keep the Rest client as internal state
+// TODO (Erik, 2016-06-05): finalize method to close the Rest client
+// TODO (Erik, 2016-06-05): extend behaviour to handle result collections
+// TODO (Erik, 2016-06-05): setter for media type (handle 'null' value)
 public class DefaultRestGetService implements RestGetService {
 	private WebTarget webTarget;
 	private String mediaType;
