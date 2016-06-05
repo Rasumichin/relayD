@@ -15,4 +15,5 @@ public interface RestGetService {
 	String getResult();
 	URI getResourceUri();
 	String getMediaType();
+	Class<?> getResultType();
 }

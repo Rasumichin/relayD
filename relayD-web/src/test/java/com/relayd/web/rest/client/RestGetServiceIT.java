@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.core.MediaType;
 
 import org.junit.Test;
@@ -28,5 +30,16 @@ public class RestGetServiceIT {
 		String result = sut.getResult();
 		
 		assertNotNull("GetService call is 'null'.", result);
+	}
+	
+	@Test
+	public void testCallServiceAndDeliverTypeConvertedFromJson() throws URISyntaxException {
+		URI resourceUri = new URI("http://jsonplaceholder.typicode.com");
+		Client client = ClientBuilder.newClient();
+		JsonPlaceholderPost result = client.target(resourceUri)
+			.path("posts/1")
+			.request(MediaType.APPLICATION_JSON)
+			.get(JsonPlaceholderPost.class);
+		assertNotNull("Conversion of JSON payload to a custom type was not correct.", result);
 	}
 }

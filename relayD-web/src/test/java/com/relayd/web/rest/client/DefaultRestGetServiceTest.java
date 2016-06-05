@@ -58,4 +58,26 @@ public class DefaultRestGetServiceTest {
 		String actualResult = sut.getMediaType();
 		assertEquals("[mediaType] is not as expected.", expectedResult, actualResult);
 	}
+
+	@Test
+	public void testGetDefaultResultType() throws URISyntaxException {
+		URI resourceUri = getTestUri();
+		RestGetService sut = new DefaultRestGetService.Buillder(resourceUri).build();
+		
+		Class<?> expectedResult = String.class;
+		Class<?> actualResult = sut.getResultType();
+		assertEquals("Default [resultType] is not as expected.", expectedResult, actualResult);
+	}
+
+	@Test
+	public void testGetResultType() throws URISyntaxException {
+		URI resourceUri = getTestUri();
+		Class<?> expectedResult = JsonPlaceholderPost.class;
+		RestGetService sut = new DefaultRestGetService.Buillder(resourceUri)
+				.withResultType(JsonPlaceholderPost.class)
+				.build();
+		
+		Class<?> actualResult = sut.getResultType();
+		assertEquals("[resultType] is not as expected.", expectedResult, actualResult);
+	}
 }
