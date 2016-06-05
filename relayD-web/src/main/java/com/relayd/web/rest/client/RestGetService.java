@@ -15,5 +15,4 @@ public interface RestGetService {
 	<T> T getResult(Class<T> aClass);
 	URI getResourceUri();
 	String getMediaType();
-	Class<?> getResultType();
 }

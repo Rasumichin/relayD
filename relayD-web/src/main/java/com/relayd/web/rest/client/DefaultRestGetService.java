@@ -19,7 +19,6 @@ import javax.ws.rs.core.Response;
 public class DefaultRestGetService implements RestGetService {
 	private WebTarget webTarget;
 	private String mediaType;
-	private Class<?> resultType;
 
 	private DefaultRestGetService(URI resourceUri) {
 		setWebTarget(resourceUri);
@@ -28,7 +27,6 @@ public class DefaultRestGetService implements RestGetService {
 	public static class Buillder {
 		private final URI uri;
 		private String mediaType = MediaType.TEXT_PLAIN;
-		private Class<?> resultType = String.class;
 
 		public Buillder(URI resourceUri) {
 			uri = resourceUri;
@@ -39,15 +37,9 @@ public class DefaultRestGetService implements RestGetService {
 			return this;
 		}
 
-		public Buillder withResultType(Class<?> aResultType) {
-			resultType = aResultType;
-			return this;
-		}
-
 		public RestGetService build() {
 			DefaultRestGetService restGetService = new DefaultRestGetService(uri);
 			restGetService.mediaType = mediaType;
-			restGetService.resultType = resultType;
 			
 			return restGetService;
 		}
@@ -79,10 +71,5 @@ public class DefaultRestGetService implements RestGetService {
 	@Override
 	public String getMediaType() {
 		return mediaType;
-	}
-
-	@Override
-	public Class<?> getResultType() {
-		return resultType;
 	}
 }

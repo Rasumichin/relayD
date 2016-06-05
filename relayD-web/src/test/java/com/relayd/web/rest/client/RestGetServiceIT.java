@@ -20,16 +20,14 @@ import org.junit.Test;
 public class RestGetServiceIT {
 	
 	@Test
-	public void testGetResultCreatedWithBuilder() throws URISyntaxException {
+	public void testCallServiceAndReceiveJsonPayload() throws URISyntaxException {
 		URI resourceUri = new URI("http://jsonplaceholder.typicode.com/posts/1");
 		RestGetService sut = new DefaultRestGetService.Buillder(resourceUri)
 				.withMediaType(MediaType.TEXT_PLAIN)
 				.build();
 		
-		// TODO (Erik, 2016-05-29): Result type should be converted to a generic one (e. g. type "RestServiceResult")
 		String result = sut.getResult(String.class);
-		
-		assertNotNull("GetService call is 'null'.", result);
+		assertNotNull("GetService call does not deliver JSON payload.", result);
 	}
 	
 	@Test
@@ -51,7 +49,6 @@ public class RestGetServiceIT {
 				.build();
 		
 		JsonPlaceholderPost result = sut.getResult(JsonPlaceholderPost.class);
-		
 		assertNotNull("Conversion of JSON payload to a custom type was not correct.", result);
 	}
 }

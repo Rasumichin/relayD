@@ -60,11 +60,6 @@ public class BasicViewTest {
 					public String getMediaType() {
 						return null;
 					}
-
-					@Override
-					public Class<?> getResultType() {
-						return null;
-					}
 				};
 			}
 		};
