@@ -45,9 +45,10 @@ public class BasicViewTest {
 			RestGetService createRestGetService(URI resourceUri) {
 				return new RestGetService() {
 					
+					@SuppressWarnings("unchecked")
 					@Override
-					public String getResult() {
-						return "Pong response from class EventsResource.";
+					public <T> T getResult(Class<T> aClass) {
+						return (T) "Pong response from class EventsResource.";
 					}
 					
 					@Override

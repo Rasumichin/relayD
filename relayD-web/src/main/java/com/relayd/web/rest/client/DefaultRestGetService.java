@@ -61,10 +61,10 @@ public class DefaultRestGetService implements RestGetService {
 	}
 
 	@Override
-	public String getResult() {
-		Response response = getWebTarget().request().get();
+	public <T> T getResult(Class<T> aClass) {
+		Response response = getWebTarget().request(getMediaType()).get();
 		
-		return response.readEntity(String.class);
+		return response.readEntity(aClass);
 	}
 
 	private WebTarget getWebTarget() {

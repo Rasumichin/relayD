@@ -12,7 +12,7 @@ import java.net.URI;
  */
 public interface RestGetService {
 
-	String getResult();
+	<T> T getResult(Class<T> aClass);
 	URI getResourceUri();
 	String getMediaType();
 	Class<?> getResultType();

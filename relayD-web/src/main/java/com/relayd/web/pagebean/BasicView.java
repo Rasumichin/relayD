@@ -58,7 +58,7 @@ public class BasicView implements Serializable {
 
 		RestGetService restService = createRestGetService(resourceUri);
 
-		return restService.getResult();
+		return restService.getResult(String.class);
 	}
 
 	RestGetService createRestGetService(URI resourceUri) {

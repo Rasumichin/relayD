@@ -27,7 +27,7 @@ public class RestGetServiceIT {
 				.build();
 		
 		// TODO (Erik, 2016-05-29): Result type should be converted to a generic one (e. g. type "RestServiceResult")
-		String result = sut.getResult();
+		String result = sut.getResult(String.class);
 		
 		assertNotNull("GetService call is 'null'.", result);
 	}
@@ -40,6 +40,18 @@ public class RestGetServiceIT {
 			.path("posts/1")
 			.request(MediaType.APPLICATION_JSON)
 			.get(JsonPlaceholderPost.class);
+		assertNotNull("Conversion of JSON payload to a custom type was not correct.", result);
+	}
+
+	@Test
+	public void testCallServiceAndReceiveCustomType() throws URISyntaxException {
+		URI resourceUri = new URI("http://jsonplaceholder.typicode.com/posts/1");
+		RestGetService sut = new DefaultRestGetService.Buillder(resourceUri)
+				.withMediaType(MediaType.APPLICATION_JSON)
+				.build();
+		
+		JsonPlaceholderPost result = sut.getResult(JsonPlaceholderPost.class);
+		
 		assertNotNull("Conversion of JSON payload to a custom type was not correct.", result);
 	}
 }
