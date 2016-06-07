@@ -1,12 +1,15 @@
 package com.relayd.web.pagebean;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 
 import org.junit.Test;
+import org.mockito.Mockito;
+
 import com.relayd.client.jaxb.EventDTO;
 import com.relayd.web.rest.client.RestGetService;
 
@@ -37,43 +40,21 @@ public class BasicViewTest {
 	}
 	
 	@Test
-	public void testGetEventsPingRequest() throws URISyntaxException {
+	public void testGetEventsPingRequestWithTestDouble() throws URISyntaxException {
 		BasicView sutWithTestDoubleForRestGetService = new BasicView() {
 			private static final long serialVersionUID = 1L;
 			
 			@Override
 			RestGetService createRestGetService(URI resourceUri) {
-				return new RestGetService() {
-					
-					@SuppressWarnings("unchecked")
-					@Override
-					public <T> T getResult(Class<T> aClass) {
-						return (T) "Pong response from class EventsResource.";
-					}
-					
-					@Override
-					public URI getResourceUri() {
-						return null;
-					}
-
-					@Override
-					public String getMediaType() {
-						return null;
-					}
-
-					@Override
-					public String getPath() {
-						return null;
-					}
-
-					@Override
-					public void setPath(String path) {
-					}
-				};
+				RestGetService testDoubleService = Mockito.mock(RestGetService.class);
+				when(testDoubleService.getResult(String.class)).thenReturn("Pong response");
+				
+				return testDoubleService;
 			}
 		};
+		
 		String uriAuthority = "localhost:8080";
-		String expectedResult = "Pong response from class EventsResource.";
+		String expectedResult = "Pong response";
 
 		String actualResult = sutWithTestDoubleForRestGetService.getEventsPingRequest(uriAuthority);
 
