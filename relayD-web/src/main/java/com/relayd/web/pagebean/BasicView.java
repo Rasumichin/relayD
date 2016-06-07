@@ -4,12 +4,16 @@ import java.io.Serializable;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+
+import org.primefaces.context.RequestContext;
 
 import com.relayd.RelayEvent;
 import com.relayd.attributes.EventName;
@@ -62,8 +66,7 @@ public class BasicView implements Serializable {
 	}
 
 	RestGetService createRestGetService(URI resourceUri) {
-		return new DefaultRestGetService.Buillder(resourceUri)
-				.build();
+		return new DefaultRestGetService.Buillder(resourceUri).build();
 	}
 
 	// TODO (Erik, 2016-05-29): This method DOES NOT belong here.
@@ -92,24 +95,53 @@ public class BasicView implements Serializable {
 		relayEventName = aName;
 	}
 
-	public void click() {
+	public void refresh() {
+		// TODO -schmollc- Mmm.. Erstmal eine Lösung zum refresh...
+	}
+
+	// TODO -schmollc- Diese Methode gehört in eine eigene Klasse die sich um den Dialog kümmert!
+	public void save() {
+
 		EventName eventName = new EventName(getName());
 		Date eventDay = getDate();
 
 		RelayEvent relayEvent = new RelayEvent(eventName, eventDay);
 		gateway.set(relayEvent);
+		closeDialog();
 	}
 
 	public void add(@SuppressWarnings("unused") ActionEvent actionEvent) {
-		String notImplementedYet = "Add not implemented yet.";
-		System.out.println(notImplementedYet);
-		addMessage(notImplementedYet);
+		openDialog();
+	}
+
+	// TODO -schmollc- Diese Methode gehört in eine eigene Klasse die sich um den Dialog kümmert!
+	public void cancel() {
+		closeDialog();
+	}
+
+	// TODO -schmollc- Diese Methode gehört in eine eigene Klasse die sich um den Dialog kümmert!
+	private void closeDialog() {
+		RequestContext.getCurrentInstance().closeDialog("relayEventDialog");
+	}
+
+	// TODO -schmollc- Diese Methode gehört in eine eigene Klasse die sich um den Dialog kümmert!
+	private void openDialog() {
+		Map<String, Object> options = new HashMap<String, Object>();
+		options.put("modal", true);
+		options.put("width", 640);
+		options.put("height", 340);
+		options.put("contentWidth", "100%");
+		options.put("contentHeight", "100%");
+		options.put("headerElement", "customheader");
+
+		RequestContext.getCurrentInstance().openDialog("relayEventDialog", options, null);
 	}
 
 	public void edit(@SuppressWarnings("unused") ActionEvent actionEvent) {
 		String notImplementedYet = "Edit not implemented yet.";
 		System.out.println(notImplementedYet);
 		addMessage(notImplementedYet);
+
 	}
 
 	public void remove(@SuppressWarnings("unused") ActionEvent actionEvent) {

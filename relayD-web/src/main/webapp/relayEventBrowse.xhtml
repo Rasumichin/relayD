@@ -13,27 +13,10 @@
 
 	<h:form id="form">
 		<p:growl id="growl" showDetail="true"/>  
- 
-		<p:outputLabel for="name" value="Event Name:" />
-		<p:inputText id="name" value="#{basicView.name}"/>
-		
-		<p:outputLabel for="date" value="Date:" />
-		<p:calendar id="date" value="#{basicView.date}" showOn="button" />
-		
-	    <p:commandButton value="Submit" update="form" actionListener="#{basicView.click}" icon="ui-icon-check" />
+	
+	    <p:commandButton value="Refresh" update="form" actionListener="#{basicView.refresh}" icon="ui-icon-check" />
 		
 		<p/>
-		
-		<p:toolbar>
-	        <f:facet name="left">
-	            <p:commandButton value="Add" update="growl"  actionListener="#{basicView.add}" icon="ui-icon-document"/>
-	            <p:commandButton value="Edit" update="growl"  actionListener="#{basicView.edit}" icon="ui-icon-folder-open"/>
-	            <span class="ui-separator">
-                	<span class="ui-icon ui-icon-grip-dotted-vertical" />
-	            </span>
-	            <p:commandButton value="Remove" update="growl"  actionListener="#{basicView.remove}" icon="ui-icon-folder-open"/>
-	        </f:facet>
-        </p:toolbar>
 		
 		<p:dataTable
 			var="relayEvent"
@@ -52,8 +35,20 @@
 			 <f:facet name="footer">
 	        	In total there are #{fn:length(basicView.relayEvents)} events.
 	    	</f:facet>
-			
 		</p:dataTable>
+	
+	
+		<p:toolbar>
+	        <f:facet name="left">
+	            <p:commandButton value="Add" update="growl"  actionListener="#{basicView.add}" icon="ui-icon-document"/>
+	            <p:commandButton value="Edit" update="growl"  actionListener="#{basicView.edit}" icon="ui-icon-folder-open"/>
+	            <span class="ui-separator">
+                	<span class="ui-icon ui-icon-grip-dotted-vertical" />
+	            </span>
+	            <p:commandButton value="Remove" update="growl"  actionListener="#{basicView.remove}" icon="ui-icon-folder-open"/>
+	        </f:facet>
+        </p:toolbar>
+		
 	</h:form>
 </h:body>
 </html>
