@@ -38,6 +38,8 @@ public class BasicView implements Serializable {
 
 	private Date relayEventDate = null;
 	private String relayEventName = null;
+	
+	private RelayEvent selectedRelayEvent = null;
 
 	public BasicView() {
 		// This will be later set through Inject, Factory or something else....
@@ -51,6 +53,15 @@ public class BasicView implements Serializable {
 	public List<RelayEvent> getRelayEvents() {
 		return gateway.getAll();
 	}
+	
+	public RelayEvent getSelectedRelayEvent() {
+		return selectedRelayEvent;
+	}
+	
+	public void setSelectedRelayEvent(RelayEvent aRelayEvent) {
+		selectedRelayEvent = aRelayEvent;
+	}
+
 
 	public List<EventDTO> getEvents() {
 		return EventDTO.getRandomEvents();

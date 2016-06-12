@@ -21,10 +21,15 @@
 		<p:dataTable
 			var="relayEvent"
 			value="#{basicView.relayEvents}"
+			selection="#{basicView.selectedRelayEvent}"
+			rowKey="#{relayEvent.name}"
 			resizableColumns="true">
 	     	<f:facet name="header">
 	        	List of Events
 	    	</f:facet>
+	    	
+	    	<p:column selectionMode="single"/>
+	    	
 			<p:column headerText="Date" width = "250">
 				<h:outputText value="#{relayEvent.eventDate}" />
 			</p:column>
