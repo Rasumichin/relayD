@@ -1,8 +1,9 @@
 package com.relayd.ejb.orm.nosql;
 
-import com.relayd.*;
-import com.relayd.attributes.*;
-import com.relayd.ejb.*;
+import java.util.UUID;
+
+import com.relayd.Person;
+import com.relayd.ejb.PersonGateway;
 
 /**
  * @author  schmollc (Christian@cloud.franke-net.com)
@@ -16,8 +17,8 @@ public class PersonGatewayNoSql implements PersonGateway {
 	//	private DBCollection persons = db.getCollection("person");
 
 	@Override
-	public Person get(Surename aSurename) {
-		//		return db.crud.find({"surename" : aSurename.toString()});
+	public Person get(UUID uuid) {
+		//		return db.crud.find({"surename" : uuid.toString()});
 		return null;
 	}
 

@@ -1,9 +1,10 @@
 package com.relayd.service;
 
-import com.relayd.*;
-import com.relayd.attributes.*;
-import com.relayd.ejb.*;
-import com.relayd.ejb.orm.file.*;
+import java.util.UUID;
+
+import com.relayd.Person;
+import com.relayd.ejb.PersonGateway;
+import com.relayd.ejb.orm.file.PersonGatewayFile;
 
 /**
  * Diese Klasse befindt sich noch in der Businessschicht und leitet die
@@ -30,7 +31,7 @@ public class PersonService {
 		gateway.set(aNewPerson);
 	}
 
-	public Person get(Surename surename) {
-		return gateway.get(surename);
+	public Person get(UUID uuid) {
+		return gateway.get(uuid);
 	}
 }

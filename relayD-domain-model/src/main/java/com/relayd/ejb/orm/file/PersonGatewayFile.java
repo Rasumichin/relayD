@@ -1,7 +1,8 @@
 package com.relayd.ejb.orm.file;
 
+import java.util.UUID;
+
 import com.relayd.Person;
-import com.relayd.attributes.Surename;
 import com.relayd.ejb.PersonGateway;
 
 /**
@@ -12,9 +13,9 @@ import com.relayd.ejb.PersonGateway;
 public class PersonGatewayFile implements PersonGateway {
 
 	@Override
-	public Person get(Surename vorname) {
+	public Person get(UUID uuid) {
 		for (Person person : FileWriter.get()) {
-			if (vorname.equals(person.getSurename())) {
+			if (uuid.equals(person.getUUID())) {
 				return person;
 			}
 		}

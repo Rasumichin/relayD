@@ -1,7 +1,8 @@
 package com.relayd.ejb.orm.mysql;
 
+import java.util.UUID;
+
 import com.relayd.Person;
-import com.relayd.attributes.Surename;
 import com.relayd.ejb.PersonGateway;
 
 /**
@@ -15,9 +16,9 @@ public class PersonGatewayMySql implements PersonGateway {
 	//	private EntityManager em;
 
 	@Override
-	public Person get(Surename aSurename) {
+	public Person get(UUID uuid) {
 		//		QPerson person = QPerson.person;
-		//		JPAQuery query = new JPAQuery(em).from(person).where(person.surename.eq(aSurename));
+		//		JPAQuery query = new JPAQuery(em).from(person).where(person.uuid.eq(uuid));
 		//
 		//		Person result = query.uniqueResult(person);
 		//
