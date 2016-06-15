@@ -1,5 +1,6 @@
 package com.relayd.service;
 
+import java.util.List;
 import java.util.UUID;
 
 import com.relayd.Person;
@@ -33,5 +34,10 @@ public class PersonService {
 
 	public Person get(UUID uuid) {
 		return gateway.get(uuid);
+	}
+
+	public List<Person> get() {
+		// TODO -schmollc- Implementierung in dem PersonGateway nachholen.
+		throw new IllegalAccessError("Not Supported yet!");
 	}
 }
