@@ -17,15 +17,15 @@
 			<p:growl id="growl" showDetail="true"/>  
 		
 			<p:outputLabel for="name" value="Event Name:" />
-			<p:inputText id="name" value="#{basicView.name}"/>
+			<p:inputText id="name" value="#{relayEventEditPageBean.name}"/>
 			
 			<p:outputLabel for="date" value="Date:" />
-			<p:calendar id="date" value="#{basicView.date}" showOn="button" />
+			<p:calendar id="date" value="#{relayEventEditPageBean.date}" showOn="button" />
 			
 			<p/>
 				
-		    <p:commandButton value="Save" update="form" actionListener="#{basicView.save}" icon="ui-icon-check" />
-		    <p:commandButton value="Cancel" update="form" actionListener="#{basicView.cancel}" icon="ui-icon-check" />
+		    <p:commandButton value="Save" update="form" actionListener="#{relayEventEditPageBean.save}" icon="ui-icon-check" />
+		    <p:commandButton value="Cancel" update="form" actionListener="#{relayEventEditPageBean.cancel}" icon="ui-icon-check" />
 	
 		</h:form>    
 	</h:body>

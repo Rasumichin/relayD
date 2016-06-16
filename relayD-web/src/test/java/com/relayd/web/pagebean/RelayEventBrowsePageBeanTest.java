@@ -19,9 +19,9 @@ import com.relayd.web.rest.client.RestGetService;
  * status initial
  * 
  */
-public class BasicViewTest {
+public class RelayEventBrowsePageBeanTest {
 	
-	private BasicView sut = new BasicView();
+	private RelayEventBrowsePageBean sut = new RelayEventBrowsePageBean();
 
 	@Test
 	public void testGetEventsAnswersThreeElements() {
@@ -41,7 +41,7 @@ public class BasicViewTest {
 	
 	@Test
 	public void testGetEventsPingRequestWithTestDouble() throws URISyntaxException {
-		BasicView sutWithTestDoubleForRestGetService = new BasicView() {
+		RelayEventBrowsePageBean sutWithTestDoubleForRestGetService = new RelayEventBrowsePageBean() {
 			private static final long serialVersionUID = 1L;
 			
 			@Override
