@@ -1,5 +1,7 @@
 package com.relayd;
 
+import java.util.UUID;
+
 import com.relayd.attributes.EventDay;
 import com.relayd.attributes.EventName;
 
@@ -11,15 +13,23 @@ import com.relayd.attributes.EventName;
  *
  */
 public class RelayEvent {
-
+	private UUID uuid;
 	private EventName name;
 	private EventDay eventDay;
 
 	public RelayEvent(EventName anEventName, EventDay anEventDay) {
 		super();
-
+		uuid = UUID.randomUUID();
 		name = anEventName;
 		eventDay = anEventDay;
+	}
+
+	public UUID getUuid() {
+		return uuid;
+	}
+
+	public void setUuid(UUID aUuid) {
+		uuid = aUuid;
 	}
 
 	public EventName getName() {
@@ -34,8 +44,7 @@ public class RelayEvent {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((eventDay == null) ? 0 : eventDay.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((uuid == null) ? 0 : uuid.hashCode());
 		return result;
 	}
 
@@ -51,18 +60,11 @@ public class RelayEvent {
 			return false;
 		}
 		RelayEvent other = (RelayEvent) obj;
-		if (eventDay == null) {
-			if (other.eventDay != null) {
+		if (uuid == null) {
+			if (other.uuid != null) {
 				return false;
 			}
-		} else if (!eventDay.equals(other.eventDay)) {
-			return false;
-		}
-		if (name == null) {
-			if (other.name != null) {
-				return false;
-			}
-		} else if (!name.equals(other.name)) {
+		} else if (!uuid.equals(other.uuid)) {
 			return false;
 		}
 		return true;
