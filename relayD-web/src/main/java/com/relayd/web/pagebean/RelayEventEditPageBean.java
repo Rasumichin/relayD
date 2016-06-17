@@ -1,7 +1,7 @@
 package com.relayd.web.pagebean;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,6 +11,7 @@ import javax.faces.bean.SessionScoped;
 import org.primefaces.context.RequestContext;
 
 import com.relayd.RelayEvent;
+import com.relayd.attributes.EventDay;
 import com.relayd.attributes.EventName;
 import com.relayd.ejb.RelayEventGateway;
 import com.relayd.ejb.orm.memory.RelayEventGatewayMemory;
@@ -30,7 +31,7 @@ public class RelayEventEditPageBean implements Serializable {
 	// This will be later set through Inject, Factory or something else....
 	private RelayEventGateway gateway = null;
 
-	private Date relayEventDate = null;
+	private LocalDate relayEventDate = null;
 	// TODO -ALL- Ist das "nur" der primitive Datentyp String oder das Objekt EventName? Macht aber Probleme mit Vorbelegung.
 	private String relayEventName = null;
 
@@ -47,11 +48,11 @@ public class RelayEventEditPageBean implements Serializable {
 		return gateway;
 	}
 
-	public Date getDate() {
+	public LocalDate getDate() {
 		return relayEventDate;
 	}
 
-	public void setDate(Date aDate) {
+	public void setDate(LocalDate aDate) {
 		relayEventDate = aDate;
 	}
 
@@ -69,7 +70,7 @@ public class RelayEventEditPageBean implements Serializable {
 
 	public void openDialogFor(RelayEvent aSelectedRelayEvent) {
 		relayEventName = aSelectedRelayEvent.getName().toString();
-		relayEventDate = aSelectedRelayEvent.getEventDate();
+		relayEventDate = aSelectedRelayEvent.getEventDay().getValue();
 		openDialog();
 	}
 
@@ -92,7 +93,7 @@ public class RelayEventEditPageBean implements Serializable {
 
 	public void save() {
 		EventName eventName = new EventName(getName());
-		Date eventDay = getDate();
+		EventDay eventDay = new EventDay(getDate());
 		RelayEvent relayEvent = new RelayEvent(eventName, eventDay);
 
 		save(relayEvent);

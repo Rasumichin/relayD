@@ -1,17 +1,17 @@
 package com.relayd.ejb.orm.memory;
 
+import static org.junit.Assert.*;
+
+import java.time.LocalDate;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import com.relayd.RelayEvent;
+import com.relayd.attributes.EventDay;
 import com.relayd.attributes.EventName;
-
-import static org.junit.Assert.*;
 
 /**
  * @author  schmollc (Christian@relayd.de)
@@ -22,10 +22,10 @@ public class RelayEventGatewayMemoryTest {
 	private RelayEventGatewayMemory sut = new RelayEventGatewayMemory();
 
 	private static final String KÖLN_MARATHON = "Köln Marathon";
-	private static final Date KÖLN_DAY = new GregorianCalendar(2017, Calendar.OCTOBER, 4).getTime();
+	private static final EventDay KÖLN_DAY = new EventDay(LocalDate.of(2017, Calendar.OCTOBER, 4));
 
 	private static final String DÜSSELDORF_MARATHON = "Düsseldorf Marathon";
-	private static final Date DÜSSELDORF_DAY = new GregorianCalendar(2017, Calendar.APRIL, 30).getTime();
+	private static final EventDay DÜSSELDORF_DAY = new EventDay(LocalDate.of(2017, Calendar.APRIL, 30));
 
 	@Before
 	public void setUp() {
@@ -46,7 +46,7 @@ public class RelayEventGatewayMemoryTest {
 		sut.set(duesseldorfMarathon);
 		sut.set(createEventForKoelnMarathon());
 
-		RelayEvent result = sut.get(duesseldorfMarathon.getName(), duesseldorfMarathon.getEventDate());
+		RelayEvent result = sut.get(duesseldorfMarathon.getName(), duesseldorfMarathon.getEventDay());
 
 		assertEquals(duesseldorfMarathon.getName(), result.getName());
 	}
@@ -57,7 +57,7 @@ public class RelayEventGatewayMemoryTest {
 		sut.set(duesseldorfMarathon);
 		sut.set(createEventForKoelnMarathon());
 
-		Date invalidDate = new Date();
+		EventDay invalidDate = new EventDay(LocalDate.now());
 		RelayEvent result = sut.get(duesseldorfMarathon.getName(), invalidDate);
 
 		assertNull(result);
@@ -74,14 +74,14 @@ public class RelayEventGatewayMemoryTest {
 
 	private RelayEvent createEventForDuesseldorfMarathon() {
 		EventName eventName = new EventName(DÜSSELDORF_MARATHON);
-		Date eventDay = DÜSSELDORF_DAY;
+		EventDay eventDay = DÜSSELDORF_DAY;
 		RelayEvent relayEvent = new RelayEvent(eventName, eventDay);
 		return relayEvent;
 	}
 
 	private RelayEvent createEventForKoelnMarathon() {
 		EventName eventName = new EventName(KÖLN_MARATHON);
-		Date eventDay = KÖLN_DAY;
+		EventDay eventDay = KÖLN_DAY;
 		RelayEvent relayEvent = new RelayEvent(eventName, eventDay);
 		return relayEvent;
 	}

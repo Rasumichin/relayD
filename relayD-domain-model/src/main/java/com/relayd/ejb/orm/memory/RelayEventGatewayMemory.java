@@ -1,12 +1,12 @@
 package com.relayd.ejb.orm.memory;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import com.relayd.RelayEvent;
+import com.relayd.attributes.EventDay;
 import com.relayd.attributes.EventName;
 import com.relayd.ejb.RelayEventGateway;
 
@@ -34,9 +34,9 @@ public class RelayEventGatewayMemory implements RelayEventGateway {
 	}
 
 	@Override
-	public RelayEvent get(EventName aRelayName, Date aRelayDay) {
+	public RelayEvent get(EventName aRelayName, EventDay aRelayDay) {
 		for (RelayEvent relayEvent : events) {
-			if (relayEvent.getName().equals(aRelayName) && relayEvent.getEventDate().equals(aRelayDay)) {
+			if (relayEvent.getName().equals(aRelayName) && relayEvent.getEventDay().equals(aRelayDay)) {
 				return relayEvent;
 			}
 		}

@@ -8,7 +8,7 @@ import com.relayd.attributes.EventName;
  * @author Rasumichin (Erik@relayd.de)
  * @since 19.05.2016
  * status initial
- * 
+ *
  */
 public class RelayEvent {
 
@@ -17,7 +17,7 @@ public class RelayEvent {
 
 	public RelayEvent(EventName anEventName, EventDay anEventDay) {
 		super();
-		
+
 		name = anEventName;
 		eventDay = anEventDay;
 	}
@@ -34,7 +34,7 @@ public class RelayEvent {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((eventDate == null) ? 0 : eventDate.hashCode());
+		result = prime * result + ((eventDay == null) ? 0 : eventDay.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
@@ -51,11 +51,11 @@ public class RelayEvent {
 			return false;
 		}
 		RelayEvent other = (RelayEvent) obj;
-		if (eventDate == null) {
-			if (other.eventDate != null) {
+		if (eventDay == null) {
+			if (other.eventDay != null) {
 				return false;
 			}
-		} else if (!eventDate.equals(other.eventDate)) {
+		} else if (!eventDay.equals(other.eventDay)) {
 			return false;
 		}
 		if (name == null) {
