@@ -2,6 +2,7 @@ package com.relayd.web.pagebean;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,9 +32,9 @@ public class RelayEventEditPageBean implements Serializable {
 	// This will be later set through Inject, Factory or something else....
 	private RelayEventGateway gateway = null;
 
-	private LocalDate relayEventDate = null;
 	// TODO -ALL- Ist das "nur" der primitive Datentyp String oder das Objekt EventName? Macht aber Probleme mit Vorbelegung.
 	private String relayEventName = null;
+	private Date relayEventDate = null;
 
 	public RelayEventEditPageBean() {
 		// This will be later set through Inject, Factory or something else....
@@ -48,11 +49,11 @@ public class RelayEventEditPageBean implements Serializable {
 		return gateway;
 	}
 
-	public LocalDate getDate() {
+	public Date getDate() {
 		return relayEventDate;
 	}
 
-	public void setDate(LocalDate aDate) {
+	public void setDate(Date aDate) {
 		relayEventDate = aDate;
 	}
 
@@ -70,7 +71,13 @@ public class RelayEventEditPageBean implements Serializable {
 
 	public void openDialogFor(RelayEvent aSelectedRelayEvent) {
 		relayEventName = aSelectedRelayEvent.getName().toString();
-		relayEventDate = aSelectedRelayEvent.getEventDay().getValue();
+		relayEventDate = new Date();
+
+		LocalDate localDate = aSelectedRelayEvent.getEventDay().getValue();
+		relayEventDate.setDate(localDate.getDayOfMonth());
+		relayEventDate.setMonth(localDate.getMonth().getValue());
+		relayEventDate.setYear(localDate.getYear());
+
 		openDialog();
 	}
 
@@ -93,7 +100,9 @@ public class RelayEventEditPageBean implements Serializable {
 
 	public void save() {
 		EventName eventName = new EventName(getName());
-		EventDay eventDay = new EventDay(getDate());
+
+		LocalDate localDate = LocalDate.of(getDate().getYear(), getDate().getMonth(), getDate().getDay());
+		EventDay eventDay = new EventDay(localDate);
 		RelayEvent relayEvent = new RelayEvent(eventName, eventDay);
 
 		save(relayEvent);
