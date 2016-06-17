@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -15,8 +16,9 @@ import org.primefaces.context.RequestContext;
 import com.relayd.RelayEvent;
 import com.relayd.attributes.EventDay;
 import com.relayd.attributes.EventName;
+import com.relayd.ejb.GatewayType;
 import com.relayd.ejb.RelayEventGateway;
-import com.relayd.ejb.orm.memory.RelayEventGatewayMemory;
+import com.relayd.ejb.RelayEventGatewayFactory;
 
 /**
  * @author schmollc (Christian@relayd.de)
@@ -30,7 +32,6 @@ public class RelayEventEditPageBean implements Serializable {
 
 	private static final String RELAY_EVENT_DIALOG_ID = "relayEventDialog";
 
-	// This will be later set through Inject, Factory or something else....
 	private RelayEventGateway gateway = null;
 
 	// TODO -ALL- Ist das "nur" der primitive Datentyp String oder das Objekt EventName? Macht aber Probleme mit Vorbelegung.
@@ -38,12 +39,7 @@ public class RelayEventEditPageBean implements Serializable {
 	private Date relayEventDate = null;
 
 	public RelayEventEditPageBean() {
-		// This will be later set through Inject, Factory or something else....
-		gateway = new RelayEventGatewayMemory();
-		// Use Gateway you need for your test e.g. File for working without Network
-		//		gateway = new RelayEventGatewaySql();
-		//		gateway = new RelayEventGatewayFile();
-		// etc...
+		gateway = RelayEventGatewayFactory.get(GatewayType.MEMORY);
 	}
 
 	private RelayEventGateway getGateway() {
@@ -70,11 +66,13 @@ public class RelayEventEditPageBean implements Serializable {
 		openDialog();
 	}
 
-	public void openDialogFor(RelayEvent aSelectedRelayEvent) {
-		relayEventName = aSelectedRelayEvent.getName().toString();
-		relayEventDate = new Date();
+	public void openDialogFor(UUID uuid) {
+		RelayEvent relayEvent = gateway.get(uuid);
 
-		LocalDate localDate = aSelectedRelayEvent.getEventDay().getValue();
+		relayEventName = relayEvent.getName().toString();
+
+		relayEventDate = new Date();
+		LocalDate localDate = relayEvent.getEventDay().getValue();
 		relayEventDate.setDate(localDate.getDayOfMonth());
 		relayEventDate.setMonth(localDate.getMonth().getValue());
 		relayEventDate.setYear(localDate.getYear());

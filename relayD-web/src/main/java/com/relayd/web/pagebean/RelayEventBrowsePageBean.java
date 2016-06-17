@@ -13,8 +13,9 @@ import javax.faces.event.ActionEvent;
 
 import com.relayd.RelayEvent;
 import com.relayd.client.jaxb.EventDTO;
+import com.relayd.ejb.GatewayType;
 import com.relayd.ejb.RelayEventGateway;
-import com.relayd.ejb.orm.memory.RelayEventGatewayMemory;
+import com.relayd.ejb.RelayEventGatewayFactory;
 import com.relayd.web.rest.client.DefaultRestGetService;
 import com.relayd.web.rest.client.RestGetService;
 
@@ -29,23 +30,14 @@ import com.relayd.web.rest.client.RestGetService;
 public class RelayEventBrowsePageBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	// This will be later set through Inject, Factory or something else....
 	private RelayEventGateway gateway = null;
 
 	private RelayEvent selectedRelayEvent = null;
 
-	// TODO -ALL- Inject klappt noch nicht richtig... Eigentlich gar nicht.. ;-)
-	//	@Inject
-	//	private RelayEventEditPageBean relayEventEditPageBean;
 	private RelayEventEditPageBean relayEventEditPageBean = new RelayEventEditPageBean();
 
 	public RelayEventBrowsePageBean() {
-		// This will be later set through Inject, Factory or something else....
-		gateway = new RelayEventGatewayMemory();
-		// Use Gateway you need for your test e.g. File for working without Network
-		//		gateway = new RelayEventGatewaySql();
-		//		gateway = new RelayEventGatewayFile();
-		// etc...
+		gateway = RelayEventGatewayFactory.get(GatewayType.MEMORY);
 	}
 
 	public List<RelayEvent> getRelayEvents() {
@@ -96,7 +88,8 @@ public class RelayEventBrowsePageBean implements Serializable {
 	}
 
 	public void edit(@SuppressWarnings("unused") ActionEvent actionEvent) {
-		relayEventEditPageBean.openDialogFor(selectedRelayEvent);
+		// TODO -ALL- Abprüfung auf selektion passiert... wie?
+		relayEventEditPageBean.openDialogFor(selectedRelayEvent.getUuid());
 	}
 
 	public void remove(@SuppressWarnings("unused") ActionEvent actionEvent) {
