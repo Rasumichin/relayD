@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
  * @since   23.03.2016
  * status   initial
  */
-public class RealynameTest {
+public class RelaynameTest {
 
 	@Rule
 	public ExpectedException expectedException = ExpectedException.none();
