@@ -2,6 +2,7 @@ package com.relayd.web.pagebean;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -99,15 +100,25 @@ public class RelayEventEditPageBean implements Serializable {
 	}
 
 	public void save() {
-		EventName eventName = new EventName(getName());
-
-		LocalDate localDate = LocalDate.of(getDate().getYear(), getDate().getMonth(), getDate().getDay());
-		EventDay eventDay = new EventDay(localDate);
-		RelayEvent relayEvent = new RelayEvent(eventName, eventDay);
+		RelayEvent relayEvent = createRelayEvent();
 
 		save(relayEvent);
 
 		closeDialog();
+	}
+
+	RelayEvent createRelayEvent() {
+		EventName eventName = new EventName(getName());
+
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTimeInMillis(getDate().getTime());
+		LocalDate localDate = LocalDate.of(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH));
+
+		EventDay eventDay = new EventDay(localDate);
+
+		RelayEvent relayEvent = new RelayEvent(eventName, eventDay);
+
+		return relayEvent;
 	}
 
 	private void save(RelayEvent relayEvent) {
