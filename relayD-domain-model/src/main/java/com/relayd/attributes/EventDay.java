@@ -41,7 +41,7 @@ public class EventDay {
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + " [" + value + "]";
+		return "" + value;
 	}
 
 	@Override
