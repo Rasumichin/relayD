@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.List;
+import java.util.UUID;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -46,7 +47,7 @@ public class RelayEventGatewayMemoryTest {
 		sut.set(duesseldorfMarathon);
 		sut.set(createEventForKoelnMarathon());
 
-		RelayEvent result = sut.get(duesseldorfMarathon.getName(), duesseldorfMarathon.getEventDay());
+		RelayEvent result = sut.get(duesseldorfMarathon.getUuid());
 
 		assertEquals(duesseldorfMarathon.getName(), result.getName());
 	}
@@ -57,8 +58,7 @@ public class RelayEventGatewayMemoryTest {
 		sut.set(duesseldorfMarathon);
 		sut.set(createEventForKoelnMarathon());
 
-		EventDay invalidDate = new EventDay(LocalDate.now());
-		RelayEvent result = sut.get(duesseldorfMarathon.getName(), invalidDate);
+		RelayEvent result = sut.get(UUID.randomUUID());
 
 		assertNull(result);
 	}
