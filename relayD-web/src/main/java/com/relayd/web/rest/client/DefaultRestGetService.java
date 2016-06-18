@@ -1,10 +1,11 @@
 package com.relayd.web.rest.client;
 
 import java.net.URI;
-
+import java.util.List;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 
 /**
@@ -16,7 +17,6 @@ import javax.ws.rs.core.MediaType;
  * status initial
  * 
  */
-// TODO (Erik, 2016-06-05): extend behaviour to handle result collections
 // TODO (Erik, 2016-06-05): setter for media type (handle 'null' value)
 public class DefaultRestGetService implements RestGetService {
 	private WebTarget webTarget;
@@ -70,6 +70,34 @@ public class DefaultRestGetService implements RestGetService {
 				.path(getPath())
 				.request(getMediaType())
 				.get(aClass);
+	}
+
+	/**
+	 * I was not able at the first go to implement this successfully.
+	 * Question is:
+	 * How to pass the given class 'aClass' as a type to the List type of the
+	 * 'GenericType'subclass?
+	 * This code does not work so I let the method here for further notice, but
+	 * take the method out of the interface.
+	 * 
+	 * @author Rasumichin (Erik@relayd.de)
+	 * 
+	 */
+	public <T> List<T> getListResult(Class<T> aClass) {
+		GenericType<List<T>> genericType = new GenericType<List<T>>() {};
+		return (List<T>) getWebTarget()
+				.path(getPath())
+				.request(getMediaType())
+				.get(genericType);
+	}
+
+
+	@Override
+	public <T> T getListResult(GenericType<T> genericType) {
+		return getWebTarget()
+				.path(getPath())
+				.request(getMediaType())
+				.get(genericType);
 	}
 
 	private WebTarget getWebTarget() {
