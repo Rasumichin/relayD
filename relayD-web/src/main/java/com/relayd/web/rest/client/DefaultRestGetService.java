@@ -17,7 +17,6 @@ import javax.ws.rs.core.MediaType;
  * status initial
  * 
  */
-// TODO (Erik, 2016-06-05): setter for media type (handle 'null' value)
 public class DefaultRestGetService implements RestGetService {
 	private WebTarget webTarget;
 	private String mediaType;
@@ -27,6 +26,13 @@ public class DefaultRestGetService implements RestGetService {
 	private DefaultRestGetService(URI resourceUri) {
 		restClient = ClientBuilder.newClient();
 		setWebTarget(resourceUri);
+	}
+
+	private void setWebTarget(URI resourceUri) {
+		if (resourceUri == null) {
+			throw new IllegalArgumentException("[resourceUri] must not be 'null'.");
+		}
+		webTarget = restClient.target(resourceUri);
 	}
 
 	public static class Buillder {
@@ -50,18 +56,27 @@ public class DefaultRestGetService implements RestGetService {
 	
 		public RestGetService build() {
 			DefaultRestGetService restGetService = new DefaultRestGetService(uri);
-			restGetService.mediaType = mediaType;
+			restGetService.setMediaType(mediaType);
 			restGetService.setPath(path);
 			
 			return restGetService;
 		}
 	}
 
-	private void setWebTarget(URI resourceUri) {
-		if (resourceUri == null) {
-			throw new IllegalArgumentException("[resourceUri] must not be 'null'.");
+	@Override
+	public void setMediaType(String aMediaType) {
+		if (aMediaType == null) {
+			throw new IllegalArgumentException("[aMediaType] must not be 'null'.");
 		}
-		webTarget = restClient.target(resourceUri);
+		mediaType = aMediaType;
+	}
+
+	@Override
+	public void setPath(String aPath) {
+		if (aPath == null) {
+			throw new IllegalArgumentException("[aPath] must not be 'null'.");
+		}
+		path = aPath;
 	}
 
 	@Override
@@ -72,13 +87,27 @@ public class DefaultRestGetService implements RestGetService {
 				.get(aClass);
 	}
 
+	private WebTarget getWebTarget() {
+		return webTarget;
+	}
+
+	@Override
+	public String getPath() {
+		return path;
+	}
+	
+	@Override
+	public String getMediaType() {
+		return mediaType;
+	}
+
 	/**
 	 * I was not able at the first go to implement this successfully.
 	 * Question is:
 	 * How to pass the given class 'aClass' as a type to the List type of the
 	 * 'GenericType'subclass?
 	 * This code does not work so I let the method here for further notice, but
-	 * take the method out of the interface.
+	 * remove the method from the interface.
 	 * 
 	 * @author Rasumichin (Erik@relayd.de)
 	 * 
@@ -100,31 +129,9 @@ public class DefaultRestGetService implements RestGetService {
 				.get(genericType);
 	}
 
-	private WebTarget getWebTarget() {
-		return webTarget;
-	}
-
 	@Override
 	public URI getResourceUri() {
 		return getWebTarget().getUri();
-	}
-
-	@Override
-	public String getMediaType() {
-		return mediaType;
-	}
-
-	@Override
-	public String getPath() {
-		return path;
-	}
-
-	@Override
-	public void setPath(String aPath) {
-		if (aPath == null) {
-			throw new IllegalArgumentException("[aPath] must not be 'null'.");
-		}
-		path = aPath;
 	}
 
 	// This 'private' method is package protected for testing purposes.

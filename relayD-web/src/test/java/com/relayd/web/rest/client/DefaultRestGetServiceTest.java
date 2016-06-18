@@ -103,6 +103,26 @@ public class DefaultRestGetServiceTest {
 	}
 	
 	@Test
+	public void testSetMediaType() throws URISyntaxException {
+		URI resourceUri = getTestUri();
+		RestGetService sut = new DefaultRestGetService.Buillder(resourceUri)
+				.withMediaType(MediaType.APPLICATION_XML)
+				.build();
+		
+		String expectedResult = MediaType.APPLICATION_JSON;
+		sut.setMediaType(expectedResult);
+		String actualResult = sut.getMediaType();
+		assertEquals("[mediaType] is not as expected.", expectedResult, actualResult);
+	}
+
+	@Test(expected=IllegalArgumentException.class)
+	public void testSetMediaTypeWithIllegalNullValue() throws URISyntaxException {
+		URI resourceUri = getTestUri();
+		RestGetService sut = new DefaultRestGetService.Buillder(resourceUri).build();
+		sut.setMediaType(null);
+	}
+	
+	@Test
 	public void testRestClientHasBeenCreatedAfterBuildInstance() throws URISyntaxException {
 		URI resourceUri = getTestUri();
 		RestGetService restGetService = new DefaultRestGetService.Buillder(resourceUri).build();
@@ -126,7 +146,7 @@ public class DefaultRestGetServiceTest {
 		// Finalize our sut which closes the 'restClient'.
 		sut.finalize();
 		
-		// Invoke again a method which is no longer legal.
+		// Invoke again a method which is now no longer legal.
 		restClient.target("");
 	}
 }

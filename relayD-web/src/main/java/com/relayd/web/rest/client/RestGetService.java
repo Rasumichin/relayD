@@ -24,4 +24,5 @@ public interface RestGetService {
 	String getMediaType();
 	String getPath();
 	void setPath(String path);
+	void setMediaType(String mediaType);
 }
