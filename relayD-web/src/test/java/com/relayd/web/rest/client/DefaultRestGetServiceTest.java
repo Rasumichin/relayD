@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import javax.ws.rs.client.Client;
 import javax.ws.rs.core.MediaType;
 
 import org.junit.Test;
@@ -99,5 +100,33 @@ public class DefaultRestGetServiceTest {
 		URI resourceUri = getTestUri();
 		RestGetService sut = new DefaultRestGetService.Buillder(resourceUri).build();
 		sut.setPath(null);
+	}
+	
+	@Test
+	public void testRestClientHasBeenCreatedAfterBuildInstance() throws URISyntaxException {
+		URI resourceUri = getTestUri();
+		RestGetService restGetService = new DefaultRestGetService.Buillder(resourceUri).build();
+		DefaultRestGetService sut = (DefaultRestGetService)restGetService;
+		
+		Client restClient = sut.getRestClient();
+		assertNotNull("[restClient] has not been initialized correctly.", restClient);
+	}
+	
+	@Test(expected=IllegalStateException.class)
+	public void testFinalizeLeadsToRestClientNoLongerUsable() throws Throwable {
+		URI resourceUri = getTestUri();
+		RestGetService restGetService = new DefaultRestGetService.Buillder(resourceUri).build();
+		DefaultRestGetService sut = (DefaultRestGetService)restGetService;
+		
+		Client restClient = sut.getRestClient();
+		
+		// Invoke an arbitrary method which is perfectly legal.
+		restClient.target("");
+		
+		// Finalize our sut which closes the 'restClient'.
+		sut.finalize();
+		
+		// Invoke again a method which is no longer legal.
+		restClient.target("");
 	}
 }
