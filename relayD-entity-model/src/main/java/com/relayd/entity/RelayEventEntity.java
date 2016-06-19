@@ -1,18 +1,15 @@
 package com.relayd.entity;
 
-import java.util.Calendar;
+import java.sql.Date;
 import java.util.UUID;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * JPA Entity class to represent the underlying RDBMS table which persists the 'Event' data.
  * Applies Joshua Bloch's 'Builder Pattern' to create instances programmatically.
  * 
- * @author Rasumichin (Erik@cloud.franke-net.com)
+ * @author Rasumichin (Erik@relayd.de)
  * @since 22.04.2016
  * status initial
  * 
@@ -26,34 +23,33 @@ public class RelayEventEntity {
 	private String id;
 	
 	@Column(nullable=false, length=64)
-	private String title;
+	private String eventName;
 	
-	@Column(nullable=true)
-	private Integer yearHappened;
+	@Column(nullable=false)
+	private Date eventDay;
 	
 	public static class Builder {
 		private final String id = UUID.randomUUID().toString();
-		private final String title;
-		private Integer yearHappened;
+		private final String eventName;
+		private Date eventDay = new Date(System.currentTimeMillis());
 		
-		public Builder(String aTitle) {
-			if (null == aTitle) {
-				throw new IllegalArgumentException("'aTitle' must not be 'null'.");
+		public Builder(String anEventName) {
+			if (null == anEventName) {
+				throw new IllegalArgumentException("'[anEventName] must not be 'null'.");
 			}
-			title = aTitle;
+			eventName = anEventName;
 		}
 		
-		public Builder withYearHappened(Integer aYearHappened) {
-			validateYearHappened(aYearHappened);
+		public Builder withEventDay(Date anEventDay) {
+			validateEventDay(anEventDay);
 			
-			yearHappened = aYearHappened;
+			eventDay = anEventDay;
 			return this;
 		}
-		
-		private void validateYearHappened(Integer aYearHappened) {
-			Integer currentYear = Calendar.getInstance().get(Calendar.YEAR);
-			if (aYearHappened < currentYear) {
-				throw new IllegalArgumentException("'aYearHappened' must not be before currenty year.");
+
+		private void validateEventDay(Date anEventDay) {
+			if (anEventDay == null) {
+				throw new IllegalArgumentException("[anEventDay] must not be 'null'.");
 			}
 		}
 
@@ -64,8 +60,8 @@ public class RelayEventEntity {
 	
 	private RelayEventEntity(Builder aBuilder) {
 		id = aBuilder.id;
-		title = aBuilder.title;
-		yearHappened = aBuilder.yearHappened;
+		eventName = aBuilder.eventName;
+		eventDay = aBuilder.eventDay;
 	}
 
 	/**
@@ -80,11 +76,11 @@ public class RelayEventEntity {
 		return id;
 	}
 	
-	public String getTitle() {
-		return title;
+	public String getEventName() {
+		return eventName;
 	}
 
-	public Integer getYearHappened() {
-		return yearHappened;
+	public Date getEventDay() {
+		return eventDay;
 	}
 }
