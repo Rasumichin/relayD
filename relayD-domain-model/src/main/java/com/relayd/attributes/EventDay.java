@@ -1,14 +1,15 @@
 package com.relayd.attributes;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * @author  Rasumichin (Erik@relayd.de)
  * @since   24.05.2016
  * status   ready-for-review
- *
  */
 public class EventDay {
+	private static final String DATE_PATTERN = "dd-MM-yyyy";
 
 	private LocalDate value;
 
@@ -41,7 +42,7 @@ public class EventDay {
 
 	@Override
 	public String toString() {
-		return "" + value;
+		return "" + value.format(DateTimeFormatter.ofPattern(DATE_PATTERN));
 	}
 
 	@Override

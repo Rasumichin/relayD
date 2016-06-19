@@ -74,7 +74,7 @@ public class EventDayTest {
 		LocalDate dateOfEvent = getDefinedLocalDateInThePast();
 		EventDay sut = new EventDay(dateOfEvent);
 
-		String expectedResult = "2001-11-21";
+		String expectedResult = "21-11-2001";
 		String actualResult = sut.toString();
 		assertEquals("toString() does not match expected result.", expectedResult, actualResult);
 	}
