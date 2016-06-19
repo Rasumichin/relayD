@@ -14,7 +14,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
- * @author Rasumichin (Erik@cloud.franke-net.com)
+ * @author Rasumichin (Erik@relayd.de)
  * @since 22.04.2016
  * status initial
  */
