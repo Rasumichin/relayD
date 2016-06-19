@@ -1,9 +1,9 @@
 package com.relayd.ejb.orm.memory;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 import java.util.UUID;
 
 import com.relayd.RelayEvent;
@@ -15,30 +15,22 @@ import com.relayd.ejb.RelayEventGateway;
  * status   initial
  */
 public class RelayEventGatewayMemory implements RelayEventGateway {
-	// TODO -schmollc- 01.06.2016 Remove public when create User Story is implemented!
-	public static Set<RelayEvent> events = new HashSet<RelayEvent>();
+	static Map<UUID, RelayEvent> events = new HashMap<UUID, RelayEvent>();
 
 	@Override
 	public void set(RelayEvent aRelayEventEntity) {
-		events.add(aRelayEventEntity);
+		events.put(aRelayEventEntity.getUuid(), aRelayEventEntity);
 	}
 
 	@Override
 	public List<RelayEvent> getAll() {
-		List<RelayEvent> eventsAsList = new ArrayList<RelayEvent>();
-		for (RelayEvent relayEvent : events) {
-			eventsAsList.add(relayEvent);
-		}
+		ArrayList<RelayEvent> eventsAsList = new ArrayList<RelayEvent>(events.values());
 		return eventsAsList;
 	}
 
 	@Override
 	public RelayEvent get(UUID uuid) {
-		for (RelayEvent relayEvent : events) {
-			if (uuid.equals(relayEvent.getUuid())) {
-				return relayEvent;
-			}
-		}
-		return null;
+		RelayEvent relayEvent = events.get(uuid);
+		return relayEvent;
 	}
 }
