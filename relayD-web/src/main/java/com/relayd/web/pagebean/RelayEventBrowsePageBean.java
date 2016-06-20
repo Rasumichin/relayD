@@ -37,7 +37,7 @@ public class RelayEventBrowsePageBean implements Serializable {
 	private RelayEventEditPageBean relayEventEditPageBean = new RelayEventEditPageBean();
 
 	public RelayEventBrowsePageBean() {
-		gateway = RelayEventGatewayFactory.get(GatewayType.MEMORY);
+		gateway = RelayEventGatewayFactory.get(GatewayType.FILE);
 	}
 
 	public List<RelayEvent> getRelayEvents() {

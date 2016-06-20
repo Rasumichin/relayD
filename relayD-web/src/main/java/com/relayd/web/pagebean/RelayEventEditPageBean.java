@@ -39,7 +39,7 @@ public class RelayEventEditPageBean implements Serializable {
 	private Date relayEventDate = null;
 
 	public RelayEventEditPageBean() {
-		gateway = RelayEventGatewayFactory.get(GatewayType.MEMORY);
+		gateway = RelayEventGatewayFactory.get(GatewayType.FILE);
 	}
 
 	private RelayEventGateway getGateway() {
