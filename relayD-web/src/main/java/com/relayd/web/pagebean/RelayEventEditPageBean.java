@@ -98,6 +98,7 @@ public class RelayEventEditPageBean implements Serializable {
 	}
 
 	public void save() {
+		// TODO checken ob relay event schon existiert. ... Dann kein create!
 		RelayEvent relayEvent = createRelayEvent();
 
 		save(relayEvent);
