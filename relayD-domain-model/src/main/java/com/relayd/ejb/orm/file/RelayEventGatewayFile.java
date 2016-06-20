@@ -22,7 +22,7 @@ import com.relayd.ejb.RelayEventGateway;
  */
 public class RelayEventGatewayFile implements RelayEventGateway {
 
-	private String fileName = "relayEvent.relay";
+	private String fileName = "relayEvent.relayD";
 
 	public RelayEventGatewayFile() {
 		initFile();

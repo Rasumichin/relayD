@@ -15,7 +15,7 @@ import com.relayd.attributes.EventDay;
 import com.relayd.attributes.EventName;
 
 public class RelayEventGatewayFileTest {
-	private RelayEventGatewayFile sut = new RelayEventGatewayFile("TestFile");
+	private RelayEventGatewayFile sut = new RelayEventGatewayFile("TestFile.relayD");
 
 	private static final String KÖLN_MARATHON = "Köln Marathon";
 	private static final EventDay KÖLN_DAY = new EventDay(LocalDate.of(2017, Calendar.OCTOBER, 4));
