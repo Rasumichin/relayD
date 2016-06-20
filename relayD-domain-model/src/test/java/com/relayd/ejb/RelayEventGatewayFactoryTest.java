@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import com.relayd.ejb.orm.file.RelayEventGatewayFile;
 import com.relayd.ejb.orm.memory.RelayEventGatewayMemory;
 
 /**
@@ -15,8 +16,15 @@ public class RelayEventGatewayFactoryTest {
 
 	@Test
 	public void testGetForRelayEventGatewayMemory() {
-		RelayEventGatewayMemory instance = RelayEventGatewayFactory.get(GatewayType.MEMORY);
+		RelayEventGateway instance = RelayEventGatewayFactory.get(GatewayType.MEMORY);
 
 		assertEquals("Instance not korrekt.", instance.getClass(), RelayEventGatewayMemory.class);
+	}
+
+	@Test
+	public void testGetForRelayEventGatewayFile() {
+		RelayEventGateway instance = RelayEventGatewayFactory.get(GatewayType.FILE);
+
+		assertEquals("Instance not korrekt.", instance.getClass(), RelayEventGatewayFile.class);
 	}
 }

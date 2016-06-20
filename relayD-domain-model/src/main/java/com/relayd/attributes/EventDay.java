@@ -1,5 +1,6 @@
 package com.relayd.attributes;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -8,7 +9,9 @@ import java.time.format.DateTimeFormatter;
  * @since   24.05.2016
  * status   ready-for-review
  */
-public class EventDay {
+public class EventDay implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	private static final String DATE_PATTERN = "dd-MM-yyyy";
 
 	private LocalDate value;

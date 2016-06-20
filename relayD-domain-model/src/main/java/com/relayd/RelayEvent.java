@@ -1,5 +1,6 @@
 package com.relayd;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 import com.relayd.attributes.EventDay;
@@ -12,7 +13,9 @@ import com.relayd.attributes.EventName;
  * status initial
  *
  */
-public class RelayEvent {
+public class RelayEvent implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	private UUID uuid;
 	private EventName name;
 	private EventDay eventDay;

@@ -1,6 +1,9 @@
 package com.relayd.attributes;
 
-public class EventName {
+import java.io.Serializable;
+
+public class EventName implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	private String value;
 

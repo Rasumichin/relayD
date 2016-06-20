@@ -6,5 +6,6 @@ package com.relayd.ejb;
  * status initial
  */
 public enum GatewayType {
-	MEMORY;
+	MEMORY,
+	FILE;
 }
