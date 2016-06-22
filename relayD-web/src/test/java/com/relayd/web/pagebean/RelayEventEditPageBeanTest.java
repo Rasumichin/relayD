@@ -4,29 +4,34 @@ import static org.junit.Assert.*;
 
 import java.time.LocalDate;
 import java.time.Month;
-import java.util.Date;
 
 import org.junit.Test;
 
 import com.relayd.RelayEvent;
 import com.relayd.attributes.EventDay;
+import com.relayd.attributes.EventName;
 
+/**
+ * @author schmollc (Christian@relayd.de)
+ * @since 22.06.2016
+ * status initial
+ */
 public class RelayEventEditPageBeanTest {
 
 	@Test
 	public void testCreateRelayEvent() {
 		RelayEventEditPageBean sut = new RelayEventEditPageBean();
-		sut.setName("Rhein Ruhr Marathon");
+		EventName name = new EventName("Rhein Ruhr Marathon");
+		sut.setName(name);
 
-		// 16.04.2016
-		Date date = new Date(1460757600000L);
-		sut.setDate(date);
+		EventDay day = new EventDay(LocalDate.of(2016, Month.APRIL, 16));
 
-		EventDay expectedDay = new EventDay(LocalDate.of(2016, Month.APRIL, 16));
+		sut.setDate(day);
 
 		RelayEvent relayEvent = sut.createRelayEvent();
 
 		assertNotNull("Expected valid instance.", relayEvent);
-		assertEquals(expectedDay, relayEvent.getEventDay());
+		assertEquals("[Name] not correct.", name, relayEvent.getName());
+		assertEquals("[EventDay] not correct.", day, relayEvent.getEventDay());
 	}
 }

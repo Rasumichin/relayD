@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
     xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:p="http://primefaces.org/ui">
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://java.sun.com/jsf/core">
      
     <h:head>
         <title>Relay Event</title>
@@ -17,11 +18,14 @@
 			<p:growl id="growl" showDetail="true"/>  
 		
 			<p:outputLabel for="name" value="Event Name:" />
-			<p:inputText id="name" value="#{relayEventEditPageBean.name}"/>
+			<p:inputText id="name" value="#{relayEventEditPageBean.name}">
+				<f:converter converterId="com.relayd.web.converter.EventNameValueObjectConverter" />
+			</p:inputText>		
 			
 			<p:outputLabel for="date" value="Date:" />
-			<p:calendar id="date" value="#{relayEventEditPageBean.date}" showOn="button" />
-			
+			<p:calendar id="date" value="#{relayEventEditPageBean.date}" showOn="button">
+				<f:converter converterId="com.relayd.web.converter.EventDayValueObjectConverter" />
+			</p:calendar>
 			<p/>
 				
 		    <p:commandButton value="Save" update="form" actionListener="#{relayEventEditPageBean.save}" icon="ui-icon-check" />

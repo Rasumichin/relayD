@@ -1,9 +1,6 @@
 package com.relayd.web.pagebean;
 
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -34,32 +31,11 @@ public class RelayEventEditPageBean implements Serializable {
 
 	private RelayEventGateway gateway = null;
 
-	// TODO -ALL- Ist das "nur" der primitive Datentyp String oder das Objekt EventName? Macht aber Probleme mit Vorbelegung.
-	private String relayEventName = null;
-	private Date relayEventDate = null;
+	private EventName eventName = null;
+	private EventDay eventDate = null;
 
 	public RelayEventEditPageBean() {
 		gateway = RelayEventGatewayFactory.get(GatewayType.FILE);
-	}
-
-	private RelayEventGateway getGateway() {
-		return gateway;
-	}
-
-	public Date getDate() {
-		return relayEventDate;
-	}
-
-	public void setDate(Date aDate) {
-		relayEventDate = aDate;
-	}
-
-	public String getName() {
-		return relayEventName;
-	}
-
-	public void setName(String aName) {
-		relayEventName = aName;
 	}
 
 	public void openDialogForCreateRelayEvent() {
@@ -69,13 +45,8 @@ public class RelayEventEditPageBean implements Serializable {
 	public void openDialogFor(UUID uuid) {
 		RelayEvent relayEvent = gateway.get(uuid);
 
-		relayEventName = relayEvent.getName().toString();
-
-		relayEventDate = new Date();
-		LocalDate localDate = relayEvent.getEventDay().getValue();
-		relayEventDate.setDate(localDate.getDayOfMonth());
-		relayEventDate.setMonth(localDate.getMonth().getValue());
-		relayEventDate.setYear(localDate.getYear());
+		setName(relayEvent.getName());
+		setDate(relayEvent.getEventDay());
 
 		openDialog();
 	}
@@ -107,15 +78,7 @@ public class RelayEventEditPageBean implements Serializable {
 	}
 
 	RelayEvent createRelayEvent() {
-		EventName eventName = new EventName(getName());
-
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTimeInMillis(getDate().getTime());
-		LocalDate localDate = LocalDate.of(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH));
-
-		EventDay eventDay = new EventDay(localDate);
-
-		RelayEvent relayEvent = new RelayEvent(eventName, eventDay);
+		RelayEvent relayEvent = new RelayEvent(getName(), getDate());
 
 		return relayEvent;
 	}
@@ -131,4 +94,25 @@ public class RelayEventEditPageBean implements Serializable {
 	private void closeDialog() {
 		RequestContext.getCurrentInstance().closeDialog(RELAY_EVENT_DIALOG_ID);
 	}
+
+	public EventName getName() {
+		return eventName;
+	}
+
+	public void setName(EventName aEventName) {
+		eventName = aEventName;
+	}
+
+	private RelayEventGateway getGateway() {
+		return gateway;
+	}
+
+	public EventDay getDate() {
+		return eventDate;
+	}
+
+	public void setDate(EventDay aDate) {
+		eventDate = aDate;
+	}
+
 }
