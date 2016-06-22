@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
@@ -25,8 +26,8 @@ import com.relayd.web.rest.client.RestGetService;
  * @since 09.05.2016
  * status initial
  */
-@SessionScoped
 @ManagedBean
+@SessionScoped
 public class RelayEventBrowsePageBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -34,7 +35,16 @@ public class RelayEventBrowsePageBean implements Serializable {
 
 	private RelayEvent selectedRelayEvent = null;
 
-	private RelayEventEditPageBean relayEventEditPageBean = new RelayEventEditPageBean();
+	@ManagedProperty(value = "#{relayEventEditPageBean}")
+	private RelayEventEditPageBean relayEventEditPageBean;
+
+	public RelayEventEditPageBean getRelayEventEditPageBean() {
+		return relayEventEditPageBean;
+	}
+
+	public void setRelayEventEditPageBean(RelayEventEditPageBean aRelayEventEditPageBean) {
+		relayEventEditPageBean = aRelayEventEditPageBean;
+	}
 
 	public RelayEventBrowsePageBean() {
 		gateway = RelayEventGatewayFactory.get(GatewayType.FILE);

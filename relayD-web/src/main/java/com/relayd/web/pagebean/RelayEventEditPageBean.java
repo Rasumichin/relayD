@@ -25,8 +25,8 @@ import com.relayd.ejb.RelayEventGatewayFactory;
  * @since 14.06.2016
  * status initial
  */
+@ManagedBean(name = "relayEventEditPageBean")
 @SessionScoped
-@ManagedBean
 public class RelayEventEditPageBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
