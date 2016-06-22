@@ -116,4 +116,17 @@ public class RelayEventGatewayFile implements RelayEventGateway {
 		SerializationUtils.serialize((Serializable) someRelays, fileOutputStream);
 		fileOutputStream.close();
 	}
+	
+	@Override
+	public void remove(UUID aUuid) {
+		RelayEvent dummyRelayEvent = new RelayEvent(null, null);
+		dummyRelayEvent.setUuid(aUuid);
+		List<RelayEvent> all = getAll();
+		all.remove(dummyRelayEvent);
+		try {
+			put(all);
+		} catch (IOException e) {
+			throw new RuntimeException("Error", e);
+		}
+	}
 }

@@ -72,4 +72,18 @@ public class RelayEventGatewayFileTest {
 		RelayEvent relayEvent = new RelayEvent(eventName, eventDay);
 		return relayEvent;
 	}
+
+	@Test
+	public void remove() {
+		RelayEvent duesseldorfMarathon = createEventForDuesseldorfMarathon();
+		sut.set(duesseldorfMarathon);
+		UUID uuid = duesseldorfMarathon.getUuid();
+		assertEquals("Error for TestFile. ", 1, sut.getAll().size());
+
+		sut.remove(uuid);
+
+		RelayEvent relayEvent = sut.get(uuid);
+
+		assertNull("Expected invalid instance.", relayEvent);
+	}
 }

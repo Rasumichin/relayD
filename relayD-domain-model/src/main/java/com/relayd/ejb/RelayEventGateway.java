@@ -16,4 +16,6 @@ public interface RelayEventGateway {
 	List<RelayEvent> getAll();
 
 	RelayEvent get(UUID uuid);
+	
+	void remove(UUID aUuid);
 }

@@ -33,4 +33,9 @@ public class RelayEventGatewayMemory implements RelayEventGateway {
 		RelayEvent relayEvent = events.get(uuid);
 		return relayEvent;
 	}
+	
+	@Override
+	public void remove(UUID aUuid) {
+		events.remove(aUuid);
+	}
 }
