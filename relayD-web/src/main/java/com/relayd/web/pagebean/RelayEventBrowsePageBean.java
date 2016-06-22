@@ -93,9 +93,8 @@ public class RelayEventBrowsePageBean implements Serializable {
 	}
 
 	public void remove(@SuppressWarnings("unused") ActionEvent actionEvent) {
-		String notImplementedYet = "Remove not implemented yet.";
-		System.out.println(notImplementedYet);
-		addMessage(notImplementedYet);
+		// TODO -ALL- Abprüfung auf selektion passiert... wie?
+		gateway.remove(getSelectedRelayEvent().getUuid());
 	}
 
 	public void addMessage(String summary) {
