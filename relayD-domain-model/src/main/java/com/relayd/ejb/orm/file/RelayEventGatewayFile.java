@@ -103,7 +103,7 @@ public class RelayEventGatewayFile implements RelayEventGateway {
 	@Override
 	public RelayEvent get(UUID aUuid) {
 		for (RelayEvent relayEvent : getAll()) {
-			if (aUuid.equals(relayEvent.getUuid())) {
+			if (aUuid.equals(relayEvent.getUUID())) {
 				return relayEvent;
 			}
 		}
@@ -116,11 +116,11 @@ public class RelayEventGatewayFile implements RelayEventGateway {
 		SerializationUtils.serialize((Serializable) someRelays, fileOutputStream);
 		fileOutputStream.close();
 	}
-	
+
 	@Override
 	public void remove(UUID aUuid) {
 		RelayEvent dummyRelayEvent = new RelayEvent(null, null);
-		dummyRelayEvent.setUuid(aUuid);
+		dummyRelayEvent.setUUID(aUuid);
 		List<RelayEvent> all = getAll();
 		all.remove(dummyRelayEvent);
 		try {

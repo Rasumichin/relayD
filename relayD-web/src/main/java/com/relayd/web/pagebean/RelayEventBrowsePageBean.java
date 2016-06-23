@@ -99,12 +99,12 @@ public class RelayEventBrowsePageBean implements Serializable {
 
 	public void edit(@SuppressWarnings("unused") ActionEvent actionEvent) {
 		// TODO -ALL- Abprüfung auf selektion passiert... wie?
-		relayEventEditPageBean.openDialogFor(selectedRelayEvent.getUuid());
+		relayEventEditPageBean.openDialogFor(selectedRelayEvent.getUUID());
 	}
 
 	public void remove(@SuppressWarnings("unused") ActionEvent actionEvent) {
 		// TODO -ALL- Abprüfung auf selektion passiert... wie?
-		gateway.remove(getSelectedRelayEvent().getUuid());
+		gateway.remove(getSelectedRelayEvent().getUUID());
 	}
 
 	public void addMessage(String summary) {

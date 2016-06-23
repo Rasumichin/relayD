@@ -40,7 +40,7 @@ public class RelayEventTest {
 
 		RelayEvent sut = new RelayEvent(eventNameDummy, eventDayDummy);
 
-		assertNotNull("Expected valid instance.", sut.getUuid());
+		assertNotNull("Expected valid instance.", sut.getUUID());
 	}
 
 	@Test
@@ -63,7 +63,7 @@ public class RelayEventTest {
 		RelayEvent sut = new RelayEvent(eventNameDummy, eventDayDummy);
 		RelayEvent secondSut = new RelayEvent(eventNameDummy, eventDayDummy);
 
-		secondSut.setUuid(sut.getUuid());
+		secondSut.setUUID(sut.getUUID());
 
 		assertEquals(sut, secondSut);
 	}

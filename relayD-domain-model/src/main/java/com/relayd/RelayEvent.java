@@ -27,11 +27,11 @@ public class RelayEvent implements Serializable {
 		eventDay = anEventDay;
 	}
 
-	public UUID getUuid() {
+	public UUID getUUID() {
 		return uuid;
 	}
 
-	public void setUuid(UUID aUuid) {
+	public void setUUID(UUID aUuid) {
 		uuid = aUuid;
 	}
 

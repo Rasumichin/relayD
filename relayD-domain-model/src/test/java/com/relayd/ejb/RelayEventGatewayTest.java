@@ -34,7 +34,7 @@ public abstract class RelayEventGatewayTest {
 		getSut().set(duesseldorfMarathon);
 		getSut().set(createEventForKoelnMarathon());
 
-		RelayEvent result = getSut().get(duesseldorfMarathon.getUuid());
+		RelayEvent result = getSut().get(duesseldorfMarathon.getUUID());
 
 		assertEquals(duesseldorfMarathon.getName(), result.getName());
 	}
@@ -77,7 +77,7 @@ public abstract class RelayEventGatewayTest {
 	public void remove() {
 		RelayEvent duesseldorfMarathon = createEventForDuesseldorfMarathon();
 		getSut().set(duesseldorfMarathon);
-		UUID uuid = duesseldorfMarathon.getUuid();
+		UUID uuid = duesseldorfMarathon.getUUID();
 		assertEquals("Error for TestFile. ", 1, getSut().getAll().size());
 
 		getSut().remove(uuid);
