@@ -2,6 +2,7 @@ package com.relayd.web.converter;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -20,7 +21,14 @@ public class EventDayValueObjectConverter implements Converter {
 
 	@Override
 	public Object getAsObject(@SuppressWarnings("unused") FacesContext facesContext, @SuppressWarnings("unused") UIComponent uiComponent, String value) {
-		LocalDate localDate = LocalDate.parse(value, DateTimeFormatter.ofPattern("dd.MM.uu"));
+		//TODO -schmollc- Refactor 
+		LocalDate localDate;
+		try {
+			localDate = LocalDate.parse(value, DateTimeFormatter.ofPattern("dd.MM.uu"));
+			
+		} catch (DateTimeParseException e) {
+			localDate = LocalDate.parse(value, DateTimeFormatter.ofPattern("dd-MM-uuuu"));
+		}
 		EventDay eventDay = new EventDay(localDate);
 		return eventDay;
 	}
