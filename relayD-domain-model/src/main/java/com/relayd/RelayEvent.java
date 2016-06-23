@@ -39,8 +39,16 @@ public class RelayEvent implements Serializable {
 		return name;
 	}
 
+	public void setName(EventName anEventName) {
+		name = anEventName;
+	}
+
 	public EventDay getEventDay() {
 		return eventDay;
+	}
+
+	public void setEventDay(EventDay aDay) {
+		eventDay = aDay;
 	}
 
 	@Override

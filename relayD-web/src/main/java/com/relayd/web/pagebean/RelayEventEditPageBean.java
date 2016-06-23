@@ -31,29 +31,24 @@ public class RelayEventEditPageBean implements Serializable {
 
 	private RelayEventGateway gateway = null;
 
-	private EventName eventName = null;
-	private EventDay eventDate = null;
+	private RelayEvent workingEvent = null;
 
 	public RelayEventEditPageBean() {
 		gateway = RelayEventGatewayFactory.get(GatewayType.FILE);
 	}
 
 	public void openDialogForCreateRelayEvent() {
+		workingEvent = new RelayEvent(null, null);
 		openDialog();
 	}
 
 	public void openDialogFor(UUID uuid) {
-		RelayEvent relayEvent = gateway.get(uuid);
-
-		setName(relayEvent.getName());
-		setDate(relayEvent.getEventDay());
-
+		workingEvent = gateway.get(uuid);
 		openDialog();
 	}
 
 	private void openDialog() {
 		Map<String, Object> options = createOptions();
-
 		RequestContext.getCurrentInstance().openDialog(RELAY_EVENT_DIALOG_ID, options, null);
 	}
 
@@ -69,22 +64,8 @@ public class RelayEventEditPageBean implements Serializable {
 	}
 
 	public void save() {
-		// TODO checken ob relay event schon existiert. ... Dann kein create!
-		RelayEvent relayEvent = createRelayEvent();
-
-		save(relayEvent);
-
+		getGateway().set(workingEvent);
 		closeDialog();
-	}
-
-	RelayEvent createRelayEvent() {
-		RelayEvent relayEvent = new RelayEvent(getName(), getDate());
-
-		return relayEvent;
-	}
-
-	private void save(RelayEvent relayEvent) {
-		getGateway().set(relayEvent);
 	}
 
 	public void cancel() {
@@ -96,23 +77,22 @@ public class RelayEventEditPageBean implements Serializable {
 	}
 
 	public EventName getName() {
-		return eventName;
+		return workingEvent.getName();
 	}
 
-	public void setName(EventName aEventName) {
-		eventName = aEventName;
+	public void setName(EventName anEventName) {
+		workingEvent.setName(anEventName);
+	}
+
+	public EventDay getDate() {
+		return workingEvent.getEventDay();
+	}
+
+	public void setDate(EventDay aDay) {
+		workingEvent.setEventDay(aDay);
 	}
 
 	private RelayEventGateway getGateway() {
 		return gateway;
 	}
-
-	public EventDay getDate() {
-		return eventDate;
-	}
-
-	public void setDate(EventDay aDate) {
-		eventDate = aDate;
-	}
-
 }

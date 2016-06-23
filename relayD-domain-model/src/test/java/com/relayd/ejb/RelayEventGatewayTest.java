@@ -86,4 +86,27 @@ public abstract class RelayEventGatewayTest {
 
 		assertNull("Expected invalid instance.", relayEvent);
 	}
+
+	@Test
+	public void update() {
+		// ARRANGE
+		RelayEvent duesseldorfMarathon = createEventForDuesseldorfMarathon();
+		UUID uuidFromUpdateRelayEvent = duesseldorfMarathon.getUUID();
+
+		getSut().set(duesseldorfMarathon);
+		getSut().set(createEventForKoelnMarathon());
+
+		RelayEvent updateEvent = getSut().get(uuidFromUpdateRelayEvent);
+
+		EventName newName = new EventName("Rund um Ennepetal");
+		updateEvent.setName(newName);
+
+		// ACT
+		getSut().set(updateEvent);
+
+		// ASSERT
+		RelayEvent checkEvent = getSut().get(uuidFromUpdateRelayEvent);
+		assertNotNull(checkEvent);
+		assertEquals(newName, checkEvent.getName());
+	}
 }

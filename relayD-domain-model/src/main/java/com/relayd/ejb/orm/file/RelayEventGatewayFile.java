@@ -62,18 +62,19 @@ public class RelayEventGatewayFile implements RelayEventGateway {
 	}
 
 	@Override
-	public void set(RelayEvent aRelayEvent) {
+	public void set(RelayEvent updateRelayEvent) {
 		List<RelayEvent> someRelays = getAll();
 
-		if (someRelays.contains(aRelayEvent)) {
+		if (someRelays.contains(updateRelayEvent)) {
 			for (RelayEvent relayEvent : someRelays) {
-				if (aRelayEvent.equals(relayEvent)) {
-					relayEvent = aRelayEvent;
+				if (updateRelayEvent.equals(relayEvent)) {
+					relayEvent.setEventDay(updateRelayEvent.getEventDay());
+					relayEvent.setName(updateRelayEvent.getName());
 					break;
 				}
 			}
 		} else {
-			someRelays.add(aRelayEvent);
+			someRelays.add(updateRelayEvent);
 		}
 
 		try {
