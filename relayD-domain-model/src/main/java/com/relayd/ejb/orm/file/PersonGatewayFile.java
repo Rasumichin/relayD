@@ -1,5 +1,6 @@
 package com.relayd.ejb.orm.file;
 
+import java.util.List;
 import java.util.UUID;
 
 import com.relayd.Person;
@@ -25,5 +26,14 @@ public class PersonGatewayFile implements PersonGateway {
 	@Override
 	public void set(Person aNewPerson) {
 		FileWriter.set(aNewPerson);
+	}
+
+	@Override
+	public void remove(UUID aUuid) {
+	}
+
+	@Override
+	public List<Person> getAll() {
+		return null;
 	}
 }

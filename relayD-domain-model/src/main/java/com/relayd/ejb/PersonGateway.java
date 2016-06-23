@@ -1,5 +1,6 @@
 package com.relayd.ejb;
 
+import java.util.List;
 import java.util.UUID;
 
 import com.relayd.Person;
@@ -10,7 +11,11 @@ import com.relayd.Person;
  * status   initial
  */
 public interface PersonGateway {
+	List<Person> getAll();
+
 	Person get(UUID uuid);
 
 	void set(Person person);
+
+	void remove(UUID uuid);
 }
