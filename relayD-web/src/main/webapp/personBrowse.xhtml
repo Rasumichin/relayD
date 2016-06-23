@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 	xmlns="http://www.w3.org/1999/xhtml"
+      	xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:p="http://primefaces.org/ui"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	>
+
+<h:head></h:head>
+<h:body>
+	<h3>Welcome to the REAL relay D!</h3>
+
+	<h:form id="form">
+		<p:growl id="growl" showDetail="true"/>  
+	
+	    <p:commandButton value="Refresh" update="form" actionListener="#{personBrowsePageBean.refresh}" icon="ui-icon-check" />
+		
+		<p/>
+		
+		<p:dataTable
+			var="person"
+			value="#{personBrowsePageBean.searchResult}"
+			selection="#{personBrowsePageBean.selectedPerson}"
+			rowKey="#{person.UUID}"
+			resizableColumns="true">
+	     	<f:facet name="header">
+	        	List of Persons
+	    	</f:facet>
+	    	
+	    	<p:column selectionMode="single"/>
+	    	
+			<p:column headerText="Surename" width = "250">
+				<h:outputText value="#{person.surename}" />
+			</p:column>
+	
+			<p:column headerText="Forename">
+				<h:outputText value="#{person.forename}" />
+			</p:column>
+			
+			<p:column headerText="Birthday">
+				<h:outputText value="#{person.birthday}" />
+			</p:column>
+	
+			 <f:facet name="footer">
+	        	In total there are #{fn:length(personBrowsePageBean.searchResult)} events.
+	    	</f:facet>
+		</p:dataTable>
+	
+		<p:toolbar>
+	        <f:facet name="left">
+	            <p:commandButton value="Add" update="growl"  actionListener="#{personBrowsePageBean.add}" icon="ui-icon-document"/>
+	            <p:commandButton value="Edit" update="growl"  actionListener="#{personBrowsePageBean.edit}" icon="ui-icon-folder-open"/>
+	            <span class="ui-separator">
+                	<span class="ui-icon ui-icon-grip-dotted-vertical" />
+	            </span>
+	            <p:commandButton value="Remove" update="growl"  actionListener="#{personBrowsePageBean.remove}" icon="ui-icon-folder-open"/>
+	        </f:facet>
+        </p:toolbar>
+		
+	</h:form>
+</h:body>
+</html>

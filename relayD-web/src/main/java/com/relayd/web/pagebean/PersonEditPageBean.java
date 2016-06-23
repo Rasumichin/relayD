@@ -3,6 +3,8 @@ package com.relayd.web.pagebean;
 import java.util.UUID;
 
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 /**
@@ -12,6 +14,8 @@ import javax.faces.context.FacesContext;
  * @since 15.06.2016
  * status initial
  */
+@ManagedBean(name = "personEditPageBean")
+@SessionScoped
 public class PersonEditPageBean {
 
 	public void openDialogForCreatePerson() {

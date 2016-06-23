@@ -1,5 +1,7 @@
 package com.relayd.web.pagebean;
 
+import static org.junit.Assert.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,8 +14,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import com.relayd.Person;
 import com.relayd.service.PersonService;
-
-import static org.junit.Assert.*;
 
 /**
  *
@@ -52,7 +52,7 @@ public class PersonBrowsePageBeanTest {
 
 	@Test
 	public void testIsRowSelected_ForSelectedRow() {
-		sut.setSelected(new PersonBuilder().build());
+		sut.setSelectedPerson(new PersonBuilder().build());
 
 		boolean result = sut.isRowSelected();
 
