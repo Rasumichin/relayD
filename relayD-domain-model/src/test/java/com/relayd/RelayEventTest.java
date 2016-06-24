@@ -90,6 +90,17 @@ public class RelayEventTest {
 	}
 
 	@Test
+	public void testEqualsWithUuid() {
+		EventName eventNameDummy = new EventName("MetroGroup Marathon Düsseldorf");
+		EventDay eventDayDummy = new EventDay(LocalDate.of(2017, Month.APRIL, 30));
+
+		RelayEvent sut = new RelayEvent(eventNameDummy, eventDayDummy);
+		RelayEvent secondSut = new RelayEvent(eventNameDummy, eventDayDummy);
+
+		assertNotEquals(sut, secondSut);
+	}
+
+	@Test
 	public void testName() {
 		RelayEvent sut = new RelayEvent(null, null);
 
@@ -137,18 +148,6 @@ public class RelayEventTest {
 		RelayEvent sut = new RelayEvent(eventNameDummy, eventDayDummy);
 
 		assertNotNull("Expected valid instance.", sut.getUUID());
-	}
-
-	@Test
-	public void testEqualWithUuid() {
-		EventName eventNameDummy = new EventName("MetroGroup Marathon Düsseldorf");
-		EventDay eventDayDummy = new EventDay(LocalDate.of(2017, Month.APRIL, 30));
-
-		RelayEvent sut = new RelayEvent(eventNameDummy, eventDayDummy);
-		RelayEvent secondSut = new RelayEvent(eventNameDummy, eventDayDummy);
-
-		assertNotEquals(sut, secondSut);
-
 	}
 
 	@Test
