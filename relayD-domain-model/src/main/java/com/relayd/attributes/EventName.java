@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class EventName implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private String value;
+	String value;
 
 	public EventName(String anEventName) {
 		if (anEventName == null) {
