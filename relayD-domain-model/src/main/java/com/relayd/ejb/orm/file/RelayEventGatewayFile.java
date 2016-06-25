@@ -102,9 +102,9 @@ public class RelayEventGatewayFile implements RelayEventGateway {
 	}
 
 	@Override
-	public RelayEvent get(UUID aUuid) {
+	public RelayEvent get(UUID uuid) {
 		for (RelayEvent relayEvent : getAll()) {
-			if (aUuid.equals(relayEvent.getUUID())) {
+			if (uuid.equals(relayEvent.getUUID())) {
 				return relayEvent;
 			}
 		}
@@ -119,9 +119,9 @@ public class RelayEventGatewayFile implements RelayEventGateway {
 	}
 
 	@Override
-	public void remove(UUID aUuid) {
+	public void remove(UUID uuid) {
 		RelayEvent dummyRelayEvent = new RelayEvent(null, null);
-		dummyRelayEvent.setUUID(aUuid);
+		dummyRelayEvent.setUUID(uuid);
 		List<RelayEvent> all = getAll();
 		all.remove(dummyRelayEvent);
 		try {
