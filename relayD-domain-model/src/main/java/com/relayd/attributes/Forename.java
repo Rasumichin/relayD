@@ -10,25 +10,24 @@ import java.io.Serializable;
 public class Forename implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private String value = "";
+	String value = "";
+
+	private Forename(String forename) {
+		super();
+		value = forename;
+	}
 
 	/**
 	 * Bloch, Joshua, Effective Java, 2nd Edition, Item 1, p. 5
 	 */
-	static public Forename newInstance(String aForename) {
-		validate(aForename);
-		return new Forename(aForename);
-
-	}
-
-	private Forename(String aForename) {
-		super();
-		value = aForename;
+	static public Forename newInstance(String forename) {
+		validate(forename);
+		return new Forename(forename);
 	}
 
 	private static void validate(String aForename) {
 		if (aForename == null) {
-			throw new IllegalArgumentException("Darf nicht null sein");
+			throw new IllegalArgumentException("[forename] must not be 'null'.");
 		}
 	}
 
@@ -37,9 +36,6 @@ public class Forename implements Serializable {
 		return value;
 	}
 
-	/**
-	 *
-	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -48,9 +44,6 @@ public class Forename implements Serializable {
 		return result;
 	}
 
-	/**
-	 *
-	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
