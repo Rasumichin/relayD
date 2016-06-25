@@ -74,4 +74,27 @@ public abstract class PersonGatewayTest {
 		assertNull("Expected invalid instance.", removedPerson);
 	}
 
+	@Test
+	public void update() {
+		// ARRANGE
+		Person ersterTeilnehmer = createPerson("Justus", "Jonas");
+		UUID uuidFromErstenTeilnehmer = ersterTeilnehmer.getUUID();
+
+		getSut().set(ersterTeilnehmer);
+		getSut().set(createPerson("Peter", "Shaw"));
+
+		Person updateTeilnehmer = getSut().get(uuidFromErstenTeilnehmer);
+
+		Forename newForename = Forename.newInstance("Johannes");
+		updateTeilnehmer.setForename(newForename);
+
+		// ACT
+		getSut().set(updateTeilnehmer);
+
+		// ASSERT
+		Person checkPerson = getSut().get(uuidFromErstenTeilnehmer);
+		assertNotNull(checkPerson);
+		assertEquals(newForename, checkPerson.getForename());
+	}
+
 }
