@@ -69,8 +69,7 @@ public class PersonBrowsePageBean {
 
 	public void remove(@SuppressWarnings("unused") ActionEvent actionEvent) {
 		// TODO -ALL- Abprüfung auf selektion passiert... wie?
-		//		gateway.remove(getSelectedPerson().getUUID());
-		addMessage("Noch nicht implementiert.");
+		gateway.remove(getSelectedPerson().getUUID());
 	}
 
 	public boolean isRowSelected() {
