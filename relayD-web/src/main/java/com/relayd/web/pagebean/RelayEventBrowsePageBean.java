@@ -12,7 +12,10 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
+import org.primefaces.event.SelectEvent;
+
 import com.relayd.RelayEvent;
+import com.relayd.attributes.EventName;
 import com.relayd.client.jaxb.EventDTO;
 import com.relayd.ejb.GatewayType;
 import com.relayd.ejb.RelayEventGateway;
@@ -104,7 +107,17 @@ public class RelayEventBrowsePageBean implements Serializable {
 
 	public void remove(@SuppressWarnings("unused") ActionEvent actionEvent) {
 		// TODO -ALL- Abprüfung auf selektion passiert... wie?
+		EventName removeRelay = getSelectedRelayEvent().getName();
 		gateway.remove(getSelectedRelayEvent().getUUID());
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Remove!", "Relay Event:" + removeRelay.toString());
+        FacesContext.getCurrentInstance().addMessage(null, message);
+	}
+	
+	public void onEditClosed(SelectEvent event) {
+		// TODO -Thorsten- Wenn Dialo cancel - keine Message 'saved'
+		RelayEvent editedEvent = (RelayEvent) event.getObject();
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Saved!", "Relay Event:" + editedEvent.getName().toString());
+        FacesContext.getCurrentInstance().addMessage(null, message);
 	}
 
 	public void addMessage(String summary) {

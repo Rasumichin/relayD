@@ -20,6 +20,7 @@
 		
 		<p:dataTable
 			var="relayEvent"
+			id="relayEventTable"
 			value="#{relayEventBrowsePageBean.relayEvents}"
 			selection="#{relayEventBrowsePageBean.selectedRelayEvent}"
 			rowKey="#{relayEvent.UUID}"
@@ -45,12 +46,18 @@
 	
 		<p:toolbar>
 	        <f:facet name="left">
-	            <p:commandButton value="Add" update="growl"  actionListener="#{relayEventBrowsePageBean.add}" icon="ui-icon-document"/>
-	            <p:commandButton value="Edit" update="growl"  actionListener="#{relayEventBrowsePageBean.edit}" icon="ui-icon-folder-open"/>
+	            <p:commandButton value="Add" update="form"  actionListener="#{relayEventBrowsePageBean.add}" icon="ui-icon-document">
+	   				<p:ajax event="dialogReturn" listener="#{relayEventBrowsePageBean.onEditClosed}" update="form" />
+    			</p:commandButton>
+	            
+	            <p:commandButton value="Edit" update="form"  actionListener="#{relayEventBrowsePageBean.edit}" icon="ui-icon-folder-open">
+	            	<p:ajax event="dialogReturn" listener="#{relayEventBrowsePageBean.onEditClosed}" update="form" />
+    			</p:commandButton>
 	            <span class="ui-separator">
                 	<span class="ui-icon ui-icon-grip-dotted-vertical" />
 	            </span>
-	            <p:commandButton value="Remove" update="growl"  actionListener="#{relayEventBrowsePageBean.remove}" icon="ui-icon-folder-open"/>
+	            <p:commandButton value="Remove" update="form"  actionListener="#{relayEventBrowsePageBean.remove}" icon="ui-icon-folder-open">
+	            </p:commandButton>
 	        </f:facet>
         </p:toolbar>
 		
