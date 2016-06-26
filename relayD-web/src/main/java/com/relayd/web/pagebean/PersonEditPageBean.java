@@ -46,6 +46,11 @@ public class PersonEditPageBean implements Serializable {
 		openDialog();
 	}
 
+	public void openDialogFor(UUID uuid) {
+		workingPerson = getGateway().get(uuid);
+		openDialog();
+	}
+
 	private void openDialog() {
 		Map<String, Object> options = createOptions();
 		RequestContext.getCurrentInstance().openDialog(PERSON_DIALOG_ID, options, null);
@@ -60,12 +65,6 @@ public class PersonEditPageBean implements Serializable {
 		options.put("contentHeight", "100%");
 		options.put("headerElement", "customheader");
 		return options;
-	}
-
-	public void openDialogFor(UUID uuid) {
-		String notImplementedYet = "[openDialogFor] not implemented yet.";
-		System.out.println(notImplementedYet);
-		addMessage(notImplementedYet);
 	}
 
 	public void save() {
