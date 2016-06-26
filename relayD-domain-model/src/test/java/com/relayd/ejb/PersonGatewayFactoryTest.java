@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import com.relayd.ejb.orm.file.PersonGatewayFile;
 import com.relayd.ejb.orm.memory.PersonGatewayMemory;
 
 public class PersonGatewayFactoryTest {
@@ -14,4 +15,12 @@ public class PersonGatewayFactoryTest {
 
 		assertEquals("Instance not korrekt.", instance.getClass(), PersonGatewayMemory.class);
 	}
+
+	@Test
+	public void testGetForPersonGatewayFile() {
+		PersonGateway instance = PersonGatewayFactory.get(GatewayType.FILE);
+
+		assertEquals("Instance not korrekt.", instance.getClass(), PersonGatewayFile.class);
+	}
+
 }
