@@ -22,8 +22,18 @@ public class EventDayValueObjectConverterTest {
 	private String day = "31.12.15";
 
 	@Test
-	public void testGetAsObject() {
+	public void testGetAsObjectForGui() {
 		Object result = sut.getAsObject(null, null, day);
+
+		assertNotNull("Expected valid instance.", result);
+		assertEquals(EventDay.class, result.getClass());
+		EventDay eventDay = (EventDay) result;
+		assertEquals("Attribute not correct.", EXPECTED_DAY, eventDay.toString());
+	}
+
+	@Test
+	public void testGetAsObjectForDomain() {
+		Object result = sut.getAsObject(null, null, EXPECTED_DAY);
 
 		assertNotNull("Expected valid instance.", result);
 		assertEquals(EventDay.class, result.getClass());
