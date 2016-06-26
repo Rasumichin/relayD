@@ -15,14 +15,20 @@
     
    	<h:body>
 		<h:form id="form">
-			<p:growl id="growl" showDetail="true"/>  
-		
-			<p:outputLabel for="forename" value="Forename:" />
-			<p:inputText id="forename" value="#{personEditPageBean.forename}">
-				<f:converter converterId="com.relayd.web.converter.ForenameValueObjectConverter" />
-			</p:inputText>		
+			<p:growl id="growl" showDetail="true"/>
+			  
+			<h:panelGrid columns="2" cellpadding="5">
+				<p:outputLabel for="forename" value="Forename:" />
+				<p:inputText id="forename" value="#{personEditPageBean.forename}">
+					<f:converter converterId="com.relayd.web.converter.ForenameValueObjectConverter" />
+				</p:inputText>		
+	
+				<p:outputLabel for="surename" value="Surename:" />
+				<p:inputText id="surename" value="#{personEditPageBean.surename}">
+					<f:converter converterId="com.relayd.web.converter.SurenameValueObjectConverter" />
+				</p:inputText>		
+			</h:panelGrid>					
 			
-				
 		    <p:commandButton value="Save" update="form" actionListener="#{personEditPageBean.save}" icon="ui-icon-check" />
 		    <p:commandButton value="Cancel" actionListener="#{personEditPageBean.cancel}" icon="ui-icon-check" />
 	

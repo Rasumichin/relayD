@@ -14,6 +14,7 @@ import org.primefaces.context.RequestContext;
 
 import com.relayd.Person;
 import com.relayd.attributes.Forename;
+import com.relayd.attributes.Surename;
 import com.relayd.ejb.GatewayType;
 import com.relayd.ejb.PersonGateway;
 import com.relayd.ejb.PersonGatewayFactory;
@@ -43,7 +44,6 @@ public class PersonEditPageBean implements Serializable {
 	public void openDialogForCreatePerson() {
 		workingPerson = Person.newInstance();
 		openDialog();
-
 	}
 
 	private void openDialog() {
@@ -92,6 +92,14 @@ public class PersonEditPageBean implements Serializable {
 
 	public void setForename(Forename aForename) {
 		workingPerson.setForename(aForename);
+	}
+
+	public Surename getSurename() {
+		return workingPerson.getSurename();
+	}
+
+	public void setSurename(Surename aSurename) {
+		workingPerson.setSurename(aSurename);
 	}
 
 	private PersonGateway getGateway() {
