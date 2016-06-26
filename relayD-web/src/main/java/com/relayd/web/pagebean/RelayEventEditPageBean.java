@@ -5,8 +5,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import org.primefaces.context.RequestContext;
 
@@ -73,7 +75,7 @@ public class RelayEventEditPageBean implements Serializable {
 	}
 
 	private void closeDialog() {
-		RequestContext.getCurrentInstance().closeDialog(RELAY_EVENT_DIALOG_ID);
+		RequestContext.getCurrentInstance().closeDialog(workingEvent);
 	}
 
 	public EventName getName() {
