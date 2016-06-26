@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://java.sun.com/jsf/core">
+     
+    <h:head>
+        <title>Person</title>
+        <style type="text/css">
+            .ui-widget {
+                font-size: 90%;
+            }
+        </style>
+    </h:head>
+    
+   	<h:body>
+		<h:form id="form">
+			<p:growl id="growl" showDetail="true"/>  
+		
+			<p:outputLabel for="forename" value="Forename:" />
+			<p:inputText id="forename" value="#{personEditPageBean.forename}">
+				<f:converter converterId="com.relayd.web.converter.ForenameValueObjectConverter" />
+			</p:inputText>		
+			
+				
+		    <p:commandButton value="Save" update="form" actionListener="#{personEditPageBean.save}" icon="ui-icon-check" />
+		    <p:commandButton value="Cancel" actionListener="#{personEditPageBean.cancel}" icon="ui-icon-check" />
+	
+		</h:form>    
+	</h:body>
+</html>
