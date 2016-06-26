@@ -13,7 +13,7 @@ import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.relayd.Person;
-import com.relayd.service.PersonService;
+import com.relayd.ejb.PersonGateway;
 
 /**
  *
@@ -24,7 +24,7 @@ public class PersonBrowsePageBeanTest {
 	private PersonBrowsePageBean sut;
 
 	@Mock
-	private PersonService personService;
+	private PersonGateway personGateway;
 
 	@Test
 	public void testGetNumberOfResults_ForEmptyResultList() {
@@ -35,7 +35,7 @@ public class PersonBrowsePageBeanTest {
 
 	@Test
 	public void testGetNumberOfResults_ForFilledResultList() {
-		Mockito.doReturn(createResultList(size(5))).when(personService).get();
+		Mockito.doReturn(createResultList(size(5))).when(personGateway).getAll();
 		sut.search();
 
 		Integer numberOfResults = sut.getNumberOfResults();

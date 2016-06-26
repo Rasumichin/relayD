@@ -9,11 +9,11 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
-import javax.inject.Inject;
 
 import com.relayd.Person;
+import com.relayd.ejb.GatewayType;
 import com.relayd.ejb.PersonGateway;
-import com.relayd.service.PersonService;
+import com.relayd.ejb.PersonGatewayFactory;
 
 /**
  * Empty PageBean with needed Methods for Workflow
@@ -25,8 +25,6 @@ import com.relayd.service.PersonService;
 @ManagedBean
 @SessionScoped
 public class PersonBrowsePageBean {
-	@Inject
-	private PersonService personService;
 
 	private PersonGateway gateway = null;
 
@@ -37,12 +35,15 @@ public class PersonBrowsePageBean {
 
 	private Person selected;
 
+	public PersonBrowsePageBean() {
+		gateway = PersonGatewayFactory.get(GatewayType.FILE);
+	}
+
 	public List<Person> getSearchResult() {
 		return searchResult;
 	}
 
 	public void search() {
-		searchResult = personService.get();
 	}
 
 	public Person getSelectedPerson() {
@@ -90,7 +91,7 @@ public class PersonBrowsePageBean {
 	}
 
 	public void refresh() {
+		searchResult = gateway.getAll();
 		// TODO -schmollc- Mmm.. Erstmal eine Lösung zum refresh...
 	}
-
 }
