@@ -13,6 +13,7 @@ import javax.faces.context.FacesContext;
 import org.primefaces.context.RequestContext;
 
 import com.relayd.Person;
+import com.relayd.attributes.Birthday;
 import com.relayd.attributes.Forename;
 import com.relayd.attributes.Surename;
 import com.relayd.ejb.GatewayType;
@@ -99,6 +100,14 @@ public class PersonEditPageBean implements Serializable {
 
 	public void setSurename(Surename aSurename) {
 		workingPerson.setSurename(aSurename);
+	}
+
+	public Birthday getBirthday() {
+		return workingPerson.getBirthday();
+	}
+
+	public void setBirthday(Birthday aBirthday) {
+		workingPerson.setBirthday(aBirthday);
 	}
 
 	private PersonGateway getGateway() {

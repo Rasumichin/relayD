@@ -27,6 +27,11 @@
 				<p:inputText id="surename" value="#{personEditPageBean.surename}">
 					<f:converter converterId="com.relayd.web.converter.SurenameValueObjectConverter" />
 				</p:inputText>		
+
+				<p:outputLabel for="birthday" value="Birthday:" />
+				<p:calendar  id="birthday" value="#{personEditPageBean.birthday}" pattern="dd-MM-yyyy" effect="fold">
+					<f:converter converterId="com.relayd.web.converter.BirthdayValueObjectConverter" />
+				</p:calendar >		
 			</h:panelGrid>					
 			
 		    <p:commandButton value="Save" update="form" actionListener="#{personEditPageBean.save}" icon="ui-icon-check" />
