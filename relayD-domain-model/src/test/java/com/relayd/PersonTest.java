@@ -1,7 +1,9 @@
 package com.relayd;
 
+import static org.junit.Assert.*;
+
+import java.time.LocalDate;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.Locale;
 
 import org.junit.Test;
@@ -10,8 +12,6 @@ import com.relayd.attributes.Birthday;
 import com.relayd.attributes.Forename;
 import com.relayd.attributes.Shirtsize;
 import com.relayd.attributes.Surename;
-
-import static org.junit.Assert.*;
 
 /**
  * @author schmollc (Christian@cloud.franke-net.com)
@@ -25,7 +25,7 @@ public class PersonTest {
 		Person sut = Person.newInstance();
 		sut.setSurename(Surename.newInstance("Jonas"));
 		sut.setForename(Forename.newInstance("Justus"));
-		sut.setBirthday(Birthday.newInstance(new GregorianCalendar(1956, Calendar.FEBRUARY, 17).getTime()));
+		sut.setBirthday(Birthday.newInstance(LocalDate.of(1956, Calendar.FEBRUARY, 17)));
 		sut.setShirtsize(Shirtsize.HerrenM);
 		sut.setNationality(Locale.GERMANY);
 

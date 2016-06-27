@@ -36,7 +36,7 @@ public class PersonBrowsePageBeanTest {
 	@Test
 	public void testGetNumberOfResults_ForFilledResultList() {
 		Mockito.doReturn(createResultList(size(5))).when(personGateway).getAll();
-		sut.search();
+		sut.refresh();
 
 		Integer numberOfResults = sut.getNumberOfResults();
 

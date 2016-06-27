@@ -43,9 +43,6 @@ public class PersonBrowsePageBean {
 		return searchResult;
 	}
 
-	public void search() {
-	}
-
 	public Person getSelectedPerson() {
 		return selected;
 	}

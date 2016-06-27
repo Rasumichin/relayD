@@ -1,8 +1,13 @@
 package com.relayd.attributes;
 
-import java.util.*;
-import org.junit.*;
 import static org.junit.Assert.*;
+
+import java.time.LocalDate;
+import java.time.Month;
+
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 /**
  * @author schmollc (Christian@cloud.franke-net.com)
@@ -10,24 +15,40 @@ import static org.junit.Assert.*;
  */
 public class BirthdayTest {
 
-    @Test
-    public void testCreateValidObject() {
-        final Date date = new GregorianCalendar(1978, Calendar.OCTOBER, 21).getTime();
+	@Rule
+	public ExpectedException expectedException = ExpectedException.none();
 
-        Birthday birthday = Birthday.newInstance(date);
+	@Test
+	public void testValidateWithNull() {
+		expectedException.expect(IllegalArgumentException.class);
+		expectedException.expectMessage("[dateOfBirth] must not be 'null'.");
 
-        assertEquals("Geboren am: 21.10.1978", birthday.toString());
-    }
+		Birthday.validate(null);
+	}
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testCreateInvalidObject_Null() {
-        Birthday.newInstance(null);
-    }
+	@Test
+	public void testValidateWithFutureDate() {
+		expectedException.expect(IllegalArgumentException.class);
+		expectedException.expectMessage("[dateOfBirth] must be in the past.");
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testCreateInvalidObject_DateInFuture() {
-        Date futureDate = new GregorianCalendar(9015, Calendar.OCTOBER, 21).getTime();
+		LocalDate dateOfBirthdayOneWeekInTheFuture = LocalDate.now().plusDays(7);
 
-        Birthday.newInstance(futureDate);
-    }
+		Birthday.validate(dateOfBirthdayOneWeekInTheFuture);
+	}
+
+	@Test
+	public void testValidateWithPastDate() {
+		LocalDate dateOfBirthdayOneWeekInTheFuture = LocalDate.now().minusYears(18);
+
+		Birthday.validate(dateOfBirthdayOneWeekInTheFuture);
+	}
+
+	@Test
+	public void testCreateValidObject() {
+		final LocalDate date = LocalDate.of(1978, Month.NOVEMBER, 21);
+
+		Birthday birthday = Birthday.newInstance(date);
+
+		assertEquals("21-11-1978", birthday.toString());
+	}
 }

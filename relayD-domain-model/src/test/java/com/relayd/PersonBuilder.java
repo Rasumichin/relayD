@@ -1,7 +1,7 @@
 package com.relayd;
 
+import java.time.LocalDate;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.Locale;
 
 import com.relayd.attributes.Birthday;
@@ -18,7 +18,7 @@ public class PersonBuilder {
 
 	private Surename surename = Surename.newInstance("Surename");
 	private Forename forename = Forename.newInstance("Forename");
-	private Birthday birthday = Birthday.newInstance(new GregorianCalendar(1956, Calendar.FEBRUARY, 17).getTime());
+	private Birthday birthday = Birthday.newInstance(LocalDate.of(1956, Calendar.FEBRUARY, 17));
 	private Shirtsize shirtsize = Shirtsize.HerrenM;
 	private Locale locale = Locale.GERMANY;
 
