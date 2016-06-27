@@ -2,7 +2,6 @@ package com.relayd.web.converter;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -10,6 +9,7 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
 import com.relayd.attributes.Birthday;
+import com.relayd.web.pagebean.FormatConstants;
 
 /**
  * @author schmollc (Christian@relayd.de)
@@ -21,14 +21,7 @@ public class BirthdayValueObjectConverter implements Converter {
 
 	@Override
 	public Object getAsObject(@SuppressWarnings("unused") FacesContext facesContext, @SuppressWarnings("unused") UIComponent uiComponent, String value) {
-		//TODO -schmollc- Refactor
-		LocalDate localDate;
-		try {
-			localDate = LocalDate.parse(value, DateTimeFormatter.ofPattern("dd.MM.uu"));
-
-		} catch (DateTimeParseException e) {
-			localDate = LocalDate.parse(value, DateTimeFormatter.ofPattern("dd-MM-uuuu"));
-		}
+		LocalDate localDate = LocalDate.parse(value, DateTimeFormatter.ofPattern(FormatConstants.DATE_FORMAT));
 		Birthday eventDay = Birthday.newInstance(localDate);
 		return eventDay;
 	}

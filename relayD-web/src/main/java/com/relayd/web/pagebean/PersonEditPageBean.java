@@ -114,4 +114,7 @@ public class PersonEditPageBean implements Serializable {
 		return gateway;
 	}
 
+	public String getDatePatttern() {
+		return FormatConstants.DATE_FORMAT;
+	}
 }

@@ -9,16 +9,20 @@ import org.junit.Test;
 
 import com.relayd.attributes.Birthday;
 
+/**
+ * @author schmollc (Christian@relayd.de)
+ * @since 22.06.2016
+ * status initial
+ */
 public class BirthdayValueObjectConverterTest {
 	private BirthdayValueObjectConverter sut = new BirthdayValueObjectConverter();
 
-	// TODO -ALL- Problem with PrimeFaces. Calendar set format in GUI is dd.mm.yy but toString on DomainObject is dd-mm-yyyy
 	private static final String EXPECTED_DAY = "31-12-2015";
-	private String day = "31.12.15";
 
 	@Test
 	public void testGetAsObject() {
-		Object result = sut.getAsObject(null, null, day);
+
+		Object result = sut.getAsObject(null, null, EXPECTED_DAY);
 
 		assertNotNull("Expected valid instance.", result);
 		assertEquals(Birthday.class, result.getClass());
