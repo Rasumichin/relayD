@@ -1,7 +1,13 @@
 package com.relayd.web.pagebean;
 
 import java.io.Serializable;
+import java.text.Collator;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 
@@ -38,8 +44,15 @@ public class PersonEditPageBean implements Serializable {
 
 	private Person workingPerson = null;
 
+	private Map<String, String> nationalities;
+
+	public Map<String, String> getNationalities() {
+		return nationalities;
+	}
+
 	public PersonEditPageBean() {
 		gateway = PersonGatewayFactory.get(GatewayType.FILE);
+		fillAllNationalities();
 	}
 
 	public void openDialogForCreatePerson() {
@@ -110,6 +123,14 @@ public class PersonEditPageBean implements Serializable {
 		workingPerson.setBirthday(aBirthday);
 	}
 
+	public Locale getNationality() {
+		return workingPerson.getNationality();
+	}
+
+	public void setNationality(Locale aLocale) {
+		workingPerson.setNationality(aLocale);
+	}
+
 	private PersonGateway getGateway() {
 		return gateway;
 	}
@@ -117,4 +138,58 @@ public class PersonEditPageBean implements Serializable {
 	public String getDatePatttern() {
 		return FormatConstants.DATE_FORMAT;
 	}
+
+	// TODO -schmollc- ab hier in eine eigene Klasse stecken!
+	public void fillAllNationalities() {
+		List<Country> countries = new ArrayList<Country>();
+		nationalities = new HashMap<String, String>();
+
+		Locale[] locales = Locale.getAvailableLocales();
+		for (Locale locale : locales) {
+			String code = locale.getCountry();
+			String name = locale.getDisplayCountry();
+
+			if (!"".equals(code) && !"".equals(name)) {
+				countries.add(new Country(code, name));
+			}
+		}
+
+		Collections.sort(countries, new CountryComparator());
+		for (Country country : countries) {
+			nationalities.put(country.code, country.name);
+		}
+	}
+}
+
+class CountryComparator implements Comparator<Country> {
+
+	@SuppressWarnings("rawtypes")
+	private Comparator comparator;
+
+	CountryComparator() {
+		comparator = Collator.getInstance();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public int compare(Country o1, Country o2) {
+		return comparator.compare(o1.name, o2.name);
+	}
+}
+
+class Country {
+
+	String code;
+	String name;
+
+	Country(String aCode, String aName) {
+		code = aCode;
+		name = aName;
+	}
+
+	@Override
+	public String toString() {
+		return code + " - " + name.toUpperCase();
+	}
+
 }

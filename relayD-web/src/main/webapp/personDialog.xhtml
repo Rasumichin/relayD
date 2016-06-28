@@ -31,7 +31,15 @@
 				<p:outputLabel for="birthday" value="Birthday:" />
 				<p:calendar  id="birthday" value="#{personEditPageBean.birthday}" pattern="#{personEditPageBean.getDatePatttern()}" effect="fold">
 					<f:converter converterId="com.relayd.web.converter.BirthdayValueObjectConverter" />
-				</p:calendar >		
+				</p:calendar >
+				
+				<p:outputLabel for="nationality" value="Nationality: " />
+	            <p:selectOneMenu id="nationality" value="#{personEditPageBean.nationality}" style="width:150px">
+	                <f:selectItem itemLabel="Select Country" itemValue="" noSelectionOption="true" />
+	                <f:selectItems value="#{personEditPageBean.nationalities}" />
+		            <f:converter converterId="com.relayd.web.converter.NationalityValueObjectConverter" />
+	            </p:selectOneMenu>
+
 			</h:panelGrid>					
 			
 		    <p:commandButton value="Save" update="form" actionListener="#{personEditPageBean.save}" icon="ui-icon-check" />
