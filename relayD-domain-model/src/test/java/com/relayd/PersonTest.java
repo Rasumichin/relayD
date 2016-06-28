@@ -3,7 +3,7 @@ package com.relayd;
 import static org.junit.Assert.*;
 
 import java.time.LocalDate;
-import java.util.Calendar;
+import java.time.Month;
 import java.util.Locale;
 
 import org.junit.Test;
@@ -25,13 +25,13 @@ public class PersonTest {
 		Person sut = Person.newInstance();
 		sut.setSurename(Surename.newInstance("Jonas"));
 		sut.setForename(Forename.newInstance("Justus"));
-		sut.setBirthday(Birthday.newInstance(LocalDate.of(1956, Calendar.FEBRUARY, 17)));
+		sut.setBirthday(Birthday.newInstance(LocalDate.of(1956, Month.FEBRUARY, 17)));
 		sut.setShirtsize(Shirtsize.HerrenM);
 		sut.setNationality(Locale.GERMANY);
 
 		String personAsString = sut.toString();
 
-		assertEquals("Justus Jonas, Geboren am: 17.02.1956, HerrenM, Germany", personAsString);
+		assertEquals("Justus Jonas, 17-02-1956, HerrenM, Germany", personAsString);
 	}
 
 	@Test
