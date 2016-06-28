@@ -2,12 +2,16 @@ package com.relayd.ejb;
 
 import static org.junit.Assert.*;
 
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 
 import org.junit.Test;
 
 import com.relayd.Person;
+import com.relayd.attributes.Birthday;
 import com.relayd.attributes.Forename;
 import com.relayd.attributes.Surename;
 
@@ -22,28 +26,19 @@ public abstract class PersonGatewayTest {
 
 	@Test
 	public void testGetForExistingEntry() {
-		Person teilnehmer = createPerson("Justus", "Jonas");
+		Person teilnehmer = createJustusJonas();
 		getSut().set(teilnehmer);
-		getSut().set(createPerson("Peter", "Shaw"));
+		getSut().set(createPeterShaw());
 
 		Person result = getSut().get(teilnehmer.getUUID());
 
 		assertEquals(teilnehmer.getForename(), result.getForename());
 	}
 
-	private Person createPerson(String forename, String surename) {
-		Person person = Person.newInstance();
-
-		person.setForename(Forename.newInstance(forename));
-		person.setSurename(Surename.newInstance(surename));
-
-		return person;
-	}
-
 	@Test
 	public void testGetForNonEntry() {
-		getSut().set(createPerson("Justus", "Jonas"));
-		getSut().set(createPerson("Peter", "Shaw"));
+		getSut().set(createJustusJonas());
+		getSut().set(createPeterShaw());
 
 		Person result = getSut().get(UUID.randomUUID());
 
@@ -52,8 +47,8 @@ public abstract class PersonGatewayTest {
 
 	@Test
 	public void testGetAll() {
-		getSut().set(createPerson("Justus", "Jonas"));
-		getSut().set(createPerson("Peter", "Shaw"));
+		getSut().set(createJustusJonas());
+		getSut().set(createPeterShaw());
 
 		List<Person> result = getSut().getAll();
 		assertEquals(2, result.size());
@@ -61,7 +56,7 @@ public abstract class PersonGatewayTest {
 
 	@Test
 	public void remove() {
-		Person teilnehmer = createPerson("Justus", "Jonas");
+		Person teilnehmer = createJustusJonas();
 		getSut().set(teilnehmer);
 		UUID uuid = teilnehmer.getUUID();
 
@@ -77,11 +72,11 @@ public abstract class PersonGatewayTest {
 	@Test
 	public void update() {
 		// ARRANGE
-		Person ersterTeilnehmer = createPerson("Justus", "Jonas");
+		Person ersterTeilnehmer = createJustusJonas();
 		UUID uuidFromErstenTeilnehmer = ersterTeilnehmer.getUUID();
 
 		getSut().set(ersterTeilnehmer);
-		getSut().set(createPerson("Peter", "Shaw"));
+		getSut().set(createPeterShaw());
 
 		Person updateTeilnehmer = getSut().get(uuidFromErstenTeilnehmer);
 
@@ -95,6 +90,24 @@ public abstract class PersonGatewayTest {
 		Person checkPerson = getSut().get(uuidFromErstenTeilnehmer);
 		assertNotNull(checkPerson);
 		assertEquals(newForename, checkPerson.getForename());
+	}
+
+	private Person createJustusJonas() {
+		return createPerson("Justus", "Jonas", LocalDate.of(1971, Month.APRIL, 17), Locale.GERMAN);
+	}
+
+	private Person createPeterShaw() {
+		return createPerson("Peter", "Shaw", LocalDate.of(1973, Month.AUGUST, 23), Locale.ENGLISH);
+	}
+
+	private Person createPerson(String forename, String surename, LocalDate dateOfBirth, Locale locale) {
+		Person person = Person.newInstance();
+
+		person.setForename(Forename.newInstance(forename));
+		person.setSurename(Surename.newInstance(surename));
+		person.setBirthday(Birthday.newInstance(dateOfBirth));
+		person.setNationality(locale);
+		return person;
 	}
 
 }
