@@ -14,7 +14,7 @@ import com.relayd.attributes.Shirtsize;
 public class ShirtsizeValueObjectConverterTest {
 	private ShirtsizeValueObjectConverter sut = new ShirtsizeValueObjectConverter();
 
-	private final String size = "DamenXS";
+	private final String size = "DamenS";
 
 	@Test
 	public void testGetAsObject() {
@@ -28,9 +28,9 @@ public class ShirtsizeValueObjectConverterTest {
 
 	@Test
 	public void testGetAsString() {
-		Shirtsize surename = Shirtsize.DamenL;
+		Shirtsize shirtsize = Shirtsize.Unknown;
 
-		String result = sut.getAsString(null, null, surename);
+		String result = sut.getAsString(null, null, shirtsize);
 
 		assertNotNull("Expected valid instance.", result);
 		assertEquals("Attribute not correct.", size, result);
