@@ -17,8 +17,8 @@ public class ShirtsizeValueObjectConverter implements Converter {
 
 	@Override
 	public Object getAsObject(@SuppressWarnings("unused") FacesContext facesContext, @SuppressWarnings("unused") UIComponent uiComponent, String value) {
-		// TODO -schmollc- Decode/Encode für ShirtsizeEnum einführen um das ValueMapping vollziehen zu können
-		Shirtsize size = Shirtsize.DamenL;
+		// TODO -schmollc- Gibt noch Probleme mit dem Refresh.....
+		Shirtsize size = Shirtsize.Unknown;
 		return size;
 	}
 

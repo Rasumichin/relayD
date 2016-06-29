@@ -47,13 +47,13 @@ public class PersonEditPageBean implements Serializable {
 
 	private Map<String, String> nationalities;
 
-	private Map<String, String> shirtsizes;
+	private Map<String, Short> shirtsizes;
 
 	public Map<String, String> getNationalities() {
 		return nationalities;
 	}
 
-	public Map<String, String> getShirtsizes() {
+	public Map<String, Short> getShirtsizes() {
 		return shirtsizes;
 	}
 
@@ -157,10 +157,10 @@ public class PersonEditPageBean implements Serializable {
 
 	// TODO -schmollc- ab hier in eine eigene Klasse stecken!
 	private void fillShirtsizes() {
-		shirtsizes = new HashMap<String, String>();
+		shirtsizes = new HashMap<String, Short>();
 
 		for (Shirtsize shirtsize : Shirtsize.values()) {
-			shirtsizes.put("" + shirtsize, "" + shirtsize);
+			shirtsizes.put(shirtsize.getDescription(), shirtsize.getSize());
 		}
 	}
 
