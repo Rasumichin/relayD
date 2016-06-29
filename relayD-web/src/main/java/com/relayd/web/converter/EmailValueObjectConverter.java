@@ -3,6 +3,7 @@ package com.relayd.web.converter;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
+import javax.faces.convert.FacesConverter;
 
 import com.relayd.attributes.Email;
 
@@ -11,6 +12,7 @@ import com.relayd.attributes.Email;
  * @since 29.06.2016
  * status initial
  */
+@FacesConverter("com.relayd.web.converter.EmailValueObjectConverter")
 public class EmailValueObjectConverter implements Converter {
 
 	@Override
