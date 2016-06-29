@@ -49,7 +49,11 @@
 				<h:outputText value="#{person.shirtsize}" />
 			</p:column>
 	
-			 <f:facet name="footer">
+			<p:column headerText="Email">
+				<h:outputText value="#{person.email}" />
+			</p:column>
+	
+			<f:facet name="footer">
 	        	In total there are #{personBrowsePageBean.getNumberOfResults()} events.
 	    	</f:facet>
 		</p:dataTable>
