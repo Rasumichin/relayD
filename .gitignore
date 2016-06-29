@@ -7,4 +7,4 @@ target/
 .DS_Store
 build.properties
 .tern-project
-.relayD
+*.relayD
