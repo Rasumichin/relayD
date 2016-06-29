@@ -10,14 +10,14 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
+import org.primefaces.event.SelectEvent;
+
 import com.relayd.Person;
 import com.relayd.ejb.GatewayType;
 import com.relayd.ejb.PersonGateway;
 import com.relayd.ejb.PersonGatewayFactory;
 
 /**
- * Empty PageBean with needed Methods for Workflow
- *
  * @author schmollc (Christian@relayd.de)
  * @since 15.06.2016
  * status initial
@@ -39,7 +39,8 @@ public class PersonBrowsePageBean {
 		gateway = PersonGatewayFactory.get(GatewayType.FILE);
 	}
 
-	public List<Person> getSearchResult() {
+	public List<Person> getPersons() {
+		searchResult = gateway.getAll();
 		return searchResult;
 	}
 
@@ -69,6 +70,10 @@ public class PersonBrowsePageBean {
 		gateway.remove(getSelectedPerson().getUUID());
 	}
 
+	public void onEditClosed(SelectEvent event) {
+		// TODO -Thorsten- Wenn Dialo cancel - keine Message 'saved'
+	}
+
 	public boolean isRowSelected() {
 		return getSelectedPerson() != null;
 	}
@@ -84,10 +89,5 @@ public class PersonBrowsePageBean {
 
 	public void setPersonEditPageBean(PersonEditPageBean aPersonEditPageBean) {
 		personEditPageBean = aPersonEditPageBean;
-	}
-
-	public void refresh() {
-		searchResult = gateway.getAll();
-		// TODO -schmollc- Mmm.. Erstmal eine Lösung zum refresh...
 	}
 }

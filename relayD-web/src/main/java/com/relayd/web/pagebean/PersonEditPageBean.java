@@ -99,12 +99,7 @@ public class PersonEditPageBean implements Serializable {
 	}
 
 	private void closeDialog() {
-		RequestContext.getCurrentInstance().closeDialog(PERSON_DIALOG_ID);
-	}
-
-	private void addMessage(String summary) {
-		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, "Bekackte Amateure, Dude!");
-		FacesContext.getCurrentInstance().addMessage(null, message);
+		RequestContext.getCurrentInstance().closeDialog(workingPerson);
 	}
 
 	public Forename getForename() {
@@ -153,6 +148,11 @@ public class PersonEditPageBean implements Serializable {
 
 	public String getDatePatttern() {
 		return FormatConstants.DATE_FORMAT;
+	}
+
+	private void addMessage(String summary) {
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, "Bekackte Amateure, Dude!");
+		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
 
 	// TODO -schmollc- ab hier in eine eigene Klasse stecken!

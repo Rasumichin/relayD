@@ -13,14 +13,13 @@
 
 	<h:form id="form">
 		<p:growl id="growl" showDetail="true"/>  
-	
-	    <p:commandButton value="Refresh" update="form" actionListener="#{personBrowsePageBean.refresh}" icon="ui-icon-check" />
-		
+
 		<p/>
 		
 		<p:dataTable
 			var="person"
-			value="#{personBrowsePageBean.searchResult}"
+			id="personTable"
+			value="#{personBrowsePageBean.persons}"
 			selection="#{personBrowsePageBean.selectedPerson}"
 			rowKey="#{person.UUID}"
 			resizableColumns="true">
@@ -30,7 +29,7 @@
 	    	
 	    	<p:column selectionMode="single" style="width:16px;text-align:center"/>
 	    	
-			<p:column headerText="Surename" width = "250">
+			<p:column headerText="Surename">
 				<h:outputText value="#{person.surename}" />
 			</p:column>
 	
@@ -57,8 +56,13 @@
 	
 		<p:toolbar>
 	        <f:facet name="left">
-	            <p:commandButton value="Add" update="growl"  actionListener="#{personBrowsePageBean.add}" icon="ui-icon-document"/>
-	            <p:commandButton value="Edit" update="growl"  actionListener="#{personBrowsePageBean.edit}" icon="ui-icon-folder-open"/>
+	            <p:commandButton value="Add" update="growl"  actionListener="#{personBrowsePageBean.add}" icon="ui-icon-document">
+	   				<p:ajax event="dialogReturn" listener="#{personBrowsePageBean.onEditClosed}" update="form" />
+	   			</p:commandButton>
+	            
+	            <p:commandButton value="Edit" update="growl"  actionListener="#{personBrowsePageBean.edit}" icon="ui-icon-folder-open">
+	            	<p:ajax event="dialogReturn" listener="#{personBrowsePageBean.onEditClosed}" update="form" />
+	            </p:commandButton>
 	            <span class="ui-separator">
                 	<span class="ui-icon ui-icon-grip-dotted-vertical" />
 	            </span>

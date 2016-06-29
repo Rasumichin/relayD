@@ -16,7 +16,9 @@ import com.relayd.Person;
 import com.relayd.ejb.PersonGateway;
 
 /**
- *
+ * @author schmollc (Christian@relayd.de)
+ * @since 15.06.2016
+ * status initial
  */
 @RunWith(MockitoJUnitRunner.class)
 public class PersonBrowsePageBeanTest {
@@ -36,7 +38,7 @@ public class PersonBrowsePageBeanTest {
 	@Test
 	public void testGetNumberOfResults_ForFilledResultList() {
 		Mockito.doReturn(createResultList(size(5))).when(personGateway).getAll();
-		sut.refresh();
+		sut.getPersons();
 
 		Integer numberOfResults = sut.getNumberOfResults();
 
