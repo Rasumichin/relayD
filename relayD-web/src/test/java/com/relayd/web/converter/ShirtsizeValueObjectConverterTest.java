@@ -14,7 +14,7 @@ import com.relayd.attributes.Shirtsize;
 public class ShirtsizeValueObjectConverterTest {
 	private ShirtsizeValueObjectConverter sut = new ShirtsizeValueObjectConverter();
 
-	private final String size = "DamenS";
+	private final String size = "DamenL";
 
 	@Test
 	public void testGetAsObject() {
