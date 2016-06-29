@@ -50,7 +50,7 @@
 			</p:column>
 	
 			 <f:facet name="footer">
-	        	In total there are #{fn:length(personBrowsePageBean.searchResult)} events.
+	        	In total there are #{personBrowsePageBean.getNumberOfResults()} events.
 	    	</f:facet>
 		</p:dataTable>
 	
