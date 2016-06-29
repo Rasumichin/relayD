@@ -9,6 +9,7 @@ import java.util.Locale;
 import org.junit.Test;
 
 import com.relayd.attributes.Birthday;
+import com.relayd.attributes.Email;
 import com.relayd.attributes.Forename;
 import com.relayd.attributes.Shirtsize;
 import com.relayd.attributes.Surename;
@@ -28,10 +29,11 @@ public class PersonTest {
 		sut.setBirthday(Birthday.newInstance(LocalDate.of(1956, Month.FEBRUARY, 17)));
 		sut.setShirtsize(Shirtsize.HerrenM);
 		sut.setNationality(Locale.GERMANY);
+		sut.setEmail(Email.newInstance("Jonas.Justus@rockyBeach.com"));
 
 		String personAsString = sut.toString();
 
-		assertEquals("Justus Jonas, 17-02-1956, HerrenM, Germany", personAsString);
+		assertEquals("Justus Jonas, 17-02-1956, HerrenM, Germany, Jonas.Justus@rockyBeach.com", personAsString);
 	}
 
 	@Test
@@ -113,4 +115,30 @@ public class PersonTest {
 		nationality = sut.getNationality();
 		assertEquals("Nationality ist nicht korrekt.", GERMANY, nationality);
 	}
+
+	@Test
+	public void testChangeEmail() {
+		final Email FIRST_CHOICE = Email.newInstance("Justus.Jonas@rockyBeach.com");
+		final Email SECOND_CHOICE = Email.newInstance("ErsterDetektiv@dieDrei.de");
+
+		Person sut = Person.newInstance();
+		Email email = sut.getEmail();
+
+		assertNull("Erwarte keine gueltige Instanz.", email);
+
+		sut.setEmail(FIRST_CHOICE);
+
+		email = sut.getEmail();
+
+		assertNotNull(email);
+		assertEquals("Erwarte den gesetzten Surename.", FIRST_CHOICE, email);
+
+		sut.setEmail(SECOND_CHOICE);
+
+		email = sut.getEmail();
+
+		assertNotNull(email);
+		assertEquals("Erwarte den neu gesetzten Surename.", SECOND_CHOICE, email);
+	}
+
 }

@@ -5,6 +5,7 @@ import java.util.Locale;
 import java.util.UUID;
 
 import com.relayd.attributes.Birthday;
+import com.relayd.attributes.Email;
 import com.relayd.attributes.Forename;
 import com.relayd.attributes.Shirtsize;
 import com.relayd.attributes.Surename;
@@ -23,6 +24,7 @@ public class Person implements Serializable {
 	private Birthday birthday = null;
 	private Shirtsize shirtsize = null;
 	private Locale nationality = null;
+	private Email email = null;
 
 	private Person() {
 		uuid = UUID.randomUUID();
@@ -80,6 +82,14 @@ public class Person implements Serializable {
 		nationality = aNationality;
 	}
 
+	public void setEmail(Email anEmail) {
+		email = anEmail;
+	}
+
+	public Email getEmail() {
+		return email;
+	}
+
 	private String getDisplayCountry() {
 		if (getNationality() != null) {
 			return getNationality().getDisplayCountry(Locale.ENGLISH);
@@ -89,12 +99,9 @@ public class Person implements Serializable {
 
 	@Override
 	public String toString() {
-		return getForename() + " " + getSurename() + ", " + getBirthday() + ", " + getShirtsize() + ", " + getDisplayCountry();
+		return getForename() + " " + getSurename() + ", " + getBirthday() + ", " + getShirtsize() + ", " + getDisplayCountry() + ", " + getEmail();
 	}
 
-	/**
-	 *
-	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -103,9 +110,6 @@ public class Person implements Serializable {
 		return result;
 	}
 
-	/**
-	 *
-	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
