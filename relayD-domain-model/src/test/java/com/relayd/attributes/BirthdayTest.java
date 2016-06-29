@@ -51,4 +51,90 @@ public class BirthdayTest {
 
 		assertEquals("21-11-1978", birthday.toString());
 	}
+
+	@Test
+	public void testGetHashCode() {
+		Birthday sut = Birthday.newInstance(LocalDate.of(1978, Month.NOVEMBER, 21));
+
+		int hashCode = sut.hashCode();
+
+		assertEquals(4051700, hashCode);
+
+		sut.value = null;
+
+		hashCode = sut.hashCode();
+
+		assertEquals(31, hashCode);
+	}
+
+	@Test
+	public void testEqualsWithMyself() {
+		Birthday sut = Birthday.newInstance(LocalDate.of(1978, Month.NOVEMBER, 21));
+
+		boolean result = sut.equals(sut);
+
+		assertTrue(result);
+	}
+
+	@Test
+	public void testEqualsWithNull() {
+		Birthday sut = Birthday.newInstance(LocalDate.of(1978, Month.NOVEMBER, 21));
+
+		boolean result = sut.equals(null);
+
+		assertFalse(result);
+	}
+
+	@Test
+	public void testEqualsWithNotCompatibleClass() {
+		Birthday sut = Birthday.newInstance(LocalDate.of(1978, Month.NOVEMBER, 21));
+
+		boolean result = sut.equals(new String());
+
+		assertFalse(result);
+	}
+
+	@Test
+	public void testEqualsWithValueIsNull() {
+		Birthday sut = Birthday.newInstance(LocalDate.of(1978, Month.NOVEMBER, 21));
+		sut.value = null;
+		Birthday secondName = Birthday.newInstance(LocalDate.of(1978, Month.NOVEMBER, 21));
+
+		boolean result = sut.equals(secondName);
+
+		assertFalse(result);
+	}
+
+	@Test
+	public void testEqualsWithBothValuesAreNull() {
+		Birthday sut = Birthday.newInstance(LocalDate.of(1978, Month.NOVEMBER, 21));
+		sut.value = null;
+		Birthday secondName = Birthday.newInstance(LocalDate.of(1978, Month.NOVEMBER, 21));
+		secondName.value = null;
+
+		boolean result = sut.equals(secondName);
+
+		assertTrue(result);
+	}
+
+	@Test
+	public void testEqualsWithTwoDiffrentValues() {
+		Birthday sut = Birthday.newInstance(LocalDate.of(1978, Month.NOVEMBER, 21));
+		Birthday secondName = Birthday.newInstance(LocalDate.of(1979, Month.DECEMBER, 22));
+
+		boolean result = sut.equals(secondName);
+
+		assertFalse(result);
+	}
+
+	@Test
+	public void testEqualsWithSameValues() {
+		Birthday sut = Birthday.newInstance(LocalDate.of(1978, Month.NOVEMBER, 21));
+		Birthday secondName = Birthday.newInstance(LocalDate.of(1978, Month.NOVEMBER, 21));
+
+		boolean result = sut.equals(secondName);
+
+		assertTrue(result);
+	}
+
 }

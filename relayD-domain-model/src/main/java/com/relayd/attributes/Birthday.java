@@ -14,7 +14,7 @@ public class Birthday implements Serializable {
 
 	private static final String DATE_PATTERN = "dd-MM-yyyy";
 
-	private LocalDate value;
+	LocalDate value;
 
 	/**
 	 * Bloch, Joshua, Effective Java, 2nd Edition, Item 1, p. 5
