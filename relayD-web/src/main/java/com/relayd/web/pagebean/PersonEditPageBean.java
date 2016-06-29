@@ -21,6 +21,7 @@ import org.primefaces.context.RequestContext;
 import com.relayd.Person;
 import com.relayd.attributes.Birthday;
 import com.relayd.attributes.Forename;
+import com.relayd.attributes.Shirtsize;
 import com.relayd.attributes.Surename;
 import com.relayd.ejb.GatewayType;
 import com.relayd.ejb.PersonGateway;
@@ -46,13 +47,20 @@ public class PersonEditPageBean implements Serializable {
 
 	private Map<String, String> nationalities;
 
+	private Map<String, String> shirtsizes;
+
 	public Map<String, String> getNationalities() {
 		return nationalities;
+	}
+
+	public Map<String, String> getShirtsizes() {
+		return shirtsizes;
 	}
 
 	public PersonEditPageBean() {
 		gateway = PersonGatewayFactory.get(GatewayType.FILE);
 		fillAllNationalities();
+		fillShirtsizes();
 	}
 
 	public void openDialogForCreatePerson() {
@@ -131,6 +139,14 @@ public class PersonEditPageBean implements Serializable {
 		workingPerson.setNationality(aLocale);
 	}
 
+	public Shirtsize getShirtsize() {
+		return workingPerson.getShirtsize();
+	}
+
+	public void setShirtsize(Shirtsize aShirtsize) {
+		workingPerson.setShirtsize(aShirtsize);
+	}
+
 	private PersonGateway getGateway() {
 		return gateway;
 	}
@@ -140,6 +156,14 @@ public class PersonEditPageBean implements Serializable {
 	}
 
 	// TODO -schmollc- ab hier in eine eigene Klasse stecken!
+	private void fillShirtsizes() {
+		shirtsizes = new HashMap<String, String>();
+
+		for (Shirtsize shirtsize : Shirtsize.values()) {
+			shirtsizes.put("" + shirtsize, "" + shirtsize);
+		}
+	}
+
 	public void fillAllNationalities() {
 		List<Country> countries = new ArrayList<Country>();
 		nationalities = new HashMap<String, String>();

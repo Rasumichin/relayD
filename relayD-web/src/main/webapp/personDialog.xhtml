@@ -40,6 +40,13 @@
 		            <f:converter converterId="com.relayd.web.converter.NationalityValueObjectConverter" />
 	            </p:selectOneMenu>
 
+				<p:outputLabel for="shirtsize" value="Shirtsize: " />
+	            <p:selectOneMenu id="shirtsize" value="#{personEditPageBean.shirtsize}" style="width:150px">
+	                <f:selectItem itemLabel="Select Shirtsize" itemValue="" noSelectionOption="true" />
+	                <f:selectItems value="#{personEditPageBean.shirtsizes}" />
+		            <f:converter converterId="com.relayd.web.converter.ShirtsizeValueObjectConverter" />
+	            </p:selectOneMenu>
+
 			</h:panelGrid>					
 			
 		    <p:commandButton value="Save" update="form" actionListener="#{personEditPageBean.save}" icon="ui-icon-check" />

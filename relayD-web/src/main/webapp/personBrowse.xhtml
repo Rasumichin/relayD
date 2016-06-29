@@ -45,6 +45,10 @@
 			<p:column headerText="Nationality">
 				<h:outputText value="#{person.nationality}" />
 			</p:column>
+
+			<p:column headerText="Shirtsize">
+				<h:outputText value="#{person.shirtsize}" />
+			</p:column>
 	
 			 <f:facet name="footer">
 	        	In total there are #{fn:length(personBrowsePageBean.searchResult)} events.
