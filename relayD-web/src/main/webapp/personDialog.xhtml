@@ -47,6 +47,11 @@
 		            <f:converter converterId="com.relayd.web.converter.ShirtsizeValueObjectConverter" />
 	            </p:selectOneMenu>
 
+				<p:outputLabel for="email" value="Email:" />
+				<p:inputText id="email" value="#{personEditPageBean.email}">
+					<f:converter converterId="com.relayd.web.converter.EmailValueObjectConverter" />
+				</p:inputText>		
+
 			</h:panelGrid>					
 			
 		    <p:commandButton value="Save" update="form" actionListener="#{personEditPageBean.save}" icon="ui-icon-check" />

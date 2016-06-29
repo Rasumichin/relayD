@@ -83,6 +83,7 @@ public class PersonGatewayFile implements PersonGateway {
 					person.setForename(updatePerson.getForename());
 					person.setNationality(updatePerson.getNationality());
 					person.setShirtsize(updatePerson.getShirtsize());
+					person.setEmail(updatePerson.getEmail());
 					break;
 				}
 			}

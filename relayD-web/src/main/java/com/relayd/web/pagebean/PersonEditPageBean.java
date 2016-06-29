@@ -20,6 +20,7 @@ import org.primefaces.context.RequestContext;
 
 import com.relayd.Person;
 import com.relayd.attributes.Birthday;
+import com.relayd.attributes.Email;
 import com.relayd.attributes.Forename;
 import com.relayd.attributes.Shirtsize;
 import com.relayd.attributes.Surename;
@@ -140,6 +141,14 @@ public class PersonEditPageBean implements Serializable {
 
 	public void setShirtsize(Shirtsize aShirtsize) {
 		workingPerson.setShirtsize(aShirtsize);
+	}
+
+	public Email getEmail() {
+		return workingPerson.getEmail();
+	}
+
+	public void setEmail(Email anEmail) {
+		workingPerson.setEmail(anEmail);
 	}
 
 	private PersonGateway getGateway() {
