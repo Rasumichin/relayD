@@ -48,15 +48,7 @@ public class PersonEditPageBean implements Serializable {
 
 	private Map<String, String> nationalities;
 
-	private Map<String, Short> shirtsizes;
-
-	public Map<String, String> getNationalities() {
-		return nationalities;
-	}
-
-	public Map<String, Short> getShirtsizes() {
-		return shirtsizes;
-	}
+	private List<Shirtsize> shirtsizes;
 
 	public PersonEditPageBean() {
 		gateway = PersonGatewayFactory.get(GatewayType.FILE);
@@ -101,6 +93,14 @@ public class PersonEditPageBean implements Serializable {
 
 	private void closeDialog() {
 		RequestContext.getCurrentInstance().closeDialog(workingPerson);
+	}
+
+	public Map<String, String> getNationalities() {
+		return nationalities;
+	}
+
+	public List<Shirtsize> getShirtsizes() {
+		return shirtsizes;
 	}
 
 	public Forename getForename() {
@@ -166,10 +166,10 @@ public class PersonEditPageBean implements Serializable {
 
 	// TODO -schmollc- ab hier in eine eigene Klasse stecken!
 	private void fillShirtsizes() {
-		shirtsizes = new HashMap<String, Short>();
+		shirtsizes = new ArrayList<Shirtsize>();
 
 		for (Shirtsize shirtsize : Shirtsize.values()) {
-			shirtsizes.put(shirtsize.getDescription(), shirtsize.getSize());
+			shirtsizes.add(shirtsize);
 		}
 	}
 
@@ -189,7 +189,7 @@ public class PersonEditPageBean implements Serializable {
 
 		Collections.sort(countries, new CountryComparator());
 		for (Country country : countries) {
-			nationalities.put(country.code, country.name);
+			nationalities.put(country.name, country.code + "1");
 		}
 	}
 }

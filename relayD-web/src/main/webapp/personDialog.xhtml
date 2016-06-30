@@ -33,19 +33,21 @@
 					<f:converter converterId="com.relayd.web.converter.BirthdayValueObjectConverter" />
 				</p:calendar >
 				
-				<p:outputLabel for="nationality" value="Nationality: " />
+				<p:outputLabel for="nationality" value="Nationality:" />
 	            <p:selectOneMenu id="nationality" value="#{personEditPageBean.nationality}" style="width:150px">
-	                <f:selectItem itemLabel="Select Country" itemValue="" noSelectionOption="true" />
+	                <f:selectItem itemLabel="Select Country" itemValue="" noSelectionOption="true"/>
 	                <f:selectItems value="#{personEditPageBean.nationalities}" />
 		            <f:converter converterId="com.relayd.web.converter.NationalityValueObjectConverter" />
 	            </p:selectOneMenu>
 
-				<p:outputLabel for="shirtsize" value="Shirtsize: " />
-	            <p:selectOneMenu id="shirtsize" value="#{personEditPageBean.shirtsize}" style="width:150px">
-	                <f:selectItem itemLabel="Select Shirtsize" itemValue="" noSelectionOption="true" />
-	                <f:selectItems value="#{personEditPageBean.shirtsizes}" />
-		            <f:converter converterId="com.relayd.web.converter.ShirtsizeValueObjectConverter" />
-	            </p:selectOneMenu>
+				<p:outputLabel for="shirtsize" value="Shirtsize:" />
+	            <p:selectOneMenu id="shirtsize" value="#{personEditPageBean.shirtsize}" var="entry" style="width:150px">
+	                <f:selectItem itemLabel="Select Shirtsize" itemValue="" />
+	                <f:selectItems value="#{personEditPageBean.shirtsizes}" var="shirtsize" itemLabel="#{shirtsize.description}" itemValue="#{shirtsize}"/>
+						<p:column>
+							#{entry.description}
+						</p:column>
+				</p:selectOneMenu>	          
 
 				<p:outputLabel for="email" value="Email:" />
 				<p:inputText id="email" value="#{personEditPageBean.email}">
