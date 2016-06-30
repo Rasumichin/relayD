@@ -67,6 +67,7 @@ public class PersonBrowsePageBean {
 
 	public void remove(@SuppressWarnings("unused") ActionEvent actionEvent) {
 		// TODO -ALL- Abprüfung auf selektion passiert... wie?
+		// TODO -schmollc- Die Gui refresht nach dem remove nicht.
 		gateway.remove(getSelectedPerson().getUUID());
 	}
 
