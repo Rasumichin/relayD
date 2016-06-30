@@ -60,17 +60,14 @@
 	
 		<p:toolbar>
 	        <f:facet name="left">
-	            <p:commandButton value="Add" update="growl"  actionListener="#{personBrowsePageBean.add}" icon="ui-icon-document">
+	            <p:commandButton value="+" update="growl"  actionListener="#{personBrowsePageBean.add}">
 	   				<p:ajax event="dialogReturn" listener="#{personBrowsePageBean.onEditClosed}" update="form" />
 	   			</p:commandButton>
-	            
+	            <p:commandButton value="-" update="growl"  actionListener="#{personBrowsePageBean.remove}" />
+
 	            <p:commandButton value="Edit" update="growl"  actionListener="#{personBrowsePageBean.edit}" icon="ui-icon-folder-open">
 	            	<p:ajax event="dialogReturn" listener="#{personBrowsePageBean.onEditClosed}" update="form" />
 	            </p:commandButton>
-	            <span class="ui-separator">
-                	<span class="ui-icon ui-icon-grip-dotted-vertical" />
-	            </span>
-	            <p:commandButton value="Remove" update="growl"  actionListener="#{personBrowsePageBean.remove}" icon="ui-icon-folder-open"/>
 	        </f:facet>
         </p:toolbar>
 		
