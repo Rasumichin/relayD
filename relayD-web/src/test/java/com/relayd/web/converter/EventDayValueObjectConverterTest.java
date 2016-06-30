@@ -17,22 +17,10 @@ import com.relayd.attributes.EventDay;
 public class EventDayValueObjectConverterTest {
 	private EventDayValueObjectConverter sut = new EventDayValueObjectConverter();
 
-	// TODO -ALL- Problem with PrimeFaces. Calendar set format in GUI is dd.mm.yy but toString on DomainObject is dd-mm-yyyy
 	private static final String EXPECTED_DAY = "31-12-2015";
-	private String day = "31.12.15";
 
 	@Test
-	public void testGetAsObjectForGui() {
-		Object result = sut.getAsObject(null, null, day);
-
-		assertNotNull("Expected valid instance.", result);
-		assertEquals(EventDay.class, result.getClass());
-		EventDay eventDay = (EventDay) result;
-		assertEquals("Attribute not correct.", EXPECTED_DAY, eventDay.toString());
-	}
-
-	@Test
-	public void testGetAsObjectForDomain() {
+	public void testGetAsObject() {
 		Object result = sut.getAsObject(null, null, EXPECTED_DAY);
 
 		assertNotNull("Expected valid instance.", result);
