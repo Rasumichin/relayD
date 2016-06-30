@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter;
 public class EventDay implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private static final String DATE_PATTERN = "dd-MM-yyyy";
+	private String datePattern = "dd-MM-yyyy";
 
 	private LocalDate value;
 
@@ -25,6 +25,12 @@ public class EventDay implements Serializable {
 
 	public EventDay() {
 		this(LocalDate.now());
+	}
+
+	public EventDay(LocalDate dateOfEvent, String aDatePattern) {
+		this(dateOfEvent);
+		datePattern = aDatePattern;
+
 	}
 
 	public LocalDate getValue() {
@@ -45,7 +51,7 @@ public class EventDay implements Serializable {
 
 	@Override
 	public String toString() {
-		return "" + value.format(DateTimeFormatter.ofPattern(DATE_PATTERN));
+		return "" + value.format(DateTimeFormatter.ofPattern(datePattern));
 	}
 
 	@Override
