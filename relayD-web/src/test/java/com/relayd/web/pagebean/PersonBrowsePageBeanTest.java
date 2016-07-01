@@ -13,7 +13,7 @@ import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.relayd.Person;
-import com.relayd.ejb.PersonGateway;
+import com.relayd.web.bridge.PersonBridge;
 
 /**
  * @author schmollc (Christian@relayd.de)
@@ -26,7 +26,7 @@ public class PersonBrowsePageBeanTest {
 	private PersonBrowsePageBean sut;
 
 	@Mock
-	private PersonGateway personGateway;
+	private PersonBridge personBridge;
 
 	@Test
 	public void testGetNumberOfResults_ForEmptyResultList() {
@@ -37,7 +37,7 @@ public class PersonBrowsePageBeanTest {
 
 	@Test
 	public void testGetNumberOfResults_ForFilledResultList() {
-		Mockito.doReturn(createResultList(size(5))).when(personGateway).getAll();
+		Mockito.doReturn(createResultList(size(5))).when(personBridge).all();
 		sut.getPersons();
 
 		Integer numberOfResults = sut.getNumberOfResults();
