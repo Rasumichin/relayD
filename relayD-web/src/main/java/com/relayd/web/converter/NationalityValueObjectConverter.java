@@ -17,12 +17,19 @@ public class NationalityValueObjectConverter implements Converter {
 
 	@Override
 	public Object getAsObject(@SuppressWarnings("unused") FacesContext facesContext, @SuppressWarnings("unused") UIComponent uiComponent, String value) {
-		Locale locale = new Locale(value);
-		return locale;
+		Locale[] locales = Locale.getAvailableLocales();
+		for (Locale locale : locales) {
+			String asString = locale.toString();
+			if (value.equals(asString)) {
+				return locale;
+			}
+		}
+		return null;
 	}
 
 	@Override
 	public String getAsString(@SuppressWarnings("unused") FacesContext facesContext, @SuppressWarnings("unused") UIComponent uiComponent, Object value) {
+		//return ((Locale) value).getDisplayCountry();
 		return value.toString();
 	}
 }

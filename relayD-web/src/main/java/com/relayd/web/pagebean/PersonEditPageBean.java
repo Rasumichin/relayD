@@ -1,10 +1,7 @@
 package com.relayd.web.pagebean;
 
 import java.io.Serializable;
-import java.text.Collator;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -46,7 +43,7 @@ public class PersonEditPageBean implements Serializable {
 
 	private Person workingPerson = null;
 
-	private Map<String, String> nationalities;
+	private List<Locale> nationalities;
 
 	private List<Shirtsize> shirtsizes;
 
@@ -95,7 +92,7 @@ public class PersonEditPageBean implements Serializable {
 		RequestContext.getCurrentInstance().closeDialog(workingPerson);
 	}
 
-	public Map<String, String> getNationalities() {
+	public List<Locale> getNationalities() {
 		return nationalities;
 	}
 
@@ -174,8 +171,7 @@ public class PersonEditPageBean implements Serializable {
 	}
 
 	public void fillAllNationalities() {
-		List<Country> countries = new ArrayList<Country>();
-		nationalities = new HashMap<String, String>();
+		nationalities = new ArrayList<Locale>();
 
 		Locale[] locales = Locale.getAvailableLocales();
 		for (Locale locale : locales) {
@@ -183,46 +179,8 @@ public class PersonEditPageBean implements Serializable {
 			String name = locale.getDisplayCountry();
 
 			if (!"".equals(code) && !"".equals(name)) {
-				countries.add(new Country(code, name));
+				nationalities.add(locale);
 			}
 		}
-
-		Collections.sort(countries, new CountryComparator());
-		for (Country country : countries) {
-			nationalities.put(country.name, country.code + "1");
-		}
 	}
-}
-
-class CountryComparator implements Comparator<Country> {
-
-	@SuppressWarnings("rawtypes")
-	private Comparator comparator;
-
-	CountryComparator() {
-		comparator = Collator.getInstance();
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public int compare(Country o1, Country o2) {
-		return comparator.compare(o1.name, o2.name);
-	}
-}
-
-class Country {
-
-	String code;
-	String name;
-
-	Country(String aCode, String aName) {
-		code = aCode;
-		name = aName;
-	}
-
-	@Override
-	public String toString() {
-		return code + " - " + name.toUpperCase();
-	}
-
 }

@@ -34,10 +34,16 @@
 				</p:calendar >
 				
 				<p:outputLabel for="nationality" value="Nationality:" />
-	            <p:selectOneMenu id="nationality" value="#{personEditPageBean.nationality}" style="width:150px">
+	            <p:selectOneMenu id="nationality" value="#{personEditPageBean.nationality}" var="entry" converter="com.relayd.web.converter.NationalityValueObjectConverter" style="width:150px">
 	                <f:selectItem itemLabel="Select Country" itemValue="" noSelectionOption="true"/>
 	                <f:selectItems value="#{personEditPageBean.nationalities}" />
-		            <f:converter converterId="com.relayd.web.converter.NationalityValueObjectConverter" />
+	                	<p:column>
+							#{entry.country}
+						</p:column>
+						<p:column>
+							#{entry.displayCountry}
+						</p:column>
+
 	            </p:selectOneMenu>
 
 				<p:outputLabel for="shirtsize" value="Shirtsize:" />

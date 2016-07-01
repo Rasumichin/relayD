@@ -15,7 +15,7 @@ public class NationalityValueObjectConverterTest {
 
 	private NationalityValueObjectConverter sut = new NationalityValueObjectConverter();
 
-	private final String name = "deutschland";
+	private final String name = "de_DE";
 
 	@Test
 	public void testGetAsObject() {
@@ -34,6 +34,6 @@ public class NationalityValueObjectConverterTest {
 		String result = sut.getAsString(null, null, locale);
 
 		assertNotNull("Expected valid instance.", result);
-		assertEquals("Attribute not correct.", name, result);
+		assertEquals("Attribute not correct.", name.toUpperCase(), result.toUpperCase());
 	}
 }
