@@ -21,13 +21,10 @@ import com.relayd.attributes.Email;
 import com.relayd.attributes.Forename;
 import com.relayd.attributes.Shirtsize;
 import com.relayd.attributes.Surename;
-import com.relayd.ejb.GatewayType;
-import com.relayd.ejb.PersonGateway;
-import com.relayd.ejb.PersonGatewayFactory;
+import com.relayd.web.bridge.PersonBridge;
+import com.relayd.web.bridge.PersonBridgeImpl;
 
 /**
- * Empty PageBean with needed Methods for Workflow
- *
  * @author schmollc (Christian@relayd.de)
  * @since 15.06.2016
  * status initial
@@ -39,27 +36,31 @@ public class PersonEditPageBean implements Serializable {
 
 	private static final String PERSON_DIALOG_ID = "personDialog";
 
-	private PersonGateway gateway = null;
+	private PersonBridge personBridge;
 
 	private Person workingPerson = null;
+
+	private boolean isNewPerson = false;
 
 	private List<Locale> nationalities;
 
 	private List<Shirtsize> shirtsizes;
 
 	public PersonEditPageBean() {
-		gateway = PersonGatewayFactory.get(GatewayType.FILE);
+		personBridge = new PersonBridgeImpl();
 		fillAllNationalities();
 		fillShirtsizes();
 	}
 
 	public void openDialogForCreatePerson() {
 		workingPerson = Person.newInstance();
+		isNewPerson = true;
 		openDialog();
 	}
 
 	public void openDialogFor(UUID uuid) {
-		workingPerson = getGateway().get(uuid);
+		workingPerson = getBridge().get(uuid);
+		isNewPerson = false;
 		openDialog();
 	}
 
@@ -80,7 +81,11 @@ public class PersonEditPageBean implements Serializable {
 	}
 
 	public void save() {
-		getGateway().set(workingPerson);
+		if (isNewPerson) {
+			getBridge().create(workingPerson);
+		} else {
+			getBridge().update(workingPerson);
+		}
 		closeDialog();
 	}
 
@@ -148,8 +153,8 @@ public class PersonEditPageBean implements Serializable {
 		workingPerson.setEmail(anEmail);
 	}
 
-	private PersonGateway getGateway() {
-		return gateway;
+	private PersonBridge getBridge() {
+		return personBridge;
 	}
 
 	public String getDatePatttern() {

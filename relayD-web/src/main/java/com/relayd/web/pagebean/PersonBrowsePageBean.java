@@ -13,9 +13,8 @@ import javax.faces.event.ActionEvent;
 import org.primefaces.event.SelectEvent;
 
 import com.relayd.Person;
-import com.relayd.ejb.GatewayType;
-import com.relayd.ejb.PersonGateway;
-import com.relayd.ejb.PersonGatewayFactory;
+import com.relayd.web.bridge.PersonBridge;
+import com.relayd.web.bridge.PersonBridgeImpl;
 
 /**
  * @author schmollc (Christian@relayd.de)
@@ -26,7 +25,7 @@ import com.relayd.ejb.PersonGatewayFactory;
 @SessionScoped
 public class PersonBrowsePageBean {
 
-	private PersonGateway gateway = null;
+	private PersonBridge personBridge = null;
 
 	@ManagedProperty(value = "#{personEditPageBean}")
 	private PersonEditPageBean personEditPageBean;
@@ -36,11 +35,11 @@ public class PersonBrowsePageBean {
 	private Person selected;
 
 	public PersonBrowsePageBean() {
-		gateway = PersonGatewayFactory.get(GatewayType.FILE);
+		personBridge = new PersonBridgeImpl();
 	}
 
 	public List<Person> getPersons() {
-		searchResult = gateway.getAll();
+		searchResult = personBridge.all();
 		return searchResult;
 	}
 
@@ -68,7 +67,7 @@ public class PersonBrowsePageBean {
 	public void remove(@SuppressWarnings("unused") ActionEvent actionEvent) {
 		// TODO -ALL- Abprüfung auf selektion passiert... wie?
 		// TODO -schmollc- Die Gui refresht nach dem remove nicht.
-		gateway.remove(getSelectedPerson().getUUID());
+		personBridge.remove(getSelectedPerson());
 	}
 
 	public void onEditClosed(SelectEvent event) {
