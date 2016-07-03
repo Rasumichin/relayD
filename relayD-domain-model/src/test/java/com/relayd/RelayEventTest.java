@@ -151,7 +151,7 @@ public class RelayEventTest {
 	}
 
 	@Test
-	public void testSetUuid() {
+	public void testSetUUID() {
 		EventName eventNameDummy = new EventName("MetroGroup Marathon Düsseldorf");
 		EventDay eventDayDummy = new EventDay(LocalDate.of(2017, Month.APRIL, 30));
 
