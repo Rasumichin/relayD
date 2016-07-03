@@ -56,8 +56,13 @@ public class RelayBrowsePageBean {
 	}
 
 	public void add(@SuppressWarnings("unused") ActionEvent actionEvent) {
-		//		getRelayEditPageBean().openDialogForCreatePerson();
+		//		getRelayEditPageBean().openDialogForCreateRelay();
 		showMessage("add not implemented yet!");
+	}
+
+	public void edit(@SuppressWarnings("unused") ActionEvent actionEvent) {
+		//		getRelayEditPageBean().openDialogFor(getSelectedRelay().getUUID());
+		showMessage("edit not implemented yet!");
 	}
 
 	public void remove(@SuppressWarnings("unused") ActionEvent actionEvent) {

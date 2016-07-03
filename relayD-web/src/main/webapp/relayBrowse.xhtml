@@ -45,6 +45,10 @@
 	   			</p:commandButton>
 	            <p:commandButton value="-" update="growl"  actionListener="#{relayBrowsePageBean.remove}" />
 	        
+	            <p:commandButton value="Edit" update="growl"  actionListener="#{relayBrowsePageBean.edit}" icon="ui-icon-folder-open">
+	            	<p:ajax event="dialogReturn" listener="#{relayBrowsePageBean.onEditClosed}" update="form" />
+	            </p:commandButton>
+	        
 	        </f:facet>
         </p:toolbar>
 		
