@@ -23,6 +23,8 @@ public class RelayBrowsePageBean {
 
 	private List<Relay> searchResult = new ArrayList<Relay>();
 
+	private Relay selected;
+
 	public RelayBrowsePageBean() {
 		relayBridge = new RelayBridgeImpl();
 	}
@@ -35,4 +37,17 @@ public class RelayBrowsePageBean {
 	public Integer getNumberOfResults() {
 		return searchResult == null ? 0 : searchResult.size();
 	}
+
+	public boolean isRowSelected() {
+		return getSelectedRelay() != null;
+	}
+
+	public Relay getSelectedRelay() {
+		return selected;
+	}
+
+	public void setSelectedRelay(Relay aSelected) {
+		selected = aSelected;
+	}
+
 }

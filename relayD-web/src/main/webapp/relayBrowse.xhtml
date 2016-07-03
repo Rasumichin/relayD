@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 	xmlns="http://www.w3.org/1999/xhtml"
+      	xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:p="http://primefaces.org/ui"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	>
+
+<h:head></h:head>
+<h:body>
+	<h3>Welcome to the REAL relay D!</h3>
+
+	<h:form id="form">
+		<p:growl id="growl" showDetail="true"/>  
+
+		<p/>
+		
+		<p:dataTable
+			var="relay"
+			id="relayTable"
+			value="#{relayBrowsePageBean.relays}"
+			selection="#{relayBrowsePageBean.selectedRelay}"
+			rowKey="#{relay.UUID}"
+			resizableColumns="true">
+	     	<f:facet name="header">
+	        	List of relays
+	    	</f:facet>
+	    	
+	    	<p:column selectionMode="single" style="width:16px;text-align:center"/>
+	    	
+			<p:column headerText="Relayname">
+				<h:outputText value="#{relay.relayname}" />
+			</p:column>
+	
+			<f:facet name="footer">
+	        	In total there are #{relayBrowsePageBean.getNumberOfResults()} relays.
+	    	</f:facet>
+		</p:dataTable>
+	
+		<p:toolbar>
+	        <f:facet name="left">
+	        </f:facet>
+        </p:toolbar>
+		
+	</h:form>
+</h:body>
+</html>

@@ -45,13 +45,13 @@ public class RelayBrowsePageBeanTest {
 		assertEquals(Integer.valueOf(5), numberOfResults);
 	}
 
-	//	@Test
-	//	public void testIsRowSelected_ForNotSelectedRow() {
-	//		boolean result = sut.isRowSelected();
-	//
-	//		assertFalse("Row should not selected.", result);
-	//	}
-	//
+	@Test
+	public void testIsRowSelected_ForNotSelectedRow() {
+		boolean result = sut.isRowSelected();
+
+		assertFalse("Row should not selected.", result);
+	}
+
 	//	@Test
 	//	public void testIsRowSelected_ForSelectedRow() {
 	//		sut.setSelectedPerson(new PersonBuilder().build());

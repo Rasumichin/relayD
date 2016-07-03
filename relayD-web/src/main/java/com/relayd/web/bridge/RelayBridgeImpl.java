@@ -6,10 +6,15 @@ import java.util.UUID;
 import com.relayd.Person;
 import com.relayd.Relay;
 import com.relayd.ejb.RelayGateway;
+import com.relayd.ejb.orm.memory.RelayGatewayMemory;
 
 public class RelayBridgeImpl implements RelayBridge {
 
 	private RelayGateway gateway = null;
+
+	public RelayBridgeImpl() {
+		gateway = new RelayGatewayMemory();
+	}
 
 	@Override
 	public List<Relay> all() {
