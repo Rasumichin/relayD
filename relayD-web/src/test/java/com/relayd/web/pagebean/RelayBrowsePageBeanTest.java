@@ -2,12 +2,17 @@ package com.relayd.web.pagebean;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import com.relayd.Relay;
 import com.relayd.web.bridge.RelayBridge;
 
 /**
@@ -30,16 +35,16 @@ public class RelayBrowsePageBeanTest {
 		assertEquals(Integer.valueOf(0), numberOfResults);
 	}
 
-	//	@Test
-	//	public void testGetNumberOfResults_ForFilledResultList() {
-	//		Mockito.doReturn(createResultList(size(5))).when(personBridge).all();
-	//		sut.getPersons();
-	//
-	//		Integer numberOfResults = sut.getNumberOfResults();
-	//
-	//		assertEquals(Integer.valueOf(5), numberOfResults);
-	//	}
-	//
+	@Test
+	public void testGetNumberOfResults_ForFilledResultList() {
+		Mockito.doReturn(createResultList(size(5))).when(relayBridge).all();
+		sut.getRelays();
+
+		Integer numberOfResults = sut.getNumberOfResults();
+
+		assertEquals(Integer.valueOf(5), numberOfResults);
+	}
+
 	//	@Test
 	//	public void testIsRowSelected_ForNotSelectedRow() {
 	//		boolean result = sut.isRowSelected();
@@ -56,19 +61,19 @@ public class RelayBrowsePageBeanTest {
 	//		assertTrue("Row should selected.", result);
 	//	}
 	//
-	//	private List<Person> createResultList(Integer aSize) {
-	//		List<Person> result = new ArrayList<Person>();
-	//		PersonBuilder personBuilder = new PersonBuilder();
-	//
-	//		for (int i = 0; i < aSize; i++) {
-	//			Person person = personBuilder.build();
-	//			result.add(person);
-	//		}
-	//		return result;
-	//	}
-	//
-	//	private Integer size(Integer aValue) {
-	//		return aValue;
-	//	}
-	//
+	private List<Relay> createResultList(Integer aSize) {
+		List<Relay> result = new ArrayList<Relay>();
+		RelayBuilder relayBuilder = new RelayBuilder();
+
+		for (int i = 0; i < aSize; i++) {
+			Relay relay = relayBuilder.build();
+			result.add(relay);
+		}
+		return result;
+	}
+
+	private Integer size(Integer aValue) {
+		return aValue;
+	}
+
 }

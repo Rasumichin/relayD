@@ -27,6 +27,11 @@ public class RelayBrowsePageBean {
 		relayBridge = new RelayBridgeImpl();
 	}
 
+	public List<Relay> getRelays() {
+		searchResult = relayBridge.all();
+		return searchResult;
+	}
+
 	public Integer getNumberOfResults() {
 		return searchResult == null ? 0 : searchResult.size();
 	}
