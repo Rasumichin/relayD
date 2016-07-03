@@ -3,8 +3,13 @@ package com.relayd.web.pagebean;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
+
+import org.primefaces.event.SelectEvent;
 
 import com.relayd.Relay;
 import com.relayd.web.bridge.RelayBridge;
@@ -48,6 +53,20 @@ public class RelayBrowsePageBean {
 
 	public void setSelectedRelay(Relay aSelected) {
 		selected = aSelected;
+	}
+
+	public void add(@SuppressWarnings("unused") ActionEvent actionEvent) {
+		//		getRelayEditPageBean().openDialogForCreatePerson();
+		showMessage("add not implemented yet!");
+	}
+
+	public void onEditClosed(SelectEvent event) {
+		// TODO -schmollc- Ist diese Methode noetig?
+	}
+
+	private void showMessage(String text) {
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, text, "Bekackte Amateure, Dude!");
+		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
 
 }

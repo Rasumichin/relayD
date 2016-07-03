@@ -40,6 +40,9 @@
 	
 		<p:toolbar>
 	        <f:facet name="left">
+	            <p:commandButton value="+" update="growl"  actionListener="#{relayBrowsePageBean.add}">
+	   				<p:ajax event="dialogReturn" listener="#{relayBrowsePageBean.onEditClosed}" update="form" />
+	   			</p:commandButton>
 	        </f:facet>
         </p:toolbar>
 		
