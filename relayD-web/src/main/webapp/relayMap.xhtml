@@ -1,0 +1,147 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+<h:head></h:head>
+<h:body>
+	<h3>Welcome to the REAL relay D!</h3>
+
+
+	<h:form id="form">
+		<p:growl
+			id="growl"
+			showDetail="true" />
+		<p:dataTable
+			var="relay"
+			id="relayTable"
+			value="#{relayBrowsePageBean.relays}"
+			selection="#{relayBrowsePageBean.selectedRelay}"
+			rowKey="#{relay.UUID}"
+			resizableColumns="true"
+			styleClass="ui-grid-col-6">
+			<f:facet name="header">
+		        	List of relays
+		    	</f:facet>
+
+			<p:column
+				selectionMode="single"
+				style="width:16px;text-align:center" />
+
+			<p:column headerText="Relayname">
+				<h:outputText value="#{relay.relayname}" />
+			</p:column>
+
+			<f:facet name="footer">
+		        	In total there are #{relayBrowsePageBean.getNumberOfResults()} relays.
+		    	</f:facet>
+		</p:dataTable>
+		<p:dataTable
+			var="person"
+			id="personTable"
+			value="#{personBrowsePageBean.persons}"
+			selection="#{personBrowsePageBean.selectedPerson}"
+			rowKey="#{person.UUID}"
+			resizableColumns="true"
+			styleClass="ui-grid-col-6">
+			<f:facet name="header">
+			        	List of Persons
+			    	</f:facet>
+
+			<p:column
+				selectionMode="single"
+				style="width:16px;text-align:center" />
+
+			<p:column headerText="Surename">
+				<h:outputText value="#{person.surename}" />
+			</p:column>
+
+			<p:column headerText="Forename">
+				<h:outputText value="#{person.forename}" />
+			</p:column>
+
+			<p:column headerText="Birthday">
+				<h:outputText value="#{person.birthday}" />
+			</p:column>
+
+			<p:column headerText="Nationality">
+				<h:outputText value="#{person.nationality}" />
+			</p:column>
+
+			<p:column headerText="Shirtsize">
+				<h:outputText value="#{person.shirtsize}" />
+			</p:column>
+
+			<p:column headerText="Email">
+				<h:outputText value="#{person.email}" />
+			</p:column>
+
+			<f:facet name="footer">
+			        	In total there are #{personBrowsePageBean.getNumberOfResults()} persons.
+			    	</f:facet>
+		</p:dataTable>
+
+		<p:toolbar styleClass="ui-grid-col-6">
+			<f:facet name="left">
+				<p:commandButton
+					value="+"
+					update="growl"
+					actionListener="#{relayBrowsePageBean.add}">
+					<p:ajax
+						event="dialogReturn"
+						listener="#{relayBrowsePageBean.onEditClosed}"
+						update="form" />
+				</p:commandButton>
+				<p:commandButton
+					value="-"
+					update="growl"
+					actionListener="#{relayBrowsePageBean.remove}" />
+
+				<p:commandButton
+					value="Edit"
+					update="growl"
+					actionListener="#{relayBrowsePageBean.edit}"
+					icon="ui-icon-folder-open">
+					<p:ajax
+						event="dialogReturn"
+						listener="#{relayBrowsePageBean.onEditClosed}"
+						update="form" />
+				</p:commandButton>
+
+			</f:facet>
+		</p:toolbar>
+		<p:toolbar styleClass="ui-grid-col-6">
+			<f:facet name="left">
+				<p:commandButton
+					value="+"
+					update="growl"
+					actionListener="#{personBrowsePageBean.add}">
+					<p:ajax
+						event="dialogReturn"
+						listener="#{personBrowsePageBean.onEditClosed}"
+						update="form" />
+				</p:commandButton>
+				<p:commandButton
+					value="-"
+					update="growl"
+					actionListener="#{personBrowsePageBean.remove}" />
+
+				<p:commandButton
+					value="Edit"
+					update="growl"
+					actionListener="#{personBrowsePageBean.edit}"
+					icon="ui-icon-folder-open">
+					<p:ajax
+						event="dialogReturn"
+						listener="#{personBrowsePageBean.onEditClosed}"
+						update="form" />
+				</p:commandButton>
+			</f:facet>
+		</p:toolbar>
+	</h:form>
+</h:body>
+</html>
