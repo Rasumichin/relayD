@@ -1,16 +1,17 @@
 package com.relayd;
 
+import static org.junit.Assert.*;
+
 import org.junit.Test;
 
 import com.relayd.attributes.Forename;
 import com.relayd.attributes.Relayname;
 import com.relayd.attributes.Surename;
 
-import static org.junit.Assert.*;
-
 /**
  * @author schmollc (Christian@cloud.franke-net.com)
- * @since 23.03.2016 status initial
+ * @since 23.03.2016
+ * status initial
  */
 public class RelayTest {
 
@@ -23,6 +24,8 @@ public class RelayTest {
 		sut.setRelayname(Relayname.newInstance(RELAYNAME));
 
 		assertEquals("Staffel: " + RELAYNAME, sut.toString());
+
+		assertNotNull("Expected valid UUID.", sut.getUUID());
 	}
 
 	@Test

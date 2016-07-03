@@ -1,6 +1,7 @@
 package com.relayd;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 import com.relayd.attributes.Relayname;
 import com.relayd.attributes.Surename;
@@ -17,13 +18,21 @@ import com.relayd.attributes.Surename;
  * @author  schmollc (Christian@cloud.franke-net.com)
  * @since   23.03.2016
  * status   initial
+ *
+ * TODO -schmollc- Correct messages to english language
  */
 public class Relay extends ArrayList<Person> {
 
 	private static final long serialVersionUID = -1655301147830819436L;
 
 	private static final int MAX_MEMBER = 4;
+
+	private UUID uuid = null;
 	private Relayname relayname = null;
+
+	private Relay() {
+		uuid = UUID.randomUUID();
+	}
 
 	public static Relay newInstance() {
 		return new Relay();
@@ -60,5 +69,9 @@ public class Relay extends ArrayList<Person> {
 	@Override
 	public String toString() {
 		return "Staffel: " + getRelayname();
+	}
+
+	public UUID getUUID() {
+		return uuid;
 	}
 }
