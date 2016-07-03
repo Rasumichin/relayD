@@ -60,6 +60,11 @@ public class RelayBrowsePageBean {
 		showMessage("add not implemented yet!");
 	}
 
+	public void remove(@SuppressWarnings("unused") ActionEvent actionEvent) {
+		// relayBridge.remove(getSelectedRelay());
+		showMessage("remove not implemented yet!");
+	}
+
 	public void onEditClosed(SelectEvent event) {
 		// TODO -schmollc- Ist diese Methode noetig?
 	}
