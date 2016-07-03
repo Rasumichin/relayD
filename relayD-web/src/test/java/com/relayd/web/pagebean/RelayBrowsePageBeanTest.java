@@ -52,15 +52,15 @@ public class RelayBrowsePageBeanTest {
 		assertFalse("Row should not selected.", result);
 	}
 
-	//	@Test
-	//	public void testIsRowSelected_ForSelectedRow() {
-	//		sut.setSelectedPerson(new PersonBuilder().build());
-	//
-	//		boolean result = sut.isRowSelected();
-	//
-	//		assertTrue("Row should selected.", result);
-	//	}
-	//
+	@Test
+	public void testIsRowSelected_ForSelectedRow() {
+		sut.setSelectedRelay(new RelayBuilder().build());
+
+		boolean result = sut.isRowSelected();
+
+		assertTrue("Row should selected.", result);
+	}
+
 	private List<Relay> createResultList(Integer aSize) {
 		List<Relay> result = new ArrayList<Relay>();
 		RelayBuilder relayBuilder = new RelayBuilder();
@@ -75,5 +75,4 @@ public class RelayBrowsePageBeanTest {
 	private Integer size(Integer aValue) {
 		return aValue;
 	}
-
 }
