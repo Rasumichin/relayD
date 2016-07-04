@@ -28,4 +28,9 @@ public class RelayGatewayMemory implements RelayGateway {
 		List<Relay> relaysAsList = new ArrayList<Relay>(relays.values());
 		return relaysAsList;
 	}
+
+	@Override
+	public Relay get(UUID uuid) {
+		return relays.get(uuid);
+	}
 }

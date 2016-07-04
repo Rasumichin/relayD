@@ -3,6 +3,7 @@ package com.relayd.ejb;
 import static org.junit.Assert.*;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.junit.Test;
 
@@ -31,5 +32,18 @@ public abstract class RelayGatewayTest {
 		Relay relay = Relay.newInstance();
 		relay.setRelayname(Relayname.newInstance(relayName));
 		return relay;
+	}
+
+	@Test
+	public void testGetForUUID() {
+		Relay firstTimeRunners = createRelay("FirstTimeRunners");
+		UUID uuid = firstTimeRunners.getUUID();
+
+		getSut().set(createRelay("Staubwolke"));
+		getSut().set(firstTimeRunners);
+
+		Relay result = getSut().get(uuid);
+
+		assertEquals(firstTimeRunners, result);
 	}
 }

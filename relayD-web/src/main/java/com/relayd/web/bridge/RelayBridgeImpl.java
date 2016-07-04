@@ -28,11 +28,12 @@ public class RelayBridgeImpl implements RelayBridge {
 
 	@Override
 	public void create(Relay relay) {
+		gateway.set(relay);
 	}
 
 	@Override
-	public Person get(UUID uuid) {
-		return null;
+	public Relay get(UUID uuid) {
+		return gateway.get(uuid);
 	}
 
 	@Override

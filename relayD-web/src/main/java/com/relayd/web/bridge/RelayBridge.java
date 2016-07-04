@@ -14,7 +14,7 @@ public interface RelayBridge {
 
 	public void create(Relay relay);
 
-	public Person get(UUID uuid);
+	public Relay get(UUID uuid);
 
 	public void remove(Relay relay);
 
