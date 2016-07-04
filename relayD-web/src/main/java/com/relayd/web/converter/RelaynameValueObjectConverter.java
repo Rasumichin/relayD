@@ -7,7 +7,7 @@ import javax.faces.convert.FacesConverter;
 
 import com.relayd.attributes.Relayname;
 
-@FacesConverter("com.relayd.web.converter.RelaynameValueObjectConverter ")
+@FacesConverter("com.relayd.web.converter.RelaynameValueObjectConverter")
 public class RelaynameValueObjectConverter implements Converter {
 
 	@Override

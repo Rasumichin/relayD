@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
@@ -25,6 +26,9 @@ import com.relayd.web.bridge.RelayBridgeImpl;
 public class RelayBrowsePageBean {
 
 	private RelayBridge relayBridge;
+
+	@ManagedProperty(value = "#{relayEditPageBean}")
+	private RelayEditPageBean relayEditPageBean;
 
 	private List<Relay> searchResult = new ArrayList<Relay>();
 
@@ -56,12 +60,12 @@ public class RelayBrowsePageBean {
 	}
 
 	public void add(@SuppressWarnings("unused") ActionEvent actionEvent) {
-		//		getRelayEditPageBean().openDialogForCreateRelay();
+		//getRelayEditPageBean().openDialogForCreateRelay();
 		showMessage("add not implemented yet!");
 	}
 
 	public void edit(@SuppressWarnings("unused") ActionEvent actionEvent) {
-		//		getRelayEditPageBean().openDialogFor(getSelectedRelay().getUUID());
+		//getRelayEditPageBean().openDialogFor(getSelectedRelay().getUUID());
 		showMessage("edit not implemented yet!");
 	}
 
@@ -79,4 +83,11 @@ public class RelayBrowsePageBean {
 		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
 
+	public RelayEditPageBean getRelayEditPageBean() {
+		return relayEditPageBean;
+	}
+
+	public void setRelayEditPageBean(RelayEditPageBean aRelayEditPageBean) {
+		relayEditPageBean = aRelayEditPageBean;
+	}
 }

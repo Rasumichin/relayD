@@ -34,7 +34,7 @@ public class RelayEditPageBean implements Serializable {
 		relayBridge = new RelayBridgeImpl();
 	}
 
-	public void openDialogForCreatePerson() {
+	public void openDialogForCreateRelay() {
 		workingRelay = Relay.newInstance();
 		isNewRelay = true;
 		openDialog();
@@ -83,7 +83,7 @@ public class RelayEditPageBean implements Serializable {
 		return workingRelay.getRelayname();
 	}
 
-	public void setForename(Relayname aRelayname) {
+	public void setRelayname(Relayname aRelayname) {
 		workingRelay.setRelayname(aRelayname);
 	}
 
