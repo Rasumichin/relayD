@@ -1,5 +1,6 @@
 package com.relayd.web.pagebean;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -16,12 +17,9 @@ import com.relayd.attributes.Relayname;
 import com.relayd.web.bridge.RelayBridge;
 import com.relayd.web.bridge.RelayBridgeImpl;
 
-/**
- *
- */
 @ManagedBean(name = "relayEditPageBean")
 @SessionScoped
-public class RelayEditPageBean {
+public class RelayEditPageBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private static final String RELAY_DIALOG_ID = "relayDialog";
