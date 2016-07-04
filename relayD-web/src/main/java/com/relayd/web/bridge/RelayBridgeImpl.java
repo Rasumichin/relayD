@@ -38,6 +38,7 @@ public class RelayBridgeImpl implements RelayBridge {
 
 	@Override
 	public void remove(Relay relay) {
+		gateway.remove(relay.getUUID());
 	}
 
 	@Override
