@@ -13,4 +13,6 @@ public interface RelayGateway {
 
 	Relay get(UUID aUuid);
 
+	void remove(UUID uuid);
+
 }

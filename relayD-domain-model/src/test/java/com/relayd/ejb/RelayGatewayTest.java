@@ -46,4 +46,21 @@ public abstract class RelayGatewayTest {
 
 		assertEquals(firstTimeRunners, result);
 	}
+
+	@Test
+	public void testRemove() {
+		Relay firstTimeRunners = createRelay("FirstTimeRunners");
+		UUID uuid = firstTimeRunners.getUUID();
+
+		getSut().set(createRelay("Staubwolke"));
+		getSut().set(firstTimeRunners);
+
+		getSut().remove(uuid);
+
+		int size = getSut().getAll().size();
+		assertEquals("Resultsize not correct.", 1, size);
+
+		Relay removedRelay = getSut().get(uuid);
+		assertNull("Expected relay not correct.", removedRelay);
+	}
 }

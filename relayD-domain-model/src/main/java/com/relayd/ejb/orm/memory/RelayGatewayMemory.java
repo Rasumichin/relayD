@@ -33,4 +33,9 @@ public class RelayGatewayMemory implements RelayGateway {
 	public Relay get(UUID uuid) {
 		return relays.get(uuid);
 	}
+
+	@Override
+	public void remove(UUID uuid) {
+		relays.remove(uuid);
+	}
 }
