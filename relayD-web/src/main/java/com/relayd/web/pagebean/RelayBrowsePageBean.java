@@ -12,7 +12,6 @@ import javax.faces.event.ActionEvent;
 
 import org.primefaces.event.SelectEvent;
 
-import com.relayd.Relay;
 import com.relayd.web.bridge.RelayBridge;
 import com.relayd.web.bridge.RelayBridgeImpl;
 import com.relayd.web.bridge.RelayRow;
@@ -33,7 +32,7 @@ public class RelayBrowsePageBean {
 
 	private List<RelayRow> searchResult = new ArrayList<RelayRow>();
 
-	private Relay selected;
+	private RelayRow selected;
 
 	public RelayBrowsePageBean() {
 		relayBridge = new RelayBridgeImpl();
@@ -49,34 +48,28 @@ public class RelayBrowsePageBean {
 	}
 
 	public boolean isRowSelected() {
-		return getSelectedRelay() != null;
+		return getSelectedRelayRow() != null;
 	}
 
-	public Relay getSelectedRelay() {
+	public RelayRow getSelectedRelayRow() {
 		return selected;
 	}
 
-	public void setSelectedRelay(Relay aSelected) {
+	public void setSelectedRelayRow(RelayRow aSelected) {
 		selected = aSelected;
 	}
 
 	public void add(@SuppressWarnings("unused") ActionEvent actionEvent) {
 		getRelayEditPageBean().openDialogForCreateRelay();
-		//		showMessage("add not implemented yet!");
 	}
 
 	public void edit(@SuppressWarnings("unused") ActionEvent actionEvent) {
-		//getRelayEditPageBean().openDialogFor(getSelectedRelay().getUUID());
-		showMessage("edit not implemented yet!");
+		getRelayEditPageBean().openDialogFor(getSelectedRelayRow().getUUID());
 	}
 
 	public void remove(@SuppressWarnings("unused") ActionEvent actionEvent) {
 		// relayBridge.remove(getSelectedRelay());
 		showMessage("remove not implemented yet!");
-	}
-
-	public void move(@SuppressWarnings("unused") ActionEvent actionEvent) {
-		showMessage("> not implemented yet!");
 	}
 
 	public void onEditClosed(SelectEvent event) {
