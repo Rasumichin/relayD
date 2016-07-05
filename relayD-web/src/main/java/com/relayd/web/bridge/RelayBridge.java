@@ -8,7 +8,7 @@ import com.relayd.Relay;
 
 public interface RelayBridge {
 
-	public List<Relay> all();
+	public List<RelayRow> all();
 
 	public void update(Relay relay);
 

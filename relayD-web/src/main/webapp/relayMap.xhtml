@@ -36,6 +36,14 @@
 				<h:outputText value="#{relay.relayname}" />
 			</p:column>
 
+			<p:column headerText="Forename">
+				<h:outputText value="#{relay.forename}" />
+			</p:column>
+
+			<p:column headerText="Surename">
+				<h:outputText value="#{relay.surename}" />
+			</p:column>
+
 			<f:facet name="footer">
 		        	In total there are #{relayBrowsePageBean.getNumberOfResults()} relays.
 		    	</f:facet>
@@ -142,6 +150,19 @@
 				</p:commandButton>
 			</f:facet>
 		</p:toolbar>
+		<p:commandButton
+			value="+"
+			update="growl"
+			actionListener="#{relayBrowsePageBean.move}"
+			styleClass="ui-grid-col-1">
+		</p:commandButton>
+		<p:commandButton
+			value="-"
+			update="growl"
+			actionListener="#{relayBrowsePageBean.move}"
+			styleClass="ui-grid-col-1">
+		</p:commandButton>
+
 	</h:form>
 </h:body>
 </html>

@@ -1,5 +1,7 @@
 package com.relayd.web.bridge;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,8 +19,27 @@ public class RelayBridgeImpl implements RelayBridge {
 	}
 
 	@Override
-	public List<Relay> all() {
-		return gateway.getAll();
+	public List<RelayRow> all() {
+		List<RelayRow> rows = new ArrayList<RelayRow>();
+		for (Relay relay : gateway.getAll()) {
+			RelayRow rowRelay = new RelayRow();
+
+			rowRelay.setRelayname(relay.getRelayname());
+			rowRelay.setUUID(relay.getUUID());
+			rows.add(rowRelay);
+
+			for (Iterator<Person> iter = relay.iterator(); iter.hasNext();) {
+				Person person = iter.next();
+				RelayRow rowPerson = new RelayRow();
+
+				rowPerson.setForename(person.getForename());
+				rowPerson.setSurename(person.getSurename());
+				rowPerson.setUUID(person.getUUID());
+				rows.add(rowPerson);
+			}
+		}
+
+		return rows;
 	}
 
 	@Override
