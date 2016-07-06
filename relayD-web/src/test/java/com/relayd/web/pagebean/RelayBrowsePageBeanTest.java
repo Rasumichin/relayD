@@ -12,8 +12,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.relayd.Relay;
 import com.relayd.web.bridge.RelayBridge;
+import com.relayd.web.bridge.RelayRow;
 
 /**
  * @author schmollc (Christian@relayd.de)
@@ -54,19 +54,19 @@ public class RelayBrowsePageBeanTest {
 
 	@Test
 	public void testIsRowSelected_ForSelectedRow() {
-		sut.setSelectedRelay(new RelayBuilder().build());
+		sut.setSelectedRelayRow(new RelayRowBuilder().build());
 
 		boolean result = sut.isRowSelected();
 
 		assertTrue("Row should selected.", result);
 	}
 
-	private List<Relay> createResultList(Integer aSize) {
-		List<Relay> result = new ArrayList<Relay>();
-		RelayBuilder relayBuilder = new RelayBuilder();
+	private List<RelayRow> createResultList(Integer aSize) {
+		List<RelayRow> result = new ArrayList<RelayRow>();
+		RelayRowBuilder relayBuilder = new RelayRowBuilder();
 
 		for (int i = 0; i < aSize; i++) {
-			Relay relay = relayBuilder.build();
+			RelayRow relay = relayBuilder.build();
 			result.add(relay);
 		}
 		return result;
