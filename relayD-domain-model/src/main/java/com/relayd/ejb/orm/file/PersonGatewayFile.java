@@ -28,8 +28,8 @@ public class PersonGatewayFile implements PersonGateway {
 		initFile();
 	}
 
-	PersonGatewayFile(String fileName) {
-		setFileName(fileName);
+	PersonGatewayFile(String aFileName) {
+		setFileName(aFileName);
 		initFile();
 	}
 

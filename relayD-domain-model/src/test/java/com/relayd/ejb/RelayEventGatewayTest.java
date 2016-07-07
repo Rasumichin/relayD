@@ -3,7 +3,7 @@ package com.relayd.ejb;
 import static org.junit.Assert.*;
 
 import java.time.LocalDate;
-import java.util.Calendar;
+import java.time.Month;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,11 +20,11 @@ import com.relayd.attributes.EventName;
  */
 public abstract class RelayEventGatewayTest {
 
-	private static final String KÖLN_MARATHON = "Köln Marathon";
-	private static final EventDay KÖLN_DAY = new EventDay(LocalDate.of(2017, Calendar.OCTOBER, 4));
+	private static final String KOELN_MARATHON = "Köln Marathon";
+	private static final EventDay KOELN_DAY = new EventDay(LocalDate.of(2017, Month.OCTOBER, 4));
 
-	private static final String DÜSSELDORF_MARATHON = "Düsseldorf Marathon";
-	private static final EventDay DÜSSELDORF_DAY = new EventDay(LocalDate.of(2017, Calendar.APRIL, 30));
+	private static final String DUESSELDORF_MARATHON = "Düsseldorf Marathon";
+	private static final EventDay DUESSELDORF_DAY = new EventDay(LocalDate.of(2017, Month.APRIL, 30));
 
 	public abstract RelayEventGateway getSut();
 
@@ -40,7 +40,7 @@ public abstract class RelayEventGatewayTest {
 	}
 
 	@Test
-	public void testGetForNonEntry() {
+	public void testGetForNonExistingEntry() {
 		RelayEvent duesseldorfMarathon = createEventForDuesseldorfMarathon();
 		getSut().set(duesseldorfMarathon);
 		getSut().set(createEventForKoelnMarathon());
@@ -60,21 +60,21 @@ public abstract class RelayEventGatewayTest {
 	}
 
 	private RelayEvent createEventForDuesseldorfMarathon() {
-		EventName eventName = new EventName(DÜSSELDORF_MARATHON);
-		EventDay eventDay = DÜSSELDORF_DAY;
+		EventName eventName = new EventName(DUESSELDORF_MARATHON);
+		EventDay eventDay = DUESSELDORF_DAY;
 		RelayEvent relayEvent = new RelayEvent(eventName, eventDay);
 		return relayEvent;
 	}
 
 	private RelayEvent createEventForKoelnMarathon() {
-		EventName eventName = new EventName(KÖLN_MARATHON);
-		EventDay eventDay = KÖLN_DAY;
+		EventName eventName = new EventName(KOELN_MARATHON);
+		EventDay eventDay = KOELN_DAY;
 		RelayEvent relayEvent = new RelayEvent(eventName, eventDay);
 		return relayEvent;
 	}
 
 	@Test
-	public void remove() {
+	public void testRemove() {
 		RelayEvent duesseldorfMarathon = createEventForDuesseldorfMarathon();
 		getSut().set(duesseldorfMarathon);
 		UUID uuid = duesseldorfMarathon.getUUID();

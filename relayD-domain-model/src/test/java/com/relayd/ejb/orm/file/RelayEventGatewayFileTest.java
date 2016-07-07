@@ -5,6 +5,11 @@ import org.junit.Before;
 import com.relayd.ejb.RelayEventGateway;
 import com.relayd.ejb.RelayEventGatewayTest;
 
+/**
+ * @author schmollc (Christian@relayD.de)
+ * @since 20.06.2016
+ * status initial
+ */
 public class RelayEventGatewayFileTest extends RelayEventGatewayTest {
 	private RelayEventGatewayFile sut = new RelayEventGatewayFile("TestFile.relayD");
 

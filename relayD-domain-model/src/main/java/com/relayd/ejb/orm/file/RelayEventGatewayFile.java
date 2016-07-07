@@ -28,8 +28,8 @@ public class RelayEventGatewayFile implements RelayEventGateway {
 		initFile();
 	}
 
-	RelayEventGatewayFile(String fileName) {
-		setFileName(fileName);
+	RelayEventGatewayFile(String aFileName) {
+		setFileName(aFileName);
 		initFile();
 	}
 
