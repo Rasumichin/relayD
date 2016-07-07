@@ -28,21 +28,21 @@ public abstract class PersonGatewayTest {
 
 	@Test
 	public void testGetForExistingEntry() {
-		Person teilnehmer = createJustusJonas();
-		getSut().set(teilnehmer);
+		Person firstMember = createJustusJonas();
+		getSut().set(firstMember);
 		getSut().set(createPeterShaw());
 
-		Person result = getSut().get(teilnehmer.getUUID());
+		Person result = getSut().get(firstMember.getUUID());
 
-		assertEquals("[Forename] not correct.", teilnehmer.getForename(), result.getForename());
-		assertEquals("[Surename] not correct.", teilnehmer.getSurename(), result.getSurename());
-		assertEquals("[Birthday] not correct.", teilnehmer.getBirthday(), result.getBirthday());
-		assertEquals("[Shirtsize] not correct.", teilnehmer.getShirtsize(), result.getShirtsize());
-		assertEquals("[Email] not correct.", teilnehmer.getEmail(), result.getEmail());
+		assertEquals("[Forename] not correct.", firstMember.getForename(), result.getForename());
+		assertEquals("[Surename] not correct.", firstMember.getSurename(), result.getSurename());
+		assertEquals("[Birthday] not correct.", firstMember.getBirthday(), result.getBirthday());
+		assertEquals("[Shirtsize] not correct.", firstMember.getShirtsize(), result.getShirtsize());
+		assertEquals("[Email] not correct.", firstMember.getEmail(), result.getEmail());
 	}
 
 	@Test
-	public void testGetForNonEntry() {
+	public void testGetForNonExistingEntry() {
 		getSut().set(createJustusJonas());
 		getSut().set(createPeterShaw());
 
@@ -61,12 +61,12 @@ public abstract class PersonGatewayTest {
 	}
 
 	@Test
-	public void remove() {
-		Person teilnehmer = createJustusJonas();
-		getSut().set(teilnehmer);
-		UUID uuid = teilnehmer.getUUID();
+	public void testRemove() {
+		Person member = createJustusJonas();
+		getSut().set(member);
+		UUID uuid = member.getUUID();
 
-		assertEquals("Error for TestFile. ", 1, getSut().getAll().size());
+		assertEquals("Error for create member. ", 1, getSut().getAll().size());
 
 		getSut().remove(uuid);
 
@@ -78,29 +78,29 @@ public abstract class PersonGatewayTest {
 	@Test
 	public void update() {
 		// ARRANGE
-		Person ersterTeilnehmer = createJustusJonas();
-		UUID uuidFromErstenTeilnehmer = ersterTeilnehmer.getUUID();
+		Person firstMember = createJustusJonas();
+		UUID uuidFromFirstMember = firstMember.getUUID();
 
-		getSut().set(ersterTeilnehmer);
+		getSut().set(firstMember);
 		getSut().set(createPeterShaw());
 
-		Person updateTeilnehmer = getSut().get(uuidFromErstenTeilnehmer);
+		Person updateMember = getSut().get(uuidFromFirstMember);
 
 		Forename newForename = Forename.newInstance("Bob");
-		updateTeilnehmer.setForename(newForename);
+		updateMember.setForename(newForename);
 		Surename newSurename = Surename.newInstance("Andrews");
-		updateTeilnehmer.setSurename(newSurename);
+		updateMember.setSurename(newSurename);
 		Birthday newBirthday = Birthday.newInstance(LocalDate.of(1977, Month.APRIL, 13));
-		updateTeilnehmer.setBirthday(newBirthday);
+		updateMember.setBirthday(newBirthday);
 		Shirtsize newShirtsize = Shirtsize.DamenXS;
-		updateTeilnehmer.setShirtsize(newShirtsize);
+		updateMember.setShirtsize(newShirtsize);
 		Email newEmail = Email.newInstance("Bob.Andrews@rockyBeach.com");
-		updateTeilnehmer.setEmail(newEmail);
+		updateMember.setEmail(newEmail);
 		// ACT
-		getSut().set(updateTeilnehmer);
+		getSut().set(updateMember);
 
 		// ASSERT
-		Person checkPerson = getSut().get(uuidFromErstenTeilnehmer);
+		Person checkPerson = getSut().get(uuidFromFirstMember);
 		assertNotNull(checkPerson);
 		assertEquals(newForename, checkPerson.getForename());
 
