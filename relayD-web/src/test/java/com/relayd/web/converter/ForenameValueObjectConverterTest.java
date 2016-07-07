@@ -6,6 +6,11 @@ import org.junit.Test;
 
 import com.relayd.attributes.Forename;
 
+/**
+ * @author schmollc (Christian@relayD.de)
+ * @since 20.06.2016
+ * status initial
+ */
 public class ForenameValueObjectConverterTest {
 	private ForenameValueObjectConverter sut = new ForenameValueObjectConverter();
 

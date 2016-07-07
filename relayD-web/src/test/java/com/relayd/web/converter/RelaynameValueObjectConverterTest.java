@@ -6,6 +6,11 @@ import org.junit.Test;
 
 import com.relayd.attributes.Relayname;
 
+/**
+ * @author schmollc (Christian@relayD.de)
+ * @since 20.06.2016
+ * status initial
+ */
 public class RelaynameValueObjectConverterTest {
 	private RelaynameValueObjectConverter sut = new RelaynameValueObjectConverter();
 

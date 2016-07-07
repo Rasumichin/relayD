@@ -12,7 +12,7 @@ import com.relayd.attributes.Surename;
 
 /**
  * TODO -schmollc- Noch zu klären wo genau die Builder hinsollen oder jede DomainKlasse Ihren eigenen innerClass Builder hat.
- * @author  schmollc (Christian@cloud.franke-net.com)
+ * @author  schmollc (Christian@relayD.de)
  * @since   30.03.2016
  * status   initial
  */

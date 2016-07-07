@@ -19,6 +19,11 @@ import com.relayd.attributes.Relayname;
 import com.relayd.attributes.Surename;
 import com.relayd.ejb.RelayGateway;
 
+/**
+ * @author schmollc (Christian@relayD.de)
+ * @since 20.06.2016
+ * status initial
+ */
 @RunWith(MockitoJUnitRunner.class)
 public class RelayBridgeImplTest {
 	@InjectMocks

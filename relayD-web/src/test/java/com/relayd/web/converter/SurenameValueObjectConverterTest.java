@@ -7,7 +7,7 @@ import org.junit.Test;
 import com.relayd.attributes.Surename;
 
 /**
- * @author  schmollc (Christian@cloud.franke-net.com)
+ * @author  schmollc (Christian@relayD.de)
  * @since   26.06.2016
  * status   initial
  */
