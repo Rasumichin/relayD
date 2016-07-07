@@ -8,6 +8,10 @@ import com.relayd.Person;
 /**
  * This Bridge could handle the REST - Serivce
  * Actual its only a layer for the PersonGateway.
+ *
+ * @author schmollc (Christian@relayD.de)
+ * @since 20.06.2016
+ * status initial
  */
 public interface PersonBridge {
 

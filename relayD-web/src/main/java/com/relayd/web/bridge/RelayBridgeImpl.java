@@ -10,6 +10,11 @@ import com.relayd.Relay;
 import com.relayd.ejb.RelayGateway;
 import com.relayd.ejb.orm.memory.RelayGatewayMemory;
 
+/**
+ * @author schmollc (Christian@relayD.de)
+ * @since 20.06.2016
+ * status initial
+ */
 public class RelayBridgeImpl implements RelayBridge {
 
 	private RelayGateway gateway = null;

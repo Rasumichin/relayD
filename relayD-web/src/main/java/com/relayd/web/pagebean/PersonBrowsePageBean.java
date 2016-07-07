@@ -78,16 +78,16 @@ public class PersonBrowsePageBean {
 		return getSelectedPerson() != null;
 	}
 
-	private void addMessage(String summary) {
-		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, "Bekackte Amateure, Dude!");
-		FacesContext.getCurrentInstance().addMessage(null, message);
-	}
-
 	public PersonEditPageBean getPersonEditPageBean() {
 		return personEditPageBean;
 	}
 
 	public void setPersonEditPageBean(PersonEditPageBean aPersonEditPageBean) {
 		personEditPageBean = aPersonEditPageBean;
+	}
+
+	private void showMessage(String summary) {
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, "Bekackte Amateure, Dude!");
+		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
 }

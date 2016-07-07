@@ -17,6 +17,11 @@ import com.relayd.attributes.Relayname;
 import com.relayd.web.bridge.RelayBridge;
 import com.relayd.web.bridge.RelayBridgeImpl;
 
+/**
+ * @author schmollc (Christian@relayD.de)
+ * @since 20.06.2016
+ * status initial
+ */
 @ManagedBean(name = "relayEditPageBean")
 @SessionScoped
 public class RelayEditPageBean implements Serializable {
@@ -91,7 +96,7 @@ public class RelayEditPageBean implements Serializable {
 		return relayBridge;
 	}
 
-	private void addMessage(String summary) {
+	private void showMessage(String summary) {
 		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, "Bekackte Amateure, Dude!");
 		FacesContext.getCurrentInstance().addMessage(null, message);
 	}

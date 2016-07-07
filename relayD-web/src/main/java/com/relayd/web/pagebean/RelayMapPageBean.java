@@ -19,6 +19,11 @@ import com.relayd.web.bridge.RelayBridge;
 import com.relayd.web.bridge.RelayBridgeImpl;
 import com.relayd.web.bridge.RelayRow;
 
+/**
+ * @author schmollc (Christian@relayD.de)
+ * @since 20.06.2016
+ * status initial
+ */
 @ManagedBean
 @SessionScoped
 public class RelayMapPageBean {

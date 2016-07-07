@@ -110,17 +110,17 @@ public class RelayEventBrowsePageBean implements Serializable {
 		EventName removeRelay = getSelectedRelayEvent().getName();
 		gateway.remove(getSelectedRelayEvent().getUUID());
 		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Remove!", "Relay Event:" + removeRelay.toString());
-        FacesContext.getCurrentInstance().addMessage(null, message);
+		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
-	
+
 	public void onEditClosed(SelectEvent event) {
 		// TODO -Thorsten- Wenn Dialo cancel - keine Message 'saved'
 		RelayEvent editedEvent = (RelayEvent) event.getObject();
 		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Saved!", "Relay Event:" + editedEvent.getName().toString());
-        FacesContext.getCurrentInstance().addMessage(null, message);
+		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
 
-	public void addMessage(String summary) {
+	private void showMessage(String summary) {
 		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, "Please use Submit, Dude!");
 		FacesContext.getCurrentInstance().addMessage(null, message);
 	}

@@ -10,6 +10,10 @@ import com.relayd.ejb.PersonGatewayFactory;
 
 /**
  * Only a simple Wrapper for the Gateway.
+ *
+ * @author schmollc (Christian@relayD.de)
+ * @since 20.06.2016
+ * status initial
  */
 public class PersonBridgeImpl implements PersonBridge {
 

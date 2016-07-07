@@ -6,6 +6,11 @@ import com.relayd.attributes.Forename;
 import com.relayd.attributes.Relayname;
 import com.relayd.attributes.Surename;
 
+/**
+ * @author schmollc (Christian@relayD.de)
+ * @since 20.06.2016
+ * status initial
+ */
 public class RelayRow {
 	private UUID uuid;
 	private Relayname relayname;
