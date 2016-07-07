@@ -11,11 +11,11 @@ import com.relayd.RelayEvent;
  * status   initial
  */
 public interface RelayEventGateway {
-	void set(RelayEvent aRelayEvent);
+	void set(RelayEvent relayEvent);
 
 	List<RelayEvent> getAll();
 
 	RelayEvent get(UUID uuid);
-	
-	void remove(UUID aUuid);
+
+	void remove(UUID uuid);
 }

@@ -12,23 +12,23 @@ public class Relayname implements Serializable {
 
 	private String value = "";
 
+	private Relayname(String relayname) {
+		super();
+		value = relayname;
+	}
+
 	/**
 	 * Bloch, Joshua, Effective Java, 2nd Edition, Item 1, p. 5
 	 */
-	static public Relayname newInstance(String aRelayname) {
-		validate(aRelayname);
-		return new Relayname(aRelayname);
+	static public Relayname newInstance(String relayname) {
+		validate(relayname);
+		return new Relayname(relayname);
 
 	}
 
-	private Relayname(String aRelayname) {
-		super();
-		value = aRelayname;
-	}
-
-	private static void validate(String aRelayname) {
-		if (aRelayname == null) {
-			throw new IllegalArgumentException("Darf nicht null sein");
+	private static void validate(String relayname) {
+		if (relayname == null) {
+			throw new IllegalArgumentException("[relayname] must not be 'null'.");
 		}
 	}
 

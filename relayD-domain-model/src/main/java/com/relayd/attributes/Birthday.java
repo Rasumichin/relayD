@@ -16,17 +16,17 @@ public class Birthday implements Serializable {
 
 	LocalDate value;
 
+	private Birthday(LocalDate aDate) {
+		super();
+		value = aDate;
+	}
+
 	/**
 	 * Bloch, Joshua, Effective Java, 2nd Edition, Item 1, p. 5
 	 */
 	static public Birthday newInstance(LocalDate dateOfBirth) {
 		validate(dateOfBirth);
 		return new Birthday(dateOfBirth);
-	}
-
-	private Birthday(LocalDate aDate) {
-		super();
-		value = aDate;
 	}
 
 	static void validate(LocalDate aDate) {
@@ -44,9 +44,6 @@ public class Birthday implements Serializable {
 		return "" + value.format(DateTimeFormatter.ofPattern(DATE_PATTERN));
 	}
 
-	/**
-	 *
-	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -55,9 +52,6 @@ public class Birthday implements Serializable {
 		return result;
 	}
 
-	/**
-	 *
-	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {

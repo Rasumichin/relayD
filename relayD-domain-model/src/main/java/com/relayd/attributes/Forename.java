@@ -25,8 +25,8 @@ public class Forename implements Serializable {
 		return new Forename(forename);
 	}
 
-	private static void validate(String aForename) {
-		if (aForename == null) {
+	private static void validate(String forename) {
+		if (forename == null) {
 			throw new IllegalArgumentException("[forename] must not be 'null'.");
 		}
 	}

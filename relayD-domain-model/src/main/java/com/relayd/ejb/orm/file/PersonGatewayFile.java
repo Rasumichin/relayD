@@ -16,7 +16,7 @@ import com.relayd.Person;
 import com.relayd.ejb.PersonGateway;
 
 /**
- * @author  schmollc (Christian@cloud.franke-net.com)
+ * @author  schmollc (Christian@relayD.de)
  * @since   26.03.2016
  * status   initial
  */
@@ -28,8 +28,8 @@ public class PersonGatewayFile implements PersonGateway {
 		initFile();
 	}
 
-	PersonGatewayFile(String aFileName) {
-		setFileName(aFileName);
+	PersonGatewayFile(String fileName) {
+		setFileName(fileName);
 		initFile();
 	}
 
@@ -113,6 +113,7 @@ public class PersonGatewayFile implements PersonGateway {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Person> getAll() {
 		FileInputStream fileInputStream;

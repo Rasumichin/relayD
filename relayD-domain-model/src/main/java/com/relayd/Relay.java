@@ -15,7 +15,7 @@ import com.relayd.attributes.Surename;
  * Es reicht den Fokus auf die fachlichen Beschränkungen zu legen wie z.B. das erreichen der Max-Grenze
  * (in diesem Fall 4)
  *
- * @author  schmollc (Christian@cloud.franke-net.com)
+ * @author  schmollc (Christian@relayD.de)
  * @since   23.03.2016
  * status   initial
  *
@@ -46,11 +46,11 @@ public class Relay extends ArrayList<Person> {
 		return relayname;
 	}
 
-	public void addPerson(Person aPerson) {
+	public void addPerson(Person person) {
 		if (isFull()) {
 			throw new IndexOutOfBoundsException("Nicht mehr als " + MAX_MEMBER + " Teilnehmer moeglich.");
 		}
-		add(aPerson);
+		add(person);
 	}
 
 	public boolean isFull() {
@@ -68,7 +68,7 @@ public class Relay extends ArrayList<Person> {
 
 	@Override
 	public String toString() {
-		return "Staffel: " + getRelayname();
+		return "Relay: " + getRelayname();
 	}
 
 	public UUID getUUID() {

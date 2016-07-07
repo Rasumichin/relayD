@@ -20,6 +20,69 @@ import com.relayd.attributes.EventName;
 public class RelayEventTest {
 
 	@Test
+	public void testName() {
+		RelayEvent sut = new RelayEvent(null, null);
+
+		EventName expected = new EventName("Name");
+
+		sut.setName(expected);
+
+		EventName result = sut.getName();
+
+		assertEquals(expected, result);
+	}
+
+	@Test
+	public void testEventDay() {
+		RelayEvent sut = new RelayEvent(null, null);
+
+		EventDay expected = new EventDay(LocalDate.now());
+
+		sut.setEventDay(expected);
+
+		EventDay result = sut.getEventDay();
+
+		assertEquals(expected, result);
+	}
+
+	@Test
+	public void testCreateValidInstance() {
+		EventName eventName = new EventName("MetroGroup Marathon Düsseldorf");
+		EventDay eventDay = new EventDay(LocalDate.of(2017, Month.APRIL, 30));
+
+		RelayEvent sut = new RelayEvent(eventName, eventDay);
+
+		EventName actualName = sut.getName();
+		EventDay actualEventDay = sut.getEventDay();
+
+		assertEquals("[Name] not correct.", eventName, actualName);
+		assertEquals("[EventDay] not correct.", eventDay, actualEventDay);
+	}
+
+	@Test
+	public void testUUID() {
+		EventName eventNameDummy = new EventName("MetroGroup Marathon Düsseldorf");
+		EventDay eventDayDummy = new EventDay(LocalDate.of(2017, Month.APRIL, 30));
+
+		RelayEvent sut = new RelayEvent(eventNameDummy, eventDayDummy);
+
+		assertNotNull("Expected valid instance.", sut.getUUID());
+	}
+
+	@Test
+	public void testSetUUID() {
+		EventName eventNameDummy = new EventName("MetroGroup Marathon Düsseldorf");
+		EventDay eventDayDummy = new EventDay(LocalDate.of(2017, Month.APRIL, 30));
+
+		RelayEvent sut = new RelayEvent(eventNameDummy, eventDayDummy);
+		RelayEvent secondSut = new RelayEvent(eventNameDummy, eventDayDummy);
+
+		secondSut.setUUID(sut.getUUID());
+
+		assertEquals(sut, secondSut);
+	}
+
+	@Test
 	public void testGetHashCode() {
 		RelayEvent sut = new RelayEvent(null, null);
 		UUID uuid = UUID.fromString("53a27b33-a5cb-4997-8eaf-dcf8bd1cb2d2");
@@ -98,68 +161,5 @@ public class RelayEventTest {
 		RelayEvent secondSut = new RelayEvent(eventNameDummy, eventDayDummy);
 
 		assertNotEquals(sut, secondSut);
-	}
-
-	@Test
-	public void testName() {
-		RelayEvent sut = new RelayEvent(null, null);
-
-		EventName expected = new EventName("Name");
-
-		sut.setName(expected);
-
-		EventName result = sut.getName();
-
-		assertEquals(expected, result);
-	}
-
-	@Test
-	public void testEventDay() {
-		RelayEvent sut = new RelayEvent(null, null);
-
-		EventDay expected = new EventDay(LocalDate.now());
-
-		sut.setEventDay(expected);
-
-		EventDay result = sut.getEventDay();
-
-		assertEquals(expected, result);
-	}
-
-	@Test
-	public void testCreateValidInstance() {
-		EventName eventName = new EventName("MetroGroup Marathon Düsseldorf");
-		EventDay eventDay = new EventDay(LocalDate.of(2017, Month.APRIL, 30));
-
-		RelayEvent sut = new RelayEvent(eventName, eventDay);
-
-		EventName actualName = sut.getName();
-		EventDay actualEventDay = sut.getEventDay();
-
-		assertEquals("[Name] not correct.", eventName, actualName);
-		assertEquals("[EventDay] not correct.", eventDay, actualEventDay);
-	}
-
-	@Test
-	public void testUUID() {
-		EventName eventNameDummy = new EventName("MetroGroup Marathon Düsseldorf");
-		EventDay eventDayDummy = new EventDay(LocalDate.of(2017, Month.APRIL, 30));
-
-		RelayEvent sut = new RelayEvent(eventNameDummy, eventDayDummy);
-
-		assertNotNull("Expected valid instance.", sut.getUUID());
-	}
-
-	@Test
-	public void testSetUUID() {
-		EventName eventNameDummy = new EventName("MetroGroup Marathon Düsseldorf");
-		EventDay eventDayDummy = new EventDay(LocalDate.of(2017, Month.APRIL, 30));
-
-		RelayEvent sut = new RelayEvent(eventNameDummy, eventDayDummy);
-		RelayEvent secondSut = new RelayEvent(eventNameDummy, eventDayDummy);
-
-		secondSut.setUUID(sut.getUUID());
-
-		assertEquals(sut, secondSut);
 	}
 }

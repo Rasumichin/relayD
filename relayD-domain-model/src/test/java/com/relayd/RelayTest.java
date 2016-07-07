@@ -9,7 +9,7 @@ import com.relayd.attributes.Relayname;
 import com.relayd.attributes.Surename;
 
 /**
- * @author schmollc (Christian@cloud.franke-net.com)
+ * @author schmollc (Christian@relayD.de)
  * @since 23.03.2016
  * status initial
  */
@@ -23,7 +23,7 @@ public class RelayTest {
 
 		sut.setRelayname(Relayname.newInstance(RELAYNAME));
 
-		assertEquals("Staffel: " + RELAYNAME, sut.toString());
+		assertEquals("Relay: " + RELAYNAME, sut.toString());
 
 		assertNotNull("Expected valid UUID.", sut.getUUID());
 	}
@@ -35,62 +35,63 @@ public class RelayTest {
 
 		Relayname relayname = sut.getRelayname();
 
-		assertNull("Erwarte keine gueltige Instanz.", relayname);
+		assertNull("Expected non valid instance.", relayname);
 
 		sut.setRelayname(FIRST_CHOICE);
 		relayname = sut.getRelayname();
 
 		assertNotNull(relayname);
-		assertEquals("Erwarte den gesetzten Surenamen.", FIRST_CHOICE, relayname);
+		assertEquals("Surename not corret.", FIRST_CHOICE, relayname);
 
 		sut.setRelayname(SECOND_CHOICE);
 		relayname = sut.getRelayname();
 
 		assertNotNull(relayname);
-		assertEquals("Erwarte den neu gesetzten Surenamen.", SECOND_CHOICE, relayname);
+		assertEquals("Changed Surename not correct.", SECOND_CHOICE, relayname);
 	}
 
 	/**
 	 * Nicht als Unit-Test konzipiert sondern als Story.
+	 * TODO -schmoll- Dieser Test ist ... seltsam.. :-)
 	 */
 	@Test
-	public void testAddPerson() {
+	public void testAddPersonAsStory() {
 		Person person = new PersonBuilder().build();
 
 		boolean isFull = sut.isFull();
 
-		assertFalse("Erwarte das Staffel nicht voll ist.", isFull);
+		assertFalse("Expected non complete relay.", isFull);
 
 		sut.addPerson(person);
 
 		isFull = sut.isFull();
 
-		assertFalse("Erwarte das Staffel nicht voll ist.", isFull);
+		assertFalse("Expected non complete relay.", isFull);
 
 		sut.addPerson(person);
 
 		isFull = sut.isFull();
 
-		assertFalse("Erwarte das Staffel nicht voll ist.", isFull);
+		assertFalse("Expected non complete relay.", isFull);
 
 		sut.addPerson(person);
 
 		isFull = sut.isFull();
 
-		assertFalse("Erwarte das Staffel nicht voll ist.", isFull);
+		assertFalse("Expected non complete relay.", isFull);
 
 		sut.addPerson(person);
 
 		isFull = sut.isFull();
 
-		assertTrue("Erwarte eine volle Staffel.", isFull);
+		assertTrue("Expected complete relay.", isFull);
 	}
 
 	@Test
 	public void testNoPersonInList() {
 		boolean isFull = sut.isFull();
 
-		assertFalse("Erwarte das Staffel nicht voll ist.", isFull);
+		assertFalse("Expected non complete relay.", isFull);
 	}
 
 	@Test
@@ -99,20 +100,20 @@ public class RelayTest {
 
 		boolean isFull = sut.isFull();
 
-		assertFalse("Erwarte das Staffel nicht voll ist.", isFull);
+		assertFalse("Expected non complete relay.", isFull);
 	}
 
 	@Test
-	public void testAddFourPerson() {
+	public void testAddFourPersons() {
 		addPersonsToSUT(personCount(4));
 
 		boolean isFull = sut.isFull();
 
-		assertTrue("Erwarte das Staffel voll ist.", isFull);
+		assertTrue("Expected complete relay.", isFull);
 	}
 
 	@Test(expected = IndexOutOfBoundsException.class)
-	public void testAddFivePerson() {
+	public void testAddFivePersons() {
 		addPersonsToSUT(personCount(5));
 	}
 

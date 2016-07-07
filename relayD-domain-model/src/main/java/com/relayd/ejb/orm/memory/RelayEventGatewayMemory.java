@@ -18,8 +18,8 @@ public class RelayEventGatewayMemory implements RelayEventGateway {
 	static Map<UUID, RelayEvent> events = new HashMap<UUID, RelayEvent>();
 
 	@Override
-	public void set(RelayEvent aRelayEventEntity) {
-		events.put(aRelayEventEntity.getUUID(), aRelayEventEntity);
+	public void set(RelayEvent relayEventEntity) {
+		events.put(relayEventEntity.getUUID(), relayEventEntity);
 	}
 
 	@Override
@@ -33,9 +33,9 @@ public class RelayEventGatewayMemory implements RelayEventGateway {
 		RelayEvent relayEvent = events.get(uuid);
 		return relayEvent;
 	}
-	
+
 	@Override
-	public void remove(UUID aUuid) {
-		events.remove(aUuid);
+	public void remove(UUID uuid) {
+		events.remove(uuid);
 	}
 }

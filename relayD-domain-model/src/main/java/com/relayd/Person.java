@@ -11,7 +11,7 @@ import com.relayd.attributes.Shirtsize;
 import com.relayd.attributes.Surename;
 
 /**
- * @author  schmollc (Christian@cloud.franke-net.com)
+ * @author  schmollc (Christian@relayD.de)
  * @since   22.03.2016
  * status   initial
  */

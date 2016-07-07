@@ -6,7 +6,7 @@ import java.util.UUID;
 import com.relayd.Person;
 
 /**
- * @author  schmollc (Christian@cloud.franke-net.com)
+ * @author  schmollc (Christian@relayD.de)
  * @since   26.03.2016
  * status   initial
  */

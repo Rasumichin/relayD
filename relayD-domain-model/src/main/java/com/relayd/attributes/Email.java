@@ -20,9 +20,9 @@ public class Email implements Serializable {
 	/**
 	 * Bloch, Joshua, Effective Java, 2nd Edition, Item 1, p. 5
 	 */
-	public static Email newInstance(String anEmail) {
-		validate(anEmail);
-		return new Email(anEmail);
+	public static Email newInstance(String email) {
+		validate(email);
+		return new Email(email);
 	}
 
 	private static void validate(String email) {
@@ -36,9 +36,6 @@ public class Email implements Serializable {
 		return value;
 	}
 
-	/**
-	 *
-	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -47,9 +44,6 @@ public class Email implements Serializable {
 		return result;
 	}
 
-	/**
-	 *
-	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {

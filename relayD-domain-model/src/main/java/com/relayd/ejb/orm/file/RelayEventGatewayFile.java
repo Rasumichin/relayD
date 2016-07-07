@@ -16,7 +16,7 @@ import com.relayd.RelayEvent;
 import com.relayd.ejb.RelayEventGateway;
 
 /**
- * @author schmollc (Christian@relayd.de)
+ * @author schmollc (Christian@relayD.de)
  * @since 20.06.2016
  * status initial
  */
@@ -28,8 +28,8 @@ public class RelayEventGatewayFile implements RelayEventGateway {
 		initFile();
 	}
 
-	RelayEventGatewayFile(String aFileName) {
-		setFileName(aFileName);
+	RelayEventGatewayFile(String fileName) {
+		setFileName(fileName);
 		initFile();
 	}
 
@@ -85,6 +85,7 @@ public class RelayEventGatewayFile implements RelayEventGateway {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<RelayEvent> getAll() {
 		FileInputStream fileInputStream;

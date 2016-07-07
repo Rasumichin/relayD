@@ -8,7 +8,7 @@ package com.relayd.attributes;
  * Babysteps. Aktuelle Abbildung des Excelsheets. <br/>
  * Es sollte natuerlich nur die Groesse geben und das Geschlecht befindet sich in
  * der Person Klasse so das Geschlecht+Groesse die "wirkliche" Shirtsize ergibt.
- *
+ * <br/>
  * Nachtrag: Ist das denn wirklich so? Tragen nicht auch einige Herren DamenXL?
  * Und ist es nicht bei Mode so das eine Größe M für Herren anders geschnitten ist als
  * eine Größe M für Damen, also das Geschlecht eine Ausprägung der Größe ist?
@@ -44,18 +44,18 @@ public enum Shirtsize {
 		return description;
 	}
 
-	public static Short encode(Shirtsize aParam) {
+	public static Short encode(Shirtsize param) {
 		for (Shirtsize shirtsize : values()) {
-			if (shirtsize.equals(aParam)) {
+			if (shirtsize.equals(param)) {
 				return shirtsize.getSize();
 			}
 		}
-		return aParam.getSize();
+		return param.getSize();
 	}
 
-	public static Shirtsize decode(Short aParam) {
+	public static Shirtsize decode(Short param) {
 		for (Shirtsize shirtsize : values()) {
-			if (shirtsize.getSize().equals(aParam)) {
+			if (shirtsize.getSize().equals(param)) {
 				return shirtsize;
 			}
 		}

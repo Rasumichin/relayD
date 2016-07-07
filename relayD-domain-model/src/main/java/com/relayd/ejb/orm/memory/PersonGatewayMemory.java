@@ -10,7 +10,9 @@ import com.relayd.Person;
 import com.relayd.ejb.PersonGateway;
 
 /**
- *
+ * @author  schmollc (Christian@relayD.de)
+ * @since   23.06.2016
+ * status   initial
  */
 public class PersonGatewayMemory implements PersonGateway {
 

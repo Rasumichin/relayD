@@ -7,11 +7,11 @@ public class EventName implements Serializable {
 
 	String value;
 
-	public EventName(String anEventName) {
-		if (anEventName == null) {
-			throw new IllegalArgumentException("[anEventName] must not be [null].");
+	public EventName(String eventName) {
+		if (eventName == null) {
+			throw new IllegalArgumentException("[eventName] must not be 'null'.");
 		}
-		value = anEventName;
+		value = eventName;
 	}
 
 	private String getValue() {
