@@ -16,6 +16,75 @@
 		<p:growl
 			id="growl"
 			showDetail="true" />
+
+		<p:toolbar styleClass="ui-grid-col-5">
+			<f:facet name="left">
+				<p:commandButton
+					value="+"
+					update="growl"
+					actionListener="#{relayMapPageBean.addRelay}">
+					<p:ajax
+						event="dialogReturn"
+						listener="#{relayMapPageBean.onEditClosed}"
+						update="form" />
+				</p:commandButton>
+				<p:commandButton
+					value="-"
+					update="growl"
+					actionListener="#{relayMapPageBean.removeRelay}" />
+				<p:commandButton
+					value="Edit"
+					update="growl"
+					actionListener="#{relayMapPageBean.editRelay}"
+					icon="ui-icon-folder-open">
+					<p:ajax
+						event="dialogReturn"
+						listener="#{relayMapPageBean.onEditClosed}"
+						update="form" />
+				</p:commandButton>
+			</f:facet>
+		</p:toolbar>
+		<p:commandButton
+			value="+"
+			update="growl"
+			actionListener="#{relayMapPageBean.move}"
+			styleClass="ui-grid-col-1">
+		</p:commandButton>
+		<p:commandButton
+			value="-"
+			update="growl"
+			actionListener="#{relayMapPageBean.move}"
+			styleClass="ui-grid-col-1">
+		</p:commandButton>
+		<p:toolbar styleClass="ui-grid-col-4">
+			<f:facet name="left">
+				<p:commandButton
+					value="+"
+					update="growl"
+					actionListener="#{relayMapPageBean.addPerson}">
+					<p:ajax
+						event="dialogReturn"
+						listener="#{relayMapPageBean.onEditClosed}"
+						update="form" />
+				</p:commandButton>
+				<p:commandButton
+					value="-"
+					update="growl"
+					actionListener="#{relayMapPageBean.removePerson}" />
+				<p:commandButton
+					value="Edit"
+					update="growl"
+					actionListener="#{relayMapPageBean.editPerson}"
+					icon="ui-icon-folder-open">
+					<p:ajax
+						event="dialogReturn"
+						listener="#{relayMapPageBean.onEditClosed}"
+						update="form" />
+				</p:commandButton>
+			</f:facet>
+		</p:toolbar>
+			
+			
 		<p:dataTable
 			var="relayRow"
 			id="relayTable"
@@ -92,73 +161,6 @@
 			        	In total there are #{relayMapPageBean.getNumberOfPersonResults()} persons.
 			    	</f:facet>
 		</p:dataTable>
-
-		<p:toolbar styleClass="ui-grid-col-6">
-			<f:facet name="left">
-				<p:commandButton
-					value="+"
-					update="growl"
-					actionListener="#{relayMapPageBean.addRelay}">
-					<p:ajax
-						event="dialogReturn"
-						listener="#{relayMapPageBean.onEditClosed}"
-						update="form" />
-				</p:commandButton>
-				<p:commandButton
-					value="-"
-					update="growl"
-					actionListener="#{relayMapPageBean.removeRelay}" />
-				<p:commandButton
-					value="Edit"
-					update="growl"
-					actionListener="#{relayMapPageBean.editRelay}"
-					icon="ui-icon-folder-open">
-					<p:ajax
-						event="dialogReturn"
-						listener="#{relayMapPageBean.onEditClosed}"
-						update="form" />
-				</p:commandButton>
-			</f:facet>
-		</p:toolbar>
-		<p:toolbar styleClass="ui-grid-col-6">
-			<f:facet name="left">
-				<p:commandButton
-					value="+"
-					update="growl"
-					actionListener="#{relayMapPageBean.addPerson}">
-					<p:ajax
-						event="dialogReturn"
-						listener="#{relayMapPageBean.onEditClosed}"
-						update="form" />
-				</p:commandButton>
-				<p:commandButton
-					value="-"
-					update="growl"
-					actionListener="#{relayMapPageBean.removePerson}" />
-				<p:commandButton
-					value="Edit"
-					update="growl"
-					actionListener="#{relayMapPageBean.editPerson}"
-					icon="ui-icon-folder-open">
-					<p:ajax
-						event="dialogReturn"
-						listener="#{relayMapPageBean.onEditClosed}"
-						update="form" />
-				</p:commandButton>
-			</f:facet>
-		</p:toolbar>
-		<p:commandButton
-			value="+"
-			update="growl"
-			actionListener="#{relayMapPageBean.move}"
-			styleClass="ui-grid-col-1">
-		</p:commandButton>
-		<p:commandButton
-			value="-"
-			update="growl"
-			actionListener="#{relayMapPageBean.move}"
-			styleClass="ui-grid-col-1">
-		</p:commandButton>
 	</h:form>
 </h:body>
 </html>

@@ -67,6 +67,9 @@ public class RelayBridgeImpl implements RelayBridge {
 	}
 
 	@Override
-	public void add(Person person) {
+	public void add(RelayRow relayRow, Person person) {
+		Relay relay = get(relayRow.getUUID());
+		relay.add(person);
+		gateway.set(relay);
 	}
 }

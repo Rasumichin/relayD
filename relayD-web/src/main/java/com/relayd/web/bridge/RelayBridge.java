@@ -20,5 +20,5 @@ public interface RelayBridge {
 
 	public void remove(Person person);
 
-	public void add(Person person);
+	void add(RelayRow aRelay, Person aPerson);
 }

@@ -131,6 +131,8 @@ public class RelayMapPageBean {
 	}
 
 	public void move(@SuppressWarnings("unused") ActionEvent actionEvent) {
+		relayBridge.add(getSelectedRelayRow(), getSelectedPerson());
+
 		showMessage("> not implemented yet!");
 	}
 
