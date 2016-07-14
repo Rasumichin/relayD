@@ -24,18 +24,6 @@ public class EventDayTest {
 	}
 
 	@Test
-	public void testCreateInstanceWithCustomFormatter() {
-		String datePattern = "yyyy.MM.dd";
-		LocalDate dateOfEventInThePast = getDefinedLocalDateInThePast();
-
-		EventDay sut = new EventDay(dateOfEventInThePast, datePattern);
-
-		String expectedResult = "2001.11.21";
-		String actualResult = sut.toString();
-		assertEquals("toString() does not match expected result.", expectedResult, actualResult);
-	}
-
-	@Test
 	public void testCreateValidInstance() {
 		LocalDate dateOfEvent = getDefinedLocalDateInThePast();
 		EventDay sut = new EventDay(dateOfEvent);
@@ -85,9 +73,10 @@ public class EventDayTest {
 	public void testToString() {
 		LocalDate dateOfEvent = getDefinedLocalDateInThePast();
 		EventDay sut = new EventDay(dateOfEvent);
+		String expectedResult = "2001-11-21";
 
-		String expectedResult = "21-11-2001";
 		String actualResult = sut.toString();
+
 		assertEquals("toString() does not match expected result.", expectedResult, actualResult);
 	}
 }
