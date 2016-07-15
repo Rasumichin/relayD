@@ -8,8 +8,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
+import com.relayd.FormatConstants;
 import com.relayd.attributes.Birthday;
-import com.relayd.web.pagebean.FormatConstants;
 
 /**
  * @author schmollc (Christian@relayd.de)
