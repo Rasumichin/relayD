@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import com.relayd.FormatConstants;
+
 /**
  * @author  schmollc (Christian@cloud.franke-net.com)
  * @since   22.03.2016
@@ -11,8 +13,6 @@ import java.time.format.DateTimeFormatter;
  */
 public class Birthday implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	private static final String DATE_PATTERN = "dd-MM-yyyy";
 
 	LocalDate value;
 
@@ -41,7 +41,7 @@ public class Birthday implements Serializable {
 
 	@Override
 	public String toString() {
-		return "" + value.format(DateTimeFormatter.ofPattern(DATE_PATTERN));
+		return value.format(DateTimeFormatter.ofPattern(FormatConstants.DATE_FORMAT));
 	}
 
 	@Override

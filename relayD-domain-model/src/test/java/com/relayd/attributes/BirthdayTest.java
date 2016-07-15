@@ -49,7 +49,16 @@ public class BirthdayTest {
 
 		Birthday birthday = Birthday.newInstance(date);
 
-		assertEquals("21-11-1978", birthday.toString());
+		assertNotNull("Expected valid instance!", birthday);
+	}
+
+	@Test
+	public void testToString() {
+		final LocalDate date = LocalDate.of(1978, Month.NOVEMBER, 21);
+
+		Birthday birthday = Birthday.newInstance(date);
+
+		assertEquals("1978-11-21", birthday.toString());
 	}
 
 	@Test
