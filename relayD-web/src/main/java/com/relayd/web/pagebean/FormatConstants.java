@@ -14,6 +14,6 @@ public final class FormatConstants {
 	}
 
 	//@formatter:off
-	public static final String DATE_FORMAT = "dd-MM-yyyy";
+	public static final String DATE_FORMAT = "yyyy-MM-dd";
 	//@formatter:on
 }
