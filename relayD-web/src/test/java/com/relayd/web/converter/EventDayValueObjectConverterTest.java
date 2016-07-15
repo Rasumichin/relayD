@@ -17,7 +17,7 @@ import com.relayd.attributes.EventDay;
 public class EventDayValueObjectConverterTest {
 	private EventDayValueObjectConverter sut = new EventDayValueObjectConverter();
 
-	private static final String EXPECTED_DAY = "31-12-2015";
+	private static final String EXPECTED_DAY = "2015-12-31";
 
 	@Test
 	public void testGetAsObject() {

@@ -17,7 +17,7 @@ import com.relayd.attributes.Birthday;
 public class BirthdayValueObjectConverterTest {
 	private BirthdayValueObjectConverter sut = new BirthdayValueObjectConverter();
 
-	private static final String EXPECTED_DAY = "31-12-2015";
+	private static final String EXPECTED_DAY = "2015-12-31";
 
 	@Test
 	public void testGetAsObject() {
