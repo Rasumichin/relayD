@@ -21,6 +21,8 @@
 			id="personTable"
 			value="#{personBrowsePageBean.persons}"
 			selection="#{personBrowsePageBean.selectedPerson}"
+			scrollable="true" scrollHeight="150"
+			
 			rowKey="#{person.UUID}"
 			resizableColumns="true">
 	     	<f:facet name="header">
@@ -28,6 +30,10 @@
 	    	</f:facet>
 	    	
 	    	<p:column selectionMode="single" style="width:16px;text-align:center"/>
+	    	
+	    	<p:column>
+				<p:rowToggler />
+			</p:column>
 	    	
 			<p:column headerText="Surename">
 				<h:outputText value="#{person.surename}" />
@@ -37,21 +43,27 @@
 				<h:outputText value="#{person.forename}" />
 			</p:column>
 			
-			<p:column headerText="Birthday">
-				<h:outputText value="#{person.birthday}" />
-			</p:column>
-
-			<p:column headerText="Nationality">
-				<h:outputText value="#{person.nationality}" />
-			</p:column>
-
-			<p:column headerText="Shirtsize">
-				<h:outputText value="#{person.shirtsize}" />
-			</p:column>
-	
-			<p:column headerText="Email">
-				<h:outputText value="#{person.email}" />
-			</p:column>
+						
+			<p:rowExpansion>
+				<p:panelGrid  columns="2" columnClasses="label,value" style="width:300px">
+	                
+                	<h:outputText value="Birthday" />
+					<h:outputText value="#{person.birthday}" />
+				
+					<h:outputText value="Nationality" />
+					<h:outputText value="#{person.nationality}" />
+					
+					<h:outputText value="Shirtsize" />
+					<h:outputText value="#{person.shirtsize}" />
+					
+					<h:outputText value="Email" />
+					<h:outputText value="#{person.email}" />
+					
+	            </p:panelGrid>
+            
+				
+				
+			</p:rowExpansion>
 	
 			<f:facet name="footer">
 	        	In total there are #{personBrowsePageBean.getNumberOfResults()} persons.
