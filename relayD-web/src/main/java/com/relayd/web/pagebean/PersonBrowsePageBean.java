@@ -10,6 +10,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
+import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
 
 import com.relayd.Person;
@@ -68,10 +69,13 @@ public class PersonBrowsePageBean {
 		// TODO -ALL- Abprüfung auf selektion passiert... wie?
 		// TODO -schmollc- Die Gui refresht nach dem remove nicht.
 		personBridge.remove(getSelectedPerson());
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Removed!", getSelectedPerson().toString());
+		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
 
 	public void onEditClosed(SelectEvent event) {
-		// TODO -Thorsten- Wenn Dialo cancel - keine Message 'saved'
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Saved!", getSelectedPerson().toString());
+		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
 
 	public boolean isRowSelected() {
@@ -84,6 +88,12 @@ public class PersonBrowsePageBean {
 
 	public void setPersonEditPageBean(PersonEditPageBean aPersonEditPageBean) {
 		personEditPageBean = aPersonEditPageBean;
+	}
+	
+	public void cancelEditDialog() {
+		getPersonEditPageBean().cancel();
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Canceld!", "");
+		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
 
 	private void showMessage(String summary) {
