@@ -66,6 +66,7 @@ public class PersonBrowsePageBean {
 	}
 
 	public void remove(@SuppressWarnings("unused") ActionEvent actionEvent) {
+		System.out.println("removed");
 		// TODO -ALL- Abprüfung auf selektion passiert... wie?
 		// TODO -schmollc- Die Gui refresht nach dem remove nicht.
 		personBridge.remove(getSelectedPerson());
@@ -74,8 +75,11 @@ public class PersonBrowsePageBean {
 	}
 
 	public void onEditClosed(SelectEvent event) {
-		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Saved!", getSelectedPerson().toString());
-		FacesContext.getCurrentInstance().addMessage(null, message);
+		System.out.println("Saved!");
+		if (getSelectedPerson() != null) {
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Saved!", getSelectedPerson().toString());
+			FacesContext.getCurrentInstance().addMessage(null, message);
+		}
 	}
 
 	public boolean isRowSelected() {
@@ -92,6 +96,7 @@ public class PersonBrowsePageBean {
 	
 	public void cancelEditDialog() {
 		getPersonEditPageBean().cancel();
+		System.out.println("Canceld Dialog!");
 		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Canceld!", "");
 		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
