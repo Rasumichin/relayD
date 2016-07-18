@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import com.relayd.FormatConstants;
+
 /**
  * @author  Rasumichin (Erik@relayd.de)
  * @since   24.05.2016
@@ -11,8 +13,6 @@ import java.time.format.DateTimeFormatter;
  */
 public class EventDay implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	private final static String DATE_PATTERN_ISO = "yyyy-MM-dd";
 
 	private LocalDate value;
 
@@ -45,7 +45,7 @@ public class EventDay implements Serializable {
 
 	@Override
 	public String toString() {
-		return value.format(DateTimeFormatter.ofPattern(DATE_PATTERN_ISO));
+		return value.format(DateTimeFormatter.ofPattern(FormatConstants.DATE_FORMAT));
 	}
 
 	@Override
