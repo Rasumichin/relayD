@@ -159,7 +159,7 @@ public class PersonEditPageBean implements Serializable {
 	}
 
 	public String getDatePatttern() {
-		return FormatConstants.DATE_FORMAT;
+		return FormatConstants.DATE_FORMAT_ISO;
 	}
 
 	private void addMessage(String summary) {

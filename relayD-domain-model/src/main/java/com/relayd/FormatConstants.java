@@ -13,5 +13,5 @@ public final class FormatConstants {
 		//	restrict instantiation
 	}
 
-	public static final String DATE_FORMAT = "yyyy-MM-dd";
+	public static final String DATE_FORMAT_ISO = "yyyy-MM-dd";
 }

@@ -41,7 +41,7 @@ public class Birthday implements Serializable {
 
 	@Override
 	public String toString() {
-		return value.format(DateTimeFormatter.ofPattern(FormatConstants.DATE_FORMAT));
+		return value.format(DateTimeFormatter.ofPattern(FormatConstants.DATE_FORMAT_ISO));
 	}
 
 	@Override
