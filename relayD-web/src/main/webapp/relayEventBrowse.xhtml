@@ -18,6 +18,12 @@
 		
 		<p/>
 		
+		<p:themeSwitcher style="width:150px">
+			<f:selectItem itemLabel="Choose Theme" itemValue="" />
+			<f:selectItems value="#{relayEventBrowsePageBean.themes}" />
+		</p:themeSwitcher>
+ 
+		
 		<p:dataTable
 			var="relayEvent"
 			id="relayEventTable"
