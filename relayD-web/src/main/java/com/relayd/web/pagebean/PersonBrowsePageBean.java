@@ -36,14 +36,19 @@ public class PersonBrowsePageBean {
 	private List<Person> searchResult = new ArrayList<Person>();
 
 	private Person selected;
+	private boolean canceled;
 
 	public PersonBrowsePageBean() {
 		personBridge = new PersonBridgeImpl();
 	}
+	
+	private void refreshPersons() {
+		searchResult = personBridge.all();
+	}
 
 	public List<Person> getPersons() {
 		if (searchResult == null | searchResult.size() < 1) {
-			searchResult = personBridge.all();
+			refreshPersons();
 		}
 		return searchResult;
 	}
@@ -83,20 +88,35 @@ public class PersonBrowsePageBean {
 	}
 
 	public void remove(@SuppressWarnings("unused") ActionEvent actionEvent) {
-		System.out.println("removed");
+		System.out.println("Removed");
 		// TODO -ALL- Abprüfung auf selektion passiert... wie?
 		// TODO -schmollc- Die Gui refresht nach dem remove nicht.
 		personBridge.remove(getSelectedPerson());
 		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Removed!", getSelectedPerson().toString());
 		FacesContext.getCurrentInstance().addMessage(null, message);
+		refreshPersons();
+		
 	}
 
 	public void onEditClosed(SelectEvent event) {
-		System.out.println("Saved!");
-		if (getSelectedPerson() != null) {
+		if (canceled) {
+			System.out.println("Cancel Message");
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Canceld!", "");
+			FacesContext.getCurrentInstance().addMessage(null, message);
+			canceled = false;
+		
+		} else if (getSelectedPerson() != null) {
+			System.out.println("Saved!");
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Saved!", getSelectedPerson().toString());
 			FacesContext.getCurrentInstance().addMessage(null, message);
+		} else {
+			System.out.println("Added!");
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Added!", "");
+			FacesContext.getCurrentInstance().addMessage(null, message);
+		
 		}
+		
+		refreshPersons();
 	}
 
 	public boolean isRowSelected() {
@@ -113,9 +133,8 @@ public class PersonBrowsePageBean {
 	
 	public void cancelEditDialog() {
 		getPersonEditPageBean().cancel();
+		canceled = true;
 		System.out.println("Canceld Dialog!");
-		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Canceld!", "");
-		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
 
 	private void showMessage(String summary) {

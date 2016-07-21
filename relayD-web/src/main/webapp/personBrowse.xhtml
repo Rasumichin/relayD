@@ -12,10 +12,13 @@
 	<h3>Welcome to the REAL relay D!</h3>
 
 	<h:form id="form">
+	
+		<p:growl id="growl" showDetail="true"/>  
 		
 		<p:dataTable
 			var="person"
 			id="personTable"
+			style="width:600px"
 			selectionMode="single"
 			value="#{personBrowsePageBean.persons}"
 			selection="#{personBrowsePageBean.selectedPerson}"
@@ -28,7 +31,7 @@
 	     		
 	    	</f:facet>
 	    	
-	    	<p:column>
+	    	<p:column style="width:16px">
 				<p:rowToggler />
 			</p:column>
 	    	
@@ -42,7 +45,7 @@
 			
 						
 			<p:rowExpansion>
-				<p:panelGrid  columns="2" columnClasses="label,value" style="width:300px">
+				<p:panelGrid  columns="2" columnClasses="label,value" style="width:500px">
 	                
                 	<h:outputText value="Birthday" />
 					<h:outputText value="#{person.birthday}" />
@@ -70,11 +73,11 @@
 		<p:toolbar>
 	        <f:facet name="left">
 	            <p:commandButton value="+" update="personTable"  actionListener="#{personBrowsePageBean.add}">
-	   				<p:ajax event="dialogReturn" listener="#{personBrowsePageBean.onEditClosed}" update="personTable" />
+	   				<p:ajax event="dialogReturn" listener="#{personBrowsePageBean.onEditClosed}" update="form" />
 	   			</p:commandButton>
-	            <p:commandButton value="-" update="personTable"  actionListener="#{personBrowsePageBean.remove}" />
+	            <p:commandButton value="-" update="form"  actionListener="#{personBrowsePageBean.remove}" />
 				<p:commandButton value="Edit" update="personTable"  actionListener="#{personBrowsePageBean.edit}" icon="ui-icon-folder-open">
-	            	<p:ajax event="dialogReturn" listener="#{personBrowsePageBean.onEditClosed}" update="personTable" />
+	            	<p:ajax event="dialogReturn" listener="#{personBrowsePageBean.onEditClosed}" update="form" />
 	            </p:commandButton>
 	        </f:facet>
         </p:toolbar>
