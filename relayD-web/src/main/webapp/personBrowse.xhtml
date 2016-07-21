@@ -20,22 +20,23 @@
 			value="#{personBrowsePageBean.persons}"
 			selection="#{personBrowsePageBean.selectedPerson}"
 			scrollable="true" scrollHeight="150"
-			
+			sortBy="#{person.surename.value}"
 			rowKey="#{person.UUID}"
 			resizableColumns="true">
 	     	<f:facet name="header">
-	        	List of Persons
+	     		List of Persons
+	     		
 	    	</f:facet>
 	    	
 	    	<p:column>
 				<p:rowToggler />
 			</p:column>
 	    	
-			<p:column headerText="Surename">
+			<p:column headerText="Surename" sortBy="#{person.surename}" sortFunction="#{personBrowsePageBean.sortBySurename}">
 				<h:outputText value="#{person.surename}" />
 			</p:column>
 	
-			<p:column headerText="Forename">
+			<p:column headerText="Forename" sortBy="#{person.forename}" sortFunction="#{personBrowsePageBean.sortByForename}">
 				<h:outputText value="#{person.forename}" />
 			</p:column>
 			

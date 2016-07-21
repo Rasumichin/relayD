@@ -14,6 +14,8 @@ import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
 
 import com.relayd.Person;
+import com.relayd.attributes.Forename;
+import com.relayd.attributes.Surename;
 import com.relayd.web.bridge.PersonBridge;
 import com.relayd.web.bridge.PersonBridgeImpl;
 
@@ -40,7 +42,9 @@ public class PersonBrowsePageBean {
 	}
 
 	public List<Person> getPersons() {
-		searchResult = personBridge.all();
+		if (searchResult == null | searchResult.size() < 1) {
+			searchResult = personBridge.all();
+		}
 		return searchResult;
 	}
 
@@ -50,6 +54,19 @@ public class PersonBrowsePageBean {
 
 	public void setSelectedPerson(Person aSelected) {
 		selected = aSelected;
+	}
+	
+	public int sortByForename(Forename name1, Forename name2) {
+		//return -1, 0 , 1 if car1 is less than, equal to or greater than car2
+		return name1.toString().compareTo(name2.toString());
+		
+	}
+
+	public int sortBySurename(Surename name1, Surename name2) {
+		//return -1, 0 , 1 if car1 is less than, equal to or greater than car2
+		System.out.println("sort surenames: " + name1.toString() + " / " + name2.toString());
+		return name1.toString().compareTo(name2.toString());
+		
 	}
 
 	public Integer getNumberOfResults() {
