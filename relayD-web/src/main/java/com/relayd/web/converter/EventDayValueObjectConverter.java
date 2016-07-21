@@ -9,6 +9,7 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
 import com.relayd.FormatConstants;
+import com.relayd.attributes.Birthday;
 import com.relayd.attributes.EventDay;
 
 /**
@@ -22,7 +23,8 @@ public class EventDayValueObjectConverter implements Converter {
 	@Override
 	public Object getAsObject(@SuppressWarnings("unused") FacesContext facesContext, @SuppressWarnings("unused") UIComponent uiComponent, String value) {
 		LocalDate localDate = LocalDate.parse(value, DateTimeFormatter.ofPattern(FormatConstants.DATE_FORMAT));
-		EventDay eventDay = new EventDay(localDate);
+		EventDay eventDay = EventDay.newInstance(localDate);
+		
 		return eventDay;
 	}
 
