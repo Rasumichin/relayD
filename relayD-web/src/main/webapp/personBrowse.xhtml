@@ -17,25 +17,41 @@
 		
 		<p:dataTable
 			var="person"
+			widgetVar="personTable"
+			filteredValue="#{personBrowsePageBean.filteredPersons}"
 			id="personTable"
-			style="width:600px"
 			selectionMode="single"
 			value="#{personBrowsePageBean.persons}"
 			selection="#{personBrowsePageBean.selectedPerson}"
-			scrollable="true" scrollHeight="150"
+			scrollable="true" scrollHeight="350"
 			sortBy="#{person.surename.value}"
 			rowKey="#{person.UUID}"
 			resizableColumns="true">
-	     	<f:facet name="header">
-	     		List of Persons
+	     	<f:facet name="header" >
+	     		List of Cars
 	     		
+	     		<p:commandButton id="toggler" type="button" value="Columns" style="float:right" icon="ui-icon-calculator" />
+        		<p:columnToggler datasource="personTable" trigger="toggler" />
+        		
+	     		<p:outputPanel>
+                	<h:outputText value="Search all fields:" />
+                	<p:inputText id="globalFilter" onkeyup="PF('personTable').filter()" style="width:150px" placeholder="Enter keyword"/>
+            	</p:outputPanel>		
+
 	    	</f:facet>
+        
+	    	
+	    	
 	    	
 	    	<p:column style="width:16px">
 				<p:rowToggler />
 			</p:column>
 	    	
-			<p:column headerText="Surename" sortBy="#{person.surename}" sortFunction="#{personBrowsePageBean.sortBySurename}">
+			<p:column 
+				headerText="Surename" 
+				filterMatchMode="contains"
+				sortBy="#{person.surename}" 
+				sortFunction="#{personBrowsePageBean.sortBySurename}">
 				<h:outputText value="#{person.surename}" />
 			</p:column>
 	
@@ -43,6 +59,21 @@
 				<h:outputText value="#{person.forename}" />
 			</p:column>
 			
+			<p:column headerText="Birthday" sortBy="#{person.birthday}" sortFunction="#{personBrowsePageBean.sortByBirthday}">
+				<h:outputText value="#{person.birthday}" />
+			</p:column>
+			
+			<p:column headerText="Nationality">
+				<h:outputText value="#{person.displayNationality}" />
+			</p:column>
+			
+			<p:column headerText="Shirtsize" sortBy="#{person.shirtsize}" sortFunction="#{personBrowsePageBean.sortByShirtsize}">
+				<h:outputText value="#{person.shirtsize}" />
+			</p:column>
+			
+			<p:column headerText="E-Mail" sortBy="#{person.email}" sortFunction="#{personBrowsePageBean.sortByEmail}">
+				<h:outputText value="#{person.email}" />
+			</p:column>
 						
 			<p:rowExpansion>
 				<p:panelGrid  columns="2" columnClasses="label,value" style="width:500px">
