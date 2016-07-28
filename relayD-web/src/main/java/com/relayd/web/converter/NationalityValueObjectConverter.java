@@ -29,7 +29,12 @@ public class NationalityValueObjectConverter implements Converter {
 
 	@Override
 	public String getAsString(@SuppressWarnings("unused") FacesContext facesContext, @SuppressWarnings("unused") UIComponent uiComponent, Object value) {
-		//return ((Locale) value).getDisplayCountry();
 		return value.toString();
+//		if (value instanceof String) {
+//			return value.toString();
+//		} else {
+//			return ((Locale) value).getDisplayCountry();
+//		}
+		
 	}
 }
