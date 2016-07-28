@@ -77,6 +77,13 @@ public class Person implements Serializable {
 	public Locale getNationality() {
 		return nationality;
 	}
+	
+	public String getDisplayNationality() {
+		if (nationality == null) {
+			return null;
+		} 
+		return nationality.getDisplayCountry();
+	}
 
 	public void setNationality(Locale aNationality) {
 		nationality = aNationality;

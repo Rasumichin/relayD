@@ -18,6 +18,24 @@
 		
 		<p/>
 		
+		<p:themeSwitcher style="width:150px">
+			<f:selectItem itemLabel="Choose Theme" itemValue="" />
+			<f:selectItems value="#{relayEventBrowsePageBean.themes}" />
+		</p:themeSwitcher>
+		
+		<p:themeSwitcher>
+			<f:selectItem itemLabel="Choose Theme" itemValue="" />
+			<f:selectItems value="#{relayEventBrowsePageBean.themes}" var="theme"
+				itemLabel="#{theme.name}" itemValue="#{theme}"/>
+				<p:column>
+					<p:graphicImage value="/images/themes/#{theme.image}"/>
+				</p:column>
+			<p:column>
+				#{t.name}
+			</p:column>
+		</p:themeSwitcher>
+ 
+		
 		<p:dataTable
 			var="relayEvent"
 			id="relayEventTable"

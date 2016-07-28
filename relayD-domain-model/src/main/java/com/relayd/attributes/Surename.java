@@ -24,7 +24,11 @@ public class Surename implements Serializable {
 		validate(surename);
 		return new Surename(surename);
 	}
-
+	
+	public String getValue() {
+		return value;
+	}
+	
 	private static void validate(String surename) {
 		if (surename == null) {
 			throw new IllegalArgumentException("[surename] must not be 'null'.");

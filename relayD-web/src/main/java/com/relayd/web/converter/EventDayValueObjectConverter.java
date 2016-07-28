@@ -20,14 +20,15 @@ import com.relayd.attributes.EventDay;
 public class EventDayValueObjectConverter implements Converter {
 
 	@Override
-	public Object getAsObject(@SuppressWarnings("unused") FacesContext facesContext, @SuppressWarnings("unused") UIComponent uiComponent, String value) {
+	public Object getAsObject(FacesContext facesContext, UIComponent uiComponent, String value) {
 		LocalDate localDate = LocalDate.parse(value, DateTimeFormatter.ofPattern(FormatConstants.DATE_FORMAT_ISO));
-		EventDay eventDay = new EventDay(localDate);
+		EventDay eventDay = EventDay.newInstance(localDate);
+		
 		return eventDay;
 	}
 
 	@Override
-	public String getAsString(@SuppressWarnings("unused") FacesContext facesContext, @SuppressWarnings("unused") UIComponent uiComponent, Object value) {
+	public String getAsString(FacesContext facesContext, UIComponent uiComponent, Object value) {
 		return value.toString();
 	}
 }
