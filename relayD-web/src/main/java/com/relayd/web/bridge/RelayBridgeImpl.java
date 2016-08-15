@@ -68,7 +68,8 @@ public class RelayBridgeImpl implements RelayBridge {
 	}
 
 	@Override
-	public void remove(Person person) {
+	public void remove(@SuppressWarnings("unused") Person person) {
+		// TODO -Team relayD- add Stuff here.
 	}
 
 	@Override
