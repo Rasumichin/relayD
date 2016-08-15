@@ -29,7 +29,7 @@
 				</p:inputText>		
 
 				<p:outputLabel for="birthday" value="Birthday:" />
-				<p:calendar  id="birthday" value="#{personEditPageBean.birthday}" pattern="#{personEditPageBean.datePatttern}" effect="fold">
+				<p:calendar  id="birthday" value="#{personEditPageBean.birthday}" showOn="button" pattern="#{personEditPageBean.datePatttern}" effect="fold">
 					<f:converter converterId="com.relayd.web.converter.BirthdayValueObjectConverter" />
 				</p:calendar >
 				
