@@ -5,13 +5,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 
 import org.primefaces.context.RequestContext;
 
+import com.relayd.FormatConstants;
 import com.relayd.RelayEvent;
 import com.relayd.attributes.EventDay;
 import com.relayd.attributes.EventName;
@@ -96,5 +95,9 @@ public class RelayEventEditPageBean implements Serializable {
 
 	private RelayEventGateway getGateway() {
 		return gateway;
+	}
+
+	public String getDateFormatIso() {
+		return FormatConstants.DATE_FORMAT_ISO;
 	}
 }
