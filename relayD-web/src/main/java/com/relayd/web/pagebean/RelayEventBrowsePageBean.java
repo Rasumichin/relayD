@@ -123,29 +123,21 @@ public class RelayEventBrowsePageBean implements Serializable {
 		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
 
-	private void showMessage(String summary) {
-		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, "Please use Submit, Dude!");
-		FacesContext.getCurrentInstance().addMessage(null, message);
-	}
-	
-	
-	
-	
 	private List<Theme> themes;
-	
+
 	@ManagedProperty("#{themeService}")
-    private ThemeService service;
- 
-    @PostConstruct
-    public void init() {
-        themes = service.getThemes();
-    }
-     
-    public List<Theme> getThemes() {
-        return themes;
-    } 
- 
-    public void setService(ThemeService service) {
-        this.service = service;
-    }
+	private ThemeService service;
+
+	@PostConstruct
+	public void init() {
+		themes = service.getThemes();
+	}
+
+	public List<Theme> getThemes() {
+		return themes;
+	}
+
+	public void setService(ThemeService service) {
+		this.service = service;
+	}
 }
