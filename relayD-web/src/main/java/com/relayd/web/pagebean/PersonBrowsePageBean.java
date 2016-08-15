@@ -10,7 +10,6 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
-import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
 
 import com.relayd.Person;
@@ -45,7 +44,7 @@ public class PersonBrowsePageBean {
 	public PersonBrowsePageBean() {
 		personBridge = new PersonBridgeImpl();
 	}
-	
+
 	private void refreshPersons() {
 		searchResult = personBridge.all();
 	}
@@ -64,7 +63,7 @@ public class PersonBrowsePageBean {
 	public void setSelectedPerson(Person aSelected) {
 		selected = aSelected;
 	}
-	
+
 	public int sortByForename(Forename name1, Forename name2) {
 		//return -1, 0 , 1 if car1 is less than, equal to or greater than car2
 		return name1.toString().compareTo(name2.toString());
@@ -79,16 +78,17 @@ public class PersonBrowsePageBean {
 		//return -1, 0 , 1 if car1 is less than, equal to or greater than car2
 		return birthday1.toString().compareTo(birthday2.toString());
 	}
-	
+
 	public int sortByShirtsize(Shirtsize size1, Shirtsize size2) {
 		//return -1, 0 , 1 if car1 is less than, equal to or greater than car2
 		return size1.toString().compareTo(size2.toString());
 	}
+
 	public int sortByEmail(Email email1, Email email2) {
 		//return -1, 0 , 1 if car1 is less than, equal to or greater than car2
 		return email1.toString().compareTo(email2.toString());
 	}
-	
+
 	public Integer getNumberOfResults() {
 		return searchResult == null ? 0 : searchResult.size();
 	}
@@ -110,7 +110,7 @@ public class PersonBrowsePageBean {
 		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Removed!", getSelectedPerson().toString());
 		FacesContext.getCurrentInstance().addMessage(null, message);
 		refreshPersons();
-		
+
 	}
 
 	public void onEditClosed(SelectEvent event) {
@@ -119,7 +119,7 @@ public class PersonBrowsePageBean {
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Canceld!", "");
 			FacesContext.getCurrentInstance().addMessage(null, message);
 			canceled = false;
-		
+
 		} else if (getSelectedPerson() != null) {
 			System.out.println("Saved!");
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Saved!", getSelectedPerson().toString());
@@ -128,9 +128,9 @@ public class PersonBrowsePageBean {
 			System.out.println("Added!");
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Added!", "");
 			FacesContext.getCurrentInstance().addMessage(null, message);
-		
+
 		}
-		
+
 		refreshPersons();
 	}
 
@@ -145,7 +145,7 @@ public class PersonBrowsePageBean {
 	public void setPersonEditPageBean(PersonEditPageBean aPersonEditPageBean) {
 		personEditPageBean = aPersonEditPageBean;
 	}
-	
+
 	public void cancelEditDialog() {
 		getPersonEditPageBean().cancel();
 		canceled = true;
