@@ -15,24 +15,30 @@ public class EventDay implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private LocalDate value;
-	
-	public EventDay(LocalDate dateOfEvent) {
+
+	private EventDay() {
+		this(LocalDate.now());
+	}
+
+	private EventDay(LocalDate dateOfEvent) {
 		if (dateOfEvent == null) {
 			throw new IllegalArgumentException("[dateOfEvent] must not be 'null'.");
 		}
 		value = dateOfEvent;
 	}
-	
+
+	/**
+	 * Bloch, Joshua, Effective Java, 2nd Edition, Item 1, p. 5
+	 */
+	static public EventDay newInstance() {
+		return new EventDay();
+	}
+
 	/**
 	 * Bloch, Joshua, Effective Java, 2nd Edition, Item 1, p. 5
 	 */
 	static public EventDay newInstance(LocalDate dateOfEvent) {
 		return new EventDay(dateOfEvent);
-	}
-
-
-	public EventDay() {
-		this(LocalDate.now());
 	}
 
 	public LocalDate getValue() {

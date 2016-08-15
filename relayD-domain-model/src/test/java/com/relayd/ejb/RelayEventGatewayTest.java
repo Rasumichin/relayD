@@ -21,10 +21,10 @@ import com.relayd.attributes.EventName;
 public abstract class RelayEventGatewayTest {
 
 	private static final String KOELN_MARATHON = "Köln Marathon";
-	private static final EventDay KOELN_DAY = new EventDay(LocalDate.of(2017, Month.OCTOBER, 4));
+	private static final EventDay KOELN_DAY = EventDay.newInstance(LocalDate.of(2017, Month.OCTOBER, 4));
 
 	private static final String DUESSELDORF_MARATHON = "Düsseldorf Marathon";
-	private static final EventDay DUESSELDORF_DAY = new EventDay(LocalDate.of(2017, Month.APRIL, 30));
+	private static final EventDay DUESSELDORF_DAY = EventDay.newInstance(LocalDate.of(2017, Month.APRIL, 30));
 
 	public abstract RelayEventGateway getSut();
 

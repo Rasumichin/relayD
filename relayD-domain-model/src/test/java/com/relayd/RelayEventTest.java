@@ -36,7 +36,7 @@ public class RelayEventTest {
 	public void testEventDay() {
 		RelayEvent sut = new RelayEvent(null, null);
 
-		EventDay expected = new EventDay(LocalDate.now());
+		EventDay expected = EventDay.newInstance(LocalDate.now());
 
 		sut.setEventDay(expected);
 
@@ -48,7 +48,7 @@ public class RelayEventTest {
 	@Test
 	public void testCreateValidInstance() {
 		EventName eventName = new EventName("MetroGroup Marathon Düsseldorf");
-		EventDay eventDay = new EventDay(LocalDate.of(2017, Month.APRIL, 30));
+		EventDay eventDay = EventDay.newInstance(LocalDate.of(2017, Month.APRIL, 30));
 
 		RelayEvent sut = new RelayEvent(eventName, eventDay);
 
@@ -62,7 +62,7 @@ public class RelayEventTest {
 	@Test
 	public void testUUID() {
 		EventName eventNameDummy = new EventName("MetroGroup Marathon Düsseldorf");
-		EventDay eventDayDummy = new EventDay(LocalDate.of(2017, Month.APRIL, 30));
+		EventDay eventDayDummy = EventDay.newInstance(LocalDate.of(2017, Month.APRIL, 30));
 
 		RelayEvent sut = new RelayEvent(eventNameDummy, eventDayDummy);
 
@@ -72,7 +72,7 @@ public class RelayEventTest {
 	@Test
 	public void testSetUUID() {
 		EventName eventNameDummy = new EventName("MetroGroup Marathon Düsseldorf");
-		EventDay eventDayDummy = new EventDay(LocalDate.of(2017, Month.APRIL, 30));
+		EventDay eventDayDummy = EventDay.newInstance(LocalDate.of(2017, Month.APRIL, 30));
 
 		RelayEvent sut = new RelayEvent(eventNameDummy, eventDayDummy);
 		RelayEvent secondSut = new RelayEvent(eventNameDummy, eventDayDummy);
@@ -155,7 +155,7 @@ public class RelayEventTest {
 	@Test
 	public void testEqualsWithUuid() {
 		EventName eventNameDummy = new EventName("MetroGroup Marathon Düsseldorf");
-		EventDay eventDayDummy = new EventDay(LocalDate.of(2017, Month.APRIL, 30));
+		EventDay eventDayDummy = EventDay.newInstance(LocalDate.of(2017, Month.APRIL, 30));
 
 		RelayEvent sut = new RelayEvent(eventNameDummy, eventDayDummy);
 		RelayEvent secondSut = new RelayEvent(eventNameDummy, eventDayDummy);

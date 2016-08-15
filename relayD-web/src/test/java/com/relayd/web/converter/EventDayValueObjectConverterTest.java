@@ -32,7 +32,7 @@ public class EventDayValueObjectConverterTest {
 	@Test
 	public void testGetAsString() {
 		LocalDate localDate = LocalDate.of(2015, Month.DECEMBER, 31);
-		EventDay eventDay = new EventDay(localDate);
+		EventDay eventDay = EventDay.newInstance(localDate);
 
 		String result = sut.getAsString(null, null, eventDay);
 
