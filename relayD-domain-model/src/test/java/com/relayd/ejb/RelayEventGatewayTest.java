@@ -62,14 +62,14 @@ public abstract class RelayEventGatewayTest {
 	private RelayEvent createEventForDuesseldorfMarathon() {
 		EventName eventName = new EventName(DUESSELDORF_MARATHON);
 		EventDay eventDay = DUESSELDORF_DAY;
-		RelayEvent relayEvent = new RelayEvent(eventName, eventDay);
+		RelayEvent relayEvent = RelayEvent.newInstance(eventName, eventDay);
 		return relayEvent;
 	}
 
 	private RelayEvent createEventForKoelnMarathon() {
 		EventName eventName = new EventName(KOELN_MARATHON);
 		EventDay eventDay = KOELN_DAY;
-		RelayEvent relayEvent = new RelayEvent(eventName, eventDay);
+		RelayEvent relayEvent = RelayEvent.newInstance(eventName, eventDay);
 		return relayEvent;
 	}
 

@@ -121,7 +121,7 @@ public class RelayEventGatewayFile implements RelayEventGateway {
 
 	@Override
 	public void remove(UUID uuid) {
-		RelayEvent dummyRelayEvent = new RelayEvent(null, null);
+		RelayEvent dummyRelayEvent = RelayEvent.newInstance(null, null);
 		dummyRelayEvent.setUUID(uuid);
 		List<RelayEvent> all = getAll();
 		all.remove(dummyRelayEvent);

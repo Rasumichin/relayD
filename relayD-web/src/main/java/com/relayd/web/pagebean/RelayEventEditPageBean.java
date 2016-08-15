@@ -39,7 +39,7 @@ public class RelayEventEditPageBean implements Serializable {
 	}
 
 	public void openDialogForCreateRelayEvent() {
-		workingEvent = new RelayEvent(null, null);
+		workingEvent = RelayEvent.newInstance(null, null);
 		openDialog();
 	}
 

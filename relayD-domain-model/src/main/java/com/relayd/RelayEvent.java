@@ -11,7 +11,6 @@ import com.relayd.attributes.EventName;
  * @author Rasumichin (Erik@relayd.de)
  * @since 19.05.2016
  * status initial
- *
  */
 public class RelayEvent implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -20,7 +19,14 @@ public class RelayEvent implements Serializable {
 	private EventName name;
 	private EventDay eventDay;
 
-	public RelayEvent(EventName anEventName, EventDay anEventDay) {
+	/**
+	 * Bloch, Joshua, Effective Java, 2nd Edition, Item 1, p. 5
+	 */
+	static public RelayEvent newInstance(EventName anEventName, EventDay anEventDay) {
+		return new RelayEvent(anEventName, anEventDay);
+	}
+
+	private RelayEvent(EventName anEventName, EventDay anEventDay) {
 		super();
 		uuid = UUID.randomUUID();
 		name = anEventName;

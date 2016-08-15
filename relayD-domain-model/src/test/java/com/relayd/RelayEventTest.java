@@ -21,7 +21,7 @@ public class RelayEventTest {
 
 	@Test
 	public void testName() {
-		RelayEvent sut = new RelayEvent(null, null);
+		RelayEvent sut = RelayEvent.newInstance(null, null);
 
 		EventName expected = new EventName("Name");
 
@@ -34,7 +34,7 @@ public class RelayEventTest {
 
 	@Test
 	public void testEventDay() {
-		RelayEvent sut = new RelayEvent(null, null);
+		RelayEvent sut = RelayEvent.newInstance(null, null);
 
 		EventDay expected = EventDay.newInstance(LocalDate.now());
 
@@ -50,7 +50,7 @@ public class RelayEventTest {
 		EventName eventName = new EventName("MetroGroup Marathon Düsseldorf");
 		EventDay eventDay = EventDay.newInstance(LocalDate.of(2017, Month.APRIL, 30));
 
-		RelayEvent sut = new RelayEvent(eventName, eventDay);
+		RelayEvent sut = RelayEvent.newInstance(eventName, eventDay);
 
 		EventName actualName = sut.getName();
 		EventDay actualEventDay = sut.getEventDay();
@@ -64,7 +64,7 @@ public class RelayEventTest {
 		EventName eventNameDummy = new EventName("MetroGroup Marathon Düsseldorf");
 		EventDay eventDayDummy = EventDay.newInstance(LocalDate.of(2017, Month.APRIL, 30));
 
-		RelayEvent sut = new RelayEvent(eventNameDummy, eventDayDummy);
+		RelayEvent sut = RelayEvent.newInstance(eventNameDummy, eventDayDummy);
 
 		assertNotNull("Expected valid instance.", sut.getUUID());
 	}
@@ -74,8 +74,8 @@ public class RelayEventTest {
 		EventName eventNameDummy = new EventName("MetroGroup Marathon Düsseldorf");
 		EventDay eventDayDummy = EventDay.newInstance(LocalDate.of(2017, Month.APRIL, 30));
 
-		RelayEvent sut = new RelayEvent(eventNameDummy, eventDayDummy);
-		RelayEvent secondSut = new RelayEvent(eventNameDummy, eventDayDummy);
+		RelayEvent sut = RelayEvent.newInstance(eventNameDummy, eventDayDummy);
+		RelayEvent secondSut = RelayEvent.newInstance(eventNameDummy, eventDayDummy);
 
 		secondSut.setUUID(sut.getUUID());
 
@@ -84,7 +84,7 @@ public class RelayEventTest {
 
 	@Test
 	public void testGetHashCode() {
-		RelayEvent sut = new RelayEvent(null, null);
+		RelayEvent sut = RelayEvent.newInstance(null, null);
 		UUID uuid = UUID.fromString("53a27b33-a5cb-4997-8eaf-dcf8bd1cb2d2");
 		sut.setUUID(uuid);
 
@@ -101,7 +101,7 @@ public class RelayEventTest {
 
 	@Test
 	public void testEqualsWithMyself() {
-		RelayEvent sut = new RelayEvent(null, null);
+		RelayEvent sut = RelayEvent.newInstance(null, null);
 
 		boolean result = sut.equals(sut);
 
@@ -110,7 +110,7 @@ public class RelayEventTest {
 
 	@Test
 	public void testEqualsWithNull() {
-		RelayEvent sut = new RelayEvent(null, null);
+		RelayEvent sut = RelayEvent.newInstance(null, null);
 
 		boolean result = sut.equals(null);
 
@@ -119,7 +119,7 @@ public class RelayEventTest {
 
 	@Test
 	public void testEqualsWithNotCompatibleClass() {
-		RelayEvent sut = new RelayEvent(null, null);
+		RelayEvent sut = RelayEvent.newInstance(null, null);
 
 		boolean result = sut.equals(new String());
 
@@ -128,9 +128,9 @@ public class RelayEventTest {
 
 	@Test
 	public void testEqualsWithUUIDIsNull() {
-		RelayEvent sut = new RelayEvent(null, null);
+		RelayEvent sut = RelayEvent.newInstance(null, null);
 
-		RelayEvent secondEvent = new RelayEvent(null, null);
+		RelayEvent secondEvent = RelayEvent.newInstance(null, null);
 		sut.setUUID(null);
 
 		boolean result = sut.equals(secondEvent);
@@ -141,10 +141,10 @@ public class RelayEventTest {
 
 	@Test
 	public void testEqualsWithBothUUIDAreNull() {
-		RelayEvent sut = new RelayEvent(null, null);
+		RelayEvent sut = RelayEvent.newInstance(null, null);
 		sut.setUUID(null);
 
-		RelayEvent secondEvent = new RelayEvent(null, null);
+		RelayEvent secondEvent = RelayEvent.newInstance(null, null);
 		secondEvent.setUUID(null);
 
 		boolean result = sut.equals(secondEvent);
@@ -157,8 +157,8 @@ public class RelayEventTest {
 		EventName eventNameDummy = new EventName("MetroGroup Marathon Düsseldorf");
 		EventDay eventDayDummy = EventDay.newInstance(LocalDate.of(2017, Month.APRIL, 30));
 
-		RelayEvent sut = new RelayEvent(eventNameDummy, eventDayDummy);
-		RelayEvent secondSut = new RelayEvent(eventNameDummy, eventDayDummy);
+		RelayEvent sut = RelayEvent.newInstance(eventNameDummy, eventDayDummy);
+		RelayEvent secondSut = RelayEvent.newInstance(eventNameDummy, eventDayDummy);
 
 		assertNotEquals(sut, secondSut);
 	}
