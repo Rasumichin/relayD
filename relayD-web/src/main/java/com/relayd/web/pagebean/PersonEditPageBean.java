@@ -8,10 +8,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 
 import org.primefaces.context.RequestContext;
 
@@ -160,11 +158,6 @@ public class PersonEditPageBean implements Serializable {
 
 	public String getDatePatttern() {
 		return FormatConstants.DATE_FORMAT_ISO;
-	}
-
-	private void addMessage(String summary) {
-		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, "Bekackte Amateure, Dude!");
-		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
 
 	// TODO -schmollc- ab hier in eine eigene Klasse stecken!
