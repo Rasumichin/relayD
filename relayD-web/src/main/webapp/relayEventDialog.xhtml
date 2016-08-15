@@ -23,7 +23,7 @@
 			</p:inputText>		
 			
 			<p:outputLabel for="date" value="Date:" />
-			<p:calendar id="date" value="#{relayEventEditPageBean.date}" showOn="button" pattern="#{relayEventEditPageBean.dateFormatIso}">
+			<p:calendar id="date" value="#{relayEventEditPageBean.date}" showOn="button" pattern="#{relayEventEditPageBean.datePatttern}"  effect="fold">
 				<f:converter converterId="com.relayd.web.converter.EventDayValueObjectConverter" />
 			</p:calendar>
 			<p/>

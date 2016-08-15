@@ -19,11 +19,11 @@ public class RelayEventEditPageBeanTest {
 	private RelayEventEditPageBean sut = new RelayEventEditPageBean();
 
 	@Test
-	public void testGetDateFormatIso() {
+	public void testGetDatePatttern() {
 		String expected = FormatConstants.DATE_FORMAT_ISO;
 
-		String result = sut.getDateFormatIso();
+		String result = sut.getDatePatttern();
 
-		assertEquals("DateFormatIso not correct!", expected, result);
+		assertEquals("DatePattern not correct!", expected, result);
 	}
 }

@@ -97,7 +97,7 @@ public class RelayEventEditPageBean implements Serializable {
 		return gateway;
 	}
 
-	public String getDateFormatIso() {
+	public String getDatePatttern() {
 		return FormatConstants.DATE_FORMAT_ISO;
 	}
 }
