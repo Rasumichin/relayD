@@ -25,8 +25,6 @@ import com.relayd.web.bridge.RelayBridgeImpl;
 public class RelayEditPageBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private static final String RELAY_DIALOG_ID = "relayDialog";
-
 	private RelayBridge relayBridge;
 
 	private Relay workingRelay = null;
@@ -51,7 +49,7 @@ public class RelayEditPageBean implements Serializable {
 
 	private void openDialog() {
 		Map<String, Object> options = createOptions();
-		RequestContext.getCurrentInstance().openDialog(RELAY_DIALOG_ID, options, null);
+		RequestContext.getCurrentInstance().openDialog(NavigationConstants.RELAY_EDIT_DIALOG_ID, options, null);
 	}
 
 	private Map<String, Object> createOptions() {
