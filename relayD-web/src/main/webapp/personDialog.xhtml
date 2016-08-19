@@ -109,21 +109,21 @@
 		</h:panelGrid>
 
 		<p:commandButton
-			value="Save"
-			update="form"
-			actionListener="#{personEditPageBean.save}"
-			icon="ui-icon-check"
-			style="float:left;" />
-		<p:commandButton
-			value="Save and Next"
-			update="form"
-			actionListener="#{personEditPageBean.saveAndNext}"
-			icon="ui-icon-check"
-			style="float:left;" />
-		<p:commandButton
 			value="Cancel"
 			actionListener="#{personBrowsePageBean.cancelEditDialog}"
 			icon="ui-icon-close"
+			style="float:left;" />
+		<p:commandButton
+			value="Ok"
+			update="form"
+			actionListener="#{personEditPageBean.save}"
+			icon="ui-icon-check"
+			style="float:right;" />
+		<p:commandButton
+			value="Ok and Next"
+			update="form"
+			actionListener="#{personEditPageBean.saveAndNext}"
+			icon="ui-icon-check"
 			style="float:right;" />
 	</h:form>
 </h:body>
