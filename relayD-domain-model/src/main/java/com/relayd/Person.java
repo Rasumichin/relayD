@@ -23,7 +23,7 @@ public class Person implements Serializable {
 	private Forename forename = null;
 	private Birthday birthday = null;
 	private Shirtsize shirtsize = null;
-	private Locale nationality = null;
+	private Locale nationality = null; // TODO -schmollc- Anderen Attribute sind Fachobjekte, dies hier eine "API" Klasse. Warum kein Decorator einführen?
 	private Email email = null;
 
 	private Person() {
@@ -77,11 +77,11 @@ public class Person implements Serializable {
 	public Locale getNationality() {
 		return nationality;
 	}
-	
+
 	public String getDisplayNationality() {
 		if (nationality == null) {
 			return null;
-		} 
+		}
 		return nationality.getDisplayCountry();
 	}
 
