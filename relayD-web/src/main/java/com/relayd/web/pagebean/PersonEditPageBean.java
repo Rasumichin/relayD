@@ -33,13 +33,11 @@ import com.relayd.web.bridge.PersonBridgeImpl;
 public class PersonEditPageBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private static final String PERSON_DIALOG_ID = "personDialog";
-
 	private PersonBridge personBridge;
 
-	private Person workingPerson = null;
+	Person workingPerson = null;
 
-	private boolean isNewPerson = false;
+	boolean isNewPerson = false;
 
 	private List<Locale> nationalities;
 
@@ -52,27 +50,35 @@ public class PersonEditPageBean implements Serializable {
 	}
 
 	public void openDialogForCreatePerson() {
-		workingPerson = Person.newInstance();
+		workingPerson = createNewPerson();
 		isNewPerson = true;
 		openDialog();
 	}
 
+	Person createNewPerson() {
+		return Person.newInstance();
+	}
+
 	public void openDialogFor(UUID uuid) {
-		workingPerson = getBridge().get(uuid);
+		workingPerson = getPerson(uuid);
 		isNewPerson = false;
 		openDialog();
 	}
 
-	private void openDialog() {
-		Map<String, Object> options = createOptions();
-		RequestContext.getCurrentInstance().openDialog(PERSON_DIALOG_ID, options, null);
+	Person getPerson(UUID uuid) {
+		return getBridge().get(uuid);
 	}
 
-	private Map<String, Object> createOptions() {
+	void openDialog() {
+		Map<String, Object> options = createDialogOptions();
+		RequestContext.getCurrentInstance().openDialog(NavigationConstants.PERSON_DIALOG_ID, options, null);
+	}
+
+	Map<String, Object> createDialogOptions() {
 		Map<String, Object> options = new HashMap<String, Object>();
 		options.put("modal", true);
-		options.put("width", 640);
-		options.put("height", 340);
+		options.put("width", 400);
+		options.put("height", 320);
 		options.put("contentWidth", "100%");
 		options.put("contentHeight", "100%");
 		options.put("headerElement", "customheader");
@@ -80,19 +86,23 @@ public class PersonEditPageBean implements Serializable {
 	}
 
 	public void save() {
+		persistPerson();
+		closeDialog();
+	}
+
+	void persistPerson() {
 		if (isNewPerson) {
 			getBridge().create(workingPerson);
 		} else {
 			getBridge().update(workingPerson);
 		}
-		closeDialog();
 	}
 
 	public void cancel() {
 		closeDialog();
 	}
 
-	private void closeDialog() {
+	void closeDialog() {
 		RequestContext.getCurrentInstance().closeDialog(workingPerson);
 	}
 
@@ -158,6 +168,11 @@ public class PersonEditPageBean implements Serializable {
 
 	public String getDatePatttern() {
 		return FormatConstants.DATE_FORMAT_ISO;
+	}
+
+	public void saveAndNext() {
+		persistPerson();
+		workingPerson = createNewPerson();
 	}
 
 	// TODO -schmollc- ab hier in eine eigene Klasse stecken!
