@@ -29,6 +29,9 @@ public class Email implements Serializable {
 		if (email == null) {
 			throw new IllegalArgumentException("[email] must not be 'null'.");
 		}
+		if (!email.trim().isEmpty() && !email.contains("@")) {
+			throw new IllegalArgumentException("[email] must has a '@'.");
+		}
 	}
 
 	@Override
