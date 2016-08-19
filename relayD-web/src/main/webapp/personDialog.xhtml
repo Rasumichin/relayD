@@ -1,84 +1,130 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:p="http://primefaces.org/ui"
-    xmlns:f="http://java.sun.com/jsf/core">
-     
-    <h:head>
-        <title>Person</title>
-        <style type="text/css">
-            .ui-widget {
-                font-size: 90%;
-            }
-        </style>
-    </h:head>
-    
-   	<h:body>
-		<h:form id="form">
-			<p:growl id="growl" showDetail="true"/>
-			  
-			<h:panelGrid columns="2" cellpadding="5">
-				<p:outputLabel for="forename" value="Forename:" />
-				<p:inputText id="forename" value="#{personEditPageBean.forename}">
-					<f:converter converterId="com.relayd.web.converter.ForenameValueObjectConverter" />
-				</p:inputText>		
-	
-				<p:outputLabel for="surename" value="Surename:" />
-				<p:inputText id="surename" value="#{personEditPageBean.surename}">
-					<f:converter converterId="com.relayd.web.converter.SurenameValueObjectConverter" />
-				</p:inputText>		
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
 
-				<p:outputLabel for="birthday" value="Birthday:" />
-				<p:calendar  id="birthday" value="#{personEditPageBean.birthday}" showOn="button" pattern="#{personEditPageBean.datePatttern}" effect="fold">
-					<f:converter converterId="com.relayd.web.converter.BirthdayValueObjectConverter" />
-				</p:calendar >
+<h:head>
+	<title>Person</title>
+	<style type="text/css">
+.ui-widget {
+	font-size: 90%;
+}
+</style>
+</h:head>
 
-				<p:outputLabel for="email" value="Email:" />
-				<p:inputText id="email" value="#{personEditPageBean.email}">
-					<f:converter converterId="com.relayd.web.converter.EmailValueObjectConverter" />
-				</p:inputText>		
-				
-				<p:outputLabel for="nationality" value="Nationality:" />
-	            <p:selectOneMenu id="nationality" value="#{personEditPageBean.nationality}" var="entry" converter="com.relayd.web.converter.NationalityValueObjectConverter" style="width:150px">
-	                <f:selectItem itemLabel="Select Country" itemValue="" noSelectionOption="true"/>
-	                <f:selectItems value="#{personEditPageBean.nationalities}" />
-	                	<p:column>
+<h:body>
+	<h:form id="form">
+		<p:growl
+			id="growl"
+			showDetail="true" />
+
+		<h:panelGrid
+			columns="2"
+			cellpadding="5">
+			<p:outputLabel
+				for="forename"
+				value="Forename:" />
+			<p:inputText
+				id="forename"
+				value="#{personEditPageBean.forename}">
+				<f:converter converterId="com.relayd.web.converter.ForenameValueObjectConverter" />
+			</p:inputText>
+
+			<p:outputLabel
+				for="surename"
+				value="Surename:" />
+			<p:inputText
+				id="surename"
+				value="#{personEditPageBean.surename}">
+				<f:converter converterId="com.relayd.web.converter.SurenameValueObjectConverter" />
+			</p:inputText>
+
+			<p:outputLabel
+				for="birthday"
+				value="Birthday:" />
+			<p:calendar
+				id="birthday"
+				value="#{personEditPageBean.birthday}"
+				showOn="button"
+				pattern="#{personEditPageBean.datePatttern}"
+				effect="fold">
+				<f:converter converterId="com.relayd.web.converter.BirthdayValueObjectConverter" />
+			</p:calendar>
+
+			<p:outputLabel
+				for="email"
+				value="Email:" />
+			<p:inputText
+				id="email"
+				value="#{personEditPageBean.email}">
+				<f:converter converterId="com.relayd.web.converter.EmailValueObjectConverter" />
+			</p:inputText>
+
+			<p:outputLabel
+				for="nationality"
+				value="Nationality:" />
+			<p:selectOneMenu
+				id="nationality"
+				value="#{personEditPageBean.nationality}"
+				var="entry"
+				converter="com.relayd.web.converter.NationalityValueObjectConverter"
+				style="width:150px">
+				<f:selectItem
+					itemLabel="Select Country"
+					itemValue=""
+					noSelectionOption="true" />
+				<f:selectItems value="#{personEditPageBean.nationalities}" />
+				<p:column>
 							#{entry.country}
 						</p:column>
-						<p:column>
+				<p:column>
 							#{entry.displayCountry}
 						</p:column>
 
-	            </p:selectOneMenu>
+			</p:selectOneMenu>
 
-				<p:outputLabel for="shirtsize" value="Shirtsize:" />
-	            <p:selectOneMenu id="shirtsize" value="#{personEditPageBean.shirtsize}" var="entry" style="width:150px">
-	                <f:selectItem itemLabel="Select Shirtsize" itemValue="" />
-	                <f:selectItems value="#{personEditPageBean.shirtsizes}" var="shirtsize" itemLabel="#{shirtsize.description}" itemValue="#{shirtsize}"/>
-						<p:column>
+			<p:outputLabel
+				for="shirtsize"
+				value="Shirtsize:" />
+			<p:selectOneMenu
+				id="shirtsize"
+				value="#{personEditPageBean.shirtsize}"
+				var="entry"
+				style="width:150px">
+				<f:selectItem
+					itemLabel="Select Shirtsize"
+					itemValue="" />
+				<f:selectItems
+					value="#{personEditPageBean.shirtsizes}"
+					var="shirtsize"
+					itemLabel="#{shirtsize.description}"
+					itemValue="#{shirtsize}" />
+				<p:column>
 							#{entry.description}
 						</p:column>
-				</p:selectOneMenu>	          
+			</p:selectOneMenu>
 
-			</h:panelGrid>
+		</h:panelGrid>
 
 		<p:commandButton
 			value="Save"
 			update="form"
 			actionListener="#{personEditPageBean.save}"
-			icon="ui-icon-check" 
-			style="float:left;"/>
+			icon="ui-icon-check"
+			style="float:left;" />
 		<p:commandButton
 			value="Save and Next"
 			update="form"
 			actionListener="#{personEditPageBean.saveAndNext}"
-			icon="ui-icon-check" 
-			style="float:left;"/>
+			icon="ui-icon-check"
+			style="float:left;" />
 		<p:commandButton
 			value="Cancel"
 			actionListener="#{personBrowsePageBean.cancelEditDialog}"
 			icon="ui-icon-close"
 			style="float:right;" />
-	</h:form>    
-	</h:body>
+	</h:form>
+</h:body>
 </html>
