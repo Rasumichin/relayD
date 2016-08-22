@@ -105,7 +105,6 @@ public class PersonBrowsePageBean {
 	public void remove(@SuppressWarnings("unused") ActionEvent actionEvent) {
 		System.out.println("Removed");
 		// TODO -ALL- Abprüfung auf selektion passiert... wie?
-		// TODO -schmollc- Die Gui refresht nach dem remove nicht.
 		personBridge.remove(getSelectedPerson());
 		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Removed!", getSelectedPerson().toString());
 		FacesContext.getCurrentInstance().addMessage(null, message);
