@@ -11,7 +11,6 @@ import org.junit.rules.ExpectedException;
  * @since   29.03.2016
  * status   initial
  */
-// TODO -schmollc- Hier muss noch mehr Musik rein.(Mail Pattern)
 public class EmailTest {
 
 	// @formatter:off
