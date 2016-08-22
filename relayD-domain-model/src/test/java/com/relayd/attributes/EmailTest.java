@@ -32,7 +32,7 @@ public class EmailTest {
 	}
 
 	@Test
-	public void testCreateObject_WithWihtSpaceValue() {
+	public void testCreateObject_WithWihteSpaceValue() {
 		String value = "   ";
 		Email email = Email.newInstance(value);
 
@@ -50,7 +50,7 @@ public class EmailTest {
 	@Test
 	public void testCreateObject_WithInvalidEmailAdress() {
 		expectedException.expect(IllegalArgumentException.class);
-		expectedException.expectMessage("[email] must has a '@'.");
+		expectedException.expectMessage("[email] not valid format!");
 
 		String value = INVALID_MAIL_FROM_JUSTUS_JONAS;
 		Email email = Email.newInstance(value);
@@ -78,7 +78,7 @@ public class EmailTest {
 
 		hashCode = sut.hashCode();
 
-		assertEquals(31, hashCode);
+		assertEquals("[hashCode] not correct!", 31, hashCode);
 	}
 
 	@Test
@@ -87,7 +87,7 @@ public class EmailTest {
 
 		boolean result = sut.equals(sut);
 
-		assertTrue(result);
+		assertTrue("values should be equal!", result);
 	}
 
 	@Test
@@ -96,7 +96,7 @@ public class EmailTest {
 
 		boolean result = sut.equals(null);
 
-		assertFalse(result);
+		assertFalse("values should not be equal!", result);
 	}
 
 	@Test
@@ -105,7 +105,7 @@ public class EmailTest {
 
 		boolean result = sut.equals(new String());
 
-		assertFalse(result);
+		assertFalse("values should not be equal!", result);
 	}
 
 	@Test
@@ -116,7 +116,7 @@ public class EmailTest {
 
 		boolean result = sut.equals(secondName);
 
-		assertFalse(result);
+		assertFalse("values should not be equal!", result);
 	}
 
 	@Test
@@ -128,7 +128,7 @@ public class EmailTest {
 
 		boolean result = sut.equals(secondName);
 
-		assertTrue(result);
+		assertTrue("values should be equal!", result);
 	}
 
 	@Test
@@ -138,7 +138,7 @@ public class EmailTest {
 
 		boolean result = sut.equals(secondName);
 
-		assertFalse(result);
+		assertFalse("values should not be equal!", result);
 	}
 
 	@Test
@@ -148,7 +148,18 @@ public class EmailTest {
 
 		boolean result = sut.equals(secondName);
 
-		assertTrue(result);
+		assertTrue("values should be equal!", result);
 	}
 
+	@Test
+	public void testIsValid_WithValidValue() {
+		boolean result = Email.isValid(VALID_MAIL_FROM_JUSTUS_JONAS);
+		assertTrue("email should be valid!", result);
+	}
+
+	@Test
+	public void testIsValid_WithInvalidValue() {
+		boolean result = Email.isValid(INVALID_MAIL_FROM_JUSTUS_JONAS);
+		assertFalse("email should be invalid!", result);
+	}
 }

@@ -12,6 +12,8 @@ public class Email implements Serializable {
 
 	String value = "";
 
+	private static String pattern = "^[_A-Za-z0-9-+]+(.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(.[A-Za-z0-9]+)*(.[A-Za-z]{2,})$";
+
 	private Email(String email) {
 		super();
 		value = email;
@@ -29,8 +31,13 @@ public class Email implements Serializable {
 		if (email == null) {
 			throw new IllegalArgumentException("[email] must not be 'null'.");
 		}
-		if (!email.trim().isEmpty() && !email.contains("@")) {
-			throw new IllegalArgumentException("[email] must has a '@'.");
+
+		if (email.trim().isEmpty()) {
+			return;
+		}
+
+		if (!isValid(email)) {
+			throw new IllegalArgumentException("[email] not valid format!");
 		}
 	}
 
@@ -67,5 +74,10 @@ public class Email implements Serializable {
 			return false;
 		}
 		return true;
+	}
+
+	public static boolean isValid(String aString) {
+		boolean result = aString.matches(pattern);
+		return result;
 	}
 }
