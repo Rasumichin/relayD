@@ -18,8 +18,6 @@ import com.relayd.attributes.Surename;
  * @author  schmollc (Christian@relayD.de)
  * @since   23.03.2016
  * status   initial
- *
- * TODO -schmollc- Correct messages to english language
  */
 public class Relay extends ArrayList<Person> {
 
@@ -48,7 +46,7 @@ public class Relay extends ArrayList<Person> {
 
 	public void addPerson(Person person) {
 		if (isFull()) {
-			throw new IndexOutOfBoundsException("Nicht mehr als " + MAX_MEMBER + " Teilnehmer moeglich.");
+			throw new IndexOutOfBoundsException("No more than " + MAX_MEMBER + " participants possible!");
 		}
 		add(person);
 	}
