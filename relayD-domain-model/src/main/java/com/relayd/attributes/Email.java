@@ -32,10 +32,6 @@ public class Email implements Serializable {
 			throw new IllegalArgumentException("[email] must not be 'null'.");
 		}
 
-		if (email.trim().isEmpty()) {
-			return;
-		}
-
 		if (!isValid(email)) {
 			throw new IllegalArgumentException("[email] not valid format!");
 		}
@@ -77,6 +73,10 @@ public class Email implements Serializable {
 	}
 
 	public static boolean isValid(String aString) {
+		if (aString.trim().isEmpty()) {
+			return true;
+		}
+
 		boolean result = aString.matches(pattern);
 		return result;
 	}
