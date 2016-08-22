@@ -1,44 +1,55 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html 	xmlns="http://www.w3.org/1999/xhtml"
-      	xmlns:h="http://java.sun.com/jsf/html"
-		xmlns:p="http://primefaces.org/ui"
-		xmlns:f="http://java.sun.com/jsf/core"
-		xmlns:fn="http://java.sun.com/jsp/jstl/functions"
-	>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 
 <h:head>
-	<link rel="stylesheet" href="./styles/relayd.css"></link>
+	<link
+		rel="stylesheet"
+		href="./styles/relayd.css"></link>
 </h:head>
 <h:body>
 
 	<div class="divStartHeader">
-		<h3>Welcome to the REAL relay D!</h3>
+	<h3>Welcome to the REAL relay D!</h3>
 	</div>
 
 	<h:form id="form">
-		<p:growl id="growl" showDetail="true"/>  
-	
-		<p/>
-		
+		<p:growl
+			id="growl"
+			showDetail="true" />
+
+		<p />
+
 		<p:themeSwitcher style="width:150px">
-			<f:selectItem itemLabel="Choose Theme" itemValue="" />
+			<f:selectItem
+				itemLabel="Choose Theme"
+				itemValue="" />
 			<f:selectItems value="#{relayEventBrowsePageBean.themes}" />
 		</p:themeSwitcher>
-		
+
 		<p:themeSwitcher>
-			<f:selectItem itemLabel="Choose Theme" itemValue="" />
-			<f:selectItems value="#{relayEventBrowsePageBean.themes}" var="theme"
-				itemLabel="#{theme.name}" itemValue="#{theme}"/>
-				<p:column>
-					<p:graphicImage value="/images/themes/#{theme.image}"/>
-				</p:column>
+			<f:selectItem
+				itemLabel="Choose Theme"
+				itemValue="" />
+			<f:selectItems
+				value="#{relayEventBrowsePageBean.themes}"
+				var="theme"
+				itemLabel="#{theme.name}"
+				itemValue="#{theme}" />
+			<p:column>
+				<p:graphicImage value="/images/themes/#{theme.image}" />
+			</p:column>
 			<p:column>
 				#{t.name}
 			</p:column>
 		</p:themeSwitcher>
- 
-		
+
+
 		<p:dataTable
 			var="relayEvent"
 			id="relayEventTable"
@@ -46,42 +57,61 @@
 			selection="#{relayEventBrowsePageBean.selectedRelayEvent}"
 			rowKey="#{relayEvent.UUID}"
 			resizableColumns="true">
-	     	<f:facet name="header">
+			<f:facet name="header">
 	        	List of Events
 	    	</f:facet>
-	    	
-	    	<p:column selectionMode="single"/>
-	    	
-			<p:column headerText="Date" width = "250">
+
+			<p:column selectionMode="single" />
+
+			<p:column
+				headerText="Date"
+				width="250">
 				<h:outputText value="#{relayEvent.eventDay}" />
 			</p:column>
-	
+
 			<p:column headerText="Event">
 				<h:outputText value="#{relayEvent.name}" />
 			</p:column>
-			 <f:facet name="footer">
+			<f:facet name="footer">
 	        	In total there are #{fn:length(relayEventBrowsePageBean.relayEvents)} events.
 	    	</f:facet>
 		</p:dataTable>
-	
-	
+
+
 		<p:toolbar>
-	        <f:facet name="left">
-	            <p:commandButton value="Add" update="form"  actionListener="#{relayEventBrowsePageBean.add}" icon="ui-icon-document">
-	   				<p:ajax event="dialogReturn" listener="#{relayEventBrowsePageBean.onEditClosed}" update="form" />
-    			</p:commandButton>
-	            
-	            <p:commandButton value="Edit" update="form"  actionListener="#{relayEventBrowsePageBean.edit}" icon="ui-icon-folder-open">
-	            	<p:ajax event="dialogReturn" listener="#{relayEventBrowsePageBean.onEditClosed}" update="form" />
-    			</p:commandButton>
-	            <span class="ui-separator">
-                	<span class="ui-icon ui-icon-grip-dotted-vertical" />
-	            </span>
-	            <p:commandButton value="Remove" update="form"  actionListener="#{relayEventBrowsePageBean.remove}" icon="ui-icon-folder-open">
-	            </p:commandButton>
-	        </f:facet>
-        </p:toolbar>
-		
+			<f:facet name="left">
+				<p:commandButton
+					value="Add"
+					update="form"
+					actionListener="#{relayEventBrowsePageBean.add}"
+					icon="ui-icon-document">
+					<p:ajax
+						event="dialogReturn"
+						listener="#{relayEventBrowsePageBean.onEditClosed}"
+						update="form" />
+				</p:commandButton>
+
+				<p:commandButton
+					value="Edit"
+					update="form"
+					actionListener="#{relayEventBrowsePageBean.edit}"
+					icon="ui-icon-folder-open">
+					<p:ajax
+						event="dialogReturn"
+						listener="#{relayEventBrowsePageBean.onEditClosed}"
+						update="form" />
+				</p:commandButton>
+				<span class="ui-separator"> <span class="ui-icon ui-icon-grip-dotted-vertical" />
+				</span>
+				<p:commandButton
+					value="Remove"
+					update="form"
+					actionListener="#{relayEventBrowsePageBean.remove}"
+					icon="ui-icon-folder-open">
+				</p:commandButton>
+			</f:facet>
+		</p:toolbar>
+
 	</h:form>
 </h:body>
 </html>
