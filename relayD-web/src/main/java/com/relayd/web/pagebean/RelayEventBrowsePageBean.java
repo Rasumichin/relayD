@@ -95,10 +95,6 @@ public class RelayEventBrowsePageBean implements Serializable {
 		return resourceUri;
 	}
 
-	public void refresh() {
-		// TODO -schmollc- Mmm.. Erstmal eine Lösung zum refresh...
-	}
-
 	public void add(@SuppressWarnings("unused") ActionEvent actionEvent) {
 		relayEventEditPageBean.openDialogForCreateRelayEvent();
 	}
