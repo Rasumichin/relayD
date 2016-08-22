@@ -1,32 +1,48 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:p="http://primefaces.org/ui"
-    xmlns:f="http://java.sun.com/jsf/core">
-     
-    <h:head>
-        <title>Relay</title>
-        <style type="text/css">
-            .ui-widget {
-                font-size: 90%;
-            }
-        </style>
-    </h:head>
-    
-   	<h:body>
-		<h:form id="form">
-			<p:growl id="growl" showDetail="true"/>
-			  
-			<h:panelGrid columns="2" cellpadding="5">
-				<p:outputLabel for="relayname" value="Relayname:" />
-				<p:inputText id="relayname" value="#{relayEditPageBean.relayname}">
-					<f:converter converterId="com.relayd.web.converter.RelaynameValueObjectConverter" />
-				</p:inputText>		
-			</h:panelGrid>					
-			
-		    <p:commandButton value="Save" update="form" actionListener="#{relayEditPageBean.save}" icon="ui-icon-check" />
-		    <p:commandButton value="Cancel" actionListener="#{relayEditPageBean.cancel}" icon="ui-icon-check" />
-	
-		</h:form>    
-	</h:body>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title>Relay</title>
+	<style type="text/css">
+.ui-widget {
+	font-size: 90%;
+}
+</style>
+</h:head>
+
+<h:body>
+	<h:form id="form">
+		<p:growl
+			id="growl"
+			showDetail="true" />
+
+		<h:panelGrid
+			columns="2"
+			cellpadding="5">
+			<p:outputLabel
+				for="relayname"
+				value="Relayname:" />
+			<p:inputText
+				id="relayname"
+				value="#{relayEditPageBean.relayname}">
+				<f:converter converterId="com.relayd.web.converter.RelaynameValueObjectConverter" />
+			</p:inputText>
+		</h:panelGrid>
+
+		<p:commandButton
+			value="Save"
+			update="form"
+			actionListener="#{relayEditPageBean.save}"
+			icon="ui-icon-check" />
+		<p:commandButton
+			value="Cancel"
+			actionListener="#{relayEditPageBean.cancel}"
+			icon="ui-icon-check" />
+
+	</h:form>
+</h:body>
 </html>
