@@ -2,6 +2,8 @@ package com.relayd.web.converter;
 
 import static org.junit.Assert.*;
 
+import javax.faces.convert.ConverterException;
+
 import org.junit.Test;
 
 import com.relayd.attributes.Email;
@@ -14,25 +16,31 @@ import com.relayd.attributes.Email;
 public class EmailValueObjectConverterTest {
 	private EmailValueObjectConverter sut = new EmailValueObjectConverter();
 
-	private final String name = "Justus.Jonas@rockyBeach.com";
+	private final String VALID_STRING = "Justus.Jonas@rockyBeach.com";
+	private final String INVALID_STRING = "Justus.JonasrockyBeach.com";
 
 	@Test
-	public void testGetAsObject() {
-		Object result = sut.getAsObject(null, null, name);
+	public void testGetAsObject_WithValidString() {
+		Object result = sut.getAsObject(null, null, VALID_STRING);
 
 		assertNotNull("Expected valid instance.", result);
 		assertEquals(Email.class, result.getClass());
 		Email email = (Email) result;
-		assertEquals("Attribute not correct.", name, email.toString());
+		assertEquals("Attribute not correct.", VALID_STRING, email.toString());
+	}
+
+	@Test(expected = ConverterException.class)
+	public void testGetAsObject_WithInvalidString() {
+		sut.getAsObject(null, null, INVALID_STRING);
 	}
 
 	@Test
 	public void testGetAsString() {
-		Email email = Email.newInstance(name);
+		Email email = Email.newInstance(VALID_STRING);
 
 		String result = sut.getAsString(null, null, email);
 
 		assertNotNull("Expected valid instance.", result);
-		assertEquals("Attribute not correct.", name, result);
+		assertEquals("Attribute not correct.", VALID_STRING, result);
 	}
 }
