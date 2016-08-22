@@ -1,6 +1,7 @@
 package com.relayd.web.pagebean;
 
 import static org.junit.Assert.*;
+import static org.mockito.Matchers.*;
 
 import java.time.LocalDate;
 import java.util.Locale;
@@ -23,6 +24,7 @@ import com.relayd.attributes.Forename;
 import com.relayd.attributes.Shirtsize;
 import com.relayd.attributes.Surename;
 import com.relayd.web.bridge.PersonBridge;
+import com.relayd.web.bridge.ValidationResultImpl;
 
 import static org.mockito.Mockito.*;
 
@@ -47,6 +49,7 @@ public class PersonEditPageBeanTest {
 	public void setUp() {
 		doNothing().when(sut).openDialog();
 		doNothing().when(sut).closeDialog();
+		doNothing().when(sut).showError();
 	}
 
 	@Test
@@ -79,15 +82,20 @@ public class PersonEditPageBeanTest {
 
 	@Test
 	public void testSave() {
+		doReturn(new ValidationResultImpl("")).when(personBridge).validateEMail(any(Person.class));
 
 		sut.save();
 
 		verify(sut).persistPerson();
 		verify(sut).closeDialog();
+
+		verify(sut, never()).showError();
 	}
 
 	@Test
 	public void testSaveAndNext_ForNewPerson() {
+		doReturn(new ValidationResultImpl("")).when(personBridge).validateEMail(any(Person.class));
+
 		sut.openDialogForCreatePerson();
 
 		sut.saveAndNext();
@@ -198,10 +206,22 @@ public class PersonEditPageBeanTest {
 	}
 
 	@Test
-	public void testCreateOptions() {
+	public void testCreateDialogOptions() {
 		Map<String, Object> optionMap = sut.createDialogOptions();
 
 		int size = optionMap.size();
 		assertEquals("[optionMap] size not correct!", 6, size);
+	}
+
+	@Test
+	public void testSave_ForTwoIdenticalEmails() {
+		doReturn(new ValidationResultImpl("Exits!")).when(personBridge).validateEMail(any(Person.class));
+
+		sut.save();
+
+		verify(sut).showError();
+
+		verify(sut, never()).persistPerson();
+		verify(sut, never()).closeDialog();
 	}
 }

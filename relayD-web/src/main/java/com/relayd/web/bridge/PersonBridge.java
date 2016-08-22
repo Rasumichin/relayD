@@ -15,13 +15,15 @@ import com.relayd.Person;
  */
 public interface PersonBridge {
 
-	public List<Person> all();
+	List<Person> all();
 
-	public void update(Person person);
+	void update(Person person);
 
-	public void create(Person person);
+	void create(Person person);
 
-	public Person get(UUID uuid);
+	Person get(UUID uuid);
 
-	public void remove(Person person);
+	void remove(Person person);
+
+	ValidationResult validateEMail(Person aNewPerson);
 }

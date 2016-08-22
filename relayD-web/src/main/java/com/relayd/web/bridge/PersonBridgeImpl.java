@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import com.relayd.Person;
+import com.relayd.attributes.Email;
 import com.relayd.ejb.GatewayType;
 import com.relayd.ejb.PersonGateway;
 import com.relayd.ejb.PersonGatewayFactory;
@@ -29,8 +30,8 @@ public class PersonBridgeImpl implements PersonBridge {
 	}
 
 	@Override
-	public void update(Person person) {
-		gateway.set(person);
+	public void update(Person aPerson) {
+		gateway.set(aPerson);
 	}
 
 	@Override
@@ -46,5 +47,20 @@ public class PersonBridgeImpl implements PersonBridge {
 	@Override
 	public void remove(Person person) {
 		gateway.remove(person.getUUID());
+	}
+
+	@Override
+	public ValidationResult validateEMail(Person aNewPerson) {
+		for (Person person : all()) {
+			if (emailsEqual(aNewPerson, person)) {
+				return new ValidationResultImpl("EMail does exist!");
+			}
+		}
+		return new ValidationResultImpl("");
+	}
+
+	private boolean emailsEqual(Person aNewPerson, Person person) {
+		Email email = person.getEmail();
+		return email != null && email.equals(aNewPerson.getEmail());
 	}
 }

@@ -8,8 +8,10 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import org.primefaces.context.RequestContext;
 
@@ -22,6 +24,7 @@ import com.relayd.attributes.Shirtsize;
 import com.relayd.attributes.Surename;
 import com.relayd.web.bridge.PersonBridge;
 import com.relayd.web.bridge.PersonBridgeImpl;
+import com.relayd.web.bridge.ValidationResult;
 
 /**
  * @author schmollc (Christian@relayd.de)
@@ -86,8 +89,17 @@ public class PersonEditPageBean implements Serializable {
 	}
 
 	public void save() {
-		persistPerson();
-		closeDialog();
+		// TODO -schmollc- Sollte die Validierung lieber in der Bridge passieren?
+		// Denn wenn die Validierung ok war wieso sollte ich dann das Object nochmal der Bridge geben?
+		// Es könnte direkt weitermachen....
+
+		ValidationResult validateResult = getBridge().validateEMail(workingPerson);
+		if (validateResult.getMessage().isEmpty()) {
+			persistPerson();
+			closeDialog();
+		} else {
+			showError();
+		}
 	}
 
 	void persistPerson() {
@@ -96,6 +108,11 @@ public class PersonEditPageBean implements Serializable {
 		} else {
 			getBridge().update(workingPerson);
 		}
+	}
+
+	public void saveAndNext() {
+		persistPerson();
+		workingPerson = createNewPerson();
 	}
 
 	public void cancel() {
@@ -170,9 +187,10 @@ public class PersonEditPageBean implements Serializable {
 		return FormatConstants.DATE_FORMAT_ISO;
 	}
 
-	public void saveAndNext() {
-		persistPerson();
-		workingPerson = createNewPerson();
+	void showError() {
+		// TODO -schmollc- wie im ObjectConverter sollte die Nachricht aus dem ValidationResult Object kommen!
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Email not uniqe!", null);
+		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
 
 	// TODO -schmollc- ab hier in eine eigene Klasse stecken!
