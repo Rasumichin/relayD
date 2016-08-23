@@ -5,12 +5,14 @@ import static org.junit.Assert.*;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Locale;
+import java.util.UUID;
 
 import org.junit.Test;
 
 import com.relayd.attributes.Birthday;
 import com.relayd.attributes.Email;
 import com.relayd.attributes.Forename;
+import com.relayd.attributes.Relayname;
 import com.relayd.attributes.Shirtsize;
 import com.relayd.attributes.Surename;
 
@@ -30,115 +32,114 @@ public class PersonTest {
 		sut.setShirtsize(Shirtsize.HerrenM);
 		sut.setNationality(Locale.GERMANY);
 		sut.setEmail(Email.newInstance("Jonas.Justus@rockyBeach.com"));
+		sut.setRelayname(Relayname.newInstance("Die 4 ????"));
 
 		String personAsString = sut.toString();
 
-		assertEquals("Justus Jonas, 1956-02-17, HerrenM, Germany, Jonas.Justus@rockyBeach.com", personAsString);
+		assertEquals("Justus Jonas, 1956-02-17, HerrenM, Germany, Jonas.Justus@rockyBeach.com, Die 4 ????", personAsString);
 	}
 
 	@Test
-	public void testChangeSurename() {
-		final Surename FIRST_CHOICE = Surename.newInstance("McFly");
-		final Surename SECOND_CHOICE = Surename.newInstance("Kline");
+	public void testSurename() {
+		Surename expected = Surename.newInstance("Justus");
 
 		Person sut = Person.newInstance();
-		Surename surename = sut.getSurename();
 
-		assertNull("Erwarte keine gueltige Instanz.", surename);
+		sut.setSurename(expected);
 
-		sut.setSurename(FIRST_CHOICE);
+		Surename result = sut.getSurename();
 
-		surename = sut.getSurename();
-
-		assertNotNull(surename);
-		assertEquals("Erwarte den gesetzten Surename.", FIRST_CHOICE, surename);
-
-		sut.setSurename(SECOND_CHOICE);
-
-		surename = sut.getSurename();
-
-		assertNotNull(surename);
-		assertEquals("Erwarte den neu gesetzten Surename.", SECOND_CHOICE, surename);
+		assertEquals("[surename] not correct!", expected, result);
 	}
 
 	@Test
-	public void testChangeForename() {
-		final Forename FIRST_CHOICE = Forename.newInstance("Marty");
-		final Forename SECOND_CHOICE = Forename.newInstance("Celvin");
+	public void testForename() {
+		Forename expected = Forename.newInstance("Jonas");
 
 		Person sut = Person.newInstance();
-		Forename forename = sut.getForename();
 
-		assertNull("Erwarte keine gueltige Instanz.", forename);
+		sut.setForename(expected);
 
-		sut.setForename(FIRST_CHOICE);
+		Forename result = sut.getForename();
 
-		forename = sut.getForename();
-
-		assertNotNull("Erwarte gueltige Instanz.", forename);
-		assertEquals("Erwarte den gesetzten Forename.", FIRST_CHOICE, forename);
-
-		sut.setForename(SECOND_CHOICE);
-
-		forename = sut.getForename();
-
-		assertNotNull(forename);
-		assertEquals("Erwarte den neu gesetzten Forename.", SECOND_CHOICE, forename);
+		assertEquals("[forename] not correct!", expected, result);
 	}
 
 	@Test
-	public void testChangeShirtsize() {
-		final Shirtsize HERREN_XXL = Shirtsize.HerrenXXL;
+	public void testShirtsize() {
+		Shirtsize expected = Shirtsize.HerrenXXL;
+
 		Person sut = Person.newInstance();
 
-		Shirtsize shirtsize = sut.getShirtsize();
+		sut.setShirtsize(expected);
 
-		assertNull("Erwarte keine gueltige Instanz.", shirtsize);
+		Shirtsize result = sut.getShirtsize();
 
-		sut.setShirtsize(HERREN_XXL);
-
-		shirtsize = sut.getShirtsize();
-		assertEquals("Shirtsize ist nicht korrekt.", HERREN_XXL, shirtsize);
+		assertEquals("[shirtsize] not correct!", expected, result);
 	}
 
 	@Test
-	public void testChangeNationality() {
-		final Locale GERMANY = Locale.GERMANY;
+	public void testNationality() {
+		Locale expected = Locale.GERMANY;
+
 		Person sut = Person.newInstance();
 
-		Locale nationality = sut.getNationality();
+		sut.setNationality(expected);
 
-		assertNull("Erwarte keine gueltige Instanz.", nationality);
+		Locale result = sut.getNationality();
 
-		sut.setNationality(GERMANY);
-
-		nationality = sut.getNationality();
-		assertEquals("Nationality ist nicht korrekt.", GERMANY, nationality);
+		assertEquals("[nationality] not correct!", expected, result);
 	}
 
 	@Test
-	public void testChangeEmail() {
-		final Email FIRST_CHOICE = Email.newInstance("Justus.Jonas@rockyBeach.com");
-		final Email SECOND_CHOICE = Email.newInstance("ErsterDetektiv@dieDrei.de");
+	public void testBirthday() {
+		Birthday expected = Birthday.newInstance(LocalDate.of(1972, Month.APRIL, 23));
 
 		Person sut = Person.newInstance();
-		Email email = sut.getEmail();
 
-		assertNull("Erwarte keine gueltige Instanz.", email);
+		sut.setBirthday(expected);
 
-		sut.setEmail(FIRST_CHOICE);
+		Birthday result = sut.getBirthday();
 
-		email = sut.getEmail();
-
-		assertNotNull(email);
-		assertEquals("Erwarte den gesetzten Surename.", FIRST_CHOICE, email);
-
-		sut.setEmail(SECOND_CHOICE);
-
-		email = sut.getEmail();
-
-		assertNotNull(email);
-		assertEquals("Erwarte den neu gesetzten Surename.", SECOND_CHOICE, email);
+		assertEquals("[birthday] not correct!", expected, result);
 	}
 
+	@Test
+	public void testEmail() {
+		Email expected = Email.newInstance("Justus.Jonas@rockyBeach.com");
+
+		Person sut = Person.newInstance();
+
+		sut.setEmail(expected);
+
+		Email result = sut.getEmail();
+
+		assertEquals("[email] not correct!", expected, result);
+	}
+
+	@Test
+	public void testRelayname() {
+		Relayname expected = Relayname.newInstance("Die 4 ????");
+
+		Person sut = Person.newInstance();
+
+		sut.setRelayname(expected);
+
+		Relayname result = sut.getRelayname();
+
+		assertEquals("[relayname] not correct!", expected, result);
+	}
+
+	@Test
+	public void testUUID() {
+		UUID expected = UUID.randomUUID();
+
+		Person sut = Person.newInstance();
+
+		sut.setUUID(expected);
+
+		UUID result = sut.getUUID();
+
+		assertEquals("[uuid] not correct!", expected, result);
+	}
 }
