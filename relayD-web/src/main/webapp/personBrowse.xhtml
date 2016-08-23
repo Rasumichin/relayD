@@ -56,18 +56,18 @@
 			</p:column>
 
 			<p:column
+				headerText="Forename"
+				sortBy="#{person.forename}"
+				sortFunction="#{personBrowsePageBean.sortByForename}">
+				<h:outputText value="#{person.forename}" />
+			</p:column>
+
+			<p:column
 				headerText="Surename"
 				filterMatchMode="contains"
 				sortBy="#{person.surename}"
 				sortFunction="#{personBrowsePageBean.sortBySurename}">
 				<h:outputText value="#{person.surename}" />
-			</p:column>
-
-			<p:column
-				headerText="Forename"
-				sortBy="#{person.forename}"
-				sortFunction="#{personBrowsePageBean.sortByForename}">
-				<h:outputText value="#{person.forename}" />
 			</p:column>
 
 			<p:column
@@ -145,7 +145,6 @@
 					update="form"
 					actionListener="#{personBrowsePageBean.remove}" />
 				<p:commandButton
-					value="Edit"
 					update="personTable"
 					actionListener="#{personBrowsePageBean.edit}"
 					icon="ui-icon-folder-open">
