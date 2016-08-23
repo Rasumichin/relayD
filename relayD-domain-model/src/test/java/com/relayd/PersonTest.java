@@ -12,6 +12,7 @@ import org.junit.Test;
 import com.relayd.attributes.Birthday;
 import com.relayd.attributes.Email;
 import com.relayd.attributes.Forename;
+import com.relayd.attributes.Position;
 import com.relayd.attributes.Relayname;
 import com.relayd.attributes.Shirtsize;
 import com.relayd.attributes.Surename;
@@ -33,10 +34,11 @@ public class PersonTest {
 		sut.setNationality(Locale.GERMANY);
 		sut.setEmail(Email.newInstance("Jonas.Justus@rockyBeach.com"));
 		sut.setRelayname(Relayname.newInstance("Die 4 ????"));
+		sut.setPosition(Position.FIRST);
 
 		String personAsString = sut.toString();
 
-		assertEquals("Justus Jonas, 1956-02-17, HerrenM, Germany, Jonas.Justus@rockyBeach.com, Die 4 ????", personAsString);
+		assertEquals("Justus Jonas, 1956-02-17, HerrenM, Germany, Jonas.Justus@rockyBeach.com, Die 4 ????, FIRST", personAsString);
 	}
 
 	@Test
@@ -128,6 +130,19 @@ public class PersonTest {
 		Relayname result = sut.getRelayname();
 
 		assertEquals("[relayname] not correct!", expected, result);
+	}
+
+	@Test
+	public void testPosition() {
+		Position expected = Position.FOURTH;
+
+		Person sut = Person.newInstance();
+
+		sut.setPosition(expected);
+
+		Position result = sut.getPosition();
+
+		assertEquals("[position] not correct!", expected, result);
 	}
 
 	@Test

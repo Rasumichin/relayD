@@ -20,6 +20,7 @@ import com.relayd.Person;
 import com.relayd.attributes.Birthday;
 import com.relayd.attributes.Email;
 import com.relayd.attributes.Forename;
+import com.relayd.attributes.Position;
 import com.relayd.attributes.Relayname;
 import com.relayd.attributes.Shirtsize;
 import com.relayd.attributes.Surename;
@@ -47,10 +48,13 @@ public class PersonEditPageBean implements Serializable {
 
 	private List<Shirtsize> shirtsizes;
 
+	public List<Position> positions;
+
 	public PersonEditPageBean() {
 		personBridge = new PersonBridgeImpl();
 		fillAllNationalities();
 		fillShirtsizes();
+		fillPositions();
 	}
 
 	public void openDialogForCreatePerson() {
@@ -82,7 +86,7 @@ public class PersonEditPageBean implements Serializable {
 		Map<String, Object> options = new HashMap<String, Object>();
 		options.put("modal", true);
 		options.put("width", 400);
-		options.put("height", 350);
+		options.put("height", 380);
 		options.put("contentWidth", "100%");
 		options.put("contentHeight", "100%");
 		options.put("headerElement", "customheader");
@@ -130,6 +134,10 @@ public class PersonEditPageBean implements Serializable {
 
 	public List<Shirtsize> getShirtsizes() {
 		return shirtsizes;
+	}
+
+	public List<Position> getPositions() {
+		return positions;
 	}
 
 	public Forename getForename() {
@@ -188,6 +196,14 @@ public class PersonEditPageBean implements Serializable {
 		return workingPerson.getRelayname();
 	}
 
+	public void setPosition(Position aPosition) {
+		workingPerson.setPosition(aPosition);
+	}
+
+	public Position getPosition() {
+		return workingPerson.getPosition();
+	}
+
 	private PersonBridge getBridge() {
 		return personBridge;
 	}
@@ -222,6 +238,14 @@ public class PersonEditPageBean implements Serializable {
 			if (!"".equals(code) && !"".equals(name)) {
 				nationalities.add(locale);
 			}
+		}
+	}
+
+	void fillPositions() {
+		positions = new ArrayList<Position>();
+
+		for (Position position : Position.values()) {
+			positions.add(position);
 		}
 	}
 }

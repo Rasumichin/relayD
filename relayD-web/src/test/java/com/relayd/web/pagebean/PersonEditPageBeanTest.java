@@ -21,6 +21,7 @@ import com.relayd.Person;
 import com.relayd.attributes.Birthday;
 import com.relayd.attributes.Email;
 import com.relayd.attributes.Forename;
+import com.relayd.attributes.Position;
 import com.relayd.attributes.Relayname;
 import com.relayd.attributes.Shirtsize;
 import com.relayd.attributes.Surename;
@@ -212,6 +213,18 @@ public class PersonEditPageBeanTest {
 	}
 
 	@Test
+	public void testPosition() {
+		sut.openDialogForCreatePerson();
+		Position expected = Position.SECOND;
+
+		sut.setPosition(expected);
+
+		Position result = sut.getPosition();
+
+		assertEquals("[Position] not correct!", expected, result);
+	}
+
+	@Test
 	public void testGetDatePattern() {
 		String result = sut.getDatePatttern();
 
@@ -236,5 +249,13 @@ public class PersonEditPageBeanTest {
 
 		verify(sut, never()).persistPerson();
 		verify(sut, never()).closeDialog();
+	}
+
+	@Test
+	public void testFillPositions() {
+		// TODO -schmollc- Interessanter Fall. Wie teste ich ein verify im Constructor!!!
+		int size = sut.positions.size();
+
+		assertEquals("[positions] not correct!", 4, size);
 	}
 }

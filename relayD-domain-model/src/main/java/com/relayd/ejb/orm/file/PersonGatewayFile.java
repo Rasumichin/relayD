@@ -85,6 +85,7 @@ public class PersonGatewayFile implements PersonGateway {
 					person.setShirtsize(updatePerson.getShirtsize());
 					person.setEmail(updatePerson.getEmail());
 					person.setRelayname(updatePerson.getRelayname());
+					person.setPosition(updatePerson.getPosition());
 					break;
 				}
 			}

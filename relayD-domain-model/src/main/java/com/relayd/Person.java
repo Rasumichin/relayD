@@ -7,6 +7,7 @@ import java.util.UUID;
 import com.relayd.attributes.Birthday;
 import com.relayd.attributes.Email;
 import com.relayd.attributes.Forename;
+import com.relayd.attributes.Position;
 import com.relayd.attributes.Relayname;
 import com.relayd.attributes.Shirtsize;
 import com.relayd.attributes.Surename;
@@ -27,6 +28,7 @@ public class Person implements Serializable {
 	private Locale nationality = null; // TODO -schmollc- Anderen Attribute sind Fachobjekte, dies hier eine "API" Klasse. Warum kein Decorator einführen?
 	private Email email = null;
 	private Relayname relayname = null;
+	private Position position = null;
 
 	private Person() {
 		uuid = UUID.randomUUID();
@@ -114,9 +116,17 @@ public class Person implements Serializable {
 		return relayname;
 	}
 
+	public void setPosition(Position aPosition) {
+		position = aPosition;
+	}
+
+	public Position getPosition() {
+		return position;
+	}
+
 	@Override
 	public String toString() {
-		return getForename() + " " + getSurename() + ", " + getBirthday() + ", " + getShirtsize() + ", " + getDisplayCountry() + ", " + getEmail() + ", " + getRelayname();
+		return getForename() + " " + getSurename() + ", " + getBirthday() + ", " + getShirtsize() + ", " + getDisplayCountry() + ", " + getEmail() + ", " + getRelayname() + ", " + getPosition();
 	}
 
 	@Override

@@ -78,6 +78,11 @@
 			</p:column>
 
 			<p:column
+				headerText="Position">
+				<h:outputText value="#{person.position}" />
+			</p:column>
+
+			<p:column
 				headerText="Birthday"
 				sortBy="#{person.birthday}"
 				sortFunction="#{personBrowsePageBean.sortByBirthday}">
