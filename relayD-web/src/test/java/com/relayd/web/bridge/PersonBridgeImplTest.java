@@ -57,17 +57,32 @@ public class PersonBridgeImplTest {
 	private List<Person> listWithPersons() {
 		List<Person> somePersons = new ArrayList<Person>();
 
-		Person personOne = Person.newInstance();
-		personOne.setEmail(Email.newInstance(EMAIL_PETER));
+		Person personOneWithEmail = Person.newInstance();
+		personOneWithEmail.setEmail(Email.newInstance(EMAIL_PETER));
 
-		somePersons.add(personOne);
+		somePersons.add(personOneWithEmail);
 
-		Person personTwo = Person.newInstance();
-		personTwo.setEmail(Email.newInstance(EMAIL_JUSTUS));
-		somePersons.add(personTwo);
+		Person personTwoWithEmail = Person.newInstance();
+		personTwoWithEmail.setEmail(Email.newInstance(EMAIL_JUSTUS));
 
-		somePersons.add(Person.newInstance());
+		somePersons.add(personTwoWithEmail);
+
+		Person personThreeWithoutEmail = Person.newInstance();
+
+		somePersons.add(personThreeWithoutEmail);
 
 		return somePersons;
+	}
+
+	@Test
+	public void testExistingPersonWithEMail() {
+		List<Person> somePersons = listWithPersons();
+		doReturn(somePersons).when(gateway).getAll();
+
+		Person updatePerson = somePersons.get(1);
+
+		ValidationResult message = sut.validateEMail(updatePerson);
+
+		assertTrue("[message] not correct!", message.getMessage().isEmpty());
 	}
 }

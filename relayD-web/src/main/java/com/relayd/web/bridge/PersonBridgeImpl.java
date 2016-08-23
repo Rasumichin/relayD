@@ -52,8 +52,10 @@ public class PersonBridgeImpl implements PersonBridge {
 	@Override
 	public ValidationResult validateEMail(Person aNewPerson) {
 		for (Person person : all()) {
-			if (emailsEqual(aNewPerson, person)) {
-				return new ValidationResultImpl("EMail does exist!");
+			if (!aNewPerson.equals(person)) {
+				if (emailsEqual(aNewPerson, person)) {
+					return new ValidationResultImpl("EMail does exist!");
+				}
 			}
 		}
 		return new ValidationResultImpl("");
