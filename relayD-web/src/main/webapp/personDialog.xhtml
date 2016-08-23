@@ -54,6 +54,15 @@
 			</p:calendar>
 
 			<p:outputLabel
+				for="relayname"
+				value="Relayname:" />
+			<p:inputText
+				id="relayname"
+				value="#{personEditPageBean.relayname}">
+				<f:converter converterId="com.relayd.web.converter.RelaynameValueObjectConverter" />
+			</p:inputText>
+
+			<p:outputLabel
 				for="email"
 				value="Email:" />
 			<p:inputText
