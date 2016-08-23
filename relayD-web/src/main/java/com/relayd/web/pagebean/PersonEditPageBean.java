@@ -1,12 +1,7 @@
 package com.relayd.web.pagebean;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -52,9 +47,43 @@ public class PersonEditPageBean implements Serializable {
 
 	public PersonEditPageBean() {
 		personBridge = new PersonBridgeImpl();
+		
+		// TODO (Erik, 2016-08-23): I would prefer 'init*' instead of 'fill*' her. Tbd with Christian.
 		fillAllNationalities();
 		fillShirtsizes();
 		fillPositions();
+	}
+
+	// TODO (Erik, 2016-08-23): Have a look at the visibility of the following three methods. Each one is different! Intention or sloppiness?
+	public void fillAllNationalities() {
+		nationalities = new ArrayList<Locale>();
+		
+		Locale[] locales = Locale.getAvailableLocales();
+		for (Locale eachLocale : locales) {
+			String code = eachLocale.getCountry();
+			String name = eachLocale.getDisplayCountry();
+			
+			if (!"".equals(code) && !"".equals(name)) {
+				nationalities.add(eachLocale);
+			}
+		}
+	}
+	
+	// TODO -schmollc- ab hier in eine eigene Klasse stecken!
+	private void fillShirtsizes() {
+		shirtsizes = new ArrayList<Shirtsize>();
+		
+		for (Shirtsize eachShirtsize : Shirtsize.values()) {
+			shirtsizes.add(eachShirtsize);
+		}
+	}
+	
+	void fillPositions() {
+		positions = new ArrayList<Position>();
+		
+		for (Position eachPosition : Position.values()) {
+			positions.add(eachPosition);
+		}
 	}
 
 	public void openDialogForCreatePerson() {
@@ -65,16 +94,6 @@ public class PersonEditPageBean implements Serializable {
 
 	Person createNewPerson() {
 		return Person.newInstance();
-	}
-
-	public void openDialogFor(UUID uuid) {
-		workingPerson = getPerson(uuid);
-		isNewPerson = false;
-		openDialog();
-	}
-
-	Person getPerson(UUID uuid) {
-		return getBridge().get(uuid);
 	}
 
 	void openDialog() {
@@ -90,7 +109,18 @@ public class PersonEditPageBean implements Serializable {
 		options.put("contentWidth", "100%");
 		options.put("contentHeight", "100%");
 		options.put("headerElement", "customheader");
+		
 		return options;
+	}
+
+	public void openDialogFor(UUID uuid) {
+		workingPerson = getPerson(uuid);
+		isNewPerson = false;
+		openDialog();
+	}
+
+	Person getPerson(UUID uuid) {
+		return getBridge().get(uuid);
 	}
 
 	public void save() {
@@ -115,6 +145,16 @@ public class PersonEditPageBean implements Serializable {
 		}
 	}
 
+	void closeDialog() {
+		RequestContext.getCurrentInstance().closeDialog(workingPerson);
+	}
+
+	void showError() {
+		// TODO -schmollc- wie im ObjectConverter sollte die Nachricht aus dem ValidationResult Object kommen!
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Email not uniqe!", null);
+		FacesContext.getCurrentInstance().addMessage(null, message);
+	}
+
 	public void saveAndNext() {
 		persistPerson();
 		workingPerson = createNewPerson();
@@ -124,20 +164,16 @@ public class PersonEditPageBean implements Serializable {
 		closeDialog();
 	}
 
-	void closeDialog() {
-		RequestContext.getCurrentInstance().closeDialog(workingPerson);
-	}
-
 	public List<Locale> getNationalities() {
-		return nationalities;
+		return Collections.unmodifiableList(nationalities);
 	}
 
 	public List<Shirtsize> getShirtsizes() {
-		return shirtsizes;
+		return Collections.unmodifiableList(shirtsizes);
 	}
 
 	public List<Position> getPositions() {
-		return positions;
+		return Collections.unmodifiableList(positions);
 	}
 
 	public Forename getForename() {
@@ -210,42 +246,5 @@ public class PersonEditPageBean implements Serializable {
 
 	public String getDatePatttern() {
 		return FormatConstants.DATE_FORMAT_ISO;
-	}
-
-	void showError() {
-		// TODO -schmollc- wie im ObjectConverter sollte die Nachricht aus dem ValidationResult Object kommen!
-		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Email not uniqe!", null);
-		FacesContext.getCurrentInstance().addMessage(null, message);
-	}
-
-	// TODO -schmollc- ab hier in eine eigene Klasse stecken!
-	private void fillShirtsizes() {
-		shirtsizes = new ArrayList<Shirtsize>();
-
-		for (Shirtsize shirtsize : Shirtsize.values()) {
-			shirtsizes.add(shirtsize);
-		}
-	}
-
-	public void fillAllNationalities() {
-		nationalities = new ArrayList<Locale>();
-
-		Locale[] locales = Locale.getAvailableLocales();
-		for (Locale locale : locales) {
-			String code = locale.getCountry();
-			String name = locale.getDisplayCountry();
-
-			if (!"".equals(code) && !"".equals(name)) {
-				nationalities.add(locale);
-			}
-		}
-	}
-
-	void fillPositions() {
-		positions = new ArrayList<Position>();
-
-		for (Position position : Position.values()) {
-			positions.add(position);
-		}
 	}
 }
