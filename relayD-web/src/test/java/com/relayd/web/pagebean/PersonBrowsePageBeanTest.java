@@ -13,6 +13,7 @@ import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.relayd.Person;
+import com.relayd.attributes.Position;
 import com.relayd.web.bridge.PersonBridge;
 
 /**
@@ -75,4 +76,70 @@ public class PersonBrowsePageBeanTest {
 	private Integer size(Integer aValue) {
 		return aValue;
 	}
+
+	@Test
+	public void testSortByRelayname_FirstRelaynameIsNull() {
+		Person first = Person.newInstance();
+		Person second = Person.newInstance();
+
+		int position = sut.sortByRelayname(first, second);
+
+		assertEquals("[position] not correct!", -1, position);
+	}
+
+	@Test
+	public void testSortByRelayname_SecondRelaynameIsNull() {
+		Person first = new PersonBuilder().withRelayname("Die 4 ????").build();
+
+		Person second = Person.newInstance();
+
+		int position = sut.sortByRelayname(first, second);
+
+		assertEquals("[position] not correct!", 1, position);
+	}
+
+	@Test
+	public void testSortByRelayname_WithSameName() {
+		Person first = new PersonBuilder().withRelayname("A").build();
+
+		Person second = new PersonBuilder().withRelayname("A").build();
+
+		int position = sut.sortByRelayname(first, second);
+
+		assertEquals("[position] not correct!", 0, position);
+	}
+
+	@Test
+	public void testSortByRelayname_WithSecondPositionIsNull() {
+		Person first = new PersonBuilder().withRelayname("A").withPosition(Position.FOURTH).build();
+
+		Person second = new PersonBuilder().withRelayname("A").build();
+
+		int position = sut.sortByRelayname(first, second);
+
+		assertEquals("[position] not correct!", 0, position);
+	}
+
+	@Test
+	public void testSortByRelayname_WithBothPositions() {
+		Person first = new PersonBuilder().withRelayname("A").withPosition(Position.FOURTH).build();
+
+		Person second = new PersonBuilder().withRelayname("A").withPosition(Position.SECOND).build();
+
+		int position = sut.sortByRelayname(first, second);
+
+		assertEquals("[position] not correct!", -13, position);
+	}
+
+	@Test
+	public void testSortByRelayname_WithBothPositions2() {
+		Person first = new PersonBuilder().withRelayname("A").withPosition(Position.SECOND).build();
+
+		Person second = new PersonBuilder().withRelayname("A").withPosition(Position.FOURTH).build();
+
+		int position = sut.sortByRelayname(first, second);
+
+		assertEquals("[position] not correct!", 13, position);
+	}
+
 }

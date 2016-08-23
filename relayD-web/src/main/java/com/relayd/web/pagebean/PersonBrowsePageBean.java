@@ -16,7 +16,6 @@ import com.relayd.Person;
 import com.relayd.attributes.Birthday;
 import com.relayd.attributes.Email;
 import com.relayd.attributes.Forename;
-import com.relayd.attributes.Relayname;
 import com.relayd.attributes.Shirtsize;
 import com.relayd.attributes.Surename;
 import com.relayd.web.bridge.PersonBridge;
@@ -65,8 +64,19 @@ public class PersonBrowsePageBean {
 		selected = aSelected;
 	}
 
-	public int sortByRelayname(Relayname name1, Relayname name2) {
-		return name1.toString().compareTo(name2.toString());
+	public int sortByRelayname(Person personOne, Person personTwo) {
+		if (personOne.getRelayname() == null) {
+			return -1;
+		}
+		if (personTwo.getRelayname() == null) {
+			return 1;
+		}
+		int position = personOne.getRelayname().toString().compareTo(personTwo.getRelayname().toString());
+		if (personOne.getPosition() == null || personTwo.getPosition() == null) {
+			return position;
+		}
+		position = position + personOne.getPosition().toString().compareTo(personTwo.getPosition().toString());
+		return position;
 	}
 
 	public int sortByForename(Forename name1, Forename name2) {
