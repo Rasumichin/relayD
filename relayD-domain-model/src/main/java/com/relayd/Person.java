@@ -27,8 +27,8 @@ public class Person implements Serializable {
 	private Shirtsize shirtsize = null;
 	private Locale nationality = null; // TODO -schmollc- Anderen Attribute sind Fachobjekte, dies hier eine "API" Klasse. Warum kein Decorator einführen?
 	private Email email = null;
-	private Relayname relayname = null;
-	private Position position = null;
+	private Relayname relayname = null; // Refactor Dieses Attribut ist Jahresabhängig!
+	private Position position = null; // Refactor Dieses Attribut ist Jahresabhängig!
 
 	private Person() {
 		uuid = UUID.randomUUID();
