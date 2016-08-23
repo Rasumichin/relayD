@@ -21,6 +21,7 @@ import com.relayd.Person;
 import com.relayd.attributes.Birthday;
 import com.relayd.attributes.Email;
 import com.relayd.attributes.Forename;
+import com.relayd.attributes.Relayname;
 import com.relayd.attributes.Shirtsize;
 import com.relayd.attributes.Surename;
 import com.relayd.web.bridge.PersonBridge;
@@ -196,6 +197,18 @@ public class PersonEditPageBeanTest {
 		Email result = sut.getEmail();
 
 		assertEquals("[Email] not correct!", expected, result);
+	}
+
+	@Test
+	public void testRelayname() {
+		sut.openDialogForCreatePerson();
+		Relayname expected = Relayname.newInstance("Die 4 ????");
+
+		sut.setRelayname(expected);
+
+		Relayname result = sut.getRelayname();
+
+		assertEquals("[Relayname] not correct!", expected, result);
 	}
 
 	@Test

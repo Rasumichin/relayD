@@ -20,6 +20,7 @@ import com.relayd.Person;
 import com.relayd.attributes.Birthday;
 import com.relayd.attributes.Email;
 import com.relayd.attributes.Forename;
+import com.relayd.attributes.Relayname;
 import com.relayd.attributes.Shirtsize;
 import com.relayd.attributes.Surename;
 import com.relayd.web.bridge.PersonBridge;
@@ -177,6 +178,14 @@ public class PersonEditPageBean implements Serializable {
 
 	public void setEmail(Email anEmail) {
 		workingPerson.setEmail(anEmail);
+	}
+
+	public void setRelayname(Relayname aRelayname) {
+		workingPerson.setRelayname(aRelayname);
+	}
+
+	public Relayname getRelayname() {
+		return workingPerson.getRelayname();
 	}
 
 	private PersonBridge getBridge() {
