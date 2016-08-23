@@ -71,6 +71,13 @@
 			</p:column>
 
 			<p:column
+				headerText="Relayname"
+				sortBy="#{person.relayname}"
+				sortFunction="#{personBrowsePageBean.sortByRelayname}">
+				<h:outputText value="#{person.relayname}" />
+			</p:column>
+
+			<p:column
 				headerText="Birthday"
 				sortBy="#{person.birthday}"
 				sortFunction="#{personBrowsePageBean.sortByBirthday}">
