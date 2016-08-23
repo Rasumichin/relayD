@@ -1,24 +1,26 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html 	xmlns="http://www.w3.org/1999/xhtml"
-      	xmlns:h="http://java.sun.com/jsf/html"
-		xmlns:p="http://primefaces.org/ui"
-		xmlns:f="http://java.sun.com/jsf/core"
-		xmlns:fn="http://java.sun.com/jsp/jstl/functions"
-	>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 
 <h:head>
-	<link rel="stylesheet" href="./styles/relayd.css"></link>
+	<link
+		rel="stylesheet"
+		href="./styles/relayd.css"></link>
 </h:head>
 <h:body>
-		<h:form id="form">
-	
-		<p:growl id="growl" showDetail="true"/>  
-		
-		
+	<h:form id="form">
+
+		<p:growl
+			id="growl"
+			showDetail="true" />
+
 		<div class="divStartHeader"></div>
-		
-		
+
 		<p:dataTable
 			var="person"
 			widgetVar="personTable"
@@ -27,95 +29,127 @@
 			selectionMode="single"
 			value="#{personBrowsePageBean.persons}"
 			selection="#{personBrowsePageBean.selectedPerson}"
-			scrollable="true" scrollHeight="350"
+			scrollable="true"
+			scrollHeight="350"
 			sortBy="#{person.surename.value}"
 			rowKey="#{person.UUID}"
 			resizableColumns="true">
-	     	<f:facet name="header" >
+			<f:facet name="header">
 	     		List of Persons
-	     		
-	     		<p:commandButton id="toggler" type="button" value="Columns" style="float:right" icon="ui-icon-calculator" />
-        		<p:columnToggler datasource="personTable" trigger="toggler" />
-        		
-	     		<p:outputPanel>
-                	<h:outputText value="&nbsp;" />
-               </p:outputPanel>		
+	     		<p:commandButton
+					id="toggler"
+					type="button"
+					value="Columns"
+					style="float:right"
+					icon="ui-icon-calculator" />
+				<p:columnToggler
+					datasource="personTable"
+					trigger="toggler" />
 
-	    	</f:facet>
-        
-	    	
-	    	
-	    	
-	    	<p:column style="width:16px">
+				<p:outputPanel>
+					<h:outputText value="&nbsp;" />
+				</p:outputPanel>
+			</f:facet>
+
+			<p:column style="width:16px">
 				<p:rowToggler />
 			</p:column>
-	    	
-			<p:column 
-				headerText="Surename" 
+
+			<p:column
+				headerText="Surename"
 				filterMatchMode="contains"
-				sortBy="#{person.surename}" 
+				sortBy="#{person.surename}"
 				sortFunction="#{personBrowsePageBean.sortBySurename}">
 				<h:outputText value="#{person.surename}" />
 			</p:column>
-	
-			<p:column headerText="Forename" sortBy="#{person.forename}" sortFunction="#{personBrowsePageBean.sortByForename}">
+
+			<p:column
+				headerText="Forename"
+				sortBy="#{person.forename}"
+				sortFunction="#{personBrowsePageBean.sortByForename}">
 				<h:outputText value="#{person.forename}" />
 			</p:column>
-			
-			<p:column headerText="Birthday" sortBy="#{person.birthday}" sortFunction="#{personBrowsePageBean.sortByBirthday}">
+
+			<p:column
+				headerText="Birthday"
+				sortBy="#{person.birthday}"
+				sortFunction="#{personBrowsePageBean.sortByBirthday}">
 				<h:outputText value="#{person.birthday}" />
 			</p:column>
-			
+
 			<p:column headerText="Nationality">
 				<h:outputText value="#{person.displayNationality}" />
 			</p:column>
-			
-			<p:column headerText="Shirtsize" sortBy="#{person.shirtsize}" sortFunction="#{personBrowsePageBean.sortByShirtsize}">
+
+			<p:column
+				headerText="Shirtsize"
+				sortBy="#{person.shirtsize}"
+				sortFunction="#{personBrowsePageBean.sortByShirtsize}">
 				<h:outputText value="#{person.shirtsize}" />
 			</p:column>
-			
-			<p:column headerText="E-Mail" sortBy="#{person.email}" sortFunction="#{personBrowsePageBean.sortByEmail}">
+
+			<p:column
+				headerText="E-Mail"
+				sortBy="#{person.email}"
+				sortFunction="#{personBrowsePageBean.sortByEmail}">
 				<h:outputText value="#{person.email}" />
 			</p:column>
-						
+
 			<p:rowExpansion>
-				<p:panelGrid  columns="2" columnClasses="label,value" style="width:500px">
-	                
-                	<h:outputText value="Birthday" />
+				<p:panelGrid
+					columns="2"
+					columnClasses="label,value"
+					style="width:500px">
+
+					<h:outputText value="Birthday" />
 					<h:outputText value="#{person.birthday}" />
-				
+
 					<h:outputText value="Nationality" />
 					<h:outputText value="#{person.displayNationality}" />
-					
+
 					<h:outputText value="Shirtsize" />
 					<h:outputText value="#{person.shirtsize}" />
-					
+
 					<h:outputText value="Email" />
 					<h:outputText value="#{person.email}" />
-					
-	            </p:panelGrid>
-            
-				
-				
+
+				</p:panelGrid>
+
 			</p:rowExpansion>
-	
+
 			<f:facet name="footer">
 	        	In total there are #{personBrowsePageBean.getNumberOfResults()} persons.
 	    	</f:facet>
 		</p:dataTable>
-	
+
 		<p:toolbar>
-	        <f:facet name="left">
-	            <p:commandButton value="+" update="personTable"  actionListener="#{personBrowsePageBean.add}">
-	   				<p:ajax event="dialogReturn" listener="#{personBrowsePageBean.onEditClosed}" update="form" />
-	   			</p:commandButton>
-	            <p:commandButton value="-" update="form"  actionListener="#{personBrowsePageBean.remove}" />
-				<p:commandButton value="Edit" update="personTable"  actionListener="#{personBrowsePageBean.edit}" icon="ui-icon-folder-open">
-	            	<p:ajax event="dialogReturn" listener="#{personBrowsePageBean.onEditClosed}" update="form" />
-	            </p:commandButton>
-	        </f:facet>
-        </p:toolbar>
-		
+			<f:facet name="left">
+				<p:commandButton
+					value="+"
+					update="personTable"
+					actionListener="#{personBrowsePageBean.add}">
+					<p:ajax
+						event="dialogReturn"
+						listener="#{personBrowsePageBean.onEditClosed}"
+						update="form" />
+				</p:commandButton>
+				<p:commandButton
+					value="-"
+					update="form"
+					actionListener="#{personBrowsePageBean.remove}" />
+				<p:commandButton
+					value="Edit"
+					update="personTable"
+					actionListener="#{personBrowsePageBean.edit}"
+					icon="ui-icon-folder-open">
+					<p:ajax
+						event="dialogReturn"
+						listener="#{personBrowsePageBean.onEditClosed}"
+						update="form" />
+				</p:commandButton>
+			</f:facet>
+		</p:toolbar>
+
 	</h:form>
 </h:body>
 </html>
