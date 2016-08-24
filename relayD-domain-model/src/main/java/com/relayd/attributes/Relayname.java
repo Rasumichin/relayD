@@ -7,10 +7,10 @@ import java.io.Serializable;
  * @since   22.03.2016
  * status   initial
  */
-public class Relayname implements Serializable {
+public class Relayname implements Serializable, Comparable<Relayname> {
 	private static final long serialVersionUID = 1L;
 
-	private String value = "";
+	String value = "";
 
 	private Relayname(String relayname) {
 		super();
@@ -35,6 +35,11 @@ public class Relayname implements Serializable {
 	@Override
 	public String toString() {
 		return value;
+	}
+
+	@Override
+	public int compareTo(Relayname aRelayname) {
+		return value.toLowerCase().compareTo(aRelayname.value.toLowerCase());
 	}
 
 	@Override
