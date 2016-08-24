@@ -1,7 +1,13 @@
 package com.relayd.web.pagebean;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.UUID;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -47,40 +53,38 @@ public class PersonEditPageBean implements Serializable {
 
 	public PersonEditPageBean() {
 		personBridge = new PersonBridgeImpl();
-		
-		// TODO (Erik, 2016-08-23): I would prefer 'init*' instead of 'fill*' her. Tbd with Christian.
-		fillAllNationalities();
-		fillShirtsizes();
-		fillPositions();
+
+		initAllNationalities();
+		initShirtsizes();
+		initPositions();
 	}
 
-	// TODO (Erik, 2016-08-23): Have a look at the visibility of the following three methods. Each one is different! Intention or sloppiness?
-	public void fillAllNationalities() {
+	private void initAllNationalities() {
 		nationalities = new ArrayList<Locale>();
-		
+
 		Locale[] locales = Locale.getAvailableLocales();
 		for (Locale eachLocale : locales) {
 			String code = eachLocale.getCountry();
 			String name = eachLocale.getDisplayCountry();
-			
+
 			if (!"".equals(code) && !"".equals(name)) {
 				nationalities.add(eachLocale);
 			}
 		}
 	}
-	
+
 	// TODO -schmollc- ab hier in eine eigene Klasse stecken!
-	private void fillShirtsizes() {
+	private void initShirtsizes() {
 		shirtsizes = new ArrayList<Shirtsize>();
-		
+
 		for (Shirtsize eachShirtsize : Shirtsize.values()) {
 			shirtsizes.add(eachShirtsize);
 		}
 	}
-	
-	void fillPositions() {
+
+	void initPositions() {
 		positions = new ArrayList<Position>();
-		
+
 		for (Position eachPosition : Position.values()) {
 			positions.add(eachPosition);
 		}
@@ -109,7 +113,7 @@ public class PersonEditPageBean implements Serializable {
 		options.put("contentWidth", "100%");
 		options.put("contentHeight", "100%");
 		options.put("headerElement", "customheader");
-		
+
 		return options;
 	}
 
