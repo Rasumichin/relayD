@@ -71,11 +71,11 @@ public class PersonBrowsePageBean {
 		if (personTwo.getRelayname() == null) {
 			return 1;
 		}
-		int position = personOne.getRelayname().toString().compareTo(personTwo.getRelayname().toString());
+		int position = personOne.getRelayname().compareTo(personTwo.getRelayname());
 		if (personOne.getPosition() == null || personTwo.getPosition() == null) {
 			return position;
 		}
-		position = position + personOne.getPosition().toString().compareTo(personTwo.getPosition().toString());
+		position = position + personOne.getPosition().compareTo(personTwo.getPosition());
 		return position;
 	}
 

@@ -128,7 +128,7 @@ public class PersonBrowsePageBeanTest {
 
 		int position = sut.sortByRelayname(first, second);
 
-		assertEquals("[position] not correct!", -13, position);
+		assertEquals("[position] not correct!", 2, position);
 	}
 
 	@Test
@@ -139,7 +139,7 @@ public class PersonBrowsePageBeanTest {
 
 		int position = sut.sortByRelayname(first, second);
 
-		assertEquals("[position] not correct!", 13, position);
+		assertEquals("[position] not correct!", -2, position);
 	}
 
 }
