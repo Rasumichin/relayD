@@ -258,4 +258,19 @@ public class PersonEditPageBeanTest {
 
 		assertEquals("[positions] not correct!", 4, size);
 	}
+
+	@Test(expected = UnsupportedOperationException.class)
+	public void testModifyPositions() {
+		sut.getPositions().add(Position.FIRST);
+	}
+
+	@Test(expected = UnsupportedOperationException.class)
+	public void testModifyNationalities() {
+		sut.getNationalities().add(Locale.CANADA);
+	}
+
+	@Test(expected = UnsupportedOperationException.class)
+	public void testModifyShirtsizes() {
+		sut.getShirtsizes().add(Shirtsize.DamenL);
+	}
 }
