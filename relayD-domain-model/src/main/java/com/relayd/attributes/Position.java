@@ -5,7 +5,7 @@ package com.relayd.attributes;
  * @since   23.08.2016
  * status   initial
  */
-public enum Position implements Comparable<Position> {
+public enum Position {
 	//@formatter:off
 	FIRST	(1, "1"),
 	SECOND	(2, "2"),
