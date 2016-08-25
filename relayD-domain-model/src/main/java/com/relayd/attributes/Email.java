@@ -10,7 +10,7 @@ import java.io.Serializable;
 public class Email implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	String value = "";
+	String value;
 
 	private static String pattern = "^[_A-Za-z0-9-+]+(.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(.[A-Za-z0-9]+)*(.[A-Za-z]{2,})$";
 

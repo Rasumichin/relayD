@@ -10,7 +10,7 @@ import java.io.Serializable;
 public class Surename implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private String value = "";
+	String value;
 
 	private Surename(String surename) {
 		super();
@@ -24,22 +24,11 @@ public class Surename implements Serializable {
 		validate(surename);
 		return new Surename(surename);
 	}
-	
-	public String getValue() {
-		return value;
-	}
-	
+
 	private static void validate(String surename) {
 		if (surename == null) {
 			throw new IllegalArgumentException("[surename] must not be 'null'.");
 		}
-		// TODO -schmollc- Hier waere dann ggf Logik rein die dem Objekt Nachname entspricht.....
-		//		if (aNachname.length() == 2) {
-		//			throw new ArrayIndexOutOfBoundsException("Ungueltige Laenge.");
-		//		}
-		//		if (aNachname.matches("[0-9]")) {
-		//			throw new IllegalArgumentException("Ungueltige Zeichen.");
-		//		}
 	}
 
 	@Override

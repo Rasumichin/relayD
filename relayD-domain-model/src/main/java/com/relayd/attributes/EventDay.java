@@ -14,7 +14,7 @@ import com.relayd.FormatConstants;
 public class EventDay implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private LocalDate value;
+	LocalDate value;
 
 	private EventDay() {
 		this(LocalDate.now());

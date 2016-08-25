@@ -30,10 +30,6 @@ public class Forename implements Serializable {
 			throw new IllegalArgumentException("[forename] must not be 'null'.");
 		}
 	}
-	
-	public String getValue() {
-		return value;
-	}
 
 	@Override
 	public String toString() {

@@ -79,4 +79,89 @@ public class EventDayTest {
 
 		assertEquals("toString() does not match expected result.", expectedResult, actualResult);
 	}
+
+	@Test
+	public void testGetHashCode() {
+		EventDay sut = EventDay.newInstance(LocalDate.now());
+
+		int hashCode = sut.hashCode();
+
+		assertEquals(4129336, hashCode);
+
+		sut.value = null;
+
+		hashCode = sut.hashCode();
+
+		assertEquals(31, hashCode);
+	}
+
+	@Test
+	public void testEqualsWithMyself() {
+		EventDay sut = EventDay.newInstance(LocalDate.now());
+
+		boolean result = sut.equals(sut);
+
+		assertTrue(result);
+	}
+
+	@Test
+	public void testEqualsWithNull() {
+		EventDay sut = EventDay.newInstance(LocalDate.now());
+
+		boolean result = sut.equals(null);
+
+		assertFalse(result);
+	}
+
+	@Test
+	public void testEqualsWithNotCompatibleClass() {
+		EventDay sut = EventDay.newInstance(LocalDate.now());
+
+		boolean result = sut.equals(new String());
+
+		assertFalse(result);
+	}
+
+	@Test
+	public void testEqualsWithValueIsNull() {
+		EventDay sut = EventDay.newInstance(LocalDate.now());
+		sut.value = null;
+		EventDay secondName = EventDay.newInstance(LocalDate.now());
+
+		boolean result = sut.equals(secondName);
+
+		assertFalse(result);
+	}
+
+	@Test
+	public void testEqualsWithBothValuesAreNull() {
+		EventDay sut = EventDay.newInstance(LocalDate.now());
+		sut.value = null;
+		EventDay secondName = EventDay.newInstance(LocalDate.now());
+		secondName.value = null;
+
+		boolean result = sut.equals(secondName);
+
+		assertTrue(result);
+	}
+
+	@Test
+	public void testEqualsWithTwoDiffrentValues() {
+		EventDay sut = EventDay.newInstance(LocalDate.now());
+		EventDay secondName = EventDay.newInstance(getDefinedLocalDateInThePast());
+
+		boolean result = sut.equals(secondName);
+
+		assertFalse(result);
+	}
+
+	@Test
+	public void testEqualsWithSameValues() {
+		EventDay sut = EventDay.newInstance(LocalDate.now());
+		EventDay secondName = EventDay.newInstance(LocalDate.now());
+
+		boolean result = sut.equals(secondName);
+
+		assertTrue(result);
+	}
 }

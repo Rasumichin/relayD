@@ -10,7 +10,7 @@ import java.io.Serializable;
 public class Relayname implements Serializable, Comparable<Relayname> {
 	private static final long serialVersionUID = 1L;
 
-	String value = "";
+	String value;
 
 	private Relayname(String relayname) {
 		super();

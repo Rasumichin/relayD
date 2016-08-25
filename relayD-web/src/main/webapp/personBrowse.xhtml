@@ -31,7 +31,7 @@
 			selection="#{personBrowsePageBean.selectedPerson}"
 			scrollable="true"
 			scrollHeight="350"
-			sortBy="#{person.surename.value}"
+			sortBy="#{person.surename.toString}"
 			rowKey="#{person.UUID}"
 			resizableColumns="true">
 			<f:facet name="header">

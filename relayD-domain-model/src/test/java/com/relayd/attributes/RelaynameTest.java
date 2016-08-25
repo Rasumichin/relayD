@@ -24,15 +24,10 @@ public class RelaynameTest {
 		assertEquals(NAME, realyname.toString());
 	}
 
-	@Test(expected = IllegalArgumentException.class)
-	public void testCreateInvalidObject_Null_WithExpectedAssert() {
-		Relayname.newInstance(null);
-	}
-
 	@Test
 	public void testCreateInvalidObject_Null_WithRuleAssert() {
 		expectedException.expect(IllegalArgumentException.class);
-		expectedException.expectMessage("null");
+		expectedException.expectMessage("[relayname] must not be 'null'.");
 		Relayname.newInstance(null);
 	}
 
@@ -150,5 +145,4 @@ public class RelaynameTest {
 
 		assertTrue(result);
 	}
-
 }
