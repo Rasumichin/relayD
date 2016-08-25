@@ -19,6 +19,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import com.relayd.FormatConstants;
 import com.relayd.Person;
 import com.relayd.attributes.Birthday;
+import com.relayd.attributes.Comment;
 import com.relayd.attributes.Email;
 import com.relayd.attributes.Forename;
 import com.relayd.attributes.Position;
@@ -162,6 +163,19 @@ public class PersonEditPageBeanTest {
 		Birthday result = sut.getBirthday();
 
 		assertEquals("[Birthday] not correct!", expected, result);
+	}
+
+	@Test
+	public void testComment() {
+		sut.openDialogForCreatePerson();
+		Comment expected = Comment.newInstance("Superläufer");
+
+		sut.setComment(expected);
+
+		Comment result = sut.getComment();
+
+		assertEquals("[Comment] not correct!", expected, result);
+
 	}
 
 	@Test

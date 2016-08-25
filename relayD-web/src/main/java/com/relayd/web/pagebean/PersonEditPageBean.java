@@ -19,6 +19,7 @@ import org.primefaces.context.RequestContext;
 import com.relayd.FormatConstants;
 import com.relayd.Person;
 import com.relayd.attributes.Birthday;
+import com.relayd.attributes.Comment;
 import com.relayd.attributes.Email;
 import com.relayd.attributes.Forename;
 import com.relayd.attributes.Position;
@@ -244,6 +245,14 @@ public class PersonEditPageBean implements Serializable {
 		return workingPerson.getPosition();
 	}
 
+	public void setComment(Comment aComment) {
+		workingPerson.setComment(aComment);
+	}
+
+	public Comment getComment() {
+		return workingPerson.getComment();
+	}
+
 	private PersonBridge getBridge() {
 		return personBridge;
 	}
@@ -251,4 +260,5 @@ public class PersonEditPageBean implements Serializable {
 	public String getDatePatttern() {
 		return FormatConstants.DATE_FORMAT_ISO;
 	}
+
 }
