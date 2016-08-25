@@ -26,4 +26,6 @@ public interface PersonBridge {
 	void remove(Person person);
 
 	ValidationResult validateEMail(Person aNewPerson);
+
+	String getEmailList();
 }

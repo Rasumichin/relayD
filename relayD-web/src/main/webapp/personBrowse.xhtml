@@ -158,6 +158,10 @@
 						listener="#{personBrowsePageBean.onEditClosed}"
 						update="form" />
 				</p:commandButton>
+				<p:commandButton
+					value="export"
+					update="form"
+					actionListener="#{personBrowsePageBean.emailExport}" />
 			</f:facet>
 		</p:toolbar>
 

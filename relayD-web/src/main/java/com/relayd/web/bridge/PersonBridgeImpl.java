@@ -65,4 +65,18 @@ public class PersonBridgeImpl implements PersonBridge {
 		Email email = person.getEmail();
 		return email != null && email.equals(aNewPerson.getEmail());
 	}
+
+	@Override
+	public String getEmailList() {
+		StringBuilder builder = new StringBuilder();
+		for (Person person : all()) {
+			if (!person.getEmail().isEmpty()) {
+				builder.append(", " + person.getEmail());
+			}
+		}
+		String output = builder.toString();
+		output = output.replaceFirst(", ", "");
+
+		return output;
+	}
 }

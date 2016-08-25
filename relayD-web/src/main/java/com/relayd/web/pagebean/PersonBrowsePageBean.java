@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
+import javax.faces.application.FacesMessage.Severity;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -118,13 +119,16 @@ public class PersonBrowsePageBean {
 	}
 
 	public void remove(@SuppressWarnings("unused") ActionEvent actionEvent) {
-		System.out.println("Removed");
 		// TODO -ALL- Abprüfung auf selektion passiert... wie?
 		personBridge.remove(getSelectedPerson());
 		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Removed!", getSelectedPerson().toString());
 		FacesContext.getCurrentInstance().addMessage(null, message);
 		refreshPersons();
+	}
 
+	public void emailExport(@SuppressWarnings("unused") ActionEvent actionEvent) {
+		String output = personBridge.getEmailList();
+		showMessage(FacesMessage.SEVERITY_INFO, "Email", output);
 	}
 
 	public void onEditClosed(SelectEvent event) {
@@ -166,8 +170,8 @@ public class PersonBrowsePageBean {
 		System.out.println("Canceld Dialog!");
 	}
 
-	private void showMessage(String summary) {
-		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, "Bekackte Amateure, Dude!");
+	void showMessage(Severity severityInfo, String summary, String textMessage) {
+		FacesMessage message = new FacesMessage(severityInfo, summary, textMessage);
 		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
 

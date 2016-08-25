@@ -1,20 +1,27 @@
 package com.relayd.web.pagebean;
 
 import static org.junit.Assert.*;
+import static org.mockito.Matchers.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.application.FacesMessage.Severity;
+
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.relayd.Person;
 import com.relayd.attributes.Position;
 import com.relayd.web.bridge.PersonBridge;
+
+import static org.mockito.Mockito.*;
 
 /**
  * @author schmollc (Christian@relayd.de)
@@ -24,10 +31,16 @@ import com.relayd.web.bridge.PersonBridge;
 @RunWith(MockitoJUnitRunner.class)
 public class PersonBrowsePageBeanTest {
 	@InjectMocks
+	@Spy
 	private PersonBrowsePageBean sut;
 
 	@Mock
 	private PersonBridge personBridge;
+
+	@Before
+	public void setUp() {
+		doNothing().when(sut).showMessage(any(Severity.class), anyString(), anyString());
+	}
 
 	@Test
 	public void testGetNumberOfResults_ForEmptyResultList() {
@@ -142,4 +155,11 @@ public class PersonBrowsePageBeanTest {
 		assertEquals("[position] not correct!", -2, position);
 	}
 
+	@Test
+	public void testEmailExport() {
+		sut.emailExport(null);
+		verify(personBridge).getEmailList();
+		verify(sut).showMessage(any(Severity.class), anyString(), anyString());
+
+	}
 }

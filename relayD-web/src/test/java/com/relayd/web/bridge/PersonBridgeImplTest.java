@@ -14,6 +14,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import com.relayd.Person;
 import com.relayd.attributes.Email;
 import com.relayd.ejb.PersonGateway;
+import com.relayd.web.pagebean.PersonBuilder;
 
 import static org.mockito.Mockito.*;
 
@@ -84,5 +85,27 @@ public class PersonBridgeImplTest {
 		ValidationResult message = sut.validateEMail(updatePerson);
 
 		assertTrue("[message] not correct!", message.getMessage().isEmpty());
+	}
+
+	@Test
+	public void testGetEmailList() {
+		doReturn(createDummyData()).when(gateway).getAll();
+
+		String commaSeperatedEmails = sut.getEmailList();
+
+		assertNotNull("Erwarte gueltige Instanz.", commaSeperatedEmails);
+		assertFalse("Erwarte keinen leeren String.", commaSeperatedEmails.isEmpty());
+		assertEquals("Wert nicht korrekt.", "Christian.Schmoll@canda.com, Dirk.Aderhold@canda.com", commaSeperatedEmails);
+	}
+
+	private List<Person> createDummyData() {
+		List<Person> somePersons = new ArrayList<Person>();
+		PersonBuilder builder = new PersonBuilder();
+
+		somePersons.add(builder.withEmail("Christian.Schmoll@canda.com").build());
+		somePersons.add(builder.withEmail("").build());
+		somePersons.add(builder.withEmail("Dirk.Aderhold@canda.com").build());
+
+		return somePersons;
 	}
 }

@@ -55,7 +55,7 @@ public class PersonBuilder {
 		return this;
 	}
 
-	Person build() {
+	public Person build() {
 		Person person = Person.newInstance();
 		person.setSurename(surename);
 		person.setForename(forename);
