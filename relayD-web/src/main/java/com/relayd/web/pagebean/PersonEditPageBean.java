@@ -46,10 +46,11 @@ public class PersonEditPageBean implements Serializable {
 
 	boolean isNewPerson = false;
 
+	// TODO -schmollc- in eine eigene Klasse stecken!
 	private List<Locale> nationalities;
-
+	// TODO -schmollc- in eine eigene Klasse stecken!
 	private List<Shirtsize> shirtsizes;
-
+	// TODO -schmollc- in eine eigene Klasse stecken!
 	public List<Position> positions;
 
 	public PersonEditPageBean() {
@@ -60,6 +61,7 @@ public class PersonEditPageBean implements Serializable {
 		initPositions();
 	}
 
+	// TODO -schmollc- in eine eigene Klasse stecken!
 	private void initAllNationalities() {
 		nationalities = new ArrayList<Locale>();
 
@@ -74,7 +76,7 @@ public class PersonEditPageBean implements Serializable {
 		}
 	}
 
-	// TODO -schmollc- ab hier in eine eigene Klasse stecken!
+	// TODO -schmollc- in eine eigene Klasse stecken!
 	private void initShirtsizes() {
 		shirtsizes = new ArrayList<Shirtsize>();
 
@@ -83,6 +85,7 @@ public class PersonEditPageBean implements Serializable {
 		}
 	}
 
+	// TODO -schmollc- in eine eigene Klasse stecken!
 	void initPositions() {
 		positions = new ArrayList<Position>();
 
@@ -260,5 +263,4 @@ public class PersonEditPageBean implements Serializable {
 	public String getDatePatttern() {
 		return FormatConstants.DATE_FORMAT_ISO;
 	}
-
 }
