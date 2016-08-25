@@ -1,6 +1,8 @@
 package com.relayd;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.UUID;
 
 import com.relayd.attributes.Relayname;
@@ -28,12 +30,24 @@ public class Relay extends ArrayList<Person> {
 	private UUID uuid = null;
 	private Relayname relayname = null;
 
+	private Integer year;
+
 	private Relay() {
 		uuid = UUID.randomUUID();
+		year = new GregorianCalendar().get(Calendar.YEAR);
+	}
+
+	public Relay(Integer aYear) {
+		uuid = UUID.randomUUID();
+		year = aYear;
 	}
 
 	public static Relay newInstance() {
 		return new Relay();
+	}
+
+	public static Relay newInstance(Integer aYear) {
+		return new Relay(aYear);
 	}
 
 	public void setRelayname(Relayname aRelayname) {
@@ -71,5 +85,9 @@ public class Relay extends ArrayList<Person> {
 
 	public UUID getUUID() {
 		return uuid;
+	}
+
+	public Integer getYear() {
+		return year;
 	}
 }

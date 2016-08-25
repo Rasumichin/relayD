@@ -2,6 +2,9 @@ package com.relayd;
 
 import static org.junit.Assert.*;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 import org.junit.Test;
 
 import com.relayd.attributes.Forename;
@@ -18,6 +21,26 @@ public class RelayTest {
 	private Relay sut = Relay.newInstance();
 
 	@Test
+	public void testConstructor() {
+		Integer expectedYear = new GregorianCalendar().get(Calendar.YEAR);
+
+		Integer year = sut.getYear();
+
+		assertEquals("[year] not correct!", expectedYear, year);
+	}
+
+	@Test
+	public void testConstructorWithParameter() {
+		Integer expectedYear = 2015;
+
+		Relay sutInPast = Relay.newInstance(expectedYear);
+
+		Integer year = sutInPast.getYear();
+
+		assertEquals("[year] not correct!", expectedYear, year);
+	}
+
+	@Test
 	public void testCreateInitialRelay() {
 		final String RELAYNAME = "Die vier ????";
 
@@ -25,7 +48,7 @@ public class RelayTest {
 
 		assertEquals("Relay: " + RELAYNAME, sut.toString());
 
-		assertNotNull("Expected valid UUID.", sut.getUUID());
+		assertNotNull("[UUID] not correct!", sut.getUUID());
 	}
 
 	@Test
@@ -35,24 +58,24 @@ public class RelayTest {
 
 		Relayname relayname = sut.getRelayname();
 
-		assertNull("Expected non valid instance.", relayname);
+		assertNull("Expected non valid instance!", relayname);
 
 		sut.setRelayname(FIRST_CHOICE);
 		relayname = sut.getRelayname();
 
 		assertNotNull(relayname);
-		assertEquals("Surename not corret.", FIRST_CHOICE, relayname);
+		assertEquals("[Relayname] not corret!", FIRST_CHOICE, relayname);
 
 		sut.setRelayname(SECOND_CHOICE);
 		relayname = sut.getRelayname();
 
 		assertNotNull(relayname);
-		assertEquals("Changed Surename not correct.", SECOND_CHOICE, relayname);
+		assertEquals("Changed [Relayname] not correct!", SECOND_CHOICE, relayname);
 	}
 
 	/**
 	 * Nicht als Unit-Test konzipiert sondern als Story.
-	 * TODO -schmoll- Dieser Test ist ... seltsam.. :-)
+	 * TODO -schmollc- Dieser Test ist ... seltsam.. :-)
 	 */
 	@Test
 	public void testAddPersonAsStory() {
