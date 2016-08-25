@@ -161,4 +161,22 @@ public class EmailTest {
 		boolean result = Email.isValid(INVALID_MAIL_FROM_JUSTUS_JONAS);
 		assertFalse("email should be invalid!", result);
 	}
+
+	@Test
+	public void testIsEmpty_True() {
+		Email sut = Email.newInstance("");
+
+		boolean result = sut.isEmpty();
+
+		assertTrue("expect empty [EMail]!", result);
+	}
+
+	@Test
+	public void testIsEmpty_False() {
+		Email sut = Email.newInstance(VALID_MAIL_FROM_JUSTUS_JONAS);
+
+		boolean result = sut.isEmpty();
+
+		assertFalse("expect filled [Email]", result);
+	}
 }

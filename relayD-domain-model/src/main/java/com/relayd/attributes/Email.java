@@ -37,6 +37,10 @@ public class Email implements Serializable {
 		}
 	}
 
+	public boolean isEmpty() {
+		return value.isEmpty();
+	}
+
 	@Override
 	public String toString() {
 		return value;
