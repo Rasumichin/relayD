@@ -6,6 +6,7 @@ import java.util.Locale;
 
 import com.relayd.Person;
 import com.relayd.attributes.Birthday;
+import com.relayd.attributes.Email;
 import com.relayd.attributes.Forename;
 import com.relayd.attributes.Position;
 import com.relayd.attributes.Relayname;
@@ -27,6 +28,7 @@ public class PersonBuilder {
 	private Birthday birthday = Birthday.newInstance(LocalDate.of(1956, Calendar.FEBRUARY, 17));
 	private Shirtsize shirtsize = Shirtsize.HerrenM;
 	private Locale locale = Locale.GERMANY;
+	private Email email = null;
 
 	PersonBuilder withSurename(Surename aSurename) {
 		surename = aSurename;
@@ -48,6 +50,11 @@ public class PersonBuilder {
 		return this;
 	}
 
+	public PersonBuilder withEmail(String string) {
+		email = Email.newInstance(string);
+		return this;
+	}
+
 	Person build() {
 		Person person = Person.newInstance();
 		person.setSurename(surename);
@@ -57,6 +64,7 @@ public class PersonBuilder {
 		person.setBirthday(birthday);
 		person.setShirtsize(shirtsize);
 		person.setNationality(locale);
+		person.setEmail(email);
 		return person;
 	}
 }
