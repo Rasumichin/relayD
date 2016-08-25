@@ -10,6 +10,7 @@ import java.util.UUID;
 import org.junit.Test;
 
 import com.relayd.attributes.Birthday;
+import com.relayd.attributes.Comment;
 import com.relayd.attributes.Email;
 import com.relayd.attributes.Forename;
 import com.relayd.attributes.Position;
@@ -143,6 +144,19 @@ public class PersonTest {
 		Position result = sut.getPosition();
 
 		assertEquals("[position] not correct!", expected, result);
+	}
+
+	@Test
+	public void testComment() {
+		Comment expected = Comment.newInstance("Spitzenläufer");
+
+		Person sut = Person.newInstance();
+
+		sut.setComment(expected);
+
+		Comment result = sut.getComment();
+
+		assertEquals("[comment] not correct!", expected, result);
 	}
 
 	@Test
