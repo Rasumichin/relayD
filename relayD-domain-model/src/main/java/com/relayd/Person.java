@@ -21,16 +21,16 @@ import com.relayd.attributes.Surename;
 public class Person implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private UUID uuid = null;
-	private Surename surename = null;
-	private Forename forename = null;
-	private Birthday birthday = null;
-	private Shirtsize shirtsize = null;
-	private Locale nationality = null; // TODO -schmollc- Anderen Attribute sind Fachobjekte, dies hier eine "API" Klasse. Warum kein Decorator einführen?
-	private Email email = null;
-	private Relayname relayname = null; // Refactor Dieses Attribut ist Jahresabhängig!
-	private Position position = null; // Refactor Dieses Attribut ist Jahresabhängig!
-	private Comment comment = null;
+	private UUID uuid;
+	private Surename surename;
+	private Forename forename;
+	private Birthday birthday;
+	private Shirtsize shirtsize;
+	private Locale nationality; // TODO -schmollc- Anderen Attribute sind Fachobjekte, dies hier eine "API" Klasse. Warum kein Decorator einführen?
+	private Email email;
+	private Relayname relayname; // Refactor Dieses Attribut ist Jahresabhängig!
+	private Position position; // Refactor Dieses Attribut ist Jahresabhängig!
+	private Comment comment;
 
 	private Person() {
 		uuid = UUID.randomUUID();
@@ -84,23 +84,15 @@ public class Person implements Serializable {
 		return nationality;
 	}
 
+	public void setNationality(Locale aNationality) {
+		nationality = aNationality;
+	}
+
 	public String getDisplayNationality() {
 		if (nationality == null) {
 			return null;
 		}
 		return nationality.getDisplayCountry();
-	}
-
-	public void setNationality(Locale aNationality) {
-		nationality = aNationality;
-	}
-
-	public void setEmail(Email anEmail) {
-		email = anEmail;
-	}
-
-	public Email getEmail() {
-		return email;
 	}
 
 	private String getDisplayCountry() {
@@ -110,28 +102,36 @@ public class Person implements Serializable {
 		return null;
 	}
 
-	public void setRelayname(Relayname aRelayname) {
-		relayname = aRelayname;
+	public Email getEmail() {
+		return email;
+	}
+
+	public void setEmail(Email anEmail) {
+		email = anEmail;
 	}
 
 	public Relayname getRelayname() {
 		return relayname;
 	}
 
-	public void setPosition(Position aPosition) {
-		position = aPosition;
+	public void setRelayname(Relayname aRelayname) {
+		relayname = aRelayname;
 	}
 
 	public Position getPosition() {
 		return position;
 	}
 
-	public void setComment(Comment aComment) {
-		comment = aComment;
+	public void setPosition(Position aPosition) {
+		position = aPosition;
 	}
 
 	public Comment getComment() {
 		return comment;
+	}
+
+	public void setComment(Comment aComment) {
+		comment = aComment;
 	}
 
 	@Override
@@ -168,5 +168,4 @@ public class Person implements Serializable {
 		}
 		return true;
 	}
-
 }

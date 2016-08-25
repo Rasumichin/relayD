@@ -78,16 +78,16 @@ public class Relay extends ArrayList<Person> {
 		return null;
 	}
 
-	@Override
-	public String toString() {
-		return "Relay: " + getRelayname();
-	}
-
 	public UUID getUUID() {
 		return uuid;
 	}
 
 	public Integer getYear() {
 		return year;
+	}
+
+	@Override
+	public String toString() {
+		return "Relay: " + getRelayname();
 	}
 }
