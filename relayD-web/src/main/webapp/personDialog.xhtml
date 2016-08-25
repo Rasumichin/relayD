@@ -136,6 +136,15 @@
 						</p:column>
 			</p:selectOneMenu>
 
+			<p:outputLabel
+				for="comment"
+				value="Comment:" />
+			<p:inputText
+				id="comment"
+				value="#{personEditPageBean.comment}">
+				<f:converter converterId="com.relayd.web.converter.CommentValueObjectConverter" />
+			</p:inputText>
+
 		</h:panelGrid>
 
 		<p:commandButton

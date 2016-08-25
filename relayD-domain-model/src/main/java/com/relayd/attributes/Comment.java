@@ -1,13 +1,14 @@
 package com.relayd.attributes;
 
+import java.io.Serializable;
+
 /**
- *
  * @author CrowCounter77 (Mirko@relayd.de)
  * @since 21.07.2016
  * status initial
- *
  */
-public class Comment {
+public class Comment implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	private String value;
 

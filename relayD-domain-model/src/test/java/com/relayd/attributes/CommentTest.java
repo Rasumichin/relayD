@@ -2,10 +2,11 @@ package com.relayd.attributes;
 
 import static org.junit.Assert.*;
 
+import java.io.Serializable;
+
 import org.junit.Test;
 
 /**
- *
  * @author CrowCounter77 (Mirko@relayd.de)
  * @since 21.07.2016
  * status initial
@@ -14,9 +15,37 @@ import org.junit.Test;
 public class CommentTest {
 
 	@Test
-	public void testCreateValidObject() {
-		String expectedComment = "Dies ist ein Kommentar.";
-		Comment sut = Comment.newInstance(expectedComment);
-		assertEquals("Value is not as expected.", expectedComment, sut.toString());
+	public void testNewInstance() {
+		Comment comment = Comment.newInstance("Comment");
+
+		assertNotNull(comment);
+	}
+
+	@Test
+	public void testNewInstanceForNull() {
+		Comment comment = Comment.newInstance(null);
+
+		assertNotNull(comment);
+	}
+
+	@Test
+	public void testToString() {
+		final String COMMENTTEXT = "Dies ist ein Kommentar.";
+		Comment comment = Comment.newInstance(COMMENTTEXT);
+
+		String result = comment.toString();
+
+		assertEquals(COMMENTTEXT, result);
+	}
+
+	@Test
+	public void testIsSerializable() {
+		String dummyString = "";
+		Comment sut = Comment.newInstance(dummyString);
+
+		@SuppressWarnings("cast")
+		boolean result = sut instanceof Serializable;
+
+		assertTrue("Class not Serializable!", result);
 	}
 }
