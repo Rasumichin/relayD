@@ -86,7 +86,7 @@ public class EventDayTest {
 
 		int hashCode = sut.hashCode();
 
-		assertEquals(4129336, hashCode);
+		assertEquals(4129337, hashCode);
 
 		sut.value = null;
 
