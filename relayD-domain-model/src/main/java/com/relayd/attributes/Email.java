@@ -10,9 +10,9 @@ import java.io.Serializable;
 public class Email implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	String value;
-
 	private static String pattern = "^[_A-Za-z0-9-+]+(.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(.[A-Za-z0-9]+)*(.[A-Za-z]{2,})$";
+
+	String value;
 
 	private Email(String email) {
 		super();
@@ -39,6 +39,19 @@ public class Email implements Serializable {
 
 	public boolean isEmpty() {
 		return value.isEmpty();
+	}
+
+	public static boolean isValid(String mail) {
+		if (mail == null) {
+			return false;
+		}
+
+		if (mail.trim().isEmpty()) {
+			return true;
+		}
+
+		boolean result = mail.matches(pattern);
+		return result;
 	}
 
 	@Override
@@ -74,14 +87,5 @@ public class Email implements Serializable {
 			return false;
 		}
 		return true;
-	}
-
-	public static boolean isValid(String aString) {
-		if (aString.trim().isEmpty()) {
-			return true;
-		}
-
-		boolean result = aString.matches(pattern);
-		return result;
 	}
 }

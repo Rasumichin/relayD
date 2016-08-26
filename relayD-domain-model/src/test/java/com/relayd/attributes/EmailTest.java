@@ -151,14 +151,20 @@ public class EmailTest {
 	}
 
 	@Test
-	public void testIsValid_WithValidValue() {
+	public void testIsValidWithValidValue() {
 		boolean result = Email.isValid(VALID_MAIL_FROM_JUSTUS_JONAS);
 		assertTrue("email should be valid!", result);
 	}
 
 	@Test
-	public void testIsValid_WithInvalidValue() {
+	public void testIsValidWithInvalidValue() {
 		boolean result = Email.isValid(INVALID_MAIL_FROM_JUSTUS_JONAS);
+		assertFalse("email should be invalid!", result);
+	}
+
+	@Test
+	public void testIsValidWithIllegalNullValue() {
+		boolean result = Email.isValid(null);
 		assertFalse("email should be invalid!", result);
 	}
 
