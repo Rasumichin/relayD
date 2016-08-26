@@ -15,14 +15,14 @@ import org.junit.Test;
 public class CommentTest {
 
 	@Test
-	public void testNewInstance() {
+	public void testCreateInstance() {
 		Comment comment = Comment.newInstance("Comment");
 
 		assertNotNull(comment);
 	}
 
 	@Test
-	public void testNewInstanceForNull() {
+	public void testCreateInstanceWithIllegalNullValue() {
 		Comment comment = Comment.newInstance(null);
 
 		assertNotNull(comment);

@@ -17,10 +17,18 @@ public class ForenameTest {
 	public ExpectedException expectedException = ExpectedException.none();
 
 	@Test
-	public void testNewInstance() {
+	public void testCreateInstance() {
 		Forename forename = Forename.newInstance("Name");
 
 		assertNotNull(forename);
+	}
+
+	@Test
+	public void testCreateInstanceWithIllegalNullValue() {
+		expectedException.expect(IllegalArgumentException.class);
+		expectedException.expectMessage("[forename] must not be 'null'.");
+
+		Forename.newInstance(null);
 	}
 
 	@Test
@@ -31,14 +39,6 @@ public class ForenameTest {
 		String result = forename.toString();
 
 		assertEquals(NAME, result);
-	}
-
-	@Test
-	public void testNewInstanceForNull() {
-		expectedException.expect(IllegalArgumentException.class);
-		expectedException.expectMessage("[forename] must not be 'null'.");
-
-		Forename.newInstance(null);
 	}
 
 	@Test

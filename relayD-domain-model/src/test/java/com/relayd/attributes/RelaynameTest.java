@@ -17,7 +17,7 @@ public class RelaynameTest {
 	public ExpectedException expectedException = ExpectedException.none();
 
 	@Test
-	public void testCreateValidObject() {
+	public void testCreateInstance() {
 		final String NAME = "Die vier ????";
 		Relayname realyname = Relayname.newInstance(NAME);
 
@@ -25,7 +25,7 @@ public class RelaynameTest {
 	}
 
 	@Test
-	public void testCreateInvalidObject_Null_WithRuleAssert() {
+	public void testCreateInstanceWithIllegalNullValue() {
 		expectedException.expect(IllegalArgumentException.class);
 		expectedException.expectMessage("[relayname] must not be 'null'.");
 		Relayname.newInstance(null);

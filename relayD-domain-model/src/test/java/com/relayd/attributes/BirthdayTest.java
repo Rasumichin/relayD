@@ -27,6 +27,13 @@ public class BirthdayTest {
 	}
 
 	@Test
+	public void testCreateInstanceWithIllegalNullValue() {
+		expectedException.expect(IllegalArgumentException.class);
+		expectedException.expectMessage("[dateOfBirth] must not be 'null'.");
+		Birthday.newInstance(null);
+	}
+
+	@Test
 	public void testValidateWithFutureDate() {
 		expectedException.expect(IllegalArgumentException.class);
 		expectedException.expectMessage("[dateOfBirth] must be in the past.");
@@ -44,7 +51,7 @@ public class BirthdayTest {
 	}
 
 	@Test
-	public void testCreateValidObject() {
+	public void testCreateInstance() {
 		final LocalDate date = LocalDate.of(1978, Month.NOVEMBER, 21);
 
 		Birthday birthday = Birthday.newInstance(date);

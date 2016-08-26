@@ -23,7 +23,7 @@ public class EmailTest {
 	public ExpectedException expectedException = ExpectedException.none();
 
 	@Test
-	public void testCreateObject_WithEmptyValue() {
+	public void testCreateInstanceWithEmptyValue() {
 		String value = "";
 		Email email = Email.newInstance(value);
 
@@ -31,7 +31,7 @@ public class EmailTest {
 	}
 
 	@Test
-	public void testCreateObject_WithWihteSpaceValue() {
+	public void testCreateInstanceWithWihteSpaceValue() {
 		String value = "   ";
 		Email email = Email.newInstance(value);
 
@@ -39,7 +39,7 @@ public class EmailTest {
 	}
 
 	@Test
-	public void testCreateObject_WithValidEmailAdress() {
+	public void testCreateInstanceWithValidEmailAdress() {
 		String value = VALID_MAIL_FROM_JUSTUS_JONAS;
 		Email email = Email.newInstance(value);
 
@@ -47,7 +47,7 @@ public class EmailTest {
 	}
 
 	@Test
-	public void testCreateObject_WithInvalidEmailAdress() {
+	public void testCreateInstanceWithInvalidEmailAdress() {
 		expectedException.expect(IllegalArgumentException.class);
 		expectedException.expectMessage("[email] not valid format!");
 
@@ -58,7 +58,7 @@ public class EmailTest {
 	}
 
 	@Test
-	public void testCreateObject_WithNull() {
+	public void testCreateInstanceWithIllegalNullValue() {
 		expectedException.expect(IllegalArgumentException.class);
 		expectedException.expectMessage("[email] must not be 'null'.");
 

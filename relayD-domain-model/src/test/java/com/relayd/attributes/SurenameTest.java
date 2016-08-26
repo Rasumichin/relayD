@@ -17,20 +17,15 @@ public class SurenameTest {
 	public ExpectedException expectedException = ExpectedException.none();
 
 	@Test
-	public void testCreateValidObject() {
-		final String NAME = "McFly";
+	public void testCreateInstance() {
+		final String NAME = "Jonas";
 		Surename surename = Surename.newInstance(NAME);
 
 		assertEquals(NAME, surename.toString());
 	}
 
-	@Test(expected = IllegalArgumentException.class)
-	public void testCreateInvalidObject_Null_WithExpectedAssert() {
-		Surename.newInstance(null);
-	}
-
 	@Test
-	public void testCreateInvalidObject_Null_WithRuleAssert() {
+	public void testCreateInstanceWithIllegalNullValue() {
 		expectedException.expect(IllegalArgumentException.class);
 		expectedException.expectMessage("[surename] must not be 'null'.");
 		Surename.newInstance(null);
