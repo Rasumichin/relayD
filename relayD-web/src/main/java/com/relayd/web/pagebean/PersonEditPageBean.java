@@ -41,9 +41,7 @@ public class PersonEditPageBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private PersonBridge personBridge;
-
 	Person workingPerson = null;
-
 	boolean isNewPerson = false;
 
 	// TODO -schmollc- in eine eigene Klasse stecken!
@@ -101,7 +99,15 @@ public class PersonEditPageBean implements Serializable {
 	}
 
 	Person createNewPerson() {
-		return Person.newInstance();
+		Person person = Person.newInstance();
+		Email defaultEmail = getDefaultEmail();
+		person.setEmail(defaultEmail);
+	
+		return person;
+	}
+
+	Email getDefaultEmail() {
+		return Email.newInstance("forename.surename@canda.com");
 	}
 
 	void openDialog() {

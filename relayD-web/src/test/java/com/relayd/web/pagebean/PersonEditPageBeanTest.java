@@ -287,4 +287,31 @@ public class PersonEditPageBeanTest {
 	public void testModifyShirtsizes() {
 		sut.getShirtsizes().add(Shirtsize.DamenL);
 	}
+	
+	@Test
+	public void testCreateNewPerson() {
+		Person result = sut.createNewPerson();
+		assertNotNull("Person is not initialized.", result);
+	}
+	
+	@Test
+	public void testGetDefaultEmail() {
+		Email expected = getExpectedDefaultEmail();
+		Email result = sut.getDefaultEmail();
+		assertEquals("Default email address is not correct.", expected, result);
+	}
+
+	private Email getExpectedDefaultEmail() {
+		return Email.newInstance("forename.surename@canda.com");
+	}
+	
+	@Test
+	public void testCreateNewPersonAndVerifyEmailHasADefaultValue() {
+		Email expected = getExpectedDefaultEmail();
+		Person person = sut.createNewPerson();
+		
+		Email result = person.getEmail();
+		assertEquals("Person's [email] attribute is not correctly initialized.", expected, result);
+		
+	}
 }
