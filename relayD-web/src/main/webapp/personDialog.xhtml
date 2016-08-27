@@ -42,6 +42,15 @@
 			</p:inputText>
 
 			<p:outputLabel
+				for="email"
+				value="Email:" />
+			<p:inputText
+				id="email"
+				value="#{personEditPageBean.email}">
+				<f:converter converterId="com.relayd.web.converter.EmailValueObjectConverter" />
+			</p:inputText>
+
+			<p:outputLabel
 				for="birthday"
 				value="Birthday:" />
 			<p:calendar
@@ -82,15 +91,6 @@
 							#{entry.description}
 						</p:column>
 			</p:selectOneMenu>
-
-			<p:outputLabel
-				for="email"
-				value="Email:" />
-			<p:inputText
-				id="email"
-				value="#{personEditPageBean.email}">
-				<f:converter converterId="com.relayd.web.converter.EmailValueObjectConverter" />
-			</p:inputText>
 
 			<p:outputLabel
 				for="nationality"
@@ -144,7 +144,6 @@
 				value="#{personEditPageBean.comment}">
 				<f:converter converterId="com.relayd.web.converter.CommentValueObjectConverter" />
 			</p:inputText>
-
 		</h:panelGrid>
 
 		<p:commandButton
