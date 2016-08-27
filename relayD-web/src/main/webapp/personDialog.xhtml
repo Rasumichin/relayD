@@ -19,6 +19,7 @@
 		<p:growl
 			id="growl"
 			showDetail="true" />
+		<p:focus/>
 
 		<h:panelGrid
 			columns="2"
@@ -28,7 +29,8 @@
 				value="Forename:" />
 			<p:inputText
 				id="forename"
-				value="#{personEditPageBean.forename}">
+				value="#{personEditPageBean.forename}"
+				required="true">
 				<f:converter converterId="com.relayd.web.converter.ForenameValueObjectConverter" />
 			</p:inputText>
 
@@ -37,7 +39,8 @@
 				value="Surename:" />
 			<p:inputText
 				id="surename"
-				value="#{personEditPageBean.surename}">
+				value="#{personEditPageBean.surename}"
+				required="true">
 				<f:converter converterId="com.relayd.web.converter.SurenameValueObjectConverter" />
 			</p:inputText>
 
