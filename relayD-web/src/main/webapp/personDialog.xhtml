@@ -32,7 +32,7 @@
 				value="#{personEditPageBean.forename}"
 				required="true">
 				<f:converter converterId="com.relayd.web.converter.ForenameValueObjectConverter" />
-				<p:ajax listener="#{personEditPageBean.forenameValueChanged}" execute="@this" render="email"/>				
+				<p:ajax event="valueChange" listener="#{personEditPageBean.forenameValueChanged}" execute="@this" render="email"/>				
 			</p:inputText>
 
 			<p:outputLabel
