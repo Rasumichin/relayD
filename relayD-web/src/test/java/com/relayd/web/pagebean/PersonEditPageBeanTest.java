@@ -307,10 +307,10 @@ public class PersonEditPageBeanTest {
 	
 	@Test
 	public void testCreateNewPersonAndVerifyEmailHasADefaultValue() {
+		sut.openDialogForCreatePerson();
 		Email expected = getExpectedDefaultEmail();
-		Person person = sut.createNewPerson();
 		
-		Email result = person.getEmail();
+		Email result = sut.getEmail();
 		assertEquals("Person's [email] attribute is not correctly initialized.", expected, result);
 		
 	}
