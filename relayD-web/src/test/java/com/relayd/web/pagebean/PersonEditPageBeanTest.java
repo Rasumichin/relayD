@@ -312,6 +312,18 @@ public class PersonEditPageBeanTest {
 		
 		Email result = sut.getEmail();
 		assertEquals("Person's [email] attribute is not correctly initialized.", expected, result);
+	}
+	
+	@Test
+	public void testForenameValueChanged() {
+		sut.openDialogForCreatePerson();
+		Forename forename = Forename.newInstance("Kent");
+		Email expected = Email.newInstance(forename.toString() + "@canda.com");
 		
+		sut.setForename(forename);
+		sut.forenameValueChanged();
+		
+		Email result = sut.getEmail();
+		assertEquals("Forename value change has not been handled correctly.", expected, result);
 	}
 }

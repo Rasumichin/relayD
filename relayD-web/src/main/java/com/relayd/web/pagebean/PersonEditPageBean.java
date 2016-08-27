@@ -177,6 +177,14 @@ public class PersonEditPageBean implements Serializable {
 	public void cancel() {
 		closeDialog();
 	}
+	
+	public void forenameValueChanged() {
+		Forename currentForename = getForename();
+		Email currentEmail = getEmail();
+		currentEmail.setLocalPart(currentForename.toString());
+		
+		System.out.println("Email is: " + getEmail());
+	}
 
 	public List<Locale> getNationalities() {
 		return Collections.unmodifiableList(nationalities);
