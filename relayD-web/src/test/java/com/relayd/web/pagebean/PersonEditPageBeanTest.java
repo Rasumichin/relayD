@@ -317,13 +317,28 @@ public class PersonEditPageBeanTest {
 	@Test
 	public void testForenameValueChanged() {
 		sut.openDialogForCreatePerson();
-		Forename forename = Forename.newInstance("Kent");
-		Email expected = Email.newInstance(forename.toString() + "@canda.com");
+		Forename forename = Forename.newInstance("Clark");
+		Surename surename = sut.getDefaultSurename();
+		Email expected = Email.newInstance(forename.toString() + "." + surename.toString() + "@canda.com");
 		
 		sut.setForename(forename);
-		sut.forenameValueChanged();
+		sut.nameValueChanged();
 		
 		Email result = sut.getEmail();
 		assertEquals("Forename value change has not been handled correctly.", expected, result);
+	}
+	
+	@Test
+	public void testSurenameValueChanged() {
+		sut.openDialogForCreatePerson();
+		Forename forename = sut.getDefaultForename();
+		Surename surename = Surename.newInstance("Kent");
+		Email expected = Email.newInstance(forename.toString() + "." + surename.toString() + "@canda.com");
+		
+		sut.setSurename(surename);
+		sut.nameValueChanged();
+		
+		Email result = sut.getEmail();
+		assertEquals("Surename value change has not been handled correctly.", expected, result);
 	}
 }

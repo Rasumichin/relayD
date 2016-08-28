@@ -23,6 +23,7 @@
 
 		<h:panelGrid
 			columns="2"
+			id="inputgrid"
 			cellpadding="5">
 			<p:outputLabel
 				for="forename"
@@ -32,7 +33,7 @@
 				value="#{personEditPageBean.forename}"
 				required="true">
 				<f:converter converterId="com.relayd.web.converter.ForenameValueObjectConverter" />
-				<p:ajax event="valueChange" listener="#{personEditPageBean.forenameValueChanged}" execute="@this" render="email"/>				
+				<p:ajax event="valueChange" listener="#{personEditPageBean.nameValueChanged}" update="email"/>				
 			</p:inputText>
 
 			<p:outputLabel
@@ -43,6 +44,7 @@
 				value="#{personEditPageBean.surename}"
 				required="true">
 				<f:converter converterId="com.relayd.web.converter.SurenameValueObjectConverter" />
+				<p:ajax event="valueChange" listener="#{personEditPageBean.nameValueChanged}" update="email"/>				
 			</p:inputText>
 
 			<p:outputLabel

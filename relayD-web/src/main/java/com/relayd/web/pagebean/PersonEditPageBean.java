@@ -107,7 +107,15 @@ public class PersonEditPageBean implements Serializable {
 	}
 
 	Email getDefaultEmail() {
-		return Email.newInstance("forename.surename@canda.com");
+		return Email.newInstance(getDefaultForename() + "." + getDefaultSurename() + "@canda.com");
+	}
+	
+	Forename getDefaultForename() {
+		return Forename.newInstance("forename");
+	}
+	
+	Surename getDefaultSurename() {
+		return Surename.newInstance("surename");
 	}
 
 	void openDialog() {
@@ -178,12 +186,12 @@ public class PersonEditPageBean implements Serializable {
 		closeDialog();
 	}
 	
-	public void forenameValueChanged() {
+	public void nameValueChanged() {
 		Forename currentForename = getForename();
+		Surename currentSurename = getSurename();
+		String localPart = currentForename + "." + currentSurename;
 		Email currentEmail = getEmail();
-		currentEmail.setLocalPart(currentForename.toString());
-		
-		System.out.println("Email is: " + getEmail());
+		currentEmail.setLocalPart(localPart.toString());
 	}
 
 	public List<Locale> getNationalities() {
@@ -199,7 +207,11 @@ public class PersonEditPageBean implements Serializable {
 	}
 
 	public Forename getForename() {
-		return workingPerson.getForename();
+		if (workingPerson.getForename() != null) {
+			return workingPerson.getForename();
+		} else {
+			return getDefaultForename();
+		}
 	}
 
 	public void setForename(Forename aForename) {
@@ -207,7 +219,11 @@ public class PersonEditPageBean implements Serializable {
 	}
 
 	public Surename getSurename() {
-		return workingPerson.getSurename();
+		if (workingPerson.getSurename() != null) {
+			return workingPerson.getSurename();
+		} else {
+			return getDefaultSurename();
+		}
 	}
 
 	public void setSurename(Surename aSurename) {
