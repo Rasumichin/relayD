@@ -89,15 +89,15 @@ public class Email implements Serializable {
 			throw new IllegalStateException("Email value must not be empty when setting the local part.");
 		}
 		if (newLocalPart == null) {
-			throw new IllegalArgumentException("Domain part must not be 'null'.");
+			throw new IllegalArgumentException("Local part must not be 'null'.");
 		}
 		if (newLocalPart.isEmpty()) {
-			throw new IllegalArgumentException("Domain part must not be empty.");
+			throw new IllegalArgumentException("Local part must not be empty.");
 		}
 		
 		String possiblyNewValue = newLocalPart + '@' + getDomainPart();
 		if (!isValid(possiblyNewValue)) {
-			throw new IllegalArgumentException("Domain part could not be part of a valid email address.");
+			throw new IllegalArgumentException("Local part [" + newLocalPart + "] could not be part of a valid email address.");
 		}
 		
 		value = possiblyNewValue;
