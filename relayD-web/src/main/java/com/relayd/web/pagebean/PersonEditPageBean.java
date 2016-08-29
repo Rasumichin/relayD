@@ -107,17 +107,9 @@ public class PersonEditPageBean implements Serializable {
 	}
 
 	Email getDefaultEmail() {
-		return Email.newInstance(getDefaultForename() + "." + getDefaultSurename() + "@canda.com");
+		return Email.newInstance("forename.surename@canda.com");
 	}
 	
-	Forename getDefaultForename() {
-		return Forename.newInstance("forename");
-	}
-	
-	Surename getDefaultSurename() {
-		return Surename.newInstance("surename");
-	}
-
 	void openDialog() {
 		Map<String, Object> options = createDialogOptions();
 		RequestContext.getCurrentInstance().openDialog(NavigationConstants.PERSON_DIALOG_ID, options, null);
@@ -187,13 +179,31 @@ public class PersonEditPageBean implements Serializable {
 	}
 	
 	public void nameValueChanged() {
-		Forename currentForename = getForename();
-		Surename currentSurename = getSurename();
-		String localPart = currentForename + "." + currentSurename;
+		String currentLocalPart = getCurrentLocalPart();
 		Email currentEmail = getEmail();
-		currentEmail.setLocalPart(localPart.toString());
+		currentEmail.setLocalPart(currentLocalPart);
 	}
 
+	public String getCurrentLocalPart() {
+		String currentLocalPart = null;
+		
+		Forename currentForename = getForename();
+		if (currentForename != null) {
+			currentLocalPart = currentForename.toString();
+		}
+		
+		Surename currentSurename = getSurename();
+		if (currentSurename != null) {
+			if (currentLocalPart == null) {
+				currentLocalPart = currentSurename.toString();
+			} else {
+				currentLocalPart += "." + currentSurename;
+			}
+		}
+		
+		return currentLocalPart;
+	}
+	
 	public List<Locale> getNationalities() {
 		return Collections.unmodifiableList(nationalities);
 	}
@@ -207,11 +217,7 @@ public class PersonEditPageBean implements Serializable {
 	}
 
 	public Forename getForename() {
-		if (workingPerson.getForename() != null) {
-			return workingPerson.getForename();
-		} else {
-			return getDefaultForename();
-		}
+		return workingPerson.getForename();
 	}
 
 	public void setForename(Forename aForename) {
@@ -219,11 +225,7 @@ public class PersonEditPageBean implements Serializable {
 	}
 
 	public Surename getSurename() {
-		if (workingPerson.getSurename() != null) {
-			return workingPerson.getSurename();
-		} else {
-			return getDefaultSurename();
-		}
+		return workingPerson.getSurename();
 	}
 
 	public void setSurename(Surename aSurename) {

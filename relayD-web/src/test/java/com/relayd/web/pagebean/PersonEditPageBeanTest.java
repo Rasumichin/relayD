@@ -8,8 +8,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -315,11 +314,53 @@ public class PersonEditPageBeanTest {
 	}
 	
 	@Test
+	public void testGetCurrentLocalPartForenameIsSet() {
+		sut.openDialogForCreatePerson();
+		Forename forename = Forename.newInstance("Mike");
+		sut.setForename(forename);
+		
+		String expected = forename.toString();
+		String result = sut.getCurrentLocalPart();
+		assertEquals("Current local part is not correct.", expected, result);
+	}
+	
+	@Test
+	public void testGetCurrentLocalPartSurenameIsSet() {
+		sut.openDialogForCreatePerson();
+		Surename surename = Surename.newInstance("Hansen");
+		sut.setSurename(surename);
+		
+		String expected = surename.toString();
+		String result = sut.getCurrentLocalPart();
+		assertEquals("Current local part is not correct.", expected, result);
+	}
+	
+	@Test
+	public void testGetCurrentLocalPartForenameAndSurenameHaveBeenSet() {
+		sut.openDialogForCreatePerson();
+		Forename forename = Forename.newInstance("Mike");
+		sut.setForename(forename);
+		Surename surename = Surename.newInstance("Hansen");
+		sut.setSurename(surename);
+		
+		String expected = forename.toString() + "." + surename.toString();
+		String result = sut.getCurrentLocalPart();
+		assertEquals("Current local part is not correct.", expected, result);
+	}
+	
+	@Test
+	public void testGetCurrentLocalPartWhenNoNameHasBeenSet() {
+		sut.openDialogForCreatePerson();
+		
+		String result = sut.getCurrentLocalPart();
+		assertNull("Current local part is not correct.", result);
+	}
+	
+	@Test
 	public void testForenameValueChanged() {
 		sut.openDialogForCreatePerson();
 		Forename forename = Forename.newInstance("Clark");
-		Surename surename = sut.getDefaultSurename();
-		Email expected = Email.newInstance(forename.toString() + "." + surename.toString() + "@canda.com");
+		Email expected = Email.newInstance(forename.toString() + "@canda.com");
 		
 		sut.setForename(forename);
 		sut.nameValueChanged();
@@ -331,9 +372,8 @@ public class PersonEditPageBeanTest {
 	@Test
 	public void testSurenameValueChanged() {
 		sut.openDialogForCreatePerson();
-		Forename forename = sut.getDefaultForename();
 		Surename surename = Surename.newInstance("Kent");
-		Email expected = Email.newInstance(forename.toString() + "." + surename.toString() + "@canda.com");
+		Email expected = Email.newInstance(surename.toString() + "@canda.com");
 		
 		sut.setSurename(surename);
 		sut.nameValueChanged();
