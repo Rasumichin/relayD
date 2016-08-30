@@ -6,10 +6,10 @@ package com.relayd.util;
  * status   initial
  */
 public class CreateEqualMethodForTestClass {
-	String carrigeReturnLineFeed = "\r\n";
+	private String carrigeReturnLineFeed = "\r\n";
 
 	public String createTestEqualsWithMyself() {
-		return "@Test\r\npublic void testEqualsWithMyself() {\r\n\r\nboolean result = sut.equals(sut);\r\n\r\nassertTrue(result);\r\n}";
+		return "@Test" + carrigeReturnLineFeed + "public void testEqualsWithMyself() {" + carrigeReturnLineFeed + carrigeReturnLineFeed + "boolean result = sut.equals(sut);" + carrigeReturnLineFeed + carrigeReturnLineFeed + "assertTrue(result);}";
 	}
 
 	public String createTestEqualsWithNull() {
