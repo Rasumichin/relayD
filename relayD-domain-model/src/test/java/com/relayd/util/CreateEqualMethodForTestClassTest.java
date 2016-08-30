@@ -15,9 +15,9 @@ public class CreateEqualMethodForTestClassTest {
 	private CreateEqualMethodForTestClass sut = new CreateEqualMethodForTestClass();
 
 	//@formatter:off
-	private final static String FIRST_EQUALS = "@Test public void testEqualsWithMyself() {boolean result = sut.equals(sut);assertTrue(result);}";
-	private final static String SECOND_EQUALS = "@Test public void testEqualsWithNull() {boolean result = sut.equals(null);assertFalse(result);}";
-	private final static String THIRD_EQUALS = "@Test public void testEqualsWithNotCompatibleClass() {boolean result = sut.equals(new String());assertFalse(result);}";
+	private final static String FIRST_EQUALS = "@Test\r\npublic void testEqualsWithMyself() {\r\n\r\nboolean result = sut.equals(sut);\r\n\r\nassertTrue(result);\r\n}";
+	private final static String SECOND_EQUALS = "@Test\r\npublic void testEqualsWithNull() {\r\n\r\nboolean result = sut.equals(null);\r\n\r\nassertFalse(result);\r\n}";
+	private final static String THIRD_EQUALS = "@Test\r\npublic void testEqualsWithNotCompatibleClass() {\r\n\r\nboolean result = sut.equals(new String());\r\n\r\nassertFalse(result);\r\n}";
 	private final static String FOURTH_EQUALS = "@Test public void testEqualsWithMasterCompanyNumberValueIsNull() {sut.setMasterCompanyNumber(null);BuyingStockOutUHCCostsPK secondSut = new BuyingStockOutUHCCostsPK();secondSut.setMasterCompanyNumber((short) 1);boolean result = sut.equals(secondSut);assertFalse(result);}";
 	private final static String FIFTH_EQUALS = "@Test public void testEqualsWithBothMasterCompanyNumberValuesAreNull() {sut.setMasterCompanyNumber(null);BuyingStockOutUHCCostsPK secondSut = new BuyingStockOutUHCCostsPK();secondSut.setMasterCompanyNumber(null);boolean result = sut.equals(secondSut);assertTrue(result);}";
 	private final static String SIXTH_EQUALS = "@Test public void testEqualsWithMasterCompanyNumberTwoDiffrentValues() {sut.setMasterCompanyNumber((short) 1);BuyingStockOutUHCCostsPK secondSut = new BuyingStockOutUHCCostsPK();secondSut.setMasterCompanyNumber((short) 2);boolean result = sut.equals(secondSut);assertFalse(result);}";

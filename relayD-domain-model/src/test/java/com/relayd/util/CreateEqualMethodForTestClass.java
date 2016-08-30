@@ -8,15 +8,15 @@ package com.relayd.util;
 public class CreateEqualMethodForTestClass {
 
 	public String createTestEqualsWithMyself() {
-		return "@Test public void testEqualsWithMyself() {boolean result = sut.equals(sut);assertTrue(result);}";
+		return "@Test\r\npublic void testEqualsWithMyself() {\r\n\r\nboolean result = sut.equals(sut);\r\n\r\nassertTrue(result);\r\n}";
 	}
 
 	public String createTestEqualsWithNull() {
-		return "@Test public void testEqualsWithNull() {boolean result = sut.equals(null);assertFalse(result);}";
+		return "@Test\r\npublic void testEqualsWithNull() {\r\n\r\nboolean result = sut.equals(null);\r\n\r\nassertFalse(result);\r\n}";
 	}
 
 	public String createTestEqualsWithNotCompatibleClass() {
-		return "@Test public void testEqualsWithNotCompatibleClass() {boolean result = sut.equals(new String());assertFalse(result);}";
+		return "@Test\r\npublic void testEqualsWithNotCompatibleClass() {\r\n\r\nboolean result = sut.equals(new String());\r\n\r\nassertFalse(result);\r\n}";
 	}
 
 	public String createTestEqualsWithParameterValueIsNull(String classname, String valueName, String type) {
