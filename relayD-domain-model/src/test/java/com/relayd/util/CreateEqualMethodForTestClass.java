@@ -6,6 +6,7 @@ package com.relayd.util;
  * status   initial
  */
 public class CreateEqualMethodForTestClass {
+	String carrigeReturnLineFeed = "\r\n";
 
 	public String createTestEqualsWithMyself() {
 		return "@Test\r\npublic void testEqualsWithMyself() {\r\n\r\nboolean result = sut.equals(sut);\r\n\r\nassertTrue(result);\r\n}";
@@ -20,7 +21,6 @@ public class CreateEqualMethodForTestClass {
 	}
 
 	public String createTestEqualsWithParameterValueIsNull(String classname, String valueName, String type) {
-		String carrigeReturnLineFeed = "\r\n";
 		StringBuilder builder = new StringBuilder("@Test" + carrigeReturnLineFeed + "public void testEqualsWith");
 		builder.append(valueName);
 		builder.append("ValueIsNull() {" + carrigeReturnLineFeed + "sut.set");
@@ -39,17 +39,17 @@ public class CreateEqualMethodForTestClass {
 	}
 
 	public String createTestEqualsWithBothMasterCompanyNumberValuesAreNull(String classname, String valueName) {
-		StringBuilder builder = new StringBuilder("@Test public void testEqualsWithBoth");
+		StringBuilder builder = new StringBuilder("@Test" + carrigeReturnLineFeed + "public void testEqualsWithBoth");
 		builder.append(valueName);
-		builder.append("ValuesAreNull() {sut.set");
+		builder.append("ValuesAreNull() {" + carrigeReturnLineFeed + "sut.set");
 		builder.append(valueName);
-		builder.append("(null);");
+		builder.append("(null);" + carrigeReturnLineFeed + carrigeReturnLineFeed);
 		builder.append(classname);
 		builder.append(" secondSut = new ");
 		builder.append(classname);
-		builder.append("();secondSut.set");
+		builder.append("();" + carrigeReturnLineFeed + carrigeReturnLineFeed + "secondSut.set");
 		builder.append(valueName);
-		builder.append("(null);boolean result = sut.equals(secondSut);assertTrue(result);}");
+		builder.append("(null);" + carrigeReturnLineFeed + carrigeReturnLineFeed + "boolean result = sut.equals(secondSut);" + carrigeReturnLineFeed + carrigeReturnLineFeed + "assertTrue(result);}");
 
 		return builder.toString();
 	}
