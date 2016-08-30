@@ -13,11 +13,11 @@ public class CreateEqualMethodForTestClass {
 	}
 
 	public String createTestEqualsWithNull() {
-		return "@Test\r\npublic void testEqualsWithNull() {\r\n\r\nboolean result = sut.equals(null);\r\n\r\nassertFalse(result);\r\n}";
+		return "@Test" + carrigeReturnLineFeed + "public void testEqualsWithNull() {" + carrigeReturnLineFeed + carrigeReturnLineFeed + "boolean result = sut.equals(null);" + carrigeReturnLineFeed + carrigeReturnLineFeed + "assertFalse(result);}";
 	}
 
 	public String createTestEqualsWithNotCompatibleClass() {
-		return "@Test\r\npublic void testEqualsWithNotCompatibleClass() {\r\n\r\nboolean result = sut.equals(new String());\r\n\r\nassertFalse(result);\r\n}";
+		return "@Test" + carrigeReturnLineFeed + "public void testEqualsWithNotCompatibleClass() {" + carrigeReturnLineFeed + carrigeReturnLineFeed + "boolean result = sut.equals(new String());" + carrigeReturnLineFeed + carrigeReturnLineFeed + "assertFalse(result);}";
 	}
 
 	public String createTestEqualsWithParameterValueIsNull(String classname, String valueName, String type) {

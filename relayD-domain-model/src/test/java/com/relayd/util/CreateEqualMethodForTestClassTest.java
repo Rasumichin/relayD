@@ -15,9 +15,9 @@ public class CreateEqualMethodForTestClassTest {
 	private CreateEqualMethodForTestClass sut = new CreateEqualMethodForTestClass();
 
 	//@formatter:off
-	private final static String FIRST_EQUALS = "@Test\r\npublic void testEqualsWithMyself() {\r\n\r\nboolean result = sut.equals(sut);\r\n\r\nassertTrue(result);\r\n}";
-	private final static String SECOND_EQUALS = "@Test\r\npublic void testEqualsWithNull() {\r\n\r\nboolean result = sut.equals(null);\r\n\r\nassertFalse(result);\r\n}";
-	private final static String THIRD_EQUALS = "@Test\r\npublic void testEqualsWithNotCompatibleClass() {\r\n\r\nboolean result = sut.equals(new String());\r\n\r\nassertFalse(result);\r\n}";
+	private final static String FIRST_EQUALS = "@Test\r\npublic void testEqualsWithMyself() {\r\n\r\nboolean result = sut.equals(sut);\r\n\r\nassertTrue(result);}";
+	private final static String SECOND_EQUALS = "@Test\r\npublic void testEqualsWithNull() {\r\n\r\nboolean result = sut.equals(null);\r\n\r\nassertFalse(result);}";
+	private final static String THIRD_EQUALS = "@Test\r\npublic void testEqualsWithNotCompatibleClass() {\r\n\r\nboolean result = sut.equals(new String());\r\n\r\nassertFalse(result);}";
 	private final static String FOURTH_EQUALS = "@Test\r\npublic void testEqualsWithMasterCompanyNumberValueIsNull() {\r\nsut.setMasterCompanyNumber(null);\r\n\r\nBuyingStockOutUHCCostsPK secondSut = new BuyingStockOutUHCCostsPK();\r\n\r\nsecondSut.setMasterCompanyNumber((short) 1);\r\n\r\nboolean result = sut.equals(secondSut);\r\n\r\nassertFalse(result);}";
 	private final static String FIFTH_EQUALS = "@Test\r\npublic void testEqualsWithBothMasterCompanyNumberValuesAreNull() {\r\nsut.setMasterCompanyNumber(null);\r\n\r\nBuyingStockOutUHCCostsPK secondSut = new BuyingStockOutUHCCostsPK();\r\n\r\nsecondSut.setMasterCompanyNumber(null);\r\n\r\nboolean result = sut.equals(secondSut);\r\n\r\nassertTrue(result);}";
 	private final static String SIXTH_EQUALS = "@Test public void testEqualsWithMasterCompanyNumberTwoDiffrentValues() {sut.setMasterCompanyNumber((short) 1);BuyingStockOutUHCCostsPK secondSut = new BuyingStockOutUHCCostsPK();secondSut.setMasterCompanyNumber((short) 2);boolean result = sut.equals(secondSut);assertFalse(result);}";
