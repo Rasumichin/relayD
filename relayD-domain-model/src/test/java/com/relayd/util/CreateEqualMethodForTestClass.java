@@ -38,7 +38,7 @@ public class CreateEqualMethodForTestClass {
 		return builder.toString();
 	}
 
-	public String createTestEqualsWithBothMasterCompanyNumberValuesAreNull(String classname, String valueName) {
+	public String createTestEqualsWithBothParameterValuesAreNull(String classname, String valueName) {
 		StringBuilder builder = new StringBuilder("@Test" + carrigeReturnLineFeed + "public void testEqualsWithBoth");
 		builder.append(valueName);
 		builder.append("ValuesAreNull() {" + carrigeReturnLineFeed + "sut.set");
@@ -82,13 +82,13 @@ public class CreateEqualMethodForTestClass {
 		builder.append("SameValues() {" + carrigeReturnLineFeed);
 		builder.append(type);
 		builder.append(" " + firstLetterOfValueNameLowerCase);
-		builder.append(restOfValueName);
+		builder.append(restOfValueName + "Value");
 		builder.append(" = (");
 		builder.append(type);
 		builder.append(") 1;" + carrigeReturnLineFeed + carrigeReturnLineFeed + "sut.set");
 		builder.append(valueName);
 		builder.append("(");
-		builder.append(firstLetterOfValueNameLowerCase + restOfValueName);
+		builder.append(firstLetterOfValueNameLowerCase + restOfValueName + "Value");
 		builder.append(");" + carrigeReturnLineFeed + carrigeReturnLineFeed);
 		builder.append(classname);
 		builder.append(" secondSut = new ");
@@ -96,7 +96,7 @@ public class CreateEqualMethodForTestClass {
 		builder.append("();" + carrigeReturnLineFeed + carrigeReturnLineFeed + "secondSut.set");
 		builder.append(valueName);
 		builder.append("(");
-		builder.append(firstLetterOfValueNameLowerCase + restOfValueName);
+		builder.append(firstLetterOfValueNameLowerCase + restOfValueName + "Value");
 		builder.append(");" + carrigeReturnLineFeed + carrigeReturnLineFeed);
 		builder.append("boolean result = sut.equals(secondSut);" + carrigeReturnLineFeed + carrigeReturnLineFeed + "assertTrue(result);}");
 

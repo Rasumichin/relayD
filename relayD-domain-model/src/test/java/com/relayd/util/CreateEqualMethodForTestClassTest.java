@@ -18,10 +18,10 @@ public class CreateEqualMethodForTestClassTest {
 	private final static String FIRST_EQUALS = "@Test\r\npublic void testEqualsWithMyself() {\r\n\r\nboolean result = sut.equals(sut);\r\n\r\nassertTrue(result);}";
 	private final static String SECOND_EQUALS = "@Test\r\npublic void testEqualsWithNull() {\r\n\r\nboolean result = sut.equals(null);\r\n\r\nassertFalse(result);}";
 	private final static String THIRD_EQUALS = "@Test\r\npublic void testEqualsWithNotCompatibleClass() {\r\n\r\nboolean result = sut.equals(new String());\r\n\r\nassertFalse(result);}";
-	private final static String FOURTH_EQUALS = "@Test\r\npublic void testEqualsWithMasterCompanyNumberValueIsNull() {\r\nsut.setMasterCompanyNumber(null);\r\n\r\nBuyingStockOutUHCCostsPK secondSut = new BuyingStockOutUHCCostsPK();\r\n\r\nsecondSut.setMasterCompanyNumber((short) 1);\r\n\r\nboolean result = sut.equals(secondSut);\r\n\r\nassertFalse(result);}";
-	private final static String FIFTH_EQUALS = "@Test\r\npublic void testEqualsWithBothMasterCompanyNumberValuesAreNull() {\r\nsut.setMasterCompanyNumber(null);\r\n\r\nBuyingStockOutUHCCostsPK secondSut = new BuyingStockOutUHCCostsPK();\r\n\r\nsecondSut.setMasterCompanyNumber(null);\r\n\r\nboolean result = sut.equals(secondSut);\r\n\r\nassertTrue(result);}";
-	private final static String SIXTH_EQUALS = "@Test\r\npublic void testEqualsWithMasterCompanyNumberTwoDiffrentValues() {\r\nsut.setMasterCompanyNumber((short) 1);\r\n\r\nBuyingStockOutUHCCostsPK secondSut = new BuyingStockOutUHCCostsPK();\r\n\r\nsecondSut.setMasterCompanyNumber((short) 2);\r\n\r\nboolean result = sut.equals(secondSut);\r\n\r\nassertFalse(result);}";
-	private final static String SEVENTH_EQUALS = "@Test\r\npublic void testEqualsWithMasterCompanyNumberSameValues() {\r\nshort masterCompanyNumber = (short) 1;\r\n\r\nsut.setMasterCompanyNumber(masterCompanyNumber);\r\n\r\nBuyingStockOutUHCCostsPK secondSut = new BuyingStockOutUHCCostsPK();\r\n\r\nsecondSut.setMasterCompanyNumber(masterCompanyNumber);\r\n\r\nboolean result = sut.equals(secondSut);\r\n\r\nassertTrue(result);}";
+	private final static String FOURTH_EQUALS = "@Test\r\npublic void testEqualsWithShortValueIsNull() {\r\nsut.setShort(null);\r\n\r\nBuyingStockOutUHCCostsPK secondSut = new BuyingStockOutUHCCostsPK();\r\n\r\nsecondSut.setShort((short) 1);\r\n\r\nboolean result = sut.equals(secondSut);\r\n\r\nassertFalse(result);}";
+	private final static String FIFTH_EQUALS = "@Test\r\npublic void testEqualsWithBothShortValuesAreNull() {\r\nsut.setShort(null);\r\n\r\nBuyingStockOutUHCCostsPK secondSut = new BuyingStockOutUHCCostsPK();\r\n\r\nsecondSut.setShort(null);\r\n\r\nboolean result = sut.equals(secondSut);\r\n\r\nassertTrue(result);}";
+	private final static String SIXTH_EQUALS = "@Test\r\npublic void testEqualsWithShortTwoDiffrentValues() {\r\nsut.setShort((short) 1);\r\n\r\nBuyingStockOutUHCCostsPK secondSut = new BuyingStockOutUHCCostsPK();\r\n\r\nsecondSut.setShort((short) 2);\r\n\r\nboolean result = sut.equals(secondSut);\r\n\r\nassertFalse(result);}";
+	private final static String SEVENTH_EQUALS = "@Test\r\npublic void testEqualsWithShortSameValues() {\r\nshort shortValue = (short) 1;\r\n\r\nsut.setShort(shortValue);\r\n\r\nBuyingStockOutUHCCostsPK secondSut = new BuyingStockOutUHCCostsPK();\r\n\r\nsecondSut.setShort(shortValue);\r\n\r\nboolean result = sut.equals(secondSut);\r\n\r\nassertTrue(result);}";
 	//@formatter:on
 
 	@Test
@@ -48,7 +48,7 @@ public class CreateEqualMethodForTestClassTest {
 	@Test
 	public void testCreateTestEqualsWithParameterValueIsNull() {
 		String classname = "BuyingStockOutUHCCostsPK";
-		String attribute = "MasterCompanyNumber";
+		String attribute = "Short";
 		String type = "short";
 		String result = sut.createTestEqualsWithParameterValueIsNull(classname, attribute, type);
 
@@ -58,8 +58,8 @@ public class CreateEqualMethodForTestClassTest {
 	@Test
 	public void testCreateTestEqualsWithBothParameterValuesAreNull() {
 		String classname = "BuyingStockOutUHCCostsPK";
-		String attribute = "MasterCompanyNumber";
-		String result = sut.createTestEqualsWithBothMasterCompanyNumberValuesAreNull(classname, attribute);
+		String attribute = "Short";
+		String result = sut.createTestEqualsWithBothParameterValuesAreNull(classname, attribute);
 
 		assertEquals("[result] nicht korrekt!", FIFTH_EQUALS, result);
 	}
@@ -67,7 +67,7 @@ public class CreateEqualMethodForTestClassTest {
 	@Test
 	public void testCreateTestEqualsWithParameterTwoDiffrentValues() {
 		String classname = "BuyingStockOutUHCCostsPK";
-		String attribute = "MasterCompanyNumber";
+		String attribute = "Short";
 		String type = "short";
 
 		String result = sut.createTestEqualsWithParameterTwoDiffrentValues(classname, attribute, type);
@@ -78,7 +78,7 @@ public class CreateEqualMethodForTestClassTest {
 	@Test
 	public void testCreateTestEqualsWithParameterSameValues() {
 		String classname = "BuyingStockOutUHCCostsPK";
-		String attribute = "MasterCompanyNumber";
+		String attribute = "Short";
 		String type = "short";
 
 		String result = sut.createTestEqualsWithParameterSameValues(classname, attribute, type);
@@ -101,12 +101,12 @@ public class CreateEqualMethodForTestClassTest {
 	@Test
 	public void outputForEqualWithParameter() {
 		String classname = "BuyingStockOutUHCCostsPK";
-		String attribute = "UniformHandlingCostNumber";
+		String attribute = "ShipmentId";
 		String type = "int";
 
 		StringBuilder builder = new StringBuilder();
 		builder.append(sut.createTestEqualsWithParameterValueIsNull(classname, attribute, type));
-		builder.append(sut.createTestEqualsWithBothMasterCompanyNumberValuesAreNull(classname, attribute));
+		builder.append(sut.createTestEqualsWithBothParameterValuesAreNull(classname, attribute));
 		builder.append(sut.createTestEqualsWithParameterTwoDiffrentValues(classname, attribute, type));
 		builder.append(sut.createTestEqualsWithParameterSameValues(classname, attribute, type));
 
