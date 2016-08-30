@@ -20,19 +20,20 @@ public class CreateEqualMethodForTestClass {
 	}
 
 	public String createTestEqualsWithParameterValueIsNull(String classname, String valueName, String type) {
-		StringBuilder builder = new StringBuilder("@Test public void testEqualsWith");
+		String carrigeReturnLineFeed = "\r\n";
+		StringBuilder builder = new StringBuilder("@Test" + carrigeReturnLineFeed + "public void testEqualsWith");
 		builder.append(valueName);
-		builder.append("ValueIsNull() {sut.set");
+		builder.append("ValueIsNull() {" + carrigeReturnLineFeed + "sut.set");
 		builder.append(valueName);
-		builder.append("(null);");
+		builder.append("(null);" + carrigeReturnLineFeed + carrigeReturnLineFeed);
 		builder.append(classname);
 		builder.append(" secondSut = new ");
 		builder.append(classname);
-		builder.append("();secondSut.set");
+		builder.append("();" + carrigeReturnLineFeed + carrigeReturnLineFeed + "secondSut.set");
 		builder.append(valueName);
 		builder.append("((");
 		builder.append(type);
-		builder.append(") 1);boolean result = sut.equals(secondSut);assertFalse(result);}");
+		builder.append(") 1);" + carrigeReturnLineFeed + carrigeReturnLineFeed + "boolean result = sut.equals(secondSut);" + carrigeReturnLineFeed + carrigeReturnLineFeed + "assertFalse(result);}");
 
 		return builder.toString();
 	}

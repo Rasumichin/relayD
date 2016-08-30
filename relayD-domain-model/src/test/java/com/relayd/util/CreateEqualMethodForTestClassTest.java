@@ -18,7 +18,7 @@ public class CreateEqualMethodForTestClassTest {
 	private final static String FIRST_EQUALS = "@Test\r\npublic void testEqualsWithMyself() {\r\n\r\nboolean result = sut.equals(sut);\r\n\r\nassertTrue(result);\r\n}";
 	private final static String SECOND_EQUALS = "@Test\r\npublic void testEqualsWithNull() {\r\n\r\nboolean result = sut.equals(null);\r\n\r\nassertFalse(result);\r\n}";
 	private final static String THIRD_EQUALS = "@Test\r\npublic void testEqualsWithNotCompatibleClass() {\r\n\r\nboolean result = sut.equals(new String());\r\n\r\nassertFalse(result);\r\n}";
-	private final static String FOURTH_EQUALS = "@Test public void testEqualsWithMasterCompanyNumberValueIsNull() {sut.setMasterCompanyNumber(null);BuyingStockOutUHCCostsPK secondSut = new BuyingStockOutUHCCostsPK();secondSut.setMasterCompanyNumber((short) 1);boolean result = sut.equals(secondSut);assertFalse(result);}";
+	private final static String FOURTH_EQUALS = "@Test\r\npublic void testEqualsWithMasterCompanyNumberValueIsNull() {\r\nsut.setMasterCompanyNumber(null);\r\n\r\nBuyingStockOutUHCCostsPK secondSut = new BuyingStockOutUHCCostsPK();\r\n\r\nsecondSut.setMasterCompanyNumber((short) 1);\r\n\r\nboolean result = sut.equals(secondSut);\r\n\r\nassertFalse(result);}";
 	private final static String FIFTH_EQUALS = "@Test public void testEqualsWithBothMasterCompanyNumberValuesAreNull() {sut.setMasterCompanyNumber(null);BuyingStockOutUHCCostsPK secondSut = new BuyingStockOutUHCCostsPK();secondSut.setMasterCompanyNumber(null);boolean result = sut.equals(secondSut);assertTrue(result);}";
 	private final static String SIXTH_EQUALS = "@Test public void testEqualsWithMasterCompanyNumberTwoDiffrentValues() {sut.setMasterCompanyNumber((short) 1);BuyingStockOutUHCCostsPK secondSut = new BuyingStockOutUHCCostsPK();secondSut.setMasterCompanyNumber((short) 2);boolean result = sut.equals(secondSut);assertFalse(result);}";
 	private final static String SEVENTH_EQUALS = "@Test public void testEqualsWithMasterCompanyNumberSameValues() {short masterCompanyNumber = (short) 1;sut.setMasterCompanyNumber(masterCompanyNumber);BuyingStockOutUHCCostsPK secondSut = new BuyingStockOutUHCCostsPK();secondSut.setMasterCompanyNumber(masterCompanyNumber);boolean result = sut.equals(secondSut);assertTrue(result);}";
@@ -99,7 +99,6 @@ public class CreateEqualMethodForTestClassTest {
 	}
 
 	@Test
-	@Ignore
 	public void outputForEqualWithParameter() {
 		String classname = "BuyingStockOutUHCCostsPK";
 		String attribute = "UniformHandlingCostNumber";
