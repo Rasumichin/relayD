@@ -55,21 +55,21 @@ public class CreateEqualMethodForTestClass {
 	}
 
 	public String createTestEqualsWithParameterTwoDiffrentValues(String classname, String valueName, String type) {
-		StringBuilder builder = new StringBuilder("@Test public void testEqualsWith");
+		StringBuilder builder = new StringBuilder("@Test" + carrigeReturnLineFeed + "public void testEqualsWith");
 		builder.append(valueName);
-		builder.append("TwoDiffrentValues() {sut.set");
+		builder.append("TwoDiffrentValues() {" + carrigeReturnLineFeed + "sut.set");
 		builder.append(valueName);
 		builder.append("((");
 		builder.append(type);
-		builder.append(") 1);");
+		builder.append(") 1);" + carrigeReturnLineFeed + carrigeReturnLineFeed);
 		builder.append(classname);
 		builder.append(" secondSut = new ");
 		builder.append(classname);
-		builder.append("();secondSut.set");
+		builder.append("();" + carrigeReturnLineFeed + carrigeReturnLineFeed + "secondSut.set");
 		builder.append(valueName);
 		builder.append("((");
 		builder.append(type);
-		builder.append(") 2);boolean result = sut.equals(secondSut);assertFalse(result);}");
+		builder.append(") 2);" + carrigeReturnLineFeed + carrigeReturnLineFeed + "boolean result = sut.equals(secondSut);" + carrigeReturnLineFeed + carrigeReturnLineFeed + "assertFalse(result);}");
 		return builder.toString();
 	}
 
@@ -77,28 +77,28 @@ public class CreateEqualMethodForTestClass {
 		String firstLetterOfValueNameLowerCase = valueName.toLowerCase().substring(0, 1);
 		String restOfValueName = valueName.substring(1);
 
-		StringBuilder builder = new StringBuilder("@Test public void testEqualsWith");
+		StringBuilder builder = new StringBuilder("@Test" + carrigeReturnLineFeed + "public void testEqualsWith");
 		builder.append(valueName);
-		builder.append("SameValues() {");
+		builder.append("SameValues() {" + carrigeReturnLineFeed);
 		builder.append(type);
 		builder.append(" " + firstLetterOfValueNameLowerCase);
 		builder.append(restOfValueName);
 		builder.append(" = (");
 		builder.append(type);
-		builder.append(") 1;sut.set");
+		builder.append(") 1;" + carrigeReturnLineFeed + carrigeReturnLineFeed + "sut.set");
 		builder.append(valueName);
 		builder.append("(");
 		builder.append(firstLetterOfValueNameLowerCase + restOfValueName);
-		builder.append(");");
+		builder.append(");" + carrigeReturnLineFeed + carrigeReturnLineFeed);
 		builder.append(classname);
 		builder.append(" secondSut = new ");
 		builder.append(classname);
-		builder.append("();secondSut.set");
+		builder.append("();" + carrigeReturnLineFeed + carrigeReturnLineFeed + "secondSut.set");
 		builder.append(valueName);
 		builder.append("(");
 		builder.append(firstLetterOfValueNameLowerCase + restOfValueName);
-		builder.append(");");
-		builder.append("boolean result = sut.equals(secondSut);assertTrue(result);}");
+		builder.append(");" + carrigeReturnLineFeed + carrigeReturnLineFeed);
+		builder.append("boolean result = sut.equals(secondSut);" + carrigeReturnLineFeed + carrigeReturnLineFeed + "assertTrue(result);}");
 
 		return builder.toString();
 	}
