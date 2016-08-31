@@ -82,11 +82,11 @@ public class EventDayTest {
 
 	@Test
 	public void testGetHashCode() {
-		EventDay sut = EventDay.newInstance(LocalDate.now());
+		EventDay sut = EventDay.newInstance(getDefinedLocalDateInThePast());
 
 		int hashCode = sut.hashCode();
 
-		assertEquals(4129337, hashCode);
+		assertEquals(4098804, hashCode);
 
 		sut.value = null;
 
