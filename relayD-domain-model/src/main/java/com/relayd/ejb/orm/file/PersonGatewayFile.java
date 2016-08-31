@@ -87,7 +87,6 @@ public class PersonGatewayFile implements PersonGateway {
 					person.setRelayname(updatePerson.getRelayname());
 					person.setPosition(updatePerson.getPosition());
 					person.setComment(updatePerson.getComment());
-					person.setEmptyElement(updatePerson.getEmptyElement());
 					break;
 				}
 			}
