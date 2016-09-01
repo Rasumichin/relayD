@@ -30,8 +30,7 @@
 				value="Forename:" />
 			<p:inputText
 				id="forename"
-				value="#{personEditPageBean.forename}"
-				required="true">
+				value="#{personEditPageBean.forename}">
 				<f:converter converterId="com.relayd.web.converter.ForenameValueObjectConverter" />
 				<p:ajax event="valueChange" listener="#{personEditPageBean.nameValueChanged}" update="email"/>				
 			</p:inputText>
@@ -41,8 +40,7 @@
 				value="Surename:" />
 			<p:inputText
 				id="surename"
-				value="#{personEditPageBean.surename}"
-				required="true">
+				value="#{personEditPageBean.surename}">
 				<f:converter converterId="com.relayd.web.converter.SurenameValueObjectConverter" />
 				<p:ajax event="valueChange" listener="#{personEditPageBean.nameValueChanged}" update="email"/>				
 			</p:inputText>
