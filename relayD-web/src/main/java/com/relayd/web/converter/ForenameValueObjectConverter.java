@@ -1,8 +1,5 @@
 package com.relayd.web.converter;
 
-import javax.faces.component.UIComponent;
-import javax.faces.context.FacesContext;
-import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
 import com.relayd.attributes.Forename;
@@ -15,20 +12,10 @@ import com.relayd.attributes.Forename;
  * 
  */
 @FacesConverter("com.relayd.web.converter.ForenameValueObjectConverter")
-public class ForenameValueObjectConverter implements Converter {
+public class ForenameValueObjectConverter extends NameValueObjectConverter {
 
 	@Override
-	public Object getAsObject(FacesContext facesContext, UIComponent uiComponent, String value) {
-		Forename name = null;
-		if (!value.trim().isEmpty()) {
-			name = Forename.newInstance(value);
-		}
-		
-		return name;
-	}
-
-	@Override
-	public String getAsString(FacesContext facesContext, UIComponent uiComponent, Object value) {
-		return value.toString();
+	Forename getName(String nameValue) {
+		return Forename.newInstance(nameValue);
 	}
 }
