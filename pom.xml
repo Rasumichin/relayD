@@ -9,6 +9,17 @@
 	<packaging>pom</packaging>
 
 	<name>relayD-parent</name>
+	<distributionManagement>
+		<repository>
+			<id>nexus-site</id>
+			<url>http://relayd.de:9081/content/repositories/releases</url>
+		</repository>
+		<snapshotRepository>
+			<id>nexus-site</id>
+			<url>http://relayd.de:9081/content/repositories/snapshots</url>
+			<uniqueVersion>true</uniqueVersion>
+		</snapshotRepository>
+	</distributionManagement>
 
 	<modules>
 		<module>relayD-api</module>
