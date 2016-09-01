@@ -17,6 +17,14 @@ public class ForenameValueObjectConverterTest {
 	private ForenameValueObjectConverter sut = new ForenameValueObjectConverter();
 
 	private final String name = "Justus";
+	
+	@Test
+	public void testGetName() {
+		Forename expected = Forename.newInstance(name);
+		Forename result = sut.getName(name);
+		
+		assertEquals("Forename has not been correctly created.", expected, result);
+	}
 
 	@Test
 	public void testGetAsObject() {
