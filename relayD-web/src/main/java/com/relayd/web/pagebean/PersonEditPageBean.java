@@ -1,10 +1,7 @@
 package com.relayd.web.pagebean;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
@@ -46,52 +43,8 @@ public class PersonEditPageBean implements Serializable {
 
 	boolean isNewPerson = false;
 
-	// TODO -schmollc- in eine eigene Klasse stecken!
-	private List<Locale> nationalities;
-	// TODO -schmollc- in eine eigene Klasse stecken!
-	private List<Shirtsize> shirtsizes;
-	// TODO -schmollc- in eine eigene Klasse stecken!
-	public List<Position> positions;
-
 	public PersonEditPageBean() {
 		personBridge = new PersonBridgeImpl();
-
-		initAllNationalities();
-		initShirtsizes();
-		initPositions();
-	}
-
-	// TODO -schmollc- in eine eigene Klasse stecken!
-	private void initAllNationalities() {
-		nationalities = new ArrayList<Locale>();
-
-		Locale[] locales = Locale.getAvailableLocales();
-		for (Locale eachLocale : locales) {
-			String code = eachLocale.getCountry();
-			String name = eachLocale.getDisplayCountry();
-
-			if (!"".equals(code) && !"".equals(name)) {
-				nationalities.add(eachLocale);
-			}
-		}
-	}
-
-	// TODO -schmollc- in eine eigene Klasse stecken!
-	private void initShirtsizes() {
-		shirtsizes = new ArrayList<Shirtsize>();
-
-		for (Shirtsize eachShirtsize : Shirtsize.values()) {
-			shirtsizes.add(eachShirtsize);
-		}
-	}
-
-	// TODO -schmollc- in eine eigene Klasse stecken!
-	void initPositions() {
-		positions = new ArrayList<Position>();
-
-		for (Position eachPosition : Position.values()) {
-			positions.add(eachPosition);
-		}
 	}
 
 	public void openDialogForCreatePerson() {
@@ -170,18 +123,6 @@ public class PersonEditPageBean implements Serializable {
 
 	public void cancel() {
 		closeDialog();
-	}
-
-	public List<Locale> getNationalities() {
-		return Collections.unmodifiableList(nationalities);
-	}
-
-	public List<Shirtsize> getShirtsizes() {
-		return Collections.unmodifiableList(shirtsizes);
-	}
-
-	public List<Position> getPositions() {
-		return Collections.unmodifiableList(positions);
 	}
 
 	public Forename getForename() {

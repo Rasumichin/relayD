@@ -83,7 +83,7 @@
 					itemLabel="Select Position"
 					itemValue="" />
 				<f:selectItems
-					value="#{personEditPageBean.positions}"
+					value="#{selectItemBean.positions}"
 					var="position"
 					itemLabel="#{position.description}"
 					itemValue="#{position}" />
@@ -105,7 +105,7 @@
 					itemLabel="Select Country"
 					itemValue=""
 					noSelectionOption="true" />
-				<f:selectItems value="#{personEditPageBean.nationalities}" />
+				<f:selectItems value="#{selectItemBean.nationalities}" />
 				<p:column>
 							#{entry.country}
 						</p:column>
@@ -127,7 +127,7 @@
 					itemLabel="Select Shirtsize"
 					itemValue="" />
 				<f:selectItems
-					value="#{personEditPageBean.shirtsizes}"
+					value="#{selectItemBean.shirtsizes}"
 					var="shirtsize"
 					itemLabel="#{shirtsize.description}"
 					itemValue="#{shirtsize}" />
