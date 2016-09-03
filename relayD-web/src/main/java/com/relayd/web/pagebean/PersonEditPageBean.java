@@ -65,8 +65,8 @@ public class PersonEditPageBean implements Serializable {
 	Map<String, Object> createDialogOptions() {
 		Map<String, Object> options = new HashMap<String, Object>();
 		options.put("modal", true);
-		options.put("width", 400);
-		options.put("height", 440);
+		options.put("width", 360);
+		options.put("height", 520);
 		options.put("contentWidth", "100%");
 		options.put("contentHeight", "100%");
 		options.put("headerElement", "customheader");

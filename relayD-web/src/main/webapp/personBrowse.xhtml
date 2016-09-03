@@ -118,7 +118,8 @@
 
 			<p:column	
 				headerText="Comment">
-				<h:outputText value="#{person.comment}" />
+				<h:outputText id="comment" value="#{person.comment}" />
+				<p:tooltip for="comment" value="#{person.comment}"/>
 			</p:column>
 
 			<p:rowExpansion>
