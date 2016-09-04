@@ -19,9 +19,11 @@ import com.relayd.attributes.Shirtsize;
 import com.relayd.attributes.Surename;
 
 /**
- * @author schmollc (Christian@cloud.franke-net.com)
+ * @author schmollc (Christian@relayd.de)
+ * @author Rasumichin (Erik@relayd.de)
  * @since 22.03.2016
  * status initial
+ * 
  */
 public class PersonTest {
 
@@ -170,5 +172,20 @@ public class PersonTest {
 		UUID result = sut.getUUID();
 
 		assertEquals("[uuid] not correct!", expected, result);
+	}
+	
+	@Test
+	public void testInferEmailFromNameAndValidDomainPart() {
+		Person sut = Person.newInstance();
+		Forename forename = Forename.newInstance("adele");
+		sut.setForename(forename);
+		Surename surename = Surename.newInstance("goldberg");
+		sut.setSurename(surename);
+		
+		String domainPart = "xerox-parc.com";
+		Email expected = Email.newInstance(forename.toString() + "." + surename + "@" + domainPart);
+		
+		Email result = sut.inferEmailFromNameAnd(domainPart);
+		assertEquals("Email has not been composed correctly.", expected, result);
 	}
 }

@@ -15,8 +15,10 @@ import com.relayd.attributes.Surename;
 
 /**
  * @author  schmollc (Christian@relayD.de)
+ * @author  Rasumichin (Erik@relayd.de)
  * @since   22.03.2016
  * status   initial
+ * 
  */
 public class Person implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -108,6 +110,17 @@ public class Person implements Serializable {
 
 	public void setEmail(Email anEmail) {
 		email = anEmail;
+	}
+
+	public Email inferEmailFromNameAnd(String domainPart) {
+		String newEmailAddress = getForename().toString()
+				+ "."
+				+ getSurename()
+				+ Email.AT_SIGN
+				+ domainPart;
+		setEmail(Email.newInstance(newEmailAddress));
+		
+		return getEmail();
 	}
 
 	public Relayname getRelayname() {

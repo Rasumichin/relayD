@@ -11,6 +11,7 @@ import java.io.Serializable;
 public class Email implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	public static Character AT_SIGN = '@';
 	private static String pattern = "^[_A-Za-z0-9-+]+(.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(.[A-Za-z0-9]+)*(.[A-Za-z]{2,})$";
 
 	// TODO (Erik, 2016-08-27): I am not sure whether we should use class InternetAddress from JavaMail:
