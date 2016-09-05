@@ -81,27 +81,22 @@ public class PersonBrowsePageBean {
 	}
 
 	public int sortByForename(Forename name1, Forename name2) {
-		//return -1, 0 , 1 if car1 is less than, equal to or greater than car2
 		return name1.toString().compareTo(name2.toString());
 	}
 
 	public int sortBySurename(Surename name1, Surename name2) {
-		//return -1, 0 , 1 if car1 is less than, equal to or greater than car2
 		return name1.toString().compareTo(name2.toString());
 	}
 
 	public int sortByBirthday(Birthday birthday1, Birthday birthday2) {
-		//return -1, 0 , 1 if car1 is less than, equal to or greater than car2
 		return birthday1.toString().compareTo(birthday2.toString());
 	}
 
 	public int sortByShirtsize(Shirtsize size1, Shirtsize size2) {
-		//return -1, 0 , 1 if car1 is less than, equal to or greater than car2
 		return size1.toString().compareTo(size2.toString());
 	}
 
 	public int sortByEmail(Email email1, Email email2) {
-		//return -1, 0 , 1 if car1 is less than, equal to or greater than car2
 		return email1.toString().compareTo(email2.toString());
 	}
 
@@ -131,22 +126,17 @@ public class PersonBrowsePageBean {
 		showMessage(FacesMessage.SEVERITY_INFO, "Email", output);
 	}
 
-	public void onEditClosed(SelectEvent event) {
+	public void onEditClosed(@SuppressWarnings("unused") SelectEvent event) {
 		if (canceled) {
-			System.out.println("Cancel Message");
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Canceld!", "");
 			FacesContext.getCurrentInstance().addMessage(null, message);
 			canceled = false;
-
 		} else if (getSelectedPerson() != null) {
-			System.out.println("Saved!");
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Saved!", getSelectedPerson().toString());
 			FacesContext.getCurrentInstance().addMessage(null, message);
 		} else {
-			System.out.println("Added!");
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Added!", "");
 			FacesContext.getCurrentInstance().addMessage(null, message);
-
 		}
 
 		refreshPersons();
@@ -175,17 +165,11 @@ public class PersonBrowsePageBean {
 		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
 
-	/**
-	 * @return the filteredPersons
-	 */
 	public List<Person> getFilteredPersons() {
 		return filteredPersons;
 	}
 
-	/**
-	 * @param filteredPersons the filteredPersons to set
-	 */
-	public void setFilteredPersons(List<Person> filteredPersons) {
-		this.filteredPersons = filteredPersons;
+	public void setFilteredPersons(List<Person> someFilteredPersons) {
+		filteredPersons = someFilteredPersons;
 	}
 }
