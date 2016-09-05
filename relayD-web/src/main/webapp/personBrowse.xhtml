@@ -58,7 +58,8 @@
 			<p:column
 				headerText="Forename"
 				sortBy="#{person.forename}"
-				sortFunction="#{personBrowsePageBean.sortByForename}">
+				sortFunction="#{personBrowsePageBean.sortByForename}"
+				width="150">
 				<h:outputText value="#{person.forename}" />
 			</p:column>
 
@@ -66,49 +67,59 @@
 				headerText="Surename"
 				filterMatchMode="contains"
 				sortBy="#{person.surename}"
-				sortFunction="#{personBrowsePageBean.sortBySurename}">
+				sortFunction="#{personBrowsePageBean.sortBySurename}"
+				width="150">
 				<h:outputText value="#{person.surename}" />
 			</p:column>
 
 			<p:column
 				headerText="Relayname"
 				sortBy="#{person}"
-				sortFunction="#{personBrowsePageBean.sortByRelayname}">
+				sortFunction="#{personBrowsePageBean.sortByRelayname}"
+				width="150">
 				<h:outputText value="#{person.relayname}" />
 			</p:column>
 
-			<p:column headerText="Position">
+			<p:column
+				headerText="Position"
+				width="70">
 				<h:outputText value="#{person.position}" />
 			</p:column>
 
 			<p:column
 				headerText="Birthday"
 				sortBy="#{person.birthday}"
-				sortFunction="#{personBrowsePageBean.sortByBirthday}">
+				sortFunction="#{personBrowsePageBean.sortByBirthday}"
+				width="60">
 				<h:outputText value="#{person.birthday}" />
-			</p:column>
-
-			<p:column headerText="Nationality">
-				<h:outputText value="#{person.displayNationality}" />
 			</p:column>
 
 			<p:column
 				headerText="Shirtsize"
 				sortBy="#{person.shirtsize}"
-				sortFunction="#{personBrowsePageBean.sortByShirtsize}">
+				sortFunction="#{personBrowsePageBean.sortByShirtsize}"
+				width="60">
 				<h:outputText value="#{person.shirtsize}" />
+			</p:column>
+
+			<p:column
+				headerText="Nationality"
+				width="120">
+				<h:outputText value="#{person.displayNationality}" />
 			</p:column>
 
 			<p:column
 				headerText="E-Mail"
 				sortBy="#{person.email}"
-				sortFunction="#{personBrowsePageBean.sortByEmail}">
+				sortFunction="#{personBrowsePageBean.sortByEmail}"
+				width="200">
 				<h:outputText value="#{person.email}" />
 			</p:column>
 
 			<p:column	
 				headerText="Comment">
-				<h:outputText value="#{person.comment}" />
+				<h:outputText id="comment" value="#{person.comment}" />
+				<p:tooltip for="comment" value="#{person.comment}"/>
 			</p:column>
 
 			<p:rowExpansion>

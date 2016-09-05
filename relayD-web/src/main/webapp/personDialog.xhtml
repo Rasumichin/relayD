@@ -28,7 +28,8 @@
 				value="Forename:" />
 			<p:inputText
 				id="forename"
-				value="#{personEditPageBean.forename}">
+				value="#{personEditPageBean.forename}"
+				style="width:180px">
 				<f:converter converterId="com.relayd.web.converter.ForenameValueObjectConverter" />
 			</p:inputText>
 
@@ -37,7 +38,8 @@
 				value="Surename:" />
 			<p:inputText
 				id="surename"
-				value="#{personEditPageBean.surename}">
+				value="#{personEditPageBean.surename}"
+				style="width:180px">
 				<f:converter converterId="com.relayd.web.converter.SurenameValueObjectConverter" />
 			</p:inputText>
 
@@ -46,7 +48,8 @@
 				value="Email:" />
 			<p:inputText
 				id="email"
-				value="#{personEditPageBean.email}">
+				value="#{personEditPageBean.email}"
+				style="width:180px">
 				<f:converter converterId="com.relayd.web.converter.EmailValueObjectConverter" />
 			</p:inputText>
 
@@ -58,7 +61,8 @@
 				value="#{personEditPageBean.birthday}"
 				showOn="button"
 				pattern="#{personEditPageBean.datePatttern}"
-				effect="fold">
+				effect="fold"
+				width="150px">
 				<f:converter converterId="com.relayd.web.converter.BirthdayValueObjectConverter" />
 			</p:calendar>
 
@@ -67,7 +71,8 @@
 				value="Relayname:" />
 			<p:inputText
 				id="relayname"
-				value="#{personEditPageBean.relayname}">
+				value="#{personEditPageBean.relayname}"
+				style="width:180px">
 				<f:converter converterId="com.relayd.web.converter.RelaynameValueObjectConverter" />
 			</p:inputText>
 
@@ -78,12 +83,12 @@
 				id="position"
 				value="#{personEditPageBean.position}"
 				var="entry"
-				style="width:150px">
+				style="width:160px">
 				<f:selectItem
 					itemLabel="Select Position"
 					itemValue="" />
 				<f:selectItems
-					value="#{personEditPageBean.positions}"
+					value="#{selectItemBean.positions}"
 					var="position"
 					itemLabel="#{position.description}"
 					itemValue="#{position}" />
@@ -100,12 +105,12 @@
 				value="#{personEditPageBean.nationality}"
 				var="entry"
 				converter="com.relayd.web.converter.NationalityValueObjectConverter"
-				style="width:150px">
+				style="width:160px">
 				<f:selectItem
 					itemLabel="Select Country"
 					itemValue=""
 					noSelectionOption="true" />
-				<f:selectItems value="#{personEditPageBean.nationalities}" />
+				<f:selectItems value="#{selectItemBean.nationalities}" />
 				<p:column>
 							#{entry.country}
 						</p:column>
@@ -122,12 +127,12 @@
 				id="shirtsize"
 				value="#{personEditPageBean.shirtsize}"
 				var="entry"
-				style="width:150px">
+				style="width:160px">
 				<f:selectItem
 					itemLabel="Select Shirtsize"
 					itemValue="" />
 				<f:selectItems
-					value="#{personEditPageBean.shirtsizes}"
+					value="#{selectItemBean.shirtsizes}"
 					var="shirtsize"
 					itemLabel="#{shirtsize.description}"
 					itemValue="#{shirtsize}" />
@@ -139,11 +144,24 @@
 			<p:outputLabel
 				for="comment"
 				value="Comment:" />
-			<p:inputText
+			<p:inputTextarea
 				id="comment"
-				value="#{personEditPageBean.comment}">
+				value="#{personEditPageBean.comment}"
+				rows="3"
+				cols="20"
+				counter="display"
+				maxlength="#{personEditPageBean.maxLengthForComment}"
+				counterTemplate="{0} characters remaining."
+				autoResize="false" 
+				style="width:180px">
 				<f:converter converterId="com.relayd.web.converter.CommentValueObjectConverter" />
-			</p:inputText>
+			</p:inputTextarea>
+			<p:outputLabel
+				for="display"
+				value="" />
+
+			<h:outputText id="display" />
+
 		</h:panelGrid>
 
 		<p:commandButton

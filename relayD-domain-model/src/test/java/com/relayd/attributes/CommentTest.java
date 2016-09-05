@@ -15,6 +15,13 @@ import org.junit.Test;
 public class CommentTest {
 
 	@Test
+	public void testMaxLengthConstant() {
+		Integer result = Comment.MAX_LENGTH;
+
+		assertEquals("[MAX_LENGTH] not correct!", 255, result.intValue());
+	}
+
+	@Test
 	public void testCreateInstance() {
 		Comment comment = Comment.newInstance("Comment");
 
