@@ -39,9 +39,9 @@ public class PersonBridgeImplTest {
 		Person newPerson = Person.newInstance();
 		newPerson.setEmail(Email.newInstance(EMAIL_JUSTUS));
 
-		ValidationResult message = sut.validateEMail(newPerson);
+		ValidationResult result = sut.validateEMail(newPerson);
 
-		assertEquals("[message] not correct!", "EMail does exist!", message.getMessage());
+		assertEquals("[result] not correct!", "EMail does exist!", result.getMessage());
 	}
 
 	@Test
@@ -50,9 +50,9 @@ public class PersonBridgeImplTest {
 		Person newPerson = Person.newInstance();
 		newPerson.setEmail(Email.newInstance(EMAIL_BOB));
 
-		ValidationResult message = sut.validateEMail(newPerson);
+		ValidationResult result = sut.validateEMail(newPerson);
 
-		assertTrue("[message] not correct!", message.getMessage().isEmpty());
+		assertTrue("[result] not correct!", result.getMessage().isEmpty());
 	}
 
 	private List<Person> listWithPersons() {
@@ -82,20 +82,20 @@ public class PersonBridgeImplTest {
 
 		Person updatePerson = somePersons.get(1);
 
-		ValidationResult message = sut.validateEMail(updatePerson);
+		ValidationResult result = sut.validateEMail(updatePerson);
 
-		assertTrue("[message] not correct!", message.getMessage().isEmpty());
+		assertTrue("[result] not correct!", result.getMessage().isEmpty());
 	}
 
 	@Test
 	public void testGetEmailList() {
 		doReturn(createDummyData()).when(gateway).getAll();
 
-		String commaSeperatedEmails = sut.getEmailList();
+		String result = sut.getEmailList();
 
-		assertNotNull("Erwarte gueltige Instanz.", commaSeperatedEmails);
-		assertFalse("Erwarte keinen leeren String.", commaSeperatedEmails.isEmpty());
-		assertEquals("Wert nicht korrekt.", "Christian.Schmoll@canda.com, Dirk.Aderhold@canda.com", commaSeperatedEmails);
+		assertNotNull("[result] invalid!", result);
+		assertFalse("[result has not be empty!", result.isEmpty());
+		assertEquals("[result] not correct!", "Christian.Schmoll@canda.com, Dirk.Aderhold@canda.com", result);
 	}
 
 	private List<Person> createDummyData() {
