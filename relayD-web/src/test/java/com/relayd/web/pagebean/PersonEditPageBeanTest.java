@@ -264,4 +264,11 @@ public class PersonEditPageBeanTest {
 		verify(sut, never()).persistPerson();
 		verify(sut, never()).closeDialog();
 	}
+
+	@Test
+	public void testGetMaxLengthForComment() {
+		Integer expected = sut.getMaxLengthForComment();
+
+		assertEquals("[maxLengthForComment] not correct!", Comment.MAX_LENGTH, expected);
+	}
 }

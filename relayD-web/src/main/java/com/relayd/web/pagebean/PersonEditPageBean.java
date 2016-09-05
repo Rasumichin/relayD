@@ -204,4 +204,8 @@ public class PersonEditPageBean implements Serializable {
 	public String getDatePatttern() {
 		return FormatConstants.DATE_FORMAT_ISO;
 	}
+
+	public Integer getMaxLengthForComment() {
+		return Comment.MAX_LENGTH;
+	}
 }
