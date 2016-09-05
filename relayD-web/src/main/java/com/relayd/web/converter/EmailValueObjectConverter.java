@@ -28,6 +28,8 @@ public class EmailValueObjectConverter implements Converter {
 			// - 152 - zu kurz
 			// usw.
 			// Dann könnte die Fehlermeldung als solches in einer ResourceDatei abgelegt werden.
+			// Allerdings wäre hier nur eine "Technische" Prüfung. Die Prüfung auf doppelten Eintrag wird erst in der Save()
+			// Methode gemacht. Auch irgendwie schade.
 			FacesMessage msg = new FacesMessage("E-mail validation failed.", "Invalid E-mail format.");
 			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
 			throw new ConverterException(msg);
