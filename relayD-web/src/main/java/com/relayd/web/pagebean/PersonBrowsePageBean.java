@@ -116,8 +116,7 @@ public class PersonBrowsePageBean {
 	public void remove(@SuppressWarnings("unused") ActionEvent actionEvent) {
 		// TODO -ALL- Abprüfung auf selektion passiert... wie?
 		personBridge.remove(getSelectedPerson());
-		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Removed!", getSelectedPerson().toString());
-		FacesContext.getCurrentInstance().addMessage(null, message);
+		showMessage(FacesMessage.SEVERITY_INFO, "Removed!", getSelectedPerson().toString());
 		refreshPersons();
 	}
 
@@ -128,15 +127,12 @@ public class PersonBrowsePageBean {
 
 	public void onEditClosed(@SuppressWarnings("unused") SelectEvent event) {
 		if (canceled) {
-			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Canceld!", "");
-			FacesContext.getCurrentInstance().addMessage(null, message);
+			showMessage(FacesMessage.SEVERITY_INFO, "Canceld!", "");
 			canceled = false;
 		} else if (getSelectedPerson() != null) {
-			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Saved!", getSelectedPerson().toString());
-			FacesContext.getCurrentInstance().addMessage(null, message);
+			showMessage(FacesMessage.SEVERITY_INFO, "Saved!", getSelectedPerson().toString());
 		} else {
-			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Added!", "");
-			FacesContext.getCurrentInstance().addMessage(null, message);
+			showMessage(FacesMessage.SEVERITY_INFO, "Added!", "");
 		}
 
 		refreshPersons();
