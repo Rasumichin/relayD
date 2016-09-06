@@ -20,7 +20,48 @@
 			showDetail="true" />
 
 		<div class="divStartHeader"></div>
-
+		<p:toolbar>
+			<f:facet name="left">
+				<p:commandButton
+					value="+"
+					update="personTable"
+					actionListener="#{personBrowsePageBean.add}">
+					<p:ajax
+						event="dialogReturn"
+						listener="#{personBrowsePageBean.onEditClosed}"
+						update="form" />
+				</p:commandButton>
+				<p:commandButton
+					value="-"
+					update="form"
+					actionListener="#{personBrowsePageBean.remove}" />
+				<p:commandButton
+					update="form"
+					actionListener="#{personBrowsePageBean.edit}"
+					icon="ui-icon-folder-open">
+					<p:ajax
+						event="dialogReturn"
+						listener="#{personBrowsePageBean.onEditClosed}"
+						update="form"/>
+				</p:commandButton>
+				<p:commandButton
+					value="export"
+					icon="ui-icon-mail-closed"
+					update="form"
+					actionListener="#{personBrowsePageBean.emailExport}" />
+			</f:facet>
+			<f:facet name="right">
+	     		<p:commandButton
+					id="toggler"
+					type="button"
+					value="Columns"
+					style="float:right"
+					icon="ui-icon-calculator" />
+				<p:columnToggler
+					datasource="personTable"
+					trigger="toggler" />
+			</f:facet>
+		</p:toolbar>
 		<p:dataTable
 			var="person"
 			widgetVar="personTable"
@@ -36,16 +77,6 @@
 			resizableColumns="true">
 			<f:facet name="header">
 	     		List of Persons
-	     		<p:commandButton
-					id="toggler"
-					type="button"
-					value="Columns"
-					style="float:right"
-					icon="ui-icon-calculator" />
-				<p:columnToggler
-					datasource="personTable"
-					trigger="toggler" />
-
 				<p:outputPanel>
 					<h:outputText value="&nbsp;" />
 				</p:outputPanel>
@@ -148,39 +179,6 @@
 	        	In total there are #{personBrowsePageBean.getNumberOfResults()} persons.
 	    	</f:facet>
 		</p:dataTable>
-
-		<p:toolbar>
-			<f:facet name="left">
-				<p:commandButton
-					value="+"
-					update="personTable"
-					actionListener="#{personBrowsePageBean.add}">
-					<p:ajax
-						event="dialogReturn"
-						listener="#{personBrowsePageBean.onEditClosed}"
-						update="form" />
-				</p:commandButton>
-				<p:commandButton
-					value="-"
-					update="form"
-					actionListener="#{personBrowsePageBean.remove}" />
-				<p:commandButton
-					update="form"
-					actionListener="#{personBrowsePageBean.edit}"
-					icon="ui-icon-folder-open">
-					<p:ajax
-						event="dialogReturn"
-						listener="#{personBrowsePageBean.onEditClosed}"
-						update="form"/>
-				</p:commandButton>
-				<p:commandButton
-					value="export"
-					icon="ui-icon-mail-closed"
-					update="form"
-					actionListener="#{personBrowsePageBean.emailExport}" />
-			</f:facet>
-		</p:toolbar>
-
 	</h:form>
 </h:body>
 </html>
