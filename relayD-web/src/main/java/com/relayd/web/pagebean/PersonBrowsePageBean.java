@@ -136,7 +136,12 @@ public class PersonBrowsePageBean {
 	}
 
 	public void emailExport(@SuppressWarnings("unused") ActionEvent actionEvent) {
-		String output = personBridge.getEmailList();
+		String output = null;
+		if (isRowSelected()) {
+			output = personBridge.getEmailList(getSelectedPersons());
+		} else {
+			output = personBridge.getEmailList();
+		}
 		showMessage(FacesMessage.SEVERITY_INFO, "Email", output);
 	}
 
@@ -153,7 +158,12 @@ public class PersonBrowsePageBean {
 		refreshPersons();
 	}
 
-	public boolean isRowSelectedForOneRow() {
+	// TODO -schmollc- Der Name ist schlecht! Mit Lotz absprechen!
+	private boolean isRowSelected() {
+		return getSelectedPersons() != null && !getSelectedPersons().isEmpty();
+	}
+
+	boolean isRowSelectedForOneRow() {
 		return getSelectedPersons() != null && getSelectedPersons().size() == 1;
 	}
 

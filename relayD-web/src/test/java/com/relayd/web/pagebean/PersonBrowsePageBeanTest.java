@@ -180,11 +180,28 @@ public class PersonBrowsePageBeanTest {
 	}
 
 	@Test
-	public void testEmailExport() {
-		sut.emailExport(null);
+	public void testEmailExport_ForAll() {
+		ActionEvent dummyActionEvent = null;
+
+		sut.emailExport(dummyActionEvent);
+
 		verify(personBridge).getEmailList();
 		verify(sut).showMessage(any(Severity.class), anyString(), anyString());
+	}
 
+	@Test
+	public void testEmailExport_ForSelectedRows() {
+		List<Person> selectedPersons = new ArrayList<Person>();
+		selectedPersons.add(new PersonBuilder().withForename(Forename.newInstance("Justus")).build());
+		selectedPersons.add(new PersonBuilder().withForename(Forename.newInstance("Peter")).build());
+		sut.setSelectedPersons(selectedPersons);
+
+		ActionEvent dummyActionEvent = null;
+
+		sut.emailExport(dummyActionEvent);
+
+		verify(personBridge).getEmailList(selectedPersons);
+		verify(sut).showMessage(any(Severity.class), anyString(), anyString());
 	}
 
 	@Test
