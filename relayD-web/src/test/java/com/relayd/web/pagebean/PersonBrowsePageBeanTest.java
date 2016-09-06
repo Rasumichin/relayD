@@ -22,6 +22,7 @@ import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.relayd.Person;
+import com.relayd.attributes.Forename;
 import com.relayd.attributes.Position;
 import com.relayd.web.bridge.PersonBridge;
 
@@ -68,19 +69,34 @@ public class PersonBrowsePageBeanTest {
 	}
 
 	@Test
-	public void testIsRowSelected_ForNotSelectedRow() {
-		boolean result = sut.isRowSelected();
+	public void testIsRowSelected_ForNonSelectedRow() {
+		boolean result = sut.isRowSelectedForOneRow();
 
-		assertFalse("Row should not selected.", result);
+		assertFalse("Row should not selected!", result);
 	}
 
 	@Test
-	public void testIsRowSelected_ForSelectedRow() {
-		sut.setSelectedPerson(new PersonBuilder().build());
+	public void testIsRowSelected_ForOneSelectedRow() {
+		List<Person> selectedPersons = new ArrayList<Person>();
+		selectedPersons.add(new PersonBuilder().build());
 
-		boolean result = sut.isRowSelected();
+		sut.setSelectedPersons(selectedPersons);
+
+		boolean result = sut.isRowSelectedForOneRow();
 
 		assertTrue("Row should selected.", result);
+	}
+
+	@Test
+	public void testIsRowSelected_ForTwoSelectedRows() {
+		List<Person> selectedPersons = new ArrayList<Person>();
+		selectedPersons.add(new PersonBuilder().withForename(Forename.newInstance("Justus")).build());
+		selectedPersons.add(new PersonBuilder().withForename(Forename.newInstance("Peter")).build());
+		sut.setSelectedPersons(selectedPersons);
+
+		boolean result = sut.isRowSelectedForOneRow();
+
+		assertFalse("Not Valid for 2 Rows!", result);
 	}
 
 	private List<Person> createResultList(Integer aSize) {
@@ -173,7 +189,11 @@ public class PersonBrowsePageBeanTest {
 
 	@Test
 	public void testEditRow_WithOneRowIsSelected() {
-		sut.setSelectedPerson(new PersonBuilder().build());
+		List<Person> selectedPersons = new ArrayList<Person>();
+		selectedPersons.add(new PersonBuilder().build());
+
+		sut.setSelectedPersons(selectedPersons);
+
 		ActionEvent dummyActionEvent = null;
 
 		sut.edit(dummyActionEvent);
@@ -194,7 +214,9 @@ public class PersonBrowsePageBeanTest {
 
 	@Test
 	public void testRemoveRow_WithOneRowIsSelected() {
-		sut.setSelectedPerson(new PersonBuilder().build());
+		List<Person> selectedPersons = new ArrayList<Person>();
+		selectedPersons.add(new PersonBuilder().build());
+		sut.setSelectedPersons(selectedPersons);
 		ActionEvent dummyActionEvent = null;
 
 		sut.remove(dummyActionEvent);

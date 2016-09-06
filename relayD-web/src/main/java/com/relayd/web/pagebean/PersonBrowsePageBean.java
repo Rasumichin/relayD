@@ -43,7 +43,7 @@ public class PersonBrowsePageBean {
 	private List<Person> searchResult = new ArrayList<Person>();
 	private List<Person> filteredPersons;
 
-	private Person selected;
+	private List<Person> selectedPersons;
 	private boolean canceled;
 
 	public PersonBrowsePageBean() {
@@ -61,12 +61,16 @@ public class PersonBrowsePageBean {
 		return searchResult;
 	}
 
-	public Person getSelectedPerson() {
-		return selected;
+	private Person getSelectedPerson() {
+		return selectedPersons.get(0);
 	}
 
-	public void setSelectedPerson(Person aSelected) {
-		selected = aSelected;
+	public List<Person> getSelectedPersons() {
+		return selectedPersons;
+	}
+
+	public void setSelectedPersons(List<Person> someSelectedPersons) {
+		selectedPersons = someSelectedPersons;
 	}
 
 	public int sortByRelayname(Person personOne, Person personTwo) {
@@ -113,7 +117,7 @@ public class PersonBrowsePageBean {
 	}
 
 	public void edit(@SuppressWarnings("unused") ActionEvent actionEvent) {
-		if (isRowSelected()) {
+		if (isRowSelectedForOneRow()) {
 			UUID uuid = getSelectedPerson().getUUID();
 			getPersonEditPageBean().openDialogFor(uuid);
 		} else {
@@ -122,7 +126,7 @@ public class PersonBrowsePageBean {
 	}
 
 	public void remove(@SuppressWarnings("unused") ActionEvent actionEvent) {
-		if (isRowSelected()) {
+		if (isRowSelectedForOneRow()) {
 			personBridge.remove(getSelectedPerson());
 			showMessage(FacesMessage.SEVERITY_INFO, "Success", "Remove" + getSelectedPerson().toString());
 			refreshPersons();
@@ -149,8 +153,8 @@ public class PersonBrowsePageBean {
 		refreshPersons();
 	}
 
-	public boolean isRowSelected() {
-		return getSelectedPerson() != null;
+	public boolean isRowSelectedForOneRow() {
+		return getSelectedPersons() != null && getSelectedPersons().size() == 1;
 	}
 
 	public PersonEditPageBean getPersonEditPageBean() {
