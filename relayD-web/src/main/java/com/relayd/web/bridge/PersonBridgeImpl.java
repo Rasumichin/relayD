@@ -50,10 +50,10 @@ public class PersonBridgeImpl implements PersonBridge {
 	}
 
 	@Override
-	public ValidationResult validateEMail(Person aNewPerson) {
+	public ValidationResult validateEMail(Person newPerson) {
 		for (Person person : all()) {
-			if (!aNewPerson.equals(person)) {
-				if (emailsEqual(aNewPerson, person)) {
+			if (!newPerson.equals(person)) {
+				if (emailsEqual(newPerson, person)) {
 					return new ValidationResultImpl("EMail does exist!");
 				}
 			}
@@ -61,15 +61,20 @@ public class PersonBridgeImpl implements PersonBridge {
 		return new ValidationResultImpl("");
 	}
 
-	private boolean emailsEqual(Person aNewPerson, Person person) {
+	private boolean emailsEqual(Person newPerson, Person person) {
 		Email email = person.getEmail();
-		return email != null && email.equals(aNewPerson.getEmail());
+		return email != null && email.equals(newPerson.getEmail());
 	}
 
 	@Override
 	public String getEmailList() {
+		return getEmailList(all());
+	}
+
+	@Override
+	public String getEmailList(List<Person> somePersons) {
 		StringBuilder builder = new StringBuilder();
-		for (Person person : all()) {
+		for (Person person : somePersons) {
 			if (!person.getEmail().isEmpty()) {
 				builder.append(", " + person.getEmail());
 			}

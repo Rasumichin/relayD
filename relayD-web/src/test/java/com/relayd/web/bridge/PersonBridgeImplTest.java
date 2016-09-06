@@ -89,16 +89,26 @@ public class PersonBridgeImplTest {
 
 	@Test
 	public void testGetEmailList() {
-		doReturn(createDummyData()).when(gateway).getAll();
+		doReturn(getDummyData()).when(gateway).getAll();
 
 		String result = sut.getEmailList();
 
 		assertNotNull("[result] invalid!", result);
-		assertFalse("[result has not be empty!", result.isEmpty());
+		assertFalse("[result] has not be empty!", result.isEmpty());
 		assertEquals("[result] not correct!", "Christian.Schmoll@canda.com, Dirk.Aderhold@canda.com", result);
 	}
 
-	private List<Person> createDummyData() {
+	@Test
+	public void testGetEmailList_ForSelectedPersons() {
+
+		String result = sut.getEmailList(getDummyData());
+
+		assertNotNull("[result] invalid!", result);
+		assertFalse("[result] has not be empty!", result.isEmpty());
+		assertEquals("[result] not correct!", "Christian.Schmoll@canda.com, Dirk.Aderhold@canda.com", result);
+	}
+
+	private List<Person> getDummyData() {
 		List<Person> somePersons = new ArrayList<Person>();
 		PersonBuilder builder = new PersonBuilder();
 
