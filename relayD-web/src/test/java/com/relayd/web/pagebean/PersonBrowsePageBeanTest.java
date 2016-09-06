@@ -5,12 +5,16 @@ import static org.mockito.Matchers.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.faces.application.FacesMessage.Severity;
+import javax.faces.event.ActionEvent;
 
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -29,6 +33,7 @@ import static org.mockito.Mockito.*;
  * status initial
  */
 @RunWith(MockitoJUnitRunner.class)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class PersonBrowsePageBeanTest {
 	@InjectMocks
 	@Spy
@@ -36,6 +41,9 @@ public class PersonBrowsePageBeanTest {
 
 	@Mock
 	private PersonBridge personBridge;
+
+	@Mock
+	private PersonEditPageBean personEditPageBean;
 
 	@Before
 	public void setUp() {
@@ -161,5 +169,49 @@ public class PersonBrowsePageBeanTest {
 		verify(personBridge).getEmailList();
 		verify(sut).showMessage(any(Severity.class), anyString(), anyString());
 
+	}
+
+	@Test
+	public void testEditRow_WithOneRowIsSelected() {
+		sut.setSelectedPerson(new PersonBuilder().build());
+		ActionEvent dummyActionEvent = null;
+
+		sut.edit(dummyActionEvent);
+
+		verify(personEditPageBean).openDialogFor(any(UUID.class));
+		verify(sut, never()).showMessage(any(Severity.class), anyString(), anyString());
+	}
+
+	@Test
+	public void testEditRow_WithNoRowIsSelected() {
+		ActionEvent dummyActionEvent = null;
+
+		sut.edit(dummyActionEvent);
+
+		verify(personEditPageBean, never()).openDialogFor(any(UUID.class));
+		verify(sut).showMessageErrorNoRowSelected();
+	}
+
+	@Test
+	public void testRemoveRow_WithOneRowIsSelected() {
+		sut.setSelectedPerson(new PersonBuilder().build());
+		ActionEvent dummyActionEvent = null;
+
+		sut.remove(dummyActionEvent);
+
+		verify(personBridge).remove(any(Person.class));
+		verify(sut).showMessage(any(Severity.class), anyString(), anyString());
+		verify(sut).refreshPersons();
+	}
+
+	@Test
+	public void testRemoveRow_WithNoRowIsSelected() {
+		ActionEvent dummyActionEvent = null;
+
+		sut.remove(dummyActionEvent);
+
+		verify(personBridge, never()).remove(any(Person.class));
+		verify(sut, never()).refreshPersons();
+		verify(sut).showMessageErrorNoRowSelected();
 	}
 }

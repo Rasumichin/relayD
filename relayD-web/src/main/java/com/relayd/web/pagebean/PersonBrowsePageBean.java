@@ -2,6 +2,7 @@ package com.relayd.web.pagebean;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.application.FacesMessage.Severity;
@@ -30,6 +31,9 @@ import com.relayd.web.bridge.PersonBridgeImpl;
 @ManagedBean
 @SessionScoped
 public class PersonBrowsePageBean {
+	// Should be I18N
+	private static final String PLEASE_SELECT_A_ROW = "Please select a row!";
+	private static final String NOT_POSSIBLE = "Not Possible!";
 
 	private PersonBridge personBridge = null;
 
@@ -46,7 +50,7 @@ public class PersonBrowsePageBean {
 		personBridge = new PersonBridgeImpl();
 	}
 
-	private void refreshPersons() {
+	void refreshPersons() {
 		searchResult = personBridge.all();
 	}
 
@@ -109,15 +113,22 @@ public class PersonBrowsePageBean {
 	}
 
 	public void edit(@SuppressWarnings("unused") ActionEvent actionEvent) {
-		// TODO -ALL- Abprüfung auf selektion passiert... wie?
-		getPersonEditPageBean().openDialogFor(getSelectedPerson().getUUID());
+		if (isRowSelected()) {
+			UUID uuid = getSelectedPerson().getUUID();
+			getPersonEditPageBean().openDialogFor(uuid);
+		} else {
+			showMessageErrorNoRowSelected();
+		}
 	}
 
 	public void remove(@SuppressWarnings("unused") ActionEvent actionEvent) {
-		// TODO -ALL- Abprüfung auf selektion passiert... wie?
-		personBridge.remove(getSelectedPerson());
-		showMessage(FacesMessage.SEVERITY_INFO, "Removed!", getSelectedPerson().toString());
-		refreshPersons();
+		if (isRowSelected()) {
+			personBridge.remove(getSelectedPerson());
+			showMessage(FacesMessage.SEVERITY_INFO, "Success", "Remove" + getSelectedPerson().toString());
+			refreshPersons();
+		} else {
+			showMessageErrorNoRowSelected();
+		}
 	}
 
 	public void emailExport(@SuppressWarnings("unused") ActionEvent actionEvent) {
@@ -153,12 +164,6 @@ public class PersonBrowsePageBean {
 	public void cancelEditDialog() {
 		getPersonEditPageBean().cancel();
 		canceled = true;
-		System.out.println("Canceld Dialog!");
-	}
-
-	void showMessage(Severity severityInfo, String summary, String textMessage) {
-		FacesMessage message = new FacesMessage(severityInfo, summary, textMessage);
-		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
 
 	public List<Person> getFilteredPersons() {
@@ -167,5 +172,14 @@ public class PersonBrowsePageBean {
 
 	public void setFilteredPersons(List<Person> someFilteredPersons) {
 		filteredPersons = someFilteredPersons;
+	}
+
+	void showMessageErrorNoRowSelected() {
+		showMessage(FacesMessage.SEVERITY_ERROR, NOT_POSSIBLE, PLEASE_SELECT_A_ROW);
+	}
+
+	void showMessage(Severity severityInfo, String summary, String textMessage) {
+		FacesMessage message = new FacesMessage(severityInfo, summary, textMessage);
+		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
 }

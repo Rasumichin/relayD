@@ -165,13 +165,13 @@
 					update="form"
 					actionListener="#{personBrowsePageBean.remove}" />
 				<p:commandButton
-					update="personTable"
+					update="form"
 					actionListener="#{personBrowsePageBean.edit}"
 					icon="ui-icon-folder-open">
 					<p:ajax
 						event="dialogReturn"
 						listener="#{personBrowsePageBean.onEditClosed}"
-						update="form" />
+						update="form"/>
 				</p:commandButton>
 				<p:commandButton
 					value="export"
