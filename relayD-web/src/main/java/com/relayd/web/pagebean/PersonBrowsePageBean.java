@@ -32,7 +32,7 @@ import com.relayd.web.bridge.PersonBridgeImpl;
 @SessionScoped
 public class PersonBrowsePageBean {
 	// Should be I18N
-	private static final String PLEASE_SELECT_A_ROW = "Please select a row!";
+	private static final String PLEASE_SELECT_A_ROW = "Please select one row!";
 	private static final String NOT_POSSIBLE = "Not Possible!";
 
 	private PersonBridge personBridge = null;

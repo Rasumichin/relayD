@@ -188,7 +188,17 @@ public class PersonBrowsePageBeanTest {
 	}
 
 	@Test
-	public void testEditRow_WithOneRowIsSelected() {
+	public void testEditRow_ForNonSelectedRow() {
+		ActionEvent dummyActionEvent = null;
+
+		sut.edit(dummyActionEvent);
+
+		verify(personEditPageBean, never()).openDialogFor(any(UUID.class));
+		verify(sut).showMessageErrorNoRowSelected();
+	}
+
+	@Test
+	public void testEditRow_ForOneSelectedRow() {
 		List<Person> selectedPersons = new ArrayList<Person>();
 		selectedPersons.add(new PersonBuilder().build());
 
@@ -199,11 +209,17 @@ public class PersonBrowsePageBeanTest {
 		sut.edit(dummyActionEvent);
 
 		verify(personEditPageBean).openDialogFor(any(UUID.class));
-		verify(sut, never()).showMessage(any(Severity.class), anyString(), anyString());
+		verify(sut, never()).showMessageErrorNoRowSelected();
+
 	}
 
 	@Test
-	public void testEditRow_WithNoRowIsSelected() {
+	public void testEditRow_ForTwoSelectedRows() {
+		List<Person> selectedPersons = new ArrayList<Person>();
+		selectedPersons.add(new PersonBuilder().withForename(Forename.newInstance("Justus")).build());
+		selectedPersons.add(new PersonBuilder().withForename(Forename.newInstance("Peter")).build());
+		sut.setSelectedPersons(selectedPersons);
+
 		ActionEvent dummyActionEvent = null;
 
 		sut.edit(dummyActionEvent);
@@ -213,7 +229,18 @@ public class PersonBrowsePageBeanTest {
 	}
 
 	@Test
-	public void testRemoveRow_WithOneRowIsSelected() {
+	public void testRemoveRow_ForNonSelectedRow() {
+		ActionEvent dummyActionEvent = null;
+
+		sut.remove(dummyActionEvent);
+
+		verify(personBridge, never()).remove(any(Person.class));
+		verify(sut, never()).refreshPersons();
+		verify(sut).showMessageErrorNoRowSelected();
+	}
+
+	@Test
+	public void testRemoveRow_ForOneSelectedRow() {
 		List<Person> selectedPersons = new ArrayList<Person>();
 		selectedPersons.add(new PersonBuilder().build());
 		sut.setSelectedPersons(selectedPersons);
@@ -227,7 +254,11 @@ public class PersonBrowsePageBeanTest {
 	}
 
 	@Test
-	public void testRemoveRow_WithNoRowIsSelected() {
+	public void testRemoveRow_ForTwoSelectedRows() {
+		List<Person> selectedPersons = new ArrayList<Person>();
+		selectedPersons.add(new PersonBuilder().withForename(Forename.newInstance("Justus")).build());
+		selectedPersons.add(new PersonBuilder().withForename(Forename.newInstance("Peter")).build());
+		sut.setSelectedPersons(selectedPersons);
 		ActionEvent dummyActionEvent = null;
 
 		sut.remove(dummyActionEvent);
