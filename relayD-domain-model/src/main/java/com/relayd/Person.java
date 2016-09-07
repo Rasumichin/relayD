@@ -112,13 +112,33 @@ public class Person implements Serializable {
 		email = anEmail;
 	}
 
+	/**
+	 * Infers the 'email' attribute of the receiver by considering the current 'forename'
+	 * and 'surename' values as well as the provided 'domain part' of the email.
+	 * 
+	 * @param domainPart The desired domain part of the new email address. Must not be 'null'.
+	 * 
+	 * @return The inferred new email address (might be 'null' in case 'forename' AND 'surename'
+	 * 			are both currently 'null'.
+	 * 
+	 */
 	public Email inferEmailFromNameAnd(String domainPart) {
-		String newEmailAddress = getForename().toString()
-				+ "."
-				+ getSurename()
-				+ Email.AT_SIGN
-				+ domainPart;
-		setEmail(Email.newInstance(newEmailAddress));
+		if (domainPart == null) {
+			throw new IllegalArgumentException("Provided domain part must not be 'null'.");
+		}
+		
+		if (getForename() == null && getSurename() == null) {
+			setEmail(null);
+			return getEmail();
+		}
+		
+		String localPart = (getForename() != null) ? getForename().toString() : "";
+		if (getSurename() != null) {
+			localPart += localPart.isEmpty() ? "" : ".";
+			localPart += getSurename();
+		}
+		
+		setEmail(Email.createFromLocalAndDomainPart(localPart, domainPart));
 		
 		return getEmail();
 	}
