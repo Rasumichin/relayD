@@ -284,4 +284,22 @@ public class PersonBrowsePageBeanTest {
 		verify(sut, never()).refreshPersons();
 		verify(sut).showMessageErrorNoRowSelected();
 	}
+
+	@Test
+	public void testShowAll() {
+		sut.showAll();
+		verify(sut).refreshPersons();
+	}
+
+	@Test
+	public void testShowComplete() {
+		sut.showComplete();
+		verify(sut).showMessage(any(Severity.class), anyString(), anyString());
+	}
+
+	@Test
+	public void testShowOpen() {
+		sut.showOpen();
+		verify(personBridge).allWithoutRelay();
+	}
 }

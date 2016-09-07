@@ -196,4 +196,16 @@ public class PersonBrowsePageBean {
 		FacesMessage message = new FacesMessage(severityInfo, summary, textMessage);
 		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
+
+	public void showAll() {
+		refreshPersons();
+	}
+
+	public void showComplete() {
+		showMessage(FacesMessage.SEVERITY_INFO, "Sorry", "Not implemented yet!");
+	}
+
+	public void showOpen() {
+		searchResult = personBridge.allWithoutRelay();
+	}
 }

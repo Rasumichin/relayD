@@ -42,16 +42,35 @@
 					<p:ajax
 						event="dialogReturn"
 						listener="#{personBrowsePageBean.onEditClosed}"
-						update="form"/>
+						update="form" />
 				</p:commandButton>
 				<p:commandButton
 					value="export"
 					icon="ui-icon-mail-closed"
 					update="form"
 					actionListener="#{personBrowsePageBean.emailExport}" />
+				<p:menuButton value="Filter">
+					<p:menuitem
+						value="All"
+						actionListener="#{personBrowsePageBean.showAll}"
+						update="form"
+						icon="ui-icon-disk" />
+					<p:separator />
+					<p:menuitem
+						value="Complete"
+						actionListener="#{personBrowsePageBean.showComplete}"
+						update="form"
+						icon="ui-icon-arrowrefresh-1-w" />
+					<p:separator />
+					<p:menuitem
+						value="Open"
+						actionListener="#{personBrowsePageBean.showOpen}"
+						update="form"
+						icon="ui-icon-close" />
+				</p:menuButton>
 			</f:facet>
 			<f:facet name="right">
-	     		<p:commandButton
+				<p:commandButton
 					id="toggler"
 					type="button"
 					value="Columns"
@@ -147,10 +166,13 @@
 				<h:outputText value="#{person.email}" />
 			</p:column>
 
-			<p:column	
-				headerText="Comment">
-				<h:outputText id="comment" value="#{person.comment}" />
-				<p:tooltip for="comment" value="#{person.comment}"/>
+			<p:column headerText="Comment">
+				<h:outputText
+					id="comment"
+					value="#{person.comment}" />
+				<p:tooltip
+					for="comment"
+					value="#{person.comment}" />
 			</p:column>
 
 			<p:rowExpansion>

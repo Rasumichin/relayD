@@ -1,5 +1,6 @@
 package com.relayd.web.bridge;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -50,10 +51,10 @@ public class PersonBridgeImpl implements PersonBridge {
 	}
 
 	@Override
-	public ValidationResult validateEMail(Person newPerson) {
+	public ValidationResult validateEMail(Person personToCheck) {
 		for (Person person : all()) {
-			if (!newPerson.equals(person)) {
-				if (emailsEqual(newPerson, person)) {
+			if (!personToCheck.equals(person)) {
+				if (emailsEqual(personToCheck, person)) {
 					return new ValidationResultImpl("EMail does exist!");
 				}
 			}
@@ -83,5 +84,16 @@ public class PersonBridgeImpl implements PersonBridge {
 		output = output.replaceFirst(", ", "");
 
 		return output;
+	}
+
+	@Override
+	public List<Person> allWithoutRelay() {
+		List<Person> result = new ArrayList<Person>();
+		for (Person person : all()) {
+			if (person.getRelayname() == null || person.getRelayname().toString().isEmpty()) {
+				result.add(person);
+			}
+		}
+		return result;
 	}
 }

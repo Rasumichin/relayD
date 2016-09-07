@@ -17,6 +17,8 @@ public interface PersonBridge {
 
 	List<Person> all();
 
+	List<Person> allWithoutRelay();
+
 	void update(Person person);
 
 	void create(Person person);
