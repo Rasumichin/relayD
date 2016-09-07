@@ -41,6 +41,20 @@ public class Email implements Serializable {
 		}
 	}
 
+	public static Email createFromLocalAndDomainPart(String localPart, String domainPart) {
+		if (localPart == null) {
+			throw new IllegalArgumentException("[localPart] must not be 'null'.");
+		}
+		
+		if (domainPart == null) {
+			throw new IllegalArgumentException("[domainPart] must not be 'null'.");
+		}
+		
+		String newEmailValue = localPart + AT_SIGN + domainPart;
+		
+		return newInstance(newEmailValue);
+	}
+
 	public boolean isEmpty() {
 		return value.isEmpty();
 	}
@@ -70,7 +84,7 @@ public class Email implements Serializable {
 			return value;
 		}
 		
-		String[] emailParts = value.split("@");
+		String[] emailParts = value.split(AT_SIGN.toString());
 		String domainPart = emailParts[emailParts.length-1];
 		
 		return domainPart;
@@ -96,7 +110,7 @@ public class Email implements Serializable {
 			throw new IllegalArgumentException("Local part must not be empty.");
 		}
 		
-		String possiblyNewValue = newLocalPart + '@' + getDomainPart();
+		String possiblyNewValue = newLocalPart + AT_SIGN + getDomainPart();
 		if (!isValid(possiblyNewValue)) {
 			throw new IllegalArgumentException("Local part [" + newLocalPart + "] could not be part of a valid email address.");
 		}
