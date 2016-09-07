@@ -35,7 +35,9 @@ import static org.mockito.Mockito.*;
  * - Anonymous
  *
  * @author schmollc (Christian@relayd.de)
+ * @author Rasumichin (Erik@relayd.de)
  * @since 18.08.2016
+ * 
  */
 @RunWith(MockitoJUnitRunner.class)
 public class PersonEditPageBeanTest {
@@ -301,7 +303,7 @@ public class PersonEditPageBeanTest {
 	}
 
 	private Email getExpectedDefaultEmail() {
-		return Email.newInstance("forename.surename@canda.com");
+		return Email.createFromLocalAndDomainPart("forename.surename", "canda.com");
 	}
 	
 	@Test
@@ -360,7 +362,7 @@ public class PersonEditPageBeanTest {
 	public void testForenameValueChanged() {
 		sut.openDialogForCreatePerson();
 		Forename forename = Forename.newInstance("Clark");
-		Email expected = Email.newInstance(forename.toString() + "@canda.com");
+		Email expected = Email.createFromLocalAndDomainPart(forename.toString(), "canda.com");
 		
 		sut.setForename(forename);
 		sut.nameValueChanged();
@@ -373,12 +375,26 @@ public class PersonEditPageBeanTest {
 	public void testSurenameValueChanged() {
 		sut.openDialogForCreatePerson();
 		Surename surename = Surename.newInstance("Kent");
-		Email expected = Email.newInstance(surename.toString() + "@canda.com");
+		Email expected = Email.createFromLocalAndDomainPart(surename.toString(), "canda.com");
 		
 		sut.setSurename(surename);
 		sut.nameValueChanged();
 		
 		Email result = sut.getEmail();
 		assertEquals("Surename value change has not been handled correctly.", expected, result);
+	}
+	
+	@Test
+	public void testNameValueChangedButEmailWasEdited() {
+		sut.openDialogForCreatePerson();
+		String expected = "edited.name" + Email.AT_SIGN + "notcanda.com";
+		Email email = Email.newInstance(expected);
+		sut.setEmail(email);
+		
+		sut.setForename(Forename.newInstance("Adele"));
+		sut.nameValueChanged();
+		
+		String result = sut.getEmail().toString();
+		assertEquals("Email was changed although otherwise edited.", expected, result);
 	}
 }

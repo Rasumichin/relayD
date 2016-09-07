@@ -52,6 +52,7 @@
 				id="email"
 				value="#{personEditPageBean.email}">
 				<f:converter converterId="com.relayd.web.converter.EmailValueObjectConverter" />
+				<p:ajax event="valueChange"/>				
 			</p:inputText>
 
 			<p:outputLabel
