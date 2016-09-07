@@ -37,6 +37,8 @@ public class PersonBrowsePageBean {
 
 	private PersonBridge personBridge = null;
 
+	private PersonSort personSort = new PersonSort();
+
 	@ManagedProperty(value = "#{personEditPageBean}")
 	private PersonEditPageBean personEditPageBean;
 
@@ -74,38 +76,27 @@ public class PersonBrowsePageBean {
 	}
 
 	public int sortByRelayname(Person personOne, Person personTwo) {
-		if (personOne.getRelayname() == null) {
-			return -1;
-		}
-		if (personTwo.getRelayname() == null) {
-			return 1;
-		}
-		int position = personOne.getRelayname().compareTo(personTwo.getRelayname());
-		if (personOne.getPosition() == null || personTwo.getPosition() == null) {
-			return position;
-		}
-		position = position + personOne.getPosition().compareTo(personTwo.getPosition());
-		return position;
+		return personSort.sortByRelayname(personOne, personTwo);
 	}
 
 	public int sortByForename(Forename name1, Forename name2) {
-		return name1.toString().compareTo(name2.toString());
+		return personSort.sortByForename(name1, name2);
 	}
 
 	public int sortBySurename(Surename name1, Surename name2) {
-		return name1.toString().compareTo(name2.toString());
+		return personSort.sortBySurename(name1, name2);
 	}
 
 	public int sortByBirthday(Birthday birthday1, Birthday birthday2) {
-		return birthday1.toString().compareTo(birthday2.toString());
+		return personSort.sortByBirthday(birthday1, birthday2);
 	}
 
 	public int sortByShirtsize(Shirtsize size1, Shirtsize size2) {
-		return size1.toString().compareTo(size2.toString());
+		return personSort.sortByShirtsize(size1, size2);
 	}
 
 	public int sortByEmail(Email email1, Email email2) {
-		return email1.toString().compareTo(email2.toString());
+		return personSort.sortByEmail(email1, email2);
 	}
 
 	public Integer getNumberOfResults() {
@@ -149,7 +140,7 @@ public class PersonBrowsePageBean {
 		if (canceled) {
 			showMessage(FacesMessage.SEVERITY_INFO, "Canceld!", "");
 			canceled = false;
-		} else if (getSelectedPerson() != null) {
+		} else if (isRowSelectedForOneRow()) {
 			showMessage(FacesMessage.SEVERITY_INFO, "Saved!", getSelectedPerson().toString());
 		} else {
 			showMessage(FacesMessage.SEVERITY_INFO, "Added!", "");

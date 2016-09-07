@@ -3,7 +3,9 @@ package com.relayd.web.pagebean;
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
 
@@ -22,8 +24,11 @@ import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.relayd.Person;
+import com.relayd.attributes.Birthday;
+import com.relayd.attributes.Email;
 import com.relayd.attributes.Forename;
-import com.relayd.attributes.Position;
+import com.relayd.attributes.Shirtsize;
+import com.relayd.attributes.Surename;
 import com.relayd.web.bridge.PersonBridge;
 
 import static org.mockito.Mockito.*;
@@ -45,6 +50,9 @@ public class PersonBrowsePageBeanTest {
 
 	@Mock
 	private PersonEditPageBean personEditPageBean;
+
+	@Mock
+	private PersonSort personSort;
 
 	@Before
 	public void setUp() {
@@ -112,71 +120,6 @@ public class PersonBrowsePageBeanTest {
 
 	private Integer size(Integer aValue) {
 		return aValue;
-	}
-
-	@Test
-	public void testSortByRelayname_FirstRelaynameIsNull() {
-		Person first = Person.newInstance();
-		Person second = Person.newInstance();
-
-		int position = sut.sortByRelayname(first, second);
-
-		assertEquals("[position] not correct!", -1, position);
-	}
-
-	@Test
-	public void testSortByRelayname_SecondRelaynameIsNull() {
-		Person first = new PersonBuilder().withRelayname("Die 4 ????").build();
-
-		Person second = Person.newInstance();
-
-		int position = sut.sortByRelayname(first, second);
-
-		assertEquals("[position] not correct!", 1, position);
-	}
-
-	@Test
-	public void testSortByRelayname_WithSameName() {
-		Person first = new PersonBuilder().withRelayname("A").build();
-
-		Person second = new PersonBuilder().withRelayname("A").build();
-
-		int position = sut.sortByRelayname(first, second);
-
-		assertEquals("[position] not correct!", 0, position);
-	}
-
-	@Test
-	public void testSortByRelayname_WithSecondPositionIsNull() {
-		Person first = new PersonBuilder().withRelayname("A").withPosition(Position.FOURTH).build();
-
-		Person second = new PersonBuilder().withRelayname("A").build();
-
-		int position = sut.sortByRelayname(first, second);
-
-		assertEquals("[position] not correct!", 0, position);
-	}
-
-	@Test
-	public void testSortByRelayname_WithBothPositions() {
-		Person first = new PersonBuilder().withRelayname("A").withPosition(Position.FOURTH).build();
-
-		Person second = new PersonBuilder().withRelayname("A").withPosition(Position.SECOND).build();
-
-		int position = sut.sortByRelayname(first, second);
-
-		assertEquals("[position] not correct!", 2, position);
-	}
-
-	@Test
-	public void testSortByRelayname_WithBothPositions2() {
-		Person first = new PersonBuilder().withRelayname("A").withPosition(Position.SECOND).build();
-
-		Person second = new PersonBuilder().withRelayname("A").withPosition(Position.FOURTH).build();
-
-		int position = sut.sortByRelayname(first, second);
-
-		assertEquals("[position] not correct!", -2, position);
 	}
 
 	@Test
@@ -302,4 +245,71 @@ public class PersonBrowsePageBeanTest {
 		sut.showOpen();
 		verify(personBridge).allWithoutRelay();
 	}
+
+	@Test
+	public void testSortByBirthday() {
+		Birthday birthday1 = Birthday.newInstance(LocalDate.of(2016, Calendar.AUGUST, 23));
+		Birthday birthday2 = Birthday.newInstance(LocalDate.of(2016, Calendar.AUGUST, 25));
+
+		@SuppressWarnings("unused")
+		int resultForDocumentation = sut.sortByBirthday(birthday1, birthday2);
+
+		verify(personSort).sortByBirthday(birthday1, birthday2);
+	}
+
+	@Test
+	public void testSortByEmail() {
+		Email email1 = Email.newInstance("Justus.Jonas@RockyBeach.com");
+		Email email2 = Email.newInstance("Peter.Shaw@RockyBeach.com");
+
+		@SuppressWarnings("unused")
+		int resultForDocumentation = sut.sortByEmail(email1, email2);
+
+		verify(personSort).sortByEmail(email1, email2);
+	}
+
+	@Test
+	public void testSortByForename() {
+		Forename name1 = Forename.newInstance("Justus");
+		Forename name2 = Forename.newInstance("Peter");
+
+		@SuppressWarnings("unused")
+		int resultForDocumentation = sut.sortByForename(name1, name2);
+
+		verify(personSort).sortByForename(name1, name2);
+	}
+
+	@Test
+	public void testSortBySurename() {
+		Surename name1 = Surename.newInstance("Jonas");
+		Surename name2 = Surename.newInstance("Shaw");
+
+		@SuppressWarnings("unused")
+		int resultForDocumentation = sut.sortBySurename(name1, name2);
+
+		verify(personSort).sortBySurename(name1, name2);
+	}
+
+	@Test
+	public void testSortByRelayname() {
+		Person person1 = new PersonBuilder().withRelayname("A").build();
+		Person person2 = new PersonBuilder().withRelayname("B").build();
+
+		@SuppressWarnings("unused")
+		int resultForDocumentation = sut.sortByRelayname(person1, person2);
+
+		verify(personSort).sortByRelayname(person1, person2);
+	}
+
+	@Test
+	public void testSortByshirtsize() {
+		Shirtsize size1 = Shirtsize.DamenL;
+		Shirtsize size2 = Shirtsize.HerrenM;
+
+		@SuppressWarnings("unused")
+		int resultForDocumentation = sut.sortByShirtsize(size1, size2);
+
+		verify(personSort).sortByShirtsize(size1, size2);
+	}
+
 }
