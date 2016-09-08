@@ -78,7 +78,9 @@
 					icon="ui-icon-calculator" />
 				<p:columnToggler
 					datasource="personTable"
-					trigger="toggler" />
+					trigger="toggler">
+					<p:ajax event="toggle" listener="#{personBrowsePageBean.onToggle}" />
+				</p:columnToggler>
 			</f:facet>
 		</p:toolbar>
 		<p:dataTable
@@ -101,12 +103,15 @@
 				</p:outputPanel>
 			</f:facet>
 
-			<p:column style="width:16px">
+			<p:column 
+				toggleable="false"
+				style="width:16px">
 				<p:rowToggler />
 			</p:column>
 
 			<p:column
 				headerText="Forename"
+				visible="#{personBrowsePageBean.visibleColumns[0]}"
 				sortBy="#{person.forename}"
 				sortFunction="#{personBrowsePageBean.sortByForename}"
 				width="150">
@@ -115,6 +120,7 @@
 
 			<p:column
 				headerText="Surename"
+				visible="#{personBrowsePageBean.visibleColumns[1]}"
 				filterMatchMode="contains"
 				sortBy="#{person.surename}"
 				sortFunction="#{personBrowsePageBean.sortBySurename}"
@@ -124,6 +130,7 @@
 
 			<p:column
 				headerText="Relayname"
+				visible="#{personBrowsePageBean.visibleColumns[2]}"
 				sortBy="#{person}"
 				sortFunction="#{personBrowsePageBean.sortByRelayname}"
 				width="150">
@@ -132,12 +139,14 @@
 
 			<p:column
 				headerText="Position"
+				visible="#{personBrowsePageBean.visibleColumns[3]}"
 				width="70">
 				<h:outputText value="#{person.position}" />
 			</p:column>
 
 			<p:column
 				headerText="Birthday"
+				visible="#{personBrowsePageBean.visibleColumns[4]}"
 				sortBy="#{person.birthday}"
 				sortFunction="#{personBrowsePageBean.sortByBirthday}"
 				width="60">
@@ -146,6 +155,7 @@
 
 			<p:column
 				headerText="Shirtsize"
+				visible="#{personBrowsePageBean.visibleColumns[5]}"
 				sortBy="#{person.shirtsize}"
 				sortFunction="#{personBrowsePageBean.sortByShirtsize}"
 				width="60">
@@ -154,19 +164,23 @@
 
 			<p:column
 				headerText="Nationality"
+				visible="#{personBrowsePageBean.visibleColumns[6]}"
 				width="120">
 				<h:outputText value="#{person.displayNationality}" />
 			</p:column>
 
 			<p:column
 				headerText="E-Mail"
+				visible="#{personBrowsePageBean.visibleColumns[7]}"
 				sortBy="#{person.email}"
 				sortFunction="#{personBrowsePageBean.sortByEmail}"
 				width="200">
 				<h:outputText value="#{person.email}" />
 			</p:column>
 
-			<p:column headerText="Comment">
+			<p:column 
+				headerText="Comment"
+				visible="#{personBrowsePageBean.visibleColumns[8]}">
 				<h:outputText
 					id="comment"
 					value="#{person.comment}" />
