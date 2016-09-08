@@ -5,20 +5,24 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.relayd.Person;
 import com.relayd.attributes.Email;
+import com.relayd.attributes.Forename;
 import com.relayd.ejb.PersonGateway;
 import com.relayd.web.pagebean.PersonBuilder;
 
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class PersonBridgeImplTest {
 
 	private static final String EMAIL_JUSTUS = "Justus.Jonas@RockyBeach.com";
@@ -34,77 +38,89 @@ public class PersonBridgeImplTest {
 	private PersonGateway gateway;
 
 	@Test
-	public void testNewPersonWithSameEMail() {
+	public void testValidateEMail_ForNewPersonWithSameEMail() {
 		doReturn(listWithPersons()).when(gateway).getAll();
 		Person newPerson = Person.newInstance();
 		newPerson.setEmail(Email.newInstance(EMAIL_JUSTUS));
 
-		ValidationResult message = sut.validateEMail(newPerson);
+		ValidationResult result = sut.validateEMail(newPerson);
 
-		assertEquals("[message] not correct!", "EMail does exist!", message.getMessage());
+		assertEquals("[result] not correct!", "EMail does exist!", result.getMessage());
 	}
 
 	@Test
-	public void testNewPersonWithNotSameEMail() {
+	public void testValidateEMail_ForNewPersonWithNotSameEMail() {
 		doReturn(listWithPersons()).when(gateway).getAll();
 		Person newPerson = Person.newInstance();
 		newPerson.setEmail(Email.newInstance(EMAIL_BOB));
 
-		ValidationResult message = sut.validateEMail(newPerson);
+		ValidationResult result = sut.validateEMail(newPerson);
 
-		assertTrue("[message] not correct!", message.getMessage().isEmpty());
-	}
-
-	private List<Person> listWithPersons() {
-		List<Person> somePersons = new ArrayList<Person>();
-
-		Person personOneWithEmail = Person.newInstance();
-		personOneWithEmail.setEmail(Email.newInstance(EMAIL_PETER));
-
-		somePersons.add(personOneWithEmail);
-
-		Person personTwoWithEmail = Person.newInstance();
-		personTwoWithEmail.setEmail(Email.newInstance(EMAIL_JUSTUS));
-
-		somePersons.add(personTwoWithEmail);
-
-		Person personThreeWithoutEmail = Person.newInstance();
-
-		somePersons.add(personThreeWithoutEmail);
-
-		return somePersons;
+		assertTrue("[result] not correct!", result.getMessage().isEmpty());
 	}
 
 	@Test
-	public void testExistingPersonWithEMail() {
+	public void testValidateEMail_ForExistingPersonWithEMail() {
 		List<Person> somePersons = listWithPersons();
 		doReturn(somePersons).when(gateway).getAll();
 
-		Person updatePerson = somePersons.get(1);
+		int positionFomrPeterShaw = 2;
+		Person person = somePersons.get(positionFomrPeterShaw);
 
-		ValidationResult message = sut.validateEMail(updatePerson);
+		ValidationResult result = sut.validateEMail(person);
 
-		assertTrue("[message] not correct!", message.getMessage().isEmpty());
+		assertTrue("[result] not correct!", result.getMessage().isEmpty());
 	}
 
 	@Test
 	public void testGetEmailList() {
-		doReturn(createDummyData()).when(gateway).getAll();
+		doReturn(listWithPersons()).when(gateway).getAll();
 
-		String commaSeperatedEmails = sut.getEmailList();
+		String result = sut.getEmailList();
 
-		assertNotNull("Erwarte gueltige Instanz.", commaSeperatedEmails);
-		assertFalse("Erwarte keinen leeren String.", commaSeperatedEmails.isEmpty());
-		assertEquals("Wert nicht korrekt.", "Christian.Schmoll@canda.com, Dirk.Aderhold@canda.com", commaSeperatedEmails);
+		assertNotNull("[result] invalid!", result);
+		assertFalse("[result] has not be empty!", result.isEmpty());
+		assertEquals("[result] not correct!", "Peter.Shaw@RockyBeach.com, Justus.Jonas@RockyBeach.com", result);
 	}
 
-	private List<Person> createDummyData() {
+	@Test
+	public void testGetEmailList_ForSelectedPersons() {
+		List<Person> selectedPersons = listWithPersons();
+
+		String result = sut.getEmailList(selectedPersons);
+
+		assertNotNull("[result] invalid!", result);
+		assertFalse("[result] has not be empty!", result.isEmpty());
+		assertEquals("[result] not correct!", "Peter.Shaw@RockyBeach.com, Justus.Jonas@RockyBeach.com", result);
+	}
+
+	@Test
+	public void testAllWithoutRelay_For2PersonsWithoutRelay() {
+		doReturn(listWithPersons()).when(gateway).getAll();
+
+		List<Person> result = sut.allWithoutRelay();
+
+		assertNotNull("[result] keine gültige Instanz!", result);
+		assertEquals("[result] größe nicht korrekt!", 2, result.size());
+		Person personFirst = result.get(0);
+		assertEquals("[forename] nicht korrekt!", "Dirk", personFirst.getForename().toString());
+	}
+
+	private List<Person> listWithPersons() {
 		List<Person> somePersons = new ArrayList<Person>();
 		PersonBuilder builder = new PersonBuilder();
 
-		somePersons.add(builder.withEmail("Christian.Schmoll@canda.com").build());
-		somePersons.add(builder.withEmail("").build());
-		somePersons.add(builder.withEmail("Dirk.Aderhold@canda.com").build());
+		Person personOne = builder.withForename(Forename.newInstance("Dirk")).withEmail("").build();
+		somePersons.add(personOne);
+
+		Person personTwo = builder.withForename(Forename.newInstance("Christian")).withEmail("").build();
+		somePersons.add(personTwo);
+
+		Person personThree = builder.withForename(Forename.newInstance("Peter")).withEmail(EMAIL_PETER).withRelayname("Die 4 ???").build();
+		somePersons.add(personThree);
+
+		Person personFour = builder.withForename(Forename.newInstance("Justus")).withEmail(EMAIL_JUSTUS).withRelayname("Die 4 ???").build();
+		somePersons.add(personFour);
 
 		return somePersons;
 	}

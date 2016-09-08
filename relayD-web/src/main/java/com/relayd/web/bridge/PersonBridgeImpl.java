@@ -1,5 +1,6 @@
 package com.relayd.web.bridge;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -50,10 +51,10 @@ public class PersonBridgeImpl implements PersonBridge {
 	}
 
 	@Override
-	public ValidationResult validateEMail(Person aNewPerson) {
+	public ValidationResult validateEMail(Person personToCheck) {
 		for (Person person : all()) {
-			if (!aNewPerson.equals(person)) {
-				if (emailsEqual(aNewPerson, person)) {
+			if (!personToCheck.equals(person)) {
+				if (emailsEqual(personToCheck, person)) {
 					return new ValidationResultImpl("EMail does exist!");
 				}
 			}
@@ -61,15 +62,20 @@ public class PersonBridgeImpl implements PersonBridge {
 		return new ValidationResultImpl("");
 	}
 
-	private boolean emailsEqual(Person aNewPerson, Person person) {
+	private boolean emailsEqual(Person newPerson, Person person) {
 		Email email = person.getEmail();
-		return email != null && email.equals(aNewPerson.getEmail());
+		return email != null && email.equals(newPerson.getEmail());
 	}
 
 	@Override
 	public String getEmailList() {
+		return getEmailList(all());
+	}
+
+	@Override
+	public String getEmailList(List<Person> somePersons) {
 		StringBuilder builder = new StringBuilder();
-		for (Person person : all()) {
+		for (Person person : somePersons) {
 			if (!person.getEmail().isEmpty()) {
 				builder.append(", " + person.getEmail());
 			}
@@ -78,5 +84,16 @@ public class PersonBridgeImpl implements PersonBridge {
 		output = output.replaceFirst(", ", "");
 
 		return output;
+	}
+
+	@Override
+	public List<Person> allWithoutRelay() {
+		List<Person> result = new ArrayList<Person>();
+		for (Person person : all()) {
+			if (person.getRelayname() == null || person.getRelayname().toString().isEmpty()) {
+				result.add(person);
+			}
+		}
+		return result;
 	}
 }

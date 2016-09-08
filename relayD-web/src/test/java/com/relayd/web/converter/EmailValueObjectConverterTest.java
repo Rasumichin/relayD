@@ -20,7 +20,23 @@ public class EmailValueObjectConverterTest {
 	private final String INVALID_STRING = "Justus.JonasrockyBeach.com";
 
 	@Test
-	public void testGetAsObject_WithValidString() {
+	public void testGetAsObject_ForNullValue() {
+		String nullValue = null;
+		Object result = sut.getAsObject(null, null, nullValue);
+
+		assertNull("Expected valid instance.", result);
+	}
+
+	@Test
+	public void testGetAsObject_ForEmptyValue() {
+		String emptyValue = "";
+		Object result = sut.getAsObject(null, null, emptyValue);
+
+		assertNull("Expected valid instance.", result);
+	}
+
+	@Test
+	public void testGetAsObject_ForValidValue() {
 		Object result = sut.getAsObject(null, null, VALID_STRING);
 
 		assertNotNull("Expected valid instance.", result);
@@ -30,7 +46,7 @@ public class EmailValueObjectConverterTest {
 	}
 
 	@Test(expected = ConverterException.class)
-	public void testGetAsObject_WithInvalidString() {
+	public void testGetAsObject_ForInvalidValue() {
 		sut.getAsObject(null, null, INVALID_STRING);
 	}
 

@@ -17,6 +17,9 @@ public class ForenameValueObjectConverter implements Converter {
 
 	@Override
 	public Object getAsObject(@SuppressWarnings("unused") FacesContext facesContext, @SuppressWarnings("unused") UIComponent uiComponent, String value) {
+		if (value == null || value.isEmpty()) {
+			return null;
+		}
 		Forename name = Forename.newInstance(value);
 		return name;
 	}

@@ -2,6 +2,7 @@ package com.relayd.web.pagebean;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.application.FacesMessage.Severity;
@@ -30,8 +31,13 @@ import com.relayd.web.bridge.PersonBridgeImpl;
 @ManagedBean
 @SessionScoped
 public class PersonBrowsePageBean {
+	// Should be I18N
+	private static final String PLEASE_SELECT_A_ROW = "Please select one row!";
+	private static final String NOT_POSSIBLE = "Not Possible!";
 
 	private PersonBridge personBridge = null;
+
+	private PersonSort personSort = new PersonSort();
 
 	@ManagedProperty(value = "#{personEditPageBean}")
 	private PersonEditPageBean personEditPageBean;
@@ -39,14 +45,14 @@ public class PersonBrowsePageBean {
 	private List<Person> searchResult = new ArrayList<Person>();
 	private List<Person> filteredPersons;
 
-	private Person selected;
+	private List<Person> selectedPersons;
 	private boolean canceled;
 
 	public PersonBrowsePageBean() {
 		personBridge = new PersonBridgeImpl();
 	}
 
-	private void refreshPersons() {
+	void refreshPersons() {
 		searchResult = personBridge.all();
 	}
 
@@ -57,52 +63,40 @@ public class PersonBrowsePageBean {
 		return searchResult;
 	}
 
-	public Person getSelectedPerson() {
-		return selected;
+	private Person getSelectedPerson() {
+		return selectedPersons.get(0);
 	}
 
-	public void setSelectedPerson(Person aSelected) {
-		selected = aSelected;
+	public List<Person> getSelectedPersons() {
+		return selectedPersons;
+	}
+
+	public void setSelectedPersons(List<Person> someSelectedPersons) {
+		selectedPersons = someSelectedPersons;
 	}
 
 	public int sortByRelayname(Person personOne, Person personTwo) {
-		if (personOne.getRelayname() == null) {
-			return -1;
-		}
-		if (personTwo.getRelayname() == null) {
-			return 1;
-		}
-		int position = personOne.getRelayname().compareTo(personTwo.getRelayname());
-		if (personOne.getPosition() == null || personTwo.getPosition() == null) {
-			return position;
-		}
-		position = position + personOne.getPosition().compareTo(personTwo.getPosition());
-		return position;
+		return personSort.sortByRelayname(personOne, personTwo);
 	}
 
 	public int sortByForename(Forename name1, Forename name2) {
-		//return -1, 0 , 1 if car1 is less than, equal to or greater than car2
-		return name1.toString().compareTo(name2.toString());
+		return personSort.sortByForename(name1, name2);
 	}
 
 	public int sortBySurename(Surename name1, Surename name2) {
-		//return -1, 0 , 1 if car1 is less than, equal to or greater than car2
-		return name1.toString().compareTo(name2.toString());
+		return personSort.sortBySurename(name1, name2);
 	}
 
 	public int sortByBirthday(Birthday birthday1, Birthday birthday2) {
-		//return -1, 0 , 1 if car1 is less than, equal to or greater than car2
-		return birthday1.toString().compareTo(birthday2.toString());
+		return personSort.sortByBirthday(birthday1, birthday2);
 	}
 
 	public int sortByShirtsize(Shirtsize size1, Shirtsize size2) {
-		//return -1, 0 , 1 if car1 is less than, equal to or greater than car2
-		return size1.toString().compareTo(size2.toString());
+		return personSort.sortByShirtsize(size1, size2);
 	}
 
 	public int sortByEmail(Email email1, Email email2) {
-		//return -1, 0 , 1 if car1 is less than, equal to or greater than car2
-		return email1.toString().compareTo(email2.toString());
+		return personSort.sortByEmail(email1, email2);
 	}
 
 	public Integer getNumberOfResults() {
@@ -114,46 +108,54 @@ public class PersonBrowsePageBean {
 	}
 
 	public void edit(@SuppressWarnings("unused") ActionEvent actionEvent) {
-		// TODO -ALL- Abprüfung auf selektion passiert... wie?
-		getPersonEditPageBean().openDialogFor(getSelectedPerson().getUUID());
+		if (isRowSelectedForOneRow()) {
+			UUID uuid = getSelectedPerson().getUUID();
+			getPersonEditPageBean().openDialogFor(uuid);
+		} else {
+			showMessageErrorNoRowSelected();
+		}
 	}
 
 	public void remove(@SuppressWarnings("unused") ActionEvent actionEvent) {
-		// TODO -ALL- Abprüfung auf selektion passiert... wie?
-		personBridge.remove(getSelectedPerson());
-		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Removed!", getSelectedPerson().toString());
-		FacesContext.getCurrentInstance().addMessage(null, message);
-		refreshPersons();
+		if (isRowSelectedForOneRow()) {
+			personBridge.remove(getSelectedPerson());
+			showMessage(FacesMessage.SEVERITY_INFO, "Success", "Remove" + getSelectedPerson().toString());
+			refreshPersons();
+		} else {
+			showMessageErrorNoRowSelected();
+		}
 	}
 
 	public void emailExport(@SuppressWarnings("unused") ActionEvent actionEvent) {
-		String output = personBridge.getEmailList();
+		String output = null;
+		if (isRowSelected()) {
+			output = personBridge.getEmailList(getSelectedPersons());
+		} else {
+			output = personBridge.getEmailList();
+		}
 		showMessage(FacesMessage.SEVERITY_INFO, "Email", output);
 	}
 
-	public void onEditClosed(SelectEvent event) {
+	public void onEditClosed(@SuppressWarnings("unused") SelectEvent event) {
 		if (canceled) {
-			System.out.println("Cancel Message");
-			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Canceld!", "");
-			FacesContext.getCurrentInstance().addMessage(null, message);
+			showMessage(FacesMessage.SEVERITY_INFO, "Canceld!", "");
 			canceled = false;
-
-		} else if (getSelectedPerson() != null) {
-			System.out.println("Saved!");
-			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Saved!", getSelectedPerson().toString());
-			FacesContext.getCurrentInstance().addMessage(null, message);
+		} else if (isRowSelectedForOneRow()) {
+			showMessage(FacesMessage.SEVERITY_INFO, "Saved!", getSelectedPerson().toString());
 		} else {
-			System.out.println("Added!");
-			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Added!", "");
-			FacesContext.getCurrentInstance().addMessage(null, message);
-
+			showMessage(FacesMessage.SEVERITY_INFO, "Added!", "");
 		}
 
 		refreshPersons();
 	}
 
-	public boolean isRowSelected() {
-		return getSelectedPerson() != null;
+	// TODO -schmollc- Der Name ist schlecht! Mit Lotz absprechen!
+	private boolean isRowSelected() {
+		return getSelectedPersons() != null && !getSelectedPersons().isEmpty();
+	}
+
+	boolean isRowSelectedForOneRow() {
+		return getSelectedPersons() != null && getSelectedPersons().size() == 1;
 	}
 
 	public PersonEditPageBean getPersonEditPageBean() {
@@ -167,7 +169,18 @@ public class PersonBrowsePageBean {
 	public void cancelEditDialog() {
 		getPersonEditPageBean().cancel();
 		canceled = true;
-		System.out.println("Canceld Dialog!");
+	}
+
+	public List<Person> getFilteredPersons() {
+		return filteredPersons;
+	}
+
+	public void setFilteredPersons(List<Person> someFilteredPersons) {
+		filteredPersons = someFilteredPersons;
+	}
+
+	void showMessageErrorNoRowSelected() {
+		showMessage(FacesMessage.SEVERITY_ERROR, NOT_POSSIBLE, PLEASE_SELECT_A_ROW);
 	}
 
 	void showMessage(Severity severityInfo, String summary, String textMessage) {
@@ -175,17 +188,15 @@ public class PersonBrowsePageBean {
 		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
 
-	/**
-	 * @return the filteredPersons
-	 */
-	public List<Person> getFilteredPersons() {
-		return filteredPersons;
+	public void showAll() {
+		refreshPersons();
 	}
 
-	/**
-	 * @param filteredPersons the filteredPersons to set
-	 */
-	public void setFilteredPersons(List<Person> filteredPersons) {
-		this.filteredPersons = filteredPersons;
+	public void showComplete() {
+		showMessage(FacesMessage.SEVERITY_INFO, "Sorry", "Not implemented yet!");
+	}
+
+	public void showOpen() {
+		searchResult = personBridge.allWithoutRelay();
 	}
 }

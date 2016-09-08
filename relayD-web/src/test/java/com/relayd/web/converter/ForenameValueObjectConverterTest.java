@@ -17,7 +17,23 @@ public class ForenameValueObjectConverterTest {
 	private final String name = "Justus";
 
 	@Test
-	public void testGetAsObject() {
+	public void testGetAsObject_ForNullValue() {
+		String nullValue = null;
+		Object result = sut.getAsObject(null, null, nullValue);
+
+		assertNull("Expected valid instance.", result);
+	}
+
+	@Test
+	public void testGetAsObject_ForEmptyValue() {
+		String emptyValue = "";
+		Object result = sut.getAsObject(null, null, emptyValue);
+
+		assertNull("Expected valid instance.", result);
+	}
+
+	@Test
+	public void testGetAsObject_ForValue() {
 		Object result = sut.getAsObject(null, null, name);
 
 		assertNotNull("Expected valid instance.", result);

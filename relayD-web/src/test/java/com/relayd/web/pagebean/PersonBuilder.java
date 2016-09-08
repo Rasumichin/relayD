@@ -23,7 +23,7 @@ public class PersonBuilder {
 
 	private Surename surename = Surename.newInstance("Surename");
 	private Forename forename = Forename.newInstance("Forename");
-	private Relayname relayname = Relayname.newInstance("");
+	private Relayname relayname = null;
 	private Position position = null;
 	private Birthday birthday = Birthday.newInstance(LocalDate.of(1956, Calendar.FEBRUARY, 17));
 	private Shirtsize shirtsize = Shirtsize.HerrenM;
@@ -35,12 +35,12 @@ public class PersonBuilder {
 		return this;
 	}
 
-	PersonBuilder withForename(Forename aForename) {
+	public PersonBuilder withForename(Forename aForename) {
 		forename = aForename;
 		return this;
 	}
 
-	PersonBuilder withRelayname(String aRelayname) {
+	public PersonBuilder withRelayname(String aRelayname) {
 		relayname = Relayname.newInstance(aRelayname);
 		return this;
 	}
@@ -50,8 +50,8 @@ public class PersonBuilder {
 		return this;
 	}
 
-	public PersonBuilder withEmail(String string) {
-		email = Email.newInstance(string);
+	public PersonBuilder withEmail(String anEmail) {
+		email = Email.newInstance(anEmail);
 		return this;
 	}
 

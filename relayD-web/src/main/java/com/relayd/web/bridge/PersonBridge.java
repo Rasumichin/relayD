@@ -17,6 +17,8 @@ public interface PersonBridge {
 
 	List<Person> all();
 
+	List<Person> allWithoutRelay();
+
 	void update(Person person);
 
 	void create(Person person);
@@ -25,7 +27,9 @@ public interface PersonBridge {
 
 	void remove(Person person);
 
-	ValidationResult validateEMail(Person aNewPerson);
+	ValidationResult validateEMail(Person newPerson);
 
 	String getEmailList();
+
+	String getEmailList(List<Person> somePersons);
 }
