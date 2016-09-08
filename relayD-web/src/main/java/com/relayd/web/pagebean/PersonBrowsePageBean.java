@@ -1,9 +1,11 @@
 package com.relayd.web.pagebean;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.application.FacesMessage.Severity;
 import javax.faces.bean.ManagedBean;
@@ -13,6 +15,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
 import org.primefaces.event.SelectEvent;
+import org.primefaces.event.ToggleEvent;
+import org.primefaces.model.Visibility;
 
 import com.relayd.Person;
 import com.relayd.attributes.Birthday;
@@ -34,6 +38,8 @@ public class PersonBrowsePageBean {
 	// Should be I18N
 	private static final String PLEASE_SELECT_A_ROW = "Please select one row!";
 	private static final String NOT_POSSIBLE = "Not Possible!";
+	
+	private List<Boolean> visibleColumns;
 
 	private PersonBridge personBridge = null;
 
@@ -47,6 +53,11 @@ public class PersonBrowsePageBean {
 
 	private List<Person> selectedPersons;
 	private boolean canceled;
+	
+	@PostConstruct
+	public void init() {
+		visibleColumns = Arrays.asList(true,true,true,true,true,true,true,true,true,true);
+	}
 
 	public PersonBrowsePageBean() {
 		personBridge = new PersonBridgeImpl();
@@ -199,4 +210,12 @@ public class PersonBrowsePageBean {
 	public void showOpen() {
 		searchResult = personBridge.allWithoutRelay();
 	}
+	
+	public List<Boolean> getVisibleColumns() {
+		return visibleColumns;
+	}
+	
+	public void onToggle(ToggleEvent e) {
+		visibleColumns.set((Integer) e.getData(), e.getVisibility() == Visibility.VISIBLE);
+    }
 }
