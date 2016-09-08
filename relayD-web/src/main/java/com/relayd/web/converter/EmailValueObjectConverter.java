@@ -19,7 +19,9 @@ public class EmailValueObjectConverter implements Converter {
 
 	@Override
 	public Object getAsObject(@SuppressWarnings("unused") FacesContext facesContext, @SuppressWarnings("unused") UIComponent uiComponent, String value) {
-
+		if (value == null || value.isEmpty()) {
+			return null;
+		}
 		if (!Email.isValid(value)) {
 			// TODO -schmollc- Was genau schiefgegangen ist würde auch noch in der  EMail Klasse stehen.
 			// isValid() könnte auch direkt den Fehler zurückliefen als Code z.B.
