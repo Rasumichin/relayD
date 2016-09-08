@@ -110,10 +110,10 @@ public class PersonBridgeImplTest {
 		List<Person> somePersons = new ArrayList<Person>();
 		PersonBuilder builder = new PersonBuilder();
 
-		Person personOne = builder.withForename(Forename.newInstance("Dirk")).withEmail("").build();
+		Person personOne = builder.withForename(Forename.newInstance("Dirk")).build();
 		somePersons.add(personOne);
 
-		Person personTwo = builder.withForename(Forename.newInstance("Christian")).withEmail("").build();
+		Person personTwo = builder.withForename(Forename.newInstance("Christian")).build();
 		somePersons.add(personTwo);
 
 		Person personThree = builder.withForename(Forename.newInstance("Peter")).withEmail(EMAIL_PETER).withRelayname("Die 4 ???").build();
