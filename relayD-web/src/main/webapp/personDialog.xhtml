@@ -19,9 +19,11 @@
 		<p:growl
 			id="growl"
 			showDetail="true" />
+		<p:focus/>
 
 		<h:panelGrid
 			columns="2"
+			id="inputgrid"
 			cellpadding="5">
 			<p:outputLabel
 				for="forename"
@@ -31,6 +33,7 @@
 				value="#{personEditPageBean.forename}"
 				style="width:180px">
 				<f:converter converterId="com.relayd.web.converter.ForenameValueObjectConverter" />
+				<p:ajax event="valueChange" listener="#{personEditPageBean.nameValueChanged}" update="email"/>				
 			</p:inputText>
 
 			<p:outputLabel
@@ -41,6 +44,7 @@
 				value="#{personEditPageBean.surename}"
 				style="width:180px">
 				<f:converter converterId="com.relayd.web.converter.SurenameValueObjectConverter" />
+				<p:ajax event="valueChange" listener="#{personEditPageBean.nameValueChanged}" update="email"/>				
 			</p:inputText>
 
 			<p:outputLabel
@@ -51,6 +55,7 @@
 				value="#{personEditPageBean.email}"
 				style="width:180px">
 				<f:converter converterId="com.relayd.web.converter.EmailValueObjectConverter" />
+				<p:ajax event="valueChange"/>				
 			</p:inputText>
 
 			<p:outputLabel

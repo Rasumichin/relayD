@@ -29,8 +29,10 @@ import com.relayd.web.bridge.ValidationResult;
 
 /**
  * @author schmollc (Christian@relayd.de)
+ * @author Rasumichin (Erik@relayd.de)
  * @since 15.06.2016
  * status initial
+ * 
  */
 @ManagedBean(name = "personEditPageBean")
 @SessionScoped
@@ -40,7 +42,7 @@ public class PersonEditPageBean implements Serializable {
 	private PersonBridge personBridge;
 
 	Person workingPerson = null;
-
+	Email lastCalculatedEmail = null;
 	boolean isNewPerson = false;
 
 	public PersonEditPageBean() {
@@ -49,12 +51,21 @@ public class PersonEditPageBean implements Serializable {
 
 	public void openDialogForCreatePerson() {
 		workingPerson = createNewPerson();
+		lastCalculatedEmail = Email.newInstance(workingPerson.getEmail().toString());
 		isNewPerson = true;
 		openDialog();
 	}
 
 	Person createNewPerson() {
-		return Person.newInstance();
+		Person person = Person.newInstance();
+		Email defaultEmail = getDefaultEmail();
+		person.setEmail(defaultEmail);
+	
+		return person;
+	}
+
+	Email getDefaultEmail() {
+		return Email.newInstance("forename.surename@canda.com");
 	}
 
 	void openDialog() {
@@ -125,6 +136,27 @@ public class PersonEditPageBean implements Serializable {
 		closeDialog();
 	}
 
+	public void nameValueChanged() {
+		Email currentEmail = getEmail();
+		if (currentEmail.equals(lastCalculatedEmail)) {
+			String currentLocalPart = getCurrentLocalPart();
+			currentEmail.setLocalPart(currentLocalPart);
+			lastCalculatedEmail = Email.newInstance(currentEmail.toString());
+		}
+	}
+
+	public String getCurrentLocalPart() {
+		Forename currentForename = getForename();
+		Surename currentSurename = getSurename();
+
+		String currentLocalPart = (currentForename == null) ? null : currentForename.toString();
+		if (currentSurename != null) {
+			currentLocalPart = (currentLocalPart == null) ? currentSurename.toString() : currentLocalPart + '.' + currentSurename;
+		}
+		
+		return currentLocalPart;
+	}
+	
 	public Forename getForename() {
 		return workingPerson.getForename();
 	}

@@ -1,22 +1,25 @@
 package com.relayd.attributes;
 
 import static org.junit.Assert.*;
+import static com.relayd.attributes.Email.AT_SIGN;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 /**
- * @author  schmollc (Christian@cloud.franke-net.com)
+ * @author  schmollc (Christian@relayd.de)
+ * @author  Rasumichin (Erik@relayd.de)
  * @since   29.03.2016
  * status   initial
+ * 
  */
 public class EmailTest {
 
 	// @formatter:off
-	private static final String VALID_MAIL_FROM_JUSTUS_JONAS 	= "Justus.Jonas@rockyBeach.com";
+	private static final String VALID_MAIL_FROM_JUSTUS_JONAS 	= "Justus.Jonas" + AT_SIGN + "rockyBeach.com";
 	private static final String INVALID_MAIL_FROM_JUSTUS_JONAS	= "Justus.JonasrockyBeach.com";
-	private static final String VALID_MAIL_FROM_PETER_SHAW 		= "Peter.Shaw@rockyBeach.com";
+	private static final String VALID_MAIL_FROM_PETER_SHAW 		= "Peter.Shaw" + AT_SIGN + "rockyBeach.com";
 	// @formatter:on
 
 	@Rule
@@ -184,5 +187,110 @@ public class EmailTest {
 		boolean result = sut.isEmpty();
 
 		assertFalse("expect filled [Email]", result);
+	}
+	
+	@Test
+	public void testGetDomainPartWhenIsEmpty_True() {
+		Email sut = Email.newInstance("");
+		String expected = "";
+		
+		String result = sut.getDomainPart();
+		assertEquals("Domain part is not correct.", expected, result);
+	}
+
+	@Test
+	public void testGetDomainPartWhenIsEmpty_False() {
+		Email sut = Email.newInstance(VALID_MAIL_FROM_JUSTUS_JONAS);
+		String expected = "rockyBeach.com";
+		
+		String result = sut.getDomainPart();
+		assertEquals("Domain part is not correct.", expected, result);
+	}
+	
+	@Test
+	public void testSetLocalPartWhenIsEmpty_True() {
+		Email sut = Email.newInstance("");
+		expectedException.expect(IllegalStateException.class);
+		expectedException.expectMessage("Email value must not be empty when setting the local part.");
+
+		sut.setLocalPart("shouldNotWork");
+	}
+	
+	@Test
+	public void testSetLocalPartWithIllegalNullValue() {
+		Email sut = Email.newInstance(VALID_MAIL_FROM_JUSTUS_JONAS);
+		expectedException.expect(IllegalArgumentException.class);
+		expectedException.expectMessage("Local part must not be 'null'.");
+
+		sut.setLocalPart(null);
+	}
+	
+	@Test
+	public void testSetLocalPartWithIllegalEmptyValue() {
+		Email sut = Email.newInstance(VALID_MAIL_FROM_JUSTUS_JONAS);
+		expectedException.expect(IllegalArgumentException.class);
+		expectedException.expectMessage("Local part must not be empty.");
+
+		sut.setLocalPart("");
+	}
+	
+	@Test
+	public void testSetLocalPartWithIllegalLocalPart() {
+		Email sut = Email.newInstance(VALID_MAIL_FROM_JUSTUS_JONAS);
+		expectedException.expect(IllegalArgumentException.class);
+		expectedException.expectMessage("Local part [forename..surename] could not be part of a valid email address.");
+
+		String illegalDomainPart = "forename..surename";
+		sut.setLocalPart(illegalDomainPart);
+	}
+	
+	@Test
+	public void testSetLocalPartToValidFullName() {
+		Email sut = Email.newInstance(VALID_MAIL_FROM_JUSTUS_JONAS);
+		String newLocalPart = "bob.andrews";
+		Email expected = Email.newInstance(newLocalPart + AT_SIGN + "rockyBeach.com");
+		
+		sut.setLocalPart(newLocalPart);
+		assertEquals("Local part of email has not been set correctly.", expected, sut);
+	}
+	
+	@Test
+	public void testSetLocalPartToValidSingleName() {
+		Email sut = Email.newInstance(VALID_MAIL_FROM_JUSTUS_JONAS);
+		String newLocalPart = "kent";
+		Email expected = Email.newInstance(newLocalPart + AT_SIGN + sut.getDomainPart());
+		
+		sut.setLocalPart(newLocalPart);
+		assertEquals("Local part of email has not been set correctly.", expected, sut);
+	}
+	
+	@Test
+	public void testCreateFromLocalAndDomainPartWithValidValues() {
+		String localPart = "martin.fowler";
+		String domainPart = "refactoring.com";
+		Email expected = Email.newInstance(localPart + AT_SIGN + domainPart);
+		
+		Email result = Email.createFromLocalAndDomainPart(localPart, domainPart);
+		assertEquals("Email has not been correctly composed.", expected, result);
+	}
+	
+	@Test
+	public void testCreateFromLocalAndDomainPartWithInvalidLocalPart_null () {
+		expectedException.expect(IllegalArgumentException.class);
+		expectedException.expectMessage("[localPart] must not be 'null'.");
+
+		String domainPart = "refactoring.com";
+
+		Email.createFromLocalAndDomainPart(null, domainPart);
+	}
+
+	@Test
+	public void testCreateFromLocalAndDomainPartWithInvalidDomainPart_null () {
+		expectedException.expect(IllegalArgumentException.class);
+		expectedException.expectMessage("[domainPart] must not be 'null'.");
+
+		String localPart = "martin.fowler";
+
+		Email.createFromLocalAndDomainPart(localPart, null);
 	}
 }
