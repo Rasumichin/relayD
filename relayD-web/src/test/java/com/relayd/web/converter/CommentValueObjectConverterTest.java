@@ -20,7 +20,7 @@ public class CommentValueObjectConverterTest {
 	private final String text = "Möchte gerne mit Personen aus dem B-Turm laufen.";
 
 	@Test
-	public void testGetAsObject_ForNull() {
+	public void testGetAsObject_ForNullValue() {
 		String nullValue = null;
 		Object result = sut.getAsObject(null, null, nullValue);
 
