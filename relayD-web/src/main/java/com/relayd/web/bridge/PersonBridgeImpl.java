@@ -90,7 +90,7 @@ public class PersonBridgeImpl implements PersonBridge {
 	public List<Person> allWithoutRelay() {
 		List<Person> result = new ArrayList<Person>();
 		for (Person person : all()) {
-			if (person.getRelayname() == null || person.getRelayname().toString().isEmpty()) {
+			if (person.getRelayname() == null) {
 				result.add(person);
 			}
 		}
