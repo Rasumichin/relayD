@@ -18,7 +18,7 @@ import com.relayd.attributes.Surename;
  * @author  Rasumichin (Erik@relayd.de)
  * @since   22.03.2016
  * status   initial
- * 
+ *
  */
 public class Person implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -115,31 +115,31 @@ public class Person implements Serializable {
 	/**
 	 * Infers the 'email' attribute of the receiver by considering the current 'forename'
 	 * and 'surename' values as well as the provided 'domain part' of the email.
-	 * 
+	 *
 	 * @param domainPart The desired domain part of the new email address. Must not be 'null'.
-	 * 
+	 *
 	 * @return The inferred new email address (might be 'null' in case 'forename' AND 'surename'
 	 * 			are both currently 'null'.
-	 * 
+	 *
 	 */
 	public Email inferEmailFromNameAnd(String domainPart) {
 		if (domainPart == null) {
 			throw new IllegalArgumentException("Provided domain part must not be 'null'.");
 		}
-		
+
 		if (getForename() == null && getSurename() == null) {
 			setEmail(null);
 			return getEmail();
 		}
-		
+
 		String localPart = (getForename() != null) ? getForename().toString() : "";
 		if (getSurename() != null) {
 			localPart += localPart.isEmpty() ? "" : ".";
 			localPart += getSurename();
 		}
-		
+
 		setEmail(Email.createFromLocalAndDomainPart(localPart, domainPart));
-		
+
 		return getEmail();
 	}
 
@@ -165,6 +165,10 @@ public class Person implements Serializable {
 
 	public void setComment(Comment aComment) {
 		comment = aComment;
+	}
+
+	public boolean hasEmail() {
+		return getEmail() != null;
 	}
 
 	@Override

@@ -23,7 +23,7 @@ import com.relayd.attributes.Surename;
  * @author Rasumichin (Erik@relayd.de)
  * @since 22.03.2016
  * status initial
- * 
+ *
  */
 public class PersonTest {
 
@@ -173,14 +173,14 @@ public class PersonTest {
 
 		assertEquals("[uuid] not correct!", expected, result);
 	}
-	
+
 	@Test
 	public void testInferEmailFromNameAndValidDomainPart() {
 		Person sut = getDefaultPersonForEmailInference();
-		
+
 		String domainPart = "xerox-parc.com";
 		Email expected = Email.newInstance(sut.getForename().toString() + "." + sut.getSurename() + "@" + domainPart);
-		
+
 		Email result = sut.inferEmailFromNameAnd(domainPart);
 		assertEquals("Email has not been composed correctly.", expected, result);
 	}
@@ -191,22 +191,22 @@ public class PersonTest {
 		person.setForename(forename);
 		Surename surename = Surename.newInstance("goldberg");
 		person.setSurename(surename);
-		
+
 		return person;
 	}
-	
-	@Test(expected=IllegalArgumentException.class)
+
+	@Test(expected = IllegalArgumentException.class)
 	public void testInferEmailFromNameAndInvalidNullDomainPart() {
 		Person sut = getDefaultPersonForEmailInference();
-		
+
 		String domainPart = null;
 		sut.inferEmailFromNameAnd(domainPart);
 	}
 
-	@Test(expected=IllegalArgumentException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void testInferEmailFromNameAndInvalidEmptyDomainPart() {
 		Person sut = getDefaultPersonForEmailInference();
-		
+
 		String domainPart = "";
 		sut.inferEmailFromNameAnd(domainPart);
 	}
@@ -215,10 +215,10 @@ public class PersonTest {
 	public void testInferEmailFromForenameOnly() {
 		Person sut = getDefaultPersonForEmailInference();
 		sut.setSurename(null);
-		
+
 		String domainPart = "xerox-parc.com";
 		Email expected = Email.newInstance(sut.getForename() + "@" + domainPart);
-		
+
 		Email result = sut.inferEmailFromNameAnd(domainPart);
 		assertEquals("Email has not been composed correctly.", expected, result);
 	}
@@ -227,22 +227,37 @@ public class PersonTest {
 	public void testInferEmailFromSurenameOnly() {
 		Person sut = getDefaultPersonForEmailInference();
 		sut.setForename(null);
-		
+
 		String domainPart = "xerox-parc.com";
 		Email expected = Email.newInstance(sut.getSurename() + "@" + domainPart);
-		
+
 		Email result = sut.inferEmailFromNameAnd(domainPart);
 		assertEquals("Email has not been composed correctly.", expected, result);
 	}
-	
+
 	@Test
 	public void testInferEmailWithoutAnyName() {
 		Person sut = getDefaultPersonForEmailInference();
 		sut.setForename(null);
 		sut.setSurename(null);
-		
+
 		String domainPart = "xerox-parc.com";
 		Email result = sut.inferEmailFromNameAnd(domainPart);
 		assertNull("Attribute [email] is unexpectedly not 'null'.", result);
+	}
+
+	@Test
+	public void testHasEmail_ForPersonWithEmail() {
+		Person sut = Person.newInstance();
+		sut.setEmail(Email.newInstance("Justus.Jonas@RockyBeach.com"));
+		assertTrue("Person should have an Email!", sut.hasEmail());
+	}
+
+	@Test
+	public void testHasEmail_ForPersonWithNoEmail() {
+		Person sut = getDefaultPersonForEmailInference();
+		sut.setEmail(null);
+
+		assertFalse("Person should have no Email!", sut.hasEmail());
 	}
 }
