@@ -29,7 +29,5 @@ public interface PersonBridge {
 
 	ValidationResult validateEMail(Person newPerson);
 
-	String getEmailList();
-
 	String getEmailList(List<Person> somePersons);
 }

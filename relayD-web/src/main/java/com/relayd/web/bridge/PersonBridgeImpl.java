@@ -68,11 +68,6 @@ public class PersonBridgeImpl implements PersonBridge {
 	}
 
 	@Override
-	public String getEmailList() {
-		return getEmailList(all());
-	}
-
-	@Override
 	public String getEmailList(List<Person> somePersons) {
 		StringBuilder builder = new StringBuilder();
 		for (Person person : somePersons) {

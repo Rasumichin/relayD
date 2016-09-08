@@ -128,7 +128,7 @@ public class PersonBrowsePageBeanTest {
 
 		sut.emailExport(dummyActionEvent);
 
-		verify(personBridge).getEmailList();
+		verify(personBridge).getEmailList(anyList());
 		verify(sut).showMessage(any(Severity.class), anyString(), anyString());
 	}
 

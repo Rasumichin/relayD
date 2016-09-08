@@ -38,7 +38,7 @@ public class PersonBrowsePageBean {
 	// Should be I18N
 	private static final String PLEASE_SELECT_A_ROW = "Please select one row!";
 	private static final String NOT_POSSIBLE = "Not Possible!";
-	
+
 	private List<Boolean> visibleColumns;
 
 	private PersonBridge personBridge = null;
@@ -53,10 +53,10 @@ public class PersonBrowsePageBean {
 
 	private List<Person> selectedPersons;
 	private boolean canceled;
-	
+
 	@PostConstruct
 	public void init() {
-		visibleColumns = Arrays.asList(true,true,true,true,true,true,true,true,true,true);
+		visibleColumns = Arrays.asList(true, true, true, true, true, true, true, true, true, true);
 	}
 
 	public PersonBrowsePageBean() {
@@ -142,7 +142,7 @@ public class PersonBrowsePageBean {
 		if (isRowSelected()) {
 			output = personBridge.getEmailList(getSelectedPersons());
 		} else {
-			output = personBridge.getEmailList();
+			output = personBridge.getEmailList(getPersons());
 		}
 		showMessage(FacesMessage.SEVERITY_INFO, "Email", output);
 	}
@@ -210,12 +210,12 @@ public class PersonBrowsePageBean {
 	public void showOpen() {
 		searchResult = personBridge.allWithoutRelay();
 	}
-	
+
 	public List<Boolean> getVisibleColumns() {
 		return visibleColumns;
 	}
-	
+
 	public void onToggle(ToggleEvent e) {
 		visibleColumns.set((Integer) e.getData(), e.getVisibility() == Visibility.VISIBLE);
-    }
+	}
 }

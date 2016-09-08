@@ -74,20 +74,9 @@ public class PersonBridgeImplTest {
 
 	@Test
 	public void testGetEmailList() {
-		doReturn(listWithPersons()).when(gateway).getAll();
+		List<Person> somePersons = listWithPersons();
 
-		String result = sut.getEmailList();
-
-		assertNotNull("[result] invalid!", result);
-		assertFalse("[result] has not be empty!", result.isEmpty());
-		assertEquals("[result] not correct!", "Peter.Shaw@RockyBeach.com, Justus.Jonas@RockyBeach.com", result);
-	}
-
-	@Test
-	public void testGetEmailList_ForSelectedPersons() {
-		List<Person> selectedPersons = listWithPersons();
-
-		String result = sut.getEmailList(selectedPersons);
+		String result = sut.getEmailList(somePersons);
 
 		assertNotNull("[result] invalid!", result);
 		assertFalse("[result] has not be empty!", result.isEmpty());
