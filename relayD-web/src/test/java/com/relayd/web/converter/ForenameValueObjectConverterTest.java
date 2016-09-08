@@ -33,7 +33,7 @@ public class ForenameValueObjectConverterTest {
 	}
 
 	@Test
-	public void testGetAsObject() {
+	public void testGetAsObject_ForValue() {
 		Object result = sut.getAsObject(null, null, name);
 
 		assertNotNull("Expected valid instance.", result);

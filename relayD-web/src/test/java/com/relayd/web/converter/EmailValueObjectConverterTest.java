@@ -36,7 +36,7 @@ public class EmailValueObjectConverterTest {
 	}
 
 	@Test
-	public void testGetAsObject_ForValidString() {
+	public void testGetAsObject_ForValidValue() {
 		Object result = sut.getAsObject(null, null, VALID_STRING);
 
 		assertNotNull("Expected valid instance.", result);
@@ -46,7 +46,7 @@ public class EmailValueObjectConverterTest {
 	}
 
 	@Test(expected = ConverterException.class)
-	public void testGetAsObject_ForInvalidString() {
+	public void testGetAsObject_ForInvalidValue() {
 		sut.getAsObject(null, null, INVALID_STRING);
 	}
 
