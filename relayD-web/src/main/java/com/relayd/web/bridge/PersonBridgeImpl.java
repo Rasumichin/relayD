@@ -76,7 +76,7 @@ public class PersonBridgeImpl implements PersonBridge {
 	public String getEmailList(List<Person> somePersons) {
 		StringBuilder builder = new StringBuilder();
 		for (Person person : somePersons) {
-			if (person.getEmail() != null) {
+			if (person.hasEmail()) {
 				builder.append(", " + person.getEmail());
 			}
 		}
