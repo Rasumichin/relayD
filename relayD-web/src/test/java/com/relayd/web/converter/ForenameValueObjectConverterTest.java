@@ -12,7 +12,6 @@ import com.relayd.attributes.Forename;
  * @author schmollc (Christian@relayD.de)
  * @author Rasumichin (Erik@relayd.de)
  * @since 20.06.2016
- * status initial
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
