@@ -203,11 +203,11 @@ public class PersonBrowsePageBean {
 		refreshPersons();
 	}
 
-	public void showComplete() {
-		showMessage(FacesMessage.SEVERITY_INFO, "Sorry", "Not implemented yet!");
+	public void showRelaysWithSpace() {
+		searchResult = personBridge.relaysWithSpace();
 	}
 
-	public void showOpen() {
+	public void showAllWithoutRelay() {
 		searchResult = personBridge.allWithoutRelay();
 	}
 

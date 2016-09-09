@@ -19,6 +19,8 @@ public interface PersonBridge {
 
 	List<Person> allWithoutRelay();
 
+	List<Person> relaysWithSpace();
+
 	void update(Person person);
 
 	void create(Person person);
@@ -30,4 +32,5 @@ public interface PersonBridge {
 	ValidationResult validateEMail(Person newPerson);
 
 	String getEmailList(List<Person> somePersons);
+
 }

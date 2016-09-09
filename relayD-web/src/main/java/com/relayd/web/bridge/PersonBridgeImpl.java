@@ -1,11 +1,14 @@
 package com.relayd.web.bridge;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import com.relayd.Person;
 import com.relayd.attributes.Email;
+import com.relayd.attributes.Relayname;
 import com.relayd.ejb.GatewayType;
 import com.relayd.ejb.PersonGateway;
 import com.relayd.ejb.PersonGatewayFactory;
@@ -90,5 +93,31 @@ public class PersonBridgeImpl implements PersonBridge {
 			}
 		}
 		return result;
+	}
+
+	@Override
+	public List<Person> relaysWithSpace() {
+		Map<Relayname, Integer> bundleRelay = new HashMap<Relayname, Integer>();
+		List<Person> resultList = new ArrayList<Person>();
+		for (Person person : all()) {
+			if (person.getRelayname() != null) {
+				int relayCount = 0;
+				if (bundleRelay.get(person.getRelayname()) != null) {
+					relayCount = bundleRelay.get(person.getRelayname());
+				}
+				relayCount++;
+				if (relayCount == 4) {
+					bundleRelay.remove(person.getRelayname());
+				} else {
+					bundleRelay.put(person.getRelayname(), relayCount);
+				}
+			}
+		}
+		for (Person person : all()) {
+			if (bundleRelay.containsKey(person.getRelayname())) {
+				resultList.add(person);
+			}
+		}
+		return resultList;
 	}
 }

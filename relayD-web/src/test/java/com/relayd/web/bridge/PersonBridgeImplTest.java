@@ -111,6 +111,36 @@ public class PersonBridgeImplTest {
 		Person personFour = builder.withForename(Forename.newInstance("Justus")).withEmail(EMAIL_JUSTUS).withRelayname("Die 4 ???").build();
 		somePersons.add(personFour);
 
+		builder = new PersonBuilder().withRelayname("Die fanta 4");
+
+		Person personFive = builder.withForename(Forename.newInstance("Michi")).build();
+		somePersons.add(personFive);
+
+		Person personSix = builder.withForename(Forename.newInstance("Smudo")).build();
+		somePersons.add(personSix);
+
+		Person personSeven = builder.withForename(Forename.newInstance("Andy")).build();
+		somePersons.add(personSeven);
+
+		Person personEight = builder.withForename(Forename.newInstance("Thomas")).build();
+		somePersons.add(personEight);
+
 		return somePersons;
+	}
+
+	@Test
+	public void testRelaysWithSpace() {
+		doReturn(listWithPersons()).when(gateway).getAll();
+
+		List<Person> result = sut.relaysWithSpace();
+
+		assertNotNull("[result] not correct!", result);
+		assertEquals("[result] element count not correct!", 2, result.size());
+
+		Person firstPerson = result.get(0);
+		assertEquals("[Forename] from first Person not correct!", Forename.newInstance("Peter"), firstPerson.getForename());
+
+		Person secondPerson = result.get(1);
+		assertEquals("[Forename] from second Person not correct!", Forename.newInstance("Justus"), secondPerson.getForename());
 	}
 }

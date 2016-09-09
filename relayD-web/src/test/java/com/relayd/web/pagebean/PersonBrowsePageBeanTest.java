@@ -235,14 +235,14 @@ public class PersonBrowsePageBeanTest {
 	}
 
 	@Test
-	public void testShowComplete() {
-		sut.showComplete();
-		verify(sut).showMessage(any(Severity.class), anyString(), anyString());
+	public void testShowRelaysWithSpace() {
+		sut.showRelaysWithSpace();
+		verify(personBridge).relaysWithSpace();
 	}
 
 	@Test
-	public void testShowOpen() {
-		sut.showOpen();
+	public void testShowAllWithoutRelay() {
+		sut.showAllWithoutRelay();
 		verify(personBridge).allWithoutRelay();
 	}
 
