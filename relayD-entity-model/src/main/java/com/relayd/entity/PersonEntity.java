@@ -34,7 +34,7 @@ public class PersonEntity {
 	private String email;
 
 	@Column
-	private String comment;
+	private String info;
 
 	@Column
 	private String relayname;
@@ -50,7 +50,7 @@ public class PersonEntity {
 		birthyear = aBuilder.birthyear;
 		relayname = aBuilder.relayname;
 		position = aBuilder.position;
-		comment = aBuilder.comment;
+		info = aBuilder.info;
 		nationality = aBuilder.nationality;
 		shirtsize = aBuilder.shirtsize;
 	}
@@ -92,8 +92,8 @@ public class PersonEntity {
 		return id;
 	}
 
-	public String getComment() {
-		return comment;
+	public String getInfo() {
+		return info;
 	}
 
 	public String getRelayname() {
@@ -112,7 +112,7 @@ public class PersonEntity {
 		private Integer birthyear;
 		private Integer shirtsize;
 		private String nationality;
-		private String comment;
+		private String info;
 		private String relayname;
 		private Integer position;
 
@@ -160,8 +160,8 @@ public class PersonEntity {
 			return this;
 		}
 
-		public Builder withComment(String aComment) {
-			comment = aComment;
+		public Builder withInfo(String aComment) {
+			info = aComment;
 			return this;
 		}
 
