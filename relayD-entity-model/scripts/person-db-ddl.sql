@@ -13,12 +13,12 @@ Create table PERSON (
 	BIRTHYEAR						INTEGER,
     SHIRTSIZE						INTEGER,
     RELAYNAME						VARCHAR(256),
-    POSITION						INTEGER,
+    POS								INTEGER, -- POSITION geht nicht!
     NATIONALITY						VARCHAR(256),
 	EMAIL							VARCHAR(256),
-	COMMENT							VARCHAR(1024)
+	INFO							VARCHAR(1024) -- COMMENT geht nicht!
 );
-Comment on Table PERSON is 'realyD - The table of Person.';
+Comment on Table PERSON is 'realyD - The table of Person.'; -- Gehen alle nicht!
 Comment on Column PERSON.ID is 'UUID as string representation.';
 Comment on Column PERSON.SURENAME is 'The Surename of a Person.';
 Comment on Column PERSON.FORENAME is 'The Forename of a Person.';
@@ -45,4 +45,4 @@ Alter table PERSON add primary key (ID);
 --------------------------------------------------
 -- Grant PERSON
 --------------------------------------------------
-Grant ALL on PERSON to PUBLIC;
+Grant ALL on PERSON to PUBLIC; -- geht nicht!
