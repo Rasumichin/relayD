@@ -24,7 +24,7 @@ public class PersonEntityTest {
 		assertNull("[birthyear] not correct!", sut.getBirthyear());
 		assertNull("[nationality] not correct!", sut.getNationality());
 		assertNull("[relayname] not correct!", sut.getRelayname());
-		assertNull("[position] not correct!", sut.getPosition());
+		assertNull("[pos] not correct!", sut.getPos());
 		assertNull("[shirtsize] not correct!", sut.getShirtsize());
 		assertNull("[nationality] not correct!", sut.getNationality());
 		assertNull("[info] not correct!", sut.getInfo());
@@ -40,7 +40,7 @@ public class PersonEntityTest {
 		assertNull("[birthyear] not correct!", sut.getBirthyear());
 		assertNull("[nationality] not correct!", sut.getNationality());
 		assertNull("[relayname] not correct!", sut.getRelayname());
-		assertNull("[position] not correct!", sut.getPosition());
+		assertNull("[pos] not correct!", sut.getPos());
 		assertNull("[shirtsize] not correct!", sut.getShirtsize());
 		assertNull("[nationality] not correct!", sut.getNationality());
 		assertNull("[info] not correct!", sut.getInfo());
@@ -96,10 +96,10 @@ public class PersonEntityTest {
 	}
 
 	@Test
-	public void testInstanceCreated_ForPosition() {
+	public void testInstanceCreated_ForPos() {
 		Integer position = 1;
-		PersonEntity sut = new PersonEntity.Builder().withPosition(position).build();
-		assertEquals("[position] has not been set correctly.", position, sut.getPosition());
+		PersonEntity sut = new PersonEntity.Builder().withPos(position).build();
+		assertEquals("[pos] has not been set correctly.", position, sut.getPos());
 	}
 
 	@Test

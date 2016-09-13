@@ -40,7 +40,7 @@ public class PersonEntity {
 	private String relayname;
 
 	@Column
-	private Integer position;
+	private Integer pos;
 
 	private PersonEntity(Builder aBuilder) {
 		id = aBuilder.id;
@@ -49,7 +49,7 @@ public class PersonEntity {
 		email = aBuilder.email;
 		birthyear = aBuilder.birthyear;
 		relayname = aBuilder.relayname;
-		position = aBuilder.position;
+		pos = aBuilder.pos;
 		info = aBuilder.info;
 		nationality = aBuilder.nationality;
 		shirtsize = aBuilder.shirtsize;
@@ -100,8 +100,8 @@ public class PersonEntity {
 		return relayname;
 	}
 
-	public Integer getPosition() {
-		return position;
+	public Integer getPos() {
+		return pos;
 	}
 
 	public static class Builder {
@@ -114,7 +114,7 @@ public class PersonEntity {
 		private String nationality;
 		private String info;
 		private String relayname;
-		private Integer position;
+		private Integer pos;
 
 		public Builder() {
 			super();
@@ -155,13 +155,13 @@ public class PersonEntity {
 			return this;
 		}
 
-		public Builder withPosition(Integer aPosition) {
-			position = aPosition;
+		public Builder withPos(Integer aPos) {
+			pos = aPos;
 			return this;
 		}
 
-		public Builder withInfo(String aComment) {
-			info = aComment;
+		public Builder withInfo(String anInfo) {
+			info = anInfo;
 			return this;
 		}
 
