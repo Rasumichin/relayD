@@ -4,7 +4,9 @@ import static org.junit.Assert.*;
 
 import java.io.Serializable;
 
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 /**
  * @author CrowCounter77 (Mirko@relayd.de)
@@ -12,7 +14,19 @@ import org.junit.Test;
  * status initial
  *
  */
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class CommentTest {
+
+	@Test
+	public void testIsSerializable() {
+		String dummyString = "";
+		Comment sut = Comment.newInstance(dummyString);
+
+		@SuppressWarnings("cast")
+		boolean result = sut instanceof Serializable;
+
+		assertTrue("Class not Serializable!", result);
+	}
 
 	@Test
 	public void testMaxLengthConstant() {
@@ -37,7 +51,7 @@ public class CommentTest {
 
 	@Test
 	public void testToString() {
-		final String COMMENTTEXT = "Dies ist ein Kommentar.";
+		final String COMMENTTEXT = "This is a comment!";
 		Comment comment = Comment.newInstance(COMMENTTEXT);
 
 		String result = comment.toString();
@@ -46,13 +60,87 @@ public class CommentTest {
 	}
 
 	@Test
-	public void testIsSerializable() {
-		String dummyString = "";
-		Comment sut = Comment.newInstance(dummyString);
+	public void testGetHashCode() {
+		Comment sut = Comment.newInstance("Comment");
 
-		@SuppressWarnings("cast")
-		boolean result = sut instanceof Serializable;
+		int hashCode = sut.hashCode();
 
-		assertTrue("Class not Serializable!", result);
+		assertEquals(-1679915426, hashCode);
+
+		sut.value = null;
+
+		hashCode = sut.hashCode();
+
+		assertEquals(31, hashCode);
+	}
+
+	@Test
+	public void testEqualsWithMyself() {
+		Comment sut = Comment.newInstance("Comment");
+
+		boolean result = sut.equals(sut);
+
+		assertTrue(result);
+	}
+
+	@Test
+	public void testEqualsWithNull() {
+		Comment sut = Comment.newInstance("Comment");
+
+		boolean result = sut.equals(null);
+
+		assertFalse(result);
+	}
+
+	@Test
+	public void testEqualsWithNotCompatibleClass() {
+		Comment sut = Comment.newInstance("Comment");
+
+		boolean result = sut.equals(new String());
+
+		assertFalse(result);
+	}
+
+	@Test
+	public void testEqualsWithValueIsNull() {
+		Comment sut = Comment.newInstance("Comment");
+		sut.value = null;
+		Comment secondName = Comment.newInstance("Comment");
+
+		boolean result = sut.equals(secondName);
+
+		assertFalse(result);
+	}
+
+	@Test
+	public void testEqualsWithBothValuesAreNull() {
+		Comment sut = Comment.newInstance("Comment");
+		sut.value = null;
+		Comment secondName = Comment.newInstance("Comment");
+		secondName.value = null;
+
+		boolean result = sut.equals(secondName);
+
+		assertTrue(result);
+	}
+
+	@Test
+	public void testEqualsWithTwoDiffrentValues() {
+		Comment sut = Comment.newInstance("Comment");
+		Comment secondName = Comment.newInstance("NotComment");
+
+		boolean result = sut.equals(secondName);
+
+		assertFalse(result);
+	}
+
+	@Test
+	public void testEqualsWithSameValues() {
+		Comment sut = Comment.newInstance("Comment");
+		Comment secondName = Comment.newInstance("Comment");
+
+		boolean result = sut.equals(secondName);
+
+		assertTrue(result);
 	}
 }
