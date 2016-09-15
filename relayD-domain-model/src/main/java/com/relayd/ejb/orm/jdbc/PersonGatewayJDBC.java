@@ -16,6 +16,7 @@ import com.relayd.Person;
 import com.relayd.attributes.Comment;
 import com.relayd.attributes.Forename;
 import com.relayd.attributes.Relayname;
+import com.relayd.attributes.Shirtsize;
 import com.relayd.attributes.Surename;
 import com.relayd.ejb.PersonGateway;
 
@@ -29,6 +30,7 @@ public class PersonGatewayJDBC implements PersonGateway {
 	static final int INDEX_UUID = 1;
 	static final int INDEX_FORENAME = 2;
 	static final int INDEX_SURENAME = 3;
+	static final int INDEX_SHIRTSIZE = 5;
 	static final int INDEX_RELAYNAME = 6;
 	static final int INDEX_COMMENT = 10;
 
@@ -114,6 +116,8 @@ public class PersonGatewayJDBC implements PersonGateway {
 		person.setUUID(UUID.fromString(rs.getString(INDEX_UUID)));
 		person.setForename(Forename.newInstance(rs.getString(INDEX_FORENAME)));
 		person.setSurename(Surename.newInstance(rs.getString(INDEX_SURENAME)));
+		person.setShirtsize(Shirtsize.decode(rs.getShort(INDEX_SHIRTSIZE)));
+		person.setComment(Comment.newInstance(rs.getString(INDEX_COMMENT)));
 		return person;
 	}
 
