@@ -26,6 +26,7 @@ import com.relayd.ejb.PersonGateway;
  */
 public class PersonGatewayJDBC implements PersonGateway {
 
+	static final int INDEX_UUID = 1;
 	static final int INDEX_FORENAME = 2;
 	static final int INDEX_SURENAME = 3;
 	static final int INDEX_RELAYNAME = 6;
@@ -73,13 +74,6 @@ public class PersonGatewayJDBC implements PersonGateway {
 		return connection;
 	}
 
-	Person mapValues(ResultSet rs) throws SQLException {
-		Person person = Person.newInstance();
-		person.setForename(Forename.newInstance(rs.getString(INDEX_FORENAME)));
-
-		return person;
-	}
-
 	@Override
 	public Person get(UUID uuid) {
 		Person person = Person.newInstance();
@@ -114,4 +108,13 @@ public class PersonGatewayJDBC implements PersonGateway {
 	@Override
 	public void remove(UUID aUuid) {
 	}
+
+	Person mapValues(ResultSet rs) throws SQLException {
+		Person person = Person.newInstance();
+		person.setUUID(UUID.fromString(rs.getString(INDEX_UUID)));
+		person.setForename(Forename.newInstance(rs.getString(INDEX_FORENAME)));
+		person.setSurename(Surename.newInstance(rs.getString(INDEX_SURENAME)));
+		return person;
+	}
+
 }
