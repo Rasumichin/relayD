@@ -17,6 +17,8 @@ import org.mockito.runners.MockitoJUnitRunner;
 import com.relayd.Person;
 import com.relayd.attributes.Comment;
 import com.relayd.attributes.Forename;
+import com.relayd.attributes.Position;
+import com.relayd.attributes.Relayname;
 import com.relayd.attributes.Shirtsize;
 import com.relayd.attributes.Surename;
 
@@ -36,8 +38,10 @@ public class PersonGatewayJDBCTest {
 	private static final String ID = "85d7094b-2146-4f52-8bd9-901e71723f31";
 	private static final String SURENAME = "Jonas";
 	private static final String FORENAME = "Justus";
-	private static final String COMMENT = "Erster Detektiv!";
 	private static final Integer SHIRTSIZE = 3;
+	private static final String RELAYNAME = "Die 4 ????";
+	private static final Integer POS = 1;
+	private static final String COMMENT = "Erster Detektiv!";
 
 	@Mock
 	private ResultSet rs;
@@ -48,6 +52,8 @@ public class PersonGatewayJDBCTest {
 		doReturn(FORENAME).when(rs).getString(PersonGatewayJDBC.INDEX_FORENAME);
 		doReturn(SURENAME).when(rs).getString(PersonGatewayJDBC.INDEX_SURENAME);
 		doReturn(SHIRTSIZE.shortValue()).when(rs).getShort(PersonGatewayJDBC.INDEX_SHIRTSIZE);
+		doReturn(RELAYNAME).when(rs).getString(PersonGatewayJDBC.INDEX_RELAYNAME);
+		doReturn(POS).when(rs).getInt(PersonGatewayJDBC.INDEX_POS);
 		doReturn(COMMENT).when(rs).getString(PersonGatewayJDBC.INDEX_COMMENT);
 
 	}
@@ -61,7 +67,9 @@ public class PersonGatewayJDBCTest {
 		assertEquals("[uuid] not correct!", UUID.fromString(ID), person.getUUID());
 		assertEquals("[forename] not correct!", Forename.newInstance(FORENAME), person.getForename());
 		assertEquals("[surename] not correct!", Surename.newInstance(SURENAME), person.getSurename());
-		assertEquals("[comment] not correct!", Comment.newInstance(COMMENT), person.getComment());
 		assertEquals("[shirtsize] not correct!", Shirtsize.decode(SHIRTSIZE.shortValue()), person.getShirtsize());
+		assertEquals("[relayname] not correct!", Relayname.newInstance(RELAYNAME), person.getRelayname());
+		assertEquals("[pos] not correct!", Position.decode(POS), person.getPosition());
+		assertEquals("[comment] not correct!", Comment.newInstance(COMMENT), person.getComment());
 	}
 }
