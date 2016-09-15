@@ -48,11 +48,7 @@ public class PersonGatewayJDBC implements PersonGateway {
 
 			while (rs.next()) {
 				System.out.printf("%s, %s, %s%n", rs.getString(1), rs.getString(INDEX_FORENAME), rs.getString(INDEX_SURENAME));
-				Person readPerson = Person.newInstance();
-				readPerson.setForename(Forename.newInstance(rs.getString(INDEX_FORENAME)));
-				readPerson.setSurename(Surename.newInstance(rs.getString(INDEX_SURENAME)));
-				readPerson.setRelayname(Relayname.newInstance(rs.getString(INDEX_RELAYNAME)));
-				readPerson.setComment(Comment.newInstance(rs.getString(INDEX_COMMENT)));
+				Person readPerson = mapValues(rs);
 				resultList.add(readPerson);
 			}
 
@@ -85,7 +81,7 @@ public class PersonGatewayJDBC implements PersonGateway {
 			InitialContext cxt = new InitialContext();
 			Connection connection = openConnection(cxt);
 			Statement statement = connection.createStatement();
-			String query = "SELECT * FROM PERSON where uuid='" + uuid + "'";
+			String query = "SELECT * FROM PERSON where id='" + uuid + "'";
 			ResultSet rs = statement.executeQuery(query);
 
 			while (rs.next()) {
