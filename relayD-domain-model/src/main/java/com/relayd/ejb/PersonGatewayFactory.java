@@ -1,8 +1,8 @@
 package com.relayd.ejb;
 
-import com.relayd.ejb.orm.db.PersonGatewayDB;
 import com.relayd.ejb.orm.file.PersonGatewayFile;
 import com.relayd.ejb.orm.jdbc.PersonGatewayJDBC;
+import com.relayd.ejb.orm.jpa.PersonGatewayJPA;
 import com.relayd.ejb.orm.memory.PersonGatewayMemory;
 
 /**
@@ -21,8 +21,8 @@ public class PersonGatewayFactory {
 			case FILE:
 				return new PersonGatewayFile();
 
-			case DB:
-				return new PersonGatewayDB();
+			case JPA:
+				return new PersonGatewayJPA();
 
 			case JDBC:
 				return new PersonGatewayJDBC();

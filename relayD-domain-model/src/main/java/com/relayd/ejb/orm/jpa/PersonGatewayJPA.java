@@ -1,4 +1,4 @@
-package com.relayd.ejb.orm.db;
+package com.relayd.ejb.orm.jpa;
 
 import java.util.List;
 import java.util.UUID;
@@ -11,7 +11,7 @@ import com.relayd.ejb.PersonGateway;
  * @since   12.09.2016
  *
  */
-public class PersonGatewayDB implements PersonGateway {
+public class PersonGatewayJPA implements PersonGateway {
 
 	@Override
 	public List<Person> getAll() {
