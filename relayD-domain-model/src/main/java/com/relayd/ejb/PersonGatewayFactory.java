@@ -2,6 +2,7 @@ package com.relayd.ejb;
 
 import com.relayd.ejb.orm.db.PersonGatewayDB;
 import com.relayd.ejb.orm.file.PersonGatewayFile;
+import com.relayd.ejb.orm.jdbc.PersonGatewayJDBC;
 import com.relayd.ejb.orm.memory.PersonGatewayMemory;
 
 /**
@@ -23,6 +24,8 @@ public class PersonGatewayFactory {
 			case DB:
 				return new PersonGatewayDB();
 
+			case JDBC:
+				return new PersonGatewayJDBC();
 			default:
 				throw new IllegalArgumentException("[" + gatewayType + "] is unsupported Gateway Type.");
 		}

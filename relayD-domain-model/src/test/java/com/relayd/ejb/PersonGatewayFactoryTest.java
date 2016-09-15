@@ -8,6 +8,7 @@ import org.junit.runners.MethodSorters;
 
 import com.relayd.ejb.orm.db.PersonGatewayDB;
 import com.relayd.ejb.orm.file.PersonGatewayFile;
+import com.relayd.ejb.orm.jdbc.PersonGatewayJDBC;
 import com.relayd.ejb.orm.memory.PersonGatewayMemory;
 
 /**
@@ -39,4 +40,12 @@ public class PersonGatewayFactoryTest {
 
 		assertEquals("Instance not korrekt!", instance.getClass(), PersonGatewayDB.class);
 	}
+
+	@Test
+	public void testGet_ForPersonGatewayJDBC() {
+		PersonGateway instance = PersonGatewayFactory.get(GatewayType.JDBC);
+
+		assertEquals("Instance not korrekt!", instance.getClass(), PersonGatewayJDBC.class);
+	}
+
 }

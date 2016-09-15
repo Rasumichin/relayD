@@ -7,6 +7,7 @@ package com.relayd.ejb;
  */
 public enum GatewayType {
 	DB,
+	JDBC,
 	MEMORY,
 	FILE;
 }
