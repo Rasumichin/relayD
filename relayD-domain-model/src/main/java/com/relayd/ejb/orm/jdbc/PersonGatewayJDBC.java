@@ -26,20 +26,17 @@ import com.relayd.ejb.PersonGateway;
  */
 public class PersonGatewayJDBC implements PersonGateway {
 
-	private static final int INDEX_FORENAME = 2;
-	private static final int INDEX_SURENAME = 3;
-	private static final int INDEX_RELAYNAME = 6;
-	private static final int INDEX_COMMENT = 10;
+	static final int INDEX_FORENAME = 2;
+	static final int INDEX_SURENAME = 3;
+	static final int INDEX_RELAYNAME = 6;
+	static final int INDEX_COMMENT = 10;
 
 	@Override
 	public List<Person> getAll() {
 		List<Person> resultList = new ArrayList<Person>();
-		InitialContext cxt;
 		try {
-			cxt = new InitialContext();
-			String jndiName = "java:comp/env/res/jdbc/dataSource";
-			DataSource dataSource = (DataSource) cxt.lookup(jndiName);
-			Connection connection = dataSource.getConnection();
+			InitialContext cxt = new InitialContext();
+			Connection connection = openConnection(cxt);
 			Statement statement = connection.createStatement();
 			String query = "SELECT * FROM PERSON";
 			ResultSet rs = statement.executeQuery(query);
@@ -69,9 +66,45 @@ public class PersonGatewayJDBC implements PersonGateway {
 		return resultList;
 	}
 
+	private Connection openConnection(InitialContext cxt) throws NamingException, SQLException {
+		String jndiName = "java:comp/env/res/jdbc/dataSource";
+		DataSource dataSource = (DataSource) cxt.lookup(jndiName);
+		Connection connection = dataSource.getConnection();
+		return connection;
+	}
+
+	Person mapValues(ResultSet rs) throws SQLException {
+		Person person = Person.newInstance();
+		person.setForename(Forename.newInstance(rs.getString(INDEX_FORENAME)));
+
+		return person;
+	}
+
 	@Override
-	public Person get(UUID aUuid) {
-		return null;
+	public Person get(UUID uuid) {
+		Person person = Person.newInstance();
+		try {
+			InitialContext cxt = new InitialContext();
+			Connection connection = openConnection(cxt);
+			Statement statement = connection.createStatement();
+			String query = "SELECT * FROM PERSON where uuid='" + uuid + "'";
+			ResultSet rs = statement.executeQuery(query);
+
+			while (rs.next()) {
+				System.out.printf("%s, %s, %s%n", rs.getString(1), rs.getString(INDEX_FORENAME), rs.getString(INDEX_SURENAME));
+				person.setForename(Forename.newInstance(rs.getString(INDEX_FORENAME)));
+				person.setSurename(Surename.newInstance(rs.getString(INDEX_SURENAME)));
+				person.setRelayname(Relayname.newInstance(rs.getString(INDEX_RELAYNAME)));
+				person.setComment(Comment.newInstance(rs.getString(INDEX_COMMENT)));
+			}
+
+		} catch (NamingException e) {
+			// TODO -all- Logging? Wie? Wo?
+			person.setComment(Comment.newInstance("NamingException:" + e));
+		} catch (SQLException e) {
+			person.setComment(Comment.newInstance("SQLException:" + e));
+		}
+		return person;
 	}
 
 	@Override
