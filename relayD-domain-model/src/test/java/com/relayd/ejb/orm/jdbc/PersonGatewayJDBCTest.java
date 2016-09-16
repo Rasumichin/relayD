@@ -16,6 +16,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import com.relayd.Person;
 import com.relayd.attributes.Comment;
+import com.relayd.attributes.Email;
 import com.relayd.attributes.Forename;
 import com.relayd.attributes.Position;
 import com.relayd.attributes.Relayname;
@@ -41,6 +42,7 @@ public class PersonGatewayJDBCTest {
 	private static final Integer SHIRTSIZE = 3;
 	private static final String RELAYNAME = "Die 4 ????";
 	private static final Integer POS = 1;
+	private static final String EMAIL = "Justus.Jonas@RockyBeach.com";
 	private static final String COMMENT = "Erster Detektiv!";
 
 	@Mock
@@ -54,8 +56,8 @@ public class PersonGatewayJDBCTest {
 		doReturn(SHIRTSIZE.shortValue()).when(rs).getShort(PersonGatewayJDBC.INDEX_SHIRTSIZE);
 		doReturn(RELAYNAME).when(rs).getString(PersonGatewayJDBC.INDEX_RELAYNAME);
 		doReturn(POS).when(rs).getInt(PersonGatewayJDBC.INDEX_POS);
+		doReturn(EMAIL).when(rs).getString(PersonGatewayJDBC.INDEX_EMAIL);
 		doReturn(COMMENT).when(rs).getString(PersonGatewayJDBC.INDEX_COMMENT);
-
 	}
 
 	@Test
@@ -70,6 +72,7 @@ public class PersonGatewayJDBCTest {
 		assertEquals("[shirtsize] not correct!", Shirtsize.decode(SHIRTSIZE.shortValue()), person.getShirtsize());
 		assertEquals("[relayname] not correct!", Relayname.newInstance(RELAYNAME), person.getRelayname());
 		assertEquals("[pos] not correct!", Position.decode(POS), person.getPosition());
+		assertEquals("[email] not correct!", Email.newInstance(EMAIL), person.getEmail());
 		assertEquals("[comment] not correct!", Comment.newInstance(COMMENT), person.getComment());
 	}
 }

@@ -14,6 +14,7 @@ import javax.sql.DataSource;
 
 import com.relayd.Person;
 import com.relayd.attributes.Comment;
+import com.relayd.attributes.Email;
 import com.relayd.attributes.Forename;
 import com.relayd.attributes.Position;
 import com.relayd.attributes.Relayname;
@@ -34,6 +35,7 @@ public class PersonGatewayJDBC implements PersonGateway {
 	static final int INDEX_SHIRTSIZE = 5;
 	static final int INDEX_RELAYNAME = 6;
 	static final int INDEX_POS = 7;
+	static final int INDEX_EMAIL = 9;
 	static final int INDEX_COMMENT = 10;
 
 	@Override
@@ -111,14 +113,16 @@ public class PersonGatewayJDBC implements PersonGateway {
 
 	Person mapValues(ResultSet rs) throws SQLException {
 		Person person = Person.newInstance();
+
 		person.setUUID(UUID.fromString(rs.getString(INDEX_UUID)));
 		person.setForename(Forename.newInstance(rs.getString(INDEX_FORENAME)));
 		person.setSurename(Surename.newInstance(rs.getString(INDEX_SURENAME)));
 		person.setShirtsize(Shirtsize.decode(rs.getShort(INDEX_SHIRTSIZE)));
 		person.setRelayname(Relayname.newInstance(rs.getString(INDEX_RELAYNAME)));
 		person.setPosition(Position.decode(rs.getInt(INDEX_POS)));
+		person.setEmail(Email.newInstance(rs.getString(INDEX_EMAIL)));
 		person.setComment(Comment.newInstance(rs.getString(INDEX_COMMENT)));
+
 		return person;
 	}
-
 }
