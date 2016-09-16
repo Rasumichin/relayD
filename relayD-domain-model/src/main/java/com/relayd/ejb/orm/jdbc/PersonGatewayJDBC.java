@@ -91,10 +91,7 @@ public class PersonGatewayJDBC implements PersonGateway {
 
 			while (rs.next()) {
 				System.out.printf("%s, %s, %s%n", rs.getString(1), rs.getString(INDEX_FORENAME), rs.getString(INDEX_SURENAME));
-				person.setForename(Forename.newInstance(rs.getString(INDEX_FORENAME)));
-				person.setSurename(Surename.newInstance(rs.getString(INDEX_SURENAME)));
-				person.setRelayname(Relayname.newInstance(rs.getString(INDEX_RELAYNAME)));
-				person.setComment(Comment.newInstance(rs.getString(INDEX_COMMENT)));
+				person = mapValues(rs);
 			}
 
 		} catch (NamingException e) {
@@ -114,6 +111,7 @@ public class PersonGatewayJDBC implements PersonGateway {
 	public void remove(UUID aUuid) {
 	}
 
+	// TODO -schmollc- In eigene Klasse verschieben
 	Person mapValues(ResultSet rs) throws SQLException {
 		Person person = Person.newInstance();
 
