@@ -50,10 +50,14 @@ public class PersonEditPageBean implements Serializable {
 	}
 
 	public void openDialogForCreatePerson() {
-		workingPerson = createNewPerson();
-		lastCalculatedEmail = Email.newInstance(workingPerson.getEmail().toString());
-		isNewPerson = true;
+		prepareNewPerson();
 		openDialog();
+	}
+
+	void prepareNewPerson() {
+		workingPerson = createNewPerson();
+		isNewPerson = true;
+		lastCalculatedEmail = Email.newInstance(workingPerson.getEmail().toString());
 	}
 
 	Person createNewPerson() {
@@ -129,7 +133,7 @@ public class PersonEditPageBean implements Serializable {
 
 	public void saveAndNext() {
 		persistPerson();
-		workingPerson = createNewPerson();
+		prepareNewPerson();
 	}
 
 	public void cancel() {

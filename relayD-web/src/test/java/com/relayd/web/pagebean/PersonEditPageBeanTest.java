@@ -58,13 +58,9 @@ public class PersonEditPageBeanTest {
 
 	@Test
 	public void testOpenDialogForCreatePerson() {
-		assertNull("[workingPerson] not corret!", sut.workingPerson);
-		assertFalse("[isNewPerson] not correct!", sut.isNewPerson);
-
 		sut.openDialogForCreatePerson();
 
-		assertNotNull("[workingPerson] not corret!", sut.workingPerson);
-		assertTrue("[isNewPerson] not correct!", sut.isNewPerson);
+		verify(sut).prepareNewPerson();
 		verify(sut).openDialog();
 	}
 
@@ -101,7 +97,6 @@ public class PersonEditPageBeanTest {
 		doReturn(new ValidationResultImpl("")).when(personBridge).validateEMail(any(Person.class));
 
 		sut.openDialogForCreatePerson();
-
 		sut.saveAndNext();
 
 		verify(sut).persistPerson();
@@ -380,5 +375,17 @@ public class PersonEditPageBeanTest {
 		
 		String result = sut.getEmail().toString();
 		assertEquals("Email was changed although otherwise edited.", expected, result);
+	}
+	
+	@Test
+	public void testPrepareNewPerson() {
+		Email expected = sut.getDefaultEmail();
+		sut.prepareNewPerson();
+		
+		assertNotNull("[workingPerson] has not been created.", sut.workingPerson);
+		assertTrue("Prepared [workingPerson] is not new.", sut.isNewPerson);
+		
+		Email result = sut.lastCalculatedEmail;
+		assertEquals("[lastCalculatedEmail] is not correct.", expected, result);
 	}
 }
