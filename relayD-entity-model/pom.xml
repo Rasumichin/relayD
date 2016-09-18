@@ -21,6 +21,11 @@
 			<version>1.4.191</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>6.0.3</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -51,8 +56,9 @@
 				</dependencies>
 			</plugin>
 		</plugins>
-		
-		<!--  TODO (EL, 2016-09-18: This generated (by Eclipse) section is only here to get rid off an inexplainable Maven error. Discuss with DA. -->
+
+		<!-- TODO (EL, 2016-09-18: This generated (by Eclipse) section is only 
+			here to get rid off an inexplainable Maven error. Discuss with DA. -->
 		<pluginManagement>
 			<plugins>
 				<!--This plugin's configuration is used to store Eclipse m2e settings 
