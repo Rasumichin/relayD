@@ -8,6 +8,7 @@
 	</parent>
 	<artifactId>relayD-entity-model</artifactId>
 	<description>This project contains the JPA abstraction layer of the underlying relational database.</description>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.openjpa</groupId>
@@ -21,4 +22,66 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.openjpa</groupId>
+				<artifactId>openjpa-maven-plugin</artifactId>
+				<version>2.4.1</version>
+				<configuration>
+					<includes>com/relayd/entity/*.class</includes>
+				</configuration>
+
+				<executions>
+					<execution>
+						<id>enhancer</id>
+						<phase>process-classes</phase>
+						<goals>
+							<goal>enhance</goal>
+						</goals>
+					</execution>
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.openjpa</groupId>
+						<artifactId>openjpa</artifactId>
+						<version>2.4.1</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+		</plugins>
+		
+		<!--  TODO (EL, 2016-09-18: This generated (by Eclipse) section is only here to get rid off an inexplainable Maven error. Discuss with DA. -->
+		<pluginManagement>
+			<plugins>
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.apache.openjpa</groupId>
+										<artifactId>openjpa-maven-plugin</artifactId>
+										<versionRange>[2.4.1,)</versionRange>
+										<goals>
+											<goal>enhance</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
 </project>
