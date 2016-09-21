@@ -12,6 +12,7 @@ import com.relayd.attributes.Position;
 import com.relayd.attributes.Relayname;
 import com.relayd.attributes.Shirtsize;
 import com.relayd.attributes.Surename;
+import com.relayd.attributes.YearOfBirth;
 
 /**
  * @author  schmollc (Christian@relayD.de)
@@ -26,7 +27,9 @@ public class Person implements Serializable {
 	private UUID uuid;
 	private Surename surename;
 	private Forename forename;
+	@Deprecated // Wird durch YearOfBirth ersetzt.
 	private Birthday birthday;
+	private YearOfBirth yearOfBirth;
 	private Shirtsize shirtsize;
 	private Locale nationality; // TODO -schmollc- Anderen Attribute sind Fachobjekte, dies hier eine "API" Klasse. Warum kein Decorator einführen?
 	private Email email;
@@ -58,10 +61,12 @@ public class Person implements Serializable {
 		surename = aSurename;
 	}
 
+	@Deprecated // Wird durch YearOfBirth ersetzt.
 	public Birthday getBirthday() {
 		return birthday;
 	}
 
+	@Deprecated // Wird durch YearOfBirth ersetzt.
 	public void setBirthday(Birthday aBirthday) {
 		birthday = aBirthday;
 	}
@@ -165,6 +170,14 @@ public class Person implements Serializable {
 
 	public void setComment(Comment aComment) {
 		comment = aComment;
+	}
+
+	public void setYearOfBirth(YearOfBirth aYearOfBirth) {
+		yearOfBirth = aYearOfBirth;
+	}
+
+	public YearOfBirth getYearOfBirth() {
+		return yearOfBirth;
 	}
 
 	public boolean hasEmail() {

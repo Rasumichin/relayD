@@ -1,7 +1,6 @@
 package com.relayd.web.pagebean;
 
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
@@ -32,7 +31,7 @@ import com.relayd.web.bridge.ValidationResult;
  * @author Rasumichin (Erik@relayd.de)
  * @since 15.06.2016
  * status initial
- * 
+ *
  */
 @ManagedBean(name = "personEditPageBean")
 @SessionScoped
@@ -57,6 +56,7 @@ public class PersonEditPageBean implements Serializable {
 	void prepareNewPerson() {
 		workingPerson = createNewPerson();
 		isNewPerson = true;
+		// TODO - Was sagt Bloch zu dem Thema clone()?
 		lastCalculatedEmail = Email.newInstance(workingPerson.getEmail().toString());
 	}
 
@@ -64,7 +64,7 @@ public class PersonEditPageBean implements Serializable {
 		Person person = Person.newInstance();
 		Email defaultEmail = getDefaultEmail();
 		person.setEmail(defaultEmail);
-	
+
 		return person;
 	}
 
@@ -73,20 +73,8 @@ public class PersonEditPageBean implements Serializable {
 	}
 
 	void openDialog() {
-		Map<String, Object> options = createDialogOptions();
-		RequestContext.getCurrentInstance().openDialog(NavigationConstants.PERSON_DIALOG_ID, options, null);
-	}
-
-	Map<String, Object> createDialogOptions() {
-		Map<String, Object> options = new HashMap<String, Object>();
-		options.put("modal", true);
-		options.put("width", 360);
-		options.put("height", 520);
-		options.put("contentWidth", "100%");
-		options.put("contentHeight", "100%");
-		options.put("headerElement", "customheader");
-
-		return options;
+		Map<String, Object> options = new DialogOptionsBuilder().build();
+		RequestContext.getCurrentInstance().openDialog(NavigationConstants.PERSON_PERSON_DIALOG_ID, options, null);
 	}
 
 	public void openDialogFor(UUID uuid) {
@@ -105,6 +93,7 @@ public class PersonEditPageBean implements Serializable {
 		// Es könnte direkt weitermachen....
 
 		ValidationResult validateResult = getBridge().validateEMail(workingPerson);
+		// TODO Also ne! Schmoll!! Tell, don't ask!!!!
 		if (validateResult.getMessage().isEmpty()) {
 			persistPerson();
 			closeDialog();
@@ -142,6 +131,8 @@ public class PersonEditPageBean implements Serializable {
 
 	public void nameValueChanged() {
 		Email currentEmail = getEmail();
+		// TODO Mit erik drüber reden. Für mich liest sich das: Wenn A gleich B, dann setz doch A bitte auf B...Das getCurrentLocalPart sorgt aber "scheinbar" für neuere Daten?
+		// Jedenfalls nicht intuitiv verstehbar. Viellecht den if umschreiben? if(mustUpdateLastCalcMail) oder so... denk man weniger nach..
 		if (currentEmail.equals(lastCalculatedEmail)) {
 			String currentLocalPart = getCurrentLocalPart();
 			currentEmail.setLocalPart(currentLocalPart);
@@ -157,10 +148,10 @@ public class PersonEditPageBean implements Serializable {
 		if (currentSurename != null) {
 			currentLocalPart = (currentLocalPart == null) ? currentSurename.toString() : currentLocalPart + '.' + currentSurename;
 		}
-		
+
 		return currentLocalPart;
 	}
-	
+
 	public Forename getForename() {
 		return workingPerson.getForename();
 	}

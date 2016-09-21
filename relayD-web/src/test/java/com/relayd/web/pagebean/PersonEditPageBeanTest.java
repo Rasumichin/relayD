@@ -5,10 +5,10 @@ import static org.mockito.Matchers.*;
 
 import java.time.LocalDate;
 import java.util.Locale;
-import java.util.Map;
 import java.util.UUID;
 
-import org.junit.*;
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -37,7 +37,7 @@ import static org.mockito.Mockito.*;
  * @author schmollc (Christian@relayd.de)
  * @author Rasumichin (Erik@relayd.de)
  * @since 18.08.2016
- * 
+ *
  */
 @RunWith(MockitoJUnitRunner.class)
 public class PersonEditPageBeanTest {
@@ -242,14 +242,6 @@ public class PersonEditPageBeanTest {
 	}
 
 	@Test
-	public void testCreateDialogOptions() {
-		Map<String, Object> optionMap = sut.createDialogOptions();
-
-		int size = optionMap.size();
-		assertEquals("[optionMap] size not correct!", 6, size);
-	}
-
-	@Test
 	public void testSave_ForTwoIdenticalEmails() {
 		doReturn(new ValidationResultImpl("Exits!")).when(personBridge).validateEMail(any(Person.class));
 
@@ -267,13 +259,13 @@ public class PersonEditPageBeanTest {
 
 		assertEquals("[maxLengthForComment] not correct!", Comment.MAX_LENGTH, expected);
 	}
-	
+
 	@Test
 	public void testCreateNewPerson() {
 		Person result = sut.createNewPerson();
 		assertNotNull("Person is not initialized.", result);
 	}
-	
+
 	@Test
 	public void testGetDefaultEmail() {
 		Email expected = getExpectedDefaultEmail();
@@ -284,38 +276,38 @@ public class PersonEditPageBeanTest {
 	private Email getExpectedDefaultEmail() {
 		return Email.createFromLocalAndDomainPart("forename.surename", "canda.com");
 	}
-	
+
 	@Test
 	public void testCreateNewPersonAndVerifyEmailHasADefaultValue() {
 		sut.openDialogForCreatePerson();
 		Email expected = getExpectedDefaultEmail();
-		
+
 		Email result = sut.getEmail();
 		assertEquals("Person's [email] attribute is not correctly initialized.", expected, result);
 	}
-	
+
 	@Test
 	public void testGetCurrentLocalPartForenameIsSet() {
 		sut.openDialogForCreatePerson();
 		Forename forename = Forename.newInstance("Mike");
 		sut.setForename(forename);
-		
+
 		String expected = forename.toString();
 		String result = sut.getCurrentLocalPart();
 		assertEquals("Current local part is not correct.", expected, result);
 	}
-	
+
 	@Test
 	public void testGetCurrentLocalPartSurenameIsSet() {
 		sut.openDialogForCreatePerson();
 		Surename surename = Surename.newInstance("Hansen");
 		sut.setSurename(surename);
-		
+
 		String expected = surename.toString();
 		String result = sut.getCurrentLocalPart();
 		assertEquals("Current local part is not correct.", expected, result);
 	}
-	
+
 	@Test
 	public void testGetCurrentLocalPartForenameAndSurenameHaveBeenSet() {
 		sut.openDialogForCreatePerson();
@@ -323,68 +315,68 @@ public class PersonEditPageBeanTest {
 		sut.setForename(forename);
 		Surename surename = Surename.newInstance("Hansen");
 		sut.setSurename(surename);
-		
+
 		String expected = forename.toString() + "." + surename.toString();
 		String result = sut.getCurrentLocalPart();
 		assertEquals("Current local part is not correct.", expected, result);
 	}
-	
+
 	@Test
 	public void testGetCurrentLocalPartWhenNoNameHasBeenSet() {
 		sut.openDialogForCreatePerson();
-		
+
 		String result = sut.getCurrentLocalPart();
 		assertNull("Current local part is not correct.", result);
 	}
-	
+
 	@Test
 	public void testForenameValueChanged() {
 		sut.openDialogForCreatePerson();
 		Forename forename = Forename.newInstance("Clark");
 		Email expected = Email.createFromLocalAndDomainPart(forename.toString(), "canda.com");
-		
+
 		sut.setForename(forename);
 		sut.nameValueChanged();
-		
+
 		Email result = sut.getEmail();
 		assertEquals("Forename value change has not been handled correctly.", expected, result);
 	}
-	
+
 	@Test
 	public void testSurenameValueChanged() {
 		sut.openDialogForCreatePerson();
 		Surename surename = Surename.newInstance("Kent");
 		Email expected = Email.createFromLocalAndDomainPart(surename.toString(), "canda.com");
-		
+
 		sut.setSurename(surename);
 		sut.nameValueChanged();
-		
+
 		Email result = sut.getEmail();
 		assertEquals("Surename value change has not been handled correctly.", expected, result);
 	}
-	
+
 	@Test
 	public void testNameValueChangedButEmailWasEdited() {
 		sut.openDialogForCreatePerson();
 		String expected = "edited.name" + Email.AT_SIGN + "notcanda.com";
 		Email email = Email.newInstance(expected);
 		sut.setEmail(email);
-		
+
 		sut.setForename(Forename.newInstance("Adele"));
 		sut.nameValueChanged();
-		
+
 		String result = sut.getEmail().toString();
 		assertEquals("Email was changed although otherwise edited.", expected, result);
 	}
-	
+
 	@Test
 	public void testPrepareNewPerson() {
 		Email expected = sut.getDefaultEmail();
 		sut.prepareNewPerson();
-		
+
 		assertNotNull("[workingPerson] has not been created.", sut.workingPerson);
 		assertTrue("Prepared [workingPerson] is not new.", sut.isNewPerson);
-		
+
 		Email result = sut.lastCalculatedEmail;
 		assertEquals("[lastCalculatedEmail] is not correct.", expected, result);
 	}

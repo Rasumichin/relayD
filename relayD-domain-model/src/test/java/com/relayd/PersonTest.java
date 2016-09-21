@@ -17,12 +17,11 @@ import com.relayd.attributes.Position;
 import com.relayd.attributes.Relayname;
 import com.relayd.attributes.Shirtsize;
 import com.relayd.attributes.Surename;
+import com.relayd.attributes.YearOfBirth;
 
 /**
  * @author schmollc (Christian@relayd.de)
  * @author Rasumichin (Erik@relayd.de)
- * @since 22.03.2016
- * status initial
  *
  */
 public class PersonTest {
@@ -107,6 +106,19 @@ public class PersonTest {
 		Birthday result = sut.getBirthday();
 
 		assertEquals("[birthday] not correct!", expected, result);
+	}
+
+	@Test
+	public void testYearOfBirth() {
+		YearOfBirth expected = YearOfBirth.newInstance(1972);
+
+		Person sut = Person.newInstance();
+
+		sut.setYearOfBirth(expected);
+
+		YearOfBirth result = sut.getYearOfBirth();
+
+		assertEquals("[yearOfBirth] not correct!", expected, result);
 	}
 
 	@Test
