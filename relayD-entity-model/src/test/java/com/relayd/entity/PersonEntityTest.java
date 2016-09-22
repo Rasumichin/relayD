@@ -21,7 +21,7 @@ public class PersonEntityTest {
 		assertNull("[forename] not correct!", sut.getForename());
 		assertNull("[surename] not correct!", sut.getSurename());
 		assertNull("[emailadress] not correct!", sut.getEmail());
-		assertNull("[birthyear] not correct!", sut.getBirthyear());
+		assertNull("[yearOfBirth] not correct!", sut.getYearOfBirth());
 		assertNull("[nationality] not correct!", sut.getNationality());
 		assertNull("[relayname] not correct!", sut.getRelayname());
 		assertNull("[pos] not correct!", sut.getPos());
@@ -37,7 +37,7 @@ public class PersonEntityTest {
 		assertNull("[forename] not correct!", sut.getForename());
 		assertNull("[surename] not correct!", sut.getSurename());
 		assertNull("[emailadress] not correct!", sut.getEmail());
-		assertNull("[birthyear] not correct!", sut.getBirthyear());
+		assertNull("[yearOfBirth] not correct!", sut.getYearOfBirth());
 		assertNull("[nationality] not correct!", sut.getNationality());
 		assertNull("[relayname] not correct!", sut.getRelayname());
 		assertNull("[pos] not correct!", sut.getPos());
@@ -70,8 +70,8 @@ public class PersonEntityTest {
 	@Test
 	public void testInstanceCreated_ForBirthyear() {
 		Integer year = 1971;
-		PersonEntity sut = new PersonEntity.Builder().withBirthyear(year).build();
-		assertEquals("[birthyear] has not been set correctly.", year, sut.getBirthyear());
+		PersonEntity sut = new PersonEntity.Builder().withYearOfBirth(year).build();
+		assertEquals("[yearOfBirth] has not been set correctly.", year, sut.getYearOfBirth());
 	}
 
 	@Test

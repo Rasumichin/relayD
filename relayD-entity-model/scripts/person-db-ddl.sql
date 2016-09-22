@@ -1,48 +1,48 @@
 --------------------------------------------------
--- Drop Table PERSON
+-- Drop Table person
 --------------------------------------------------
-Drop table PERSON;
+DROP TABLE person;
 
 --------------------------------------------------
--- Create Table PERSON
+-- Create Table person
 --------------------------------------------------
-Create table PERSON (
-	ID								CHAR(36)		NOT NULL,
-	SURENAME						VARCHAR(256),
-	FORENAME						VARCHAR(256),
-	BIRTHYEAR						INTEGER,
-    SHIRTSIZE						INTEGER,
-    RELAYNAME						VARCHAR(256),
-    POS								INTEGER, -- POSITION geht nicht!
-    NATIONALITY						VARCHAR(256),
-	EMAIL							VARCHAR(256),
-	INFO							VARCHAR(1024) -- COMMENT geht nicht!
+CREATE TABLE person (
+	id								CHAR(36)		NOT NULL,
+	surename						VARCHAR(256),
+	forename						VARCHAR(256),
+	yearOfBirth						INTEGER,
+    shirtsize						INTEGER,
+    relayname						VARCHAR(256),
+    pos								INTEGER, -- POSITION geht nicht!
+    nationality						VARCHAR(256),
+	email							VARCHAR(256),
+	info							VARCHAR(1024) -- COMMENT geht nicht!
 );
-Comment on Table PERSON is 'realyD - The table of Person.'; -- Gehen alle nicht!
-Comment on Column PERSON.ID is 'UUID as string representation.';
-Comment on Column PERSON.SURENAME is 'The Surename of a Person.';
-Comment on Column PERSON.FORENAME is 'The Forename of a Person.';
-Comment on Column PERSON.BIRTHYEAR is 'The Birthyear of a Person.';
-Comment on Column PERSON.SHIRTSIZE is 'TODO - Is this not a ref to a table?';
-Comment on Column PERSON.RELAYNAME is 'TODO - A workaround-should be an own entity.';
-Comment on Column PERSON.POSITION is 'TODO - A workaround-should be an own entity.';
-Comment on Column PERSON.NATIONALITY is 'The nationality of a Person.';
-Comment on Column PERSON.EMAIL is 'The Email of a Person.';
-Comment on Column PERSON.COMMENT is 'A comment for a Person.';
+COMMENT on TABLE person is 'realyD - The table of Person.'; -- Gehen alle nicht!
+COMMENT on COLUMN person.id is 'UUID as string representation.';
+COMMENT on COLUMN person.surename is 'The Surename of a Person.';
+COMMENT on COLUMN person.forename is 'The Forename of a Person.';
+COMMENT on COLUMN person.yearOfBirth is 'The Year Of Birth of a Person.';
+COMMENT on COLUMN person.shirtsize is 'TODO - Is this not a ref to a table?';
+COMMENT on COLUMN person.relayname is 'TODO - A workaround-should be an own entity.';
+COMMENT on COLUMN person.position is 'TODO - A workaround-should be an own entity.';
+COMMENT on COLUMN person.nationality is 'The nationality of a Person.';
+COMMENT on COLUMN person.email is 'The Email of a Person.';
+COMMENT on COLUMN person.comment is 'A comment for a Person.';
 
 --------------------------------------------------
--- Create Index PERSON_IDX
+-- Create Index person_IDX
 --------------------------------------------------
-CREATE UNIQUE INDEX PERSON_IDX
-        ON PERSON
-        (ID);
+CREATE UNIQUE INDEX person_idx
+        ON person
+        (id);
 
 --------------------------------------------------
 -- Create Primary Key
 --------------------------------------------------
-Alter table PERSON add primary key (ID);
+ALTER TABLE person ADD PRIMARY KEY (id);
 
 --------------------------------------------------
--- Grant PERSON
+-- Grant person
 --------------------------------------------------
-Grant ALL on PERSON to PUBLIC; -- geht nicht!
+GRANT ALL ON person TO PUBLIC; -- geht nicht!

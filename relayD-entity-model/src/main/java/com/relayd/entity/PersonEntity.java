@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "PERSON")
+@Table(name = "person")
 public class PersonEntity {
 
 	@Id
@@ -22,7 +22,7 @@ public class PersonEntity {
 	private String forename;
 
 	@Column
-	private Integer birthyear;
+	private Integer yearOfBirth;
 
 	@Column
 	private Integer shirtsize;
@@ -47,7 +47,7 @@ public class PersonEntity {
 		forename = aBuilder.forename;
 		surename = aBuilder.surename;
 		email = aBuilder.email;
-		birthyear = aBuilder.birthyear;
+		yearOfBirth = aBuilder.yearOfBirth;
 		relayname = aBuilder.relayname;
 		pos = aBuilder.pos;
 		info = aBuilder.info;
@@ -84,8 +84,8 @@ public class PersonEntity {
 		return email;
 	}
 
-	public Integer getBirthyear() {
-		return birthyear;
+	public Integer getYearOfBirth() {
+		return yearOfBirth;
 	}
 
 	public String getId() {
@@ -109,7 +109,7 @@ public class PersonEntity {
 		private String forename;
 		private String surename;
 		private String email;
-		private Integer birthyear;
+		private Integer yearOfBirth;
 		private Integer shirtsize;
 		private String nationality;
 		private String info;
@@ -135,8 +135,8 @@ public class PersonEntity {
 			return this;
 		}
 
-		public Builder withBirthyear(Integer aBirthyear) {
-			birthyear = aBirthyear;
+		public Builder withYearOfBirth(Integer aYearOfBirth) {
+			yearOfBirth = aYearOfBirth;
 			return this;
 		}
 
