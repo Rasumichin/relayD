@@ -2,20 +2,17 @@ package com.relayd.web.pagebean;
 
 import static org.junit.Assert.*;
 
-import java.time.LocalDate;
-import java.util.Calendar;
-
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import com.relayd.Person;
-import com.relayd.attributes.Birthday;
 import com.relayd.attributes.Email;
 import com.relayd.attributes.Forename;
 import com.relayd.attributes.Position;
 import com.relayd.attributes.Shirtsize;
 import com.relayd.attributes.Surename;
+import com.relayd.attributes.YearOfBirth;
 
 /**
  * @author schmollc (Christian@relayd.de)
@@ -94,12 +91,12 @@ public class PersonSortTest {
 
 	@Test
 	public void testSortByBirthday() {
-		Birthday birthday1 = Birthday.newInstance(LocalDate.of(2016, Calendar.AUGUST, 23));
-		Birthday birthday2 = Birthday.newInstance(LocalDate.of(2016, Calendar.AUGUST, 25));
+		YearOfBirth yearOfBirth1 = YearOfBirth.newInstance(1971);
+		YearOfBirth yearOfBirth2 = YearOfBirth.newInstance(1973);
 
-		int position = sut.sortByBirthday(birthday1, birthday2);
+		int position = sut.sortYearOfBirth(yearOfBirth1, yearOfBirth2);
 
-		assertEquals("[position] not correct!", -2, position);
+		assertEquals("[yearOfBirth] not correct!", -2, position);
 	}
 
 	@Test

@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -14,7 +13,6 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import com.relayd.Person;
-import com.relayd.attributes.Birthday;
 import com.relayd.attributes.Comment;
 import com.relayd.attributes.Email;
 import com.relayd.attributes.Forename;
@@ -22,6 +20,7 @@ import com.relayd.attributes.Position;
 import com.relayd.attributes.Relayname;
 import com.relayd.attributes.Shirtsize;
 import com.relayd.attributes.Surename;
+import com.relayd.attributes.YearOfBirth;
 import com.relayd.ejb.PersonGateway;
 
 /**
@@ -118,9 +117,8 @@ public class PersonGatewayJDBC implements PersonGateway {
 		person.setUUID(UUID.fromString(rs.getString(INDEX_UUID)));
 		person.setForename(Forename.newInstance(rs.getString(INDEX_FORENAME)));
 		person.setSurename(Surename.newInstance(rs.getString(INDEX_SURENAME)));
-		// TODO -Wird entfernt wenn Birthday durch Dirthyear ersetzt wird
 		Integer birthyear = rs.getInt(INDEX_BIRTHYEAR);
-		person.setBirthday(Birthday.newInstance(LocalDate.ofYearDay(birthyear, 1)));
+		person.setYearOfBirth(YearOfBirth.newInstance(birthyear));
 
 		person.setShirtsize(Shirtsize.decode(rs.getShort(INDEX_SHIRTSIZE)));
 		person.setRelayname(Relayname.newInstance(rs.getString(INDEX_RELAYNAME)));

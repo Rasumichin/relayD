@@ -19,11 +19,11 @@ import org.primefaces.event.ToggleEvent;
 import org.primefaces.model.Visibility;
 
 import com.relayd.Person;
-import com.relayd.attributes.Birthday;
 import com.relayd.attributes.Email;
 import com.relayd.attributes.Forename;
 import com.relayd.attributes.Shirtsize;
 import com.relayd.attributes.Surename;
+import com.relayd.attributes.YearOfBirth;
 import com.relayd.web.bridge.PersonBridge;
 import com.relayd.web.bridge.PersonBridgeImpl;
 
@@ -98,8 +98,8 @@ public class PersonBrowsePageBean {
 		return personSort.sortBySurename(name1, name2);
 	}
 
-	public int sortByBirthday(Birthday birthday1, Birthday birthday2) {
-		return personSort.sortByBirthday(birthday1, birthday2);
+	public int sortYearOfBirth(YearOfBirth yearOfBirth1, YearOfBirth yearOfBirth2) {
+		return personSort.sortYearOfBirth(yearOfBirth1, yearOfBirth2);
 	}
 
 	public int sortByShirtsize(Shirtsize size1, Shirtsize size2) {

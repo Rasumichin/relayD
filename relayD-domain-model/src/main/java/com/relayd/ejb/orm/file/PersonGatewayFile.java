@@ -78,7 +78,7 @@ public class PersonGatewayFile implements PersonGateway {
 			for (Person person : somePersons) {
 				if (updatePerson.equals(person)) {
 					// TODO -schmollc- Mapper einbauen
-					person.setBirthday(updatePerson.getBirthday());
+					person.setYearOfBirth(updatePerson.getYearOfBirth());
 					person.setSurename(updatePerson.getSurename());
 					person.setForename(updatePerson.getForename());
 					person.setNationality(updatePerson.getNationality());

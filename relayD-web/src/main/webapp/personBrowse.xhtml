@@ -146,12 +146,12 @@
 			</p:column>
 
 			<p:column
-				headerText="Birthday"
+				headerText="YearOfBirth"
 				visible="#{personBrowsePageBean.visibleColumns[5]}"
-				sortBy="#{person.birthday}"
-				sortFunction="#{personBrowsePageBean.sortByBirthday}"
+				sortBy="#{person.yearOfBirth}"
+				sortFunction="#{personBrowsePageBean.sortByYearOfBirth}"
 				width="60">
-				<h:outputText value="#{person.birthday}" />
+				<h:outputText value="#{person.yearOfBirth}" />
 			</p:column>
 
 			<p:column

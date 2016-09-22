@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.Locale;
 import java.util.UUID;
 
-import com.relayd.attributes.Birthday;
 import com.relayd.attributes.Comment;
 import com.relayd.attributes.Email;
 import com.relayd.attributes.Forename;
@@ -27,8 +26,6 @@ public class Person implements Serializable {
 	private UUID uuid;
 	private Surename surename;
 	private Forename forename;
-	@Deprecated // Wird durch YearOfBirth ersetzt.
-	private Birthday birthday;
 	private YearOfBirth yearOfBirth;
 	private Shirtsize shirtsize;
 	private Locale nationality; // TODO -schmollc- Anderen Attribute sind Fachobjekte, dies hier eine "API" Klasse. Warum kein Decorator einführen?
@@ -62,14 +59,6 @@ public class Person implements Serializable {
 	}
 
 	@Deprecated // Wird durch YearOfBirth ersetzt.
-	public Birthday getBirthday() {
-		return birthday;
-	}
-
-	@Deprecated // Wird durch YearOfBirth ersetzt.
-	public void setBirthday(Birthday aBirthday) {
-		birthday = aBirthday;
-	}
 
 	public Forename getForename() {
 		return forename;
@@ -186,7 +175,7 @@ public class Person implements Serializable {
 
 	@Override
 	public String toString() {
-		return getForename() + " " + getSurename() + ", " + getBirthday() + ", " + getShirtsize() + ", " + getDisplayCountry() + ", " + getEmail() + ", " + getRelayname() + ", " + getPosition();
+		return getForename() + " " + getSurename() + ", " + getYearOfBirth() + ", " + getShirtsize() + ", " + getDisplayCountry() + ", " + getEmail() + ", " + getRelayname() + ", " + getPosition();
 	}
 
 	@Override

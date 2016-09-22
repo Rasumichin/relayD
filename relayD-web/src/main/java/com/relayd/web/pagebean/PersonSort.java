@@ -1,11 +1,11 @@
 package com.relayd.web.pagebean;
 
 import com.relayd.Person;
-import com.relayd.attributes.Birthday;
 import com.relayd.attributes.Email;
 import com.relayd.attributes.Forename;
 import com.relayd.attributes.Shirtsize;
 import com.relayd.attributes.Surename;
+import com.relayd.attributes.YearOfBirth;
 
 /**
  * @author schmollc (Christian@relayd.de)
@@ -37,15 +37,15 @@ public class PersonSort {
 		return name1.toString().compareTo(name2.toString());
 	}
 
-	public int sortByBirthday(Birthday birthday1, Birthday birthday2) {
-		return birthday1.toString().compareTo(birthday2.toString());
-	}
-
 	public int sortByShirtsize(Shirtsize size1, Shirtsize size2) {
 		return size1.toString().compareTo(size2.toString());
 	}
 
 	public int sortByEmail(Email email1, Email email2) {
 		return email1.toString().compareTo(email2.toString());
+	}
+
+	public int sortYearOfBirth(YearOfBirth aYearOfBirth1, YearOfBirth aYearOfBirth2) {
+		return aYearOfBirth1.toString().compareTo(aYearOfBirth2.toString());
 	}
 }

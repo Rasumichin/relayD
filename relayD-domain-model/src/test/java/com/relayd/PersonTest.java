@@ -2,14 +2,11 @@ package com.relayd;
 
 import static org.junit.Assert.*;
 
-import java.time.LocalDate;
-import java.time.Month;
 import java.util.Locale;
 import java.util.UUID;
 
 import org.junit.Test;
 
-import com.relayd.attributes.Birthday;
 import com.relayd.attributes.Comment;
 import com.relayd.attributes.Email;
 import com.relayd.attributes.Forename;
@@ -31,7 +28,7 @@ public class PersonTest {
 		Person sut = Person.newInstance();
 		sut.setSurename(Surename.newInstance("Jonas"));
 		sut.setForename(Forename.newInstance("Justus"));
-		sut.setBirthday(Birthday.newInstance(LocalDate.of(1956, Month.FEBRUARY, 17)));
+		sut.setYearOfBirth(YearOfBirth.newInstance(1956));
 		sut.setShirtsize(Shirtsize.HerrenM);
 		sut.setNationality(Locale.GERMANY);
 		sut.setEmail(Email.newInstance("Jonas.Justus@rockyBeach.com"));
@@ -40,7 +37,7 @@ public class PersonTest {
 
 		String personAsString = sut.toString();
 
-		assertEquals("Justus Jonas, 1956-02-17, HerrenM, Germany, Jonas.Justus@rockyBeach.com, Die 4 ????, FIRST", personAsString);
+		assertEquals("Justus Jonas, 1956, HerrenM, Germany, Jonas.Justus@rockyBeach.com, Die 4 ????, FIRST", personAsString);
 	}
 
 	@Test
@@ -93,19 +90,6 @@ public class PersonTest {
 		Locale result = sut.getNationality();
 
 		assertEquals("[nationality] not correct!", expected, result);
-	}
-
-	@Test
-	public void testBirthday() {
-		Birthday expected = Birthday.newInstance(LocalDate.of(1972, Month.APRIL, 23));
-
-		Person sut = Person.newInstance();
-
-		sut.setBirthday(expected);
-
-		Birthday result = sut.getBirthday();
-
-		assertEquals("[birthday] not correct!", expected, result);
 	}
 
 	@Test

@@ -3,7 +3,6 @@ package com.relayd.web.pagebean;
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.*;
 
-import java.time.LocalDate;
 import java.util.Locale;
 import java.util.UUID;
 
@@ -15,9 +14,7 @@ import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.relayd.FormatConstants;
 import com.relayd.Person;
-import com.relayd.attributes.Birthday;
 import com.relayd.attributes.Comment;
 import com.relayd.attributes.Email;
 import com.relayd.attributes.Forename;
@@ -25,6 +22,7 @@ import com.relayd.attributes.Position;
 import com.relayd.attributes.Relayname;
 import com.relayd.attributes.Shirtsize;
 import com.relayd.attributes.Surename;
+import com.relayd.attributes.YearOfBirth;
 import com.relayd.web.bridge.PersonBridge;
 import com.relayd.web.bridge.ValidationResultImpl;
 
@@ -150,13 +148,13 @@ public class PersonEditPageBeanTest {
 	}
 
 	@Test
-	public void testBirthday() {
+	public void testYearOfBirth() {
 		sut.openDialogForCreatePerson();
-		Birthday expected = Birthday.newInstance(LocalDate.now());
+		YearOfBirth expected = YearOfBirth.newInstance(1971);
 
-		sut.setBirthday(expected);
+		sut.setYearOfBirth(expected);
 
-		Birthday result = sut.getBirthday();
+		YearOfBirth result = sut.getYearOfBirth();
 
 		assertEquals("[Birthday] not correct!", expected, result);
 	}
@@ -232,13 +230,6 @@ public class PersonEditPageBeanTest {
 		Position result = sut.getPosition();
 
 		assertEquals("[Position] not correct!", expected, result);
-	}
-
-	@Test
-	public void testGetDatePattern() {
-		String result = sut.getDatePatttern();
-
-		assertEquals("[DatePattern] nicht korrekt!", FormatConstants.DATE_FORMAT_ISO, result);
 	}
 
 	@Test

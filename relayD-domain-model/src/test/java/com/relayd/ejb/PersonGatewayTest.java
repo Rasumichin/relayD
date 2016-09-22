@@ -2,8 +2,6 @@ package com.relayd.ejb;
 
 import static org.junit.Assert.*;
 
-import java.time.LocalDate;
-import java.time.Month;
 import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
@@ -11,11 +9,11 @@ import java.util.UUID;
 import org.junit.Test;
 
 import com.relayd.Person;
-import com.relayd.attributes.Birthday;
 import com.relayd.attributes.Email;
 import com.relayd.attributes.Forename;
 import com.relayd.attributes.Shirtsize;
 import com.relayd.attributes.Surename;
+import com.relayd.attributes.YearOfBirth;
 
 /**
  * @author  schmollc (Christian@relayd.de)
@@ -36,7 +34,7 @@ public abstract class PersonGatewayTest {
 
 		assertEquals("[Forename] not correct.", firstMember.getForename(), result.getForename());
 		assertEquals("[Surename] not correct.", firstMember.getSurename(), result.getSurename());
-		assertEquals("[Birthday] not correct.", firstMember.getBirthday(), result.getBirthday());
+		assertEquals("[YearOfBirth] not correct.", firstMember.getYearOfBirth(), result.getYearOfBirth());
 		assertEquals("[Shirtsize] not correct.", firstMember.getShirtsize(), result.getShirtsize());
 		assertEquals("[Email] not correct.", firstMember.getEmail(), result.getEmail());
 	}
@@ -90,8 +88,8 @@ public abstract class PersonGatewayTest {
 		updateMember.setForename(newForename);
 		Surename newSurename = Surename.newInstance("Andrews");
 		updateMember.setSurename(newSurename);
-		Birthday newBirthday = Birthday.newInstance(LocalDate.of(1977, Month.APRIL, 13));
-		updateMember.setBirthday(newBirthday);
+		YearOfBirth newYearOfBirth = YearOfBirth.newInstance(1971);
+		updateMember.setYearOfBirth(newYearOfBirth);
 		Shirtsize newShirtsize = Shirtsize.DamenXS;
 		updateMember.setShirtsize(newShirtsize);
 		Email newEmail = Email.newInstance("Bob.Andrews@rockyBeach.com");
@@ -106,26 +104,26 @@ public abstract class PersonGatewayTest {
 
 		assertEquals("[Forename] not correct.", newForename, checkPerson.getForename());
 		assertEquals("[Surename] not correct.", newSurename, checkPerson.getSurename());
-		assertEquals("[Birthday] not correct.", newBirthday, checkPerson.getBirthday());
+		assertEquals("[YearOfBirth] not correct.", newYearOfBirth, checkPerson.getYearOfBirth());
 		assertEquals("[Shirtsize] not correct.", newShirtsize, checkPerson.getShirtsize());
 		assertEquals("[Email] not correct.", newEmail, checkPerson.getEmail());
 
 	}
 
 	private Person createJustusJonas() {
-		return createPerson("Justus", "Jonas", LocalDate.of(1971, Month.APRIL, 17), Locale.GERMAN, "Justus.Jonas@rockyBech.com");
+		return createPerson("Justus", "Jonas", 1971, Locale.GERMAN, "Justus.Jonas@rockyBech.com");
 	}
 
 	private Person createPeterShaw() {
-		return createPerson("Peter", "Shaw", LocalDate.of(1973, Month.AUGUST, 23), Locale.ENGLISH, "Perter.Shaw@rockyBeach.com");
+		return createPerson("Peter", "Shaw", 1973, Locale.ENGLISH, "Perter.Shaw@rockyBeach.com");
 	}
 
-	private Person createPerson(String forename, String surename, LocalDate dateOfBirth, Locale locale, String email) {
+	private Person createPerson(String forename, String surename, Integer yearofBirth, Locale locale, String email) {
 		Person person = Person.newInstance();
 
 		person.setForename(Forename.newInstance(forename));
 		person.setSurename(Surename.newInstance(surename));
-		person.setBirthday(Birthday.newInstance(dateOfBirth));
+		person.setYearOfBirth(YearOfBirth.newInstance(yearofBirth));
 		person.setNationality(locale);
 		person.setShirtsize(Shirtsize.Unknown);
 		person.setEmail(Email.newInstance(email));

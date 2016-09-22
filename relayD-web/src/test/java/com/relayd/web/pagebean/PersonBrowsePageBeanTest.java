@@ -3,9 +3,7 @@ package com.relayd.web.pagebean;
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.*;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
 
@@ -24,11 +22,11 @@ import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.relayd.Person;
-import com.relayd.attributes.Birthday;
 import com.relayd.attributes.Email;
 import com.relayd.attributes.Forename;
 import com.relayd.attributes.Shirtsize;
 import com.relayd.attributes.Surename;
+import com.relayd.attributes.YearOfBirth;
 import com.relayd.web.bridge.PersonBridge;
 
 import static org.mockito.Mockito.*;
@@ -248,13 +246,13 @@ public class PersonBrowsePageBeanTest {
 
 	@Test
 	public void testSortByBirthday() {
-		Birthday birthday1 = Birthday.newInstance(LocalDate.of(2016, Calendar.AUGUST, 23));
-		Birthday birthday2 = Birthday.newInstance(LocalDate.of(2016, Calendar.AUGUST, 25));
+		YearOfBirth yearOfBirth1 = YearOfBirth.newInstance(1971);
+		YearOfBirth yearOfBirth2 = YearOfBirth.newInstance(1973);
 
 		@SuppressWarnings("unused")
-		int resultForDocumentation = sut.sortByBirthday(birthday1, birthday2);
+		int resultForDocumentation = sut.sortYearOfBirth(yearOfBirth1, yearOfBirth2);
 
-		verify(personSort).sortByBirthday(birthday1, birthday2);
+		verify(personSort).sortYearOfBirth(yearOfBirth1, yearOfBirth2);
 	}
 
 	@Test

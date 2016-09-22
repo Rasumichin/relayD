@@ -12,9 +12,7 @@ import javax.faces.context.FacesContext;
 
 import org.primefaces.context.RequestContext;
 
-import com.relayd.FormatConstants;
 import com.relayd.Person;
-import com.relayd.attributes.Birthday;
 import com.relayd.attributes.Comment;
 import com.relayd.attributes.Email;
 import com.relayd.attributes.Forename;
@@ -22,6 +20,7 @@ import com.relayd.attributes.Position;
 import com.relayd.attributes.Relayname;
 import com.relayd.attributes.Shirtsize;
 import com.relayd.attributes.Surename;
+import com.relayd.attributes.YearOfBirth;
 import com.relayd.web.bridge.PersonBridge;
 import com.relayd.web.bridge.PersonBridgeImpl;
 import com.relayd.web.bridge.ValidationResult;
@@ -168,12 +167,12 @@ public class PersonEditPageBean implements Serializable {
 		workingPerson.setSurename(aSurename);
 	}
 
-	public Birthday getBirthday() {
-		return workingPerson.getBirthday();
+	public YearOfBirth getYearOfBirth() {
+		return workingPerson.getYearOfBirth();
 	}
 
-	public void setBirthday(Birthday aBirthday) {
-		workingPerson.setBirthday(aBirthday);
+	public void setYearOfBirth(YearOfBirth aYearOfBirth) {
+		workingPerson.setYearOfBirth(aYearOfBirth);
 	}
 
 	public Locale getNationality() {
@@ -226,10 +225,6 @@ public class PersonEditPageBean implements Serializable {
 
 	private PersonBridge getBridge() {
 		return personBridge;
-	}
-
-	public String getDatePatttern() {
-		return FormatConstants.DATE_FORMAT_ISO;
 	}
 
 	public Integer getMaxLengthForComment() {

@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.UUID;
 
 import org.junit.Before;
@@ -16,7 +15,6 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.relayd.Person;
-import com.relayd.attributes.Birthday;
 import com.relayd.attributes.Comment;
 import com.relayd.attributes.Email;
 import com.relayd.attributes.Forename;
@@ -24,6 +22,7 @@ import com.relayd.attributes.Position;
 import com.relayd.attributes.Relayname;
 import com.relayd.attributes.Shirtsize;
 import com.relayd.attributes.Surename;
+import com.relayd.attributes.YearOfBirth;
 
 import static org.mockito.Mockito.*;
 
@@ -47,7 +46,7 @@ public class PersonGatewayJDBCTest {
 	private static final Integer POS = 1;
 	private static final String EMAIL = "Justus.Jonas@RockyBeach.com";
 	private static final String COMMENT = "Erster Detektiv!";
-	private static final LocalDate BIRTHDAY = LocalDate.ofYearDay(1971, 1);
+	private static final Integer YEAROFBIRTH = 1971;
 
 	@Mock
 	private ResultSet rs;
@@ -74,7 +73,7 @@ public class PersonGatewayJDBCTest {
 		assertEquals("[uuid] not correct!", UUID.fromString(ID), person.getUUID());
 		assertEquals("[forename] not correct!", Forename.newInstance(FORENAME), person.getForename());
 		assertEquals("[surename] not correct!", Surename.newInstance(SURENAME), person.getSurename());
-		assertEquals("[birthday] not correct!", Birthday.newInstance(BIRTHDAY), person.getBirthday());
+		assertEquals("[yearOfBirth] not correct!", YearOfBirth.newInstance(YEAROFBIRTH), person.getYearOfBirth());
 		assertEquals("[shirtsize] not correct!", Shirtsize.decode(SHIRTSIZE.shortValue()), person.getShirtsize());
 		assertEquals("[relayname] not correct!", Relayname.newInstance(RELAYNAME), person.getRelayname());
 		assertEquals("[pos] not correct!", Position.decode(POS), person.getPosition());
