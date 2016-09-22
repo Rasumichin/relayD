@@ -55,8 +55,7 @@ public class PersonEditPageBean implements Serializable {
 	void prepareNewPerson() {
 		workingPerson = createNewPerson();
 		isNewPerson = true;
-		// TODO - Was sagt Bloch zu dem Thema clone()?
-		lastCalculatedEmail = Email.newInstance(workingPerson.getEmail().toString());
+		lastCalculatedEmail = workingPerson.getEmail().clone();
 	}
 
 	Person createNewPerson() {
