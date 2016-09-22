@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @since   29.03.2016
  * status   initial
  */
-public class Email implements Serializable {
+public class Email implements Serializable, Cloneable {
 	private static final long serialVersionUID = 1L;
 
 	public static Character AT_SIGN = '@';
@@ -116,6 +116,15 @@ public class Email implements Serializable {
 		}
 		
 		value = possiblyNewValue;
+	}
+	
+	@Override
+	public Email clone() {
+		try {
+			return (Email) super.clone();
+		} catch (CloneNotSupportedException cnsEx) {
+			throw new AssertionError("Cannot happen here.");
+		}
 	}
 
 	@Override

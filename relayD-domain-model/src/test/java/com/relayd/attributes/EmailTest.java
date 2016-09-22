@@ -11,15 +11,14 @@ import org.junit.rules.ExpectedException;
  * @author  schmollc (Christian@relayd.de)
  * @author  Rasumichin (Erik@relayd.de)
  * @since   29.03.2016
- * status   initial
  * 
  */
 public class EmailTest {
 
 	// @formatter:off
-	private static final String VALID_MAIL_FROM_JUSTUS_JONAS 	= "Justus.Jonas" + AT_SIGN + "rockyBeach.com";
-	private static final String INVALID_MAIL_FROM_JUSTUS_JONAS	= "Justus.JonasrockyBeach.com";
-	private static final String VALID_MAIL_FROM_PETER_SHAW 		= "Peter.Shaw" + AT_SIGN + "rockyBeach.com";
+	private static final String VALID_MAIL_OF_JUSTUS_JONAS 	 = "Justus.Jonas" + AT_SIGN + "rockyBeach.com";
+	private static final String INVALID_MAIL_OF_JUSTUS_JONAS = "Justus.JonasrockyBeach.com";
+	private static final String VALID_MAIL_OF_PETER_SHAW 	 = "Peter.Shaw" + AT_SIGN + "rockyBeach.com";
 	// @formatter:on
 
 	@Rule
@@ -43,7 +42,7 @@ public class EmailTest {
 
 	@Test
 	public void testCreateInstanceWithValidEmailAdress() {
-		String value = VALID_MAIL_FROM_JUSTUS_JONAS;
+		String value = VALID_MAIL_OF_JUSTUS_JONAS;
 		Email email = Email.newInstance(value);
 
 		assertEquals(value, email.toString());
@@ -54,7 +53,7 @@ public class EmailTest {
 		expectedException.expect(IllegalArgumentException.class);
 		expectedException.expectMessage("[email] not valid format!");
 
-		String value = INVALID_MAIL_FROM_JUSTUS_JONAS;
+		String value = INVALID_MAIL_OF_JUSTUS_JONAS;
 		Email email = Email.newInstance(value);
 
 		assertEquals(value, email.toString());
@@ -70,7 +69,7 @@ public class EmailTest {
 
 	@Test
 	public void testGetHashCode() {
-		Email sut = Email.newInstance(VALID_MAIL_FROM_JUSTUS_JONAS);
+		Email sut = Email.newInstance(VALID_MAIL_OF_JUSTUS_JONAS);
 
 		int hashCode = sut.hashCode();
 
@@ -85,7 +84,7 @@ public class EmailTest {
 
 	@Test
 	public void testEqualsWithMyself() {
-		Email sut = Email.newInstance(VALID_MAIL_FROM_JUSTUS_JONAS);
+		Email sut = Email.newInstance(VALID_MAIL_OF_JUSTUS_JONAS);
 
 		boolean result = sut.equals(sut);
 
@@ -94,7 +93,7 @@ public class EmailTest {
 
 	@Test
 	public void testEqualsWithNull() {
-		Email sut = Email.newInstance(VALID_MAIL_FROM_JUSTUS_JONAS);
+		Email sut = Email.newInstance(VALID_MAIL_OF_JUSTUS_JONAS);
 
 		boolean result = sut.equals(null);
 
@@ -103,7 +102,7 @@ public class EmailTest {
 
 	@Test
 	public void testEqualsWithNotCompatibleClass() {
-		Email sut = Email.newInstance(VALID_MAIL_FROM_JUSTUS_JONAS);
+		Email sut = Email.newInstance(VALID_MAIL_OF_JUSTUS_JONAS);
 
 		boolean result = sut.equals(new String());
 
@@ -112,9 +111,9 @@ public class EmailTest {
 
 	@Test
 	public void testEqualsWithValueIsNull() {
-		Email sut = Email.newInstance(VALID_MAIL_FROM_JUSTUS_JONAS);
+		Email sut = Email.newInstance(VALID_MAIL_OF_JUSTUS_JONAS);
 		sut.value = null;
-		Email secondName = Email.newInstance(VALID_MAIL_FROM_JUSTUS_JONAS);
+		Email secondName = Email.newInstance(VALID_MAIL_OF_JUSTUS_JONAS);
 
 		boolean result = sut.equals(secondName);
 
@@ -123,9 +122,9 @@ public class EmailTest {
 
 	@Test
 	public void testEqualsWithBothValuesAreNull() {
-		Email sut = Email.newInstance(VALID_MAIL_FROM_JUSTUS_JONAS);
+		Email sut = Email.newInstance(VALID_MAIL_OF_JUSTUS_JONAS);
 		sut.value = null;
-		Email secondName = Email.newInstance(VALID_MAIL_FROM_JUSTUS_JONAS);
+		Email secondName = Email.newInstance(VALID_MAIL_OF_JUSTUS_JONAS);
 		secondName.value = null;
 
 		boolean result = sut.equals(secondName);
@@ -135,8 +134,8 @@ public class EmailTest {
 
 	@Test
 	public void testEqualsWithTwoDiffrentValues() {
-		Email sut = Email.newInstance(VALID_MAIL_FROM_JUSTUS_JONAS);
-		Email secondName = Email.newInstance(VALID_MAIL_FROM_PETER_SHAW);
+		Email sut = Email.newInstance(VALID_MAIL_OF_JUSTUS_JONAS);
+		Email secondName = Email.newInstance(VALID_MAIL_OF_PETER_SHAW);
 
 		boolean result = sut.equals(secondName);
 
@@ -145,8 +144,8 @@ public class EmailTest {
 
 	@Test
 	public void testEqualsWithSameValues() {
-		Email sut = Email.newInstance(VALID_MAIL_FROM_JUSTUS_JONAS);
-		Email secondName = Email.newInstance(VALID_MAIL_FROM_JUSTUS_JONAS);
+		Email sut = Email.newInstance(VALID_MAIL_OF_JUSTUS_JONAS);
+		Email secondName = Email.newInstance(VALID_MAIL_OF_JUSTUS_JONAS);
 
 		boolean result = sut.equals(secondName);
 
@@ -155,13 +154,13 @@ public class EmailTest {
 
 	@Test
 	public void testIsValidWithValidValue() {
-		boolean result = Email.isValid(VALID_MAIL_FROM_JUSTUS_JONAS);
+		boolean result = Email.isValid(VALID_MAIL_OF_JUSTUS_JONAS);
 		assertTrue("email should be valid!", result);
 	}
 
 	@Test
 	public void testIsValidWithInvalidValue() {
-		boolean result = Email.isValid(INVALID_MAIL_FROM_JUSTUS_JONAS);
+		boolean result = Email.isValid(INVALID_MAIL_OF_JUSTUS_JONAS);
 		assertFalse("email should be invalid!", result);
 	}
 
@@ -182,7 +181,7 @@ public class EmailTest {
 
 	@Test
 	public void testIsEmpty_False() {
-		Email sut = Email.newInstance(VALID_MAIL_FROM_JUSTUS_JONAS);
+		Email sut = Email.newInstance(VALID_MAIL_OF_JUSTUS_JONAS);
 
 		boolean result = sut.isEmpty();
 
@@ -200,7 +199,7 @@ public class EmailTest {
 
 	@Test
 	public void testGetDomainPartWhenIsEmpty_False() {
-		Email sut = Email.newInstance(VALID_MAIL_FROM_JUSTUS_JONAS);
+		Email sut = Email.newInstance(VALID_MAIL_OF_JUSTUS_JONAS);
 		String expected = "rockyBeach.com";
 		
 		String result = sut.getDomainPart();
@@ -218,7 +217,7 @@ public class EmailTest {
 	
 	@Test
 	public void testSetLocalPartWithIllegalNullValue() {
-		Email sut = Email.newInstance(VALID_MAIL_FROM_JUSTUS_JONAS);
+		Email sut = Email.newInstance(VALID_MAIL_OF_JUSTUS_JONAS);
 		expectedException.expect(IllegalArgumentException.class);
 		expectedException.expectMessage("Local part must not be 'null'.");
 
@@ -227,7 +226,7 @@ public class EmailTest {
 	
 	@Test
 	public void testSetLocalPartWithIllegalEmptyValue() {
-		Email sut = Email.newInstance(VALID_MAIL_FROM_JUSTUS_JONAS);
+		Email sut = Email.newInstance(VALID_MAIL_OF_JUSTUS_JONAS);
 		expectedException.expect(IllegalArgumentException.class);
 		expectedException.expectMessage("Local part must not be empty.");
 
@@ -236,7 +235,7 @@ public class EmailTest {
 	
 	@Test
 	public void testSetLocalPartWithIllegalLocalPart() {
-		Email sut = Email.newInstance(VALID_MAIL_FROM_JUSTUS_JONAS);
+		Email sut = Email.newInstance(VALID_MAIL_OF_JUSTUS_JONAS);
 		expectedException.expect(IllegalArgumentException.class);
 		expectedException.expectMessage("Local part [forename..surename] could not be part of a valid email address.");
 
@@ -246,7 +245,7 @@ public class EmailTest {
 	
 	@Test
 	public void testSetLocalPartToValidFullName() {
-		Email sut = Email.newInstance(VALID_MAIL_FROM_JUSTUS_JONAS);
+		Email sut = Email.newInstance(VALID_MAIL_OF_JUSTUS_JONAS);
 		String newLocalPart = "bob.andrews";
 		Email expected = Email.newInstance(newLocalPart + AT_SIGN + "rockyBeach.com");
 		
@@ -256,7 +255,7 @@ public class EmailTest {
 	
 	@Test
 	public void testSetLocalPartToValidSingleName() {
-		Email sut = Email.newInstance(VALID_MAIL_FROM_JUSTUS_JONAS);
+		Email sut = Email.newInstance(VALID_MAIL_OF_JUSTUS_JONAS);
 		String newLocalPart = "kent";
 		Email expected = Email.newInstance(newLocalPart + AT_SIGN + sut.getDomainPart());
 		
@@ -292,5 +291,14 @@ public class EmailTest {
 		String localPart = "martin.fowler";
 
 		Email.createFromLocalAndDomainPart(localPart, null);
+	}
+	
+	@Test
+	public void testClone() {
+		Email sut = Email.newInstance(VALID_MAIL_OF_PETER_SHAW);
+		Email clone = sut.clone();
+		
+		assertNotSame("Cloning failed.", sut, clone);
+		assertEquals("Cloning failed.", sut, clone);
 	}
 }
