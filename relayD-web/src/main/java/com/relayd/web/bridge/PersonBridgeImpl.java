@@ -25,7 +25,7 @@ public class PersonBridgeImpl implements PersonBridge {
 	private PersonGateway gateway = null;
 
 	public PersonBridgeImpl() {
-		gateway = PersonGatewayFactory.get(GatewayType.JPA);
+		gateway = PersonGatewayFactory.get(GatewayType.JDBC);
 	}
 
 	@Override

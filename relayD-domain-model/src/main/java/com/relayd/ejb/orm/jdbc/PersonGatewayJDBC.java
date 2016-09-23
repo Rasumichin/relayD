@@ -47,7 +47,7 @@ public class PersonGatewayJDBC implements PersonGateway {
 			InitialContext cxt = new InitialContext();
 			Connection connection = openConnection(cxt);
 			Statement statement = connection.createStatement();
-			String query = "SELECT * FROM PERSON";
+			String query = "SELECT * FROM person";
 			ResultSet rs = statement.executeQuery(query);
 
 			while (rs.next()) {
@@ -85,7 +85,7 @@ public class PersonGatewayJDBC implements PersonGateway {
 			InitialContext cxt = new InitialContext();
 			Connection connection = openConnection(cxt);
 			Statement statement = connection.createStatement();
-			String query = "SELECT * FROM PERSON where id='" + uuid + "'";
+			String query = "SELECT * FROM person where id='" + uuid + "'";
 			ResultSet rs = statement.executeQuery(query);
 
 			while (rs.next()) {
