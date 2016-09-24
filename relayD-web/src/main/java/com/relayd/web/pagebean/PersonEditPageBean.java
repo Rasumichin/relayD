@@ -146,6 +146,10 @@ public class PersonEditPageBean implements Serializable {
 		if (currentSurename != null) {
 			currentLocalPart = (currentLocalPart == null) ? currentSurename.toString() : currentLocalPart + '.' + currentSurename;
 		}
+		
+		if (currentLocalPart != null) {
+			currentLocalPart = currentLocalPart.replaceAll("\\s+","");
+		}
 
 		return currentLocalPart;
 	}
