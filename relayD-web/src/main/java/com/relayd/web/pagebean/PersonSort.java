@@ -45,7 +45,7 @@ public class PersonSort {
 		return email1.toString().compareTo(email2.toString());
 	}
 
-	public int sortYearOfBirth(YearOfBirth aYearOfBirth1, YearOfBirth aYearOfBirth2) {
+	public int sortByYearOfBirth(YearOfBirth aYearOfBirth1, YearOfBirth aYearOfBirth2) {
 		return aYearOfBirth1.toString().compareTo(aYearOfBirth2.toString());
 	}
 }

@@ -90,11 +90,11 @@ public class PersonSortTest {
 	}
 
 	@Test
-	public void testSortByBirthday() {
+	public void testSortByYear() {
 		YearOfBirth yearOfBirth1 = YearOfBirth.newInstance(1971);
 		YearOfBirth yearOfBirth2 = YearOfBirth.newInstance(1973);
 
-		int position = sut.sortYearOfBirth(yearOfBirth1, yearOfBirth2);
+		int position = sut.sortByYearOfBirth(yearOfBirth1, yearOfBirth2);
 
 		assertEquals("[yearOfBirth] not correct!", -2, position);
 	}

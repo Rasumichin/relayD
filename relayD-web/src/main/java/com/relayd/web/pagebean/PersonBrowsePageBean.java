@@ -98,8 +98,8 @@ public class PersonBrowsePageBean {
 		return personSort.sortBySurename(name1, name2);
 	}
 
-	public int sortYearOfBirth(YearOfBirth yearOfBirth1, YearOfBirth yearOfBirth2) {
-		return personSort.sortYearOfBirth(yearOfBirth1, yearOfBirth2);
+	public int sortByYearOfBirth(YearOfBirth yearOfBirth1, YearOfBirth yearOfBirth2) {
+		return personSort.sortByYearOfBirth(yearOfBirth1, yearOfBirth2);
 	}
 
 	public int sortByShirtsize(Shirtsize size1, Shirtsize size2) {

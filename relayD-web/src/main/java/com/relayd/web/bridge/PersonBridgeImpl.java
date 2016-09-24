@@ -18,14 +18,14 @@ import com.relayd.ejb.PersonGatewayFactory;
  *
  * @author schmollc (Christian@relayD.de)
  * @since 20.06.2016
- * status initial
+ *
  */
 public class PersonBridgeImpl implements PersonBridge {
 
 	private PersonGateway gateway = null;
 
 	public PersonBridgeImpl() {
-		gateway = PersonGatewayFactory.get(GatewayType.JDBC);
+		gateway = PersonGatewayFactory.get(GatewayType.FILE);
 	}
 
 	@Override

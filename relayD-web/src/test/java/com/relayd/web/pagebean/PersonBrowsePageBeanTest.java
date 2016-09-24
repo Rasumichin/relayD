@@ -120,6 +120,7 @@ public class PersonBrowsePageBeanTest {
 		return aValue;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Test
 	public void testEmailExport_ForAll() {
 		ActionEvent dummyActionEvent = null;
@@ -245,14 +246,14 @@ public class PersonBrowsePageBeanTest {
 	}
 
 	@Test
-	public void testSortByBirthday() {
+	public void testSortByYearOfBirth() {
 		YearOfBirth yearOfBirth1 = YearOfBirth.newInstance(1971);
 		YearOfBirth yearOfBirth2 = YearOfBirth.newInstance(1973);
 
 		@SuppressWarnings("unused")
-		int resultForDocumentation = sut.sortYearOfBirth(yearOfBirth1, yearOfBirth2);
+		int resultForDocumentation = sut.sortByYearOfBirth(yearOfBirth1, yearOfBirth2);
 
-		verify(personSort).sortYearOfBirth(yearOfBirth1, yearOfBirth2);
+		verify(personSort).sortByYearOfBirth(yearOfBirth1, yearOfBirth2);
 	}
 
 	@Test
