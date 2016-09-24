@@ -17,7 +17,6 @@ import com.relayd.attributes.YearOfBirth;
  * @author  schmollc (Christian@relayD.de)
  * @author  Rasumichin (Erik@relayd.de)
  * @since   22.03.2016
- * status   initial
  *
  */
 public class Person implements Serializable {
@@ -57,8 +56,6 @@ public class Person implements Serializable {
 	public void setSurename(Surename aSurename) {
 		surename = aSurename;
 	}
-
-	@Deprecated // Wird durch YearOfBirth ersetzt.
 
 	public Forename getForename() {
 		return forename;
