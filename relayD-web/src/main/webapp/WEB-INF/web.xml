@@ -12,7 +12,7 @@
 	</context-param>
 	<context-param>  
 	    <param-name>primefaces.THEME</param-name>  
-	    <param-value>afternoon</param-value>  
+	    <param-value>bluesky</param-value>  
 	</context-param>
 
 	<servlet>
