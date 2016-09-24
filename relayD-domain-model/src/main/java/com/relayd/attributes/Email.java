@@ -67,6 +67,10 @@ public class Email implements Serializable, Cloneable {
 		if (mail.trim().isEmpty()) {
 			return true;
 		}
+		
+		if (mail.contains(" ")) {
+			return false;
+		}
 
 		boolean result = mail.matches(pattern);
 		return result;

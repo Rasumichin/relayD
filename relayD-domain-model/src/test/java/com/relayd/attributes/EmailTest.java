@@ -24,6 +24,7 @@ public class EmailTest {
 	@Rule
 	public ExpectedException expectedException = ExpectedException.none();
 
+	//TODO (Erik, 2016-09-24): Mit CS diskutieren, dass sollen gültige Email-Adressen sein?
 	@Test
 	public void testCreateInstanceWithEmptyValue() {
 		String value = "";
@@ -32,8 +33,9 @@ public class EmailTest {
 		assertEquals(value, email.toString());
 	}
 
+	//TODO (Erik, 2016-09-24): Mit CS diskutieren, dass sollen gültige Email-Adressen sein?
 	@Test
-	public void testCreateInstanceWithWihteSpaceValue() {
+	public void testCreateInstanceWithWhiteSpaceValue() {
 		String value = "   ";
 		Email email = Email.newInstance(value);
 
@@ -160,14 +162,24 @@ public class EmailTest {
 
 	@Test
 	public void testIsValidWithInvalidValue() {
-		boolean result = Email.isValid(INVALID_MAIL_OF_JUSTUS_JONAS);
-		assertFalse("email should be invalid!", result);
+		String eMailAddress = INVALID_MAIL_OF_JUSTUS_JONAS;
+		boolean result = Email.isValid(eMailAddress);
+
+		assertFalse("email '" + eMailAddress + "' should be invalid.", result);
 	}
 
 	@Test
 	public void testIsValidWithIllegalNullValue() {
 		boolean result = Email.isValid(null);
-		assertFalse("email should be invalid!", result);
+		assertFalse("email should be invalid.", result);
+	}
+	
+	@Test
+	public void testIsValidWithAddressThatContainsASpace() {
+		String eMailAddress = "abraham.van helsing@stoker.com";
+		boolean result = Email.isValid(eMailAddress);
+		
+		assertFalse("email '" + eMailAddress + "' should be invalid.", result);
 	}
 
 	@Test
