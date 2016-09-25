@@ -10,6 +10,7 @@ import org.junit.rules.ExpectedException;
 
 /**
  * @author schmollc (Christian@relayd.de)
+ * @author Rasumichin (Erik@relayd.de)
  * @since 18.09.2016
  */
 public class YearOfBirthTest {
@@ -127,5 +128,14 @@ public class YearOfBirthTest {
 		boolean result = sut.equals(secondYearOfBirth);
 
 		assertTrue(result);
+	}
+	
+	@Test
+	public void testGetValue() {
+		Integer expected = Integer.valueOf(1965);
+		YearOfBirth sut = YearOfBirth.newInstance(expected);
+		
+		Integer result = sut.getValue();
+		assertEquals("[value] is not correct.", expected, result);
 	}
 }
