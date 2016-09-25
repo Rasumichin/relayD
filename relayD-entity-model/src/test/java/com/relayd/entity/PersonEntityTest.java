@@ -27,7 +27,7 @@ public class PersonEntityTest {
 		assertNull("[pos] not correct!", sut.getPos());
 		assertNull("[shirtsize] not correct!", sut.getShirtsize());
 		assertNull("[nationality] not correct!", sut.getNationality());
-		assertNull("[info] not correct!", sut.getInfo());
+		assertNull("[comment] not correct!", sut.getComment());
 	}
 
 	@Test
@@ -43,7 +43,7 @@ public class PersonEntityTest {
 		assertNull("[pos] not correct!", sut.getPos());
 		assertNull("[shirtsize] not correct!", sut.getShirtsize());
 		assertNull("[nationality] not correct!", sut.getNationality());
-		assertNull("[info] not correct!", sut.getInfo());
+		assertNull("[comment] not correct!", sut.getComment());
 	}
 
 	@Test
@@ -105,8 +105,7 @@ public class PersonEntityTest {
 	@Test
 	public void testInstanceCreated_ForInfo() {
 		String comment = "a info";
-		PersonEntity sut = new PersonEntity.Builder().withInfo(comment).build();
-		assertEquals("[info] has not been set correctly.", comment, sut.getInfo());
+		PersonEntity sut = new PersonEntity.Builder().withComment(comment).build();
+		assertEquals("[comment] has not been set correctly.", comment, sut.getComment());
 	}
-
 }
