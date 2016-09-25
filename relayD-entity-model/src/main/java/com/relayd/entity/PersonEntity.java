@@ -7,6 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * @author schmollc (Christian@relayd.de)
+ * @author Rasumichin (Erik@relayd.de)
+ * @since 09.09.2016
+ *
+ */
 @Entity
 @Table(name = "person")
 public class PersonEntity {
@@ -105,7 +111,7 @@ public class PersonEntity {
 	}
 
 	public static class Builder {
-		private final String id = UUID.randomUUID().toString();
+		private String id = UUID.randomUUID().toString();
 		private String forename;
 		private String surename;
 		private String email;
@@ -120,6 +126,12 @@ public class PersonEntity {
 			super();
 		}
 
+		// TODO (EL, 2016-09-25): Discuss nullability of 'anId' and where to handle it.
+		public Builder withId(String anId) {
+			id = anId;
+			return this;
+		}
+		
 		public Builder withForename(String aForename) {
 			forename = aForename;
 			return this;
