@@ -86,4 +86,34 @@ public class PersonToEntityMapperTest {
 		Locale result = new Locale.Builder().setLanguageTag(personEntity.getNationality()).build();
 		assertEquals("Mapping of [nationality] is not correct.", expected, result);
 	}
+
+	@Test
+	public void testMapPersonToEntity_relayname() {
+		person.setRelayname(Relayname.newInstance("Four are not a Fist"));
+		
+		PersonEntity personEntity = sut.mapPersonToEntity(person);
+		Relayname expected = person.getRelayname();
+		Relayname result = Relayname.newInstance(personEntity.getRelayname());
+		assertEquals("Mapping of [relayname] is not correct.", expected, result);
+	}
+
+	@Test
+	public void testMapPersonToEntity_position() {
+		person.setPosition(Position.FIRST);
+		
+		PersonEntity personEntity = sut.mapPersonToEntity(person);
+		Position expected = person.getPosition();
+		Position result = Position.decode(personEntity.getPos());
+		assertEquals("Mapping of [position] is not correct.", expected, result);
+	}
+
+	@Test
+	public void testMapPersonToEntity_shirtsize() {
+		person.setShirtsize(Shirtsize.HerrenL);
+		
+		PersonEntity personEntity = sut.mapPersonToEntity(person);
+		Shirtsize expected = person.getShirtsize();
+		Shirtsize result = Shirtsize.decode(personEntity.getShirtsize().shortValue());
+		assertEquals("Mapping of [shirtsize] is not correct.", expected, result);
+	}
 }

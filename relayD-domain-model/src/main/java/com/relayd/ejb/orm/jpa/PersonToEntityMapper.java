@@ -26,6 +26,9 @@ public class PersonToEntityMapper {
 				.withYearOfBirth((person.getYearOfBirth() == null) ? null : person.getYearOfBirth().getValue())
 				.withComment((person.getComment() == null) ? null : person.getComment().toString())
 				.withNationality((person.getNationality() == null) ? null : person.getNationality().toLanguageTag())
+				.withRelayname((person.getRelayname() == null) ? null : person.getRelayname().toString())
+				.withPos((person.getPosition() == null) ? null : person.getPosition().getValue())
+				.withShirtsize((person.getShirtsize() == null) ? null : person.getShirtsize().getSize().intValue())
 				.build();
 		
 		return result;
