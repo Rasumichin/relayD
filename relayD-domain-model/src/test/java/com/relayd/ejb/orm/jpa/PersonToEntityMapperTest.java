@@ -21,59 +21,110 @@ public class PersonToEntityMapperTest {
 
 	@Test
 	public void testMapPersonToEntity_id() {
-		PersonEntity personEntity = sut.mapPersonToEntity(person);
+		PersonEntity mappedPersonEntity = sut.mapPersonToEntity(person);
 		UUID expected = person.getUUID();
-		UUID result = UUID.fromString(personEntity.getId());
+		UUID result = UUID.fromString(mappedPersonEntity.getId());
 		assertEquals("Mapping of [uuid] is not correct.", expected, result);
+	}
+	
+	@Test
+	public void testMapEntityToPerson_id() {
+		PersonEntity personEntity = new PersonEntity.Builder().build();
+		
+		Person mappedPerson = sut.mapEntityToPerson(personEntity);
+		String expected = personEntity.getId();
+		String result = mappedPerson.getUUID().toString();
+		assertEquals("Mapping of [id] is not correct.", expected, result);
 	}
 	
 	@Test
 	public void testMapPersonToEntity_forename() {
 		person.setForename(Forename.newInstance("Steve"));
 		
-		PersonEntity personEntity = sut.mapPersonToEntity(person);
+		PersonEntity mappedPersonEntity = sut.mapPersonToEntity(person);
 		Forename expected = person.getForename();
-		Forename result = Forename.newInstance(personEntity.getForename());
+		Forename result = Forename.newInstance(mappedPersonEntity.getForename());
 		assertEquals("Mapping of [forename] is not correct.", expected, result);
 	}
 
 	@Test
+	public void testMapEntityToPerson_forename() {
+		PersonEntity personEntity = new PersonEntity.Builder().withForename("Steve").build();
+		
+		Person mappedPerson = sut.mapEntityToPerson(personEntity);
+		String expected = personEntity.getForename();
+		String result = mappedPerson.getForename().toString();
+		assertEquals("Mapping of [forename] is not correct.", expected, result);
+	}
+	
+	@Test
 	public void testMapPersonToEntity_surename() {
 		person.setSurename(Surename.newInstance("Jobs"));
 		
-		PersonEntity personEntity = sut.mapPersonToEntity(person);
+		PersonEntity mappedPersonEntity = sut.mapPersonToEntity(person);
 		Surename expected = person.getSurename();
-		Surename result = Surename.newInstance(personEntity.getSurename());
+		Surename result = Surename.newInstance(mappedPersonEntity.getSurename());
 		assertEquals("Mapping of [surename] is not correct.", expected, result);
 	}
 
 	@Test
+	public void testMapEntityToPerson_surename() {
+		PersonEntity personEntity = new PersonEntity.Builder().withSurename("Jobs").build();
+		
+		Person mappedPerson = sut.mapEntityToPerson(personEntity);
+		String expected = personEntity.getSurename();
+		String result = mappedPerson.getSurename().toString();
+		assertEquals("Mapping of [surename] is not correct.", expected, result);
+	}
+	
+	@Test
 	public void testMapPersonToEntity_email() {
 		person.setEmail(Email.createFromLocalAndDomainPart("steve.jobs", "apple.com"));
 		
-		PersonEntity personEntity = sut.mapPersonToEntity(person);
+		PersonEntity mappedPersonEntity = sut.mapPersonToEntity(person);
 		Email expected = person.getEmail();
-		Email result = Email.newInstance(personEntity.getEmail());
+		Email result = Email.newInstance(mappedPersonEntity.getEmail());
 		assertEquals("Mapping of [email] is not correct.", expected, result);
 	}
 
+
+	@Test
+	public void testMapEntityToPerson_email() {
+		PersonEntity personEntity = new PersonEntity.Builder().withEmail("me" + Email.AT_SIGN + "mail.com").build();
+		
+		Person mappedPerson = sut.mapEntityToPerson(personEntity);
+		String expected = personEntity.getEmail();
+		String result = mappedPerson.getEmail().toString();
+		assertEquals("Mapping of [email] is not correct.", expected, result);
+	}
+	
 	@Test
 	public void testMapPersonToEntity_yearOfBirth() {
 		person.setYearOfBirth(YearOfBirth.newInstance(1965));
 		
-		PersonEntity personEntity = sut.mapPersonToEntity(person);
+		PersonEntity mappedPersonEntity = sut.mapPersonToEntity(person);
 		YearOfBirth expected = person.getYearOfBirth();
-		YearOfBirth result = YearOfBirth.newInstance(personEntity.getYearOfBirth());
+		YearOfBirth result = YearOfBirth.newInstance(mappedPersonEntity.getYearOfBirth());
 		assertEquals("Mapping of [yearOfBirth] is not correct.", expected, result);
 	}
 
 	@Test
+	public void testMapEntityToPerson_yearOfBirth() {
+		PersonEntity personEntity = new PersonEntity.Builder().withYearOfBirth(1965).build();
+		
+		Person mappedPerson = sut.mapEntityToPerson(personEntity);
+		Integer expected = personEntity.getYearOfBirth();
+		Integer result = mappedPerson.getYearOfBirth().getValue();
+		assertEquals("Mapping of [yearOfBirth] is not correct.", expected, result);
+	}
+	
+	@Test
 	public void testMapPersonToEntity_comment() {
 		person.setComment(Comment.newInstance("Just a remark"));
 		
-		PersonEntity personEntity = sut.mapPersonToEntity(person);
+		PersonEntity mappedPersonEntity = sut.mapPersonToEntity(person);
 		Comment expected = person.getComment();
-		Comment result = Comment.newInstance(personEntity.getComment());
+		Comment result = Comment.newInstance(mappedPersonEntity.getComment());
 		assertEquals("Mapping of [comment] is not correct.", expected, result);
 	}
 
@@ -81,9 +132,9 @@ public class PersonToEntityMapperTest {
 	public void testMapPersonToEntity_nationality() {
 		person.setNationality(Locale.FRANCE);
 		
-		PersonEntity personEntity = sut.mapPersonToEntity(person);
+		PersonEntity mappedPersonEntity = sut.mapPersonToEntity(person);
 		Locale expected = person.getNationality();
-		Locale result = new Locale.Builder().setLanguageTag(personEntity.getNationality()).build();
+		Locale result = new Locale.Builder().setLanguageTag(mappedPersonEntity.getNationality()).build();
 		assertEquals("Mapping of [nationality] is not correct.", expected, result);
 	}
 
@@ -91,9 +142,9 @@ public class PersonToEntityMapperTest {
 	public void testMapPersonToEntity_relayname() {
 		person.setRelayname(Relayname.newInstance("Four are not a Fist"));
 		
-		PersonEntity personEntity = sut.mapPersonToEntity(person);
+		PersonEntity mappedPersonEntity = sut.mapPersonToEntity(person);
 		Relayname expected = person.getRelayname();
-		Relayname result = Relayname.newInstance(personEntity.getRelayname());
+		Relayname result = Relayname.newInstance(mappedPersonEntity.getRelayname());
 		assertEquals("Mapping of [relayname] is not correct.", expected, result);
 	}
 
@@ -101,9 +152,9 @@ public class PersonToEntityMapperTest {
 	public void testMapPersonToEntity_position() {
 		person.setPosition(Position.FIRST);
 		
-		PersonEntity personEntity = sut.mapPersonToEntity(person);
+		PersonEntity mappedPersonEntity = sut.mapPersonToEntity(person);
 		Position expected = person.getPosition();
-		Position result = Position.decode(personEntity.getPos());
+		Position result = Position.decode(mappedPersonEntity.getPos());
 		assertEquals("Mapping of [position] is not correct.", expected, result);
 	}
 
@@ -111,9 +162,9 @@ public class PersonToEntityMapperTest {
 	public void testMapPersonToEntity_shirtsize() {
 		person.setShirtsize(Shirtsize.HerrenL);
 		
-		PersonEntity personEntity = sut.mapPersonToEntity(person);
+		PersonEntity mappedPersonEntity = sut.mapPersonToEntity(person);
 		Shirtsize expected = person.getShirtsize();
-		Shirtsize result = Shirtsize.decode(personEntity.getShirtsize().shortValue());
+		Shirtsize result = Shirtsize.decode(mappedPersonEntity.getShirtsize().shortValue());
 		assertEquals("Mapping of [shirtsize] is not correct.", expected, result);
 	}
 }
