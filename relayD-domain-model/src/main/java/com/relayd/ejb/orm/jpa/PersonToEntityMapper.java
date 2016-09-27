@@ -1,6 +1,6 @@
 package com.relayd.ejb.orm.jpa;
 
-import java.util.UUID;
+import java.util.*;
 
 import com.relayd.Person;
 import com.relayd.attributes.*;
@@ -45,10 +45,14 @@ public class PersonToEntityMapper {
 		mapSurenameFromEntityToPerson(personEntity, result);
 		mapEmailFromEntityToPerson(personEntity, result);
 		mapYearOfBirthFromEntityToPerson(personEntity, result);
+		mapCommentFromEntityToPerson(personEntity, result);
+		mapNationalityFromEntityToPerson(personEntity, result);
+		mapRelaynameFromEntityToPerson(personEntity, result);
+		mapPosFromEntityToPerson(personEntity, result);
+		mapShirtsizeFromEntityToPerson(personEntity, result);
 			
 		return result;
 	}
-
 
 	private void mapForenameFromEntityToPerson(PersonEntity personEntity, Person result) {
 		if (personEntity.getForename() != null) {
@@ -71,6 +75,36 @@ public class PersonToEntityMapper {
 	private void mapYearOfBirthFromEntityToPerson(PersonEntity personEntity, Person result) {
 		if (personEntity.getYearOfBirth() != null) {
 			result.setYearOfBirth(YearOfBirth.newInstance(personEntity.getYearOfBirth()));
+		}
+	}
+
+	private void mapCommentFromEntityToPerson(PersonEntity personEntity, Person result) {
+		if (personEntity.getComment() != null) {
+			result.setComment(Comment.newInstance(personEntity.getComment()));
+		}
+	}
+
+	private void mapNationalityFromEntityToPerson(PersonEntity personEntity, Person result) {
+		if (personEntity.getNationality() != null) {
+			result.setNationality(new Locale.Builder().setLanguageTag(personEntity.getNationality()).build());
+		}
+	}
+
+	private void mapRelaynameFromEntityToPerson(PersonEntity personEntity, Person result) {
+		if (personEntity.getRelayname() != null) {
+			result.setRelayname(Relayname.newInstance(personEntity.getRelayname()));
+		}
+	}
+
+	private void mapPosFromEntityToPerson(PersonEntity personEntity, Person result) {
+		if (personEntity.getPos() != null) {
+			result.setPosition(Position.decode(personEntity.getPos()));
+		}
+	}
+
+	private void mapShirtsizeFromEntityToPerson(PersonEntity personEntity, Person result) {
+		if (personEntity.getShirtsize() != null) {
+			result.setShirtsize(Shirtsize.decode(personEntity.getShirtsize().shortValue()));
 		}
 	}
 }

@@ -129,12 +129,33 @@ public class PersonToEntityMapperTest {
 	}
 
 	@Test
+	public void testMapEntityToPerson_comment() {
+		PersonEntity personEntity = new PersonEntity.Builder().withComment("Just a remark").build();
+		
+		Person mappedPerson = sut.mapEntityToPerson(personEntity);
+		String expected = personEntity.getComment();
+		String result = mappedPerson.getComment().toString();
+		assertEquals("Mapping of [comment] is not correct.", expected, result);
+	}
+	
+	@Test
 	public void testMapPersonToEntity_nationality() {
 		person.setNationality(Locale.FRANCE);
 		
 		PersonEntity mappedPersonEntity = sut.mapPersonToEntity(person);
 		Locale expected = person.getNationality();
 		Locale result = new Locale.Builder().setLanguageTag(mappedPersonEntity.getNationality()).build();
+		assertEquals("Mapping of [nationality] is not correct.", expected, result);
+	}
+
+	@Test
+	public void testMapEntityToPerson_nationality() {
+		String nationalityValue = Locale.FRANCE.toLanguageTag();
+		PersonEntity personEntity = new PersonEntity.Builder().withNationality(nationalityValue).build();
+		
+		Person mappedPerson = sut.mapEntityToPerson(personEntity);
+		String expected = personEntity.getNationality();
+		String result = mappedPerson.getNationality().toLanguageTag();
 		assertEquals("Mapping of [nationality] is not correct.", expected, result);
 	}
 
@@ -149,6 +170,16 @@ public class PersonToEntityMapperTest {
 	}
 
 	@Test
+	public void testMapEntityToPerson_relayname() {
+		PersonEntity personEntity = new PersonEntity.Builder().withRelayname("Fists of Fury").build();
+		
+		Person mappedPerson = sut.mapEntityToPerson(personEntity);
+		String expected = personEntity.getRelayname();
+		String result = mappedPerson.getRelayname().toString();
+		assertEquals("Mapping of [relayname] is not correct.", expected, result);
+	}
+
+	@Test
 	public void testMapPersonToEntity_position() {
 		person.setPosition(Position.FIRST);
 		
@@ -159,12 +190,33 @@ public class PersonToEntityMapperTest {
 	}
 
 	@Test
+	public void testMapEntityToPerson_position() {
+		PersonEntity personEntity = new PersonEntity.Builder().withPos(Integer.valueOf(1)).build();
+		
+		Person mappedPerson = sut.mapEntityToPerson(personEntity);
+		Integer expected = personEntity.getPos();
+		Integer result = mappedPerson.getPosition().getValue();
+		assertEquals("Mapping of [pos] is not correct.", expected, result);
+	}
+
+	@Test
 	public void testMapPersonToEntity_shirtsize() {
 		person.setShirtsize(Shirtsize.HerrenL);
 		
 		PersonEntity mappedPersonEntity = sut.mapPersonToEntity(person);
 		Shirtsize expected = person.getShirtsize();
 		Shirtsize result = Shirtsize.decode(mappedPersonEntity.getShirtsize().shortValue());
+		assertEquals("Mapping of [shirtsize] is not correct.", expected, result);
+	}
+
+	@Test
+	public void testMapEntityToPerson_shirtsize() {
+		Short shirtsizeValue = Shirtsize.HerrenXL.getSize();
+		PersonEntity personEntity = new PersonEntity.Builder().withShirtsize(Integer.valueOf(shirtsizeValue.intValue())).build();
+		
+		Person mappedPerson = sut.mapEntityToPerson(personEntity);
+		Integer expected = personEntity.getShirtsize();
+		Integer result = mappedPerson.getShirtsize().getSize().intValue();
 		assertEquals("Mapping of [shirtsize] is not correct.", expected, result);
 	}
 }
