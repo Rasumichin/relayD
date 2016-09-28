@@ -7,6 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * @author schmollc (Christian@relayd.de)
+ * @author Rasumichin (Erik@relayd.de)
+ * @since 09.09.2016
+ *
+ */
 @Entity
 @Table(name = "person")
 public class PersonEntity {
@@ -34,7 +40,7 @@ public class PersonEntity {
 	private String email;
 
 	@Column
-	private String info;
+	private String comment;
 
 	@Column
 	private String relayname;
@@ -50,7 +56,7 @@ public class PersonEntity {
 		yearOfBirth = aBuilder.yearOfBirth;
 		relayname = aBuilder.relayname;
 		pos = aBuilder.pos;
-		info = aBuilder.info;
+		comment = aBuilder.comment;
 		nationality = aBuilder.nationality;
 		shirtsize = aBuilder.shirtsize;
 	}
@@ -92,8 +98,8 @@ public class PersonEntity {
 		return id;
 	}
 
-	public String getInfo() {
-		return info;
+	public String getComment() {
+		return comment;
 	}
 
 	public String getRelayname() {
@@ -105,14 +111,14 @@ public class PersonEntity {
 	}
 
 	public static class Builder {
-		private final String id = UUID.randomUUID().toString();
+		private String id = UUID.randomUUID().toString();
 		private String forename;
 		private String surename;
 		private String email;
 		private Integer yearOfBirth;
 		private Integer shirtsize;
 		private String nationality;
-		private String info;
+		private String comment;
 		private String relayname;
 		private Integer pos;
 
@@ -120,6 +126,12 @@ public class PersonEntity {
 			super();
 		}
 
+		// TODO (EL, 2016-09-25): Discuss nullability of 'anId' and where to handle it.
+		public Builder withId(String anId) {
+			id = anId;
+			return this;
+		}
+		
 		public Builder withForename(String aForename) {
 			forename = aForename;
 			return this;
@@ -160,8 +172,8 @@ public class PersonEntity {
 			return this;
 		}
 
-		public Builder withInfo(String anInfo) {
-			info = anInfo;
+		public Builder withComment(String aComment) {
+			comment = aComment;
 			return this;
 		}
 

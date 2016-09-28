@@ -26,6 +26,10 @@ public class YearOfBirth implements Serializable {
 		}
 	}
 
+	public Integer getValue() {
+		return value;
+	}
+
 	@Override
 	public String toString() {
 		return value.toString();
