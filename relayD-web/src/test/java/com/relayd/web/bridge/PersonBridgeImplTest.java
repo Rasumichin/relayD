@@ -16,6 +16,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import com.relayd.Person;
 import com.relayd.attributes.Email;
 import com.relayd.attributes.Forename;
+import com.relayd.ejb.GatewayType;
 import com.relayd.ejb.PersonGateway;
 import com.relayd.web.pagebean.PersonBuilder;
 
@@ -142,5 +143,12 @@ public class PersonBridgeImplTest {
 
 		Person secondPerson = result.get(1);
 		assertEquals("[Forename] from second Person not correct!", Forename.newInstance("Justus"), secondPerson.getForename());
+	}
+
+	@Test
+	public void testGatewayType() {
+		GatewayType result = sut.getGatewayType();
+
+		assertEquals("[gatewayType] not correct!", GatewayType.FILE, result);
 	}
 }

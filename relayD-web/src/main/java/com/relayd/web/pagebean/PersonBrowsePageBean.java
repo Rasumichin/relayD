@@ -218,4 +218,8 @@ public class PersonBrowsePageBean {
 	public void onToggle(ToggleEvent e) {
 		visibleColumns.set((Integer) e.getData(), e.getVisibility() == Visibility.VISIBLE);
 	}
+
+	public void info(@SuppressWarnings("unused") ActionEvent actionEvent) {
+		showMessage(FacesMessage.SEVERITY_INFO, "Used Gateway:", "" + personBridge.getGatewayType());
+	}
 }

@@ -71,6 +71,10 @@
 			</f:facet>
 			<f:facet name="right">
 				<p:commandButton
+					update="form"
+					icon="ui-icon-info"
+					actionListener="#{personBrowsePageBean.info}" />
+				<p:commandButton
 					id="toggler"
 					type="button"
 					value="Columns"

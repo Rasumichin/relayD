@@ -23,9 +23,10 @@ import com.relayd.ejb.PersonGatewayFactory;
 public class PersonBridgeImpl implements PersonBridge {
 
 	private PersonGateway gateway = null;
+	private GatewayType gatewayType = GatewayType.FILE;
 
 	public PersonBridgeImpl() {
-		gateway = PersonGatewayFactory.get(GatewayType.FILE);
+		gateway = PersonGatewayFactory.get(getGatewayType());
 	}
 
 	@Override
@@ -119,5 +120,10 @@ public class PersonBridgeImpl implements PersonBridge {
 			}
 		}
 		return resultList;
+	}
+
+	@Override
+	public GatewayType getGatewayType() {
+		return gatewayType;
 	}
 }

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import com.relayd.Person;
+import com.relayd.ejb.GatewayType;
 
 /**
  * This Bridge could handle the REST - Serivce
@@ -32,5 +33,7 @@ public interface PersonBridge {
 	ValidationResult validateEMail(Person newPerson);
 
 	String getEmailList(List<Person> somePersons);
+
+	GatewayType getGatewayType();
 
 }
