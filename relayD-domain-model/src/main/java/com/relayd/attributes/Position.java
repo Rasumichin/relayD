@@ -7,10 +7,10 @@ package com.relayd.attributes;
  */
 public enum Position {
 	//@formatter:off
-	FIRST	(1, "1"),
-	SECOND	(2, "2"),
-	THIRD	(3, "3"),
-	FOURTH	(4, "4");
+	FIRST	(1, "First"),
+	SECOND	(2, "Second"),
+	THIRD	(3, "Third"),
+	FOURTH	(4, "Fourth");
 	//@formatter:on
 
 	private Integer value;

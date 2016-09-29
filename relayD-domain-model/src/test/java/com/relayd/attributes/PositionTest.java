@@ -14,7 +14,7 @@ public class PositionTest {
 	@Test
 	public void testGetDescription() {
 		Position second = Position.SECOND;
-		assertEquals("[description] not correct!", "2", second.getDescription());
+		assertEquals("[description] not correct!", "Second", second.getDescription());
 	}
 
 	@Test
