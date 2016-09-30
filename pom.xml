@@ -9,6 +9,13 @@
 	<packaging>pom</packaging>
 
 	<name>relayD-parent</name>
+	<servers>
+		<server>
+			<id>nexus-site</id>
+			<username>${deploy.user}</username>
+			<password>${deploy.password}</password>
+		</server>
+	</servers>
 	<distributionManagement>
 		<repository>
 			<id>nexus-site</id>
