@@ -40,7 +40,7 @@ public class PersonTest {
 
 		String personAsString = sut.toString();
 
-		assertEquals("Justus Jonas, 1956, Herren M, Germany, Jonas.Justus@rockyBeach.com, Die 4 ????, FIRST", personAsString);
+		assertEquals("Justus Jonas, 1956, Herren M, Germany, Jonas.Justus@rockyBeach.com, Die 4 ????, First", personAsString);
 	}
 
 	@Test

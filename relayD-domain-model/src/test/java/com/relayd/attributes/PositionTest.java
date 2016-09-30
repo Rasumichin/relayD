@@ -2,13 +2,19 @@ package com.relayd.attributes;
 
 import static org.junit.Assert.*;
 
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 /**
+ * Es ist nicht von Bedeutung, wie langsam du gehst, solange du nicht stehen bleibst.
+ *  - Konfuzius
+ *
  * @author  schmollc (Christian@relayd.com)
  * @since   23.08.2016
  * status   initial
  */
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class PositionTest {
 
 	@Test
@@ -56,5 +62,14 @@ public class PositionTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void testDecodeForUnkwonValue() {
 		Position.decode(5);
+	}
+
+	@Test
+	public void testToString() {
+		Position second = Position.SECOND;
+
+		String result = second.toString();
+
+		assertEquals("Second", result);
 	}
 }

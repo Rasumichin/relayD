@@ -37,4 +37,9 @@ public enum Position {
 		}
 		throw new IllegalArgumentException("[" + aPosition + "] is an invalid parameter for Position");
 	}
+
+	@Override
+	public String toString() {
+		return getDescription();
+	}
 }
