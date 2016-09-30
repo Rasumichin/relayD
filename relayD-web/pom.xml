@@ -13,6 +13,9 @@
 
 	<name>relayD-web</name>
 	<description>Module to provide the web application of the relayD system.</description>
+	<scm>
+		<connection>scm:git:https://github.com/Rasumichin/relayD.git</connection>
+	</scm>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -42,7 +45,7 @@
 			<artifactId>primefaces</artifactId>
 			<version>5.3</version>
 		</dependency>
-		
+
 		<dependency>
 		    <groupId>org.primefaces.extensions</groupId>
 		    <artifactId>all-themes</artifactId>
@@ -83,6 +86,16 @@
 					<artifactId>maven-war-plugin</artifactId>
 					<!-- TODO: actual version seems to be 2.6 - migration? -->
 					<version>2.3</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-release-plugin</artifactId>
+					<version>2.5.3</version>
+					<configuration>
+						<releaseProfiles>release</releaseProfiles>
+						<username>${maven.scm.username}</username>
+						<password>${maven.scm.password}</password>
+					</configuration>
 				</plugin>
 			</plugins>
 		</pluginManagement>
