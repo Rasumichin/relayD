@@ -156,7 +156,7 @@ public class PersonEditPageBeanTest {
 
 		YearOfBirth result = sut.getYearOfBirth();
 
-		assertEquals("[Birthday] not correct!", expected, result);
+		assertEquals("[YearOfBirth] not correct!", expected, result);
 	}
 
 	@Test
@@ -319,13 +319,13 @@ public class PersonEditPageBeanTest {
 		String result = sut.getCurrentLocalPart();
 		assertNull("Current local part is not correct.", result);
 	}
-	
+
 	@Test
 	public void tetGetCurrentLocalPartWhenSurenameContainsWhitespace() {
 		sut.openDialogForCreatePerson();
 		Surename surename = Surename.newInstance("van Helsing");
 		sut.setSurename(surename);
-		
+
 		String expected = "vanHelsing";
 		String result = sut.getCurrentLocalPart();
 		assertEquals("Current local part is not correct.", expected, result);

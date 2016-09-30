@@ -27,6 +27,9 @@ import com.relayd.attributes.YearOfBirth;
 import static org.mockito.Mockito.*;
 
 /**
+ * Testen ist wie Rudern gegen den Strom. Hört man damit auf, treibt man zurück.
+ *  - Laotse
+ *
  * @author  schmollc (Christian@relayd.de)
  * @since   15.09.2016
  *
@@ -41,12 +44,11 @@ public class PersonGatewayJDBCTest {
 	private static final String SURENAME = "Jonas";
 	private static final String FORENAME = "Justus";
 	private static final Integer SHIRTSIZE = 3;
-	private static final Integer BIRTHYEAR = 1971;
+	private static final Integer YEAROFBIRTH = 1971;
 	private static final String RELAYNAME = "Die 4 ????";
 	private static final Integer POS = 1;
 	private static final String EMAIL = "Justus.Jonas@RockyBeach.com";
 	private static final String COMMENT = "Erster Detektiv!";
-	private static final Integer YEAROFBIRTH = 1971;
 
 	@Mock
 	private ResultSet rs;
@@ -56,7 +58,7 @@ public class PersonGatewayJDBCTest {
 		doReturn(ID).when(rs).getString(PersonGatewayJDBC.INDEX_UUID);
 		doReturn(FORENAME).when(rs).getString(PersonGatewayJDBC.INDEX_FORENAME);
 		doReturn(SURENAME).when(rs).getString(PersonGatewayJDBC.INDEX_SURENAME);
-		doReturn(BIRTHYEAR).when(rs).getInt(PersonGatewayJDBC.INDEX_BIRTHYEAR);
+		doReturn(YEAROFBIRTH).when(rs).getInt(PersonGatewayJDBC.INDEX_YEAROFBIRTH);
 		doReturn(SHIRTSIZE.shortValue()).when(rs).getShort(PersonGatewayJDBC.INDEX_SHIRTSIZE);
 		doReturn(RELAYNAME).when(rs).getString(PersonGatewayJDBC.INDEX_RELAYNAME);
 		doReturn(POS).when(rs).getInt(PersonGatewayJDBC.INDEX_POS);

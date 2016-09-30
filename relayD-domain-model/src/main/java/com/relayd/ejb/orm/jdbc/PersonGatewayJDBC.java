@@ -33,7 +33,7 @@ public class PersonGatewayJDBC implements PersonGateway {
 	static final int INDEX_UUID = 1;
 	static final int INDEX_FORENAME = 2;
 	static final int INDEX_SURENAME = 3;
-	static final int INDEX_BIRTHYEAR = 4;
+	static final int INDEX_YEAROFBIRTH = 4;
 	static final int INDEX_SHIRTSIZE = 5;
 	static final int INDEX_RELAYNAME = 6;
 	static final int INDEX_POS = 7;
@@ -117,8 +117,8 @@ public class PersonGatewayJDBC implements PersonGateway {
 		person.setUUID(UUID.fromString(rs.getString(INDEX_UUID)));
 		person.setForename(Forename.newInstance(rs.getString(INDEX_FORENAME)));
 		person.setSurename(Surename.newInstance(rs.getString(INDEX_SURENAME)));
-		Integer birthyear = rs.getInt(INDEX_BIRTHYEAR);
-		person.setYearOfBirth(YearOfBirth.newInstance(birthyear));
+		Integer yearOfBirth = rs.getInt(INDEX_YEAROFBIRTH);
+		person.setYearOfBirth(YearOfBirth.newInstance(yearOfBirth));
 
 		person.setShirtsize(Shirtsize.decode(rs.getShort(INDEX_SHIRTSIZE)));
 		person.setRelayname(Relayname.newInstance(rs.getString(INDEX_RELAYNAME)));

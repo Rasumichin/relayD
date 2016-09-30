@@ -68,7 +68,7 @@ public class PersonEntityTest {
 	}
 
 	@Test
-	public void testInstanceCreated_ForBirthyear() {
+	public void testInstanceCreated_ForYearOfBirth() {
 		Integer year = 1971;
 		PersonEntity sut = new PersonEntity.Builder().withYearOfBirth(year).build();
 		assertEquals("[yearOfBirth] has not been set correctly.", year, sut.getYearOfBirth());
