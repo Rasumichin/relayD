@@ -2,8 +2,19 @@ package com.relayd.attributes;
 
 import static org.junit.Assert.*;
 
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
+/**
+ * Every large system that works started as a small system that worked.
+ * - Anonymous
+ *
+ * @author  schmollc (Christian@relayd.com)
+ * @since   23.03.2016
+ *
+ */
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ShirtsizeTest {
 
 	@Test
@@ -200,5 +211,14 @@ public class ShirtsizeTest {
 		Shirtsize shirtsizeEnum = Shirtsize.decode(shirtsize);
 
 		assertEquals(Shirtsize.Unknown.getDescription(), shirtsizeEnum.getDescription());
+	}
+
+	@Test
+	public void testToString() {
+		Shirtsize shirtsize = Shirtsize.DamenM;
+
+		String name = shirtsize.toString();
+
+		assertEquals("Damen M", name);
 	}
 }

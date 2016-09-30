@@ -1,7 +1,7 @@
 package com.relayd.attributes;
 
 /**
- * @author  schmollc (Christian@cloud.franke-net.com)
+ * @author  schmollc (Christian@relayd.com)
  * @since   23.03.2016
  * status   initial<br/>
  *
@@ -60,5 +60,10 @@ public enum Shirtsize {
 			}
 		}
 		return Unknown;
+	}
+
+	@Override
+	public String toString() {
+		return getDescription();
 	}
 }
