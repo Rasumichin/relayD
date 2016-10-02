@@ -202,7 +202,7 @@ public class EmailTest {
 	public void testSetLocalPartWithIllegalEmptyValue() {
 		Email sut = Email.newInstance(VALID_MAIL_OF_JUSTUS_JONAS);
 		expectedException.expect(IllegalArgumentException.class);
-		expectedException.expectMessage("Local part must not be empty.");
+		expectedException.expectMessage("Local part [] could not be part of a valid email address.");
 
 		sut.setLocalPart("");
 	}

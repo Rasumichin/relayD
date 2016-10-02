@@ -94,9 +94,6 @@ public class Email implements Serializable, Cloneable {
 		if (newLocalPart == null) {
 			throw new IllegalArgumentException("Local part must not be 'null'.");
 		}
-		if (newLocalPart.isEmpty()) {
-			throw new IllegalArgumentException("Local part must not be empty.");
-		}
 		
 		String possiblyNewValue = newLocalPart + AT_SIGN + getDomainPart();
 		if (!isValidAddress(possiblyNewValue)) {
