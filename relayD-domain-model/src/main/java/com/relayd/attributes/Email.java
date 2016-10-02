@@ -8,16 +8,12 @@ import javax.mail.internet.*;
  * @author  schmollc (Christian@cloud.franke-net.com)
  * @author  Rasumichin (Erik@relayd.de)
  * @since   29.03.2016
- * status   initial
+ * 
  */
 public class Email implements Serializable, Cloneable {
 	private static final long serialVersionUID = 1L;
 
 	public static Character AT_SIGN = '@';
-	private static String pattern = "^[_A-Za-z0-9-+]+(.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(.[A-Za-z0-9]+)*(.[A-Za-z]{2,})$";
-
-	// TODO (Erik, 2016-08-27): I am not sure whether we should use class InternetAddress from JavaMail:
-	// http://docs.oracle.com/javaee/7/api/javax/mail/internet/InternetAddress.html
 	String value;
 
 	private Email(String email) {
@@ -39,8 +35,21 @@ public class Email implements Serializable, Cloneable {
 		}
 
 		if (!isValidAddress(email)) {
-			throw new IllegalArgumentException("[email] not valid format!");
+			throw new IllegalArgumentException("[email] has not valid format!");
 		}
+	}
+
+	public static boolean isValidAddress(String mail) {
+		if (mail == null) {
+			return false;
+		}
+		try {
+			new InternetAddress(mail, true);
+		} catch (AddressException adrEx) {
+			return false;
+		}
+
+		return true;
 	}
 
 	public static Email createFromLocalAndDomainPart(String localPart, String domainPart) {
@@ -59,19 +68,6 @@ public class Email implements Serializable, Cloneable {
 
 	public boolean isEmpty() {
 		return value.isEmpty();
-	}
-
-	public static boolean isValidAddress(String mail) {
-		if (mail == null) {
-			return false;
-		}
-		try {
-			new InternetAddress(mail, true);
-		} catch (AddressException adrEx) {
-			return false;
-		}
-
-		return true;
 	}
 
 	/**
