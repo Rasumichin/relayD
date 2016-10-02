@@ -181,15 +181,6 @@ public class EmailTest {
 	}
 
 	@Test
-	public void testIsEmpty_True() {
-		Email sut = Email.newInstance("");
-
-		boolean result = sut.isEmpty();
-
-		assertTrue("expect empty [EMail]!", result);
-	}
-
-	@Test
 	public void testIsEmpty_False() {
 		Email sut = Email.newInstance(VALID_MAIL_OF_JUSTUS_JONAS);
 
@@ -199,30 +190,12 @@ public class EmailTest {
 	}
 	
 	@Test
-	public void testGetDomainPartWhenIsEmpty_True() {
-		Email sut = Email.newInstance("");
-		String expected = "";
-		
-		String result = sut.getDomainPart();
-		assertEquals("Domain part is not correct.", expected, result);
-	}
-
-	@Test
 	public void testGetDomainPartWhenIsEmpty_False() {
 		Email sut = Email.newInstance(VALID_MAIL_OF_JUSTUS_JONAS);
 		String expected = "rockyBeach.com";
 		
 		String result = sut.getDomainPart();
 		assertEquals("Domain part is not correct.", expected, result);
-	}
-	
-	@Test
-	public void testSetLocalPartWhenIsEmpty_True() {
-		Email sut = Email.newInstance("");
-		expectedException.expect(IllegalStateException.class);
-		expectedException.expectMessage("Email value must not be empty when setting the local part.");
-
-		sut.setLocalPart("shouldNotWork");
 	}
 	
 	@Test
@@ -241,16 +214,6 @@ public class EmailTest {
 		expectedException.expectMessage("Local part must not be empty.");
 
 		sut.setLocalPart("");
-	}
-	
-	@Test
-	public void testSetLocalPartWithIllegalLocalPart() {
-		Email sut = Email.newInstance(VALID_MAIL_OF_JUSTUS_JONAS);
-		expectedException.expect(IllegalArgumentException.class);
-		expectedException.expectMessage("Local part [forename..surename] could not be part of a valid email address.");
-
-		String illegalDomainPart = "forename..surename";
-		sut.setLocalPart(illegalDomainPart);
 	}
 	
 	@Test

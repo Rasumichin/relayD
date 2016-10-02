@@ -38,7 +38,7 @@ public class Email implements Serializable, Cloneable {
 			throw new IllegalArgumentException("[email] must not be 'null'.");
 		}
 
-		if (!isValid(email)) {
+		if (!isValidAddress(email)) {
 			throw new IllegalArgumentException("[email] not valid format!");
 		}
 	}
@@ -61,23 +61,6 @@ public class Email implements Serializable, Cloneable {
 		return value.isEmpty();
 	}
 
-	public static boolean isValid(String mail) {
-		if (mail == null) {
-			return false;
-		}
-
-		if (mail.trim().isEmpty()) {
-			return true;
-		}
-		
-		if (mail.contains(" ")) {
-			return false;
-		}
-
-		boolean result = mail.matches(pattern);
-		return result;
-	}
-	
 	public static boolean isValidAddress(String mail) {
 		if (mail == null) {
 			return false;
@@ -130,7 +113,7 @@ public class Email implements Serializable, Cloneable {
 		}
 		
 		String possiblyNewValue = newLocalPart + AT_SIGN + getDomainPart();
-		if (!isValid(possiblyNewValue)) {
+		if (!isValidAddress(possiblyNewValue)) {
 			throw new IllegalArgumentException("Local part [" + newLocalPart + "] could not be part of a valid email address.");
 		}
 		

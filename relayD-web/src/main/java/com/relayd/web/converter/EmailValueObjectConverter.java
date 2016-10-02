@@ -22,7 +22,7 @@ public class EmailValueObjectConverter implements Converter {
 		if (value == null || value.isEmpty()) {
 			return null;
 		}
-		if (!Email.isValid(value)) {
+		if (!Email.isValidAddress(value)) {
 			// TODO -schmollc- Was genau schiefgegangen ist würde auch noch in der  EMail Klasse stehen.
 			// isValid() könnte auch direkt den Fehler zurückliefen als Code z.B.
 			// - 150 - @ fehlt
