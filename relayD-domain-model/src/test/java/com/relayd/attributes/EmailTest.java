@@ -24,22 +24,48 @@ public class EmailTest {
 	@Rule
 	public ExpectedException expectedException = ExpectedException.none();
 
-	//TODO (Erik, 2016-09-24): Mit CS diskutieren, dass sollen gültige Email-Adressen sein?
 	@Test
-	public void testCreateInstanceWithEmptyValue() {
-		String value = "";
-		Email email = Email.newInstance(value);
-
-		assertEquals(value, email.toString());
+	public void testIsValidWithValidValue() {
+		boolean result = Email.isValidAddress(VALID_MAIL_OF_JUSTUS_JONAS);
+		assertTrue("email should be valid!", result);
 	}
 
-	//TODO (Erik, 2016-09-24): Mit CS diskutieren, dass sollen gültige Email-Adressen sein?
 	@Test
-	public void testCreateInstanceWithWhiteSpaceValue() {
-		String value = "   ";
-		Email email = Email.newInstance(value);
+	public void testIsValidWithInvalidValue() {
+		String eMailAddress = INVALID_MAIL_OF_JUSTUS_JONAS;
+		boolean result = Email.isValidAddress(eMailAddress);
 
-		assertEquals(value, email.toString());
+		assertFalse("email '" + eMailAddress + "' should be invalid.", result);
+	}
+
+	@Test
+	public void testIsValidWithIllegalNullValue() {
+		boolean result = Email.isValidAddress(null);
+		assertFalse("email should be invalid.", result);
+	}
+	
+	@Test
+	public void testIsValidWithAddressThatContainsASpace() {
+		String eMailAddress = "abraham.van helsing@stoker.com";
+		boolean result = Email.isValidAddress(eMailAddress);
+		
+		assertFalse("email '" + eMailAddress + "' should be invalid.", result);
+	}
+
+	@Test
+	public void testIsValidWithEmptyValue() {
+		String eMailAddress = "";
+		boolean result = Email.isValidAddress(eMailAddress);
+
+		assertFalse("email '" + eMailAddress + "' should be invalid.", result);
+	}
+
+	@Test
+	public void testIsValidWithWhitespaceOnly() {
+		String eMailAddress = "   ";
+		boolean result = Email.isValidAddress(eMailAddress);
+
+		assertFalse("email '" + eMailAddress + "' should be invalid.", result);
 	}
 
 	@Test
@@ -152,34 +178,6 @@ public class EmailTest {
 		boolean result = sut.equals(secondName);
 
 		assertTrue("values should be equal!", result);
-	}
-
-	@Test
-	public void testIsValidWithValidValue() {
-		boolean result = Email.isValid(VALID_MAIL_OF_JUSTUS_JONAS);
-		assertTrue("email should be valid!", result);
-	}
-
-	@Test
-	public void testIsValidWithInvalidValue() {
-		String eMailAddress = INVALID_MAIL_OF_JUSTUS_JONAS;
-		boolean result = Email.isValid(eMailAddress);
-
-		assertFalse("email '" + eMailAddress + "' should be invalid.", result);
-	}
-
-	@Test
-	public void testIsValidWithIllegalNullValue() {
-		boolean result = Email.isValid(null);
-		assertFalse("email should be invalid.", result);
-	}
-	
-	@Test
-	public void testIsValidWithAddressThatContainsASpace() {
-		String eMailAddress = "abraham.van helsing@stoker.com";
-		boolean result = Email.isValid(eMailAddress);
-		
-		assertFalse("email '" + eMailAddress + "' should be invalid.", result);
 	}
 
 	@Test

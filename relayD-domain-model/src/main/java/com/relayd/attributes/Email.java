@@ -2,6 +2,8 @@ package com.relayd.attributes;
 
 import java.io.Serializable;
 
+import javax.mail.internet.*;
+
 /**
  * @author  schmollc (Christian@cloud.franke-net.com)
  * @author  Rasumichin (Erik@relayd.de)
@@ -74,6 +76,19 @@ public class Email implements Serializable, Cloneable {
 
 		boolean result = mail.matches(pattern);
 		return result;
+	}
+	
+	public static boolean isValidAddress(String mail) {
+		if (mail == null) {
+			return false;
+		}
+		try {
+			new InternetAddress(mail, true);
+		} catch (AddressException adrEx) {
+			return false;
+		}
+
+		return true;
 	}
 
 	/**
