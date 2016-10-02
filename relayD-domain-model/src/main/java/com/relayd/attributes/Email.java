@@ -14,11 +14,19 @@ public class Email implements Serializable, Cloneable {
 	private static final long serialVersionUID = 1L;
 
 	public static Character AT_SIGN = '@';
-	String value;
+	private InternetAddress value;
 
 	private Email(String email) {
 		super();
-		value = email;
+		setValue(email);
+	}
+
+	private void setValue(String email) {
+		try {
+			value = new InternetAddress(email, true);
+		} catch (AddressException adrEx) {
+			// This cannot happen here.
+		}
 	}
 
 	/**
@@ -39,13 +47,13 @@ public class Email implements Serializable, Cloneable {
 		}
 	}
 
-	public static boolean isValidAddress(String mail) {
-		if (mail == null) {
+	public static boolean isValidAddress(String email) {
+		if (email == null) {
 			return false;
 		}
 		
 		try {
-			new InternetAddress(mail, true);
+			new InternetAddress(email, true);
 		} catch (AddressException adrEx) {
 			return false;
 		}
@@ -75,7 +83,7 @@ public class Email implements Serializable, Cloneable {
 	 * 
 	 */
 	public String getDomainPart() {
-		String[] emailParts = value.split(AT_SIGN.toString());
+		String[] emailParts = value.getAddress().split(AT_SIGN.toString());
 		String domainPart = emailParts[emailParts.length-1];
 		
 		return domainPart;
@@ -100,7 +108,7 @@ public class Email implements Serializable, Cloneable {
 			throw new IllegalArgumentException("Local part [" + newLocalPart + "] could not be part of a valid email address.");
 		}
 		
-		value = possiblyNewValue;
+		setValue(possiblyNewValue);
 	}
 	
 	@Override
@@ -114,7 +122,7 @@ public class Email implements Serializable, Cloneable {
 
 	@Override
 	public String toString() {
-		return value;
+		return value.getAddress();
 	}
 
 	@Override

@@ -96,21 +96,6 @@ public class EmailTest {
 	}
 
 	@Test
-	public void testGetHashCode() {
-		Email sut = Email.newInstance(VALID_MAIL_OF_JUSTUS_JONAS);
-
-		int hashCode = sut.hashCode();
-
-		assertEquals(629424970, hashCode);
-
-		sut.value = null;
-
-		hashCode = sut.hashCode();
-
-		assertEquals("[hashCode] not correct!", 31, hashCode);
-	}
-
-	@Test
 	public void testEqualsWithMyself() {
 		Email sut = Email.newInstance(VALID_MAIL_OF_JUSTUS_JONAS);
 
@@ -135,29 +120,6 @@ public class EmailTest {
 		boolean result = sut.equals(new String());
 
 		assertFalse("values should not be equal!", result);
-	}
-
-	@Test
-	public void testEqualsWithValueIsNull() {
-		Email sut = Email.newInstance(VALID_MAIL_OF_JUSTUS_JONAS);
-		sut.value = null;
-		Email secondName = Email.newInstance(VALID_MAIL_OF_JUSTUS_JONAS);
-
-		boolean result = sut.equals(secondName);
-
-		assertFalse("values should not be equal!", result);
-	}
-
-	@Test
-	public void testEqualsWithBothValuesAreNull() {
-		Email sut = Email.newInstance(VALID_MAIL_OF_JUSTUS_JONAS);
-		sut.value = null;
-		Email secondName = Email.newInstance(VALID_MAIL_OF_JUSTUS_JONAS);
-		secondName.value = null;
-
-		boolean result = sut.equals(secondName);
-
-		assertTrue("values should be equal!", result);
 	}
 
 	@Test
