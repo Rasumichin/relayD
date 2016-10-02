@@ -79,7 +79,7 @@ public class EmailTest {
 	@Test
 	public void testCreateInstanceWithInvalidEmailAdress() {
 		expectedException.expect(IllegalArgumentException.class);
-		expectedException.expectMessage("[email] not valid format!");
+		expectedException.expectMessage("[email] has not a valid format!");
 
 		String value = INVALID_MAIL_OF_JUSTUS_JONAS;
 		Email email = Email.newInstance(value);
@@ -180,15 +180,6 @@ public class EmailTest {
 		assertTrue("values should be equal!", result);
 	}
 
-	@Test
-	public void testIsEmpty_False() {
-		Email sut = Email.newInstance(VALID_MAIL_OF_JUSTUS_JONAS);
-
-		boolean result = sut.isEmpty();
-
-		assertFalse("expect filled [Email]", result);
-	}
-	
 	@Test
 	public void testGetDomainPartWhenIsEmpty_False() {
 		Email sut = Email.newInstance(VALID_MAIL_OF_JUSTUS_JONAS);

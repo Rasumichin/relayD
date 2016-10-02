@@ -35,7 +35,7 @@ public class Email implements Serializable, Cloneable {
 		}
 
 		if (!isValidAddress(email)) {
-			throw new IllegalArgumentException("[email] has not valid format!");
+			throw new IllegalArgumentException("[email] has not a valid format!");
 		}
 	}
 
@@ -43,6 +43,7 @@ public class Email implements Serializable, Cloneable {
 		if (mail == null) {
 			return false;
 		}
+		
 		try {
 			new InternetAddress(mail, true);
 		} catch (AddressException adrEx) {
@@ -66,10 +67,6 @@ public class Email implements Serializable, Cloneable {
 		return newInstance(newEmailValue);
 	}
 
-	public boolean isEmpty() {
-		return value.isEmpty();
-	}
-
 	/**
 	 * Answers the domain part of the email address.
 	 * 
@@ -78,10 +75,6 @@ public class Email implements Serializable, Cloneable {
 	 * 
 	 */
 	public String getDomainPart() {
-		if (isEmpty()) {
-			return value;
-		}
-		
 		String[] emailParts = value.split(AT_SIGN.toString());
 		String domainPart = emailParts[emailParts.length-1];
 		
@@ -98,9 +91,6 @@ public class Email implements Serializable, Cloneable {
 	 * 
 	 */
 	public void setLocalPart(String newLocalPart) {
-		if (isEmpty()) {
-			throw new IllegalStateException("Email value must not be empty when setting the local part.");
-		}
 		if (newLocalPart == null) {
 			throw new IllegalArgumentException("Local part must not be 'null'.");
 		}
