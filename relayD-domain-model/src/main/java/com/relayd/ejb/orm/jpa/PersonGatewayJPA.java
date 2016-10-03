@@ -16,23 +16,39 @@ import com.relayd.entity.PersonEntity;
  */
 public class PersonGatewayJPA implements PersonGateway {
 	private static EntityManagerFactory EM_FACTORY = Persistence.createEntityManagerFactory("dataSource");
+	
+	private PersonToEntityMapper personMapper = PersonToEntityMapper.newInstance();
+
+	@Override
+	public Person get(UUID uuid) {
+		PersonEntity personEntity = findById(uuid);
+		Person person = getPersonMapper().mapEntityToPerson(personEntity);
+		
+		return person;
+	}
+
+	PersonEntity findById(UUID uuid) {
+		EntityManager em = getEntityManager();
+		PersonEntity result = em.find(PersonEntity.class, uuid.toString());
+		
+		return result;
+	}
+	
+	private EntityManager getEntityManager() {
+		return EM_FACTORY.createEntityManager();
+	}
+
+	PersonToEntityMapper getPersonMapper() {
+		return personMapper;
+	}
 
 	@Override
 	public List<Person> getAll() {
-		EntityManager em = EM_FACTORY.createEntityManager();
+		EntityManager em = getEntityManager();
 		List<PersonEntity> result = em.createQuery("SELECT p FROM PersonEntity p", PersonEntity.class).getResultList();
 		System.out.println("Result getAll: " + result.size());
 		
 		return new ArrayList<>();
-	}
-
-	@Override
-	public Person get(UUID uuid) {
-		EntityManager em = EM_FACTORY.createEntityManager();
-		PersonEntity result = em.find(PersonEntity.class, uuid.toString());
-		System.out.println("Result get: " + result);
-		
-		return null;
 	}
 
 	@Override
