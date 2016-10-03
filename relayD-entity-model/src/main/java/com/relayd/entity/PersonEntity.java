@@ -39,7 +39,7 @@ public class PersonEntity {
 	@Column
 	private String email;
 
-	@Column
+	@Column(name="info")
 	private String comment;
 
 	@Column
