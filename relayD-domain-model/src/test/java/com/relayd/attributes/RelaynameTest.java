@@ -2,15 +2,21 @@ package com.relayd.attributes;
 
 import static org.junit.Assert.*;
 
+import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import org.junit.runners.MethodSorters;
 
 /**
- * @author  schmollc (Christian@cloud.franke-net.com)
+ * Die Samen der Vergangenheit sind die Früchte der Zukunft.
+ *  - Siddhartha Gautama
+ *
+ * @author  schmollc (Christian@relayd.de)
  * @since   23.03.2016
- * status   initial
+ *
  */
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class RelaynameTest {
 
 	@Rule
@@ -19,9 +25,9 @@ public class RelaynameTest {
 	@Test
 	public void testCreateInstance() {
 		final String NAME = "Die vier ????";
-		Relayname realyname = Relayname.newInstance(NAME);
+		Relayname sut = Relayname.newInstance(NAME);
 
-		assertEquals(NAME, realyname.toString());
+		assertEquals(NAME, sut.toString());
 	}
 
 	@Test
@@ -29,6 +35,26 @@ public class RelaynameTest {
 		expectedException.expect(IllegalArgumentException.class);
 		expectedException.expectMessage("[relayname] must not be 'null'.");
 		Relayname.newInstance(null);
+	}
+
+	@Test
+	public void testIsEmpty_WithFilledName() {
+		String NAME = "Die vier ????";
+		Relayname sut = Relayname.newInstance(NAME);
+
+		boolean result = sut.isEmpty();
+
+		assertFalse("[result] for isEmpty is not correct!", result);
+	}
+
+	@Test
+	public void testIsEmpty_WithNameFilledWithSpace() {
+		String NAME = "  ";
+		Relayname sut = Relayname.newInstance(NAME);
+
+		boolean result = sut.isEmpty();
+
+		assertTrue("[result] for isEmpty is not correct!", result);
 	}
 
 	@Test

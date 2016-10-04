@@ -170,6 +170,10 @@ public class Person implements Serializable {
 		return getEmail() != null;
 	}
 
+	public boolean hasRelay() {
+		return getRelayname() != null && !getRelayname().isEmpty();
+	}
+
 	@Override
 	public String toString() {
 		return getForename() + " " + getSurename() + ", " + getYearOfBirth() + ", " + getShirtsize() + ", " + getDisplayCountry() + ", " + getEmail() + ", " + getRelayname() + ", " + getPosition();

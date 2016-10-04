@@ -89,7 +89,7 @@ public class PersonBridgeImpl implements PersonBridge {
 	public List<Person> allWithoutRelay() {
 		List<Person> result = new ArrayList<Person>();
 		for (Person person : all()) {
-			if (person.getRelayname() == null) {
+			if (!person.hasRelay()) {
 				result.add(person);
 			}
 		}
@@ -101,7 +101,7 @@ public class PersonBridgeImpl implements PersonBridge {
 		Map<Relayname, Integer> bundleRelay = new HashMap<Relayname, Integer>();
 		List<Person> resultList = new ArrayList<Person>();
 		for (Person person : all()) {
-			if (person.getRelayname() != null) {
+			if (person.hasRelay()) {
 				int relayCount = 0;
 				if (bundleRelay.get(person.getRelayname()) != null) {
 					relayCount = bundleRelay.get(person.getRelayname());

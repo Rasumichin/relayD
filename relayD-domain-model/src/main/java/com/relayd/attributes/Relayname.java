@@ -32,6 +32,10 @@ public class Relayname implements Serializable, Comparable<Relayname> {
 		}
 	}
 
+	public boolean isEmpty() {
+		return value.trim().isEmpty();
+	}
+
 	@Override
 	public String toString() {
 		return value;

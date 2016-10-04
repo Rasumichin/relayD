@@ -5,7 +5,9 @@ import static org.junit.Assert.*;
 import java.util.Locale;
 import java.util.UUID;
 
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import com.relayd.attributes.Comment;
 import com.relayd.attributes.Email;
@@ -24,6 +26,7 @@ import com.relayd.attributes.YearOfBirth;
  * @author Rasumichin (Erik@relayd.de)
  *
  */
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class PersonTest {
 
 	@Test
@@ -171,6 +174,35 @@ public class PersonTest {
 		UUID result = sut.getUUID();
 
 		assertEquals("[uuid] not correct!", expected, result);
+	}
+
+	@Test
+	public void testHasRelay_ForRelaynameIsNull() {
+		Person sut = Person.newInstance();
+
+		boolean result = sut.hasRelay();
+
+		assertFalse("[result] for hasRelay() is not correct!", result);
+	}
+
+	@Test
+	public void testHasRelay_ForRelaynameIsFilled() {
+		Person sut = Person.newInstance();
+		sut.setRelayname(Relayname.newInstance("Die 4 ????"));
+
+		boolean result = sut.hasRelay();
+
+		assertTrue("[result] for hasRelay() is not correct!", result);
+	}
+
+	@Test
+	public void testHasRelay_ForRelaynameIsFilledWithEmptyString() {
+		Person sut = Person.newInstance();
+		sut.setRelayname(Relayname.newInstance("  "));
+
+		boolean result = sut.hasRelay();
+
+		assertFalse("[result] for hasRelay() is not correct!", result);
 	}
 
 	@Test
