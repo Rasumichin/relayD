@@ -1,41 +1,38 @@
 package com.relayd.ejb.orm.memory;
 
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 import com.relayd.RelayEvent;
+import com.relayd.attributes.EventDay;
+import com.relayd.attributes.EventName;
 import com.relayd.ejb.RelayEventGateway;
 
 /**
  * @author  schmollc (Christian@relayd.de)
  * @since   31.05.2016
- * status   initial
+ *
  */
 public class RelayEventGatewayMemory implements RelayEventGateway {
-	static Map<UUID, RelayEvent> events = new HashMap<UUID, RelayEvent>();
 
-	@Override
-	public void set(RelayEvent relayEventEntity) {
-		events.put(relayEventEntity.getUUID(), relayEventEntity);
-	}
+	private static final String DUESSELDORF_MARATHON = "Metro Group Marathon Düsseldorf";
+	private static final EventDay DUESSELDORF_DAY = EventDay.newInstance(LocalDate.of(2017, Month.APRIL, 30));
 
 	@Override
 	public List<RelayEvent> getAll() {
-		ArrayList<RelayEvent> eventsAsList = new ArrayList<RelayEvent>(events.values());
+		ArrayList<RelayEvent> eventsAsList = new ArrayList<RelayEvent>();
+
+		eventsAsList.add(createEventForDuesseldorfMarathon());
+
 		return eventsAsList;
 	}
 
-	@Override
-	public RelayEvent get(UUID uuid) {
-		RelayEvent relayEvent = events.get(uuid);
+	private RelayEvent createEventForDuesseldorfMarathon() {
+		EventName eventName = new EventName(DUESSELDORF_MARATHON);
+		EventDay eventDay = DUESSELDORF_DAY;
+		RelayEvent relayEvent = RelayEvent.newInstance(eventName, eventDay);
 		return relayEvent;
-	}
-
-	@Override
-	public void remove(UUID uuid) {
-		events.remove(uuid);
 	}
 }

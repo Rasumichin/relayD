@@ -61,11 +61,9 @@
 	        	List of Events
 	    	</f:facet>
 
-			<p:column selectionMode="single" />
-
 			<p:column
 				headerText="Date"
-				width="250">
+				width="50">
 				<h:outputText value="#{relayEvent.eventDay}" />
 			</p:column>
 
@@ -76,41 +74,6 @@
 	        	In total there are #{fn:length(relayEventBrowsePageBean.relayEvents)} events.
 	    	</f:facet>
 		</p:dataTable>
-
-
-		<p:toolbar>
-			<f:facet name="left">
-				<p:commandButton
-					value="Add"
-					update="form"
-					actionListener="#{relayEventBrowsePageBean.add}"
-					icon="ui-icon-document">
-					<p:ajax
-						event="dialogReturn"
-						listener="#{relayEventBrowsePageBean.onEditClosed}"
-						update="form" />
-				</p:commandButton>
-
-				<p:commandButton
-					value="Edit"
-					update="form"
-					actionListener="#{relayEventBrowsePageBean.edit}"
-					icon="ui-icon-folder-open">
-					<p:ajax
-						event="dialogReturn"
-						listener="#{relayEventBrowsePageBean.onEditClosed}"
-						update="form" />
-				</p:commandButton>
-				<span class="ui-separator"> <span class="ui-icon ui-icon-grip-dotted-vertical" />
-				</span>
-				<p:commandButton
-					value="Remove"
-					update="form"
-					actionListener="#{relayEventBrowsePageBean.remove}"
-					icon="ui-icon-folder-open">
-				</p:commandButton>
-			</f:facet>
-		</p:toolbar>
 
 	</h:form>
 </h:body>
