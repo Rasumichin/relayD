@@ -2,21 +2,26 @@ package com.relayd.attributes;
 
 import java.io.Serializable;
 
-public class EventName implements Serializable {
+/**
+ * @author  schmollc (Christian@cloud.franke-net.com)
+ * @since   22.03.2016
+ *
+ */
+public class Eventname implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	String value;
 
-	private EventName(String eventName) {
+	private Eventname(String eventname) {
 		super();
-		value = eventName;
+		value = eventname;
 	}
 
-	public static EventName newInstance(String eventName) {
-		if (eventName == null) {
-			throw new IllegalArgumentException("[eventName] must not be 'null'.");
+	public static Eventname newInstance(String eventname) {
+		if (eventname == null) {
+			throw new IllegalArgumentException("[eventname] must not be 'null'.");
 		}
-		return new EventName(eventName);
+		return new Eventname(eventname);
 	}
 
 	private String getValue() {
@@ -47,7 +52,7 @@ public class EventName implements Serializable {
 		if (getClass() != obj.getClass()) {
 			return false;
 		}
-		EventName other = (EventName) obj;
+		Eventname other = (Eventname) obj;
 		if (value == null) {
 			if (other.value != null) {
 				return false;

@@ -9,7 +9,7 @@ import java.util.UUID;
 import org.junit.Test;
 
 import com.relayd.attributes.EventDay;
-import com.relayd.attributes.EventName;
+import com.relayd.attributes.Eventname;
 
 /**
  * Keine Straße ist zu lang mit einem Test an der Seite.
@@ -26,11 +26,11 @@ public class RelayEventTest {
 	public void testName() {
 		RelayEvent sut = RelayEvent.newInstance(null, null);
 
-		EventName expected = EventName.newInstance("Name");
+		Eventname expected = Eventname.newInstance("Name");
 
 		sut.setName(expected);
 
-		EventName result = sut.getName();
+		Eventname result = sut.getName();
 
 		assertEquals(expected, result);
 	}
@@ -50,12 +50,12 @@ public class RelayEventTest {
 
 	@Test
 	public void testCreateValidInstance() {
-		EventName eventName = EventName.newInstance("MetroGroup Marathon Düsseldorf");
+		Eventname eventName = Eventname.newInstance("MetroGroup Marathon Düsseldorf");
 		EventDay eventDay = EventDay.newInstance(LocalDate.of(2017, Month.APRIL, 30));
 
 		RelayEvent sut = RelayEvent.newInstance(eventName, eventDay);
 
-		EventName actualName = sut.getName();
+		Eventname actualName = sut.getName();
 		EventDay actualEventDay = sut.getEventDay();
 
 		assertEquals("[Name] not correct.", eventName, actualName);
@@ -64,7 +64,7 @@ public class RelayEventTest {
 
 	@Test
 	public void testUUID() {
-		EventName eventNameDummy = EventName.newInstance("MetroGroup Marathon Düsseldorf");
+		Eventname eventNameDummy = Eventname.newInstance("MetroGroup Marathon Düsseldorf");
 		EventDay eventDayDummy = EventDay.newInstance(LocalDate.of(2017, Month.APRIL, 30));
 
 		RelayEvent sut = RelayEvent.newInstance(eventNameDummy, eventDayDummy);
@@ -74,7 +74,7 @@ public class RelayEventTest {
 
 	@Test
 	public void testSetUUID() {
-		EventName eventNameDummy = EventName.newInstance("MetroGroup Marathon Düsseldorf");
+		Eventname eventNameDummy = Eventname.newInstance("MetroGroup Marathon Düsseldorf");
 		EventDay eventDayDummy = EventDay.newInstance(LocalDate.of(2017, Month.APRIL, 30));
 
 		RelayEvent sut = RelayEvent.newInstance(eventNameDummy, eventDayDummy);
@@ -157,7 +157,7 @@ public class RelayEventTest {
 
 	@Test
 	public void testEqualsWithUuid() {
-		EventName eventNameDummy = EventName.newInstance("MetroGroup Marathon Düsseldorf");
+		Eventname eventNameDummy = Eventname.newInstance("MetroGroup Marathon Düsseldorf");
 		EventDay eventDayDummy = EventDay.newInstance(LocalDate.of(2017, Month.APRIL, 30));
 
 		RelayEvent sut = RelayEvent.newInstance(eventNameDummy, eventDayDummy);

@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.UUID;
 
 import com.relayd.attributes.EventDay;
-import com.relayd.attributes.EventName;
+import com.relayd.attributes.Eventname;
 
 /**
  * @author schmollc (Christian@relayd.de)
@@ -16,17 +16,17 @@ public class RelayEvent implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private UUID uuid;
-	private EventName name;
+	private Eventname name;
 	private EventDay eventDay;
 
 	/**
 	 * Bloch, Joshua, Effective Java, 2nd Edition, Item 1, p. 5
 	 */
-	static public RelayEvent newInstance(EventName anEventName, EventDay anEventDay) {
+	static public RelayEvent newInstance(Eventname anEventName, EventDay anEventDay) {
 		return new RelayEvent(anEventName, anEventDay);
 	}
 
-	private RelayEvent(EventName anEventName, EventDay anEventDay) {
+	private RelayEvent(Eventname anEventName, EventDay anEventDay) {
 		super();
 		uuid = UUID.randomUUID();
 		name = anEventName;
@@ -41,11 +41,11 @@ public class RelayEvent implements Serializable {
 		uuid = aUuid;
 	}
 
-	public EventName getName() {
+	public Eventname getName() {
 		return name;
 	}
 
-	public void setName(EventName eventName) {
+	public void setName(Eventname eventName) {
 		name = eventName;
 	}
 

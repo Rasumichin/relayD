@@ -17,7 +17,7 @@ import org.junit.rules.ExpectedException;
  * @since 19.05.2016
  *
  */
-public class EventNameTest {
+public class EventnameTest {
 
 	@Rule
 	public ExpectedException expectedException = ExpectedException.none();
@@ -25,7 +25,7 @@ public class EventNameTest {
 	@Test
 	public void testIsSerializable() {
 		String dummyString = "";
-		EventName sut = EventName.newInstance(dummyString);
+		Eventname sut = Eventname.newInstance(dummyString);
 
 		@SuppressWarnings("cast")
 		boolean result = sut instanceof Serializable;
@@ -35,7 +35,7 @@ public class EventNameTest {
 
 	@Test
 	public void testCreateInstance() {
-		EventName eventName = EventName.newInstance("Name");
+		Eventname eventName = Eventname.newInstance("Name");
 
 		assertNotNull(eventName);
 	}
@@ -43,14 +43,14 @@ public class EventNameTest {
 	@Test
 	public void testEventNameMustNotBeNull() {
 		expectedException.expect(IllegalArgumentException.class);
-		expectedException.expectMessage("[eventName] must not be 'null'.");
+		expectedException.expectMessage("[eventname] must not be 'null'.");
 
-		EventName.newInstance(null);
+		Eventname.newInstance(null);
 	}
 
 	@Test
 	public void testGetHashCode() {
-		EventName sut = EventName.newInstance("Name");
+		Eventname sut = Eventname.newInstance("Name");
 
 		int hashCode = sut.hashCode();
 
@@ -66,7 +66,7 @@ public class EventNameTest {
 
 	@Test
 	public void testEqualsWithMyself() {
-		EventName sut = EventName.newInstance("Name");
+		Eventname sut = Eventname.newInstance("Name");
 
 		boolean result = sut.equals(sut);
 
@@ -75,7 +75,7 @@ public class EventNameTest {
 
 	@Test
 	public void testEqualsWithNull() {
-		EventName sut = EventName.newInstance("Name");
+		Eventname sut = Eventname.newInstance("Name");
 
 		boolean result = sut.equals(null);
 
@@ -84,7 +84,7 @@ public class EventNameTest {
 
 	@Test
 	public void testEqualsWithNotCompatibleClass() {
-		EventName sut = EventName.newInstance("Name");
+		Eventname sut = Eventname.newInstance("Name");
 
 		boolean result = sut.equals(new String());
 
@@ -93,9 +93,9 @@ public class EventNameTest {
 
 	@Test
 	public void testEqualsWithDiffrentValues() {
-		EventName sut = EventName.newInstance("Name1");
+		Eventname sut = Eventname.newInstance("Name1");
 
-		EventName secondName = EventName.newInstance("Name2");
+		Eventname secondName = Eventname.newInstance("Name2");
 
 		boolean result = sut.equals(secondName);
 
@@ -105,9 +105,9 @@ public class EventNameTest {
 
 	@Test
 	public void testEqualsWithSameValues() {
-		EventName sut = EventName.newInstance("Name");
+		Eventname sut = Eventname.newInstance("Name");
 
-		EventName secondName = EventName.newInstance("Name");
+		Eventname secondName = Eventname.newInstance("Name");
 
 		boolean result = sut.equals(secondName);
 
@@ -116,10 +116,10 @@ public class EventNameTest {
 
 	@Test
 	public void testEqualsWithUUIDIsNull() {
-		EventName sut = EventName.newInstance("dummy");
+		Eventname sut = Eventname.newInstance("dummy");
 		sut.value = null;
 
-		EventName secondName = EventName.newInstance("dummy");
+		Eventname secondName = Eventname.newInstance("dummy");
 
 		boolean result = sut.equals(secondName);
 
@@ -129,10 +129,10 @@ public class EventNameTest {
 
 	@Test
 	public void testEqualsWithBothUUIDAreNull() {
-		EventName sut = EventName.newInstance("dummy");
+		Eventname sut = Eventname.newInstance("dummy");
 		sut.value = null;
 
-		EventName secondName = EventName.newInstance("dummy");
+		Eventname secondName = Eventname.newInstance("dummy");
 		secondName.value = null;
 
 		boolean result = sut.equals(secondName);
@@ -144,7 +144,7 @@ public class EventNameTest {
 	public void testToString() {
 		String eventName = "MetroGroup Marathon Düsseldorf";
 
-		EventName sut = EventName.newInstance(eventName);
+		Eventname sut = Eventname.newInstance(eventName);
 
 		String result = sut.toString();
 

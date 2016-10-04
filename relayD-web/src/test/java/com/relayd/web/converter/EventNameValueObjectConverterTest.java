@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import com.relayd.attributes.EventName;
+import com.relayd.attributes.Eventname;
 
 /**
  * Discipline is the best tool.
@@ -24,14 +24,14 @@ public class EventNameValueObjectConverterTest {
 		Object result = sut.getAsObject(null, null, name);
 
 		assertNotNull("Expected valid instance.", result);
-		assertEquals(EventName.class, result.getClass());
-		EventName eventName = (EventName) result;
+		assertEquals(Eventname.class, result.getClass());
+		Eventname eventName = (Eventname) result;
 		assertEquals("Attribute not correct.", name, eventName.toString());
 	}
 
 	@Test
 	public void testGetAsString() {
-		EventName eventName = EventName.newInstance(name);
+		Eventname eventName = Eventname.newInstance(name);
 
 		String result = sut.getAsString(null, null, eventName);
 

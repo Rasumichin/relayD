@@ -5,7 +5,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-import com.relayd.attributes.EventName;
+import com.relayd.attributes.Eventname;
 
 /**
  * @author schmollc (Christian@relayd.de)
@@ -17,7 +17,7 @@ public class EventNameValueObjectConverter implements Converter {
 
 	@Override
 	public Object getAsObject(@SuppressWarnings("unused") FacesContext facesContext, @SuppressWarnings("unused") UIComponent uiComponent, String value) {
-		EventName name = EventName.newInstance(value);
+		Eventname name = Eventname.newInstance(value);
 		return name;
 	}
 

@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import com.relayd.RelayEvent;
 import com.relayd.attributes.EventDay;
-import com.relayd.attributes.EventName;
+import com.relayd.attributes.Eventname;
 
 /**
  * Es bleibt einem jeden immer noch soviel Kraft, das auszuführen, wovon er überzeugt ist.
@@ -41,7 +41,7 @@ public abstract class RelayEventGatewayTest {
 	}
 
 	private RelayEvent createEventForDuesseldorfMarathon() {
-		EventName eventName = EventName.newInstance(DUESSELDORF_MARATHON);
+		Eventname eventName = Eventname.newInstance(DUESSELDORF_MARATHON);
 		EventDay eventDay = DUESSELDORF_DAY;
 		RelayEvent relayEvent = RelayEvent.newInstance(eventName, eventDay);
 		return relayEvent;
