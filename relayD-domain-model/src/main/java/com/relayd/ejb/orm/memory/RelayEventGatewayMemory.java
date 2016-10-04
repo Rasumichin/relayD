@@ -30,7 +30,7 @@ public class RelayEventGatewayMemory implements RelayEventGateway {
 	}
 
 	private RelayEvent createEventForDuesseldorfMarathon() {
-		EventName eventName = new EventName(DUESSELDORF_MARATHON);
+		EventName eventName = EventName.newInstance(DUESSELDORF_MARATHON);
 		EventDay eventDay = DUESSELDORF_DAY;
 		RelayEvent relayEvent = RelayEvent.newInstance(eventName, eventDay);
 		return relayEvent;

@@ -7,14 +7,17 @@ import org.junit.Test;
 import com.relayd.attributes.EventName;
 
 /**
+ * Discipline is the best tool.
+ * - Anonymous
+ *
  * @author schmollc (Christian@relayd.de)
  * @since 22.06.2016
- * status initial
+ *
  */
 public class EventNameValueObjectConverterTest {
 	private EventNameValueObjectConverter sut = new EventNameValueObjectConverter();
 
-	private final String name = "Köln Marathon";
+	private final String name = "Düsseldorf Marathon";
 
 	@Test
 	public void testGetAsObject() {
@@ -28,7 +31,7 @@ public class EventNameValueObjectConverterTest {
 
 	@Test
 	public void testGetAsString() {
-		EventName eventName = new EventName(name);
+		EventName eventName = EventName.newInstance(name);
 
 		String result = sut.getAsString(null, null, eventName);
 

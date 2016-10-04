@@ -12,10 +12,13 @@ import com.relayd.attributes.EventDay;
 import com.relayd.attributes.EventName;
 
 /**
+ * Keine Straße ist zu lang mit einem Test an der Seite.
+ *  - Konfuzius
+ *
  * @author schmollc (Christian@relayd.de)
  * @author Rasumichin (Erik@relayd.de)
  * @since 19.05.2016
- * status initial
+ *
  */
 public class RelayEventTest {
 
@@ -23,7 +26,7 @@ public class RelayEventTest {
 	public void testName() {
 		RelayEvent sut = RelayEvent.newInstance(null, null);
 
-		EventName expected = new EventName("Name");
+		EventName expected = EventName.newInstance("Name");
 
 		sut.setName(expected);
 
@@ -47,7 +50,7 @@ public class RelayEventTest {
 
 	@Test
 	public void testCreateValidInstance() {
-		EventName eventName = new EventName("MetroGroup Marathon Düsseldorf");
+		EventName eventName = EventName.newInstance("MetroGroup Marathon Düsseldorf");
 		EventDay eventDay = EventDay.newInstance(LocalDate.of(2017, Month.APRIL, 30));
 
 		RelayEvent sut = RelayEvent.newInstance(eventName, eventDay);
@@ -61,7 +64,7 @@ public class RelayEventTest {
 
 	@Test
 	public void testUUID() {
-		EventName eventNameDummy = new EventName("MetroGroup Marathon Düsseldorf");
+		EventName eventNameDummy = EventName.newInstance("MetroGroup Marathon Düsseldorf");
 		EventDay eventDayDummy = EventDay.newInstance(LocalDate.of(2017, Month.APRIL, 30));
 
 		RelayEvent sut = RelayEvent.newInstance(eventNameDummy, eventDayDummy);
@@ -71,7 +74,7 @@ public class RelayEventTest {
 
 	@Test
 	public void testSetUUID() {
-		EventName eventNameDummy = new EventName("MetroGroup Marathon Düsseldorf");
+		EventName eventNameDummy = EventName.newInstance("MetroGroup Marathon Düsseldorf");
 		EventDay eventDayDummy = EventDay.newInstance(LocalDate.of(2017, Month.APRIL, 30));
 
 		RelayEvent sut = RelayEvent.newInstance(eventNameDummy, eventDayDummy);
@@ -154,7 +157,7 @@ public class RelayEventTest {
 
 	@Test
 	public void testEqualsWithUuid() {
-		EventName eventNameDummy = new EventName("MetroGroup Marathon Düsseldorf");
+		EventName eventNameDummy = EventName.newInstance("MetroGroup Marathon Düsseldorf");
 		EventDay eventDayDummy = EventDay.newInstance(LocalDate.of(2017, Month.APRIL, 30));
 
 		RelayEvent sut = RelayEvent.newInstance(eventNameDummy, eventDayDummy);
