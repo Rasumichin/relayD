@@ -6,6 +6,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import com.relayd.ejb.orm.jdbc.RelayEventGatewayJDBC;
 import com.relayd.ejb.orm.jpa.RelayEventGatewayJPA;
 import com.relayd.ejb.orm.memory.RelayEventGatewayMemory;
 
@@ -46,9 +47,8 @@ public class RelayEventGatewayFactoryTest {
 
 	@Test
 	public void testGetForRelayEventGatewayJDBC() {
-		expectedException.expect(IllegalArgumentException.class);
-		expectedException.expectMessage("[JDBC] is unsupported Gateway Type.");
+		RelayEventGateway instance = RelayEventGatewayFactory.get(GatewayType.JDBC);
 
-		RelayEventGatewayFactory.get(GatewayType.JDBC);
+		assertEquals("Instance not korrekt.", instance.getClass(), RelayEventGatewayJDBC.class);
 	}
 }
