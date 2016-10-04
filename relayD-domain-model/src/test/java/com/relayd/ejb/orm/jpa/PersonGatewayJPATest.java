@@ -33,6 +33,11 @@ public class PersonGatewayJPATest {
 		assertNotNull("[personMapper] has not been initialized.", result);
 	}
 	
+	@Test(expected=IllegalArgumentException.class)
+	public void testGetWithIllegalNullValue() {
+		sut.get(null);
+	}
+	
 	@Test
 	public void testGet() {
 		UUID expectedUuid = UUID.randomUUID();

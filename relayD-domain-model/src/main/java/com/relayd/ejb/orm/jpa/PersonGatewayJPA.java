@@ -21,6 +21,10 @@ public class PersonGatewayJPA implements PersonGateway {
 
 	@Override
 	public Person get(UUID uuid) {
+		if (uuid == null) {
+			throw new IllegalArgumentException("[uuid] must not be 'null'.");
+		}
+		
 		PersonEntity personEntity = findById(uuid);
 		Person person = getPersonMapper().mapEntityToPerson(personEntity);
 		
