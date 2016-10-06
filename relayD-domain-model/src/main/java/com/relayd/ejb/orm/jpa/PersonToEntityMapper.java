@@ -1,9 +1,17 @@
 package com.relayd.ejb.orm.jpa;
 
-import java.util.*;
+import java.util.Locale;
+import java.util.UUID;
 
 import com.relayd.Person;
-import com.relayd.attributes.*;
+import com.relayd.attributes.Comment;
+import com.relayd.attributes.Email;
+import com.relayd.attributes.Forename;
+import com.relayd.attributes.Position;
+import com.relayd.attributes.Relayname;
+import com.relayd.attributes.Shirtsize;
+import com.relayd.attributes.Surename;
+import com.relayd.attributes.YearOfBirth;
 import com.relayd.entity.PersonEntity;
 
 /**
@@ -15,7 +23,7 @@ public class PersonToEntityMapper {
 
 	private PersonToEntityMapper() {
 	}
-	
+
 	public static PersonToEntityMapper newInstance() {
 		return new PersonToEntityMapper();
 	}
@@ -33,7 +41,7 @@ public class PersonToEntityMapper {
 				.withPos((person.getPosition() == null) ? null : person.getPosition().getValue())
 				.withShirtsize((person.getShirtsize() == null) ? null : person.getShirtsize().getSize().intValue())
 				.build();
-		
+
 		return result;
 	}
 
@@ -50,7 +58,7 @@ public class PersonToEntityMapper {
 		mapRelaynameFromEntityToPerson(personEntity, result);
 		mapPosFromEntityToPerson(personEntity, result);
 		mapShirtsizeFromEntityToPerson(personEntity, result);
-			
+
 		return result;
 	}
 
@@ -104,7 +112,7 @@ public class PersonToEntityMapper {
 
 	private void mapShirtsizeFromEntityToPerson(PersonEntity personEntity, Person result) {
 		if (personEntity.getShirtsize() != null) {
-			result.setShirtsize(Shirtsize.decode(personEntity.getShirtsize().shortValue()));
+			result.setShirtsize(Shirtsize.decode(personEntity.getShirtsize()));
 		}
 	}
 }

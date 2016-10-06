@@ -120,7 +120,7 @@ public class PersonGatewayJDBC implements PersonGateway {
 		Integer yearOfBirth = rs.getInt(INDEX_YEAROFBIRTH);
 		person.setYearOfBirth(YearOfBirth.newInstance(yearOfBirth));
 
-		person.setShirtsize(Shirtsize.decode(rs.getShort(INDEX_SHIRTSIZE)));
+		person.setShirtsize(Shirtsize.decode(rs.getInt(INDEX_SHIRTSIZE)));
 		person.setRelayname(Relayname.newInstance(rs.getString(INDEX_RELAYNAME)));
 		person.setPosition(Position.decode(rs.getInt(INDEX_POS)));
 		person.setEmail(Email.newInstance(rs.getString(INDEX_EMAIL)));

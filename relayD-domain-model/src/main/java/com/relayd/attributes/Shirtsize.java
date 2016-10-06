@@ -15,28 +15,28 @@ package com.relayd.attributes;
  */
 public enum Shirtsize {
 	//@formatter:off
-	Unknown		((short)-1, "Unknown"),
-	DamenXS		((short) 1, "Damen XS"),
-	DamenS		((short) 2, "Damen S"),
-	DamenM		((short) 3, "Damen M"),
-	DamenL		((short) 4, "Damen L"),
-	DamenXL		((short) 5, "Damen XL"),
-	HerrenS		((short) 6, "Herren S"),
-	HerrenM		((short) 7, "Herren M"),
-	HerrenL		((short) 8, "Herren L"),
-	HerrenXL	((short) 9, "Herren XL"),
-	HerrenXXL	((short)10, "Herren XXL");
+	Unknown		(-1, "Unknown"),
+	DamenXS		( 1, "Damen XS"),
+	DamenS		( 2, "Damen S"),
+	DamenM		( 3, "Damen M"),
+	DamenL		( 4, "Damen L"),
+	DamenXL		( 5, "Damen XL"),
+	HerrenS		( 6, "Herren S"),
+	HerrenM		( 7, "Herren M"),
+	HerrenL		( 8, "Herren L"),
+	HerrenXL	( 9, "Herren XL"),
+	HerrenXXL	(10, "Herren XXL");
 	//@formatter:off
 
-	private final Short size;
+	private final Integer size;
 	private final String description;
 
-	Shirtsize(Short aSize, String aDescription) {
+	Shirtsize(Integer aSize, String aDescription) {
 		size = aSize;
 		description = aDescription;
 	}
 
-	public Short getSize() {
+	public Integer getSize() {
 		return size;
 	}
 
@@ -44,7 +44,7 @@ public enum Shirtsize {
 		return description;
 	}
 
-	public static Short encode(Shirtsize param) {
+	public static Integer encode(Shirtsize param) {
 		for (Shirtsize shirtsize : values()) {
 			if (shirtsize.equals(param)) {
 				return shirtsize.getSize();
@@ -53,7 +53,7 @@ public enum Shirtsize {
 		return param.getSize();
 	}
 
-	public static Shirtsize decode(Short param) {
+	public static Shirtsize decode(Integer param) {
 		for (Shirtsize shirtsize : values()) {
 			if (shirtsize.getSize().equals(param)) {
 				return shirtsize;

@@ -51,32 +51,32 @@ public class PersonGatewayJDBCTest {
 	private static final String COMMENT = "Erster Detektiv!";
 
 	@Mock
-	private ResultSet rs;
+	private ResultSet resultSetMock;
 
 	@Before
 	public void setUp() throws SQLException {
-		doReturn(ID).when(rs).getString(PersonGatewayJDBC.INDEX_UUID);
-		doReturn(FORENAME).when(rs).getString(PersonGatewayJDBC.INDEX_FORENAME);
-		doReturn(SURENAME).when(rs).getString(PersonGatewayJDBC.INDEX_SURENAME);
-		doReturn(YEAROFBIRTH).when(rs).getInt(PersonGatewayJDBC.INDEX_YEAROFBIRTH);
-		doReturn(SHIRTSIZE.shortValue()).when(rs).getShort(PersonGatewayJDBC.INDEX_SHIRTSIZE);
-		doReturn(RELAYNAME).when(rs).getString(PersonGatewayJDBC.INDEX_RELAYNAME);
-		doReturn(POS).when(rs).getInt(PersonGatewayJDBC.INDEX_POS);
-		doReturn(EMAIL).when(rs).getString(PersonGatewayJDBC.INDEX_EMAIL);
-		doReturn(COMMENT).when(rs).getString(PersonGatewayJDBC.INDEX_COMMENT);
+		doReturn(ID).when(resultSetMock).getString(PersonGatewayJDBC.INDEX_UUID);
+		doReturn(FORENAME).when(resultSetMock).getString(PersonGatewayJDBC.INDEX_FORENAME);
+		doReturn(SURENAME).when(resultSetMock).getString(PersonGatewayJDBC.INDEX_SURENAME);
+		doReturn(YEAROFBIRTH).when(resultSetMock).getInt(PersonGatewayJDBC.INDEX_YEAROFBIRTH);
+		doReturn(SHIRTSIZE).when(resultSetMock).getInt(PersonGatewayJDBC.INDEX_SHIRTSIZE);
+		doReturn(RELAYNAME).when(resultSetMock).getString(PersonGatewayJDBC.INDEX_RELAYNAME);
+		doReturn(POS).when(resultSetMock).getInt(PersonGatewayJDBC.INDEX_POS);
+		doReturn(EMAIL).when(resultSetMock).getString(PersonGatewayJDBC.INDEX_EMAIL);
+		doReturn(COMMENT).when(resultSetMock).getString(PersonGatewayJDBC.INDEX_COMMENT);
 	}
 
 	@Test
 	public void testMapValues() throws SQLException {
 
-		Person person = sut.mapValues(rs);
+		Person person = sut.mapValues(resultSetMock);
 
 		assertNotNull(person);
 		assertEquals("[uuid] not correct!", UUID.fromString(ID), person.getUUID());
 		assertEquals("[forename] not correct!", Forename.newInstance(FORENAME), person.getForename());
 		assertEquals("[surename] not correct!", Surename.newInstance(SURENAME), person.getSurename());
 		assertEquals("[yearOfBirth] not correct!", YearOfBirth.newInstance(YEAROFBIRTH), person.getYearOfBirth());
-		assertEquals("[shirtsize] not correct!", Shirtsize.decode(SHIRTSIZE.shortValue()), person.getShirtsize());
+		assertEquals("[shirtsize] not correct!", Shirtsize.decode(SHIRTSIZE), person.getShirtsize());
 		assertEquals("[relayname] not correct!", Relayname.newInstance(RELAYNAME), person.getRelayname());
 		assertEquals("[pos] not correct!", Position.decode(POS), person.getPosition());
 		assertEquals("[email] not correct!", Email.newInstance(EMAIL), person.getEmail());
