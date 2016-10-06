@@ -23,7 +23,7 @@ import com.relayd.ejb.PersonGatewayFactory;
 public class PersonBridgeImpl implements PersonBridge {
 
 	private PersonGateway gateway = null;
-	private GatewayType gatewayType = GatewayType.JPA;
+	private GatewayType gatewayType = GatewayType.FILE;
 
 	public PersonBridgeImpl() {
 		gateway = PersonGatewayFactory.get(getGatewayType());
