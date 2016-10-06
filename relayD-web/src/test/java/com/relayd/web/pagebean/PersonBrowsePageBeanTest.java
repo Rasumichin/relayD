@@ -67,7 +67,7 @@ public class PersonBrowsePageBeanTest {
 	@Test
 	public void testGetNumberOfResults_ForFilledResultList() {
 		Mockito.doReturn(createResultList(size(5))).when(personBridge).all();
-		sut.getPersons();
+		sut.refreshPersons();
 
 		Integer numberOfResults = sut.getNumberOfResults();
 
