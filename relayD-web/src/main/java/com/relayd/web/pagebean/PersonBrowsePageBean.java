@@ -68,9 +68,6 @@ public class PersonBrowsePageBean {
 	}
 
 	public List<Person> getPersons() {
-		if (searchResult == null || searchResult.isEmpty()) {
-			refreshPersons();
-		}
 		return searchResult;
 	}
 
