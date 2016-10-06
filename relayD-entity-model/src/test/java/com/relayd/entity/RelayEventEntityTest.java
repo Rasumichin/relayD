@@ -1,25 +1,29 @@
 package com.relayd.entity;
 
+import static org.junit.Assert.*;
+
 import java.sql.Date;
+import java.util.Calendar;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 /**
+ * Es gibt nur eine Zeit, in der es wesentlich ist tests zu schreiben.
+ * Diese Zeit ist jetzt.
+ *  - Siddhartha Gautama
+ *
  * @author Rasumichin (Erik@relayd.de)
  * @since 22.04.2016
- * status initial
- * 
+ *
  */
 public class RelayEventEntityTest {
-	int LENGTH_OF_CORRECT_UUID_STRING = 36;
+	private int LENGTH_OF_CORRECT_UUID_STRING = 36;
 
 	@Test
 	public void testInstanceIsCreatedWithValidIdentity() {
 		RelayEventEntity sut = new RelayEventEntity.Builder("name").build();
 		assertNotNull("Id of EventEntity must not be 'null' after creation.", sut.getId());
-		assertTrue("Id of EventEntity is not properly initialized.", sut.getId().length() == LENGTH_OF_CORRECT_UUID_STRING);
+		assertEquals("Id of EventEntity is not properly initialized.", sut.getId().length(), LENGTH_OF_CORRECT_UUID_STRING);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -37,11 +41,9 @@ public class RelayEventEntityTest {
 
 	@Test
 	public void testInstanceCreatedWithValidEventDay() {
-		// Suffice to the wonderful way how the old Date API counts months ;-)
-		int june = 5;
 		@SuppressWarnings("deprecation")
-		Date eventDay = new Date(2017, june, 24);
-		
+		Date eventDay = new Date(2017, Calendar.JUNE, 24);
+
 		RelayEventEntity sut = new RelayEventEntity.Builder("name").withEventDay(eventDay).build();
 		assertEquals("[eventDay] has not been set correctly.", eventDay, sut.getEventDay());
 	}
