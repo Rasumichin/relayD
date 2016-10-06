@@ -2,6 +2,7 @@ package com.relayd.attributes;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 /**
  * @author  schmollc (Christian@relayd.de)
@@ -15,7 +16,7 @@ public class Distance implements Serializable {
 
 	private Distance(BigDecimal aDistance) {
 		super();
-		value = aDistance;
+		value = aDistance.setScale(2, RoundingMode.HALF_UP);
 	}
 
 	public static Distance newInstance(BigDecimal distance) {

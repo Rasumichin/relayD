@@ -79,7 +79,7 @@ public class DistanceTest {
 
 		int hashCode = sut.hashCode();
 
-		assertEquals(341, hashCode);
+		assertEquals(31033, hashCode);
 
 		sut.value = null;
 
