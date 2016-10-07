@@ -30,7 +30,7 @@ import com.relayd.attributes.YearOfBirth;
 public class PersonTest {
 
 	@Test
-	public void testCreateCompletePerson() {
+	public void testToString() {
 		Person sut = Person.newInstance();
 		sut.setSurename(Surename.newInstance("Jonas"));
 		sut.setForename(Forename.newInstance("Justus"));
@@ -54,9 +54,9 @@ public class PersonTest {
 
 		sut.setSurename(expected);
 
-		Surename result = sut.getSurename();
+		Surename actual = sut.getSurename();
 
-		assertEquals("[surename] not correct!", expected, result);
+		assertEquals("[surename] not correct!", expected, actual);
 	}
 
 	@Test
@@ -67,9 +67,9 @@ public class PersonTest {
 
 		sut.setForename(expected);
 
-		Forename result = sut.getForename();
+		Forename actual = sut.getForename();
 
-		assertEquals("[forename] not correct!", expected, result);
+		assertEquals("[forename] not correct!", expected, actual);
 	}
 
 	@Test
@@ -80,9 +80,9 @@ public class PersonTest {
 
 		sut.setShirtsize(expected);
 
-		Shirtsize result = sut.getShirtsize();
+		Shirtsize actual = sut.getShirtsize();
 
-		assertEquals("[shirtsize] not correct!", expected, result);
+		assertEquals("[shirtsize] not correct!", expected, actual);
 	}
 
 	@Test
@@ -93,9 +93,9 @@ public class PersonTest {
 
 		sut.setNationality(expected);
 
-		Locale result = sut.getNationality();
+		Locale actual = sut.getNationality();
 
-		assertEquals("[nationality] not correct!", expected, result);
+		assertEquals("[nationality] not correct!", expected, actual);
 	}
 
 	@Test
@@ -106,9 +106,9 @@ public class PersonTest {
 
 		sut.setYearOfBirth(expected);
 
-		YearOfBirth result = sut.getYearOfBirth();
+		YearOfBirth actual = sut.getYearOfBirth();
 
-		assertEquals("[yearOfBirth] not correct!", expected, result);
+		assertEquals("[yearOfBirth] not correct!", expected, actual);
 	}
 
 	@Test
@@ -119,9 +119,9 @@ public class PersonTest {
 
 		sut.setEmail(expected);
 
-		Email result = sut.getEmail();
+		Email actual = sut.getEmail();
 
-		assertEquals("[email] not correct!", expected, result);
+		assertEquals("[email] not correct!", expected, actual);
 	}
 
 	@Test
@@ -132,9 +132,9 @@ public class PersonTest {
 
 		sut.setRelayname(expected);
 
-		Relayname result = sut.getRelayname();
+		Relayname actual = sut.getRelayname();
 
-		assertEquals("[relayname] not correct!", expected, result);
+		assertEquals("[relayname] not correct!", expected, actual);
 	}
 
 	@Test
@@ -145,9 +145,9 @@ public class PersonTest {
 
 		sut.setPosition(expected);
 
-		Position result = sut.getPosition();
+		Position actual = sut.getPosition();
 
-		assertEquals("[position] not correct!", expected, result);
+		assertEquals("[position] not correct!", expected, actual);
 	}
 
 	@Test
@@ -158,9 +158,9 @@ public class PersonTest {
 
 		sut.setComment(expected);
 
-		Comment result = sut.getComment();
+		Comment actual = sut.getComment();
 
-		assertEquals("[comment] not correct!", expected, result);
+		assertEquals("[comment] not correct!", expected, actual);
 	}
 
 	@Test
@@ -171,18 +171,18 @@ public class PersonTest {
 
 		sut.setUUID(expected);
 
-		UUID result = sut.getUUID();
+		UUID actual = sut.getUUID();
 
-		assertEquals("[uuid] not correct!", expected, result);
+		assertEquals("[uuid] not correct!", expected, actual);
 	}
 
 	@Test
 	public void testHasRelay_ForRelaynameIsNull() {
 		Person sut = Person.newInstance();
 
-		boolean result = sut.hasRelay();
+		boolean actual = sut.hasRelay();
 
-		assertFalse("[result] for hasRelay() is not correct!", result);
+		assertFalse("[actual] for hasRelay() is not correct!", actual);
 	}
 
 	@Test
@@ -190,9 +190,9 @@ public class PersonTest {
 		Person sut = Person.newInstance();
 		sut.setRelayname(Relayname.newInstance("Die 4 ????"));
 
-		boolean result = sut.hasRelay();
+		boolean actual = sut.hasRelay();
 
-		assertTrue("[result] for hasRelay() is not correct!", result);
+		assertTrue("[actual] for hasRelay() is not correct!", actual);
 	}
 
 	@Test
@@ -200,9 +200,9 @@ public class PersonTest {
 		Person sut = Person.newInstance();
 		sut.setRelayname(Relayname.newInstance("  "));
 
-		boolean result = sut.hasRelay();
+		boolean actual = sut.hasRelay();
 
-		assertFalse("[result] for hasRelay() is not correct!", result);
+		assertFalse("[actual] for hasRelay() is not correct!", actual);
 	}
 
 	@Test
@@ -212,8 +212,8 @@ public class PersonTest {
 		String domainPart = "xerox-parc.com";
 		Email expected = Email.newInstance(sut.getForename().toString() + "." + sut.getSurename() + "@" + domainPart);
 
-		Email result = sut.inferEmailFromNameAnd(domainPart);
-		assertEquals("Email has not been composed correctly.", expected, result);
+		Email actual = sut.inferEmailFromNameAnd(domainPart);
+		assertEquals("Email has not been composed correctly.", expected, actual);
 	}
 
 	private Person getDefaultPersonForEmailInference() {
@@ -250,8 +250,8 @@ public class PersonTest {
 		String domainPart = "xerox-parc.com";
 		Email expected = Email.newInstance(sut.getForename() + "@" + domainPart);
 
-		Email result = sut.inferEmailFromNameAnd(domainPart);
-		assertEquals("Email has not been composed correctly.", expected, result);
+		Email actual = sut.inferEmailFromNameAnd(domainPart);
+		assertEquals("Email has not been composed correctly.", expected, actual);
 	}
 
 	@Test
@@ -262,8 +262,8 @@ public class PersonTest {
 		String domainPart = "xerox-parc.com";
 		Email expected = Email.newInstance(sut.getSurename() + "@" + domainPart);
 
-		Email result = sut.inferEmailFromNameAnd(domainPart);
-		assertEquals("Email has not been composed correctly.", expected, result);
+		Email actual = sut.inferEmailFromNameAnd(domainPart);
+		assertEquals("Email has not been composed correctly.", expected, actual);
 	}
 
 	@Test
@@ -273,8 +273,8 @@ public class PersonTest {
 		sut.setSurename(null);
 
 		String domainPart = "xerox-parc.com";
-		Email result = sut.inferEmailFromNameAnd(domainPart);
-		assertNull("Attribute [email] is unexpectedly not 'null'.", result);
+		Email actual = sut.inferEmailFromNameAnd(domainPart);
+		assertNull("Attribute [email] is unexpectedly not 'null'.", actual);
 	}
 
 	@Test
