@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+<h:head>
+	<link
+		rel="stylesheet"
+		href="./styles/relayd.css"></link>
+</h:head>
+<h:body>
+
+	<h:form id="form">
+		<p:growl
+			id="growl"
+			showDetail="true" />
+
+		<p />
+
+		<p:themeSwitcher style="width:150px">
+			<f:selectItem
+				itemLabel="Choose Theme"
+				itemValue="" />
+			<f:selectItems value="#{settingsPageBean.themes}" />
+		</p:themeSwitcher>
+
+		<p:themeSwitcher>
+			<f:selectItem
+				itemLabel="Choose Theme"
+				itemValue="" />
+			<f:selectItems
+				value="#{settingsPageBean.themes}"
+				var="theme"
+				itemLabel="#{theme.name}"
+				itemValue="#{theme}" />
+			<p:column>
+				<p:graphicImage value="/images/themes/#{theme.image}" />
+			</p:column>
+			<p:column>
+				#{t.name}
+			</p:column>
+		</p:themeSwitcher>
+		<p:panel
+			id="panel"
+			header="Settings"
+			style="margin-bottom:10px;">
+			<h:panelGrid
+				columns="1"
+				id="inputgrid"
+				cellpadding="5">
+				<p:outputLabel value="Version: #{settingsPageBean.version}" />
+				<p:outputLabel value="mail Endung: @todo" />
+				<p:outputLabel value="Gateway: FILE (todo) " />
+				<p:outputLabel value="Anmeldeschluß: 01.04.2017 (todo) " />
+			</h:panelGrid>
+		</p:panel>
+
+	</h:form>
+</h:body>
+</html>
