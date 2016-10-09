@@ -14,10 +14,7 @@ import com.relayd.entity.PersonEntity;
  * @since   12.09.2016
  *
  */
-public class PersonGatewayJPA implements PersonGateway {
-	private static EntityManagerFactory EM_FACTORY = Persistence.createEntityManagerFactory("dataSource");
-	
-	private EntityManager entityManager;
+public class PersonGatewayJPA extends GatewayJPA implements PersonGateway {
 	private PersonToEntityMapper personMapper = PersonToEntityMapper.newInstance();
 
 	@Override
@@ -39,14 +36,6 @@ public class PersonGatewayJPA implements PersonGateway {
 		return result;
 	}
 	
-	private EntityManager getEntityManager() {
-		if (entityManager == null) {
-			entityManager = EM_FACTORY.createEntityManager();
-		}
-		
-		return entityManager;
-	}
-
 	PersonToEntityMapper getPersonMapper() {
 		return personMapper;
 	}
@@ -89,29 +78,6 @@ public class PersonGatewayJPA implements PersonGateway {
 		getEntityManager().merge(personEntity);
 		commitTransaction();
 		endTransaction();
-	}
-
-	private void startTransaction() {
-		EntityManager em = getEntityManager();
-		EntityTransaction tx = em.getTransaction();
-		
-		tx.begin();
-	}
-
-	private void commitTransaction() {
-		EntityManager em = getEntityManager();
-		EntityTransaction tx = em.getTransaction();
-		
-		tx.commit();
-	}
-
-	private void endTransaction() {
-		getEntityManager().close();
-		resetEntityManager();
-	}
-	
-	private void resetEntityManager() {
-		entityManager = null;
 	}
 
 	@Override
