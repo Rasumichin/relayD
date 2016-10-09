@@ -57,6 +57,7 @@ public class PersonBrowsePageBean {
 	@PostConstruct
 	public void init() {
 		visibleColumns = Arrays.asList(true, true, true, true, true, true, true, true, true, true);
+		searchResult = personBridge.all();
 	}
 
 	public PersonBrowsePageBean() {
