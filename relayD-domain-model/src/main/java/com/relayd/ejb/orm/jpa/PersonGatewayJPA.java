@@ -80,28 +80,10 @@ public class PersonGatewayJPA implements PersonGateway {
 			throw new IllegalArgumentException("[person] must not be 'null'.");
 		}
 		
-		PersonEntity personEntity = findById(person.getUUID());
-		if (personEntity == null) {
-			personEntity = getPersonMapper().mapPersonToEntity(person);
-			persistNewPersonEntity(personEntity);
-		} else {
-			personEntity = getPersonMapper().mapPersonToEntity(person);
-			mergePersonEntity(personEntity);
-		}
+		PersonEntity personEntity = getPersonMapper().mapPersonToEntity(person);
+		mergePersonEntity(personEntity);
 	}
 
-	void persistNewPersonEntity(PersonEntity personEntity) {
-		EntityManager em = getEntityManager();
-		EntityTransaction tx = em.getTransaction();
-		
-		tx.begin();
-		em.persist(personEntity);
-		tx.commit();
-		
-		em.close();
-		resetEntityManager();
-	}
-	
 	void mergePersonEntity(PersonEntity personEntity) {
 		EntityManager em = getEntityManager();
 		EntityTransaction tx = em.getTransaction();
@@ -112,6 +94,10 @@ public class PersonGatewayJPA implements PersonGateway {
 		
 		em.close();
 		resetEntityManager();
+	}
+	
+	private void resetEntityManager() {
+		entityManager = null;
 	}
 
 	@Override
@@ -134,9 +120,5 @@ public class PersonGatewayJPA implements PersonGateway {
 		
 		em.close();
 		resetEntityManager();
-	}
-
-	private void resetEntityManager() {
-		entityManager = null;
 	}
 }
