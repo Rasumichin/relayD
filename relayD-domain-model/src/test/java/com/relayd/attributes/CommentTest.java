@@ -11,7 +11,6 @@ import org.junit.runners.MethodSorters;
 /**
  * @author CrowCounter77 (Mirko@relayd.de)
  * @since 21.07.2016
- * status initial
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -37,16 +36,62 @@ public class CommentTest {
 
 	@Test
 	public void testCreateInstance() {
-		Comment comment = Comment.newInstance("Comment");
+		// Diskutieren: Benötigt man einen "default" Constructor?
+		Comment comment = Comment.newInstance();
 
 		assertNotNull(comment);
+
+		boolean result = comment.getClass() == Comment.class;
+		assertFalse("Instance not correct!", result);
+
+		// Diskutieren: Sollte man die Sichtbarkeit fürs testen öffnen?
+		//		boolean result = comment.getClass() == Comment.CommentNullObject.class;
+		//		assertTrue("Instance not correct!", result);
+
+		//Oder
+		String toString = comment.toString();
+		assertEquals("", toString);
+
 	}
 
 	@Test
-	public void testCreateInstanceWithIllegalNullValue() {
+	public void testCreateInstance_ForParameter() {
+		Comment comment = Comment.newInstance("Comment");
+
+		assertNotNull(comment);
+
+		boolean result = comment.getClass() == Comment.class;
+		assertTrue("Instance not correct!", result);
+		//Oder
+		String toString = comment.toString();
+		assertEquals("Comment", toString);
+	}
+
+	@Test
+	public void testCreateInstance_ForNullValue() {
 		Comment comment = Comment.newInstance(null);
 
 		assertNotNull(comment);
+
+		boolean result = comment.getClass() == Comment.class;
+		assertFalse("Instance not correct!", result);
+
+		// Diskutieren: Sollte man die Sichtbarkeit fürs testen öffnen?
+		//		boolean result = comment.getClass() == Comment.CommentNullObject.class;
+		//		assertTrue("Instance not correct!", result);
+
+		//Oder
+		String toString = comment.toString();
+		assertEquals("", toString);
+	}
+
+	@Test
+	public void testSameInstanceForTwoObjects() {
+		Comment firstComment = Comment.newInstance(null);
+
+		Comment secondComment = Comment.newInstance(null);
+
+		assertSame("Should be the same!", firstComment, secondComment);
 	}
 
 	@Test
