@@ -4,6 +4,7 @@
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 
@@ -83,7 +84,9 @@
 				<p:columnToggler
 					datasource="personTable"
 					trigger="toggler">
-					<p:ajax event="toggle" listener="#{personBrowsePageBean.onToggle}" />
+					<p:ajax
+						event="toggle"
+						listener="#{personBrowsePageBean.onToggle}" />
 				</p:columnToggler>
 			</f:facet>
 		</p:toolbar>
@@ -107,7 +110,7 @@
 				</p:outputPanel>
 			</f:facet>
 
-			<p:column 
+			<p:column
 				visible="true"
 				toggleable="false"
 				style="width:16px">
@@ -183,7 +186,7 @@
 				<h:outputText value="#{person.email}" />
 			</p:column>
 
-			<p:column 
+			<p:column
 				headerText="Comment"
 				visible="#{personBrowsePageBean.visibleColumns[9]}">
 				<h:outputText
@@ -220,25 +223,9 @@
 	        	In total there are #{personBrowsePageBean.getNumberOfResults()} persons.
 	    	</f:facet>
 		</p:dataTable>
-		<p:dock position="bottom">
-			<p:menuitem
-				value="Home"
-				icon="/images/dock/home.png"
-				url="index.html" />
-			<p:menuitem
-				value="Event"
-				icon="/images/dock/event.png"
-				url="relayEventBrowse.xhtml" />
-			<p:menuitem
-				value="Person"
-				icon="/images/dock/person.png"
-				url="personBrowse.xhtml" />
-			<p:menuitem
-				value="Settings"
-				icon="/images/dock/settings.png"
-				url="settings.xhtml" />
-		</p:dock>
-		
+
+		<ui:include src="/dock.xhtml" />
+
 	</h:form>
 </h:body>
 </html>

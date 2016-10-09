@@ -59,25 +59,9 @@
 				<p:outputLabel value="Anmeldeschluß: 01.04.2017 (todo) " />
 			</h:panelGrid>
 		</p:panel>
-		<p:dock position="bottom">
-			<p:menuitem
-				value="Home"
-				icon="/images/dock/home.png"
-				url="index.html" />
-			<p:menuitem
-				value="Event"
-				icon="/images/dock/event.png"
-				url="relayEventBrowse.xhtml" />
-			<p:menuitem
-				value="Person"
-				icon="/images/dock/person.png"
-				url="personBrowse.xhtml" />
-			<p:menuitem
-				value="Settings"
-				icon="/images/dock/settings.png"
-				url="settings.xhtml" />
-		</p:dock>
-
+		
+		<ui:include src="/dock.xhtml" />
+	
 	</h:form>
 </h:body>
 </html>
