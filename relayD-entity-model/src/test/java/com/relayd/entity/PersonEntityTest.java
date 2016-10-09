@@ -2,13 +2,16 @@ package com.relayd.entity;
 
 import static org.junit.Assert.*;
 
+import java.util.UUID;
+
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 /**
  * @author schmollc (Christian@relayd.de)
- * @since 09.09.2016
+ * @author Rasumichin (Erik@relayd.de)
+ * @since  09.09.2016
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -107,5 +110,34 @@ public class PersonEntityTest {
 		String comment = "a info";
 		PersonEntity sut = new PersonEntity.Builder().withComment(comment).build();
 		assertEquals("[comment] has not been set correctly.", comment, sut.getComment());
+	}
+	
+	@Test
+	public void testToString() {
+		String forename = "Kent";
+		String surename = "Beck";
+		PersonEntity sut = new PersonEntity.Builder().withForename(forename).withSurename(surename).build();
+		
+		String expectedResult = "PersonEntity [id=" + sut.getId() + ", surename=" + surename + ", forename=" + forename + "]";
+		String actualResult = sut.toString();
+		
+		assertEquals("String representation is not correct!", expectedResult, actualResult);
+	}
+	
+	@Test
+	public void testEquals_true() {
+		String someId = UUID.randomUUID().toString();
+		PersonEntity christian = new PersonEntity.Builder().withForename("Christian").withId(someId).build();
+		PersonEntity erik = new PersonEntity.Builder().withForename("Erik").withId(someId).build();
+		
+		assertEquals("Equality has not been tested correctly!", christian, erik);
+	}
+	
+	@Test
+	public void testEquals_false() {
+		PersonEntity christian = new PersonEntity.Builder().withForename("Christian").build();
+		PersonEntity erik = new PersonEntity.Builder().withForename("Erik").build();
+		
+		assertNotEquals("Equality has not been tested correctly!", christian, erik);
 	}
 }
