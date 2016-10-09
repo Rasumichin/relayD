@@ -17,6 +17,7 @@ import com.relayd.entity.PersonEntity;
 public class PersonGatewayJPA implements PersonGateway {
 	private static EntityManagerFactory EM_FACTORY = Persistence.createEntityManagerFactory("dataSource");
 	
+	private EntityManager entityManager;
 	private PersonToEntityMapper personMapper = PersonToEntityMapper.newInstance();
 
 	@Override
@@ -39,7 +40,11 @@ public class PersonGatewayJPA implements PersonGateway {
 	}
 	
 	private EntityManager getEntityManager() {
-		return EM_FACTORY.createEntityManager();
+		if (entityManager == null) {
+			entityManager = EM_FACTORY.createEntityManager();
+		}
+		
+		return entityManager;
 	}
 
 	PersonToEntityMapper getPersonMapper() {
@@ -75,5 +80,27 @@ public class PersonGatewayJPA implements PersonGateway {
 
 	@Override
 	public void remove(UUID uuid) {
+		PersonEntity personEntity = findById(uuid);
+		if (personEntity == null) {
+			throw new EntityNotFoundException("PersonEntity with 'uuid' (" + uuid + ") does not exist!");
+		}
+		
+		removePersonEntity(personEntity);
+	}
+
+	void removePersonEntity(PersonEntity personEntity) {
+		EntityManager em = getEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		
+		tx.begin();
+		em.remove(personEntity);
+		tx.commit();
+		
+		em.close();
+		resetEntityManager();
+	}
+
+	private void resetEntityManager() {
+		entityManager = null;
 	}
 }

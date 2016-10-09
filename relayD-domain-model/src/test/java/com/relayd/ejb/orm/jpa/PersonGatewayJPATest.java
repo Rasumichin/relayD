@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import java.util.*;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.junit.*;
 import org.junit.runners.MethodSorters;
 
@@ -95,5 +97,37 @@ public class PersonGatewayJPATest {
 		assertTrue("Restult list is not correct.", result.isEmpty());
 	}
 	
-	// TODO: (EL, 2016-10-09): Discuss with CS: Do we need further tests here for the other cases (one element, many elements)?
+	// TODO: (EL, 2016-10-09): Discuss with CS: Do we need further tests here for the other cases for 'getAll' (one element, many elements)?
+	
+	@Test(expected=EntityNotFoundException.class)
+	public void testRemoveWhenPersonDoesNotExistForUuid() {
+		PersonGatewayJPA sut = new PersonGatewayJPA() {
+			@Override
+			PersonEntity findById(UUID uuid) {
+				return null;
+			}
+		};
+		
+		UUID someUuid = UUID.randomUUID();
+		sut.remove(someUuid);
+	}
+	
+	@Test
+	public void testRemoveWhenPersonNotExistForUuid() {
+		PersonGatewayJPA sut = new PersonGatewayJPA() {
+			@Override
+			PersonEntity findById(UUID uuid) {
+				PersonEntity personEntity = new PersonEntity.Builder().withId(uuid.toString()).build();
+				return personEntity;
+			}
+			
+			@Override
+			void removePersonEntity(PersonEntity personEntity) {
+			}
+		};
+		
+		UUID someUuid = UUID.randomUUID();
+		sut.remove(someUuid);
+		// How to verify that 'removePersonEntity()' has been called without Mockito?
+	}
 }
