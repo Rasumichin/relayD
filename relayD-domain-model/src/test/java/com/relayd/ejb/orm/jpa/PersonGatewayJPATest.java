@@ -14,6 +14,7 @@ import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.relayd.Person;
+import com.relayd.attributes.*;
 import com.relayd.entity.PersonEntity;
 
 /**
@@ -115,5 +116,25 @@ public class PersonGatewayJPATest {
 		
 		sut.remove(someUuid);
 		verify(sut, times(1)).removePersonEntity(personEntity);
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testSetWithIllegalNullValue() {
+		sut.set(null);
+	}
+	
+	@Test
+	public void testSetWithNewPerson() {
+		Person person = Person.newInstance();
+		person.setForename(Forename.newInstance("Ward"));
+		person.setSurename(Surename.newInstance("Cunningham"));
+		PersonEntity expectedPersonEntitiy = sut.getPersonMapper().mapPersonToEntity(person);
+		
+		doReturn(null).when(sut).findById(person.getUUID());
+		doNothing().when(sut).persistNewPersonEntity(expectedPersonEntitiy);
+		
+		sut.set(person);
+		verify(sut, times(1)).findById(person.getUUID());
+		verify(sut, times(1)).persistNewPersonEntity(expectedPersonEntitiy);
 	}
 }

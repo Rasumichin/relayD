@@ -76,6 +76,27 @@ public class PersonGatewayJPA implements PersonGateway {
 
 	@Override
 	public void set(Person person) {
+		if (person == null) {
+			throw new IllegalArgumentException("[person] must not be 'null'.");
+		}
+		
+		PersonEntity personEntity = findById(person.getUUID());
+		if (personEntity == null) {
+			personEntity = getPersonMapper().mapPersonToEntity(person);
+			persistNewPersonEntity(personEntity);
+		}
+	}
+
+	void persistNewPersonEntity(PersonEntity personEntity) {
+		EntityManager em = getEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		
+		tx.begin();
+		em.persist(personEntity);
+		tx.commit();
+		
+		em.close();
+		resetEntityManager();
 	}
 
 	@Override
