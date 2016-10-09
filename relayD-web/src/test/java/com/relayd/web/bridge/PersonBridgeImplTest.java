@@ -149,6 +149,6 @@ public class PersonBridgeImplTest {
 	public void testGatewayType() {
 		GatewayType result = sut.getGatewayType();
 
-		assertEquals("[gatewayType] not correct!", GatewayType.FILE, result);
+		assertEquals("[gatewayType] not correct!", GatewayType.JPA, result);
 	}
 }

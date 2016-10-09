@@ -14,32 +14,86 @@ import com.relayd.entity.PersonEntity;
  * @since   12.09.2016
  *
  */
-public class PersonGatewayJPA implements PersonGateway {
-	private static EntityManagerFactory EM_FACTORY = Persistence.createEntityManagerFactory("dataSource");
-
-	@Override
-	public List<Person> getAll() {
-		EntityManager em = EM_FACTORY.createEntityManager();
-		List<PersonEntity> result = em.createQuery("SELECT p FROM PersonEntity p", PersonEntity.class).getResultList();
-		System.out.println("Result getAll: " + result.size());
-		
-		return new ArrayList<>();
-	}
+public class PersonGatewayJPA extends GatewayJPA implements PersonGateway {
+	private PersonToEntityMapper personMapper = PersonToEntityMapper.newInstance();
 
 	@Override
 	public Person get(UUID uuid) {
-		EntityManager em = EM_FACTORY.createEntityManager();
-		PersonEntity result = em.find(PersonEntity.class, uuid.toString());
-		System.out.println("Result get: " + result);
+		if (uuid == null) {
+			throw new IllegalArgumentException("[uuid] must not be 'null'.");
+		}
 		
-		return null;
+		PersonEntity personEntity = findById(uuid);
+		Person person = getPersonMapper().mapEntityToPerson(personEntity);
+		
+		return person;
+	}
+
+	PersonEntity findById(UUID uuid) {
+		EntityManager em = getEntityManager();
+		PersonEntity result = em.find(PersonEntity.class, uuid.toString());
+		
+		return result;
+	}
+	
+	PersonToEntityMapper getPersonMapper() {
+		return personMapper;
+	}
+
+	@Override
+	public List<Person> getAll() {
+		List<PersonEntity> personEntities = findAll();
+		List<Person> persons = mapPersonEntityListToPersonList(personEntities);
+		
+		return persons;
+	}
+
+	List<PersonEntity> findAll() {
+		EntityManager em = getEntityManager();
+		List<PersonEntity> result = em.createQuery("SELECT p FROM PersonEntity p", PersonEntity.class).getResultList();
+		
+		return result;
+	}
+	
+	List<Person> mapPersonEntityListToPersonList(List<PersonEntity> personEntities) {
+		List<Person> persons = new ArrayList<>();
+		for (PersonEntity eachEntity: personEntities) {
+			persons.add(getPersonMapper().mapEntityToPerson(eachEntity));
+		}
+		return persons;
 	}
 
 	@Override
 	public void set(Person person) {
+		if (person == null) {
+			throw new IllegalArgumentException("[person] must not be 'null'.");
+		}
+		
+		PersonEntity personEntity = getPersonMapper().mapPersonToEntity(person);
+		mergePersonEntity(personEntity);
+	}
+
+	void mergePersonEntity(PersonEntity personEntity) {
+		startTransaction();
+		getEntityManager().merge(personEntity);
+		commitTransaction();
+		endTransaction();
 	}
 
 	@Override
 	public void remove(UUID uuid) {
+		PersonEntity personEntity = findById(uuid);
+		if (personEntity == null) {
+			throw new EntityNotFoundException("PersonEntity with 'uuid' (" + uuid + ") does not exist!");
+		}
+		
+		removePersonEntity(personEntity);
+	}
+
+	void removePersonEntity(PersonEntity personEntity) {
+		startTransaction();
+		getEntityManager().remove(personEntity);
+		commitTransaction();
+		endTransaction();
 	}
 }
