@@ -85,14 +85,28 @@ public class PersonGatewayJPA implements PersonGateway {
 	}
 
 	void mergePersonEntity(PersonEntity personEntity) {
+		startTransaction();
+		getEntityManager().merge(personEntity);
+		commitTransaction();
+		endTransaction();
+	}
+
+	private void startTransaction() {
 		EntityManager em = getEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		
 		tx.begin();
-		em.merge(personEntity);
-		tx.commit();
+	}
+
+	private void commitTransaction() {
+		EntityManager em = getEntityManager();
+		EntityTransaction tx = em.getTransaction();
 		
-		em.close();
+		tx.commit();
+	}
+
+	private void endTransaction() {
+		getEntityManager().close();
 		resetEntityManager();
 	}
 	
@@ -111,14 +125,9 @@ public class PersonGatewayJPA implements PersonGateway {
 	}
 
 	void removePersonEntity(PersonEntity personEntity) {
-		EntityManager em = getEntityManager();
-		EntityTransaction tx = em.getTransaction();
-		
-		tx.begin();
-		em.remove(personEntity);
-		tx.commit();
-		
-		em.close();
-		resetEntityManager();
+		startTransaction();
+		getEntityManager().remove(personEntity);
+		commitTransaction();
+		endTransaction();
 	}
 }
