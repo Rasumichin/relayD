@@ -128,13 +128,28 @@ public class PersonGatewayJPATest {
 		Person person = Person.newInstance();
 		person.setForename(Forename.newInstance("Ward"));
 		person.setSurename(Surename.newInstance("Cunningham"));
-		PersonEntity expectedPersonEntitiy = sut.getPersonMapper().mapPersonToEntity(person);
+		PersonEntity expectedPersonEntity = sut.getPersonMapper().mapPersonToEntity(person);
 		
 		doReturn(null).when(sut).findById(person.getUUID());
-		doNothing().when(sut).persistNewPersonEntity(expectedPersonEntitiy);
+		doNothing().when(sut).persistNewPersonEntity(expectedPersonEntity);
 		
 		sut.set(person);
 		verify(sut, times(1)).findById(person.getUUID());
-		verify(sut, times(1)).persistNewPersonEntity(expectedPersonEntitiy);
+		verify(sut, times(1)).persistNewPersonEntity(expectedPersonEntity);
+	}
+	
+	@Test
+	public void testSetWithPersonThatHasBeenSavedBefore() {
+		Person person = Person.newInstance();
+		person.setForename(Forename.newInstance("Ward"));
+		person.setSurename(Surename.newInstance("Cunningham"));
+		PersonEntity expectedPersonEntity = sut.getPersonMapper().mapPersonToEntity(person);
+		
+		doReturn(expectedPersonEntity).when(sut).findById(person.getUUID());
+		doNothing().when(sut).mergePersonEntity(expectedPersonEntity);
+		
+		sut.set(person);
+		verify(sut, times(1)).findById(person.getUUID());
+		verify(sut, times(1)).mergePersonEntity(expectedPersonEntity);
 	}
 }

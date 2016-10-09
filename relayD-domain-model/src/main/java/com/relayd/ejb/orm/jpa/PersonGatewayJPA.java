@@ -84,6 +84,9 @@ public class PersonGatewayJPA implements PersonGateway {
 		if (personEntity == null) {
 			personEntity = getPersonMapper().mapPersonToEntity(person);
 			persistNewPersonEntity(personEntity);
+		} else {
+			personEntity = getPersonMapper().mapPersonToEntity(person);
+			mergePersonEntity(personEntity);
 		}
 	}
 
@@ -93,6 +96,18 @@ public class PersonGatewayJPA implements PersonGateway {
 		
 		tx.begin();
 		em.persist(personEntity);
+		tx.commit();
+		
+		em.close();
+		resetEntityManager();
+	}
+	
+	void mergePersonEntity(PersonEntity personEntity) {
+		EntityManager em = getEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		
+		tx.begin();
+		em.merge(personEntity);
 		tx.commit();
 		
 		em.close();
