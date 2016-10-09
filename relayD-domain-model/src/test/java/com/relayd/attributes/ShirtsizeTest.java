@@ -26,7 +26,7 @@ public class ShirtsizeTest {
 
 	@Test
 	public void testDecodeDamenXS() {
-		Integer shirtsize = Integer.valueOf((short) 1);
+		Integer shirtsize = Integer.valueOf(1);
 
 		Shirtsize shirtsizeEnum = Shirtsize.decode(shirtsize);
 
@@ -39,12 +39,12 @@ public class ShirtsizeTest {
 
 		Integer shirtsize = Shirtsize.encode(shirtsizeEnum);
 
-		assertEquals(Integer.valueOf((short) 1), shirtsize);
+		assertEquals(Integer.valueOf(1), shirtsize);
 	}
 
 	@Test
 	public void testDecodeDamenS() {
-		Integer shirtsize = Integer.valueOf((short) 2);
+		Integer shirtsize = Integer.valueOf(2);
 
 		Shirtsize shirtsizeEnum = Shirtsize.decode(shirtsize);
 
@@ -57,12 +57,12 @@ public class ShirtsizeTest {
 
 		Integer shirtsize = Shirtsize.encode(shirtsizeEnum);
 
-		assertEquals(Integer.valueOf((short) 2), shirtsize);
+		assertEquals(Integer.valueOf(2), shirtsize);
 	}
 
 	@Test
 	public void testDecodeDamenM() {
-		Integer shirtsize = Integer.valueOf((short) 3);
+		Integer shirtsize = Integer.valueOf(3);
 
 		Shirtsize shirtsizeEnum = Shirtsize.decode(shirtsize);
 
@@ -75,12 +75,12 @@ public class ShirtsizeTest {
 
 		Integer shirtsize = Shirtsize.encode(shirtsizeEnum);
 
-		assertEquals(Integer.valueOf((short) 3), shirtsize);
+		assertEquals(Integer.valueOf(3), shirtsize);
 	}
 
 	@Test
 	public void testDecodeDamenL() {
-		Integer shirtsize = Integer.valueOf((short) 4);
+		Integer shirtsize = Integer.valueOf(4);
 
 		Shirtsize shirtsizeEnum = Shirtsize.decode(shirtsize);
 
@@ -93,12 +93,12 @@ public class ShirtsizeTest {
 
 		Integer shirtsize = Shirtsize.encode(shirtsizeEnum);
 
-		assertEquals(Integer.valueOf((short) 4), shirtsize);
+		assertEquals(Integer.valueOf(4), shirtsize);
 	}
 
 	@Test
 	public void testDecodeDamenXL() {
-		Integer shirtsize = Integer.valueOf((short) 5);
+		Integer shirtsize = Integer.valueOf(5);
 
 		Shirtsize shirtsizeEnum = Shirtsize.decode(shirtsize);
 
@@ -111,12 +111,12 @@ public class ShirtsizeTest {
 
 		Integer shirtsize = Shirtsize.encode(shirtsizeEnum);
 
-		assertEquals(Integer.valueOf((short) 5), shirtsize);
+		assertEquals(Integer.valueOf(5), shirtsize);
 	}
 
 	@Test
 	public void testDecodeHerrenS() {
-		Integer shirtsize = Integer.valueOf((short) 6);
+		Integer shirtsize = Integer.valueOf(6);
 
 		Shirtsize shirtsizeEnum = Shirtsize.decode(shirtsize);
 
@@ -129,12 +129,12 @@ public class ShirtsizeTest {
 
 		Integer shirtsize = Shirtsize.encode(shirtsizeEnum);
 
-		assertEquals(Integer.valueOf((short) 6), shirtsize);
+		assertEquals(Integer.valueOf(6), shirtsize);
 	}
 
 	@Test
 	public void testDecodeHerrenM() {
-		Integer shirtsize = Integer.valueOf((short) 7);
+		Integer shirtsize = Integer.valueOf(7);
 
 		Shirtsize shirtsizeEnum = Shirtsize.decode(shirtsize);
 
@@ -147,12 +147,12 @@ public class ShirtsizeTest {
 
 		Integer shirtsize = Shirtsize.encode(shirtsizeEnum);
 
-		assertEquals(Integer.valueOf((short) 7), shirtsize);
+		assertEquals(Integer.valueOf(7), shirtsize);
 	}
 
 	@Test
 	public void testDecodeHerrenL() {
-		Integer shirtsize = Integer.valueOf((short) 8);
+		Integer shirtsize = Integer.valueOf(8);
 
 		Shirtsize shirtsizeEnum = Shirtsize.decode(shirtsize);
 
@@ -165,12 +165,12 @@ public class ShirtsizeTest {
 
 		Integer shirtsize = Shirtsize.encode(shirtsizeEnum);
 
-		assertEquals(Integer.valueOf((short) 8), shirtsize);
+		assertEquals(Integer.valueOf(8), shirtsize);
 	}
 
 	@Test
 	public void testDecodeHerrenXL() {
-		Integer shirtsize = Integer.valueOf((short) 9);
+		Integer shirtsize = Integer.valueOf(9);
 
 		Shirtsize shirtsizeEnum = Shirtsize.decode(shirtsize);
 
@@ -183,12 +183,12 @@ public class ShirtsizeTest {
 
 		Integer shirtsize = Shirtsize.encode(shirtsizeEnum);
 
-		assertEquals(Integer.valueOf((short) 9), shirtsize);
+		assertEquals(Integer.valueOf(9), shirtsize);
 	}
 
 	@Test
 	public void testDecodeHerrenXXL() {
-		Integer shirtsize = Integer.valueOf((short) 10);
+		Integer shirtsize = Integer.valueOf(10);
 
 		Shirtsize shirtsizeEnum = Shirtsize.decode(shirtsize);
 
@@ -201,12 +201,12 @@ public class ShirtsizeTest {
 
 		Integer shirtsize = Shirtsize.encode(shirtsizeEnum);
 
-		assertEquals(Integer.valueOf((short) 10), shirtsize);
+		assertEquals(Integer.valueOf(10), shirtsize);
 	}
 
 	@Test
 	public void testDecodeInvalidValue() {
-		Integer shirtsize = Integer.valueOf((short) 99);
+		Integer shirtsize = Integer.valueOf(99);
 
 		Shirtsize shirtsizeEnum = Shirtsize.decode(shirtsize);
 
