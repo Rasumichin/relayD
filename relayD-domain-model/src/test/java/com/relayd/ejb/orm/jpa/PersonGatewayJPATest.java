@@ -1,13 +1,17 @@
 package com.relayd.ejb.orm.jpa;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 import java.util.*;
 
 import javax.persistence.EntityNotFoundException;
 
 import org.junit.*;
+import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
+import org.mockito.Spy;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import com.relayd.Person;
 import com.relayd.entity.PersonEntity;
@@ -17,17 +21,13 @@ import com.relayd.entity.PersonEntity;
  * @since   03.10.2016
  *
  */
+@RunWith(MockitoJUnitRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class PersonGatewayJPATest {
 	
-	private PersonGatewayJPA sut = new PersonGatewayJPA() {
-		@Override
-		PersonEntity findById(UUID uuid) {
-			PersonEntity personEntity = new PersonEntity.Builder().withId(uuid.toString()).build();
-			return personEntity;
-		}
-	};
-
+	@Spy
+	private PersonGatewayJPA sut = new PersonGatewayJPA();
+	
 	@Test
 	public void testGetPersonMapper() {
 		PersonToEntityMapper result = sut.getPersonMapper();
@@ -42,6 +42,9 @@ public class PersonGatewayJPATest {
 	@Test
 	public void testGet() {
 		UUID expectedUuid = UUID.randomUUID();
+		PersonEntity personEntity = new PersonEntity.Builder().withId(expectedUuid.toString()).build();
+		doReturn(personEntity).when(sut).findById(expectedUuid);
+		
 		Person result = sut.get(expectedUuid);
 		
 		assertNotNull("Result 'Person' must not be 'null'.", result);
@@ -86,12 +89,7 @@ public class PersonGatewayJPATest {
 	
 	@Test
 	public void testGetAllWhenResultIsEmpty() {
-		PersonGatewayJPA sut = new PersonGatewayJPA() {
-			@Override
-			List<PersonEntity> findAll() {
-				return new ArrayList<>();
-			}
-		};
+		doReturn(new ArrayList<>()).when(sut).findAll();
 		
 		List<Person> result = sut.getAll();
 		assertTrue("Restult list is not correct.", result.isEmpty());
@@ -101,33 +99,21 @@ public class PersonGatewayJPATest {
 	
 	@Test(expected=EntityNotFoundException.class)
 	public void testRemoveWhenPersonDoesNotExistForUuid() {
-		PersonGatewayJPA sut = new PersonGatewayJPA() {
-			@Override
-			PersonEntity findById(UUID uuid) {
-				return null;
-			}
-		};
-		
 		UUID someUuid = UUID.randomUUID();
+		doReturn(null).when(sut).findById(someUuid);
+		
 		sut.remove(someUuid);
 	}
 	
 	@Test
 	public void testRemoveWhenPersonNotExistForUuid() {
-		PersonGatewayJPA sut = new PersonGatewayJPA() {
-			@Override
-			PersonEntity findById(UUID uuid) {
-				PersonEntity personEntity = new PersonEntity.Builder().withId(uuid.toString()).build();
-				return personEntity;
-			}
-			
-			@Override
-			void removePersonEntity(PersonEntity personEntity) {
-			}
-		};
-		
 		UUID someUuid = UUID.randomUUID();
+		PersonEntity personEntity = new PersonEntity.Builder().withId(someUuid.toString()).build();
+		
+		doReturn(personEntity).when(sut).findById(someUuid);
+		doNothing().when(sut).removePersonEntity(personEntity);
+		
 		sut.remove(someUuid);
-		// How to verify that 'removePersonEntity()' has been called without Mockito?
+		verify(sut, times(1)).removePersonEntity(personEntity);
 	}
 }
