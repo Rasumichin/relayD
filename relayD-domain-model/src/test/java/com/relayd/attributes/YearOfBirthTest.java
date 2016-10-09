@@ -4,15 +4,22 @@ import static org.junit.Assert.*;
 
 import java.io.Serializable;
 
+import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import org.junit.runners.MethodSorters;
 
 /**
+ * Verantwortlich ist man nicht nur für das, was man tut, sondern auch für das, was man nicht tut.
+ *  - Laotse
+ *
  * @author schmollc (Christian@relayd.de)
  * @author Rasumichin (Erik@relayd.de)
  * @since 18.09.2016
+ *
  */
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class YearOfBirthTest {
 
 	@Rule
@@ -31,10 +38,12 @@ public class YearOfBirthTest {
 
 	@Test
 	public void testCreateInstance() {
-		final Integer YEAR = 1971;
-		YearOfBirth yearOfBirth = YearOfBirth.newInstance(YEAR);
+		Integer expected = 1971;
 
-		assertEquals(YEAR.toString(), yearOfBirth.toString());
+		YearOfBirth yearOfBirth = YearOfBirth.newInstance(expected);
+
+		Integer actual = yearOfBirth.value;
+		assertEquals(expected, actual);
 	}
 
 	@Test
@@ -43,6 +52,17 @@ public class YearOfBirthTest {
 		expectedException.expectMessage("[year] must not be 'null'!");
 
 		YearOfBirth.newInstance(null);
+	}
+
+	@Test
+	public void testToString() {
+		Integer year = 1978;
+
+		YearOfBirth yearOfBirth = YearOfBirth.newInstance(year);
+
+		String actual = yearOfBirth.toString();
+
+		assertEquals("1978", actual);
 	}
 
 	@Test
@@ -129,13 +149,13 @@ public class YearOfBirthTest {
 
 		assertTrue(result);
 	}
-	
+
 	@Test
 	public void testGetValue() {
 		Integer expected = Integer.valueOf(1965);
 		YearOfBirth sut = YearOfBirth.newInstance(expected);
-		
-		Integer result = sut.getValue();
-		assertEquals("[value] is not correct.", expected, result);
+
+		Integer actual = sut.getValue();
+		assertEquals("[value] is not correct.", expected, actual);
 	}
 }
