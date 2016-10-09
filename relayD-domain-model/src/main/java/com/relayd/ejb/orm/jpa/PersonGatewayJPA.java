@@ -48,11 +48,25 @@ public class PersonGatewayJPA implements PersonGateway {
 
 	@Override
 	public List<Person> getAll() {
+		List<PersonEntity> personEntities = findAll();
+		List<Person> persons = mapPersonEntityListToPersonList(personEntities);
+		
+		return persons;
+	}
+
+	List<PersonEntity> findAll() {
 		EntityManager em = getEntityManager();
 		List<PersonEntity> result = em.createQuery("SELECT p FROM PersonEntity p", PersonEntity.class).getResultList();
-		System.out.println("Result getAll: " + result.size());
 		
-		return new ArrayList<>();
+		return result;
+	}
+	
+	List<Person> mapPersonEntityListToPersonList(List<PersonEntity> personEntities) {
+		List<Person> persons = new ArrayList<>();
+		for (PersonEntity eachEntity: personEntities) {
+			persons.add(getPersonMapper().mapEntityToPerson(eachEntity));
+		}
+		return persons;
 	}
 
 	@Override
