@@ -2,18 +2,40 @@ package com.relayd.attributes;
 
 import static org.junit.Assert.*;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Month;
 
-import org.junit.*;
+import org.junit.FixMethodOrder;
+import org.junit.Ignore;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
+import org.junit.runners.MethodSorters;
 
 /**
+ * Niemand, der seine Arbeit tatsächlich versteht würde sich einen Experten nennen.
+ *  - Henry Ford
+ *
  * @author  Rasumichin (Erik@relayd.de)
  * @since   24.05.2016
- * status   ready-for-review
  *
  */
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class EventDayTest {
+
+	@Rule
+	public ExpectedException expectedException = ExpectedException.none();
+
+	@Test
+	public void testIsSerializable() {
+		EventDay sut = EventDay.newInstance();
+
+		@SuppressWarnings("cast")
+		boolean result = sut instanceof Serializable;
+
+		assertTrue("Class not Serializable!", result);
+	}
 
 	@Test
 	public void testCreateDefaultInstanceAsForToday() {
@@ -36,10 +58,12 @@ public class EventDayTest {
 		return LocalDate.of(2001, Month.NOVEMBER, 21);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	public void testCreateInstanceWithIllegalNullValue() {
-		@SuppressWarnings("unused")
-		EventDay sut = EventDay.newInstance(null);
+		expectedException.expect(IllegalArgumentException.class);
+		expectedException.expectMessage("[dateOfEvent] must not be 'null'.");
+
+		EventDay.newInstance(null);
 	}
 
 	@Test
@@ -82,7 +106,7 @@ public class EventDayTest {
 
 	// TODO (Erik, 2016-08-27): Discuss whether this is necessary. Surprisingly test failed without any change?
 	@Ignore
-	public void testGetHashCode() {
+	public void testHashCode() {
 		EventDay sut = EventDay.newInstance(getDefinedLocalDateInThePast());
 
 		int hashCode = sut.hashCode();
@@ -127,9 +151,9 @@ public class EventDayTest {
 	public void testEqualsWithValueIsNull() {
 		EventDay sut = EventDay.newInstance(LocalDate.now());
 		sut.value = null;
-		EventDay secondName = EventDay.newInstance(LocalDate.now());
+		EventDay secondSut = EventDay.newInstance(LocalDate.now());
 
-		boolean result = sut.equals(secondName);
+		boolean result = sut.equals(secondSut);
 
 		assertFalse(result);
 	}
@@ -138,10 +162,10 @@ public class EventDayTest {
 	public void testEqualsWithBothValuesAreNull() {
 		EventDay sut = EventDay.newInstance(LocalDate.now());
 		sut.value = null;
-		EventDay secondName = EventDay.newInstance(LocalDate.now());
-		secondName.value = null;
+		EventDay secondSut = EventDay.newInstance(LocalDate.now());
+		secondSut.value = null;
 
-		boolean result = sut.equals(secondName);
+		boolean result = sut.equals(secondSut);
 
 		assertTrue(result);
 	}
@@ -149,9 +173,9 @@ public class EventDayTest {
 	@Test
 	public void testEqualsWithTwoDiffrentValues() {
 		EventDay sut = EventDay.newInstance(LocalDate.now());
-		EventDay secondName = EventDay.newInstance(getDefinedLocalDateInThePast());
+		EventDay secondSut = EventDay.newInstance(getDefinedLocalDateInThePast());
 
-		boolean result = sut.equals(secondName);
+		boolean result = sut.equals(secondSut);
 
 		assertFalse(result);
 	}
@@ -159,9 +183,9 @@ public class EventDayTest {
 	@Test
 	public void testEqualsWithSameValues() {
 		EventDay sut = EventDay.newInstance(LocalDate.now());
-		EventDay secondName = EventDay.newInstance(LocalDate.now());
+		EventDay secondSut = EventDay.newInstance(LocalDate.now());
 
-		boolean result = sut.equals(secondName);
+		boolean result = sut.equals(secondSut);
 
 		assertTrue(result);
 	}

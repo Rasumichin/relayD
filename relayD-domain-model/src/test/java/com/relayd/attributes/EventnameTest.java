@@ -49,7 +49,18 @@ public class EventnameTest {
 	}
 
 	@Test
-	public void testGetHashCode() {
+	public void testToString() {
+		String expected = "MetroGroup Marathon Düsseldorf";
+
+		Eventname sut = Eventname.newInstance(expected);
+
+		String actual = sut.toString();
+
+		assertEquals(expected, actual);
+	}
+
+	@Test
+	public void testHashCode() {
 		Eventname sut = Eventname.newInstance("Name");
 
 		int hashCode = sut.hashCode();
@@ -95,9 +106,9 @@ public class EventnameTest {
 	public void testEqualsWithDiffrentValues() {
 		Eventname sut = Eventname.newInstance("Name1");
 
-		Eventname secondName = Eventname.newInstance("Name2");
+		Eventname secondSut = Eventname.newInstance("Name2");
 
-		boolean result = sut.equals(secondName);
+		boolean result = sut.equals(secondSut);
 
 		assertFalse(result);
 
@@ -107,47 +118,36 @@ public class EventnameTest {
 	public void testEqualsWithSameValues() {
 		Eventname sut = Eventname.newInstance("Name");
 
-		Eventname secondName = Eventname.newInstance("Name");
+		Eventname secondSut = Eventname.newInstance("Name");
 
-		boolean result = sut.equals(secondName);
+		boolean result = sut.equals(secondSut);
 
 		assertTrue(result);
 	}
 
 	@Test
-	public void testEqualsWithUUIDIsNull() {
+	public void testEqualsWithValueIsNull() {
 		Eventname sut = Eventname.newInstance("dummy");
 		sut.value = null;
 
-		Eventname secondName = Eventname.newInstance("dummy");
+		Eventname secondSut = Eventname.newInstance("dummy");
 
-		boolean result = sut.equals(secondName);
+		boolean result = sut.equals(secondSut);
 
 		assertFalse(result);
 
 	}
 
 	@Test
-	public void testEqualsWithBothUUIDAreNull() {
+	public void testEqualsWithBothValuesAreNull() {
 		Eventname sut = Eventname.newInstance("dummy");
 		sut.value = null;
 
-		Eventname secondName = Eventname.newInstance("dummy");
-		secondName.value = null;
+		Eventname secondSut = Eventname.newInstance("dummy");
+		secondSut.value = null;
 
-		boolean result = sut.equals(secondName);
+		boolean result = sut.equals(secondSut);
 
 		assertTrue(result);
-	}
-
-	@Test
-	public void testToString() {
-		String eventName = "MetroGroup Marathon Düsseldorf";
-
-		Eventname sut = Eventname.newInstance(eventName);
-
-		String result = sut.toString();
-
-		assertEquals(eventName, result);
 	}
 }
