@@ -1,49 +1,40 @@
 package com.relayd;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.UUID;
 
+import com.relayd.attributes.Position;
 import com.relayd.attributes.Relayname;
-import com.relayd.attributes.Surename;
 
 /**
- * Eine Staffel ist ja eigentlich nichts anderes als eine Liste von Personen
- * (oder Etappen) mit einem Namen.<p/>
- *
- * Vorteil: Es müssen nun solche Methoden wie isEmpty(), add(), remove() usw nicht
- * mehr auf funktionalität getestet werden.<br/>
- * Es reicht den Fokus auf die fachlichen Beschränkungen zu legen wie z.B. das erreichen der Max-Grenze
- * (in diesem Fall 4)
- *
- * @author  schmollc (Christian@relayD.de)
+ * @author  schmollc (Christian@relayd.de)
  * @since   23.03.2016
- * status   initial
+ *
  */
-public class Relay extends ArrayList<Person> {
+public class Relay implements Serializable {
+	private static final long serialVersionUID = 1L;
 
-	private static final long serialVersionUID = -1655301147830819436L;
-
-	private static final int MAX_MEMBER = 4;
-
-	private UUID uuid = null;
+	UUID uuid = null;
 	private Relayname relayname = null;
-
+	// TODO Ein Jahr ist ein Jahr, und kein Integer!!!!
 	private Integer year;
+	private List<Track> tracks = new ArrayList<>();
 
-	private Relay() {
-		uuid = UUID.randomUUID();
-		year = new GregorianCalendar().get(Calendar.YEAR);
-	}
-
-	public Relay(Integer aYear) {
+	private Relay(Integer aYear) {
 		uuid = UUID.randomUUID();
 		year = aYear;
+		tracks.add(Track.firstTrack);
+		tracks.add(Track.secondTrack);
+		tracks.add(Track.thirdTrack);
+		tracks.add(Track.fourthTrack);
 	}
 
 	public static Relay newInstance() {
-		return new Relay();
+		return new Relay(new GregorianCalendar().get(Calendar.YEAR));
 	}
 
 	public static Relay newInstance(Integer aYear) {
@@ -58,27 +49,7 @@ public class Relay extends ArrayList<Person> {
 		return relayname;
 	}
 
-	public void addPerson(Person person) {
-		if (isFull()) {
-			throw new IndexOutOfBoundsException("No more than " + MAX_MEMBER + " participants possible!");
-		}
-		add(person);
-	}
-
-	public boolean isFull() {
-		return size() == MAX_MEMBER;
-	}
-
-	public Person getPerson(Surename surename) {
-		for (Person person : this) {
-			if (person.getSurename().equals(surename)) {
-				return person;
-			}
-		}
-		return null;
-	}
-
-	public UUID getUUID() {
+	public UUID getUuid() {
 		return uuid;
 	}
 
@@ -86,8 +57,44 @@ public class Relay extends ArrayList<Person> {
 		return year;
 	}
 
+	public Track getTrackFor(Position position) {
+		int index = position.getValue() - 1;
+		Track track = tracks.get(index);
+		return track;
+	}
+
 	@Override
 	public String toString() {
 		return "Relay: " + getRelayname();
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((uuid == null) ? 0 : uuid.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		Relay other = (Relay) obj;
+		if (uuid == null) {
+			if (other.uuid != null) {
+				return false;
+			}
+		} else if (!uuid.equals(other.uuid)) {
+			return false;
+		}
+		return true;
 	}
 }
