@@ -1,18 +1,27 @@
 package com.relayd.attributes;
 
+import static com.relayd.attributes.Email.*;
 import static org.junit.Assert.*;
-import static com.relayd.attributes.Email.AT_SIGN;
 
+import java.io.Serializable;
+
+import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import org.junit.runners.MethodSorters;
 
 /**
+ * But isn’t some code hard to test?
+ * Yes, but only because that code has been designed to be hard to test.
+ *  - Robert C. Martin
+ *
  * @author  schmollc (Christian@relayd.de)
  * @author  Rasumichin (Erik@relayd.de)
  * @since   29.03.2016
- * 
+ *
  */
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class EmailTest {
 
 	// @formatter:off
@@ -23,6 +32,16 @@ public class EmailTest {
 
 	@Rule
 	public ExpectedException expectedException = ExpectedException.none();
+
+	@Test
+	public void testIsSerializable() {
+		Email sut = Email.newInstance(VALID_MAIL_OF_JUSTUS_JONAS);
+
+		@SuppressWarnings("cast")
+		boolean result = sut instanceof Serializable;
+
+		assertTrue("Class not Serializable!", result);
+	}
 
 	@Test
 	public void testIsValidWithValidValue() {
@@ -43,12 +62,12 @@ public class EmailTest {
 		boolean result = Email.isValidAddress(null);
 		assertFalse("email should be invalid.", result);
 	}
-	
+
 	@Test
 	public void testIsValidWithAddressThatContainsASpace() {
 		String eMailAddress = "abraham.van helsing@stoker.com";
 		boolean result = Email.isValidAddress(eMailAddress);
-		
+
 		assertFalse("email '" + eMailAddress + "' should be invalid.", result);
 	}
 
@@ -146,11 +165,11 @@ public class EmailTest {
 	public void testGetDomainPartWhenIsEmpty_False() {
 		Email sut = Email.newInstance(VALID_MAIL_OF_JUSTUS_JONAS);
 		String expected = "rockyBeach.com";
-		
+
 		String result = sut.getDomainPart();
 		assertEquals("Domain part is not correct.", expected, result);
 	}
-	
+
 	@Test
 	public void testSetLocalPartWithIllegalNullValue() {
 		Email sut = Email.newInstance(VALID_MAIL_OF_JUSTUS_JONAS);
@@ -159,7 +178,7 @@ public class EmailTest {
 
 		sut.setLocalPart(null);
 	}
-	
+
 	@Test
 	public void testSetLocalPartWithIllegalEmptyValue() {
 		Email sut = Email.newInstance(VALID_MAIL_OF_JUSTUS_JONAS);
@@ -168,39 +187,39 @@ public class EmailTest {
 
 		sut.setLocalPart("");
 	}
-	
+
 	@Test
 	public void testSetLocalPartToValidFullName() {
 		Email sut = Email.newInstance(VALID_MAIL_OF_JUSTUS_JONAS);
 		String newLocalPart = "bob.andrews";
 		Email expected = Email.newInstance(newLocalPart + AT_SIGN + "rockyBeach.com");
-		
+
 		sut.setLocalPart(newLocalPart);
 		assertEquals("Local part of email has not been set correctly.", expected, sut);
 	}
-	
+
 	@Test
 	public void testSetLocalPartToValidSingleName() {
 		Email sut = Email.newInstance(VALID_MAIL_OF_JUSTUS_JONAS);
 		String newLocalPart = "kent";
 		Email expected = Email.newInstance(newLocalPart + AT_SIGN + sut.getDomainPart());
-		
+
 		sut.setLocalPart(newLocalPart);
 		assertEquals("Local part of email has not been set correctly.", expected, sut);
 	}
-	
+
 	@Test
 	public void testCreateFromLocalAndDomainPartWithValidValues() {
 		String localPart = "martin.fowler";
 		String domainPart = "refactoring.com";
 		Email expected = Email.newInstance(localPart + AT_SIGN + domainPart);
-		
+
 		Email result = Email.createFromLocalAndDomainPart(localPart, domainPart);
 		assertEquals("Email has not been correctly composed.", expected, result);
 	}
-	
+
 	@Test
-	public void testCreateFromLocalAndDomainPartWithInvalidLocalPart_null () {
+	public void testCreateFromLocalAndDomainPartWithInvalidLocalPart_null() {
 		expectedException.expect(IllegalArgumentException.class);
 		expectedException.expectMessage("[localPart] must not be 'null'.");
 
@@ -210,7 +229,7 @@ public class EmailTest {
 	}
 
 	@Test
-	public void testCreateFromLocalAndDomainPartWithInvalidDomainPart_null () {
+	public void testCreateFromLocalAndDomainPartWithInvalidDomainPart_null() {
 		expectedException.expect(IllegalArgumentException.class);
 		expectedException.expectMessage("[domainPart] must not be 'null'.");
 
@@ -218,12 +237,12 @@ public class EmailTest {
 
 		Email.createFromLocalAndDomainPart(localPart, null);
 	}
-	
+
 	@Test
 	public void testClone() {
 		Email sut = Email.newInstance(VALID_MAIL_OF_PETER_SHAW);
 		Email clone = sut.clone();
-		
+
 		assertNotSame("Cloning failed.", sut, clone);
 		assertEquals("Cloning failed.", sut, clone);
 	}

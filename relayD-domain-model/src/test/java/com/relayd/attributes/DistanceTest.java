@@ -73,7 +73,7 @@ public class DistanceTest {
 	}
 
 	@Test
-	public void testGetHashCode() {
+	public void testHashCode() {
 		BigDecimal distance = BigDecimal.TEN;
 		Distance sut = Distance.newInstance(distance);
 
@@ -123,9 +123,9 @@ public class DistanceTest {
 		BigDecimal distance = BigDecimal.TEN;
 		Distance sut = Distance.newInstance(distance);
 		sut.value = null;
-		Distance secondName = Distance.newInstance(distance);
+		Distance secondSut = Distance.newInstance(distance);
 
-		boolean result = sut.equals(secondName);
+		boolean result = sut.equals(secondSut);
 
 		assertFalse(result);
 	}
@@ -135,10 +135,10 @@ public class DistanceTest {
 		BigDecimal distance = BigDecimal.TEN;
 		Distance sut = Distance.newInstance(distance);
 		sut.value = null;
-		Distance secondName = Distance.newInstance(distance);
-		secondName.value = null;
+		Distance secondSut = Distance.newInstance(distance);
+		secondSut.value = null;
 
-		boolean result = sut.equals(secondName);
+		boolean result = sut.equals(secondSut);
 
 		assertTrue(result);
 	}
@@ -148,9 +148,9 @@ public class DistanceTest {
 		BigDecimal distanceOne = BigDecimal.ONE;
 		Distance sut = Distance.newInstance(distanceOne);
 		BigDecimal distanceTwo = BigDecimal.TEN;
-		Distance secondName = Distance.newInstance(distanceTwo);
+		Distance secondSut = Distance.newInstance(distanceTwo);
 
-		boolean result = sut.equals(secondName);
+		boolean result = sut.equals(secondSut);
 
 		assertFalse(result);
 	}
@@ -159,9 +159,9 @@ public class DistanceTest {
 	public void testEqualsWithSameValues() {
 		BigDecimal distance = BigDecimal.TEN;
 		Distance sut = Distance.newInstance(distance);
-		Distance secondName = Distance.newInstance(distance);
+		Distance secondSut = Distance.newInstance(distance);
 
-		boolean result = sut.equals(secondName);
+		boolean result = sut.equals(secondSut);
 
 		assertTrue(result);
 	}

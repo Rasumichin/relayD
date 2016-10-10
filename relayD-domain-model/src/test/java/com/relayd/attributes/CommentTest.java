@@ -9,6 +9,11 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 /**
+ * Is 100% code coverage realistic?
+ * Of course it is.
+ * If you can write a line of code, you can write another that tests it.
+ *  - Robert C. Martin
+ *
  * @author CrowCounter77 (Mirko@relayd.de)
  * @since 21.07.2016
  *
@@ -29,9 +34,9 @@ public class CommentTest {
 
 	@Test
 	public void testMaxLengthConstant() {
-		Integer result = Comment.MAX_LENGTH;
+		Integer actual = Comment.MAX_LENGTH;
 
-		assertEquals("[MAX_LENGTH] not correct!", 255, result.intValue());
+		assertEquals("[MAX_LENGTH] not correct!", 255, actual.intValue());
 	}
 
 	@Test
@@ -96,12 +101,12 @@ public class CommentTest {
 
 	@Test
 	public void testToString() {
-		final String COMMENTTEXT = "This is a comment!";
-		Comment comment = Comment.newInstance(COMMENTTEXT);
+		String commentText = "This is a comment!";
+		Comment comment = Comment.newInstance(commentText);
 
-		String result = comment.toString();
+		String actual = comment.toString();
 
-		assertEquals(COMMENTTEXT, result);
+		assertEquals(commentText, actual);
 	}
 
 	@Test
@@ -150,9 +155,9 @@ public class CommentTest {
 	public void testEqualsWithValueIsNull() {
 		Comment sut = Comment.newInstance("Comment");
 		sut.value = null;
-		Comment secondName = Comment.newInstance("Comment");
+		Comment secondSut = Comment.newInstance("Comment");
 
-		boolean result = sut.equals(secondName);
+		boolean result = sut.equals(secondSut);
 
 		assertFalse(result);
 	}
@@ -161,10 +166,10 @@ public class CommentTest {
 	public void testEqualsWithBothValuesAreNull() {
 		Comment sut = Comment.newInstance("Comment");
 		sut.value = null;
-		Comment secondName = Comment.newInstance("Comment");
-		secondName.value = null;
+		Comment secondSut = Comment.newInstance("Comment");
+		secondSut.value = null;
 
-		boolean result = sut.equals(secondName);
+		boolean result = sut.equals(secondSut);
 
 		assertTrue(result);
 	}
@@ -172,9 +177,9 @@ public class CommentTest {
 	@Test
 	public void testEqualsWithTwoDiffrentValues() {
 		Comment sut = Comment.newInstance("Comment");
-		Comment secondName = Comment.newInstance("NotComment");
+		Comment secondSut = Comment.newInstance("NotComment");
 
-		boolean result = sut.equals(secondName);
+		boolean result = sut.equals(secondSut);
 
 		assertFalse(result);
 	}
@@ -182,9 +187,9 @@ public class CommentTest {
 	@Test
 	public void testEqualsWithSameValues() {
 		Comment sut = Comment.newInstance("Comment");
-		Comment secondName = Comment.newInstance("Comment");
+		Comment secondSut = Comment.newInstance("Comment");
 
-		boolean result = sut.equals(secondName);
+		boolean result = sut.equals(secondSut);
 
 		assertTrue(result);
 	}
