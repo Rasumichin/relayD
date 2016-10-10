@@ -382,4 +382,37 @@ public class PersonEditPageBeanTest {
 		Email result = sut.lastCalculatedEmail;
 		assertEquals("[lastCalculatedEmail] is not correct.", expected, result);
 	}
+	
+	@Test
+	public void testCurrentEmailHasBeenCalculated_true() {
+		sut.openDialogForCreatePerson();
+
+		boolean result = sut.currentEmailHasBeenCalculated();
+		
+		assertTrue("Recalculation should be possible!", result);
+	}
+
+	@Test
+	public void testCurrentEmailHasBeenCalculated_false() {
+		sut.openDialogForCreatePerson();
+		Email email = Email.createFromLocalAndDomainPart("john", "mail.com");
+		sut.setEmail(email);
+
+		boolean result = sut.currentEmailHasBeenCalculated();
+
+		assertFalse("Recalculation should not be possible!", result);
+	}
+	
+	@Test
+	public void testRecalculateEmail() {
+		sut.openDialogForCreatePerson();
+		sut.setEmail(sut.getDefaultEmail());
+		Email expected = Email.createFromLocalAndDomainPart("john", "canda.com");
+		sut.setForename(Forename.newInstance("john"));
+		
+		sut.recalculateEmail();
+		
+		Email result = sut.lastCalculatedEmail;
+		assertEquals("Recalculation of [lastCalculatedEmail] is not correct!", expected, result);
+	}
 }

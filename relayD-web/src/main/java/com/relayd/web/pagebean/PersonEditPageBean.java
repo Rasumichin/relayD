@@ -128,14 +128,24 @@ public class PersonEditPageBean implements Serializable {
 	}
 
 	public void nameValueChanged() {
-		Email currentEmail = getEmail();
-		// TODO Mit erik drüber reden. Für mich liest sich das: Wenn A gleich B, dann setz doch A bitte auf B...Das getCurrentLocalPart sorgt aber "scheinbar" für neuere Daten?
-		// Jedenfalls nicht intuitiv verstehbar. Viellecht den if umschreiben? if(mustUpdateLastCalcMail) oder so... denk man weniger nach..
-		if (currentEmail.equals(lastCalculatedEmail)) {
-			String currentLocalPart = getCurrentLocalPart();
-			currentEmail.setLocalPart(currentLocalPart);
-			lastCalculatedEmail = Email.newInstance(currentEmail.toString());
+		// TODO (Erik, 2016-10-10): Mit CS abstimmen, ob die Methode ihm so eher verständlich erscheint.
+		if (currentEmailHasBeenCalculated()) {
+			recalculateEmail();
 		}
+	}
+	
+	boolean currentEmailHasBeenCalculated() {
+		Email currentEmail = getEmail();
+		
+		return currentEmail.equals(lastCalculatedEmail);
+	}
+	
+	void recalculateEmail() {
+		Email currentEmail = getEmail();
+		String currentLocalPart = getCurrentLocalPart();
+		currentEmail.setLocalPart(currentLocalPart);
+		
+		lastCalculatedEmail = Email.newInstance(currentEmail.toString());
 	}
 
 	public String getCurrentLocalPart() {
