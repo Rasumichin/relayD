@@ -21,8 +21,36 @@
 			showDetail="true" />
 
 		<div class="divStartHeader"></div>
-		<h3>To Do</h3>
-		
+		<p:dataTable
+			var="relay"
+			widgetVar="relayTable"
+			id="relayTable"
+			selectionMode="single"
+			value="#{relayBrowsePageBean.relays}"
+			selection="#{relayBrowsePageBean.selectedRelay}"
+			scrollable="true"
+			scrollHeight="350"
+			sortBy="#{relay.relayname.toString()}"
+			rowKey="#{relay.uuid}"
+			resizableColumns="true">
+			<f:facet name="header">
+	     		List of Relays
+				<p:outputPanel>
+					<h:outputText value="&nbsp;" />
+				</p:outputPanel>
+			</f:facet>
+
+			<p:column
+				headerText="Relayname"
+				width="150">
+				<h:outputText value="#{relay.relayname}" />
+			</p:column>
+
+			<f:facet name="footer">
+	        	In total there are #{relayBrowsePageBean.getNumberOfResults()} relays.
+	    	</f:facet>
+		</p:dataTable>
+
 		<ui:include src="/dock.xhtml" />
 
 	</h:form>
