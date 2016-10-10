@@ -102,4 +102,17 @@ public class TrackTest {
 		assertEquals("[result] not correct!", "10.40km Linksseitiges Rheinufer", result);
 	}
 
+	@Test
+	public void testPerson() {
+		Distance dummyDistance = Distance.newInstance(BigDecimal.ONE);
+		Track sut = Track.newInstance(dummyDistance);
+
+		Person expected = Person.newInstance();
+
+		sut.setPerson(expected);
+
+		Person actual = sut.getPerson();
+
+		assertEquals(expected, actual);
+	}
 }
