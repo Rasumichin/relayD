@@ -45,7 +45,7 @@ public class RelayEventBrowsePageBeanTest {
 			private static final long serialVersionUID = 1L;
 
 			@Override
-			RestGetService createRestGetService(URI resourceUri) {
+			RestGetService createRestGetService(@SuppressWarnings("unused") URI resourceUri) {
 				RestGetService testDoubleService = Mockito.mock(RestGetService.class);
 				when(testDoubleService.getResult(String.class)).thenReturn("Pong response");
 

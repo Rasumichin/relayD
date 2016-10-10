@@ -5,9 +5,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
 import com.relayd.RelayEvent;
@@ -17,8 +15,6 @@ import com.relayd.ejb.RelayEventGateway;
 import com.relayd.ejb.RelayEventGatewayFactory;
 import com.relayd.web.rest.client.DefaultRestGetService;
 import com.relayd.web.rest.client.RestGetService;
-import com.relayd.web.theme.Theme;
-import com.relayd.web.theme.ThemeService;
 
 /**
  * @author schmollc (Christian@relayd.de)
@@ -76,23 +72,5 @@ public class RelayEventBrowsePageBean implements Serializable {
 		URI resourceUri = new URI(uriString);
 
 		return resourceUri;
-	}
-
-	private List<Theme> themes;
-
-	@ManagedProperty("#{themeService}")
-	private ThemeService service;
-
-	@PostConstruct
-	public void init() {
-		themes = service.getThemes();
-	}
-
-	public List<Theme> getThemes() {
-		return themes;
-	}
-
-	public void setService(ThemeService service) {
-		this.service = service;
 	}
 }

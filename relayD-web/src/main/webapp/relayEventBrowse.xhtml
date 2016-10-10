@@ -15,41 +15,11 @@
 </h:head>
 <h:body>
 
-	<div class="divStartHeader">
-		<h3>Welcome to the REAL relay D!</h3>
-	</div>
-
 	<h:form id="form">
 		<p:growl
 			id="growl"
 			showDetail="true" />
-
 		<p />
-
-		<p:themeSwitcher style="width:150px">
-			<f:selectItem
-				itemLabel="Choose Theme"
-				itemValue="" />
-			<f:selectItems value="#{relayEventBrowsePageBean.themes}" />
-		</p:themeSwitcher>
-
-		<p:themeSwitcher>
-			<f:selectItem
-				itemLabel="Choose Theme"
-				itemValue="" />
-			<f:selectItems
-				value="#{relayEventBrowsePageBean.themes}"
-				var="theme"
-				itemLabel="#{theme.name}"
-				itemValue="#{theme}" />
-			<p:column>
-				<p:graphicImage value="/images/themes/#{theme.image}" />
-			</p:column>
-			<p:column>
-				#{t.name}
-			</p:column>
-		</p:themeSwitcher>
-
 
 		<p:dataTable
 			var="relayEvent"
