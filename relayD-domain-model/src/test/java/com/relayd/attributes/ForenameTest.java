@@ -7,9 +7,12 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 /**
- * @author  schmollc (Christian@cloud.franke-net.com)
+ * Wissen und nichts tun ist wie nicht wissen.
+ *  - Dalai Lama
+ *
+ * @author  schmollc (Christian@relayd.de)
  * @since   22.03.2016
- * status   initial
+ *
  */
 public class ForenameTest {
 
@@ -18,31 +21,34 @@ public class ForenameTest {
 
 	@Test
 	public void testCreateInstance() {
-		Forename forename = Forename.newInstance("Name");
+		String expected = "Justus";
 
-		assertNotNull(forename);
+		Forename sut = Forename.newInstance(expected);
+
+		String actual = sut.value;
+		assertEquals(expected, actual);
+
 	}
 
 	@Test
 	public void testCreateInstanceWithIllegalNullValue() {
 		expectedException.expect(IllegalArgumentException.class);
 		expectedException.expectMessage("[forename] must not be 'null'.");
-
 		Forename.newInstance(null);
 	}
 
 	@Test
 	public void testToString() {
-		final String NAME = "Marty";
-		Forename forename = Forename.newInstance(NAME);
+		String forename = "Marty";
+		Forename sut = Forename.newInstance(forename);
 
-		String result = forename.toString();
+		String result = sut.toString();
 
-		assertEquals(NAME, result);
+		assertEquals("Marty", result);
 	}
 
 	@Test
-	public void testGetHashCode() {
+	public void testHashCode() {
 		Forename sut = Forename.newInstance("Forename");
 
 		int hashCode = sut.hashCode();
@@ -87,9 +93,9 @@ public class ForenameTest {
 	public void testEqualsWithValueIsNull() {
 		Forename sut = Forename.newInstance("Forename");
 		sut.value = null;
-		Forename secondName = Forename.newInstance("Forename");
+		Forename secondSut = Forename.newInstance("Forename");
 
-		boolean result = sut.equals(secondName);
+		boolean result = sut.equals(secondSut);
 
 		assertFalse(result);
 	}
@@ -98,10 +104,10 @@ public class ForenameTest {
 	public void testEqualsWithBothValuesAreNull() {
 		Forename sut = Forename.newInstance("Forename");
 		sut.value = null;
-		Forename secondName = Forename.newInstance("Forename");
-		secondName.value = null;
+		Forename secondSut = Forename.newInstance("Forename");
+		secondSut.value = null;
 
-		boolean result = sut.equals(secondName);
+		boolean result = sut.equals(secondSut);
 
 		assertTrue(result);
 	}
@@ -109,9 +115,9 @@ public class ForenameTest {
 	@Test
 	public void testEqualsWithTwoDiffrentValues() {
 		Forename sut = Forename.newInstance("Forename");
-		Forename secondName = Forename.newInstance("NotForename");
+		Forename secondSut = Forename.newInstance("NotForename");
 
-		boolean result = sut.equals(secondName);
+		boolean result = sut.equals(secondSut);
 
 		assertFalse(result);
 	}
@@ -119,9 +125,9 @@ public class ForenameTest {
 	@Test
 	public void testEqualsWithSameValues() {
 		Forename sut = Forename.newInstance("Forename");
-		Forename secondName = Forename.newInstance("Forename");
+		Forename secondSut = Forename.newInstance("Forename");
 
-		boolean result = sut.equals(secondName);
+		boolean result = sut.equals(secondSut);
 
 		assertTrue(result);
 	}
