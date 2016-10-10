@@ -2,6 +2,8 @@ package com.relayd.attributes;
 
 import static org.junit.Assert.*;
 
+import java.io.Serializable;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -18,6 +20,17 @@ public class ForenameTest {
 
 	@Rule
 	public ExpectedException expectedException = ExpectedException.none();
+
+	@Test
+	public void testIsSerializable() {
+		String dummyString = "";
+		Forename sut = Forename.newInstance(dummyString);
+
+		@SuppressWarnings("cast")
+		boolean result = sut instanceof Serializable;
+
+		assertTrue("Class not Serializable!", result);
+	}
 
 	@Test
 	public void testCreateInstance() {

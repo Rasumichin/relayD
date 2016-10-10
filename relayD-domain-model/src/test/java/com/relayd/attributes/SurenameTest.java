@@ -2,6 +2,8 @@ package com.relayd.attributes;
 
 import static org.junit.Assert.*;
 
+import java.io.Serializable;
+
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
@@ -21,6 +23,17 @@ public class SurenameTest {
 
 	@Rule
 	public ExpectedException expectedException = ExpectedException.none();
+
+	@Test
+	public void testIsSerializable() {
+		String dummyString = "";
+		Surename sut = Surename.newInstance(dummyString);
+
+		@SuppressWarnings("cast")
+		boolean result = sut instanceof Serializable;
+
+		assertTrue("Class not Serializable!", result);
+	}
 
 	@Test
 	public void testCreateInstance() {
