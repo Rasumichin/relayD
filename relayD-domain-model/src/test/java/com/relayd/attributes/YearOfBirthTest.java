@@ -66,7 +66,7 @@ public class YearOfBirthTest {
 	}
 
 	@Test
-	public void testGetHashCode() {
+	public void testHashCode() {
 		YearOfBirth sut = YearOfBirth.newInstance(1971);
 
 		int hashCode = sut.hashCode();
@@ -111,9 +111,9 @@ public class YearOfBirthTest {
 	public void testEqualsWithValueIsNull() {
 		YearOfBirth sut = YearOfBirth.newInstance(1971);
 		sut.value = null;
-		YearOfBirth secondYearOfBirth = YearOfBirth.newInstance(1971);
+		YearOfBirth secondSut = YearOfBirth.newInstance(1971);
 
-		boolean result = sut.equals(secondYearOfBirth);
+		boolean result = sut.equals(secondSut);
 
 		assertFalse(result);
 	}
@@ -122,10 +122,10 @@ public class YearOfBirthTest {
 	public void testEqualsWithBothValuesAreNull() {
 		YearOfBirth sut = YearOfBirth.newInstance(1971);
 		sut.value = null;
-		YearOfBirth secondYearOfBirth = YearOfBirth.newInstance(1971);
-		secondYearOfBirth.value = null;
+		YearOfBirth secondSut = YearOfBirth.newInstance(1971);
+		secondSut.value = null;
 
-		boolean result = sut.equals(secondYearOfBirth);
+		boolean result = sut.equals(secondSut);
 
 		assertTrue(result);
 	}
@@ -133,9 +133,9 @@ public class YearOfBirthTest {
 	@Test
 	public void testEqualsWithTwoDiffrentValues() {
 		YearOfBirth sut = YearOfBirth.newInstance(1971);
-		YearOfBirth secondYearOfBirth = YearOfBirth.newInstance(1987);
+		YearOfBirth secondSut = YearOfBirth.newInstance(1987);
 
-		boolean result = sut.equals(secondYearOfBirth);
+		boolean result = sut.equals(secondSut);
 
 		assertFalse(result);
 	}
@@ -143,9 +143,9 @@ public class YearOfBirthTest {
 	@Test
 	public void testEqualsWithSameValues() {
 		YearOfBirth sut = YearOfBirth.newInstance(1971);
-		YearOfBirth secondYearOfBirth = YearOfBirth.newInstance(1971);
+		YearOfBirth secondSut = YearOfBirth.newInstance(1971);
 
-		boolean result = sut.equals(secondYearOfBirth);
+		boolean result = sut.equals(secondSut);
 
 		assertTrue(result);
 	}

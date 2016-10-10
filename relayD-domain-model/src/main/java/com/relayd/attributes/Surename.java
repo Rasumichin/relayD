@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * @author schmollc (Christian@relayD.de)
  * @since 22.03.2016
- * status initial
+ *
  */
 public class Surename implements Serializable {
 	private static final long serialVersionUID = 1L;

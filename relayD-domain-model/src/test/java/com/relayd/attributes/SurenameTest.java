@@ -2,15 +2,21 @@ package com.relayd.attributes;
 
 import static org.junit.Assert.*;
 
+import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import org.junit.runners.MethodSorters;
 
 /**
- * @author  schmollc (Christian@cloud.franke-net.com)
+ * Jede lange Reise beginnt mit dem ersten Schritt
+ *  - Laotse
+ *
+ * @author  schmollc (Christian@relayd.de)
  * @since   22.03.2016
- * status   initial
+ *
  */
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class SurenameTest {
 
 	@Rule
@@ -18,10 +24,11 @@ public class SurenameTest {
 
 	@Test
 	public void testCreateInstance() {
-		final String NAME = "Jonas";
-		Surename surename = Surename.newInstance(NAME);
+		String expected = "Jonas";
+		Surename surename = Surename.newInstance(expected);
 
-		assertEquals(NAME, surename.toString());
+		String actual = surename.value;
+		assertEquals(expected, actual);
 	}
 
 	@Test
@@ -32,7 +39,17 @@ public class SurenameTest {
 	}
 
 	@Test
-	public void testGetHashCode() {
+	public void testToString() {
+		String name = "Jonas";
+		Surename surename = Surename.newInstance(name);
+
+		String actual = surename.toString();
+
+		assertEquals("Jonas", actual);
+	}
+
+	@Test
+	public void testHashCode() {
 		Surename sut = Surename.newInstance("Surename");
 
 		int hashCode = sut.hashCode();
@@ -77,9 +94,9 @@ public class SurenameTest {
 	public void testEqualsWithValueIsNull() {
 		Surename sut = Surename.newInstance("Surename");
 		sut.value = null;
-		Surename secondName = Surename.newInstance("Surename");
+		Surename secondSut = Surename.newInstance("Surename");
 
-		boolean result = sut.equals(secondName);
+		boolean result = sut.equals(secondSut);
 
 		assertFalse(result);
 	}
@@ -88,10 +105,10 @@ public class SurenameTest {
 	public void testEqualsWithBothValuesAreNull() {
 		Surename sut = Surename.newInstance("Surename");
 		sut.value = null;
-		Surename secondName = Surename.newInstance("Surename");
-		secondName.value = null;
+		Surename secondSut = Surename.newInstance("Surename");
+		secondSut.value = null;
 
-		boolean result = sut.equals(secondName);
+		boolean result = sut.equals(secondSut);
 
 		assertTrue(result);
 	}
@@ -99,9 +116,9 @@ public class SurenameTest {
 	@Test
 	public void testEqualsWithTwoDiffrentValues() {
 		Surename sut = Surename.newInstance("Surename");
-		Surename secondName = Surename.newInstance("NotSurename");
+		Surename secondSut = Surename.newInstance("NotSurename");
 
-		boolean result = sut.equals(secondName);
+		boolean result = sut.equals(secondSut);
 
 		assertFalse(result);
 	}
@@ -109,9 +126,9 @@ public class SurenameTest {
 	@Test
 	public void testEqualsWithSameValues() {
 		Surename sut = Surename.newInstance("Surename");
-		Surename secondName = Surename.newInstance("Surename");
+		Surename secondSut = Surename.newInstance("Surename");
 
-		boolean result = sut.equals(secondName);
+		boolean result = sut.equals(secondSut);
 
 		assertTrue(result);
 	}
