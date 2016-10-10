@@ -19,49 +19,39 @@
 		<p:growl
 			id="growl"
 			showDetail="true" />
-
 		<p />
 
-		<p:themeSwitcher style="width:150px">
-			<f:selectItem
-				itemLabel="Choose Theme"
-				itemValue="" />
-			<f:selectItems value="#{settingsPageBean.themes}" />
-		</p:themeSwitcher>
-
-		<p:themeSwitcher>
-			<f:selectItem
-				itemLabel="Choose Theme"
-				itemValue="" />
-			<f:selectItems
-				value="#{settingsPageBean.themes}"
-				var="theme"
-				itemLabel="#{theme.name}"
-				itemValue="#{theme}" />
-			<p:column>
-				<p:graphicImage value="/images/themes/#{theme.image}" />
-			</p:column>
-			<p:column>
-				#{t.name}
-			</p:column>
-		</p:themeSwitcher>
 		<p:panel
 			id="panel"
 			header="Settings"
 			style="margin-bottom:10px;">
 			<h:panelGrid
-				columns="1"
+				columns="2"
 				id="inputgrid"
 				cellpadding="5">
-				<p:outputLabel value="Version: #{settingsPageBean.version}" />
-				<p:outputLabel value="mail Endung: @todo" />
-				<p:outputLabel value="Gateway: FILE (todo) " />
-				<p:outputLabel value="Anmeldeschluß: 01.04.2017 (todo) " />
+				<p:outputLabel value="Version:" />
+				<p:outputLabel value="#{settingsPageBean.version}" />
+				<p:outputLabel value="mail Endung: " />
+				<p:outputLabel value="@todo" />
+				<p:outputLabel value="Gateway: " />
+				<p:outputLabel value="FILE (todo) " />
+				<p:outputLabel value="Anmeldeschluß: " />
+				<p:outputLabel value="01.04.2017 (todo) " />
+				<p:outputLabel value="Theme: " />
+				<p:themeSwitcher style="width:150px" effect="fade">
+					<f:selectItem
+						itemLabel="Choose Theme"
+						itemValue="" />
+					<f:selectItems value="#{settingsPageBean.themes}" />
+					<p:ajax
+						global="false"
+						listener="#{settingsPageBean.saveTheme}" />
+				</p:themeSwitcher>
 			</h:panelGrid>
 		</p:panel>
-		
+
 		<ui:include src="/dock.xhtml" />
-	
+
 	</h:form>
 </h:body>
 </html>

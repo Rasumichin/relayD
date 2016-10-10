@@ -7,6 +7,9 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.event.AjaxBehaviorEvent;
+
+import org.primefaces.component.themeswitcher.ThemeSwitcher;
 
 import com.relayd.web.theme.Theme;
 import com.relayd.web.theme.ThemeService;
@@ -22,6 +25,8 @@ public class SettingsPageBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private List<Theme> themes;
+
+	private String theme = "bluesky";
 
 	@ManagedProperty("#{themeService}")
 	ThemeService service;
@@ -41,5 +46,17 @@ public class SettingsPageBean implements Serializable {
 
 	public String getVersion() {
 		return "1.0 - Codename Augustiner";
+	}
+
+	public String getTheme() {
+		return theme;
+	}
+
+	public void setTheme(String aTheme) {
+		theme = aTheme;
+	}
+
+	public void saveTheme(AjaxBehaviorEvent ajax) {
+		setTheme((String) ((ThemeSwitcher) ajax.getSource()).getValue());
 	}
 }
