@@ -66,9 +66,9 @@ public class Relay implements Serializable {
 		return track;
 	}
 
-	public void addPerson(Person person, Position position) {
+	public void addPersonRelay(PersonRelay person, Position position) {
 		Track track = getTrackFor(position);
-		track.setPerson(person);
+		track.setPersonRelay(person);
 	}
 
 	@Override

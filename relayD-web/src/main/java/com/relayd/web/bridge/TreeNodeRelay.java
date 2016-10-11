@@ -2,34 +2,44 @@ package com.relayd.web.bridge;
 
 import java.io.Serializable;
 
+import com.relayd.PersonRelay;
+import com.relayd.attributes.Relayname;
+
 /**
  * Klasse übernommen aus dem Primefaces-Beispiel.
+ *
+ * @author schmollc (Christian@relayd.de)
+ * @since 10.10.2016
  */
 public class TreeNodeRelay implements Serializable, Comparable<TreeNodeRelay> {
 	private static final long serialVersionUID = 1L;
 
-	private String name;
-	private String participant;
+	private Relayname name;
+	private PersonRelay participant;
 
-	public TreeNodeRelay(String aName, String aParticipant) {
-		name = aName;
+	// TODO -schmollc- Treenode ist entweder ein Relay oder ein Participant!
+	public TreeNodeRelay(Relayname aRelayname) {
+		name = aRelayname;
+	}
+
+	public TreeNodeRelay(PersonRelay aParticipant) {
 		participant = aParticipant;
 	}
 
-	public String getName() {
+	public static TreeNodeRelay newInstance(Relayname relayname) {
+		return new TreeNodeRelay(relayname);
+	}
+
+	public static TreeNodeRelay newInstance(PersonRelay personRelay) {
+		return new TreeNodeRelay(personRelay);
+	}
+
+	public Relayname getName() {
 		return name;
 	}
 
-	public void setName(String aName) {
-		name = aName;
-	}
-
-	public String getParticipant() {
+	public PersonRelay getParticipant() {
 		return participant;
-	}
-
-	public void setParticipant(String aParticipant) {
-		participant = aParticipant;
 	}
 
 	//Eclipse Generated hashCode and equals
@@ -73,7 +83,7 @@ public class TreeNodeRelay implements Serializable, Comparable<TreeNodeRelay> {
 
 	@Override
 	public String toString() {
-		return name;
+		return name.toString();
 	}
 
 	@Override

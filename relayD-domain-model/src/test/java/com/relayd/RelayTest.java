@@ -14,8 +14,10 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import com.relayd.attributes.Distance;
+import com.relayd.attributes.Forename;
 import com.relayd.attributes.Position;
 import com.relayd.attributes.Relayname;
+import com.relayd.attributes.Surename;
 
 /**
  * Test code is just as important as production code.
@@ -92,13 +94,15 @@ public class RelayTest {
 	public void testAddPerson() {
 		Relay sut = Relay.newInstance();
 
-		Person expected = new PersonBuilder().withForename("Justus").withSurename("Jonas").build();
+		PersonRelay expected = PersonRelay.newInstance();
+		expected.setForename(Forename.newInstance("Justus"));
+		expected.setSurename(Surename.newInstance("Jonas"));
 
-		sut.addPerson(expected, Position.FIRST);
+		sut.addPersonRelay(expected, Position.FIRST);
 
 		Track track = sut.getTrackFor(Position.FIRST);
 
-		Person actual = track.getPerson();
+		PersonRelay actual = track.getPersonRelay();
 
 		assertEquals(expected, actual);
 	}

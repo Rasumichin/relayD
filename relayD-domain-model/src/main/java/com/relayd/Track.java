@@ -17,7 +17,7 @@ public class Track implements Serializable {
 	private UUID uuid;
 	private Distance distance;
 	private Comment comment;
-	private Person person;
+	private PersonRelay person;
 
 	private Track(Distance aDistance, Comment aComment) {
 		uuid = UUID.randomUUID();
@@ -34,12 +34,12 @@ public class Track implements Serializable {
 		return new Track(aDistance, aComment);
 	}
 
-	public Person getPerson() {
+	public PersonRelay getPersonRelay() {
 		return person;
 	}
 
-	public void setPerson(Person aPerson) {
-		person = aPerson;
+	public void setPersonRelay(PersonRelay aPersonRelay) {
+		person = aPersonRelay;
 	}
 
 	@Override
