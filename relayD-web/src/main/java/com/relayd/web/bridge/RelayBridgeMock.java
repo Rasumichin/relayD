@@ -23,14 +23,15 @@ import com.relayd.attributes.Surename;
 public class RelayBridgeMock implements RelayBridge {
 
 	@Override
-	public TreeNode allRelays() {
+	public TreeNode all() {
 		TreeNode root = new DefaultTreeNode(new TreeNodeRelay("Files", "-"), null);
 
 		for (Relay relay : getAllRelays()) {
 
+			// Methodik übernommen aus dem Primefaces-Beispiel.
 			TreeNode relayTreeNode = new DefaultTreeNode(new TreeNodeRelay(relay.getRelayname().toString(), "-"), root);
 
-			// TODO -schmollc/lotz- Sieht nach Trainwreck aus. Aber wenn man direkt auf Person geht... Dann "verschwindet" die Person...
+			// TODO -schmollc/lotz- Sieht nach Trainwreck aus. Aber wenn man direkt auf Person geht... Dann "verschwindet" der Track...
 			// Moment.. mmm... dann würde die toString von Track halt sagen: "8.3km, Justus, Jonas, usw.."... mmmmm.....
 			TreeNode trackOne = new DefaultTreeNode("Etappe 1", new TreeNodeRelay("", relay.getTrackFor(Position.FIRST).getPerson().toString()), relayTreeNode);
 			TreeNode trackTwo = new DefaultTreeNode("Etappe 2", new TreeNodeRelay("", relay.getTrackFor(Position.SECOND).getPerson().toString()), relayTreeNode);
@@ -105,5 +106,4 @@ public class RelayBridgeMock implements RelayBridge {
 
 		return relay;
 	}
-
 }

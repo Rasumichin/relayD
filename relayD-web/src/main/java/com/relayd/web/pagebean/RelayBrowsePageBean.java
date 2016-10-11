@@ -37,7 +37,7 @@ public class RelayBrowsePageBean implements Serializable {
 
 	public RelayBrowsePageBean() {
 		relayBridge = new RelayBridgeMock();
-		root = relayBridge.allRelays();
+		root = relayBridge.all();
 	}
 
 	public RelayEditPageBean getRelayEditPageBean() {

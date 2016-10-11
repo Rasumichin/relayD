@@ -3,7 +3,7 @@ package com.relayd.web.bridge;
 import java.io.Serializable;
 
 /**
- *
+ * Klasse übernommen aus dem Primefaces-Beispiel.
  */
 public class TreeNodeRelay implements Serializable, Comparable<TreeNodeRelay> {
 	private static final long serialVersionUID = 1L;

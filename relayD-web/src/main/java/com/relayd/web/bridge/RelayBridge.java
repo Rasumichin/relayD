@@ -9,5 +9,5 @@ import org.primefaces.model.TreeNode;
  */
 public interface RelayBridge {
 
-	TreeNode allRelays();
+	TreeNode all();
 }
