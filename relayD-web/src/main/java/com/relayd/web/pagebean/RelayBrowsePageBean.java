@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.faces.application.FacesMessage;
 import javax.faces.application.FacesMessage.Severity;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
@@ -31,9 +32,20 @@ public class RelayBrowsePageBean implements Serializable {
 
 	private RelayBridge relayBridge = null;
 
+	@ManagedProperty(value = "#{relayEditPageBean}")
+	private RelayEditPageBean relayEditPageBean;
+
 	public RelayBrowsePageBean() {
 		relayBridge = new RelayBridgeMock();
 		root = relayBridge.allRelays();
+	}
+
+	public RelayEditPageBean getRelayEditPageBean() {
+		return relayEditPageBean;
+	}
+
+	public void setRelayEditPageBean(RelayEditPageBean aRelayEditPageBean) {
+		relayEditPageBean = aRelayEditPageBean;
 	}
 
 	public TreeNode getSelectedNode() {
@@ -49,7 +61,7 @@ public class RelayBrowsePageBean implements Serializable {
 	}
 
 	public void add(@SuppressWarnings("unused") ActionEvent actionEvent) {
-		showMessage(FacesMessage.SEVERITY_ERROR, NOT_POSSIBLE, "Not implemented yet!");
+		getRelayEditPageBean().openDialogForCreateRelay();
 	}
 
 	public void edit(@SuppressWarnings("unused") ActionEvent actionEvent) {
@@ -63,5 +75,9 @@ public class RelayBrowsePageBean implements Serializable {
 	void showMessage(Severity severityInfo, String summary, String textMessage) {
 		FacesMessage message = new FacesMessage(severityInfo, summary, textMessage);
 		FacesContext.getCurrentInstance().addMessage(null, message);
+	}
+
+	public void cancelEditDialog() {
+		getRelayEditPageBean().cancel();
 	}
 }
