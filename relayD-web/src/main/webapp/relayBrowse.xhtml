@@ -21,8 +21,27 @@
 			showDetail="true" />
 
 		<div class="divStartHeader"></div>
-	
+		<p:toolbar>
+			<f:facet name="left">
+				<p:commandButton
+					actionListener="#{relayBrowsePageBean.add}"
+					update="form"
+					value="+" />
+				<p:commandButton
+					actionListener="#{relayBrowsePageBean.remove}" 
+					update="form"
+					value="-" />
+				<p:commandButton
+					actionListener="#{relayBrowsePageBean.edit}"
+					icon="ui-icon-folder-open"
+					update="form" />
+			</f:facet>
+		</p:toolbar>
+
 		<p:treeTable
+			id="relayTable"
+			selection="#{relayBrowsePageBean.selectedNode}"
+			selectionMode="single"
 			value="#{relayBrowsePageBean.root}"
 			var="relay">
 			<f:facet name="header">
