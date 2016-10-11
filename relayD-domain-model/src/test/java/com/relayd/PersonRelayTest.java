@@ -73,4 +73,15 @@ public class PersonRelayTest {
 		assertEquals("[surename] not correct!", expected, actual);
 	}
 
+	@Test
+	public void testToString() {
+		PersonRelay sut = PersonRelay.newInstance();
+		sut.setSurename(Surename.newInstance("Jonas"));
+		sut.setForename(Forename.newInstance("Justus"));
+
+		String personAsString = sut.toString();
+
+		assertEquals("Justus Jonas", personAsString);
+	}
+
 }

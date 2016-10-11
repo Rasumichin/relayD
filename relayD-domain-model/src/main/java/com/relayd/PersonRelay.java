@@ -46,4 +46,8 @@ public class PersonRelay implements Serializable {
 		forename = aForename;
 	}
 
+	@Override
+	public String toString() {
+		return getForename() + " " + getSurename();
+	}
 }
