@@ -35,34 +35,6 @@ public class TrackTest {
 	}
 
 	@Test
-	public void testFirstTrack() {
-		Track sut = Track.firstTrack;
-
-		assertEquals("11.30km ", sut.toString());
-	}
-
-	@Test
-	public void testSecondTrack() {
-		Track sut = Track.secondTrack;
-
-		assertEquals("8.60km ", sut.toString());
-	}
-
-	@Test
-	public void testThirdTrack() {
-		Track sut = Track.thirdTrack;
-
-		assertEquals("9.20km ", sut.toString());
-	}
-
-	@Test
-	public void testFourthTrack() {
-		Track sut = Track.fourthTrack;
-
-		assertEquals("13.10km ", sut.toString());
-	}
-
-	@Test
 	public void testCreateInstanceForOneParameter() {
 		Distance expectedDistance = Distance.newInstance(BigDecimal.TEN);
 

@@ -1,12 +1,14 @@
 package com.relayd;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.UUID;
 
+import com.relayd.attributes.Distance;
 import com.relayd.attributes.Position;
 import com.relayd.attributes.Relayname;
 
@@ -27,10 +29,11 @@ public class Relay implements Serializable {
 	private Relay(Integer aYear) {
 		uuid = UUID.randomUUID();
 		year = aYear;
-		tracks.add(Track.firstTrack);
-		tracks.add(Track.secondTrack);
-		tracks.add(Track.thirdTrack);
-		tracks.add(Track.fourthTrack);
+
+		tracks.add(Track.newInstance(Distance.newInstance(new BigDecimal("11.3"))));
+		tracks.add(Track.newInstance(Distance.newInstance(new BigDecimal("8.6"))));
+		tracks.add(Track.newInstance(Distance.newInstance(new BigDecimal("9.2"))));
+		tracks.add(Track.newInstance(Distance.newInstance(new BigDecimal("13.1"))));
 	}
 
 	public static Relay newInstance() {

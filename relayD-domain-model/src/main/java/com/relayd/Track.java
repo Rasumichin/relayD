@@ -1,7 +1,6 @@
 package com.relayd;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.UUID;
 
 import com.relayd.attributes.Comment;
@@ -14,11 +13,6 @@ import com.relayd.attributes.Distance;
  */
 public class Track implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	public static final Track firstTrack = Track.newInstance(Distance.newInstance(new BigDecimal("11.3")));
-	public static final Track secondTrack = Track.newInstance(Distance.newInstance(new BigDecimal("8.6")));
-	public static final Track thirdTrack = Track.newInstance(Distance.newInstance(new BigDecimal("9.2")));
-	public static final Track fourthTrack = Track.newInstance(Distance.newInstance(new BigDecimal("13.1")));
 
 	private UUID uuid;
 	private Distance distance;

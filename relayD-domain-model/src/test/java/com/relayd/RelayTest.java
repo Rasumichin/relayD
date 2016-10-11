@@ -11,7 +11,6 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import com.relayd.attributes.Position;
 import com.relayd.attributes.Relayname;
 
 /**
@@ -73,30 +72,6 @@ public class RelayTest {
 		Relayname actual = sut.getRelayname();
 
 		assertEquals("[Relayname] not corret!", expected, actual);
-	}
-
-	@Test
-	public void testGetTrack_ForFirstPosition() {
-		Relay sut = Relay.newInstance();
-
-		Track actual = sut.getTrackFor(Position.FIRST);
-
-		Track expected = Track.firstTrack;
-
-		assertNotNull("Expected valid Track Object!", actual);
-		assertEquals(expected, actual);
-	}
-
-	@Test
-	public void testGetTrack_ForSecondPosition() {
-		Relay sut = Relay.newInstance();
-
-		Track actual = sut.getTrackFor(Position.SECOND);
-
-		Track expected = Track.secondTrack;
-
-		assertNotNull("Expected valid Track Object!", actual);
-		assertEquals(expected, actual);
 	}
 
 	@Test
