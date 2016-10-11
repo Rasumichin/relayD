@@ -147,7 +147,7 @@ public class PersonBrowsePageBean {
 
 	public void onEditClosed(@SuppressWarnings("unused") SelectEvent event) {
 		if (canceled) {
-			showMessage(FacesMessage.SEVERITY_INFO, "Canceld!", "");
+			showMessage(FacesMessage.SEVERITY_INFO, "Canceled!", "");
 			canceled = false;
 		} else if (isRowSelectedForOneRow()) {
 			showMessage(FacesMessage.SEVERITY_INFO, "Saved!", getSelectedPerson().toString());
