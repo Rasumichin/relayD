@@ -3,14 +3,18 @@ package com.relayd;
 import static org.junit.Assert.*;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.UUID;
 
 import org.junit.FixMethodOrder;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import com.relayd.attributes.Distance;
+import com.relayd.attributes.Position;
 import com.relayd.attributes.Relayname;
 
 /**
@@ -72,6 +76,31 @@ public class RelayTest {
 		Relayname actual = sut.getRelayname();
 
 		assertEquals("[Relayname] not corret!", expected, actual);
+	}
+
+	@Test
+	@Ignore("Noch unsicher wie dieser Test lauten muss da noch nicht socher WANN ein Track == Track ist ")
+	public void testGetTrackFor_PositionFirst() {
+		Relay sut = Relay.newInstance();
+
+		Track actual = sut.getTrackFor(Position.FIRST);
+		Track expected = Track.newInstance(Distance.newInstance(new BigDecimal("11.30")));
+		assertEquals(expected, actual);
+	}
+
+	@Test
+	public void testAddPerson() {
+		Relay sut = Relay.newInstance();
+
+		Person expected = new PersonBuilder().withForename("Justus").withSurename("Jonas").build();
+
+		sut.addPerson(expected, Position.FIRST);
+
+		Track track = sut.getTrackFor(Position.FIRST);
+
+		Person actual = track.getPerson();
+
+		assertEquals(expected, actual);
 	}
 
 	@Test

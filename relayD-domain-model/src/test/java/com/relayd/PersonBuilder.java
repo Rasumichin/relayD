@@ -30,6 +30,16 @@ public class PersonBuilder {
 		return this;
 	}
 
+	PersonBuilder withForename(String aForename) {
+		forename = Forename.newInstance(aForename);
+		return this;
+	}
+
+	PersonBuilder withSurename(String aSurename) {
+		surename = Surename.newInstance(aSurename);
+		return this;
+	}
+
 	Person build() {
 		Person person = Person.newInstance();
 		person.setSurename(surename);

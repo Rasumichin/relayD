@@ -66,6 +66,11 @@ public class Relay implements Serializable {
 		return track;
 	}
 
+	public void addPerson(Person person, Position position) {
+		Track track = getTrackFor(position);
+		track.setPerson(person);
+	}
+
 	@Override
 	public String toString() {
 		return "Relay: " + getRelayname();
