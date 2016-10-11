@@ -8,6 +8,8 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import org.primefaces.model.TreeNode;
+
 import com.relayd.Relay;
 import com.relayd.web.bridge.RelayBridge;
 import com.relayd.web.bridge.RelayBridgeMock;
@@ -21,6 +23,7 @@ import com.relayd.web.bridge.RelayBridgeMock;
 @SessionScoped
 public class RelayBrowsePageBean implements Serializable {
 	private static final long serialVersionUID = 1L;
+	private TreeNode root;
 
 	private List<Relay> searchResult = new ArrayList<Relay>();
 
@@ -30,6 +33,7 @@ public class RelayBrowsePageBean implements Serializable {
 
 	public RelayBrowsePageBean() {
 		relayBridge = new RelayBridgeMock();
+		root = relayBridge.allRelays();
 	}
 
 	@PostConstruct
@@ -55,5 +59,9 @@ public class RelayBrowsePageBean implements Serializable {
 
 	public Integer getNumberOfResults() {
 		return searchResult == null ? 0 : searchResult.size();
+	}
+
+	public TreeNode getRoot() {
+		return root;
 	}
 }

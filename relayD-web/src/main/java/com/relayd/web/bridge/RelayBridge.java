@@ -2,6 +2,8 @@ package com.relayd.web.bridge;
 
 import java.util.List;
 
+import org.primefaces.model.TreeNode;
+
 import com.relayd.Relay;
 
 /**
@@ -11,4 +13,6 @@ import com.relayd.Relay;
  */
 public interface RelayBridge {
 	List<Relay> all();
+
+	TreeNode allRelays();
 }
