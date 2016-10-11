@@ -1,5 +1,6 @@
 package com.relayd.web.pagebean;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -34,7 +35,9 @@ import com.relayd.web.bridge.PersonBridgeImpl;
  */
 @ManagedBean
 @SessionScoped
-public class PersonBrowsePageBean {
+public class PersonBrowsePageBean implements Serializable {
+	private static final long serialVersionUID = -7684007777613912395L;
+
 	// Should be I18N
 	private static final String PLEASE_SELECT_A_ROW = "Please select one row!";
 	private static final String NOT_POSSIBLE = "Not Possible!";
