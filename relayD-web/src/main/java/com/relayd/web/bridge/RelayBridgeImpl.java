@@ -12,15 +12,17 @@ import com.relayd.attributes.Forename;
 import com.relayd.attributes.Position;
 import com.relayd.attributes.Relayname;
 import com.relayd.attributes.Surename;
+import com.relayd.ejb.GatewayType;
 
 /**
- * Ugly, ugly! :)
- *
  * @author schmollc (Christian@relayd.de)
- * @since 10.10.2016
+ * @since 14.10.2016
  *
  */
-public class RelayBridgeMock implements RelayBridge {
+public class RelayBridgeImpl implements RelayBridge {
+
+	//	private PersonGateway gateway = null;
+	private GatewayType gatewayType = GatewayType.MEMORY;
 
 	@Override
 	public TreeNode all() {
@@ -105,5 +107,10 @@ public class RelayBridgeMock implements RelayBridge {
 		relay.addPersonRelay(person, Position.FOURTH);
 
 		return relay;
+	}
+
+	@Override
+	public GatewayType getGatewayType() {
+		return gatewayType;
 	}
 }

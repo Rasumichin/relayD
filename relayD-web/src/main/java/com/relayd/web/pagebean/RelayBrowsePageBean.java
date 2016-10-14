@@ -13,7 +13,7 @@ import javax.faces.event.ActionEvent;
 import org.primefaces.model.TreeNode;
 
 import com.relayd.web.bridge.RelayBridge;
-import com.relayd.web.bridge.RelayBridgeMock;
+import com.relayd.web.bridge.RelayBridgeImpl;
 
 /**
  * @author schmollc (Christian@relayd.de)
@@ -36,7 +36,7 @@ public class RelayBrowsePageBean implements Serializable {
 	private RelayEditPageBean relayEditPageBean;
 
 	public RelayBrowsePageBean() {
-		relayBridge = new RelayBridgeMock();
+		relayBridge = new RelayBridgeImpl();
 		root = relayBridge.all();
 	}
 
