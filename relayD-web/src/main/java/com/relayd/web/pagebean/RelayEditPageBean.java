@@ -10,6 +10,8 @@ import org.primefaces.context.RequestContext;
 
 import com.relayd.Relay;
 import com.relayd.attributes.Relayname;
+import com.relayd.web.bridge.RelayBridge;
+import com.relayd.web.bridge.RelayBridgeImpl;
 
 /**
  * @author schmollc (Christian@relayd.de)
@@ -23,7 +25,10 @@ public class RelayEditPageBean implements Serializable {
 
 	private Relay workingRelay;
 
+	private RelayBridge relayBridge;
+
 	public RelayEditPageBean() {
+		relayBridge = new RelayBridgeImpl();
 	}
 
 	void closeDialog() {
@@ -47,8 +52,18 @@ public class RelayEditPageBean implements Serializable {
 		openDialog();
 	}
 
-	private void prepareNewRelay() {
-		workingRelay = Relay.newInstance();
+	void prepareNewRelay() {
+		workingRelay = createNewRelay();
+	}
+
+	Relay createNewRelay() {
+		Relay relay = Relay.newInstance();
+		return relay;
+	}
+
+	public void save() {
+		persistRelay();
+		closeDialog();
 	}
 
 	void openDialog() {
@@ -56,4 +71,11 @@ public class RelayEditPageBean implements Serializable {
 		RequestContext.getCurrentInstance().openDialog(NavigationConstants.RELAY_EDIT_DIALOG_ID, options, null);
 	}
 
+	void persistRelay() {
+		getBridge().create(workingRelay);
+	}
+
+	private RelayBridge getBridge() {
+		return relayBridge;
+	}
 }

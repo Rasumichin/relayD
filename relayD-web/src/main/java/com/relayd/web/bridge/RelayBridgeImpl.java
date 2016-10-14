@@ -50,4 +50,9 @@ public class RelayBridgeImpl implements RelayBridge {
 	public GatewayType getGatewayType() {
 		return gatewayType;
 	}
+
+	@Override
+	public void create(Relay relay) {
+		gateway.set(relay);
+	}
 }

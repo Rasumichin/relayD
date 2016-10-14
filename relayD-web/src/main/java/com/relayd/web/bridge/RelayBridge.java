@@ -2,6 +2,7 @@ package com.relayd.web.bridge;
 
 import org.primefaces.model.TreeNode;
 
+import com.relayd.Relay;
 import com.relayd.ejb.GatewayType;
 
 /**
@@ -13,5 +14,8 @@ public interface RelayBridge {
 
 	TreeNode all();
 
+	void create(Relay aWorkingRelay);
+
 	GatewayType getGatewayType();
+
 }

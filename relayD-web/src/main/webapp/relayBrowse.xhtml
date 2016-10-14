@@ -26,15 +26,26 @@
 				<p:commandButton
 					actionListener="#{relayBrowsePageBean.add}"
 					update="form"
-					value="+" />
+					value="+">
+					<p:ajax
+						event="dialogReturn"
+						listener="#{relayBrowsePageBean.onEditClosed}"
+						update="form" />
+				</p:commandButton>
 				<p:commandButton
-					actionListener="#{relayBrowsePageBean.remove}" 
+					actionListener="#{relayBrowsePageBean.remove}"
 					update="form"
 					value="-" />
 				<p:commandButton
 					actionListener="#{relayBrowsePageBean.edit}"
 					icon="ui-icon-folder-open"
-					update="form" />
+					update="form">
+					<p:ajax
+						event="dialogReturn"
+						listener="#{personBrowsePageBean.onEditClosed}"
+						update="form" />
+				</p:commandButton>
+
 			</f:facet>
 		</p:toolbar>
 

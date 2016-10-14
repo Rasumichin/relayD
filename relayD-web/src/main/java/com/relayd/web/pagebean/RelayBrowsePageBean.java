@@ -10,6 +10,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
+import org.primefaces.event.SelectEvent;
 import org.primefaces.model.TreeNode;
 
 import com.relayd.web.bridge.RelayBridge;
@@ -30,14 +31,18 @@ public class RelayBrowsePageBean implements Serializable {
 
 	private TreeNode selectedTreeNode;
 
-	private RelayBridge relayBridge = null;
+	private RelayBridge bridge = null;
 
 	@ManagedProperty(value = "#{relayEditPageBean}")
 	private RelayEditPageBean relayEditPageBean;
 
 	public RelayBrowsePageBean() {
-		relayBridge = new RelayBridgeImpl();
-		root = relayBridge.all();
+		bridge = new RelayBridgeImpl();
+		refreshRelays();
+	}
+
+	private void refreshRelays() {
+		root = bridge.all();
 	}
 
 	public RelayEditPageBean getRelayEditPageBean() {
@@ -79,5 +84,9 @@ public class RelayBrowsePageBean implements Serializable {
 
 	public void cancelEditDialog() {
 		getRelayEditPageBean().cancel();
+	}
+
+	public void onEditClosed(@SuppressWarnings("unused") SelectEvent event) {
+		refreshRelays();
 	}
 }

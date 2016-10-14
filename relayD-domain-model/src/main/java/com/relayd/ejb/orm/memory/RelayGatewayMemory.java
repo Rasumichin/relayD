@@ -32,14 +32,15 @@ public class RelayGatewayMemory implements RelayGateway {
 	public List<Relay> getAll() {
 		ArrayList<Relay> relaysAsList = new ArrayList<Relay>(relays.values());
 		return relaysAsList;
-		/*
-				List<Relay> result = new ArrayList<Relay>();
-		
-				result.add(createDie4());
-				result.add(createDieFanta4());
-		
-				return result;
-			*/
+	}
+
+	public List<Relay> getAllMock() {
+		List<Relay> result = new ArrayList<Relay>();
+
+		result.add(createDie4());
+		result.add(createDieFanta4());
+
+		return result;
 	}
 
 	private Relay createDie4() {
