@@ -1,0 +1,46 @@
+package com.relayd.ejb;
+
+import static org.junit.Assert.*;
+
+import java.util.List;
+
+import org.junit.Test;
+
+import com.relayd.Relay;
+
+/**
+ * What makes a clean test?
+ * Three things.
+ * Readability, readability, and readability.
+ *  - Robert C. Martin
+ *
+ * @author  schmollc (Christian@relayd.de)
+ * @since   14.10.2016
+ *
+ */
+public abstract class RelayGatewayTest {
+
+	public abstract RelayGateway getSut();
+
+	@Test
+	public void set() {
+		List<Relay> someRelays = getSut().getAll();
+		assertNotNull("Expect valid instance!", someRelays);
+
+		boolean result = someRelays.isEmpty();
+
+		assertTrue("The List of relays must be empty!", result);
+
+		Relay relay = Relay.newInstance();
+
+		getSut().set(relay);
+
+		someRelays = getSut().getAll();
+		assertNotNull("Expect valid instance!", someRelays);
+
+		result = someRelays.isEmpty();
+
+		assertFalse("The List of relays should contain data!", result);
+
+	}
+}

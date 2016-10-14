@@ -1,7 +1,10 @@
 package com.relayd.ejb.orm.memory;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 import com.relayd.PersonRelay;
 import com.relayd.Relay;
@@ -18,14 +21,25 @@ import com.relayd.ejb.RelayGateway;
  */
 public class RelayGatewayMemory implements RelayGateway {
 
+	static Map<UUID, Relay> relays = new HashMap<UUID, Relay>();
+
+	@Override
+	public void set(Relay relay) {
+		relays.put(relay.getUuid(), relay);
+	}
+
 	@Override
 	public List<Relay> getAll() {
-		List<Relay> result = new ArrayList<Relay>();
-
-		result.add(createDie4());
-		result.add(createDieFanta4());
-
-		return result;
+		ArrayList<Relay> relaysAsList = new ArrayList<Relay>(relays.values());
+		return relaysAsList;
+		/*
+				List<Relay> result = new ArrayList<Relay>();
+		
+				result.add(createDie4());
+				result.add(createDieFanta4());
+		
+				return result;
+			*/
 	}
 
 	private Relay createDie4() {
@@ -82,5 +96,4 @@ public class RelayGatewayMemory implements RelayGateway {
 
 		return relay;
 	}
-
 }

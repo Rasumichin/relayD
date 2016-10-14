@@ -11,4 +11,6 @@ import com.relayd.Relay;
  */
 public interface RelayGateway {
 	List<Relay> getAll();
+
+	void set(Relay aRelay);
 }
