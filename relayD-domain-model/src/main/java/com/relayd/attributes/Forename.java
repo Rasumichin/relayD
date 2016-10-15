@@ -11,7 +11,7 @@ import java.io.Serializable;
 public class Forename implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	String value = "";
+	private String value;
 	
 	private Forename() {
 	}
@@ -25,14 +25,11 @@ public class Forename implements Serializable {
 	 * Bloch, Joshua, Effective Java, 2nd Edition, Item 1, p. 5
 	 */
 	static public Forename newInstance(String forename) {
-		validate(forename);
-		return new Forename(forename);
-	}
-
-	private static void validate(String forename) {
-		if (forename == null) {
-			throw new IllegalArgumentException("[forename] must not be 'null'.");
+		if (forename == null || forename.trim().isEmpty()) {
+			return NullObjectForename.instance();
 		}
+
+		return new Forename(forename);
 	}
 
 	@Override
