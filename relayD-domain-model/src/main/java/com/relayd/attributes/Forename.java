@@ -4,13 +4,17 @@ import java.io.Serializable;
 
 /**
  * @author  schmollc (Christian@relayd.de)
+ * @author  Rasumichin (Erik@relayd.de)
  * @since   22.03.2016
  *
  */
 public class Forename implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	String value = "";
+	private String value;
+	
+	private Forename() {
+	}
 
 	private Forename(String forename) {
 		super();
@@ -21,14 +25,15 @@ public class Forename implements Serializable {
 	 * Bloch, Joshua, Effective Java, 2nd Edition, Item 1, p. 5
 	 */
 	static public Forename newInstance(String forename) {
-		validate(forename);
+		if (forename == null || forename.trim().isEmpty()) {
+			return NullObjectForename.instance();
+		}
+
 		return new Forename(forename);
 	}
 
-	private static void validate(String forename) {
-		if (forename == null) {
-			throw new IllegalArgumentException("[forename] must not be 'null'.");
-		}
+	public boolean isEmpty() {
+		return false;
 	}
 
 	@Override
@@ -64,5 +69,25 @@ public class Forename implements Serializable {
 			return false;
 		}
 		return true;
+	}
+	
+	private static final class NullObjectForename extends Forename {
+		private static final long serialVersionUID = 6577776791000840413L;
+		
+		private static final NullObjectForename SINGLETON = new NullObjectForename();
+		
+		private static NullObjectForename instance() {
+			return SINGLETON;
+		}
+		
+		@Override
+		public boolean isEmpty() {
+			return true;
+		}
+
+		@Override
+		public String toString() {
+			return "";
+		}
 	}
 }

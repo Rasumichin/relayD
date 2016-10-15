@@ -4,22 +4,20 @@ import static org.junit.Assert.*;
 
 import java.io.Serializable;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.*;
+import org.junit.runners.MethodSorters;
 
 /**
  * Wissen und nichts tun ist wie nicht wissen.
  *  - Dalai Lama
  *
  * @author  schmollc (Christian@relayd.de)
+ * @author  Rasumichin (Erik@relayd.de)
  * @since   22.03.2016
  *
  */
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ForenameTest {
-
-	@Rule
-	public ExpectedException expectedException = ExpectedException.none();
 
 	@Test
 	public void testIsSerializable() {
@@ -29,119 +27,142 @@ public class ForenameTest {
 		@SuppressWarnings("cast")
 		boolean result = sut instanceof Serializable;
 
-		assertTrue("Class not Serializable!", result);
+		assertTrue("Class is not Serializable!", result);
 	}
 
 	@Test
-	public void testCreateInstance() {
-		String expected = "Justus";
+	public void testToString_usualValue() {
+		String expectedResult = "Marty";
+		Forename sut = Forename.newInstance(expectedResult);
 
-		Forename sut = Forename.newInstance(expected);
+		String actualResult = sut.toString();
 
-		String actual = sut.value;
-		assertEquals(expected, actual);
-
+		assertEquals("String representation is not correct!", expectedResult, actualResult);
 	}
 
 	@Test
-	public void testCreateInstanceWithIllegalNullValue() {
-		expectedException.expect(IllegalArgumentException.class);
-		expectedException.expectMessage("[forename] must not be 'null'.");
-		Forename.newInstance(null);
+	public void testToString_emptyValue() {
+		String expectedResult = "";
+		Forename sut = Forename.newInstance(expectedResult);
+
+		String actualResult = sut.toString();
+
+		assertEquals("String representation is not correct!", expectedResult, actualResult);
 	}
 
 	@Test
-	public void testToString() {
-		String forename = "Marty";
-		Forename sut = Forename.newInstance(forename);
+	public void testToString_blankValue() {
+		String blankForename = "   ";
+		Forename sut = Forename.newInstance(blankForename);
 
-		String result = sut.toString();
+		String expectedResult = "";
+		String actualResult = sut.toString();
 
-		assertEquals("Marty", result);
+		assertEquals("String representation is not correct!", expectedResult, actualResult);
 	}
 
 	@Test
-	public void testHashCode() {
-		Forename sut = Forename.newInstance("Forename");
+	public void testToString_nullValue() {
+		Forename sut = Forename.newInstance(null);
 
-		int hashCode = sut.hashCode();
+		String expectedResult = "";
+		String actualResult = sut.toString();
 
-		assertEquals(531705222, hashCode);
-
-		sut.value = null;
-
-		hashCode = sut.hashCode();
-
-		assertEquals(31, hashCode);
+		assertEquals("String representation is not correct!", expectedResult, actualResult);
 	}
 
 	@Test
-	public void testEqualsWithMyself() {
+	public void testEquals_withMyself() {
 		Forename sut = Forename.newInstance("Forename");
 
 		boolean result = sut.equals(sut);
 
-		assertTrue(result);
+		assertTrue("Comparing equality is not correct!", result);
 	}
 
 	@Test
-	public void testEqualsWithNull() {
+	public void testEquals_withNull() {
 		Forename sut = Forename.newInstance("Forename");
 
 		boolean result = sut.equals(null);
 
-		assertFalse(result);
+		assertFalse("Comparing equality is not correct!", result);
 	}
 
 	@Test
-	public void testEqualsWithNotCompatibleClass() {
+	public void testEquals_withIncompatibleClass() {
 		Forename sut = Forename.newInstance("Forename");
 
 		boolean result = sut.equals(new String());
 
-		assertFalse(result);
+		assertFalse("Comparing equality is not correct!", result);
 	}
 
 	@Test
-	public void testEqualsWithValueIsNull() {
+	public void testEquals_withNullForename() {
 		Forename sut = Forename.newInstance("Forename");
-		sut.value = null;
-		Forename secondSut = Forename.newInstance("Forename");
+		Forename nullForename = Forename.newInstance(null);
 
-		boolean result = sut.equals(secondSut);
-
-		assertFalse(result);
+		boolean result = sut.equals(nullForename);
+		
+		assertFalse("Comparing equality is not correct!", result);
 	}
 
 	@Test
-	public void testEqualsWithBothValuesAreNull() {
-		Forename sut = Forename.newInstance("Forename");
-		sut.value = null;
-		Forename secondSut = Forename.newInstance("Forename");
-		secondSut.value = null;
+	public void testEquals_withTwoNullForenames() {
+		Forename sut = Forename.newInstance(null);
+		Forename otherNullForename = Forename.newInstance(null);
 
-		boolean result = sut.equals(secondSut);
-
-		assertTrue(result);
+		boolean result = sut.equals(otherNullForename);
+		
+		assertTrue("Comparing equality is not correct!", result);
 	}
 
 	@Test
-	public void testEqualsWithTwoDiffrentValues() {
+	public void testEquals_withTwoDifferentInstances() {
 		Forename sut = Forename.newInstance("Forename");
-		Forename secondSut = Forename.newInstance("NotForename");
+		Forename otherForename = Forename.newInstance("NotForename");
 
-		boolean result = sut.equals(secondSut);
+		boolean result = sut.equals(otherForename);
 
-		assertFalse(result);
+		assertFalse("Comparing equality is not correct!", result);
 	}
 
 	@Test
-	public void testEqualsWithSameValues() {
+	public void testEquals_withEqualInstances() {
 		Forename sut = Forename.newInstance("Forename");
-		Forename secondSut = Forename.newInstance("Forename");
+		Forename otherForename = Forename.newInstance("Forename");
 
-		boolean result = sut.equals(secondSut);
+		boolean result = sut.equals(otherForename);
 
-		assertTrue(result);
+		assertTrue("Comparing equality is not correct!", result);
+	}
+
+	@Test
+	public void testSamenessOfTwoNullForenames() {
+		Forename sut = Forename.newInstance(null);
+		Forename otherNullForename = Forename.newInstance(null);
+
+		boolean result = (sut == otherNullForename);
+		
+		assertTrue("Two NullObjectForenames are not the same!", result);
+	}
+	
+	@Test
+	public void testIsEmpty_usualValue() {
+		Forename sut = Forename.newInstance("Forename");
+		
+		boolean result = sut.isEmpty();
+		
+		assertFalse("'isEmpty' check is not correct!", result);
+	}
+
+	@Test
+	public void testIsEmpty_nullValue() {
+		Forename sut = Forename.newInstance(null);
+		
+		boolean result = sut.isEmpty();
+		
+		assertTrue("'isEmpty' check is not correct!", result);
 	}
 }

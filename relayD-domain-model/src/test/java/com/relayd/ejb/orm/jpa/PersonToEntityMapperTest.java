@@ -5,7 +5,8 @@ import static org.junit.Assert.*;
 import java.util.Locale;
 import java.util.UUID;
 
-import org.junit.Test;
+import org.junit.*;
+import org.junit.runners.MethodSorters;
 
 import com.relayd.Person;
 import com.relayd.attributes.Comment;
@@ -23,6 +24,7 @@ import com.relayd.entity.PersonEntity;
  * @since   25.09.2016
  *
  */
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class PersonToEntityMapperTest {
 	private PersonToEntityMapper sut = PersonToEntityMapper.newInstance();
 	private Person person = Person.newInstance();
@@ -56,6 +58,15 @@ public class PersonToEntityMapperTest {
 	}
 
 	@Test
+	public void testMapPersonToEntity_forenameNullObject() {
+		person.setForename(Forename.newInstance(null));
+
+		PersonEntity mappedPersonEntity = sut.mapPersonToEntity(person);
+		String result = mappedPersonEntity.getForename();
+		assertNull("Mapping of [forename] is not correct.", result);
+	}
+
+	@Test
 	public void testMapEntityToPerson_forename() {
 		PersonEntity personEntity = new PersonEntity.Builder().withForename("Steve").build();
 
@@ -63,6 +74,15 @@ public class PersonToEntityMapperTest {
 		String expected = personEntity.getForename();
 		String result = mappedPerson.getForename().toString();
 		assertEquals("Mapping of [forename] is not correct.", expected, result);
+	}
+
+	@Test
+	public void testMapEntityToPerson_forenameIsNull() {
+		PersonEntity personEntity = new PersonEntity.Builder().build();
+
+		Person mappedPerson = sut.mapEntityToPerson(personEntity);
+		Forename result = mappedPerson.getForename();
+		assertNotNull("Mapping of [forename] is not correct.", result);
 	}
 
 	@Test
