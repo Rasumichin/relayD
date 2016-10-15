@@ -15,8 +15,8 @@ import com.relayd.attributes.YearOfBirth;
 import com.relayd.entity.PersonEntity;
 
 /**
- * @author  Rasumichin (Erik@relayd.de)
- * @since   25.09.2016
+ * @author Rasumichin (Erik@relayd.de)
+ * @since 25.09.2016
  *
  */
 public class PersonToEntityMapper {
@@ -29,9 +29,9 @@ public class PersonToEntityMapper {
 	}
 
 	public PersonEntity mapPersonToEntity(Person person) {
-		PersonEntity result = new PersonEntity.Builder()
-				.withId(person.getUUID().toString())
-				.withForename((person.getForename() == null) ? null : person.getForename().toString())
+		PersonEntity result = new PersonEntity.Builder().withId(person.getUUID().toString())
+				.withForename((person.getForename() == null) || (person.getForename().isEmpty()) ? null
+						: person.getForename().toString())
 				.withSurename((person.getSurename() == null) ? null : person.getSurename().toString())
 				.withEmail((person.getEmail() == null) ? null : person.getEmail().toString())
 				.withYearOfBirth((person.getYearOfBirth() == null) ? null : person.getYearOfBirth().getValue())
@@ -48,8 +48,8 @@ public class PersonToEntityMapper {
 	public Person mapEntityToPerson(PersonEntity personEntity) {
 		Person result = Person.newInstance();
 		result.setUUID(UUID.fromString(personEntity.getId()));
-
-		mapForenameFromEntityToPerson(personEntity, result);
+		result.setForename(Forename.newInstance(personEntity.getForename()));
+		
 		mapSurenameFromEntityToPerson(personEntity, result);
 		mapEmailFromEntityToPerson(personEntity, result);
 		mapYearOfBirthFromEntityToPerson(personEntity, result);
@@ -60,12 +60,6 @@ public class PersonToEntityMapper {
 		mapShirtsizeFromEntityToPerson(personEntity, result);
 
 		return result;
-	}
-
-	private void mapForenameFromEntityToPerson(PersonEntity personEntity, Person result) {
-		if (personEntity.getForename() != null) {
-			result.setForename(Forename.newInstance(personEntity.getForename()));
-		}
 	}
 
 	private void mapSurenameFromEntityToPerson(PersonEntity personEntity, Person result) {
