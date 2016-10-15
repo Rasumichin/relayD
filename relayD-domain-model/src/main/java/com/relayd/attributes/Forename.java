@@ -32,6 +32,10 @@ public class Forename implements Serializable {
 		return new Forename(forename);
 	}
 
+	public boolean isEmpty() {
+		return false;
+	}
+
 	@Override
 	public String toString() {
 		return value;
@@ -76,6 +80,11 @@ public class Forename implements Serializable {
 			return SINGLETON;
 		}
 		
+		@Override
+		public boolean isEmpty() {
+			return true;
+		}
+
 		@Override
 		public String toString() {
 			return "";

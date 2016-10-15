@@ -147,4 +147,22 @@ public class ForenameTest {
 		
 		assertTrue("Two NullObjectForenames are not the same!", result);
 	}
+	
+	@Test
+	public void testIsEmpty_usualValue() {
+		Forename sut = Forename.newInstance("Forename");
+		
+		boolean result = sut.isEmpty();
+		
+		assertFalse("'isEmpty' check is not correct!", result);
+	}
+
+	@Test
+	public void testIsEmpty_nullValue() {
+		Forename sut = Forename.newInstance(null);
+		
+		boolean result = sut.isEmpty();
+		
+		assertTrue("'isEmpty' check is not correct!", result);
+	}
 }
