@@ -42,4 +42,12 @@ public class SettingsTest {
 
 		assertEquals("[getEmailDomain] not correct!", "ToDo", actual);
 	}
+
+	@Test
+	public void testGetGatewayType() {
+		String actual = sut.getGatewayType();
+
+		assertEquals("[getGatewayType] not correct!", "ToDo", actual);
+	}
+
 }

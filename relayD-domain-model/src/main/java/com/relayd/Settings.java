@@ -10,6 +10,8 @@ import java.io.Serializable;
 public class Settings implements Serializable {
 	private static final long serialVersionUID = 6060470764587750857L;
 
+	private static final String TO_DO = "ToDo";
+
 	private Settings() {
 		super();
 	}
@@ -23,6 +25,10 @@ public class Settings implements Serializable {
 	}
 
 	public String getEmailDomain() {
-		return "ToDo";
+		return TO_DO;
+	}
+
+	public String getGatewayType() {
+		return TO_DO;
 	}
 }
