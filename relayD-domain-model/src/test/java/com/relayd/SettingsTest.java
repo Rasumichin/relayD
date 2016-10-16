@@ -50,4 +50,11 @@ public class SettingsTest {
 		assertEquals("[getGatewayType] not correct!", "ToDo", actual);
 	}
 
+	@Test
+	public void testGetClosingDate() {
+		String actual = sut.getClosingDate();
+
+		assertEquals("[getClosingDate] not correct!", "01.04.2017 (ToDo)", actual);
+	}
+
 }

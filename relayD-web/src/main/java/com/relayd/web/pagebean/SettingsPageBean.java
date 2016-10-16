@@ -59,6 +59,10 @@ public class SettingsPageBean implements Serializable {
 		return settings.getGatewayType();
 	}
 
+	public String getClosingDate() {
+		return settings.getClosingDate();
+	}
+
 	public String getTheme() {
 		return theme;
 	}

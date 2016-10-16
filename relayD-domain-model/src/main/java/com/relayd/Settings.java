@@ -31,4 +31,8 @@ public class Settings implements Serializable {
 	public String getGatewayType() {
 		return TO_DO;
 	}
+
+	public String getClosingDate() {
+		return "01.04.2017 (ToDo)";
+	}
 }
