@@ -29,8 +29,6 @@ public class SettingsPageBean implements Serializable {
 
 	private List<Theme> themes;
 
-	private String theme = "bluesky";
-
 	@ManagedProperty("#{themeService}")
 	ThemeService service;
 
@@ -64,11 +62,11 @@ public class SettingsPageBean implements Serializable {
 	}
 
 	public String getTheme() {
-		return theme;
+		return settings.getTheme();
 	}
 
 	public void setTheme(String aTheme) {
-		theme = aTheme;
+		settings.setTheme(aTheme);
 	}
 
 	public void saveTheme(AjaxBehaviorEvent ajax) {

@@ -12,6 +12,8 @@ public class Settings implements Serializable {
 
 	private static final String TO_DO = "ToDo";
 
+	private String theme = "cupertino";
+
 	private Settings() {
 		super();
 	}
@@ -34,5 +36,13 @@ public class Settings implements Serializable {
 
 	public String getClosingDate() {
 		return "01.04.2017 (ToDo)";
+	}
+
+	public String getTheme() {
+		return theme;
+	}
+
+	public void setTheme(String aTheme) {
+		theme = aTheme;
 	}
 }
