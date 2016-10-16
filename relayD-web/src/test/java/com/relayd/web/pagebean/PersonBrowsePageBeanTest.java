@@ -17,7 +17,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
 
@@ -32,9 +31,12 @@ import com.relayd.web.bridge.PersonBridge;
 import static org.mockito.Mockito.*;
 
 /**
+ * Quality is never an accident; it is always the result of intelligent effort.
+ *  - John Ruskin
+ *
  * @author schmollc (Christian@relayd.de)
  * @since 15.06.2016
- * status initial
+ *
  */
 @RunWith(MockitoJUnitRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -59,14 +61,14 @@ public class PersonBrowsePageBeanTest {
 
 	@Test
 	public void testGetNumberOfResults_ForEmptyResultList() {
-		Integer numberOfResults = sut.getNumberOfResults();
+		Integer actual = sut.getNumberOfResults();
 
-		assertEquals(Integer.valueOf(0), numberOfResults);
+		assertEquals("Numboer of results for empty result list not correct!", Integer.valueOf(0), actual);
 	}
 
 	@Test
 	public void testGetNumberOfResults_ForFilledResultList() {
-		Mockito.doReturn(createResultList(size(5))).when(personBridge).all();
+		doReturn(createResultList(size(5))).when(personBridge).all();
 		sut.refreshPersons();
 
 		Integer numberOfResults = sut.getNumberOfResults();

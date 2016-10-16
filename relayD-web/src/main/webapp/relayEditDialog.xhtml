@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title>Relay</title>
+	<style type="text/css">
+.ui-widget {
+	font-size: 90%;
+}
+</style>
+</h:head>
+
+<h:body>
+	<h:form id="form">
+		<p:growl
+			id="growl"
+			showDetail="true" />
+		<p:focus/>
+
+		<h:panelGrid
+			columns="2"
+			id="inputgrid"
+			cellpadding="5">
+			<p:outputLabel
+				for="relayname"
+				value="Relayname:" />
+			<p:inputText
+				id="relayname"
+				value="#{relayEditPageBean.relayname}"
+				style="width:180px">
+				<f:converter converterId="com.relayd.web.converter.RelaynameValueObjectConverter" />
+			</p:inputText>
+		</h:panelGrid>
+
+		<p:commandButton
+			actionListener="#{relayBrowsePageBean.cancelEditDialog}"
+			icon="ui-icon-close"
+			style="float:left;" />
+		<p:commandButton
+			update="form"
+			actionListener="#{relayEditPageBean.save}"
+			icon="ui-icon-check"
+			style="float:right;" />
+	</h:form>
+</h:body>
+</html>

@@ -21,8 +21,51 @@
 			showDetail="true" />
 
 		<div class="divStartHeader"></div>
-		<h3>To Do</h3>
-		
+		<p:toolbar>
+			<f:facet name="left">
+				<p:commandButton
+					actionListener="#{relayBrowsePageBean.add}"
+					update="form"
+					value="+">
+					<p:ajax
+						event="dialogReturn"
+						listener="#{relayBrowsePageBean.onEditClosed}"
+						update="form" />
+				</p:commandButton>
+				<p:commandButton
+					actionListener="#{relayBrowsePageBean.remove}"
+					update="form"
+					value="-" />
+				<p:commandButton
+					actionListener="#{relayBrowsePageBean.edit}"
+					icon="ui-icon-folder-open"
+					update="form">
+					<p:ajax
+						event="dialogReturn"
+						listener="#{personBrowsePageBean.onEditClosed}"
+						update="form" />
+				</p:commandButton>
+
+			</f:facet>
+		</p:toolbar>
+
+		<p:treeTable
+			id="relayTable"
+			selection="#{relayBrowsePageBean.selectedNode}"
+			selectionMode="single"
+			value="#{relayBrowsePageBean.root}"
+			var="relay">
+			<f:facet name="header">
+            Relays
+        </f:facet>
+			<p:column headerText="Name">
+				<h:outputText value="#{relay.name}" />
+			</p:column>
+			<p:column headerText="Participant">
+				<h:outputText value="#{relay.participant}" />
+			</p:column>
+		</p:treeTable>
+
 		<ui:include src="/dock.xhtml" />
 
 	</h:form>
