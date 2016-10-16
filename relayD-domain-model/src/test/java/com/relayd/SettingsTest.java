@@ -35,4 +35,11 @@ public class SettingsTest {
 
 		assertEquals("[getVersion] not correct!", "1.0 - Codename Augustiner", actual);
 	}
+
+	@Test
+	public void testGetEmailDomain() {
+		String actual = sut.getEmailDomain();
+
+		assertEquals("[getEmailDomain] not correct!", "ToDo", actual);
+	}
 }

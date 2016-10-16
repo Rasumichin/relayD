@@ -21,4 +21,8 @@ public class Settings implements Serializable {
 	public String getVersion() {
 		return "1.0 - Codename Augustiner";
 	}
+
+	public String getEmailDomain() {
+		return "ToDo";
+	}
 }

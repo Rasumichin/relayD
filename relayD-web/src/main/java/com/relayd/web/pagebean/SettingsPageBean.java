@@ -51,6 +51,10 @@ public class SettingsPageBean implements Serializable {
 		return settings.getVersion();
 	}
 
+	public String getEmailDomain() {
+		return settings.getEmailDomain();
+	}
+
 	public String getTheme() {
 		return theme;
 	}
