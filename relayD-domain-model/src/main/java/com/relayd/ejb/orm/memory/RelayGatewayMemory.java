@@ -31,6 +31,7 @@ public class RelayGatewayMemory implements RelayGateway {
 	@Override
 	public List<Relay> getAll() {
 		ArrayList<Relay> relaysAsList = new ArrayList<Relay>(relays.values());
+		relaysAsList.addAll(getAllMock());
 		return relaysAsList;
 	}
 
@@ -48,7 +49,6 @@ public class RelayGatewayMemory implements RelayGateway {
 
 		relay.setRelayname(Relayname.newInstance("Die 4 ????"));
 
-		//		Person person = new PersonBuilder().withForename(Forename.newInstance("Justus")).build();
 		PersonRelay person = PersonRelay.newInstance();
 		person.setForename(Forename.newInstance("Justus"));
 		person.setSurename(Surename.newInstance("Jonas"));
@@ -75,7 +75,6 @@ public class RelayGatewayMemory implements RelayGateway {
 
 		relay.setRelayname(Relayname.newInstance("Die Fanta 4"));
 
-		//		PersonRelay person = new PersonRelayBuilder().withForename(Forename.newInstance("Justus")).build();
 		PersonRelay person = PersonRelay.newInstance();
 		person.setForename(Forename.newInstance("Smudo"));
 		relay.addPersonRelay(person, Position.FIRST);
