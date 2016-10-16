@@ -11,6 +11,7 @@ import javax.faces.event.AjaxBehaviorEvent;
 
 import org.primefaces.component.themeswitcher.ThemeSwitcher;
 
+import com.relayd.Settings;
 import com.relayd.web.theme.Theme;
 import com.relayd.web.theme.ThemeService;
 
@@ -23,6 +24,8 @@ import com.relayd.web.theme.ThemeService;
 @SessionScoped
 public class SettingsPageBean implements Serializable {
 	private static final long serialVersionUID = 1L;
+
+	private Settings settings = Settings.newInstance();
 
 	private List<Theme> themes;
 
@@ -45,7 +48,7 @@ public class SettingsPageBean implements Serializable {
 	}
 
 	public String getVersion() {
-		return "1.0 - Codename Augustiner";
+		return settings.getVersion();
 	}
 
 	public String getTheme() {

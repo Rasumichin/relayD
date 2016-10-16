@@ -17,4 +17,8 @@ public class Settings implements Serializable {
 	public static Settings newInstance() {
 		return new Settings();
 	}
+
+	public String getVersion() {
+		return "1.0 - Codename Augustiner";
+	}
 }

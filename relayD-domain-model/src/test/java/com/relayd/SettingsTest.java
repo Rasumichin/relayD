@@ -18,14 +18,21 @@ import org.junit.runners.MethodSorters;
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class SettingsTest {
+	private Settings sut = Settings.newInstance();
 
 	@Test
 	public void testIsSerializable() {
-		Settings sut = Settings.newInstance();
 
 		@SuppressWarnings("cast")
 		boolean result = sut instanceof Serializable;
 
 		assertTrue("Class not Serializable!", result);
+	}
+
+	@Test
+	public void testGetVersion() {
+		String actual = sut.getVersion();
+
+		assertEquals("[getVersion] not correct!", "1.0 - Codename Augustiner", actual);
 	}
 }
