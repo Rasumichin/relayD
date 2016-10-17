@@ -59,7 +59,7 @@ public class EventDTO {
 	 * @return true or false with a 50 percent probability for each case
 	 *
 	 */
-	public static boolean isEventExistingFor(String anEventId) {
+	public static boolean isEventExistingFor(@SuppressWarnings("unused") String anEventId) {
 		long randomValue = System.currentTimeMillis();
 
 		return (randomValue % 2) == 0;
