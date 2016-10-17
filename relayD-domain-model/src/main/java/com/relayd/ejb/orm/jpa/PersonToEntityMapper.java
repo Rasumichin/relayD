@@ -45,6 +45,17 @@ public class PersonToEntityMapper {
 		return result;
 	}
 
+	public void mapPersonToExistingEntity(Person person, PersonEntity personEntity) {
+		personEntity.setForename((person.getForename() == null) || (person.getForename().isEmpty()) ? null
+						: person.getForename().toString());
+		personEntity.setSurename((person.getSurename() == null) ? null : person.getSurename().toString());
+		personEntity.setEmail((person.getEmail() == null) ? null : person.getEmail().toString());
+		personEntity.setYearOfBirth((person.getYearOfBirth() == null) ? null : person.getYearOfBirth().getValue());
+		personEntity.setComment((person.getComment() == null) ? null : person.getComment().toString());
+		personEntity.setNationality((person.getNationality() == null) ? null : person.getNationality().toLanguageTag());
+		personEntity.setRelayname((person.getRelayname() == null) ? null : person.getRelayname().toString());
+	}
+
 	public Person mapEntityToPerson(PersonEntity personEntity) {
 		Person result = Person.newInstance();
 		result.setUUID(UUID.fromString(personEntity.getId()));

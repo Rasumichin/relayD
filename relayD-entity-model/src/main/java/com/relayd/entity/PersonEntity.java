@@ -73,9 +73,17 @@ public class PersonEntity {
 	public String getSurename() {
 		return surename;
 	}
+	
+	public void setSurename(String aSurename) {
+		surename = aSurename;
+	}
 
 	public String getForename() {
 		return forename;
+	}
+
+	public void setForename(String aForename) {
+		forename = aForename;
 	}
 
 	public Integer getShirtsize() {
@@ -86,12 +94,24 @@ public class PersonEntity {
 		return nationality;
 	}
 
+	public void setNationality(String aNationality) {
+		nationality = aNationality;
+	}
+
 	public String getEmail() {
 		return email;
 	}
 
+	public void setEmail(String anEmail) {
+		email = anEmail;
+	}
+
 	public Integer getYearOfBirth() {
 		return yearOfBirth;
+	}
+
+	public void setYearOfBirth(Integer aYearOfBirth) {
+		yearOfBirth = aYearOfBirth;
 	}
 
 	public String getId() {
@@ -102,8 +122,16 @@ public class PersonEntity {
 		return comment;
 	}
 
+	public void setComment(String aComment) {
+		comment = aComment;
+	}
+
 	public String getRelayname() {
 		return relayname;
+	}
+
+	public void setRelayname(String aRelayname) {
+		relayname = aRelayname;
 	}
 
 	public Integer getPos() {

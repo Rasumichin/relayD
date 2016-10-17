@@ -69,7 +69,13 @@ public class PersonGatewayJPA extends GatewayJPA implements PersonGateway {
 			throw new IllegalArgumentException("[person] must not be 'null'.");
 		}
 		
-		PersonEntity personEntity = getPersonMapper().mapPersonToEntity(person);
+		PersonEntity personEntity = findById(person.getUUID());
+		if (personEntity != null) {
+			getPersonMapper().mapPersonToExistingEntity(person, personEntity);
+		} else {
+			personEntity = getPersonMapper().mapPersonToEntity(person);
+		}
+		
 		mergePersonEntity(personEntity);
 	}
 
