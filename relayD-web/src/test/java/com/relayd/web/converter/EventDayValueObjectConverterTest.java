@@ -5,7 +5,9 @@ import static org.junit.Assert.*;
 import java.time.LocalDate;
 import java.time.Month;
 
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import com.relayd.attributes.EventDay;
 
@@ -14,6 +16,7 @@ import com.relayd.attributes.EventDay;
  * @since 22.06.2016
  * status initial
  */
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class EventDayValueObjectConverterTest {
 	private EventDayValueObjectConverter sut = new EventDayValueObjectConverter();
 

@@ -4,7 +4,9 @@ import static org.junit.Assert.*;
 
 import java.util.Map;
 
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 /**
  * Testen ist wie Rudern gegen den Strom. Hört man damit auf, treibt man zurück.
@@ -14,6 +16,7 @@ import org.junit.Test;
  * @since 21.09.2016
  *
  */
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class DialogOptionsBuilderTest {
 	private DialogOptionsBuilder sut = new DialogOptionsBuilder();
 

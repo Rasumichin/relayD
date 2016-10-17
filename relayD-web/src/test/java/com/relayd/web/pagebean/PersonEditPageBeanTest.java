@@ -7,8 +7,10 @@ import java.util.Locale;
 import java.util.UUID;
 
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
@@ -38,6 +40,7 @@ import static org.mockito.Mockito.*;
  *
  */
 @RunWith(MockitoJUnitRunner.class)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class PersonEditPageBeanTest {
 
 	@Spy
@@ -382,13 +385,13 @@ public class PersonEditPageBeanTest {
 		Email result = sut.lastCalculatedEmail;
 		assertEquals("[lastCalculatedEmail] is not correct.", expected, result);
 	}
-	
+
 	@Test
 	public void testCurrentEmailHasBeenCalculated_true() {
 		sut.openDialogForCreatePerson();
 
 		boolean result = sut.currentEmailHasBeenCalculated();
-		
+
 		assertTrue("Recalculation should be possible!", result);
 	}
 
@@ -402,16 +405,16 @@ public class PersonEditPageBeanTest {
 
 		assertFalse("Recalculation should not be possible!", result);
 	}
-	
+
 	@Test
 	public void testRecalculateEmail() {
 		sut.openDialogForCreatePerson();
 		sut.setEmail(sut.getDefaultEmail());
 		Email expected = Email.createFromLocalAndDomainPart("john", "canda.com");
 		sut.setForename(Forename.newInstance("john"));
-		
+
 		sut.recalculateEmail();
-		
+
 		Email result = sut.lastCalculatedEmail;
 		assertEquals("Recalculation of [lastCalculatedEmail] is not correct!", expected, result);
 	}

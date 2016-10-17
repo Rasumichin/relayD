@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import com.relayd.Person;
 import com.relayd.attributes.Email;
@@ -18,8 +20,9 @@ import com.relayd.attributes.YearOfBirth;
 /**
  * @author  schmollc (Christian@relayd.de)
  * @since   23.06.2016
- * status   initial
+ *
  */
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public abstract class PersonGatewayTest {
 
 	public abstract PersonGateway getSut();

@@ -5,7 +5,9 @@ import static org.junit.Assert.*;
 import java.util.List;
 import java.util.Locale;
 
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import com.relayd.attributes.Position;
 import com.relayd.attributes.Shirtsize;
@@ -18,6 +20,7 @@ import com.relayd.attributes.Shirtsize;
  * @since 01.09.2016
  * status initial
  */
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class SelectItemBeanTest {
 	private SelectItemBean sut = new SelectItemBean();
 

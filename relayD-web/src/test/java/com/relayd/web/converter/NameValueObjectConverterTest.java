@@ -2,8 +2,10 @@ package com.relayd.web.converter;
 
 import static org.junit.Assert.*;
 
+import org.junit.FixMethodOrder;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 /**
  * @author schmollc (Christian@relayD.de)
@@ -11,6 +13,7 @@ import org.junit.Test;
  * @since 08.09.2016
  *
  */
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public abstract class NameValueObjectConverterTest {
 
 	abstract NameValueObjectConverter getSut();

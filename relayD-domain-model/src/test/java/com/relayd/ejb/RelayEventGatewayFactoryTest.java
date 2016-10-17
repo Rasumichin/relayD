@@ -2,9 +2,11 @@ package com.relayd.ejb;
 
 import static org.junit.Assert.*;
 
+import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import org.junit.runners.MethodSorters;
 
 import com.relayd.ejb.orm.jdbc.RelayEventGatewayJDBC;
 import com.relayd.ejb.orm.jpa.RelayEventGatewayJPA;
@@ -18,6 +20,7 @@ import com.relayd.ejb.orm.memory.RelayEventGatewayMemory;
  * @since 17.06.2016
  *
  */
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class RelayEventGatewayFactoryTest {
 
 	@Rule

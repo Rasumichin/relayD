@@ -2,7 +2,9 @@ package com.relayd.ejb;
 
 import static org.junit.Assert.*;
 
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import com.relayd.ejb.orm.memory.RelayGatewayMemory;
 
@@ -15,6 +17,7 @@ import com.relayd.ejb.orm.memory.RelayGatewayMemory;
  * @since   14.10.2016
  *
  */
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class RelayGatewayFactoryTest {
 
 	@Test

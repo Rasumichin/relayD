@@ -6,7 +6,9 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;
 
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import com.relayd.RelayEvent;
 import com.relayd.attributes.EventDay;
@@ -20,6 +22,7 @@ import com.relayd.attributes.Eventname;
  * @since   21.06.2016
  *
  */
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public abstract class RelayEventGatewayTest {
 
 	private static final String DUESSELDORF_MARATHON = "Metro Group Marathon Düsseldorf";

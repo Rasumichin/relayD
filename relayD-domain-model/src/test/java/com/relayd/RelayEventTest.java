@@ -6,7 +6,9 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.UUID;
 
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import com.relayd.attributes.EventDay;
 import com.relayd.attributes.Eventname;
@@ -20,6 +22,7 @@ import com.relayd.attributes.Eventname;
  * @since 19.05.2016
  *
  */
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class RelayEventTest {
 
 	@Test

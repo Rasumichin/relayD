@@ -2,7 +2,9 @@ package com.relayd.web.converter;
 
 import static org.junit.Assert.*;
 
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import com.relayd.attributes.YearOfBirth;
 
@@ -12,6 +14,7 @@ import com.relayd.attributes.YearOfBirth;
  * status initial
  *
  */
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class YearOfBirthValueObjectConverterTest {
 	private YearOfBirthValueObjectConverter sut = new YearOfBirthValueObjectConverter();
 

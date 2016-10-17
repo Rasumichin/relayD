@@ -2,7 +2,9 @@ package com.relayd.web.converter;
 
 import static org.junit.Assert.*;
 
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import com.relayd.attributes.Eventname;
 
@@ -14,6 +16,7 @@ import com.relayd.attributes.Eventname;
  * @since 22.06.2016
  *
  */
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class EventNameValueObjectConverterTest {
 	private EventNameValueObjectConverter sut = new EventNameValueObjectConverter();
 

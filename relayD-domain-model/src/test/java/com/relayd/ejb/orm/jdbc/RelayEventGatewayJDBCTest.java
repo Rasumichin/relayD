@@ -11,8 +11,10 @@ import java.util.GregorianCalendar;
 import java.util.UUID;
 
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
@@ -31,6 +33,7 @@ import static org.mockito.Mockito.*;
  *
  */
 @RunWith(MockitoJUnitRunner.class)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class RelayEventGatewayJDBCTest {
 
 	private RelayEventGatewayJDBC sut = new RelayEventGatewayJDBC();

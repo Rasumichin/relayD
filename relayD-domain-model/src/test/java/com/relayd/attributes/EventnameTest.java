@@ -4,9 +4,11 @@ import static org.junit.Assert.*;
 
 import java.io.Serializable;
 
+import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import org.junit.runners.MethodSorters;
 
 /**
  * Der Mann, der den Berg abtrug, war derselbe,
@@ -17,6 +19,7 @@ import org.junit.rules.ExpectedException;
  * @since 19.05.2016
  *
  */
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class EventnameTest {
 
 	@Rule

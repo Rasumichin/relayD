@@ -4,13 +4,16 @@ import static org.junit.Assert.*;
 
 import java.util.Locale;
 
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 /**
  * @author  schmollc (Christian@relayD.de)
  * @since   28.06.2016
  * status   initial
  */
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class NationalityValueObjectConverterTest {
 
 	private NationalityValueObjectConverter sut = new NationalityValueObjectConverter();

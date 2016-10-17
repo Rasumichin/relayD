@@ -4,7 +4,9 @@ import static org.junit.Assert.*;
 
 import javax.faces.convert.ConverterException;
 
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import com.relayd.attributes.Email;
 
@@ -13,6 +15,7 @@ import com.relayd.attributes.Email;
  * @since 29.06.2016
  * status initial
  */
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class EmailValueObjectConverterTest {
 	private EmailValueObjectConverter sut = new EmailValueObjectConverter();
 
