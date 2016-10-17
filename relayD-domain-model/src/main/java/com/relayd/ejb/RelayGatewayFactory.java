@@ -3,6 +3,8 @@ package com.relayd.ejb;
 import com.relayd.ejb.orm.memory.RelayGatewayMemory;
 
 /**
+ * @author schmollc (Christian@relayd.de)
+ * @since 08.08.2016
  *
  */
 public class RelayGatewayFactory {

@@ -9,7 +9,7 @@ import com.relayd.FormatConstants;
 /**
  * @author  Rasumichin (Erik@relayd.de)
  * @since   24.05.2016
- * status   ready-for-review
+ *
  */
 public class EventDay implements Serializable {
 	private static final long serialVersionUID = 1L;

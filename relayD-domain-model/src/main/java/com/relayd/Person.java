@@ -14,7 +14,7 @@ import com.relayd.attributes.Surename;
 import com.relayd.attributes.YearOfBirth;
 
 /**
- * @author  schmollc (Christian@relayD.de)
+ * @author  schmollc (Christian@relayd.de)
  * @author  Rasumichin (Erik@relayd.de)
  * @since   22.03.2016
  *

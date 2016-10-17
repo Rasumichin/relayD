@@ -16,9 +16,9 @@ import com.relayd.Person;
 import com.relayd.ejb.PersonGateway;
 
 /**
- * @author  schmollc (Christian@relayD.de)
+ * @author  schmollc (Christian@relayd.de)
  * @since   26.03.2016
- * status   initial
+ *
  */
 public class PersonGatewayFile implements PersonGateway {
 

@@ -7,7 +7,7 @@ import com.relayd.attributes.Forename;
 import com.relayd.attributes.Surename;
 
 /**
- * @author  schmollc (Christian@relayD.de)
+ * @author  schmollc (Christian@relayd.de)
  * @since   11.06.2016
  *
  */

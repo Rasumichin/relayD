@@ -3,7 +3,6 @@ package com.relayd.attributes;
 /**
  * @author  schmollc (Christian@relayd.com)
  * @since   23.03.2016
- * status   initial<br/>
  *
  * Babysteps. Aktuelle Abbildung des Excelsheets. <br/>
  * Es sollte natuerlich nur die Groesse geben und das Geschlecht befindet sich in

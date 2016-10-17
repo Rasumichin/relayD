@@ -10,7 +10,7 @@ import com.relayd.attributes.Eventname;
  * @author schmollc (Christian@relayd.de)
  * @author Rasumichin (Erik@relayd.de)
  * @since 19.05.2016
- * status initial
+ *
  */
 public class RelayEvent implements Serializable {
 	private static final long serialVersionUID = 1L;

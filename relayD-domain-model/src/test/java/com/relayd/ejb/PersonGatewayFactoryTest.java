@@ -14,7 +14,6 @@ import com.relayd.ejb.orm.memory.PersonGatewayMemory;
 /**
  * @author  schmollc (Christian@relayd.de)
  * @since   23.06.2016
- * status   initial
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)

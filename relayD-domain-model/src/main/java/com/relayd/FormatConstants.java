@@ -5,7 +5,7 @@ package com.relayd;
  *
  * @author schmollc (Christian@relayd.de)
  * @since 27.06.2016
- * status initial
+ *
  */
 public final class FormatConstants {
 

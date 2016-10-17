@@ -3,7 +3,7 @@ package com.relayd.attributes;
 /**
  * @author  schmollc (Christian@relayd.com)
  * @since   23.08.2016
- * status   initial
+ *
  */
 public enum Position {
 	//@formatter:off

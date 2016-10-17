@@ -6,9 +6,9 @@ import java.util.UUID;
 import com.relayd.Person;
 
 /**
- * @author  schmollc (Christian@relayD.de)
+ * @author  schmollc (Christian@relayd.de)
  * @since   26.03.2016
- * status   initial
+ *
  */
 public interface PersonGateway {
 	List<Person> getAll();

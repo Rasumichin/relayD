@@ -8,7 +8,7 @@ import com.relayd.ejb.PersonGateway;
 import com.relayd.ejb.PersonGatewayTest;
 
 /**
- * @author schmollc (Christian@relayD.de)
+ * @author schmollc (Christian@relayd.de)
  * @since 20.06.2016
  *
  */
