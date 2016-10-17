@@ -35,15 +35,8 @@ public class PersonBridgeImpl implements PersonBridge {
 	}
 
 	@Override
-	public void update(Person aPerson) {
-		// TODO -schmollc- Machen das gleiche. Kann mit einer Methode gelöst werden!
+	public void persistPerson(Person aPerson) {
 		gateway.set(aPerson);
-	}
-
-	@Override
-	public void create(Person person) {
-		// TODO -schmollc- Machen das gleiche. Kann mit einer Methode gelöst werden!
-		gateway.set(person);
 	}
 
 	@Override

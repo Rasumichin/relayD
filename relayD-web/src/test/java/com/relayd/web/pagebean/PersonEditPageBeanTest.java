@@ -71,12 +71,10 @@ public class PersonEditPageBeanTest {
 		doReturn(Person.newInstance()).when(sut).getPerson(uuid);
 
 		assertNull("[workingPerson] not corret!", sut.workingPerson);
-		assertFalse("[isNewPerson] not correct!", sut.isNewPerson);
 
 		sut.openDialogFor(uuid);
 
 		assertNotNull("[workingPerson] not corret!", sut.workingPerson);
-		assertFalse("[isNewPerson] not correct!", sut.isNewPerson);
 		verify(sut).getPerson(uuid);
 		verify(sut).openDialog();
 	}
@@ -265,6 +263,5 @@ public class PersonEditPageBeanTest {
 		sut.prepareNewPerson();
 
 		assertNotNull("[workingPerson] has not been created.", sut.workingPerson);
-		assertTrue("Prepared [workingPerson] is not new.", sut.isNewPerson);
 	}
 }

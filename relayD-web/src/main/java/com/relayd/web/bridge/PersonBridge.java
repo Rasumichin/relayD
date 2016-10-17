@@ -22,9 +22,7 @@ public interface PersonBridge {
 
 	List<Person> relaysWithSpace();
 
-	void update(Person person);
-
-	void create(Person person);
+	void persistPerson(Person person);
 
 	Person get(UUID uuid);
 

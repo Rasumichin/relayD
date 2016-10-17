@@ -39,7 +39,7 @@ public class PersonEditPageBean implements Serializable {
 	private PersonBridge personBridge;
 
 	Person workingPerson = null;
-	boolean isNewPerson = false;
+	//	boolean isNewPerson = false;
 
 	public PersonEditPageBean() {
 		personBridge = new PersonBridgeImpl();
@@ -52,7 +52,6 @@ public class PersonEditPageBean implements Serializable {
 
 	void prepareNewPerson() {
 		workingPerson = createNewPerson();
-		isNewPerson = true;
 	}
 
 	Person createNewPerson() {
@@ -67,7 +66,6 @@ public class PersonEditPageBean implements Serializable {
 
 	public void openDialogFor(UUID uuid) {
 		workingPerson = getPerson(uuid);
-		isNewPerson = false;
 		openDialog();
 	}
 
@@ -91,11 +89,7 @@ public class PersonEditPageBean implements Serializable {
 	}
 
 	void persistPerson() {
-		if (isNewPerson) {
-			getBridge().create(workingPerson);
-		} else {
-			getBridge().update(workingPerson);
-		}
+		getBridge().persistPerson(workingPerson);
 	}
 
 	void closeDialog() {
