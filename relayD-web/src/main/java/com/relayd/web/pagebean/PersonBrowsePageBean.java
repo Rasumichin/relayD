@@ -121,7 +121,7 @@ public class PersonBrowsePageBean implements Serializable {
 
 	public void edit(@SuppressWarnings("unused") ActionEvent actionEvent) {
 		if (isRowSelectedForOneRow()) {
-			UUID uuid = getSelectedPerson().getUUID();
+			UUID uuid = getSelectedPerson().getUuid();
 			getPersonEditPageBean().openDialogFor(uuid);
 		} else {
 			showMessageErrorNoRowSelected();

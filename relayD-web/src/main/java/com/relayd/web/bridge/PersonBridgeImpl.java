@@ -51,7 +51,7 @@ public class PersonBridgeImpl implements PersonBridge {
 
 	@Override
 	public void remove(Person person) {
-		gateway.remove(person.getUUID());
+		gateway.remove(person.getUuid());
 	}
 
 	@Override

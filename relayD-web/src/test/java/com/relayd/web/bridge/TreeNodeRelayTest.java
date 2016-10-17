@@ -51,7 +51,7 @@ public class TreeNodeRelayTest {
 	public void testCreateInstance_ForParameterPersonRelay() {
 		UUID uuid = UUID.randomUUID();
 		PersonRelay expected = PersonRelay.newInstance();
-		expected.setUUID(uuid);
+		expected.setUuid(uuid);
 
 		TreeNodeRelay sut = TreeNodeRelay.newInstance(expected);
 
