@@ -195,8 +195,8 @@ public class PersonBrowsePageBean implements Serializable {
 		showMessage(FacesMessage.SEVERITY_ERROR, NOT_POSSIBLE, PLEASE_SELECT_A_ROW);
 	}
 
-	void showMessage(Severity severityInfo, String summary, String textMessage) {
-		FacesMessage message = new FacesMessage(severityInfo, summary, textMessage);
+	void showMessage(Severity severity, String summary, String textMessage) {
+		FacesMessage message = new FacesMessage(severity, summary, textMessage);
 		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
 
