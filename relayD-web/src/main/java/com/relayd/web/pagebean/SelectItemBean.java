@@ -13,10 +13,10 @@ import com.relayd.attributes.Shirtsize;
 
 /**
  * Holds the methods for Comboboxes in the GUI.
- * <p/>
+ *
  * @author schmollc (Christian@relayd.de)
  * @since 01.09.2016
- * status initial
+ *
  */
 @ManagedBean(name = "selectItemBean")
 @SessionScoped

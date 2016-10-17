@@ -17,7 +17,7 @@ import com.relayd.attributes.YearOfBirth;
 /**
  * @author schmollc (Christian@relayd.de)
  * @since 07.09.2016
- * status initial
+ *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class PersonSortTest {

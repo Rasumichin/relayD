@@ -13,9 +13,9 @@ import com.relayd.attributes.YearOfBirth;
 
 /**
  * TODO -schmollc- Noch zu klären wo genau die Builder hinsollen oder jede DomainKlasse Ihren eigenen innerClass Builder hat.
- * @author  schmollc (Christian@relayD.de)
+ * @author  schmollc (Christian@relayd.de)
  * @since   30.03.2016
- * status   initial
+ *
  */
 public class PersonBuilder {
 

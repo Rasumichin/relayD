@@ -8,7 +8,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 /**
- * @author schmollc (Christian@relayD.de)
+ * @author schmollc (Christian@relayd.de)
  * @author Rasumichin (Erik@relayd.de)
  * @since 08.09.2016
  *

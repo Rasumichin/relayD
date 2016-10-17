@@ -13,7 +13,7 @@ import com.relayd.attributes.Email;
 /**
  * @author schmollc (Christian@relayd.de)
  * @since 29.06.2016
- * status initial
+ *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class EmailValueObjectConverterTest {

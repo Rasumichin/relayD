@@ -3,9 +3,9 @@ package com.relayd.web.pagebean;
 /**
  * Bloch, Joshua, Effective Java, 2nd Edition, p. 98
  *
- * @author schmollc (Christian@relayD.de)
+ * @author schmollc (Christian@relayd.de)
  * @since 16.08.2016
- * status initial
+ *
  */
 public final class NavigationConstants {
 

@@ -31,7 +31,7 @@ import com.relayd.web.bridge.PersonBridgeImpl;
 /**
  * @author schmollc (Christian@relayd.de)
  * @since 15.06.2016
- * status initial
+ *
  */
 @ManagedBean
 @SessionScoped

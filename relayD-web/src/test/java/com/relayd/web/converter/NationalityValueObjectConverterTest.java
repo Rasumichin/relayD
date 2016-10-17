@@ -9,9 +9,9 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 /**
- * @author  schmollc (Christian@relayD.de)
+ * @author  schmollc (Christian@relayd.de)
  * @since   28.06.2016
- * status   initial
+ *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class NationalityValueObjectConverterTest {

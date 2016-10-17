@@ -8,9 +8,9 @@ import javax.faces.convert.FacesConverter;
 import com.relayd.attributes.Relayname;
 
 /**
- * @author schmollc (Christian@relayD.de)
+ * @author schmollc (Christian@relayd.de)
  * @since 20.06.2016
- * status initial
+ *
  */
 @FacesConverter("com.relayd.web.converter.RelaynameValueObjectConverter")
 public class RelaynameValueObjectConverter implements Converter {

@@ -12,7 +12,7 @@ import com.relayd.attributes.Email;
 /**
  * @author schmollc (Christian@relayd.de)
  * @since 29.06.2016
- * status initial
+ *
  */
 @FacesConverter("com.relayd.web.converter.EmailValueObjectConverter")
 public class EmailValueObjectConverter implements Converter {

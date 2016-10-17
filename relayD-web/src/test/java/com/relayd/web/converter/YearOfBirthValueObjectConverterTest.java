@@ -9,9 +9,8 @@ import org.junit.runners.MethodSorters;
 import com.relayd.attributes.YearOfBirth;
 
 /**
- * @author schmollc (Christian@relayD.de)
+ * @author schmollc (Christian@relayd.de)
  * @since 22.09.2016
- * status initial
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)

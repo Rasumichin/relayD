@@ -29,7 +29,6 @@ import com.relayd.web.bridge.ValidationResult;
  * @author schmollc (Christian@relayd.de)
  * @author Rasumichin (Erik@relayd.de)
  * @since 15.06.2016
- * status initial
  *
  */
 @ManagedBean(name = "personEditPageBean")
@@ -133,18 +132,18 @@ public class PersonEditPageBean implements Serializable {
 			recalculateEmail();
 		}
 	}
-	
+
 	boolean currentEmailHasBeenCalculated() {
 		Email currentEmail = getEmail();
-		
+
 		return currentEmail.equals(lastCalculatedEmail);
 	}
-	
+
 	void recalculateEmail() {
 		Email currentEmail = getEmail();
 		String currentLocalPart = getCurrentLocalPart();
 		currentEmail.setLocalPart(currentLocalPart);
-		
+
 		lastCalculatedEmail = Email.newInstance(currentEmail.toString());
 	}
 

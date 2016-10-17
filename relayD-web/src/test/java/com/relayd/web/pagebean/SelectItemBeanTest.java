@@ -18,7 +18,7 @@ import com.relayd.attributes.Shirtsize;
  *
  * @author schmollc (Christian@relayd.de)
  * @since 01.09.2016
- * status initial
+ *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class SelectItemBeanTest {

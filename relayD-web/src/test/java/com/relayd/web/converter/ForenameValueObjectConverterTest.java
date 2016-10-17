@@ -9,7 +9,7 @@ import org.junit.runners.MethodSorters;
 import com.relayd.attributes.Forename;
 
 /**
- * @author schmollc (Christian@relayD.de)
+ * @author schmollc (Christian@relayd.de)
  * @author Rasumichin (Erik@relayd.de)
  * @since 20.06.2016
  *

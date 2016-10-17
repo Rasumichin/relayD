@@ -20,6 +20,9 @@ import static org.mockito.Mockito.*;
  * They describe the lowest-level design of the system.
  *  - Robert C. Martin
  *
+ * @author schmollc (Christian@relayd.de)
+ * @since 08.10.2016
+ *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class SettingsPageBeanTest {

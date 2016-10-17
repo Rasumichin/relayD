@@ -9,9 +9,9 @@ import org.junit.runners.MethodSorters;
 import com.relayd.attributes.Comment;
 
 /**
- * @author  schmollc (Christian@relayD.de)
+ * @author  schmollc (Christian@relayd.de)
  * @since   25.08.2016
- * status   initial
+ *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class CommentValueObjectConverterTest {

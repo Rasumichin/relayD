@@ -1,5 +1,10 @@
 package com.relayd.web.theme;
 
+/**
+ * @author Thorsten (Thorsten@relayd.de)
+ * @since 21.06.2016
+ *
+ */
 public class Theme {
 
 	private int id;

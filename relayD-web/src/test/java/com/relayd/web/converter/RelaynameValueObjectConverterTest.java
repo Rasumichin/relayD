@@ -9,9 +9,9 @@ import org.junit.runners.MethodSorters;
 import com.relayd.attributes.Relayname;
 
 /**
- * @author schmollc (Christian@relayD.de)
+ * @author schmollc (Christian@relayd.de)
  * @since 20.06.2016
- * status initial
+ *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class RelaynameValueObjectConverterTest {
