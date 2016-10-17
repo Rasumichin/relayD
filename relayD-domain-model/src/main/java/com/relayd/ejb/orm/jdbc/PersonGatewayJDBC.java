@@ -103,11 +103,13 @@ public class PersonGatewayJDBC implements PersonGateway {
 	}
 
 	@Override
-	public void set(Person aPerson) {
+	public void set(@SuppressWarnings("unused") Person aPerson) {
+		// TODO -schmollc- Implementieren
 	}
 
 	@Override
-	public void remove(UUID aUuid) {
+	public void remove(@SuppressWarnings("unused") UUID uuid) {
+		// TODO -schmollc- Implementieren
 	}
 
 	// TODO -schmollc- In eigene Klasse verschieben
