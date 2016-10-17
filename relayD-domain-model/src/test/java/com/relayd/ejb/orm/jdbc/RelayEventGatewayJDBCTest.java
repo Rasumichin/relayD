@@ -58,7 +58,7 @@ public class RelayEventGatewayJDBCTest {
 		RelayEvent relayEvent = sut.mapValues(rs);
 
 		assertNotNull(relayEvent);
-		assertEquals("[uuid] not correct!", UUID.fromString(ID), relayEvent.getUUID());
+		assertEquals("[uuid] not correct!", UUID.fromString(ID), relayEvent.getUuid());
 		assertEquals("[eventname] not correct!", Eventname.newInstance(EVENT_NAME), relayEvent.getName());
 		// TODO -schmoll- Mann sollte nicht Whisky trinken und dann coden....
 		Calendar calendar = Calendar.getInstance();

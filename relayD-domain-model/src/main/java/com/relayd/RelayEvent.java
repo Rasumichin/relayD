@@ -33,12 +33,12 @@ public class RelayEvent implements Serializable {
 		eventDay = anEventDay;
 	}
 
-	public UUID getUUID() {
+	public UUID getUuid() {
 		return uuid;
 	}
 
-	public void setUUID(UUID aUuid) {
-		uuid = aUuid;
+	public void setUuid(UUID anUuid) {
+		uuid = anUuid;
 	}
 
 	public Eventname getName() {

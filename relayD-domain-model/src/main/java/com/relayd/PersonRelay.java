@@ -22,11 +22,11 @@ public class PersonRelay implements Serializable {
 		return new PersonRelay();
 	}
 
-	public UUID getUUID() {
+	public UUID getUuid() {
 		return uuid;
 	}
 
-	public void setUUID(UUID anUuid) {
+	public void setUuid(UUID anUuid) {
 		uuid = anUuid;
 	}
 

@@ -50,7 +50,7 @@ public class PersonGatewayJPATest {
 		
 		assertNotNull("Result 'Person' must not be 'null'.", result);
 		
-		UUID actualUuid = result.getUUID();
+		UUID actualUuid = result.getUuid();
 		assertEquals("Mapping from PersonEntity to Person was not correct.", expectedUuid, actualUuid);
 	}
 

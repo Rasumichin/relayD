@@ -63,7 +63,7 @@ public class PersonGatewayFile implements PersonGateway {
 	@Override
 	public Person get(UUID uuid) {
 		for (Person person : getAll()) {
-			if (uuid.equals(person.getUUID())) {
+			if (uuid.equals(person.getUuid())) {
 				return person;
 			}
 		}
@@ -105,7 +105,7 @@ public class PersonGatewayFile implements PersonGateway {
 	@Override
 	public void remove(UUID uuid) {
 		Person dummyRelayEvent = Person.newInstance();
-		dummyRelayEvent.setUUID(uuid);
+		dummyRelayEvent.setUuid(uuid);
 		List<Person> all = getAll();
 		all.remove(dummyRelayEvent);
 		try {

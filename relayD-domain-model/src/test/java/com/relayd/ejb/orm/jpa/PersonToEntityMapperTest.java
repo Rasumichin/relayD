@@ -32,7 +32,7 @@ public class PersonToEntityMapperTest {
 	@Test
 	public void testMapPersonToEntity_id() {
 		PersonEntity mappedPersonEntity = sut.mapPersonToEntity(person);
-		UUID expected = person.getUUID();
+		UUID expected = person.getUuid();
 		UUID result = UUID.fromString(mappedPersonEntity.getId());
 		assertEquals("Mapping of [uuid] is not correct.", expected, result);
 	}
@@ -43,7 +43,7 @@ public class PersonToEntityMapperTest {
 
 		Person mappedPerson = sut.mapEntityToPerson(personEntity);
 		String expected = personEntity.getId();
-		String result = mappedPerson.getUUID().toString();
+		String result = mappedPerson.getUuid().toString();
 		assertEquals("Mapping of [id] is not correct.", expected, result);
 	}
 

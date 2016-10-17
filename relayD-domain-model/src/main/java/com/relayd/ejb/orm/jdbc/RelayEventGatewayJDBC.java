@@ -83,7 +83,7 @@ public class RelayEventGatewayJDBC implements RelayEventGateway {
 		EventDay eventDay = EventDay.newInstance(localDate);
 
 		RelayEvent relayEvent = RelayEvent.newInstance(eventName, eventDay);
-		relayEvent.setUUID(UUID.fromString(rs.getString(INDEX_UUID)));
+		relayEvent.setUuid(UUID.fromString(rs.getString(INDEX_UUID)));
 
 		return relayEvent;
 	}

@@ -33,7 +33,7 @@ public abstract class PersonGatewayTest {
 		getSut().set(firstMember);
 		getSut().set(createPeterShaw());
 
-		Person result = getSut().get(firstMember.getUUID());
+		Person result = getSut().get(firstMember.getUuid());
 
 		assertEquals("[Forename] not correct.", firstMember.getForename(), result.getForename());
 		assertEquals("[Surename] not correct.", firstMember.getSurename(), result.getSurename());
@@ -65,7 +65,7 @@ public abstract class PersonGatewayTest {
 	public void testRemove() {
 		Person member = createJustusJonas();
 		getSut().set(member);
-		UUID uuid = member.getUUID();
+		UUID uuid = member.getUuid();
 
 		assertEquals("Error for create member. ", 1, getSut().getAll().size());
 
@@ -80,7 +80,7 @@ public abstract class PersonGatewayTest {
 	public void update() {
 		// ARRANGE
 		Person firstMember = createJustusJonas();
-		UUID uuidFromFirstMember = firstMember.getUUID();
+		UUID uuidFromFirstMember = firstMember.getUuid();
 
 		getSut().set(firstMember);
 		getSut().set(createPeterShaw());

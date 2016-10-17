@@ -40,9 +40,9 @@ public class PersonRelayTest {
 
 		PersonRelay sut = PersonRelay.newInstance();
 
-		sut.setUUID(expected);
+		sut.setUuid(expected);
 
-		UUID actual = sut.getUUID();
+		UUID actual = sut.getUuid();
 
 		assertEquals("[uuid] not correct!", expected, actual);
 	}

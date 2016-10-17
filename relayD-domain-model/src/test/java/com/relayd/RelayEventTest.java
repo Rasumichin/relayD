@@ -66,24 +66,24 @@ public class RelayEventTest {
 	}
 
 	@Test
-	public void testUUID() {
+	public void testUuid() {
 		Eventname eventNameDummy = Eventname.newInstance("MetroGroup Marathon Düsseldorf");
 		EventDay eventDayDummy = EventDay.newInstance(LocalDate.of(2017, Month.APRIL, 30));
 
 		RelayEvent sut = RelayEvent.newInstance(eventNameDummy, eventDayDummy);
 
-		assertNotNull("Expected valid instance.", sut.getUUID());
+		assertNotNull("Expected valid instance.", sut.getUuid());
 	}
 
 	@Test
-	public void testSetUUID() {
+	public void testSetUuid() {
 		Eventname eventNameDummy = Eventname.newInstance("MetroGroup Marathon Düsseldorf");
 		EventDay eventDayDummy = EventDay.newInstance(LocalDate.of(2017, Month.APRIL, 30));
 
 		RelayEvent sut = RelayEvent.newInstance(eventNameDummy, eventDayDummy);
 		RelayEvent secondSut = RelayEvent.newInstance(eventNameDummy, eventDayDummy);
 
-		secondSut.setUUID(sut.getUUID());
+		secondSut.setUuid(sut.getUuid());
 
 		assertEquals(sut, secondSut);
 	}
@@ -92,13 +92,13 @@ public class RelayEventTest {
 	public void testGetHashCode() {
 		RelayEvent sut = RelayEvent.newInstance(null, null);
 		UUID uuid = UUID.fromString("53a27b33-a5cb-4997-8eaf-dcf8bd1cb2d2");
-		sut.setUUID(uuid);
+		sut.setUuid(uuid);
 
 		int hashCode = sut.hashCode();
 
 		assertEquals(-975545171, hashCode);
 
-		sut.setUUID(null);
+		sut.setUuid(null);
 
 		hashCode = sut.hashCode();
 
@@ -133,11 +133,11 @@ public class RelayEventTest {
 	}
 
 	@Test
-	public void testEqualsWithUUIDIsNull() {
+	public void testEqualsWithUuidIsNull() {
 		RelayEvent sut = RelayEvent.newInstance(null, null);
 
 		RelayEvent secondEvent = RelayEvent.newInstance(null, null);
-		sut.setUUID(null);
+		sut.setUuid(null);
 
 		boolean result = sut.equals(secondEvent);
 
@@ -146,12 +146,12 @@ public class RelayEventTest {
 	}
 
 	@Test
-	public void testEqualsWithBothUUIDAreNull() {
+	public void testEqualsWithBothUuidAreNull() {
 		RelayEvent sut = RelayEvent.newInstance(null, null);
-		sut.setUUID(null);
+		sut.setUuid(null);
 
 		RelayEvent secondEvent = RelayEvent.newInstance(null, null);
-		secondEvent.setUUID(null);
+		secondEvent.setUuid(null);
 
 		boolean result = sut.equals(secondEvent);
 

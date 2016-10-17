@@ -116,7 +116,7 @@ public class PersonGatewayJDBC implements PersonGateway {
 	Person mapValues(ResultSet rs) throws SQLException {
 		Person person = Person.newInstance();
 
-		person.setUUID(UUID.fromString(rs.getString(INDEX_UUID)));
+		person.setUuid(UUID.fromString(rs.getString(INDEX_UUID)));
 		person.setForename(Forename.newInstance(rs.getString(INDEX_FORENAME)));
 		person.setSurename(Surename.newInstance(rs.getString(INDEX_SURENAME)));
 		Integer yearOfBirth = rs.getInt(INDEX_YEAROFBIRTH);

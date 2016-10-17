@@ -41,11 +41,11 @@ public class Person implements Serializable {
 		return new Person();
 	}
 
-	public UUID getUUID() {
+	public UUID getUuid() {
 		return uuid;
 	}
 
-	public void setUUID(UUID anUuid) {
+	public void setUuid(UUID anUuid) {
 		uuid = anUuid;
 	}
 

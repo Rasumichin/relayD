@@ -25,7 +25,7 @@ public class PersonGatewayMemory implements PersonGateway {
 
 	@Override
 	public void set(Person person) {
-		events.put(person.getUUID(), person);
+		events.put(person.getUuid(), person);
 	}
 
 	@Override

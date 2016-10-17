@@ -72,7 +72,7 @@ public class PersonGatewayJDBCTest {
 		Person person = sut.mapValues(resultSetMock);
 
 		assertNotNull(person);
-		assertEquals("[uuid] not correct!", UUID.fromString(ID), person.getUUID());
+		assertEquals("[uuid] not correct!", UUID.fromString(ID), person.getUuid());
 		assertEquals("[forename] not correct!", Forename.newInstance(FORENAME), person.getForename());
 		assertEquals("[surename] not correct!", Surename.newInstance(SURENAME), person.getSurename());
 		assertEquals("[yearOfBirth] not correct!", YearOfBirth.newInstance(YEAROFBIRTH), person.getYearOfBirth());
