@@ -39,7 +39,6 @@ public class PersonEditPageBean implements Serializable {
 	private PersonBridge personBridge;
 
 	Person workingPerson = null;
-	Email lastCalculatedEmail = null;
 	boolean isNewPerson = false;
 
 	public PersonEditPageBean() {
@@ -54,19 +53,11 @@ public class PersonEditPageBean implements Serializable {
 	void prepareNewPerson() {
 		workingPerson = createNewPerson();
 		isNewPerson = true;
-		lastCalculatedEmail = workingPerson.getEmail().clone();
 	}
 
 	Person createNewPerson() {
 		Person person = Person.newInstance();
-		Email defaultEmail = getDefaultEmail();
-		person.setEmail(defaultEmail);
-
 		return person;
-	}
-
-	Email getDefaultEmail() {
-		return Email.newInstance("forename.surename@canda.com");
 	}
 
 	void openDialog() {
@@ -127,24 +118,7 @@ public class PersonEditPageBean implements Serializable {
 	}
 
 	public void nameValueChanged() {
-		// TODO (Erik, 2016-10-10): Mit CS abstimmen, ob die Methode ihm so eher verständlich erscheint.
-		if (currentEmailHasBeenCalculated()) {
-			recalculateEmail();
-		}
-	}
-
-	boolean currentEmailHasBeenCalculated() {
-		Email currentEmail = getEmail();
-
-		return currentEmail.equals(lastCalculatedEmail);
-	}
-
-	void recalculateEmail() {
-		Email currentEmail = getEmail();
-		String currentLocalPart = workingPerson.getCurrentLocalPart();
-		currentEmail.setLocalPart(currentLocalPart);
-
-		lastCalculatedEmail = Email.newInstance(currentEmail.toString());
+		workingPerson.nameValueChanged();
 	}
 
 	public Forename getForename() {

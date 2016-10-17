@@ -261,107 +261,10 @@ public class PersonEditPageBeanTest {
 	}
 
 	@Test
-	public void testGetDefaultEmail() {
-		Email expected = getExpectedDefaultEmail();
-		Email result = sut.getDefaultEmail();
-		assertEquals("Default email address is not correct.", expected, result);
-	}
-
-	private Email getExpectedDefaultEmail() {
-		return Email.createFromLocalAndDomainPart("forename.surename", "canda.com");
-	}
-
-	@Test
-	public void testCreateNewPersonAndVerifyEmailHasADefaultValue() {
-		sut.openDialogForCreatePerson();
-		Email expected = getExpectedDefaultEmail();
-
-		Email result = sut.getEmail();
-		assertEquals("Person's [email] attribute is not correctly initialized.", expected, result);
-	}
-
-	@Test
-	public void testForenameValueChanged() {
-		sut.openDialogForCreatePerson();
-		Forename forename = Forename.newInstance("Clark");
-		Email expected = Email.createFromLocalAndDomainPart(forename.toString(), "canda.com");
-
-		sut.setForename(forename);
-		sut.nameValueChanged();
-
-		Email result = sut.getEmail();
-		assertEquals("Forename value change has not been handled correctly.", expected, result);
-	}
-
-	@Test
-	public void testSurenameValueChanged() {
-		sut.openDialogForCreatePerson();
-		Surename surename = Surename.newInstance("Kent");
-		Email expected = Email.createFromLocalAndDomainPart(surename.toString(), "canda.com");
-
-		sut.setSurename(surename);
-		sut.nameValueChanged();
-
-		Email result = sut.getEmail();
-		assertEquals("Surename value change has not been handled correctly.", expected, result);
-	}
-
-	@Test
-	public void testNameValueChangedButEmailWasEdited() {
-		sut.openDialogForCreatePerson();
-		String expected = "edited.name" + Email.AT_SIGN + "notcanda.com";
-		Email email = Email.newInstance(expected);
-		sut.setEmail(email);
-
-		sut.setForename(Forename.newInstance("Adele"));
-		sut.nameValueChanged();
-
-		String result = sut.getEmail().toString();
-		assertEquals("Email was changed although otherwise edited.", expected, result);
-	}
-
-	@Test
 	public void testPrepareNewPerson() {
-		Email expected = sut.getDefaultEmail();
 		sut.prepareNewPerson();
 
 		assertNotNull("[workingPerson] has not been created.", sut.workingPerson);
 		assertTrue("Prepared [workingPerson] is not new.", sut.isNewPerson);
-
-		Email result = sut.lastCalculatedEmail;
-		assertEquals("[lastCalculatedEmail] is not correct.", expected, result);
-	}
-
-	@Test
-	public void testCurrentEmailHasBeenCalculated_true() {
-		sut.openDialogForCreatePerson();
-
-		boolean result = sut.currentEmailHasBeenCalculated();
-
-		assertTrue("Recalculation should be possible!", result);
-	}
-
-	@Test
-	public void testCurrentEmailHasBeenCalculated_false() {
-		sut.openDialogForCreatePerson();
-		Email email = Email.createFromLocalAndDomainPart("john", "mail.com");
-		sut.setEmail(email);
-
-		boolean result = sut.currentEmailHasBeenCalculated();
-
-		assertFalse("Recalculation should not be possible!", result);
-	}
-
-	@Test
-	public void testRecalculateEmail() {
-		sut.openDialogForCreatePerson();
-		sut.setEmail(sut.getDefaultEmail());
-		Email expected = Email.createFromLocalAndDomainPart("john", "canda.com");
-		sut.setForename(Forename.newInstance("john"));
-
-		sut.recalculateEmail();
-
-		Email result = sut.lastCalculatedEmail;
-		assertEquals("Recalculation of [lastCalculatedEmail] is not correct!", expected, result);
 	}
 }

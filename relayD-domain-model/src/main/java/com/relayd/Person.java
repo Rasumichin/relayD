@@ -32,9 +32,12 @@ public class Person implements Serializable {
 	private Relayname relayname; // Refactor Dieses Attribut ist Jahresabhängig!
 	private Position position; // Refactor Dieses Attribut ist Jahresabhängig!
 	private Comment comment;
+	Email lastCalculatedEmail;
 
 	private Person() {
 		uuid = UUID.randomUUID();
+		email = getDefaultEmail();
+		lastCalculatedEmail = email.clone();
 	}
 
 	public static Person newInstance() {
@@ -101,6 +104,10 @@ public class Person implements Serializable {
 
 	public void setEmail(Email anEmail) {
 		email = anEmail;
+	}
+
+	Email getDefaultEmail() {
+		return Email.newInstance("forename.surename@canda.com");
 	}
 
 	/**
@@ -174,7 +181,28 @@ public class Person implements Serializable {
 		return getRelayname() != null && !getRelayname().isEmpty();
 	}
 
-	public String getCurrentLocalPart() {
+	public void nameValueChanged() {
+		// TODO (Erik, 2016-10-10): Mit CS abstimmen, ob die Methode ihm so eher verständlich erscheint.
+		if (currentEmailHasBeenCalculated()) {
+			recalculateEmail();
+		}
+	}
+
+	boolean currentEmailHasBeenCalculated() {
+		Email currentEmail = getEmail();
+
+		return currentEmail.equals(lastCalculatedEmail);
+	}
+
+	void recalculateEmail() {
+		Email currentEmail = getEmail();
+		String currentLocalPart = getCurrentLocalPart();
+		currentEmail.setLocalPart(currentLocalPart);
+
+		lastCalculatedEmail = Email.newInstance(currentEmail.toString());
+	}
+
+	String getCurrentLocalPart() {
 		Forename currentForename = getForename();
 		Surename currentSurename = getSurename();
 
