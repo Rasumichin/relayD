@@ -122,7 +122,7 @@
 				visible="#{personBrowsePageBean.visibleColumns[1]}"
 				sortBy="#{person.forename}"
 				sortFunction="#{personBrowsePageBean.sortByForename}"
-				width="150">
+				width="140">
 				<h:outputText value="#{person.forename}" />
 			</p:column>
 
@@ -132,7 +132,7 @@
 				filterMatchMode="contains"
 				sortBy="#{person.surename}"
 				sortFunction="#{personBrowsePageBean.sortBySurename}"
-				width="150">
+				width="140">
 				<h:outputText value="#{person.surename}" />
 			</p:column>
 
@@ -157,7 +157,7 @@
 				visible="#{personBrowsePageBean.visibleColumns[5]}"
 				sortBy="#{person.yearOfBirth}"
 				sortFunction="#{personBrowsePageBean.sortByYearOfBirth}"
-				width="90">
+				width="120">
 				<h:outputText value="#{person.yearOfBirth}" />
 			</p:column>
 
@@ -166,7 +166,7 @@
 				visible="#{personBrowsePageBean.visibleColumns[6]}"
 				sortBy="#{person.shirtsize}"
 				sortFunction="#{personBrowsePageBean.sortByShirtsize}"
-				width="60">
+				width="100">
 				<h:outputText value="#{person.shirtsize.toString()}" />
 			</p:column>
 
