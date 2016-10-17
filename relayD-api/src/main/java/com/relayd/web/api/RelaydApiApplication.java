@@ -1,12 +1,12 @@
 package com.relayd.web.api;
 
-import javax.ws.rs.*;
-import javax.ws.rs.core.*;
+import javax.ws.rs.ApplicationPath;
+import javax.ws.rs.core.Application;
 
 /**
- * @author  Rasumichin (Erik@cloud.franke-net.com)
+ * @author  Rasumichin (Erik@relayd.de)
  * @since   26.03.2016
- * status   initial
+ *
  */
 @ApplicationPath("/resources")
 public class RelaydApiApplication extends Application {

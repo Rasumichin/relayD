@@ -1,13 +1,13 @@
 package com.relayd.web.api.resource;
 
-import org.junit.Test;
-
 import static org.junit.Assert.*;
 
+import org.junit.Test;
+
 /**
- * @author  schmollc (Christian@cloud.franke-net.com)
+ * @author  schmollc (Christian@relayd.de)
  * @since   06.04.2016
- * status   initial
+ *
  */
 public class PersonResourceTest {
 	private PersonResource sut = new PersonResource();

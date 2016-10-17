@@ -5,9 +5,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
 /**
- * @author  schmollc (Christian@cloud.franke-net.com)
+ * @author  schmollc (Christian@relayd.de)
  * @since   06.04.2016
- * status   initial
+ *
  */
 @Path("person")
 public class PersonResource {

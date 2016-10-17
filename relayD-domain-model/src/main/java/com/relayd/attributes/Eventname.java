@@ -3,7 +3,7 @@ package com.relayd.attributes;
 import java.io.Serializable;
 
 /**
- * @author  schmollc (Christian@cloud.franke-net.com)
+ * @author  schmollc (Christian@relayd.de)
  * @since   22.03.2016
  *
  */

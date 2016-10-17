@@ -8,9 +8,9 @@ import com.relayd.attributes.Surename;
 import com.relayd.attributes.YearOfBirth;
 
 /**
- * @author  schmollc (Christian@cloud.franke-net.com)
+ * @author  schmollc (Christian@relayd.de)
  * @since   30.03.2016
- * status   initial
+ *
  */
 public class PersonBuilder {
 
