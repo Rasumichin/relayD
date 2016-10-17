@@ -141,26 +141,10 @@ public class PersonEditPageBean implements Serializable {
 
 	void recalculateEmail() {
 		Email currentEmail = getEmail();
-		String currentLocalPart = getCurrentLocalPart();
+		String currentLocalPart = workingPerson.getCurrentLocalPart();
 		currentEmail.setLocalPart(currentLocalPart);
 
 		lastCalculatedEmail = Email.newInstance(currentEmail.toString());
-	}
-
-	public String getCurrentLocalPart() {
-		Forename currentForename = getForename();
-		Surename currentSurename = getSurename();
-
-		String currentLocalPart = (currentForename == null) ? null : currentForename.toString();
-		if (currentSurename != null) {
-			currentLocalPart = (currentLocalPart == null) ? currentSurename.toString() : currentLocalPart + '.' + currentSurename;
-		}
-
-		if (currentLocalPart != null) {
-			currentLocalPart = currentLocalPart.replaceAll("\\s+", "");
-		}
-
-		return currentLocalPart;
 	}
 
 	public Forename getForename() {

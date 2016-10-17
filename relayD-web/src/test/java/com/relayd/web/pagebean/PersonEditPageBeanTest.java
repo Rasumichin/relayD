@@ -281,60 +281,6 @@ public class PersonEditPageBeanTest {
 	}
 
 	@Test
-	public void testGetCurrentLocalPartForenameIsSet() {
-		sut.openDialogForCreatePerson();
-		Forename forename = Forename.newInstance("Mike");
-		sut.setForename(forename);
-
-		String expected = forename.toString();
-		String result = sut.getCurrentLocalPart();
-		assertEquals("Current local part is not correct.", expected, result);
-	}
-
-	@Test
-	public void testGetCurrentLocalPartSurenameIsSet() {
-		sut.openDialogForCreatePerson();
-		Surename surename = Surename.newInstance("Hansen");
-		sut.setSurename(surename);
-
-		String expected = surename.toString();
-		String result = sut.getCurrentLocalPart();
-		assertEquals("Current local part is not correct.", expected, result);
-	}
-
-	@Test
-	public void testGetCurrentLocalPartForenameAndSurenameHaveBeenSet() {
-		sut.openDialogForCreatePerson();
-		Forename forename = Forename.newInstance("Mike");
-		sut.setForename(forename);
-		Surename surename = Surename.newInstance("Hansen");
-		sut.setSurename(surename);
-
-		String expected = forename.toString() + "." + surename.toString();
-		String result = sut.getCurrentLocalPart();
-		assertEquals("Current local part is not correct.", expected, result);
-	}
-
-	@Test
-	public void testGetCurrentLocalPartWhenNoNameHasBeenSet() {
-		sut.openDialogForCreatePerson();
-
-		String result = sut.getCurrentLocalPart();
-		assertNull("Current local part is not correct.", result);
-	}
-
-	@Test
-	public void tetGetCurrentLocalPartWhenSurenameContainsWhitespace() {
-		sut.openDialogForCreatePerson();
-		Surename surename = Surename.newInstance("van Helsing");
-		sut.setSurename(surename);
-
-		String expected = "vanHelsing";
-		String result = sut.getCurrentLocalPart();
-		assertEquals("Current local part is not correct.", expected, result);
-	}
-
-	@Test
 	public void testForenameValueChanged() {
 		sut.openDialogForCreatePerson();
 		Forename forename = Forename.newInstance("Clark");

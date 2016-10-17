@@ -174,6 +174,22 @@ public class Person implements Serializable {
 		return getRelayname() != null && !getRelayname().isEmpty();
 	}
 
+	public String getCurrentLocalPart() {
+		Forename currentForename = getForename();
+		Surename currentSurename = getSurename();
+
+		String currentLocalPart = (currentForename == null) ? null : currentForename.toString();
+		if (currentSurename != null) {
+			currentLocalPart = (currentLocalPart == null) ? currentSurename.toString() : currentLocalPart + '.' + currentSurename;
+		}
+
+		if (currentLocalPart != null) {
+			currentLocalPart = currentLocalPart.replaceAll("\\s+", "");
+		}
+
+		return currentLocalPart;
+	}
+
 	@Override
 	public String toString() {
 		return getForename() + " " + getSurename() + ", " + getYearOfBirth() + ", " + getShirtsize() + ", " + getDisplayCountry() + ", " + getEmail() + ", " + getRelayname() + ", " + getPosition();
