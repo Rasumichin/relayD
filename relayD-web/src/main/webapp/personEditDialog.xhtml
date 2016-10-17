@@ -64,7 +64,7 @@
 			<p:inputText
 				id="yearOfBirth"
 				value="#{personEditPageBean.yearOfBirth}"
-				width="150px">
+				style="width:180px">
 				<f:converter converterId="com.relayd.web.converter.YearOfBirthValueObjectConverter" />
 			</p:inputText>
 
@@ -107,19 +107,18 @@
 				value="#{personEditPageBean.nationality}"
 				var="entry"
 				converter="com.relayd.web.converter.NationalityValueObjectConverter"
-				style="width:160px">
+				style="width:120px">
 				<f:selectItem
 					itemLabel="Select Country"
 					itemValue=""
 					noSelectionOption="true" />
 				<f:selectItems value="#{selectItemBean.nationalities}" />
 				<p:column>
-							#{entry.country}
-						</p:column>
+					#{entry.country}
+				</p:column>
 				<p:column>
-							#{entry.displayCountry}
-						</p:column>
-
+					#{entry.displayCountry}
+				</p:column>
 			</p:selectOneMenu>
 
 			<p:outputLabel
@@ -139,8 +138,8 @@
 					itemLabel="#{shirtsize.description}"
 					itemValue="#{shirtsize}" />
 				<p:column>
-							#{entry.description}
-						</p:column>
+					#{entry.description}
+				</p:column>
 			</p:selectOneMenu>
 
 			<p:outputLabel
@@ -161,7 +160,6 @@
 			<p:outputLabel
 				for="display"
 				value="" />
-
 			<h:outputText id="display" />
 
 		</h:panelGrid>
