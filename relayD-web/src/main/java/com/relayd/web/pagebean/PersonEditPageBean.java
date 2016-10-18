@@ -1,7 +1,6 @@
 package com.relayd.web.pagebean;
 
 import java.io.Serializable;
-import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 
@@ -39,7 +38,6 @@ public class PersonEditPageBean implements Serializable {
 	private PersonBridge personBridge;
 
 	Person workingPerson = null;
-	//	boolean isNewPerson = false;
 
 	public PersonEditPageBean() {
 		personBridge = new PersonBridgeImpl();
@@ -137,14 +135,6 @@ public class PersonEditPageBean implements Serializable {
 
 	public void setYearOfBirth(YearOfBirth aYearOfBirth) {
 		workingPerson.setYearOfBirth(aYearOfBirth);
-	}
-
-	public Locale getNationality() {
-		return workingPerson.getNationality();
-	}
-
-	public void setNationality(Locale aLocale) {
-		workingPerson.setNationality(aLocale);
 	}
 
 	public Shirtsize getShirtsize() {

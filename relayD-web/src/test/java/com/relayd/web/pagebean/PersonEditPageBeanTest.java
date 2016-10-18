@@ -3,7 +3,6 @@ package com.relayd.web.pagebean;
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.*;
 
-import java.util.Locale;
 import java.util.UUID;
 
 import org.junit.Before;
@@ -171,18 +170,6 @@ public class PersonEditPageBeanTest {
 
 		assertEquals("[Comment] not correct!", expected, result);
 
-	}
-
-	@Test
-	public void testNationality() {
-		sut.openDialogForCreatePerson();
-		Locale expected = Locale.GERMANY;
-
-		sut.setNationality(expected);
-
-		Locale result = sut.getNationality();
-
-		assertEquals("[Nationality] not correct!", expected, result);
 	}
 
 	@Test
