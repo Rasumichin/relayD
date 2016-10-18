@@ -34,12 +34,9 @@ public class PersonEntity {
 	private Integer shirtsize;
 
 	@Column
-	private String nationality;
-
-	@Column
 	private String email;
 
-	@Column(name="info")
+	@Column(name = "info")
 	private String comment;
 
 	@Column
@@ -57,7 +54,6 @@ public class PersonEntity {
 		relayname = aBuilder.relayname;
 		pos = aBuilder.pos;
 		comment = aBuilder.comment;
-		nationality = aBuilder.nationality;
 		shirtsize = aBuilder.shirtsize;
 	}
 
@@ -80,10 +76,6 @@ public class PersonEntity {
 
 	public Integer getShirtsize() {
 		return shirtsize;
-	}
-
-	public String getNationality() {
-		return nationality;
 	}
 
 	public String getEmail() {
@@ -125,18 +117,23 @@ public class PersonEntity {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		PersonEntity other = (PersonEntity) obj;
 		if (id == null) {
-			if (other.id != null)
+			if (other.id != null) {
 				return false;
-		} else if (!id.equals(other.id))
+			}
+		} else if (!id.equals(other.id)) {
 			return false;
+		}
 		return true;
 	}
 
@@ -147,7 +144,6 @@ public class PersonEntity {
 		private String email;
 		private Integer yearOfBirth;
 		private Integer shirtsize;
-		private String nationality;
 		private String comment;
 		private String relayname;
 		private Integer pos;
@@ -161,7 +157,7 @@ public class PersonEntity {
 			id = anId;
 			return this;
 		}
-		
+
 		public Builder withForename(String aForename) {
 			forename = aForename;
 			return this;
@@ -184,11 +180,6 @@ public class PersonEntity {
 
 		public Builder withShirtsize(Integer aShirtsize) {
 			shirtsize = aShirtsize;
-			return this;
-		}
-
-		public Builder withNationality(String aNationality) {
-			nationality = aNationality;
 			return this;
 		}
 
