@@ -132,7 +132,7 @@ public class PersonGatewayJPATest {
 	public void testSet() {
 		Person person = getPersonToSet();
 		PersonEntity expectedPersonEntity = new PersonEntity.Builder().build();
-		sut.getPersonMapper().mapPersonToExistingEntity(person, expectedPersonEntity);
+		sut.getPersonMapper().mapPersonToEntity(person, expectedPersonEntity);
 
 		doReturn(expectedPersonEntity).when(sut).findById(person.getUUID());
 		doNothing().when(sut).mergePersonEntity(expectedPersonEntity);

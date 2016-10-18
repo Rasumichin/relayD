@@ -28,7 +28,7 @@ public class PersonToEntityMapper {
 		return new PersonToEntityMapper();
 	}
 
-	public void mapPersonToExistingEntity(Person person, PersonEntity personEntity) {
+	public void mapPersonToEntity(Person person, PersonEntity personEntity) {
 		personEntity.setForename((person.getForename() == null) || (person.getForename().isEmpty()) ? null : person.getForename().toString());
 		personEntity.setSurename((person.getSurename() == null) ? null : person.getSurename().toString());
 		personEntity.setEmail((person.getEmail() == null) ? null : person.getEmail().toString());
