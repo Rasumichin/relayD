@@ -3,7 +3,6 @@ package com.relayd.ejb;
 import static org.junit.Assert.*;
 
 import java.util.List;
-import java.util.Locale;
 import java.util.UUID;
 
 import org.junit.FixMethodOrder;
@@ -114,20 +113,19 @@ public abstract class PersonGatewayTest {
 	}
 
 	private Person createJustusJonas() {
-		return createPerson("Justus", "Jonas", 1971, Locale.GERMAN, "Justus.Jonas@rockyBech.com");
+		return createPerson("Justus", "Jonas", 1971, "Justus.Jonas@rockyBech.com");
 	}
 
 	private Person createPeterShaw() {
-		return createPerson("Peter", "Shaw", 1973, Locale.ENGLISH, "Perter.Shaw@rockyBeach.com");
+		return createPerson("Peter", "Shaw", 1973, "Perter.Shaw@rockyBeach.com");
 	}
 
-	private Person createPerson(String forename, String surename, Integer yearofBirth, Locale locale, String email) {
+	private Person createPerson(String forename, String surename, Integer yearofBirth, String email) {
 		Person person = Person.newInstance();
 
 		person.setForename(Forename.newInstance(forename));
 		person.setSurename(Surename.newInstance(surename));
 		person.setYearOfBirth(YearOfBirth.newInstance(yearofBirth));
-		person.setNationality(locale);
 		person.setShirtsize(Shirtsize.Unknown);
 		person.setEmail(Email.newInstance(email));
 		return person;

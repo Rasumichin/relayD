@@ -1,6 +1,5 @@
 package com.relayd.ejb.orm.jpa;
 
-import java.util.Locale;
 import java.util.UUID;
 
 import com.relayd.Person;
@@ -36,7 +35,6 @@ public class PersonToEntityMapper {
 				.withEmail((person.getEmail() == null) ? null : person.getEmail().toString())
 				.withYearOfBirth((person.getYearOfBirth() == null) ? null : person.getYearOfBirth().getValue())
 				.withComment((person.getComment() == null) ? null : person.getComment().toString())
-				.withNationality((person.getNationality() == null) ? null : person.getNationality().toLanguageTag())
 				.withRelayname((person.getRelayname() == null) ? null : person.getRelayname().toString())
 				.withPos((person.getPosition() == null) ? null : person.getPosition().getValue())
 				.withShirtsize((person.getShirtsize() == null) ? null : person.getShirtsize().getSize().intValue())
@@ -49,12 +47,11 @@ public class PersonToEntityMapper {
 		Person result = Person.newInstance();
 		result.setUuid(UUID.fromString(personEntity.getId()));
 		result.setForename(Forename.newInstance(personEntity.getForename()));
-		
+
 		mapSurenameFromEntityToPerson(personEntity, result);
 		mapEmailFromEntityToPerson(personEntity, result);
 		mapYearOfBirthFromEntityToPerson(personEntity, result);
 		mapCommentFromEntityToPerson(personEntity, result);
-		mapNationalityFromEntityToPerson(personEntity, result);
 		mapRelaynameFromEntityToPerson(personEntity, result);
 		mapPosFromEntityToPerson(personEntity, result);
 		mapShirtsizeFromEntityToPerson(personEntity, result);
@@ -83,12 +80,6 @@ public class PersonToEntityMapper {
 	private void mapCommentFromEntityToPerson(PersonEntity personEntity, Person result) {
 		if (personEntity.getComment() != null) {
 			result.setComment(Comment.newInstance(personEntity.getComment()));
-		}
-	}
-
-	private void mapNationalityFromEntityToPerson(PersonEntity personEntity, Person result) {
-		if (personEntity.getNationality() != null) {
-			result.setNationality(new Locale.Builder().setLanguageTag(personEntity.getNationality()).build());
 		}
 	}
 

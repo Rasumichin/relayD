@@ -1,7 +1,6 @@
 package com.relayd;
 
 import java.io.Serializable;
-import java.util.Locale;
 import java.util.UUID;
 
 import com.relayd.attributes.Comment;
@@ -27,7 +26,6 @@ public class Person implements Serializable {
 	private Forename forename;
 	private YearOfBirth yearOfBirth;
 	private Shirtsize shirtsize;
-	private Locale nationality; // TODO -schmollc- Anderen Attribute sind Fachobjekte, dies hier eine "API" Klasse. Warum kein Decorator einführen?
 	private Email email;
 	private Relayname relayname; // Refactor Dieses Attribut ist Jahresabhängig!
 	private Position position; // Refactor Dieses Attribut ist Jahresabhängig!
@@ -74,28 +72,6 @@ public class Person implements Serializable {
 
 	public void setShirtsize(Shirtsize aShirtsize) {
 		shirtsize = aShirtsize;
-	}
-
-	public Locale getNationality() {
-		return nationality;
-	}
-
-	public void setNationality(Locale aNationality) {
-		nationality = aNationality;
-	}
-
-	public String getDisplayNationality() {
-		if (nationality == null) {
-			return null;
-		}
-		return nationality.getDisplayCountry();
-	}
-
-	private String getDisplayCountry() {
-		if (getNationality() != null) {
-			return getNationality().getDisplayCountry(Locale.ENGLISH);
-		}
-		return null;
 	}
 
 	public Email getEmail() {
@@ -220,7 +196,7 @@ public class Person implements Serializable {
 
 	@Override
 	public String toString() {
-		return getForename() + " " + getSurename() + ", " + getYearOfBirth() + ", " + getShirtsize() + ", " + getDisplayCountry() + ", " + getEmail() + ", " + getRelayname() + ", " + getPosition();
+		return getForename() + " " + getSurename() + ", " + getYearOfBirth() + ", " + getShirtsize() + ", " + getEmail() + ", " + getRelayname() + ", " + getPosition();
 	}
 
 	@Override
