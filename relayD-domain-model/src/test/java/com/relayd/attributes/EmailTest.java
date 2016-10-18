@@ -115,6 +115,21 @@ public class EmailTest {
 	}
 
 	@Test
+	public void testHashCode() {
+		Email sut = Email.newInstance(VALID_MAIL_OF_JUSTUS_JONAS);
+
+		int hashCode = sut.hashCode();
+
+		assertEquals(-865138838, hashCode);
+
+		sut.value = null;
+
+		hashCode = sut.hashCode();
+
+		assertEquals(31, hashCode);
+	}
+
+	@Test
 	public void testEqualsWithMyself() {
 		Email sut = Email.newInstance(VALID_MAIL_OF_JUSTUS_JONAS);
 
@@ -139,6 +154,17 @@ public class EmailTest {
 		boolean result = sut.equals(new String());
 
 		assertFalse("values should not be equal!", result);
+	}
+
+	@Test
+	public void testEqualsWithValueIsNull() {
+		Email sut = Email.newInstance(VALID_MAIL_OF_JUSTUS_JONAS);
+		sut.value = null;
+		Email secondSut = Email.newInstance(VALID_MAIL_OF_JUSTUS_JONAS);
+
+		boolean result = sut.equals(secondSut);
+
+		assertFalse(result);
 	}
 
 	@Test

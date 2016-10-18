@@ -15,7 +15,7 @@ public class Email implements Serializable, Cloneable {
 	private static final long serialVersionUID = 1L;
 
 	public static Character AT_SIGN = '@';
-	private InternetAddress value;
+	InternetAddress value;
 
 	private Email(String email) {
 		super();
