@@ -2,10 +2,10 @@ package com.relayd.ejb.orm.jpa;
 
 import static org.junit.Assert.*;
 
-import java.util.Locale;
 import java.util.UUID;
 
-import org.junit.*;
+import org.junit.FixMethodOrder;
+import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import com.relayd.Person;
@@ -163,27 +163,6 @@ public class PersonToEntityMapperTest {
 		String expected = personEntity.getComment();
 		String result = mappedPerson.getComment().toString();
 		assertEquals("Mapping of [comment] is not correct.", expected, result);
-	}
-
-	@Test
-	public void testMapPersonToEntity_nationality() {
-		person.setNationality(Locale.FRANCE);
-
-		PersonEntity mappedPersonEntity = sut.mapPersonToEntity(person);
-		Locale expected = person.getNationality();
-		Locale result = new Locale.Builder().setLanguageTag(mappedPersonEntity.getNationality()).build();
-		assertEquals("Mapping of [nationality] is not correct.", expected, result);
-	}
-
-	@Test
-	public void testMapEntityToPerson_nationality() {
-		String nationalityValue = Locale.FRANCE.toLanguageTag();
-		PersonEntity personEntity = new PersonEntity.Builder().withNationality(nationalityValue).build();
-
-		Person mappedPerson = sut.mapEntityToPerson(personEntity);
-		String expected = personEntity.getNationality();
-		String result = mappedPerson.getNationality().toLanguageTag();
-		assertEquals("Mapping of [nationality] is not correct.", expected, result);
 	}
 
 	@Test

@@ -100,28 +100,6 @@
 			</p:selectOneMenu>
 
 			<p:outputLabel
-				for="nationality"
-				value="Nationality:" />
-			<p:selectOneMenu
-				id="nationality"
-				value="#{personEditPageBean.nationality}"
-				var="entry"
-				converter="com.relayd.web.converter.NationalityValueObjectConverter"
-				style="width:120px">
-				<f:selectItem
-					itemLabel="Select Country"
-					itemValue=""
-					noSelectionOption="true" />
-				<f:selectItems value="#{selectItemBean.nationalities}" />
-				<p:column>
-					#{entry.country}
-				</p:column>
-				<p:column>
-					#{entry.displayCountry}
-				</p:column>
-			</p:selectOneMenu>
-
-			<p:outputLabel
 				for="shirtsize"
 				value="Shirtsize:" />
 			<p:selectOneMenu

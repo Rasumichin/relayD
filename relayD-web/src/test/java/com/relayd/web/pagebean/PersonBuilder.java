@@ -1,7 +1,5 @@
 package com.relayd.web.pagebean;
 
-import java.util.Locale;
-
 import com.relayd.Person;
 import com.relayd.attributes.Email;
 import com.relayd.attributes.Forename;
@@ -25,7 +23,6 @@ public class PersonBuilder {
 	private Position position = null;
 	private YearOfBirth yearOfBirth = YearOfBirth.newInstance(1956);
 	private Shirtsize shirtsize = Shirtsize.HerrenM;
-	private Locale locale = Locale.GERMANY;
 	private Email email = null;
 
 	PersonBuilder withSurename(Surename aSurename) {
@@ -61,7 +58,6 @@ public class PersonBuilder {
 		person.setPosition(position);
 		person.setYearOfBirth(yearOfBirth);
 		person.setShirtsize(shirtsize);
-		person.setNationality(locale);
 		person.setEmail(email);
 		return person;
 	}

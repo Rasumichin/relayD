@@ -2,7 +2,6 @@ package com.relayd;
 
 import static org.junit.Assert.*;
 
-import java.util.Locale;
 import java.util.UUID;
 
 import org.junit.FixMethodOrder;
@@ -36,14 +35,13 @@ public class PersonTest {
 		sut.setForename(Forename.newInstance("Justus"));
 		sut.setYearOfBirth(YearOfBirth.newInstance(1956));
 		sut.setShirtsize(Shirtsize.HerrenM);
-		sut.setNationality(Locale.GERMANY);
 		sut.setEmail(Email.newInstance("Jonas.Justus@rockyBeach.com"));
 		sut.setRelayname(Relayname.newInstance("Die 4 ????"));
 		sut.setPosition(Position.FIRST);
 
 		String personAsString = sut.toString();
 
-		assertEquals("Justus Jonas, 1956, Herren M, Germany, Jonas.Justus@rockyBeach.com, Die 4 ????, First", personAsString);
+		assertEquals("Justus Jonas, 1956, Herren M, Jonas.Justus@rockyBeach.com, Die 4 ????, First", personAsString);
 	}
 
 	@Test
@@ -83,19 +81,6 @@ public class PersonTest {
 		Shirtsize actual = sut.getShirtsize();
 
 		assertEquals("[shirtsize] not correct!", expected, actual);
-	}
-
-	@Test
-	public void testNationality() {
-		Locale expected = Locale.GERMANY;
-
-		Person sut = Person.newInstance();
-
-		sut.setNationality(expected);
-
-		Locale actual = sut.getNationality();
-
-		assertEquals("[nationality] not correct!", expected, actual);
 	}
 
 	@Test

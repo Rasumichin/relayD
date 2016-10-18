@@ -37,7 +37,7 @@ public class DialogOptionsBuilderTest {
 
 		assertNotNull("[height] does not exist in map!", result.get("height"));
 		Integer height = (Integer) result.get("height");
-		assertEquals("[height] not correct!", 520, height.intValue());
+		assertEquals("[height] not correct!", 480, height.intValue());
 
 		assertNotNull("[contentWidth] does not exist in map!", result.get("contentWidth"));
 		String contentWidth = (String) result.get("contentWidth");

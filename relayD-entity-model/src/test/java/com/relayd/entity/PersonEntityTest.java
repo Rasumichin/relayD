@@ -25,11 +25,9 @@ public class PersonEntityTest {
 		assertNull("[surename] not correct!", sut.getSurename());
 		assertNull("[emailadress] not correct!", sut.getEmail());
 		assertNull("[yearOfBirth] not correct!", sut.getYearOfBirth());
-		assertNull("[nationality] not correct!", sut.getNationality());
 		assertNull("[relayname] not correct!", sut.getRelayname());
 		assertNull("[pos] not correct!", sut.getPos());
 		assertNull("[shirtsize] not correct!", sut.getShirtsize());
-		assertNull("[nationality] not correct!", sut.getNationality());
 		assertNull("[comment] not correct!", sut.getComment());
 	}
 
@@ -41,11 +39,9 @@ public class PersonEntityTest {
 		assertNull("[surename] not correct!", sut.getSurename());
 		assertNull("[emailadress] not correct!", sut.getEmail());
 		assertNull("[yearOfBirth] not correct!", sut.getYearOfBirth());
-		assertNull("[nationality] not correct!", sut.getNationality());
 		assertNull("[relayname] not correct!", sut.getRelayname());
 		assertNull("[pos] not correct!", sut.getPos());
 		assertNull("[shirtsize] not correct!", sut.getShirtsize());
-		assertNull("[nationality] not correct!", sut.getNationality());
 		assertNull("[comment] not correct!", sut.getComment());
 	}
 
@@ -85,13 +81,6 @@ public class PersonEntityTest {
 	}
 
 	@Test
-	public void testInstanceCreated_ForNationality() {
-		String nationality = "DE";
-		PersonEntity sut = new PersonEntity.Builder().withNationality(nationality).build();
-		assertEquals("[nationality] has not been set correctly.", nationality, sut.getNationality());
-	}
-
-	@Test
 	public void testInstanceCreated_ForRelayname() {
 		String relayname = "Die 4 ????";
 		PersonEntity sut = new PersonEntity.Builder().withRelayname(relayname).build();
@@ -111,33 +100,33 @@ public class PersonEntityTest {
 		PersonEntity sut = new PersonEntity.Builder().withComment(comment).build();
 		assertEquals("[comment] has not been set correctly.", comment, sut.getComment());
 	}
-	
+
 	@Test
 	public void testToString() {
 		String forename = "Kent";
 		String surename = "Beck";
 		PersonEntity sut = new PersonEntity.Builder().withForename(forename).withSurename(surename).build();
-		
+
 		String expectedResult = "PersonEntity [id=" + sut.getId() + ", surename=" + surename + ", forename=" + forename + "]";
 		String actualResult = sut.toString();
-		
+
 		assertEquals("String representation is not correct!", expectedResult, actualResult);
 	}
-	
+
 	@Test
 	public void testEquals_true() {
 		String someId = UUID.randomUUID().toString();
 		PersonEntity christian = new PersonEntity.Builder().withForename("Christian").withId(someId).build();
 		PersonEntity erik = new PersonEntity.Builder().withForename("Erik").withId(someId).build();
-		
+
 		assertEquals("Equality has not been tested correctly!", christian, erik);
 	}
-	
+
 	@Test
 	public void testEquals_false() {
 		PersonEntity christian = new PersonEntity.Builder().withForename("Christian").build();
 		PersonEntity erik = new PersonEntity.Builder().withForename("Erik").build();
-		
+
 		assertNotEquals("Equality has not been tested correctly!", christian, erik);
 	}
 }

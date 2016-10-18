@@ -171,15 +171,8 @@
 			</p:column>
 
 			<p:column
-				headerText="Nationality"
-				visible="#{personBrowsePageBean.visibleColumns[7]}"
-				width="120">
-				<h:outputText value="#{person.displayNationality}" />
-			</p:column>
-
-			<p:column
 				headerText="E-Mail"
-				visible="#{personBrowsePageBean.visibleColumns[8]}"
+				visible="#{personBrowsePageBean.visibleColumns[7]}"
 				sortBy="#{person.email}"
 				sortFunction="#{personBrowsePageBean.sortByEmail}"
 				width="200">
@@ -188,7 +181,7 @@
 
 			<p:column
 				headerText="Comment"
-				visible="#{personBrowsePageBean.visibleColumns[9]}">
+				visible="#{personBrowsePageBean.visibleColumns[8]}">
 				<h:outputText
 					id="comment"
 					value="#{person.comment}" />
@@ -205,9 +198,6 @@
 
 					<h:outputText value="Year of Birth" />
 					<h:outputText value="#{person.yearOfBirth}" />
-
-					<h:outputText value="Nationality" />
-					<h:outputText value="#{person.displayNationality}" />
 
 					<h:outputText value="Shirtsize" />
 					<h:outputText value="#{person.shirtsize}" />

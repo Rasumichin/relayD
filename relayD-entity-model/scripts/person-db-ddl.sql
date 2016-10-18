@@ -14,7 +14,6 @@ CREATE TABLE person (
     shirtsize						INTEGER,
     relayname						VARCHAR(256),
     pos								INTEGER, -- POSITION geht nicht!
-    nationality						VARCHAR(256),
 	email							VARCHAR(256),
 	info							VARCHAR(1024) -- COMMENT geht nicht!
 );
@@ -26,7 +25,6 @@ COMMENT on COLUMN person.yearOfBirth is 'The Year Of Birth of a Person.';
 COMMENT on COLUMN person.shirtsize is 'TODO - Is this not a ref to a table?';
 COMMENT on COLUMN person.relayname is 'TODO - A workaround-should be an own entity.';
 COMMENT on COLUMN person.position is 'TODO - A workaround-should be an own entity.';
-COMMENT on COLUMN person.nationality is 'The nationality of a Person.';
 COMMENT on COLUMN person.email is 'The Email of a Person.';
 COMMENT on COLUMN person.comment is 'A comment for a Person.';
 

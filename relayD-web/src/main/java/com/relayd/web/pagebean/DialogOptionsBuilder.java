@@ -11,7 +11,7 @@ import java.util.Map;
 public class DialogOptionsBuilder {
 	private boolean modal = true;
 	private int width = 360;
-	private int height = 520;
+	private int height = 480;
 	private String contentWidth = "100%";
 	private String contentHeight = "100%";
 	private String headerElement = "customheader";
