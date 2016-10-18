@@ -7,7 +7,6 @@ import java.time.LocalDate;
 import java.time.Month;
 
 import org.junit.FixMethodOrder;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -104,8 +103,7 @@ public class EventDayTest {
 		assertEquals("toString() does not match expected result.", expectedResult, actualResult);
 	}
 
-	// TODO (Erik, 2016-08-27): Discuss whether this is necessary. Surprisingly test failed without any change?
-	@Ignore
+	@Test
 	public void testHashCode() {
 		EventDay sut = EventDay.newInstance(getDefinedLocalDateInThePast());
 
