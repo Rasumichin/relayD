@@ -1,8 +1,11 @@
 package com.relayd.ejb.orm.jpa;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
-import javax.persistence.*;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityNotFoundException;
 
 import com.relayd.Person;
 import com.relayd.ejb.PersonGateway;
@@ -22,20 +25,20 @@ public class PersonGatewayJPA extends GatewayJPA implements PersonGateway {
 		if (uuid == null) {
 			throw new IllegalArgumentException("[uuid] must not be 'null'.");
 		}
-		
+
 		PersonEntity personEntity = findById(uuid);
 		Person person = getPersonMapper().mapEntityToPerson(personEntity);
-		
+
 		return person;
 	}
 
 	PersonEntity findById(UUID uuid) {
 		EntityManager em = getEntityManager();
 		PersonEntity result = em.find(PersonEntity.class, uuid.toString());
-		
+
 		return result;
 	}
-	
+
 	PersonToEntityMapper getPersonMapper() {
 		return personMapper;
 	}
@@ -44,20 +47,20 @@ public class PersonGatewayJPA extends GatewayJPA implements PersonGateway {
 	public List<Person> getAll() {
 		List<PersonEntity> personEntities = findAll();
 		List<Person> persons = mapPersonEntityListToPersonList(personEntities);
-		
+
 		return persons;
 	}
 
 	List<PersonEntity> findAll() {
 		EntityManager em = getEntityManager();
 		List<PersonEntity> result = em.createQuery("SELECT p FROM PersonEntity p", PersonEntity.class).getResultList();
-		
+
 		return result;
 	}
-	
+
 	List<Person> mapPersonEntityListToPersonList(List<PersonEntity> personEntities) {
 		List<Person> persons = new ArrayList<>();
-		for (PersonEntity eachEntity: personEntities) {
+		for (PersonEntity eachEntity : personEntities) {
 			persons.add(getPersonMapper().mapEntityToPerson(eachEntity));
 		}
 		return persons;
@@ -68,14 +71,13 @@ public class PersonGatewayJPA extends GatewayJPA implements PersonGateway {
 		if (person == null) {
 			throw new IllegalArgumentException("[person] must not be 'null'.");
 		}
-		
+
 		PersonEntity personEntity = findById(person.getUUID());
-		if (personEntity != null) {
-			getPersonMapper().mapPersonToExistingEntity(person, personEntity);
-		} else {
-			personEntity = getPersonMapper().mapPersonToEntity(person);
+		if (personEntity == null) {
+			personEntity = new PersonEntity.Builder().withId(person.getUUID().toString()).build();
 		}
-		
+		getPersonMapper().mapPersonToExistingEntity(person, personEntity);
+
 		mergePersonEntity(personEntity);
 	}
 
@@ -92,7 +94,7 @@ public class PersonGatewayJPA extends GatewayJPA implements PersonGateway {
 		if (personEntity == null) {
 			throw new EntityNotFoundException("PersonEntity with 'uuid' (" + uuid + ") does not exist!");
 		}
-		
+
 		removePersonEntity(personEntity);
 	}
 
