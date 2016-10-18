@@ -59,7 +59,7 @@ public class PersonBrowsePageBean implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		visibleColumns = Arrays.asList(true, true, true, true, true, true, true, true, true, true);
+		visibleColumns = Arrays.asList(true, true, true, true, true, true, true, true, true);
 		refreshPersons();
 	}
 
