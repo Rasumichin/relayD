@@ -39,7 +39,7 @@ public class PersonEntity {
 	@Column
 	private String email;
 
-	@Column(name="info")
+	@Column(name = "info")
 	private String comment;
 
 	@Column
@@ -73,7 +73,7 @@ public class PersonEntity {
 	public String getSurename() {
 		return surename;
 	}
-	
+
 	public void setSurename(String aSurename) {
 		surename = aSurename;
 	}
@@ -88,6 +88,10 @@ public class PersonEntity {
 
 	public Integer getShirtsize() {
 		return shirtsize;
+	}
+
+	public void setShirtsize(Integer aShirtsize) {
+		shirtsize = aShirtsize;
 	}
 
 	public String getNationality() {
@@ -138,6 +142,10 @@ public class PersonEntity {
 		return pos;
 	}
 
+	public void setPos(Integer aPosition) {
+		pos = aPosition;
+	}
+
 	@Override
 	public String toString() {
 		return getClass().getSimpleName() + " [id=" + id + ", surename=" + surename + ", forename=" + forename + "]";
@@ -153,18 +161,23 @@ public class PersonEntity {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		PersonEntity other = (PersonEntity) obj;
 		if (id == null) {
-			if (other.id != null)
+			if (other.id != null) {
 				return false;
-		} else if (!id.equals(other.id))
+			}
+		} else if (!id.equals(other.id)) {
 			return false;
+		}
 		return true;
 	}
 
@@ -189,7 +202,7 @@ public class PersonEntity {
 			id = anId;
 			return this;
 		}
-		
+
 		public Builder withForename(String aForename) {
 			forename = aForename;
 			return this;
