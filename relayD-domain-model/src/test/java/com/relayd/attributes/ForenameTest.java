@@ -4,7 +4,8 @@ import static org.junit.Assert.*;
 
 import java.io.Serializable;
 
-import org.junit.*;
+import org.junit.FixMethodOrder;
+import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 /**
@@ -104,7 +105,7 @@ public class ForenameTest {
 		Forename nullForename = Forename.newInstance(null);
 
 		boolean result = sut.equals(nullForename);
-		
+
 		assertFalse("Comparing equality is not correct!", result);
 	}
 
@@ -114,7 +115,7 @@ public class ForenameTest {
 		Forename otherNullForename = Forename.newInstance(null);
 
 		boolean result = sut.equals(otherNullForename);
-		
+
 		assertTrue("Comparing equality is not correct!", result);
 	}
 
@@ -144,25 +145,110 @@ public class ForenameTest {
 		Forename otherNullForename = Forename.newInstance(null);
 
 		boolean result = (sut == otherNullForename);
-		
+
 		assertTrue("Two NullObjectForenames are not the same!", result);
 	}
-	
+
 	@Test
 	public void testIsEmpty_usualValue() {
 		Forename sut = Forename.newInstance("Forename");
-		
+
 		boolean result = sut.isEmpty();
-		
+
 		assertFalse("'isEmpty' check is not correct!", result);
 	}
 
 	@Test
 	public void testIsEmpty_nullValue() {
 		Forename sut = Forename.newInstance(null);
-		
+
 		boolean result = sut.isEmpty();
-		
+
 		assertTrue("'isEmpty' check is not correct!", result);
+	}
+
+	@Test
+	public void testHashCode() {
+		Forename sut = Forename.newInstance("Forename");
+
+		int hashCode = sut.hashCode();
+
+		assertEquals(531705222, hashCode);
+
+		sut.value = null;
+
+		hashCode = sut.hashCode();
+
+		assertEquals(31, hashCode);
+	}
+
+	@Test
+	public void testEqualsWithMyself() {
+		Forename sut = Forename.newInstance("Forename");
+
+		boolean result = sut.equals(sut);
+
+		assertTrue(result);
+	}
+
+	@Test
+	public void testEqualsWithNull() {
+		Forename sut = Forename.newInstance("Forename");
+
+		boolean result = sut.equals(null);
+
+		assertFalse(result);
+	}
+
+	@Test
+	public void testEqualsWithNotCompatibleClass() {
+		Forename sut = Forename.newInstance("Forename");
+
+		boolean result = sut.equals(new String());
+
+		assertFalse(result);
+	}
+
+	@Test
+	public void testEqualsWithValueIsNull() {
+		Forename sut = Forename.newInstance("Forename");
+		sut.value = null;
+		Forename secondSut = Forename.newInstance("Forename");
+
+		boolean result = sut.equals(secondSut);
+
+		assertFalse(result);
+	}
+
+	@Test
+	public void testEqualsWithBothValuesAreNull() {
+		Forename sut = Forename.newInstance("Forename");
+		sut.value = null;
+		Forename secondSut = Forename.newInstance("Forename");
+		secondSut.value = null;
+
+		boolean result = sut.equals(secondSut);
+
+		assertTrue(result);
+	}
+
+	@Test
+	public void testEqualsWithTwoDiffrentValues() {
+		Forename sut = Forename.newInstance("Forename");
+		Forename secondSut = Forename.newInstance("NotForename");
+
+		boolean result = sut.equals(secondSut);
+
+		assertFalse(result);
+	}
+
+	@Test
+	public void testEqualsWithSameValues() {
+		Forename sut = Forename.newInstance("Forename");
+		Forename secondSut = Forename.newInstance("Forename");
+
+		boolean result = sut.equals(secondSut);
+
+		assertTrue(result);
 	}
 }

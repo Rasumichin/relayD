@@ -110,7 +110,7 @@ public class CommentTest {
 	}
 
 	@Test
-	public void testGetHashCode() {
+	public void testHashCode() {
 		Comment sut = Comment.newInstance("Comment");
 
 		int hashCode = sut.hashCode();

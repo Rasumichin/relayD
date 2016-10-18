@@ -11,8 +11,8 @@ import java.io.Serializable;
 public class Forename implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private String value;
-	
+	String value;
+
 	private Forename() {
 	}
 
@@ -70,16 +70,16 @@ public class Forename implements Serializable {
 		}
 		return true;
 	}
-	
+
 	private static final class NullObjectForename extends Forename {
 		private static final long serialVersionUID = 6577776791000840413L;
-		
+
 		private static final NullObjectForename SINGLETON = new NullObjectForename();
-		
+
 		private static NullObjectForename instance() {
 			return SINGLETON;
 		}
-		
+
 		@Override
 		public boolean isEmpty() {
 			return true;
