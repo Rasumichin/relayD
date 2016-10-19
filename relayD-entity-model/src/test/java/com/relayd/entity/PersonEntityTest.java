@@ -34,6 +34,29 @@ public class PersonEntityTest {
 	}
 
 	@Test
+	public void testNewInstance() {
+		PersonEntity sut = PersonEntity.newInstance();
+		
+		String result = sut.getId();
+		assertNotNull("Instance has not been created correctly!", result);
+	}
+
+	@Test
+	public void testNewInstanceForUuid() {
+		UUID expected = UUID.randomUUID();
+		PersonEntity sut = PersonEntity.newInstance(expected);
+		
+		UUID actual = UUID.fromString(sut.getId());
+		assertEquals("[id] has not been set correctly!", expected, actual);
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testNewInstanceForUuid_withNullValue() {
+		@SuppressWarnings("unused")
+		PersonEntity sut = PersonEntity.newInstance(null);
+	}
+	
+	@Test
 	public void testInstanceIsCreatedWithoutAnyFurtherInformation() {
 		PersonEntity sut = new PersonEntity.Builder().build();
 		assertNotNull("Id of PersonEntity must not be 'null' after creation.", sut.getId());

@@ -48,6 +48,32 @@ public class PersonEntity {
 	@Column
 	private Integer pos;
 
+	public static PersonEntity newInstance() {
+		PersonEntity personEntity = new PersonEntity();
+		personEntity.setId(UUID.randomUUID().toString());
+		
+		return personEntity;
+	}
+
+	/**
+	 * Provided empty constructor to conform to the JPA spec. For that reason the entity property fields
+	 * are not declared 'final'.
+	 *
+	 */
+	PersonEntity() {
+		super();
+	}
+
+	public static PersonEntity newInstance(UUID anUuid) {
+		if (anUuid == null) {
+			throw new IllegalArgumentException("[anUuid] must not be 'null'.");
+		}
+		PersonEntity personEntity = new PersonEntity();
+		personEntity.setId(anUuid.toString());
+		
+		return personEntity;
+	}
+
 	private PersonEntity(Builder aBuilder) {
 		id = aBuilder.id;
 		forename = aBuilder.forename;
@@ -59,15 +85,6 @@ public class PersonEntity {
 		comment = aBuilder.comment;
 		nationality = aBuilder.nationality;
 		shirtsize = aBuilder.shirtsize;
-	}
-
-	/**
-	 * Provided empty constructor to conform to the JPA spec. For that reason the entity property fields
-	 * are not declared 'final'.
-	 *
-	 */
-	PersonEntity() {
-		super();
 	}
 
 	public String getSurename() {
@@ -120,6 +137,10 @@ public class PersonEntity {
 
 	public String getId() {
 		return id;
+	}
+	
+	void setId(String anId) {
+		id = anId;
 	}
 
 	public String getComment() {
