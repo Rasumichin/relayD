@@ -19,6 +19,7 @@ import com.relayd.entity.PersonEntity;
  * @since 25.09.2016
  *
  */
+// TODO: (Erik, 2016-10-20): Split this class into two: PersonToEntityMapper and EntityToPersonMapper. Thanks to CS for the hint.
 public class PersonToEntityMapper {
 
 	private PersonToEntityMapper() {
