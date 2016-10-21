@@ -2,10 +2,7 @@ package com.relayd.entity;
 
 import java.util.UUID;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * @author schmollc (Christian@relayd.de)
@@ -45,16 +42,11 @@ public class PersonEntity {
 	@Column
 	private Integer pos;
 
-	private PersonEntity(Builder aBuilder) {
-		id = aBuilder.id;
-		forename = aBuilder.forename;
-		surename = aBuilder.surename;
-		email = aBuilder.email;
-		yearOfBirth = aBuilder.yearOfBirth;
-		relayname = aBuilder.relayname;
-		pos = aBuilder.pos;
-		comment = aBuilder.comment;
-		shirtsize = aBuilder.shirtsize;
+	public static PersonEntity newInstance() {
+		PersonEntity personEntity = new PersonEntity();
+		personEntity.setId(UUID.randomUUID().toString());
+		
+		return personEntity;
 	}
 
 	/**
@@ -66,40 +58,86 @@ public class PersonEntity {
 		super();
 	}
 
+	public static PersonEntity newInstance(UUID anUuid) {
+		if (anUuid == null) {
+			throw new IllegalArgumentException("[anUuid] must not be 'null'.");
+		}
+		PersonEntity personEntity = new PersonEntity();
+		personEntity.setId(anUuid.toString());
+		
+		return personEntity;
+	}
+
 	public String getSurename() {
 		return surename;
+	}
+
+	public void setSurename(String aSurename) {
+		surename = aSurename;
 	}
 
 	public String getForename() {
 		return forename;
 	}
 
+	public void setForename(String aForename) {
+		forename = aForename;
+	}
+
 	public Integer getShirtsize() {
 		return shirtsize;
+	}
+
+	public void setShirtsize(Integer aShirtsize) {
+		shirtsize = aShirtsize;
 	}
 
 	public String getEmail() {
 		return email;
 	}
 
+	public void setEmail(String anEmail) {
+		email = anEmail;
+	}
+
 	public Integer getYearOfBirth() {
 		return yearOfBirth;
 	}
 
+	public void setYearOfBirth(Integer aYearOfBirth) {
+		yearOfBirth = aYearOfBirth;
+	}
+
 	public String getId() {
 		return id;
+	}
+	
+	void setId(String anId) {
+		id = anId;
 	}
 
 	public String getComment() {
 		return comment;
 	}
 
+	public void setComment(String aComment) {
+		comment = aComment;
+	}
+
 	public String getRelayname() {
 		return relayname;
 	}
 
+	public void setRelayname(String aRelayname) {
+		relayname = aRelayname;
+	}
+
 	public Integer getPos() {
 		return pos;
+	}
+
+	public void setPos(Integer aPosition) {
+		pos = aPosition;
 	}
 
 	@Override
@@ -135,71 +173,5 @@ public class PersonEntity {
 			return false;
 		}
 		return true;
-	}
-
-	public static class Builder {
-		private String id = UUID.randomUUID().toString();
-		private String forename;
-		private String surename;
-		private String email;
-		private Integer yearOfBirth;
-		private Integer shirtsize;
-		private String comment;
-		private String relayname;
-		private Integer pos;
-
-		public Builder() {
-			super();
-		}
-
-		// TODO (EL, 2016-09-25): Discuss nullability of 'anId' and where to handle it.
-		public Builder withId(String anId) {
-			id = anId;
-			return this;
-		}
-
-		public Builder withForename(String aForename) {
-			forename = aForename;
-			return this;
-		}
-
-		public Builder withSurename(String aSurename) {
-			surename = aSurename;
-			return this;
-		}
-
-		public Builder withEmail(String anEmail) {
-			email = anEmail;
-			return this;
-		}
-
-		public Builder withYearOfBirth(Integer aYearOfBirth) {
-			yearOfBirth = aYearOfBirth;
-			return this;
-		}
-
-		public Builder withShirtsize(Integer aShirtsize) {
-			shirtsize = aShirtsize;
-			return this;
-		}
-
-		public Builder withRelayname(String aRelayname) {
-			relayname = aRelayname;
-			return this;
-		}
-
-		public Builder withPos(Integer aPos) {
-			pos = aPos;
-			return this;
-		}
-
-		public Builder withComment(String aComment) {
-			comment = aComment;
-			return this;
-		}
-
-		public PersonEntity build() {
-			return new PersonEntity(this);
-		}
 	}
 }
