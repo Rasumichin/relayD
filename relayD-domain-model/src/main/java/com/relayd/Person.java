@@ -23,13 +23,13 @@ public class Person implements Serializable {
 
 	private UUID uuid;
 	private Surename surename;
-	private Forename forename;
+	private Forename forename = Forename.newInstance();
 	private YearOfBirth yearOfBirth;
 	private Shirtsize shirtsize;
 	private Email email;
 	private Relayname relayname; // Refactor Dieses Attribut ist Jahresabhängig!
 	private Position position; // Refactor Dieses Attribut ist Jahresabhängig!
-	private Comment comment;
+	private Comment comment = Comment.newInstance();
 	Email lastCalculatedEmail;
 
 	private Person() {
@@ -182,9 +182,9 @@ public class Person implements Serializable {
 		Forename currentForename = getForename();
 		Surename currentSurename = getSurename();
 
-		String currentLocalPart = (currentForename == null) ? null : currentForename.toString();
+		String currentLocalPart = currentForename.toString();
 		if (currentSurename != null) {
-			currentLocalPart = (currentLocalPart == null) ? currentSurename.toString() : currentLocalPart + '.' + currentSurename;
+			currentLocalPart = (currentLocalPart.isEmpty()) ? currentSurename.toString() : currentLocalPart + '.' + currentSurename;
 		}
 
 		if (currentLocalPart != null) {

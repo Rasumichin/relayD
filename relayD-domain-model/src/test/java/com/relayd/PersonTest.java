@@ -317,7 +317,7 @@ public class PersonTest {
 		Person sut = Person.newInstance();
 
 		String result = sut.getCurrentLocalPart();
-		assertNull("Current local part is not correct.", result);
+		assertTrue("Current local part is not correct.", result.isEmpty());
 	}
 
 	@Test

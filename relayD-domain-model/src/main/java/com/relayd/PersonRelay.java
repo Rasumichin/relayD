@@ -16,7 +16,7 @@ public class PersonRelay implements Serializable {
 
 	private UUID uuid;
 	private Surename surename;
-	private Forename forename;
+	private Forename forename = Forename.newInstance(null);
 
 	public static PersonRelay newInstance() {
 		return new PersonRelay();
