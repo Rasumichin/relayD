@@ -74,7 +74,7 @@ public class PersonGatewayJPA extends GatewayJPA implements PersonGateway {
 
 		PersonEntity personEntity = findById(person.getUUID());
 		if (personEntity == null) {
-			personEntity = new PersonEntity.Builder().withId(person.getUUID().toString()).build();
+			personEntity = PersonEntity.newInstance(person.getUUID());
 		}
 		getPersonMapper().mapPersonToEntity(person, personEntity);
 

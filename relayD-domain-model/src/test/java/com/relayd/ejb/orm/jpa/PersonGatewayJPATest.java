@@ -48,7 +48,7 @@ public class PersonGatewayJPATest {
 	@Test
 	public void testGet() {
 		UUID expectedUuid = UUID.randomUUID();
-		PersonEntity personEntity = new PersonEntity.Builder().withId(expectedUuid.toString()).build();
+		PersonEntity personEntity = PersonEntity.newInstance(expectedUuid);
 		doReturn(personEntity).when(sut).findById(expectedUuid);
 
 		Person result = sut.get(expectedUuid);
@@ -70,7 +70,7 @@ public class PersonGatewayJPATest {
 	@Test
 	public void testMapPersonEntityListToPersonList_withOneElement() {
 		List<PersonEntity> personEntities = new ArrayList<>();
-		personEntities.add(new PersonEntity.Builder().build());
+		personEntities.add(PersonEntity.newInstance());
 
 		List<Person> persons = sut.mapPersonEntityListToPersonList(personEntities);
 
@@ -82,9 +82,9 @@ public class PersonGatewayJPATest {
 	@Test
 	public void testMapPersonEntityListToPersonList_withManyElement() {
 		List<PersonEntity> personEntities = new ArrayList<>();
-		personEntities.add(new PersonEntity.Builder().build());
-		personEntities.add(new PersonEntity.Builder().build());
-		personEntities.add(new PersonEntity.Builder().build());
+		personEntities.add(PersonEntity.newInstance());
+		personEntities.add(PersonEntity.newInstance());
+		personEntities.add(PersonEntity.newInstance());
 
 		List<Person> persons = sut.mapPersonEntityListToPersonList(personEntities);
 
@@ -114,7 +114,7 @@ public class PersonGatewayJPATest {
 	@Test
 	public void testRemoveWhenPersonNotExistForUuid() {
 		UUID someUuid = UUID.randomUUID();
-		PersonEntity personEntity = new PersonEntity.Builder().withId(someUuid.toString()).build();
+		PersonEntity personEntity = PersonEntity.newInstance(someUuid);
 
 		doReturn(personEntity).when(sut).findById(someUuid);
 		doNothing().when(sut).removePersonEntity(personEntity);
@@ -131,7 +131,7 @@ public class PersonGatewayJPATest {
 	@Test
 	public void testSet() {
 		Person person = getPersonToSet();
-		PersonEntity expectedPersonEntity = new PersonEntity.Builder().build();
+		PersonEntity expectedPersonEntity = PersonEntity.newInstance();
 		sut.getPersonMapper().mapPersonToEntity(person, expectedPersonEntity);
 
 		doReturn(expectedPersonEntity).when(sut).findById(person.getUUID());

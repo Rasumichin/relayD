@@ -42,24 +42,9 @@ public class PersonEntityTest {
 	}
 
 	@Test
-	public void testNewInstanceForUuid() {
-		UUID expected = UUID.randomUUID();
-		PersonEntity sut = PersonEntity.newInstance(expected);
-		
-		UUID actual = UUID.fromString(sut.getId());
-		assertEquals("[id] has not been set correctly!", expected, actual);
-	}
-	
-	@Test(expected=IllegalArgumentException.class)
-	public void testNewInstanceForUuid_withNullValue() {
-		@SuppressWarnings("unused")
-		PersonEntity sut = PersonEntity.newInstance(null);
-	}
-	
-	@Test
-	public void testInstanceIsCreatedWithoutAnyFurtherInformation() {
-		PersonEntity sut = new PersonEntity.Builder().build();
-		assertNotNull("Id of PersonEntity must not be 'null' after creation.", sut.getId());
+	public void testNewInstance_isCreatedWithoutAnyFurtherInformation() {
+		PersonEntity sut = PersonEntity.newInstance();
+		assertNotNull("Id of PersonEntity must not be 'null' after creation!", sut.getId());
 		assertNull("[forename] not correct!", sut.getForename());
 		assertNull("[surename] not correct!", sut.getSurename());
 		assertNull("[emailadress] not correct!", sut.getEmail());
@@ -73,93 +58,135 @@ public class PersonEntityTest {
 	}
 
 	@Test
-	public void testInstanceCreated_ForForename() {
+	public void testNewInstance_withUuid() {
+		UUID expected = UUID.randomUUID();
+		PersonEntity sut = PersonEntity.newInstance(expected);
+		
+		UUID actual = UUID.fromString(sut.getId());
+		assertEquals("[id] has not been set correctly!", expected, actual);
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testNewInstance_forUuidWithNullValue() {
+		@SuppressWarnings("unused")
+		PersonEntity sut = PersonEntity.newInstance(null);
+	}
+	
+	@Test
+	public void testSetForename() {
 		String forename = "Justus";
-		PersonEntity sut = new PersonEntity.Builder().withForename(forename).build();
-		assertEquals("[forename] has not been set correctly.", forename, sut.getForename());
+		PersonEntity sut = PersonEntity.newInstance();
+		
+		sut.setForename(forename);
+		assertEquals("[forename] has not been set correctly!", forename, sut.getForename());
 	}
 
 	@Test
-	public void testInstanceCreated_ForSurename() {
+	public void testSetSurename() {
 		String surename = "Jonas";
-		PersonEntity sut = new PersonEntity.Builder().withSurename(surename).build();
-		assertEquals("[surename] has not been set correctly.", surename, sut.getSurename());
+		PersonEntity sut = PersonEntity.newInstance();
+		
+		sut.setSurename(surename);
+		assertEquals("[surename] has not been set correctly!", surename, sut.getSurename());
 	}
 
 	@Test
-	public void testInstanceCreated_ForEmail() {
+	public void testSetEmail() {
 		String email = "Jonas.Jonas@RockyBeach.com";
-		PersonEntity sut = new PersonEntity.Builder().withEmail(email).build();
-		assertEquals("[email] has not been set correctly.", email, sut.getEmail());
+		PersonEntity sut = PersonEntity.newInstance();
+
+		sut.setEmail(email);
+		assertEquals("[email] has not been set correctly!", email, sut.getEmail());
 	}
 
 	@Test
-	public void testInstanceCreated_ForYearOfBirth() {
-		Integer year = 1971;
-		PersonEntity sut = new PersonEntity.Builder().withYearOfBirth(year).build();
-		assertEquals("[yearOfBirth] has not been set correctly.", year, sut.getYearOfBirth());
+	public void testSetYearOfBirth() {
+		Integer yearOfBirth = 1971;
+		PersonEntity sut = PersonEntity.newInstance();
+
+		sut.setYearOfBirth(yearOfBirth);
+		assertEquals("[yearOfBirth] has not been set correctly!", yearOfBirth, sut.getYearOfBirth());
 	}
 
 	@Test
-	public void testInstanceCreated_ForShirtsize() {
+	public void testShirtsize() {
 		Integer shirtsize = 1;
-		PersonEntity sut = new PersonEntity.Builder().withShirtsize(shirtsize).build();
-		assertEquals("[shirtsize] has not been set correctly.", shirtsize, sut.getShirtsize());
+		PersonEntity sut = PersonEntity.newInstance();
+
+		sut.setShirtsize(shirtsize);
+		assertEquals("[shirtsize] has not been set correctly!", shirtsize, sut.getShirtsize());
 	}
 
 	@Test
-	public void testInstanceCreated_ForNationality() {
+	public void testSetNationality() {
 		String nationality = "DE";
-		PersonEntity sut = new PersonEntity.Builder().withNationality(nationality).build();
-		assertEquals("[nationality] has not been set correctly.", nationality, sut.getNationality());
+		PersonEntity sut = PersonEntity.newInstance();
+
+		sut.setNationality(nationality);
+		assertEquals("[nationality] has not been set correctly!", nationality, sut.getNationality());
 	}
 
 	@Test
-	public void testInstanceCreated_ForRelayname() {
+	public void testSetRelayname() {
 		String relayname = "Die 4 ????";
-		PersonEntity sut = new PersonEntity.Builder().withRelayname(relayname).build();
-		assertEquals("[relayname] has not been set correctly.", relayname, sut.getRelayname());
+		PersonEntity sut = PersonEntity.newInstance();
+		
+		sut.setRelayname(relayname);
+		assertEquals("[relayname] has not been set correctly!", relayname, sut.getRelayname());
 	}
 
 	@Test
-	public void testInstanceCreated_ForPos() {
+	public void testSetPos() {
 		Integer position = 1;
-		PersonEntity sut = new PersonEntity.Builder().withPos(position).build();
-		assertEquals("[pos] has not been set correctly.", position, sut.getPos());
+		PersonEntity sut = PersonEntity.newInstance();
+		
+		sut.setPos(position);
+		assertEquals("[pos] has not been set correctly!", position, sut.getPos());
 	}
 
 	@Test
-	public void testInstanceCreated_ForInfo() {
+	public void testSetComment() {
 		String comment = "a info";
-		PersonEntity sut = new PersonEntity.Builder().withComment(comment).build();
-		assertEquals("[comment] has not been set correctly.", comment, sut.getComment());
+		PersonEntity sut = PersonEntity.newInstance();
+		
+		sut.setComment(comment);
+		assertEquals("[comment] has not been set correctly!", comment, sut.getComment());
 	}
 	
 	@Test
 	public void testToString() {
 		String forename = "Kent";
 		String surename = "Beck";
-		PersonEntity sut = new PersonEntity.Builder().withForename(forename).withSurename(surename).build();
 		
-		String expectedResult = "PersonEntity [id=" + sut.getId() + ", surename=" + surename + ", forename=" + forename + "]";
+		PersonEntity sut = PersonEntity.newInstance();
+		sut.setForename(forename);
+		sut.setSurename(surename);
+		
 		String actualResult = sut.toString();
-		
+
+		String expectedResult = "PersonEntity [id=" + sut.getId() + ", surename=" + surename + ", forename=" + forename + "]";
 		assertEquals("String representation is not correct!", expectedResult, actualResult);
 	}
 	
 	@Test
 	public void testEquals_true() {
-		String someId = UUID.randomUUID().toString();
-		PersonEntity christian = new PersonEntity.Builder().withForename("Christian").withId(someId).build();
-		PersonEntity erik = new PersonEntity.Builder().withForename("Erik").withId(someId).build();
+		UUID someId = UUID.randomUUID();
+		PersonEntity christian = PersonEntity.newInstance(someId);
+		christian.setForename("Christian");
+		
+		PersonEntity erik = PersonEntity.newInstance(someId);
+		erik.setForename("Erik");
 		
 		assertEquals("Equality has not been tested correctly!", christian, erik);
 	}
 	
 	@Test
 	public void testEquals_false() {
-		PersonEntity christian = new PersonEntity.Builder().withForename("Christian").build();
-		PersonEntity erik = new PersonEntity.Builder().withForename("Erik").build();
+		PersonEntity christian = PersonEntity.newInstance();
+		christian.setForename("Christian");
+		
+		PersonEntity erik = PersonEntity.newInstance();
+		erik.setForename("Erik");
 		
 		assertNotEquals("Equality has not been tested correctly!", christian, erik);
 	}
