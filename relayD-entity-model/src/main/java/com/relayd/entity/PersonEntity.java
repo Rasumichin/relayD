@@ -74,19 +74,6 @@ public class PersonEntity {
 		return personEntity;
 	}
 
-	private PersonEntity(Builder aBuilder) {
-		id = aBuilder.id;
-		forename = aBuilder.forename;
-		surename = aBuilder.surename;
-		email = aBuilder.email;
-		yearOfBirth = aBuilder.yearOfBirth;
-		relayname = aBuilder.relayname;
-		pos = aBuilder.pos;
-		comment = aBuilder.comment;
-		nationality = aBuilder.nationality;
-		shirtsize = aBuilder.shirtsize;
-	}
-
 	public String getSurename() {
 		return surename;
 	}
@@ -200,77 +187,5 @@ public class PersonEntity {
 			return false;
 		}
 		return true;
-	}
-
-	public static class Builder {
-		private String id = UUID.randomUUID().toString();
-		private String forename;
-		private String surename;
-		private String email;
-		private Integer yearOfBirth;
-		private Integer shirtsize;
-		private String nationality;
-		private String comment;
-		private String relayname;
-		private Integer pos;
-
-		public Builder() {
-			super();
-		}
-
-		// TODO (EL, 2016-09-25): Discuss nullability of 'anId' and where to handle it.
-		public Builder withId(String anId) {
-			id = anId;
-			return this;
-		}
-
-		public Builder withForename(String aForename) {
-			forename = aForename;
-			return this;
-		}
-
-		public Builder withSurename(String aSurename) {
-			surename = aSurename;
-			return this;
-		}
-
-		public Builder withEmail(String anEmail) {
-			email = anEmail;
-			return this;
-		}
-
-		public Builder withYearOfBirth(Integer aYearOfBirth) {
-			yearOfBirth = aYearOfBirth;
-			return this;
-		}
-
-		public Builder withShirtsize(Integer aShirtsize) {
-			shirtsize = aShirtsize;
-			return this;
-		}
-
-		public Builder withNationality(String aNationality) {
-			nationality = aNationality;
-			return this;
-		}
-
-		public Builder withRelayname(String aRelayname) {
-			relayname = aRelayname;
-			return this;
-		}
-
-		public Builder withPos(Integer aPos) {
-			pos = aPos;
-			return this;
-		}
-
-		public Builder withComment(String aComment) {
-			comment = aComment;
-			return this;
-		}
-
-		public PersonEntity build() {
-			return new PersonEntity(this);
-		}
 	}
 }
