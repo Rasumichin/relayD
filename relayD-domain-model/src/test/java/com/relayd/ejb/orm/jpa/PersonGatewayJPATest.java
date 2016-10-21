@@ -1,21 +1,26 @@
 package com.relayd.ejb.orm.jpa;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.EntityNotFoundException;
 
-import org.junit.*;
+import org.junit.FixMethodOrder;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.relayd.Person;
-import com.relayd.attributes.*;
+import com.relayd.attributes.Forename;
+import com.relayd.attributes.Surename;
 import com.relayd.entity.PersonEntity;
+
+import static org.mockito.Mockito.*;
 
 /**
  * @author  Rasumichin (Erik@relayd.de)
@@ -25,30 +30,29 @@ import com.relayd.entity.PersonEntity;
 @RunWith(MockitoJUnitRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class PersonGatewayJPATest {
-	
+
 	@Spy
 	private PersonGatewayJPA sut = new PersonGatewayJPA();
-	
+
 	@Test
 	public void testGetPersonMapper() {
 		PersonToEntityMapper result = sut.getPersonMapper();
 		assertNotNull("[personMapper] has not been initialized.", result);
 	}
-	
-	@Test(expected=IllegalArgumentException.class)
+
+	@Test(expected = IllegalArgumentException.class)
 	public void testGetWithIllegalNullValue() {
 		sut.get(null);
 	}
-	
+
 	@Test
 	public void testGet() {
 		UUID expectedUuid = UUID.randomUUID();
-		PersonEntity personEntity = new PersonEntity.Builder().withId(expectedUuid.toString()).build();
+		PersonEntity personEntity = PersonEntity.newInstance(expectedUuid);
 		doReturn(personEntity).when(sut).findById(expectedUuid);
-		
+
 		Person result = sut.get(expectedUuid);
-		
-		assertNotNull("Result 'Person' must not be 'null'.", result);
+		assertNotNull("Result 'Person' must not be 'null'!", result);
 		
 		UUID actualUuid = result.getUuid();
 		assertEquals("Mapping from PersonEntity to Person was not correct.", expectedUuid, actualUuid);
@@ -58,78 +62,80 @@ public class PersonGatewayJPATest {
 	public void testMapPersonEntityListToPersonList_whenEmpty() {
 		List<PersonEntity> personEntities = new ArrayList<>();
 		List<Person> result = sut.mapPersonEntityListToPersonList(personEntities);
-		
+
 		assertTrue("Mapping from a list of PersonEntities to Persons was not correct.", result.isEmpty());
 	}
-	
+
 	@Test
 	public void testMapPersonEntityListToPersonList_withOneElement() {
 		List<PersonEntity> personEntities = new ArrayList<>();
-		personEntities.add(new PersonEntity.Builder().build());
-		
+		personEntities.add(PersonEntity.newInstance());
+
 		List<Person> persons = sut.mapPersonEntityListToPersonList(personEntities);
-		
+
 		int expectedResult = 1;
 		int actualResult = persons.size();
 		assertEquals("Mapping from a list of PersonEntities to Persons was not correct.", expectedResult, actualResult);
 	}
-	
+
 	@Test
 	public void testMapPersonEntityListToPersonList_withManyElement() {
 		List<PersonEntity> personEntities = new ArrayList<>();
-		personEntities.add(new PersonEntity.Builder().build());
-		personEntities.add(new PersonEntity.Builder().build());
-		personEntities.add(new PersonEntity.Builder().build());
-		
+		personEntities.add(PersonEntity.newInstance());
+		personEntities.add(PersonEntity.newInstance());
+		personEntities.add(PersonEntity.newInstance());
+
 		List<Person> persons = sut.mapPersonEntityListToPersonList(personEntities);
-		
+
 		int expectedResult = 3;
 		int actualResult = persons.size();
 		assertEquals("Mapping from a list of PersonEntities to Persons was not correct.", expectedResult, actualResult);
 	}
-	
+
 	@Test
 	public void testGetAllWhenResultIsEmpty() {
 		doReturn(new ArrayList<>()).when(sut).findAll();
-		
+
 		List<Person> result = sut.getAll();
 		assertTrue("Restult list is not correct.", result.isEmpty());
 	}
-	
+
 	// TODO: (EL, 2016-10-09): Discuss with CS: Do we need further tests here for the other cases for 'getAll' (one element, many elements)?
-	
-	@Test(expected=EntityNotFoundException.class)
+
+	@Test(expected = EntityNotFoundException.class)
 	public void testRemoveWhenPersonDoesNotExistForUuid() {
 		UUID someUuid = UUID.randomUUID();
 		doReturn(null).when(sut).findById(someUuid);
-		
+
 		sut.remove(someUuid);
 	}
-	
+
 	@Test
 	public void testRemoveWhenPersonNotExistForUuid() {
 		UUID someUuid = UUID.randomUUID();
-		PersonEntity personEntity = new PersonEntity.Builder().withId(someUuid.toString()).build();
-		
+		PersonEntity personEntity = PersonEntity.newInstance(someUuid);
+
 		doReturn(personEntity).when(sut).findById(someUuid);
 		doNothing().when(sut).removePersonEntity(personEntity);
-		
+
 		sut.remove(someUuid);
 		verify(sut, times(1)).removePersonEntity(personEntity);
 	}
-	
-	@Test(expected=IllegalArgumentException.class)
+
+	@Test(expected = IllegalArgumentException.class)
 	public void testSetWithIllegalNullValue() {
 		sut.set(null);
 	}
-	
+
 	@Test
 	public void testSet() {
 		Person person = getPersonToSet();
-		PersonEntity expectedPersonEntity = sut.getPersonMapper().mapPersonToEntity(person);
-		
+		PersonEntity expectedPersonEntity = PersonEntity.newInstance();
+		sut.getPersonMapper().mapPersonToEntity(person, expectedPersonEntity);
+
+		doReturn(expectedPersonEntity).when(sut).findById(person.getUuid());
 		doNothing().when(sut).mergePersonEntity(expectedPersonEntity);
-		
+
 		sut.set(person);
 		verify(sut, times(1)).mergePersonEntity(expectedPersonEntity);
 	}
@@ -138,7 +144,7 @@ public class PersonGatewayJPATest {
 		Person person = Person.newInstance();
 		person.setForename(Forename.newInstance("Ward"));
 		person.setSurename(Surename.newInstance("Cunningham"));
-		
+
 		return person;
 	}
 }

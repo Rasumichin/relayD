@@ -17,6 +17,7 @@ import org.junit.runners.MethodSorters;
 
 /**
  * @author schmollc (Christian@relayd.de)
+ * @author Rasumichin (Erik@relayd.de)
  * @since 09.09.2016
  *
  */
@@ -47,7 +48,8 @@ public class PersonEntityIT {
 
 	@Test
 	public void testInsertPersonEntity() {
-		PersonEntity sut = new PersonEntity.Builder().withForename("Bob").build();
+		PersonEntity sut = PersonEntity.newInstance();
+		sut.setForename("Bob");
 
 		EntityTransaction tx = entityManager.getTransaction();
 
