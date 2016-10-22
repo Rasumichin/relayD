@@ -52,8 +52,13 @@ public class PersonGatewayJPA extends GatewayJPA implements PersonGateway {
 	}
 
 	List<PersonEntity> findAll() {
+		startTransaction();
+
 		EntityManager em = getEntityManager();
 		List<PersonEntity> result = em.createQuery("SELECT p FROM PersonEntity p", PersonEntity.class).getResultList();
+
+		commitTransaction();
+		endTransaction();
 
 		return result;
 	}
