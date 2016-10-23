@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -14,14 +15,27 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.relayd.Person;
+import com.relayd.attributes.Comment;
 import com.relayd.attributes.Email;
 import com.relayd.attributes.Forename;
+import com.relayd.attributes.Shirtsize;
+import com.relayd.attributes.Surename;
+import com.relayd.attributes.YearOfBirth;
 import com.relayd.ejb.GatewayType;
 import com.relayd.ejb.PersonGateway;
+import com.relayd.web.browse.PersonBrowse;
 import com.relayd.web.pagebean.PersonBuilder;
 
 import static org.mockito.Mockito.*;
 
+/**
+ * The software isn't finished until the last user is dead.
+ *  - Anonymous
+ *
+ * @author  schmollc (Christian@relayd.de)
+ * @since   20.06.2016
+ *
+ */
 @RunWith(MockitoJUnitRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class PersonBridgeImplTest {
@@ -150,5 +164,54 @@ public class PersonBridgeImplTest {
 		GatewayType result = sut.getGatewayType();
 
 		assertEquals("[gatewayType] not correct!", GatewayType.JPA, result);
+	}
+
+	@Test
+	public void testAllPersonBrowse() {
+		doReturn(listWithPersons()).when(gateway).getAll();
+
+		List<PersonBrowse> actual = sut.allPersonBrowse();
+
+		assertNotNull("[resultList] not a valid instance!", actual);
+
+		int size = actual.size();
+		assertEquals("[size] of resultList not correct!", 8, size);
+	}
+
+	@Test
+	public void testGetPersonBrowseFor() {
+		// Arrange
+		UUID expectedUuid = UUID.randomUUID();
+		Forename expectedForename = Forename.newInstance("Peter");
+		Surename expectedSurename = Surename.newInstance("Shaw");
+		YearOfBirth expectedYearOfBirth = YearOfBirth.newInstance(1971);
+		Comment expectedComment = Comment.newInstance("Comment");
+
+		//@formatter:off
+		Shirtsize expectedShirtsize = Shirtsize.HerrenL;
+		Person person = new PersonBuilder()
+								.withUuid(expectedUuid)
+								.withForename(expectedForename)
+								.withSurename(expectedSurename)
+								.withYearOfBirth(expectedYearOfBirth)
+								.withShirtsize(expectedShirtsize)
+								.withEmail(EMAIL_PETER)
+								.withRelayname("Die 4 ???")
+								.withComment(expectedComment)
+								.build();
+		//@formatter:on
+
+		// Act
+		PersonBrowse actual = sut.getPersonBrowseFor(person);
+
+		// Assert
+		assertEquals("[uuid] not correct!", expectedUuid, actual.getUuidPerson());
+		assertEquals("[forename] not correct!", expectedForename, actual.getForename());
+		assertEquals("[surename] not correct!", expectedSurename, actual.getSurename());
+		assertEquals("[yearOfBirth] not correct!", expectedYearOfBirth, actual.getYearOfBirth());
+		assertEquals("[shirtsize] not correct!", expectedShirtsize, actual.getShirtsize());
+		assertEquals("[comment] not correct!", expectedComment, actual.getComment());
+		assertEquals("[email] not correct!", Email.newInstance(EMAIL_PETER), actual.getEmail());
+
 	}
 }

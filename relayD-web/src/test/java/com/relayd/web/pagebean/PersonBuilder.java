@@ -1,6 +1,9 @@
 package com.relayd.web.pagebean;
 
+import java.util.UUID;
+
 import com.relayd.Person;
+import com.relayd.attributes.Comment;
 import com.relayd.attributes.Email;
 import com.relayd.attributes.Forename;
 import com.relayd.attributes.Position;
@@ -17,15 +20,22 @@ import com.relayd.attributes.YearOfBirth;
  */
 public class PersonBuilder {
 
+	private UUID uuid = UUID.randomUUID();
 	private Surename surename = Surename.newInstance("Surename");
 	private Forename forename = Forename.newInstance("Forename");
-	private Relayname relayname = null;
-	private Position position = null;
+	private Relayname relayname;
+	private Position position;
 	private YearOfBirth yearOfBirth = YearOfBirth.newInstance(1956);
 	private Shirtsize shirtsize = Shirtsize.HerrenM;
-	private Email email = null;
+	private Email email;
+	private Comment comment;
 
-	PersonBuilder withSurename(Surename aSurename) {
+	public PersonBuilder withUuid(UUID anUuid) {
+		uuid = anUuid;
+		return this;
+	}
+
+	public PersonBuilder withSurename(Surename aSurename) {
 		surename = aSurename;
 		return this;
 	}
@@ -45,13 +55,29 @@ public class PersonBuilder {
 		return this;
 	}
 
+	public PersonBuilder withShirtsize(Shirtsize aShirtsize) {
+		shirtsize = aShirtsize;
+		return this;
+	}
+
 	public PersonBuilder withEmail(String anEmail) {
 		email = Email.newInstance(anEmail);
 		return this;
 	}
 
+	public PersonBuilder withYearOfBirth(YearOfBirth aYearOfBirth) {
+		yearOfBirth = aYearOfBirth;
+		return this;
+	}
+
+	public PersonBuilder withComment(Comment aComment) {
+		comment = aComment;
+		return this;
+	}
+
 	public Person build() {
 		Person person = Person.newInstance();
+		person.setUuid(uuid);
 		person.setSurename(surename);
 		person.setForename(forename);
 		person.setRelayname(relayname);
@@ -59,6 +85,7 @@ public class PersonBuilder {
 		person.setYearOfBirth(yearOfBirth);
 		person.setShirtsize(shirtsize);
 		person.setEmail(email);
+		person.setComment(comment);
 		return person;
 	}
 }
