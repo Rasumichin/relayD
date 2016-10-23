@@ -40,17 +40,6 @@ public class PersonToEntityMapperTest {
 	}
 
 	@Test
-	public void testMapEntityToPerson_id() {
-		PersonEntity personEntity = PersonEntity.newInstance();
-		String expected = personEntity.getId();
-
-		Person mappedPerson = sut.mapEntityToPerson(personEntity);
-		
-		String result = mappedPerson.getUuid().toString();
-		assertEquals("Mapping of [id] is not correct!", expected, result);
-	}
-
-	@Test
 	public void testMapPersonToEntity_forename() {
 		PersonEntity existingEntity = PersonEntity.newInstance();
 		String expected = "Steve";
@@ -75,28 +64,6 @@ public class PersonToEntityMapperTest {
 	}
 
 	@Test
-	public void testMapEntityToPerson_forename() {
-		PersonEntity personEntity = PersonEntity.newInstance();
-		personEntity.setForename("Steve");
-		String expected = personEntity.getForename();
-
-		Person mappedPerson = sut.mapEntityToPerson(personEntity);
-
-		String result = mappedPerson.getForename().toString();
-		assertEquals("Mapping of [forename] is not correct!", expected, result);
-	}
-
-	@Test
-	public void testMapEntityToPerson_forenameIsNull() {
-		PersonEntity personEntity = PersonEntity.newInstance();
-
-		Person mappedPerson = sut.mapEntityToPerson(personEntity);
-
-		Forename result = mappedPerson.getForename();
-		assertNotNull("Mapping of [forename] is not correct!", result);
-	}
-
-	@Test
 	public void testMapPersonToEntity_surename() {
 		PersonEntity existingEntity = PersonEntity.newInstance();
 		String expected = "Jobs";
@@ -105,18 +72,6 @@ public class PersonToEntityMapperTest {
 		sut.mapPersonToEntity(person, existingEntity);
 
 		String result = existingEntity.getSurename();
-		assertEquals("Mapping of [surename] is not correct!", expected, result);
-	}
-
-	@Test
-	public void testMapEntityToPerson_surename() {
-		PersonEntity personEntity = PersonEntity.newInstance();
-		personEntity.setSurename("Jobs");
-		String expected = personEntity.getSurename();
-
-		Person mappedPerson = sut.mapEntityToPerson(personEntity);
-
-		String result = mappedPerson.getSurename().toString();
 		assertEquals("Mapping of [surename] is not correct!", expected, result);
 	}
 
@@ -133,18 +88,6 @@ public class PersonToEntityMapperTest {
 	}
 
 	@Test
-	public void testMapEntityToPerson_email() {
-		PersonEntity personEntity = PersonEntity.newInstance();
-		personEntity.setEmail("me" + Email.AT_SIGN + "mail.com");
-		String expected = personEntity.getEmail();
-
-		Person mappedPerson = sut.mapEntityToPerson(personEntity);
-
-		String result = mappedPerson.getEmail().toString();
-		assertEquals("Mapping of [email] is not correct!", expected, result);
-	}
-
-	@Test
 	public void testMapPersonToEntity_yearOfBirth() {
 		PersonEntity existingEntity = PersonEntity.newInstance();
 		Integer expected = Integer.valueOf(1965);
@@ -153,18 +96,6 @@ public class PersonToEntityMapperTest {
 		sut.mapPersonToEntity(person, existingEntity);
 
 		Integer result = existingEntity.getYearOfBirth();
-		assertEquals("Mapping of [yearOfBirth] is not correct!", expected, result);
-	}
-
-	@Test
-	public void testMapEntityToPerson_yearOfBirth() {
-		PersonEntity personEntity = PersonEntity.newInstance();
-		personEntity.setYearOfBirth(1965);
-		Integer expected = personEntity.getYearOfBirth();
-
-		Person mappedPerson = sut.mapEntityToPerson(personEntity);
-
-		Integer result = mappedPerson.getYearOfBirth().getValue();
 		assertEquals("Mapping of [yearOfBirth] is not correct!", expected, result);
 	}
 
@@ -181,18 +112,6 @@ public class PersonToEntityMapperTest {
 	}
 
 	@Test
-	public void testMapEntityToPerson_comment() {
-		PersonEntity personEntity = PersonEntity.newInstance();
-		personEntity.setComment("Just a remark");
-		String expected = personEntity.getComment();
-
-		Person mappedPerson = sut.mapEntityToPerson(personEntity);
-
-		String result = mappedPerson.getComment().toString();
-		assertEquals("Mapping of [comment] is not correct!", expected, result);
-	}
-
-	@Test
 	public void testMapPersonToEntity_relayname() {
 		PersonEntity existingEntity = PersonEntity.newInstance();
 		String expected = "Fists of Fury";
@@ -201,18 +120,6 @@ public class PersonToEntityMapperTest {
 		sut.mapPersonToEntity(person, existingEntity);
 
 		String result = existingEntity.getRelayname();
-		assertEquals("Mapping of [relayname] is not correct!", expected, result);
-	}
-
-	@Test
-	public void testMapEntityToPerson_relayname() {
-		PersonEntity personEntity = PersonEntity.newInstance();
-		personEntity.setRelayname("Fists of Fury");
-		String expected = personEntity.getRelayname();
-
-		Person mappedPerson = sut.mapEntityToPerson(personEntity);
-
-		String result = mappedPerson.getRelayname().toString();
 		assertEquals("Mapping of [relayname] is not correct!", expected, result);
 	}
 
@@ -229,18 +136,6 @@ public class PersonToEntityMapperTest {
 	}
 
 	@Test
-	public void testMapEntityToPerson_position() {
-		PersonEntity personEntity = PersonEntity.newInstance();
-		personEntity.setPos(Integer.valueOf(1));
-		Integer expected = personEntity.getPos();
-
-		Person mappedPerson = sut.mapEntityToPerson(personEntity);
-
-		Integer result = mappedPerson.getPosition().getValue();
-		assertEquals("Mapping of [pos] is not correct!", expected, result);
-	}
-
-	@Test
 	public void testMapPersonToEntity_shirtsize() {
 		PersonEntity existingEntity = PersonEntity.newInstance();
 		Integer expected = Shirtsize.HerrenL.getSize();
@@ -249,19 +144,6 @@ public class PersonToEntityMapperTest {
 		sut.mapPersonToEntity(person, existingEntity);
 
 		Integer result = existingEntity.getShirtsize();
-		assertEquals("Mapping of [shirtsize] is not correct!", expected, result);
-	}
-
-	@Test
-	public void testMapEntityToPerson_shirtsize() {
-		PersonEntity personEntity = PersonEntity.newInstance();
-		Integer shirtsizeValue = Shirtsize.HerrenXL.getSize();
-		personEntity.setShirtsize(Integer.valueOf(shirtsizeValue));
-		Integer expected = personEntity.getShirtsize();
-
-		Person mappedPerson = sut.mapEntityToPerson(personEntity);
-
-		Integer result = mappedPerson.getShirtsize().getSize().intValue();
 		assertEquals("Mapping of [shirtsize] is not correct!", expected, result);
 	}
 }
