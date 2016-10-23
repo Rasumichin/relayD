@@ -12,6 +12,7 @@ import com.relayd.attributes.Relayname;
 import com.relayd.ejb.GatewayType;
 import com.relayd.ejb.PersonGateway;
 import com.relayd.ejb.PersonGatewayFactory;
+import com.relayd.web.browse.PersonBrowse;
 
 /**
  * Only a simple Wrapper for the Gateway.
@@ -120,5 +121,30 @@ public class PersonBridgeImpl implements PersonBridge {
 	@Override
 	public GatewayType getGatewayType() {
 		return gatewayType;
+	}
+
+	@Override
+	public List<PersonBrowse> allPersonBrowse() {
+		List<PersonBrowse> result = new ArrayList<PersonBrowse>();
+		for (Person person : all()) {
+			PersonBrowse personBrowse = getPersonBrowseFor(person);
+			result.add(personBrowse);
+		}
+		return result;
+	}
+
+	PersonBrowse getPersonBrowseFor(Person person) {
+		//@formatter:off
+		PersonBrowse personBrowse = new PersonBrowse.Builder()
+													.withUuidPerson(person.getUuid())
+													.withForename(person.getForename())
+													.withSurename(person.getSurename())
+													.withYearOfBirth(person.getYearOfBirth())
+													.withShirtsize(person.getShirtsize())
+													.withEmail(person.getEmail())
+													.withComment(person.getComment())
+													.build();
+		//@formatter:on
+		return personBrowse;
 	}
 }

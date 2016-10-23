@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import com.relayd.Person;
 import com.relayd.ejb.GatewayType;
+import com.relayd.web.browse.PersonBrowse;
 
 /**
  * This Bridge could handle the REST - Serivce
@@ -15,6 +16,8 @@ import com.relayd.ejb.GatewayType;
  * status initial
  */
 public interface PersonBridge {
+
+	List<PersonBrowse> allPersonBrowse();
 
 	List<Person> all();
 
