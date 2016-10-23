@@ -18,6 +18,13 @@ public class PersonToEntityMapper {
 	}
 
 	public void mapPersonToEntity(Person person, PersonEntity personEntity) {
+		if (person == null) {
+			throw new IllegalArgumentException("[personEntity] must not be 'null'!");
+		}
+		if (personEntity == null) {
+			throw new IllegalArgumentException("[person] must not be 'null'!");
+		}
+		
 		personEntity.setForename((person.getForename() == null) || (person.getForename().isEmpty()) ? null : person.getForename().toString());
 		personEntity.setSurename((person.getSurename() == null) ? null : person.getSurename().toString());
 		personEntity.setEmail((person.getEmail() == null) ? null : person.getEmail().toString());
