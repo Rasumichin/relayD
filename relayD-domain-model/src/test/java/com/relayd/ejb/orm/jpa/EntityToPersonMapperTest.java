@@ -18,7 +18,9 @@ import com.relayd.entity.PersonEntity;
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class EntityToPersonMapperTest {
+	
 	private EntityToPersonMapper sut = EntityToPersonMapper.newInstance();
+	private PersonEntity personEntity = PersonEntity.newInstance();
 
 	@Test
 	public void testNewInstance() {
@@ -43,7 +45,6 @@ public class EntityToPersonMapperTest {
 
 	@Test
 	public void testMapToPerson_comment() {
-		PersonEntity personEntity = PersonEntity.newInstance();
 		personEntity.setComment("Just a remark");
 		Comment expected = Comment.newInstance(personEntity.getComment());
 
@@ -55,7 +56,6 @@ public class EntityToPersonMapperTest {
 	
 	@Test
 	public void testMapToPerson_email() {
-		PersonEntity personEntity = PersonEntity.newInstance();
 		personEntity.setEmail("me" + Email.AT_SIGN + "mail.com");
 		Email expected = Email.newInstance(personEntity.getEmail());
 
@@ -67,7 +67,6 @@ public class EntityToPersonMapperTest {
 	
 	@Test
 	public void testMapToPerson_forename() {
-		PersonEntity personEntity = PersonEntity.newInstance();
 		personEntity.setForename("Steve");
 		Forename expected = Forename.newInstance(personEntity.getForename());
 
@@ -79,7 +78,6 @@ public class EntityToPersonMapperTest {
 	
 	@Test
 	public void testMapToPerson_position() {
-		PersonEntity personEntity = PersonEntity.newInstance();
 		personEntity.setPos(Position.FIRST.getValue());
 		Position expected = Position.decode(personEntity.getPos());
 
@@ -91,7 +89,6 @@ public class EntityToPersonMapperTest {
 
 	@Test
 	public void testMapToPerson_relayname() {
-		PersonEntity personEntity = PersonEntity.newInstance();
 		personEntity.setRelayname("Fists of Fury");
 		Relayname expected = Relayname.newInstance(personEntity.getRelayname());
 
@@ -103,7 +100,6 @@ public class EntityToPersonMapperTest {
 	
 	@Test
 	public void testMapToPerson_shirtsize() {
-		PersonEntity personEntity = PersonEntity.newInstance();
 		Integer shirtsizeValue = Shirtsize.HerrenXL.getSize();
 		personEntity.setShirtsize(Integer.valueOf(shirtsizeValue));
 		Shirtsize expected = Shirtsize.decode(personEntity.getShirtsize());
@@ -116,7 +112,6 @@ public class EntityToPersonMapperTest {
 
 	@Test
 	public void testMapToPerson_surename() {
-		PersonEntity personEntity = PersonEntity.newInstance();
 		personEntity.setSurename("Jobs");
 		Surename expected = Surename.newInstance(personEntity.getSurename());
 
@@ -128,7 +123,6 @@ public class EntityToPersonMapperTest {
 	
 	@Test
 	public void testMapToPerson_yearOfBirth() {
-		PersonEntity personEntity = PersonEntity.newInstance();
 		personEntity.setYearOfBirth(1965);
 		YearOfBirth expected = YearOfBirth.newInstance(personEntity.getYearOfBirth());
 
