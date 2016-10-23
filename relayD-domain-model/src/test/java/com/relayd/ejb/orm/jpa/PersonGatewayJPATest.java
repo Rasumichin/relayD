@@ -39,6 +39,12 @@ public class PersonGatewayJPATest {
 		assertNotNull("[personMapper] has not been initialized.", result);
 	}
 
+	@Test
+	public void testGetPersonEntityMapper() {
+		EntityToPersonMapper result = sut.getPersonEntityMapper();
+		assertNotNull("[personEntityMapper] has not been initialized!", result);
+	}
+	
 	@Test(expected = IllegalArgumentException.class)
 	public void testGetWithIllegalNullValue() {
 		sut.get(null);
