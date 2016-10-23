@@ -55,6 +55,11 @@ public class PersonBuilder {
 		return this;
 	}
 
+	public PersonBuilder withShirtsize(Shirtsize aShirtsize) {
+		shirtsize = aShirtsize;
+		return this;
+	}
+
 	public PersonBuilder withEmail(String anEmail) {
 		email = Email.newInstance(anEmail);
 		return this;

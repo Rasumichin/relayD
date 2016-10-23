@@ -28,6 +28,14 @@ import com.relayd.web.pagebean.PersonBuilder;
 
 import static org.mockito.Mockito.*;
 
+/**
+ * The software isn't finished until the last user is dead.
+ *  - Anonymous
+ *
+ * @author  schmollc (Christian@relayd.de)
+ * @since   20.06.2016
+ *
+ */
 @RunWith(MockitoJUnitRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class PersonBridgeImplTest {
@@ -178,14 +186,17 @@ public class PersonBridgeImplTest {
 		Surename expectedSurename = Surename.newInstance("Shaw");
 		YearOfBirth expectedYearOfBirth = YearOfBirth.newInstance(1971);
 		Comment expectedComment = Comment.newInstance("Comment");
+
 		//@formatter:off
+		Shirtsize expectedShirtsize = Shirtsize.HerrenL;
 		Person person = new PersonBuilder()
 								.withUuid(expectedUuid)
 								.withForename(expectedForename)
 								.withSurename(expectedSurename)
+								.withYearOfBirth(expectedYearOfBirth)
+								.withShirtsize(expectedShirtsize)
 								.withEmail(EMAIL_PETER)
 								.withRelayname("Die 4 ???")
-								.withYearOfBirth(expectedYearOfBirth)
 								.withComment(expectedComment)
 								.build();
 		//@formatter:on
@@ -194,14 +205,13 @@ public class PersonBridgeImplTest {
 		PersonBrowse actual = sut.getPersonBrowseFor(person);
 
 		// Assert
-		assertEquals(expectedUuid, actual.getUuidPerson());
-		assertEquals(expectedForename, actual.getForename());
-		assertEquals(expectedSurename, actual.getSurename());
-		assertEquals(expectedYearOfBirth, actual.getYearOfBirth());
-		assertEquals(expectedComment, actual.getComment());
-
-		assertEquals(Shirtsize.HerrenM, actual.getShirtsize());
-		assertEquals(Email.newInstance(EMAIL_PETER), actual.getEmail());
+		assertEquals("[uuid] not correct!", expectedUuid, actual.getUuidPerson());
+		assertEquals("[forename] not correct!", expectedForename, actual.getForename());
+		assertEquals("[surename] not correct!", expectedSurename, actual.getSurename());
+		assertEquals("[yearOfBirth] not correct!", expectedYearOfBirth, actual.getYearOfBirth());
+		assertEquals("[shirtsize] not correct!", expectedShirtsize, actual.getShirtsize());
+		assertEquals("[comment] not correct!", expectedComment, actual.getComment());
+		assertEquals("[email] not correct!", Email.newInstance(EMAIL_PETER), actual.getEmail());
 
 	}
 }
