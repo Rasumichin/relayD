@@ -8,11 +8,10 @@ import java.util.UUID;
 
 import javax.persistence.EntityNotFoundException;
 
-import org.junit.FixMethodOrder;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
-import org.mockito.Spy;
+import org.mockito.*;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.relayd.Person;
@@ -40,6 +39,12 @@ public class PersonGatewayJPATest {
 		assertNotNull("[personMapper] has not been initialized.", result);
 	}
 
+	@Test
+	public void testGetPersonEntityMapper() {
+		EntityToPersonMapper result = sut.getPersonEntityMapper();
+		assertNotNull("[personEntityMapper] has not been initialized!", result);
+	}
+	
 	@Test(expected = IllegalArgumentException.class)
 	public void testGetWithIllegalNullValue() {
 		sut.get(null);
@@ -128,12 +133,26 @@ public class PersonGatewayJPATest {
 	}
 
 	@Test
-	public void testSet() {
+	public void testSet_whenPersonHasToBeUpdated() {
 		Person person = getPersonToSet();
 		PersonEntity expectedPersonEntity = PersonEntity.newInstance();
 		sut.getPersonMapper().mapPersonToEntity(person, expectedPersonEntity);
 
 		doReturn(expectedPersonEntity).when(sut).findById(person.getUuid());
+		doNothing().when(sut).mergePersonEntity(expectedPersonEntity);
+
+		sut.set(person);
+		verify(sut, times(1)).mergePersonEntity(expectedPersonEntity);
+	}
+
+	// TODO (EL, 2016-10-22): Been unable to stub the method call 'findById' to return 'null'. Any attempt is starting JPA ?!
+	@Ignore
+	@Test
+	public void testSet_whenPersonIsNew() {
+		Person person = getPersonToSet();
+		PersonEntity expectedPersonEntity = PersonEntity.newInstance();
+		sut.getPersonMapper().mapPersonToEntity(person, expectedPersonEntity);
+
 		doNothing().when(sut).mergePersonEntity(expectedPersonEntity);
 
 		sut.set(person);

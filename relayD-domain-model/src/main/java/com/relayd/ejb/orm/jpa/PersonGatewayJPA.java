@@ -19,6 +19,7 @@ import com.relayd.entity.PersonEntity;
  */
 public class PersonGatewayJPA extends GatewayJPA implements PersonGateway {
 	private PersonToEntityMapper personMapper = PersonToEntityMapper.newInstance();
+	private EntityToPersonMapper personEntityMapper = EntityToPersonMapper.newInstance();
 
 	@Override
 	public Person get(UUID uuid) {
@@ -27,7 +28,7 @@ public class PersonGatewayJPA extends GatewayJPA implements PersonGateway {
 		}
 
 		PersonEntity personEntity = findById(uuid);
-		Person person = getPersonMapper().mapEntityToPerson(personEntity);
+		Person person = getPersonEntityMapper().mapToPerson(personEntity);
 
 		return person;
 	}
@@ -43,6 +44,11 @@ public class PersonGatewayJPA extends GatewayJPA implements PersonGateway {
 		return personMapper;
 	}
 
+
+	EntityToPersonMapper getPersonEntityMapper() {
+		return personEntityMapper;
+	}
+
 	@Override
 	public List<Person> getAll() {
 		List<PersonEntity> personEntities = findAll();
@@ -52,8 +58,13 @@ public class PersonGatewayJPA extends GatewayJPA implements PersonGateway {
 	}
 
 	List<PersonEntity> findAll() {
+		startTransaction();
+
 		EntityManager em = getEntityManager();
 		List<PersonEntity> result = em.createQuery("SELECT p FROM PersonEntity p", PersonEntity.class).getResultList();
+
+		commitTransaction();
+		endTransaction();
 
 		return result;
 	}
@@ -61,7 +72,7 @@ public class PersonGatewayJPA extends GatewayJPA implements PersonGateway {
 	List<Person> mapPersonEntityListToPersonList(List<PersonEntity> personEntities) {
 		List<Person> persons = new ArrayList<>();
 		for (PersonEntity eachEntity : personEntities) {
-			persons.add(getPersonMapper().mapEntityToPerson(eachEntity));
+			persons.add(getPersonEntityMapper().mapToPerson(eachEntity));
 		}
 		return persons;
 	}
