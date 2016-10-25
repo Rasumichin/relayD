@@ -42,16 +42,34 @@ public class DistanceTest {
 		Distance sut = Distance.newInstance(distance);
 
 		assertNotNull(sut);
-		assertEquals("10.12", sut.toString());
+		assertEquals("[value] not correct!", "10.12", sut.toString());
 	}
 
 	@Test
 	public void testCreateInstance_For3Digits() {
 		BigDecimal distance = new BigDecimal("10.127");
-		Distance sut = Distance.newInstance(distance);
+		Distance sut = Distance.kilometers(distance);
 
 		assertNotNull(sut);
 		assertEquals("10.13", sut.toString());
+	}
+
+	@Test
+	public void testKilometers() {
+		BigDecimal distance = new BigDecimal("12.34");
+		Distance sut = Distance.kilometers(distance);
+
+		assertNotNull(sut);
+		assertEquals("12.34 km", sut.toStringWithUnity());
+	}
+
+	@Test
+	public void testMeters() {
+		BigDecimal distance = new BigDecimal("12.34");
+		Distance sut = Distance.meters(distance);
+
+		assertNotNull(sut);
+		assertEquals("12.34 m", sut.toStringWithUnity());
 	}
 
 	@Test
@@ -60,6 +78,38 @@ public class DistanceTest {
 		expectedException.expectMessage("[distance] must not be 'null'.");
 
 		Distance.newInstance(null);
+	}
+
+	@Test
+	public void testAdd_WithSameUnity() {
+		Distance sutFirst = Distance.kilometers(new BigDecimal("7.34"));
+		Distance sutSecond = Distance.kilometers(new BigDecimal("3.57"));
+
+		Distance actual = sutFirst.add(sutSecond);
+
+		Distance expected = Distance.kilometers(new BigDecimal("10.91"));
+		assertEquals("[add] not corret!", expected, actual);
+	}
+
+	@Test
+	public void testAdd_WithDiffrentUnity() {
+		Distance sutFirst = Distance.kilometers(new BigDecimal("7.34"));
+		Distance sutSecond = Distance.meters(new BigDecimal("3.57"));
+
+		Distance actual = sutFirst.add(sutSecond);
+
+		Distance expected = Distance.meters(new BigDecimal("7343.57"));
+		assertEquals("[add] not corret!", expected, actual);
+	}
+
+	@Test
+	public void testToStringWithUnity() {
+		BigDecimal expected = new BigDecimal("11.23");
+		Distance sut = Distance.newInstance(expected);
+
+		String result = sut.toStringWithUnity();
+
+		assertEquals("11.23 km", result);
 	}
 
 	@Test
