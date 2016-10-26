@@ -1,3 +1,7 @@
+/*
+ * Designers make the mistake of not taking error into account.
+ * 		- Donald A. Norman (The Design of Everyday Things) -
+ */
 package com.relayd.ejb.orm.jpa;
 
 import static org.junit.Assert.*;
