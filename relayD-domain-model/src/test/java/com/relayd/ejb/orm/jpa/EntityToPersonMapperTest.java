@@ -12,6 +12,9 @@ import com.relayd.attributes.*;
 import com.relayd.entity.PersonEntity;
 
 /**
+ * The key to avoiding nervousness is: Be prepared.
+ * 		- Patrick McDermott (Zen and the Art of Systems Analysis) -
+ * 
  * @author  Rasumichin (Erik@relayd.de)
  * @since   23.10.2016
  *

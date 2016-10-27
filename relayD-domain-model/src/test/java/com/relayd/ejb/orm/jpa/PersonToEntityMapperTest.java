@@ -18,6 +18,9 @@ import com.relayd.attributes.YearOfBirth;
 import com.relayd.entity.PersonEntity;
 
 /**
+ * The value of layers is that each specializes in a particular aspect of a computer program.
+ * 		- Eric Evans (Domain-Driven Design) -
+ * 
  * @author  Rasumichin (Erik@relayd.de)
  * @since   25.09.2016
  *

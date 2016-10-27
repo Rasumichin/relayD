@@ -1,7 +1,3 @@
-/*
- * The key to avoiding nervousness is: Be prepared.
- * 		- Patrick McDermott (Zen and the Art of Systems Analysis) -
- */
 package com.relayd.ejb.orm.jpa;
 
 import java.util.UUID;

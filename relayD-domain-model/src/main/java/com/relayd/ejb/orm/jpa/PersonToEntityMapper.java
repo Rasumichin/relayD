@@ -1,7 +1,3 @@
-/*
- * The value of layers is that each specializes in a particular aspect of a computer program.
- * 		- Eric Evans (Domain-Driven Design) -
- */
 package com.relayd.ejb.orm.jpa;
 
 import com.relayd.Person;

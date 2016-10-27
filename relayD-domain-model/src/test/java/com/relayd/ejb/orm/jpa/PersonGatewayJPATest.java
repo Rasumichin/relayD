@@ -1,7 +1,3 @@
-/*
- * Designers make the mistake of not taking error into account.
- * 		- Donald A. Norman (The Design of Everyday Things) -
- */
 package com.relayd.ejb.orm.jpa;
 
 import static org.junit.Assert.*;
@@ -26,6 +22,9 @@ import com.relayd.entity.PersonEntity;
 import static org.mockito.Mockito.*;
 
 /**
+ * Designers make the mistake of not taking error into account.
+ * 		- Donald A. Norman (The Design of Everyday Things) -
+ * 
  * @author  Rasumichin (Erik@relayd.de)
  * @since   03.10.2016
  *
