@@ -33,6 +33,7 @@ public class Person implements Serializable {
 	Email lastCalculatedEmail;
 
 	private Person() {
+		// TODO (EL, 2016-10-28): Discuss. When do we do initialization here and when directly on field declaration level (see above)?
 		uuid = UUID.randomUUID();
 		email = getDefaultEmail();
 		lastCalculatedEmail = email.clone();
@@ -40,6 +41,10 @@ public class Person implements Serializable {
 
 	public static Person newInstance() {
 		return new Person();
+	}
+
+	Email getDefaultEmail() {
+		return Email.newInstance("forename.surename@canda.com");
 	}
 
 	public UUID getUuid() {
@@ -80,10 +85,6 @@ public class Person implements Serializable {
 
 	public void setEmail(Email anEmail) {
 		email = anEmail;
-	}
-
-	Email getDefaultEmail() {
-		return Email.newInstance("forename.surename@canda.com");
 	}
 
 	/**
