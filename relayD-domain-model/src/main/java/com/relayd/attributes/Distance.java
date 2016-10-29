@@ -23,16 +23,16 @@ public class Distance implements Serializable {
 		value = distance.setScale(2, RoundingMode.HALF_UP);
 	}
 
+	private Distance(BigDecimal aValue, Unity anUnity) {
+		value = aValue;
+		unity = anUnity;
+	}
+
+	// TODO -Team relayd- Braucht man diesen Konstruktor eigentlich?
+	// Eine Distance sollte doch eigentlich immer genau eine Ausprägung an Unity besitzen
 	public static Distance newInstance(BigDecimal aDistance) {
 		validate(aDistance);
 		return new Distance(aDistance);
-	}
-
-	public static Distance newInstance(BigDecimal aDistance, Unity anUnity) {
-		validate(aDistance);
-		Distance distance = new Distance(aDistance);
-		distance.unity = anUnity;
-		return distance;
 	}
 
 	public static Distance kilometers(BigDecimal distance) {
@@ -42,7 +42,7 @@ public class Distance implements Serializable {
 
 	public static Distance meters(BigDecimal aDistance) {
 		validate(aDistance);
-		return Distance.newInstance(aDistance, Unity.METER);
+		return new Distance(aDistance, Unity.METER);
 	}
 
 	private static void validate(BigDecimal distance) {
@@ -57,10 +57,9 @@ public class Distance implements Serializable {
 
 	public Distance add(Distance aDistance) {
 		if (areSameUnity(aDistance)) {
-			return Distance.newInstance(value.add(aDistance.value), getUnity());
+			return new Distance(value.add(aDistance.value), getUnity());
 		} else {
-			// Klappt aber aktuell nur von KM->METER. Nicht von wenn METER->KM!
-			return Distance.newInstance(value.multiply(new BigDecimal(1000)).add(aDistance.value), getUnity());
+			throw new IllegalArgumentException("Only Distances with same unity are supported!");
 		}
 	}
 
@@ -69,12 +68,12 @@ public class Distance implements Serializable {
 	}
 
 	public String toStringWithUnity() {
-		return value + " " + getUnity();
+		return toString() + " " + getUnity();
 	}
 
 	@Override
 	public String toString() {
-		return value.toString();
+		return value.stripTrailingZeros().toString();
 	}
 
 	@Override

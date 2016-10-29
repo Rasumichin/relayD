@@ -51,7 +51,18 @@ public class DistanceTest {
 		Distance sut = Distance.kilometers(distance);
 
 		assertNotNull(sut);
-		assertEquals("10.13", sut.toString());
+		assertEquals("[value] not correct!", "10.13", sut.toString());
+	}
+
+	@Test
+	public void testToString_ForCutZeros() {
+		BigDecimal distance = new BigDecimal("12.400");
+
+		Distance sut = Distance.kilometers(distance);
+
+		String actual = sut.toString();
+
+		assertEquals("[value] not correct!", "12.4", actual);
 	}
 
 	@Test
@@ -93,13 +104,13 @@ public class DistanceTest {
 
 	@Test
 	public void testAdd_WithDiffrentUnity() {
+		expectedException.expect(IllegalArgumentException.class);
+		expectedException.expectMessage("Only Distances with same unity are supported!");
+
 		Distance sutFirst = Distance.kilometers(new BigDecimal("7.34"));
 		Distance sutSecond = Distance.meters(new BigDecimal("3.57"));
 
-		Distance actual = sutFirst.add(sutSecond);
-
-		Distance expected = Distance.meters(new BigDecimal("7343.57"));
-		assertEquals("[add] not corret!", expected, actual);
+		sutFirst.add(sutSecond);
 	}
 
 	@Test
@@ -117,9 +128,9 @@ public class DistanceTest {
 		BigDecimal expected = new BigDecimal("11.23");
 		Distance sut = Distance.newInstance(expected);
 
-		String result = sut.toString();
+		String actual = sut.toString();
 
-		assertEquals(expected.toString(), result);
+		assertEquals(expected.toString(), actual);
 	}
 
 	@Test
