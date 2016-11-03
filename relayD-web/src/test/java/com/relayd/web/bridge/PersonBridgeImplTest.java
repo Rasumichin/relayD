@@ -22,6 +22,8 @@ import com.relayd.web.pagebean.PersonBuilder;
 
 import static org.mockito.Mockito.*;
 
+// TODO (EL, 2016-11-03): 1) No class comment, author, saying etc. 2) This test produces console output saying a JPA runtime could not be started. Check mocks.
+
 @RunWith(MockitoJUnitRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class PersonBridgeImplTest {
