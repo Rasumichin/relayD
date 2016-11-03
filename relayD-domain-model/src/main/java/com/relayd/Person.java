@@ -23,16 +23,17 @@ public class Person implements Serializable {
 
 	private UUID uuid;
 	private Surename surename;
-	private Forename forename;
+	private Forename forename = Forename.newInstance();
 	private YearOfBirth yearOfBirth;
 	private Shirtsize shirtsize;
 	private Email email;
 	private Relayname relayname; // Refactor Dieses Attribut ist Jahresabhängig!
 	private Position position; // Refactor Dieses Attribut ist Jahresabhängig!
-	private Comment comment;
+	private Comment comment = Comment.newInstance();
 	Email lastCalculatedEmail;
 
 	private Person() {
+		// TODO (EL, 2016-10-28): Discuss. When do we do initialization here and when directly on field declaration level (see above)?
 		uuid = UUID.randomUUID();
 		email = getDefaultEmail();
 		lastCalculatedEmail = email.clone();
@@ -40,6 +41,10 @@ public class Person implements Serializable {
 
 	public static Person newInstance() {
 		return new Person();
+	}
+
+	Email getDefaultEmail() {
+		return Email.newInstance("forename.surename@canda.com");
 	}
 
 	public UUID getUuid() {
@@ -63,7 +68,11 @@ public class Person implements Serializable {
 	}
 
 	public void setForename(Forename aForename) {
-		forename = aForename;
+		if (aForename == null) {
+			forename = Forename.newInstance();
+		} else {
+			forename = aForename;
+		}
 	}
 
 	public Shirtsize getShirtsize() {
@@ -82,10 +91,6 @@ public class Person implements Serializable {
 		email = anEmail;
 	}
 
-	Email getDefaultEmail() {
-		return Email.newInstance("forename.surename@canda.com");
-	}
-
 	/**
 	 * Infers the 'email' attribute of the receiver by considering the current 'forename'
 	 * and 'surename' values as well as the provided 'domain part' of the email.
@@ -101,12 +106,12 @@ public class Person implements Serializable {
 			throw new IllegalArgumentException("Provided domain part must not be 'null'.");
 		}
 
-		if (getForename() == null && getSurename() == null) {
+		if (getForename().isEmpty() && getSurename() == null) {
 			setEmail(null);
 			return getEmail();
 		}
 
-		String localPart = (getForename() != null) ? getForename().toString() : "";
+		String localPart = getForename().toString();
 		if (getSurename() != null) {
 			localPart += localPart.isEmpty() ? "" : ".";
 			localPart += getSurename();
@@ -182,9 +187,9 @@ public class Person implements Serializable {
 		Forename currentForename = getForename();
 		Surename currentSurename = getSurename();
 
-		String currentLocalPart = (currentForename == null) ? null : currentForename.toString();
+		String currentLocalPart = currentForename.toString();
 		if (currentSurename != null) {
-			currentLocalPart = (currentLocalPart == null) ? currentSurename.toString() : currentLocalPart + '.' + currentSurename;
+			currentLocalPart = (currentLocalPart.isEmpty()) ? currentSurename.toString() : currentLocalPart + '.' + currentSurename;
 		}
 
 		if (currentLocalPart != null) {

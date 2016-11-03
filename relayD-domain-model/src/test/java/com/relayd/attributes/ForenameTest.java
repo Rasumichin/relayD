@@ -32,6 +32,39 @@ public class ForenameTest {
 	}
 
 	@Test
+	public void testCreateInstance() {
+		// Diskutieren: Benötigt man einen "default" Constructor?
+		Forename forename = Forename.newInstance();
+
+		assertNotNull(forename);
+
+		boolean result = forename.getClass() == Forename.class;
+		assertFalse("Instance not correct!", result);
+
+		// Diskutieren: Sollte man die Sichtbarkeit fürs testen öffnen?
+		//		boolean result = comment.getClass() == Comment.CommentNullObject.class;
+		//		assertTrue("Instance not correct!", result);
+
+		//Oder
+		String toString = forename.toString();
+		assertEquals("", toString);
+
+	}
+
+	@Test
+	public void testCreateInstance_ForParameter() {
+		Forename forename = Forename.newInstance("Forename");
+
+		assertNotNull(forename);
+
+		boolean result = forename.getClass() == Forename.class;
+		assertTrue("Instance not correct!", result);
+		//Oder
+		String toString = forename.toString();
+		assertEquals("Forename", toString);
+	}
+
+	@Test
 	public void testToString_usualValue() {
 		String expectedResult = "Marty";
 		Forename sut = Forename.newInstance(expectedResult);

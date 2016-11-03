@@ -21,6 +21,10 @@ public class Forename implements Serializable {
 		value = forename;
 	}
 
+	static public Forename newInstance() {
+		return NullObjectForename.instance();
+	}
+
 	/**
 	 * Bloch, Joshua, Effective Java, 2nd Edition, Item 1, p. 5
 	 */

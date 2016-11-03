@@ -4,8 +4,7 @@ import static org.junit.Assert.*;
 
 import java.util.UUID;
 
-import org.junit.FixMethodOrder;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runners.MethodSorters;
 
 import com.relayd.attributes.Comment;
@@ -70,6 +69,16 @@ public class PersonTest {
 		assertEquals("[forename] not correct!", expected, actual);
 	}
 
+	@Test
+	public void testSetForename_withNull() {
+		Person sut = Person.newInstance();
+		
+		sut.setForename(null);
+		
+		Forename result = sut.getForename();
+		assertNotNull("Person must not return [forename] equals 'null'!", result);
+	}
+	
 	@Test
 	public void testShirtsize() {
 		Shirtsize expected = Shirtsize.HerrenXXL;
@@ -317,7 +326,7 @@ public class PersonTest {
 		Person sut = Person.newInstance();
 
 		String result = sut.getCurrentLocalPart();
-		assertNull("Current local part is not correct.", result);
+		assertTrue("Current local part is not correct.", result.isEmpty());
 	}
 
 	@Test

@@ -36,6 +36,8 @@ import static org.mockito.Mockito.*;
  * @since   20.06.2016
  *
  */
+// TODO (EL, 2016-11-03): This test produces console output saying a JPA runtime could not be started. Check mocks.
+
 @RunWith(MockitoJUnitRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class PersonBridgeImplTest {
