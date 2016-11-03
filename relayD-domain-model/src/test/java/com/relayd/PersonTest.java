@@ -69,7 +69,6 @@ public class PersonTest {
 		assertEquals("[forename] not correct!", expected, actual);
 	}
 
-	@Ignore
 	@Test
 	public void testSetForename_withNull() {
 		Person sut = Person.newInstance();

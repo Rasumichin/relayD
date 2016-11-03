@@ -68,7 +68,11 @@ public class Person implements Serializable {
 	}
 
 	public void setForename(Forename aForename) {
-		forename = aForename;
+		if (aForename == null) {
+			forename = Forename.newInstance();
+		} else {
+			forename = aForename;
+		}
 	}
 
 	public Shirtsize getShirtsize() {
@@ -102,12 +106,12 @@ public class Person implements Serializable {
 			throw new IllegalArgumentException("Provided domain part must not be 'null'.");
 		}
 
-		if (getForename() == null && getSurename() == null) {
+		if (getForename().isEmpty() && getSurename() == null) {
 			setEmail(null);
 			return getEmail();
 		}
 
-		String localPart = (getForename() != null) ? getForename().toString() : "";
+		String localPart = getForename().toString();
 		if (getSurename() != null) {
 			localPart += localPart.isEmpty() ? "" : ".";
 			localPart += getSurename();
