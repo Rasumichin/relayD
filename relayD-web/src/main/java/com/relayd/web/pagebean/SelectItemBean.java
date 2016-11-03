@@ -1,5 +1,6 @@
 package com.relayd.web.pagebean;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -20,7 +21,8 @@ import com.relayd.attributes.Shirtsize;
  */
 @ManagedBean(name = "selectItemBean")
 @SessionScoped
-public class SelectItemBean {
+public class SelectItemBean implements Serializable {
+	private static final long serialVersionUID = -8028809269452661427L;
 
 	private List<Shirtsize> shirtsizes;
 	private List<Position> positions;
