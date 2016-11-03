@@ -29,8 +29,7 @@ public class PersonToEntityMapper {
 
 	public PersonEntity mapPersonToEntity(Person person) {
 		PersonEntity result = new PersonEntity.Builder().withId(person.getUuid().toString())
-				.withForename((person.getForename() == null) || (person.getForename().isEmpty()) ? null
-						: person.getForename().toString())
+				.withForename((person.getForename().isEmpty()) ? null : person.getForename().toString())
 				.withSurename((person.getSurename() == null) ? null : person.getSurename().toString())
 				.withEmail((person.getEmail() == null) ? null : person.getEmail().toString())
 				.withYearOfBirth((person.getYearOfBirth() == null) ? null : person.getYearOfBirth().getValue())
