@@ -27,7 +27,7 @@ public class Person implements Serializable {
 	private YearOfBirth yearOfBirth;
 	private Shirtsize shirtsize;
 	private Email email;
-	private Relayname relayname; // Refactor Dieses Attribut ist Jahresabhängig!
+	private Relayname relayname = Relayname.newInstance(); // Refactor Dieses Attribut ist Jahresabhängig!
 	private Position position; // Refactor Dieses Attribut ist Jahresabhängig!
 	private Comment comment;
 	Email lastCalculatedEmail;

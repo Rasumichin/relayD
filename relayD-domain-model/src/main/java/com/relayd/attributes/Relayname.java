@@ -12,6 +12,10 @@ public class Relayname implements Serializable, Comparable<Relayname> {
 
 	String value;
 
+	private Relayname() {
+		super();
+	}
+
 	private Relayname(String relayname) {
 		super();
 		value = relayname;
@@ -20,20 +24,22 @@ public class Relayname implements Serializable, Comparable<Relayname> {
 	/**
 	 * Bloch, Joshua, Effective Java, 2nd Edition, Item 1, p. 5
 	 */
-	static public Relayname newInstance(String relayname) {
-		validate(relayname);
-		return new Relayname(relayname);
-
+	public static Relayname newInstance() {
+		return RelaynameNullObject.instance();
 	}
 
-	private static void validate(String relayname) {
-		if (relayname == null) {
-			throw new IllegalArgumentException("[relayname] must not be 'null'.");
+	/**
+	 * Bloch, Joshua, Effective Java, 2nd Edition, Item 1, p. 5
+	 */
+	static public Relayname newInstance(String relayname) {
+		if (relayname == null || relayname.trim().isEmpty()) {
+			return RelaynameNullObject.instance();
 		}
+		return new Relayname(relayname);
 	}
 
 	public boolean isEmpty() {
-		return value.trim().isEmpty();
+		return false;
 	}
 
 	@Override
@@ -74,5 +80,25 @@ public class Relayname implements Serializable, Comparable<Relayname> {
 			return false;
 		}
 		return true;
+	}
+
+	static final class RelaynameNullObject extends Relayname {
+		private static final long serialVersionUID = -1319243586895164056L;
+
+		private static final RelaynameNullObject SINGELTON = new RelaynameNullObject();
+
+		static RelaynameNullObject instance() {
+			return SINGELTON;
+		}
+
+		@Override
+		public boolean isEmpty() {
+			return true;
+		}
+
+		@Override
+		public String toString() {
+			return "";
+		}
 	}
 }

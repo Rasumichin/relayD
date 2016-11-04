@@ -111,9 +111,13 @@ public class PersonTest {
 
 	@Test
 	public void testRelayname() {
-		Relayname expected = Relayname.newInstance("Die 4 ????");
-
 		Person sut = Person.newInstance();
+
+		Relayname relayname = sut.getRelayname();
+
+		assertNotNull("[relayname] not valid instance!", relayname);
+
+		Relayname expected = Relayname.newInstance("Die 4 ????");
 
 		sut.setRelayname(expected);
 

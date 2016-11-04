@@ -24,7 +24,7 @@ public class RelaynameValueObjectConverterTest {
 		String nullValue = null;
 		Object result = sut.getAsObject(null, null, nullValue);
 
-		assertNull("Expected valid instance.", result);
+		assertNotNull("Expected valid instance.", result);
 	}
 
 	@Test
@@ -32,7 +32,7 @@ public class RelaynameValueObjectConverterTest {
 		String emptyValue = "";
 		Object result = sut.getAsObject(null, null, emptyValue);
 
-		assertNull("Expected valid instance.", result);
+		assertNotNull("Expected valid instance.", result);
 	}
 
 	@Test
@@ -41,7 +41,9 @@ public class RelaynameValueObjectConverterTest {
 
 		assertNotNull("Expected valid instance.", result);
 		assertEquals(Relayname.class, result.getClass());
+
 		Relayname relayname = (Relayname) result;
+
 		assertEquals("Attribute not correct.", name, relayname.toString());
 	}
 
