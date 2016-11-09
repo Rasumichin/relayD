@@ -17,9 +17,6 @@ public class RelaynameValueObjectConverter implements Converter {
 
 	@Override
 	public Object getAsObject(@SuppressWarnings("unused") FacesContext facesContext, @SuppressWarnings("unused") UIComponent uiComponent, String value) {
-		if (value == null || value.isEmpty()) {
-			return null;
-		}
 		Relayname name = Relayname.newInstance(value);
 		return name;
 	}

@@ -5,10 +5,10 @@ import static org.junit.Assert.*;
 import java.io.Serializable;
 
 import org.junit.FixMethodOrder;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import org.junit.runners.MethodSorters;
+
+import com.relayd.attributes.Relayname.RelaynameNullObject;
 
 /**
  * Die Samen der Vergangenheit sind die Früchte der Zukunft.
@@ -20,9 +20,6 @@ import org.junit.runners.MethodSorters;
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class RelaynameTest {
-
-	@Rule
-	public ExpectedException expectedException = ExpectedException.none();
 
 	@Test
 	public void testIsSerializable() {
@@ -37,22 +34,28 @@ public class RelaynameTest {
 
 	@Test
 	public void testCreateInstance() {
+		Relayname sut = Relayname.newInstance();
+
+		assertNotNull("[relayname] not a valid instance!", sut);
+
+		boolean result = sut.getClass() == RelaynameNullObject.class;
+		assertTrue("Instance not correct!", result);
+	}
+
+	@Test
+	public void testCreateInstance_ForParameter() {
 		String expected = "Die vier ????";
 		Relayname sut = Relayname.newInstance(expected);
 
 		String actual = sut.value;
 		assertEquals(expected, actual);
+
+		boolean result = sut.getClass() == Relayname.class;
+		assertTrue("Instance not correct!", result);
 	}
 
 	@Test
-	public void testCreateInstanceWithIllegalNullValue() {
-		expectedException.expect(IllegalArgumentException.class);
-		expectedException.expectMessage("[relayname] must not be 'null'.");
-		Relayname.newInstance(null);
-	}
-
-	@Test
-	public void testIsEmpty_ForFilledName() {
+	public void testIsEmpty_ForNameFilled() {
 		String relayName = "Die vier ????";
 		Relayname sut = Relayname.newInstance(relayName);
 
@@ -62,8 +65,28 @@ public class RelaynameTest {
 	}
 
 	@Test
-	public void testIsEmpty_ForNameFilledWithSpace() {
+	public void testIsEmpty_ForNameFilledWithBlank() {
 		String relayName = "  ";
+		Relayname sut = Relayname.newInstance(relayName);
+
+		boolean result = sut.isEmpty();
+
+		assertTrue("[result] for isEmpty is not correct!", result);
+	}
+
+	@Test
+	public void testIsEmpty_ForNameEmpty() {
+		String relayName = "";
+		Relayname sut = Relayname.newInstance(relayName);
+
+		boolean result = sut.isEmpty();
+
+		assertTrue("[result] for isEmpty is not correct!", result);
+	}
+
+	@Test
+	public void testIsEmpty_ForNameNull() {
+		String relayName = null;
 		Relayname sut = Relayname.newInstance(relayName);
 
 		boolean result = sut.isEmpty();
@@ -102,13 +125,43 @@ public class RelaynameTest {
 	}
 
 	@Test
-	public void testToString() {
-		String relayName = "Staubwolke";
-		Relayname sut = Relayname.newInstance(relayName);
+	public void testToString_ForUsualValue() {
+		String relayname = "Staubwolke";
+		Relayname sut = Relayname.newInstance(relayname);
 
 		String actual = sut.toString();
 
-		assertEquals("Staubwolke", actual);
+		assertEquals("String representation is not correct!", "Staubwolke", actual);
+	}
+
+	@Test
+	public void testToString_ForEmptyValue() {
+		String relayname = "";
+		Relayname sut = Relayname.newInstance(relayname);
+
+		String actual = sut.toString();
+
+		assertEquals("String representation is not correct!", "", actual);
+	}
+
+	@Test
+	public void testToString_ForBlankValue() {
+		String relayname = "  ";
+		Relayname sut = Relayname.newInstance(relayname);
+
+		String actual = sut.toString();
+
+		assertEquals("String representation is not correct!", "", actual);
+	}
+
+	@Test
+	public void testToString_ForNullValue() {
+		String relayname = null;
+		Relayname sut = Relayname.newInstance(relayname);
+
+		String actual = sut.toString();
+
+		assertEquals("String representation is not correct!", "", actual);
 	}
 
 	@Test
