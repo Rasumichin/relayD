@@ -91,6 +91,16 @@ public class PersonTest {
 	}
 
 	@Test
+	public void testSetComment_ForNullValue() {
+		Person sut = Person.newInstance();
+
+		sut.setComment(null);
+
+		Comment actual = sut.getComment();
+		assertNotNull("Person must not return [comment] equals 'null'!", actual);
+	}
+
+	@Test
 	public void testShirtsize() {
 		Shirtsize expected = Shirtsize.HerrenXXL;
 

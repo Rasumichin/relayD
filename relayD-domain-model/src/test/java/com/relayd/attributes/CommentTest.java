@@ -8,6 +8,8 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import com.relayd.attributes.Comment.CommentNullObject;
+
 /**
  * Is 100% code coverage realistic?
  * Of course it is.
@@ -61,40 +63,49 @@ public class CommentTest {
 
 	@Test
 	public void testCreateInstance_ForParameter() {
-		Comment comment = Comment.newInstance("Comment");
+		Comment sut = Comment.newInstance("Comment");
 
-		assertNotNull(comment);
+		assertNotNull(sut);
 
-		boolean result = comment.getClass() == Comment.class;
+		boolean result = sut.getClass() == Comment.class;
+
 		assertTrue("Instance not correct!", result);
-		//Oder
-		String toString = comment.toString();
-		assertEquals("Comment", toString);
 	}
 
 	@Test
 	public void testCreateInstance_ForNullValue() {
-		Comment comment = Comment.newInstance(null);
+		Comment sut = Comment.newInstance(null);
 
-		assertNotNull(comment);
+		assertNotNull(sut);
 
-		boolean result = comment.getClass() == Comment.class;
-		assertFalse("Instance not correct!", result);
+		boolean actual = sut.getClass() == CommentNullObject.class;
 
-		// Diskutieren: Sollte man die Sichtbarkeit fürs testen öffnen?
-		//		boolean result = comment.getClass() == Comment.CommentNullObject.class;
-		//		assertTrue("Instance not correct!", result);
+		assertTrue("Instance not correct!", actual);
+	}
 
-		//Oder
-		String toString = comment.toString();
-		assertEquals("", toString);
+	@Test
+	public void testIsEmpty_usualValue() {
+		Comment sut = Comment.newInstance("Comment");
+
+		boolean actual = sut.isEmpty();
+
+		assertFalse("'isEmpty' check is not correct!", actual);
+	}
+
+	@Test
+	public void testIsEmpty_nullValue() {
+		Comment sut = Comment.newInstance();
+
+		boolean actual = sut.isEmpty();
+
+		assertTrue("'isEmpty' check is not correct!", actual);
 	}
 
 	@Test
 	public void testSameInstanceForTwoObjects() {
-		Comment firstComment = Comment.newInstance(null);
+		Comment firstComment = Comment.newInstance();
 
-		Comment secondComment = Comment.newInstance(null);
+		Comment secondComment = Comment.newInstance();
 
 		assertSame("Should be the same!", firstComment, secondComment);
 	}

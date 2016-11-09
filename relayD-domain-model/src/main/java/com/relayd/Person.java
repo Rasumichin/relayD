@@ -147,7 +147,11 @@ public class Person implements Serializable {
 	}
 
 	public void setComment(Comment aComment) {
-		comment = aComment;
+		if (aComment == null) {
+			comment = Comment.newInstance();
+		} else {
+			comment = aComment;
+		}
 	}
 
 	public void setYearOfBirth(YearOfBirth aYearOfBirth) {

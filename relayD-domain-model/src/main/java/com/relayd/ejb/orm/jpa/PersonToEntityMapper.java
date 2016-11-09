@@ -25,11 +25,11 @@ public class PersonToEntityMapper {
 			throw new IllegalArgumentException("[person] must not be 'null'!");
 		}
 
-		personEntity.setForename((person.getForename() == null) || (person.getForename().isEmpty()) ? null : person.getForename().toString());
+		personEntity.setForename(person.getForename().isEmpty() ? null : person.getForename().toString());
 		personEntity.setSurename((person.getSurename() == null) ? null : person.getSurename().toString());
 		personEntity.setEmail((person.getEmail() == null) ? null : person.getEmail().toString());
 		personEntity.setYearOfBirth((person.getYearOfBirth() == null) ? null : person.getYearOfBirth().getValue());
-		personEntity.setComment((person.getComment() == null) ? null : person.getComment().toString());
+		personEntity.setComment((person.getComment().isEmpty()) ? null : person.getComment().toString());
 		personEntity.setRelayname(person.getRelayname().isEmpty() ? null : person.getRelayname().toString());
 		personEntity.setPos((person.getPosition() == null) ? null : person.getPosition().getValue());
 		personEntity.setShirtsize((person.getShirtsize() == null) ? null : person.getShirtsize().getSize().intValue());

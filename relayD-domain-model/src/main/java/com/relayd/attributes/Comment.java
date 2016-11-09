@@ -10,8 +10,6 @@ import java.io.Serializable;
 public class Comment implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private static final CommentNullObject commentNullObjectSingelton = new CommentNullObject();
-
 	public static final Integer MAX_LENGTH = 255;
 
 	String value;
@@ -25,23 +23,18 @@ public class Comment implements Serializable {
 	}
 
 	public static Comment newInstance() {
-		return commentNullObjectSingelton;
+		return CommentNullObject.instance();
 	}
 
 	public static Comment newInstance(String aComment) {
 		if (aComment == null) {
-			return commentNullObjectSingelton;
+			return CommentNullObject.instance();
 		}
 		return new Comment(aComment);
 	}
 
-	private static class CommentNullObject extends Comment {
-		private static final long serialVersionUID = 1L;
-
-		@Override
-		public String toString() {
-			return "";
-		}
+	public boolean isEmpty() {
+		return false;
 	}
 
 	@Override
@@ -77,5 +70,25 @@ public class Comment implements Serializable {
 			return false;
 		}
 		return true;
+	}
+
+	static class CommentNullObject extends Comment {
+		private static final long serialVersionUID = -319144040520563172L;
+
+		private static final CommentNullObject SINGLETON = new CommentNullObject();
+
+		private static CommentNullObject instance() {
+			return SINGLETON;
+		}
+
+		@Override
+		public boolean isEmpty() {
+			return true;
+		}
+
+		@Override
+		public String toString() {
+			return "";
+		}
 	}
 }
