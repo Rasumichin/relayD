@@ -31,7 +31,7 @@ public class PersonSortTest {
 
 		int position = sut.sortByRelayname(first, second);
 
-		assertEquals("[position] not correct!", -1, position);
+		assertEquals("[position] not correct!", 0, position);
 	}
 
 	@Test
@@ -42,7 +42,7 @@ public class PersonSortTest {
 
 		int position = sut.sortByRelayname(first, second);
 
-		assertEquals("[position] not correct!", 1, position);
+		assertEquals("[position] not correct!", 10, position);
 	}
 
 	@Test

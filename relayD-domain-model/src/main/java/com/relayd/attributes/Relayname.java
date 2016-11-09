@@ -87,6 +87,11 @@ public class Relayname implements Serializable, Comparable<Relayname> {
 
 		private static final RelaynameNullObject SINGELTON = new RelaynameNullObject();
 
+		private RelaynameNullObject() {
+			super();
+			value = "";
+		}
+
 		static RelaynameNullObject instance() {
 			return SINGELTON;
 		}
@@ -98,7 +103,7 @@ public class Relayname implements Serializable, Comparable<Relayname> {
 
 		@Override
 		public String toString() {
-			return "";
+			return value;
 		}
 	}
 }
