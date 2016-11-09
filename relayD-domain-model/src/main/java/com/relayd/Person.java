@@ -127,7 +127,11 @@ public class Person implements Serializable {
 	}
 
 	public void setRelayname(Relayname aRelayname) {
-		relayname = aRelayname;
+		if (aRelayname == null) {
+			relayname = Relayname.newInstance();
+		} else {
+			relayname = aRelayname;
+		}
 	}
 
 	public Position getPosition() {

@@ -4,7 +4,8 @@ import static org.junit.Assert.*;
 
 import java.util.UUID;
 
-import org.junit.*;
+import org.junit.FixMethodOrder;
+import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import com.relayd.attributes.Comment;
@@ -70,15 +71,25 @@ public class PersonTest {
 	}
 
 	@Test
-	public void testSetForename_withNull() {
+	public void testSetForename_ForNullValue() {
 		Person sut = Person.newInstance();
-		
+
 		sut.setForename(null);
-		
-		Forename result = sut.getForename();
-		assertNotNull("Person must not return [forename] equals 'null'!", result);
+
+		Forename actual = sut.getForename();
+		assertNotNull("Person must not return [forename] equals 'null'!", actual);
 	}
-	
+
+	@Test
+	public void testSetRelayname_ForNullValue() {
+		Person sut = Person.newInstance();
+
+		sut.setRelayname(null);
+
+		Relayname actual = sut.getRelayname();
+		assertNotNull("Person must not return [relayname] equals 'null'!", actual);
+	}
+
 	@Test
 	public void testShirtsize() {
 		Shirtsize expected = Shirtsize.HerrenXXL;
