@@ -12,7 +12,7 @@ import org.junit.runners.MethodSorters;
  *
  * @author  schmollc (Christian@relayd.com)
  * @since   23.08.2016
- * status   initial
+ *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class PositionTest {
