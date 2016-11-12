@@ -33,7 +33,7 @@ public class SettingsTest {
 	public void testGetVersion() {
 		String actual = sut.getVersion();
 
-		assertEquals("[getVersion] not correct!", "1.0 - Codename Augustiner", actual);
+		assertEquals("[getVersion] not correct!", "1.1 - Codename Bitburger", actual);
 	}
 
 	@Test
