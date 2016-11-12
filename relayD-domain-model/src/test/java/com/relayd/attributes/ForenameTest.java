@@ -8,6 +8,8 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import com.relayd.attributes.Forename.ForenameNullObject;
+
 /**
  * Wissen und nichts tun ist wie nicht wissen.
  *  - Dalai Lama
@@ -33,22 +35,13 @@ public class ForenameTest {
 
 	@Test
 	public void testCreateInstance() {
-		// Diskutieren: Benötigt man einen "default" Constructor?
-		Forename forename = Forename.newInstance();
+		Forename sut = Forename.newInstance();
 
-		assertNotNull(forename);
+		assertNotNull("Not a valid instance!", sut);
 
-		boolean result = forename.getClass() == Forename.class;
-		assertFalse("Instance not correct!", result);
+		boolean result = sut.getClass() == ForenameNullObject.class;
 
-		// Diskutieren: Sollte man die Sichtbarkeit fürs testen öffnen?
-		//		boolean result = comment.getClass() == Comment.CommentNullObject.class;
-		//		assertTrue("Instance not correct!", result);
-
-		//Oder
-		String toString = forename.toString();
-		assertEquals("", toString);
-
+		assertTrue("Instance is not correct!", result);
 	}
 
 	@Test
@@ -65,7 +58,40 @@ public class ForenameTest {
 	}
 
 	@Test
-	public void testToString_usualValue() {
+	public void testCreateInstance_ForNullValue() {
+		Forename sut = Forename.newInstance(null);
+
+		assertNotNull(sut);
+
+		boolean actual = sut.getClass() == ForenameNullObject.class;
+
+		assertTrue("Instance not correct!", actual);
+	}
+
+	@Test
+	public void testCreateInstance_ForEmptyValue() {
+		Forename sut = Forename.newInstance("");
+
+		assertNotNull("Not a valid instance!", sut);
+
+		boolean actual = sut.getClass() == ForenameNullObject.class;
+
+		assertTrue("Instance is not correct!", actual);
+	}
+
+	@Test
+	public void testCreateInstance_ForBlankValue() {
+		Forename sut = Forename.newInstance("   ");
+
+		assertNotNull("Not a valid instance!", sut);
+
+		boolean actual = sut.getClass() == ForenameNullObject.class;
+
+		assertTrue("Instance is not correct!", actual);
+	}
+
+	@Test
+	public void testToString() {
 		String expectedResult = "Marty";
 		Forename sut = Forename.newInstance(expectedResult);
 
@@ -75,101 +101,31 @@ public class ForenameTest {
 	}
 
 	@Test
-	public void testToString_emptyValue() {
-		String expectedResult = "";
-		Forename sut = Forename.newInstance(expectedResult);
+	public void testToString_ForEmptyValue() {
+		String expected = "";
+		Forename sut = Forename.newInstance(expected);
 
-		String actualResult = sut.toString();
+		String actual = sut.toString();
 
-		assertEquals("String representation is not correct!", expectedResult, actualResult);
+		assertEquals("String representation is not correct!", expected, actual);
 	}
 
 	@Test
-	public void testToString_blankValue() {
-		String blankForename = "   ";
-		Forename sut = Forename.newInstance(blankForename);
+	public void testToString_ForBlankValue() {
+		Forename sut = Forename.newInstance("   ");
 
-		String expectedResult = "";
-		String actualResult = sut.toString();
+		String actual = sut.toString();
 
-		assertEquals("String representation is not correct!", expectedResult, actualResult);
+		assertEquals("String representation is not correct!", "", actual);
 	}
 
 	@Test
-	public void testToString_nullValue() {
+	public void testToString_ForNullValue() {
 		Forename sut = Forename.newInstance(null);
 
-		String expectedResult = "";
-		String actualResult = sut.toString();
+		String actual = sut.toString();
 
-		assertEquals("String representation is not correct!", expectedResult, actualResult);
-	}
-
-	@Test
-	public void testEquals_withMyself() {
-		Forename sut = Forename.newInstance("Forename");
-
-		boolean result = sut.equals(sut);
-
-		assertTrue("Comparing equality is not correct!", result);
-	}
-
-	@Test
-	public void testEquals_withNull() {
-		Forename sut = Forename.newInstance("Forename");
-
-		boolean result = sut.equals(null);
-
-		assertFalse("Comparing equality is not correct!", result);
-	}
-
-	@Test
-	public void testEquals_withIncompatibleClass() {
-		Forename sut = Forename.newInstance("Forename");
-
-		boolean result = sut.equals(new String());
-
-		assertFalse("Comparing equality is not correct!", result);
-	}
-
-	@Test
-	public void testEquals_withNullForename() {
-		Forename sut = Forename.newInstance("Forename");
-		Forename nullForename = Forename.newInstance(null);
-
-		boolean result = sut.equals(nullForename);
-
-		assertFalse("Comparing equality is not correct!", result);
-	}
-
-	@Test
-	public void testEquals_withTwoNullForenames() {
-		Forename sut = Forename.newInstance(null);
-		Forename otherNullForename = Forename.newInstance(null);
-
-		boolean result = sut.equals(otherNullForename);
-
-		assertTrue("Comparing equality is not correct!", result);
-	}
-
-	@Test
-	public void testEquals_withTwoDifferentInstances() {
-		Forename sut = Forename.newInstance("Forename");
-		Forename otherForename = Forename.newInstance("NotForename");
-
-		boolean result = sut.equals(otherForename);
-
-		assertFalse("Comparing equality is not correct!", result);
-	}
-
-	@Test
-	public void testEquals_withEqualInstances() {
-		Forename sut = Forename.newInstance("Forename");
-		Forename otherForename = Forename.newInstance("Forename");
-
-		boolean result = sut.equals(otherForename);
-
-		assertTrue("Comparing equality is not correct!", result);
+		assertEquals("String representation is not correct!", "", actual);
 	}
 
 	@Test
@@ -177,27 +133,44 @@ public class ForenameTest {
 		Forename sut = Forename.newInstance(null);
 		Forename otherNullForename = Forename.newInstance(null);
 
-		boolean result = (sut == otherNullForename);
-
-		assertTrue("Two NullObjectForenames are not the same!", result);
+		assertSame("Two ForenameNullObjects are not the same!", sut, otherNullForename);
 	}
 
 	@Test
-	public void testIsEmpty_usualValue() {
-		Forename sut = Forename.newInstance("Forename");
+	public void testIsEmpty_ForValueEmpty() {
+		Forename sut = Forename.newInstance("");
 
 		boolean result = sut.isEmpty();
 
-		assertFalse("'isEmpty' check is not correct!", result);
+		assertTrue("[result] for isEmpty is not correct!", result);
 	}
 
 	@Test
-	public void testIsEmpty_nullValue() {
+	public void testIsEmpty_ForValueFilled() {
+		String comment = "Justus";
+		Forename sut = Forename.newInstance(comment);
+
+		boolean result = sut.isEmpty();
+
+		assertFalse("[result] for isEmpty is not correct!", result);
+	}
+
+	@Test
+	public void testIsEmpty_ForValueFilledWithBlank() {
+		Forename sut = Forename.newInstance("    ");
+
+		boolean result = sut.isEmpty();
+
+		assertTrue("[result] for isEmpty is not correct!", result);
+	}
+
+	@Test
+	public void testIsEmpty_ForValueNull() {
 		Forename sut = Forename.newInstance(null);
 
 		boolean result = sut.isEmpty();
 
-		assertTrue("'isEmpty' check is not correct!", result);
+		assertTrue("[result] for isEmpty is not correct!", result);
 	}
 
 	@Test
@@ -216,8 +189,8 @@ public class ForenameTest {
 	}
 
 	@Test
-	public void testEqualsWithMyself() {
-		Forename sut = Forename.newInstance("Forename");
+	public void testEquals_WithMyself() {
+		Forename sut = Forename.newInstance("Name");
 
 		boolean result = sut.equals(sut);
 
@@ -225,8 +198,8 @@ public class ForenameTest {
 	}
 
 	@Test
-	public void testEqualsWithNull() {
-		Forename sut = Forename.newInstance("Forename");
+	public void testEquals_WithNull() {
+		Forename sut = Forename.newInstance("Name");
 
 		boolean result = sut.equals(null);
 
@@ -234,8 +207,8 @@ public class ForenameTest {
 	}
 
 	@Test
-	public void testEqualsWithNotCompatibleClass() {
-		Forename sut = Forename.newInstance("Forename");
+	public void testEquals_WithNotCompatibleClass() {
+		Forename sut = Forename.newInstance("Name");
 
 		boolean result = sut.equals(new String());
 
@@ -243,22 +216,22 @@ public class ForenameTest {
 	}
 
 	@Test
-	public void testEqualsWithValueIsNull() {
-		Forename sut = Forename.newInstance("Forename");
-		sut.value = null;
-		Forename secondSut = Forename.newInstance("Forename");
+	public void testEquals_WithDiffrentValues() {
+		Forename sut = Forename.newInstance("Name1");
+
+		Forename secondSut = Forename.newInstance("Name2");
 
 		boolean result = sut.equals(secondSut);
 
 		assertFalse(result);
+
 	}
 
 	@Test
-	public void testEqualsWithBothValuesAreNull() {
-		Forename sut = Forename.newInstance("Forename");
-		sut.value = null;
-		Forename secondSut = Forename.newInstance("Forename");
-		secondSut.value = null;
+	public void testEquals_WithSameValues() {
+		Forename sut = Forename.newInstance("Name");
+
+		Forename secondSut = Forename.newInstance("Name");
 
 		boolean result = sut.equals(secondSut);
 
@@ -266,19 +239,25 @@ public class ForenameTest {
 	}
 
 	@Test
-	public void testEqualsWithTwoDiffrentValues() {
-		Forename sut = Forename.newInstance("Forename");
-		Forename secondSut = Forename.newInstance("NotForename");
+	public void testEquals_WithValueIsNull() {
+		Forename sut = Forename.newInstance("dummy");
+		sut.value = null;
+
+		Forename secondSut = Forename.newInstance("dummy");
 
 		boolean result = sut.equals(secondSut);
 
 		assertFalse(result);
+
 	}
 
 	@Test
-	public void testEqualsWithSameValues() {
-		Forename sut = Forename.newInstance("Forename");
-		Forename secondSut = Forename.newInstance("Forename");
+	public void testEquals_WithBothValuesAreNull() {
+		Forename sut = Forename.newInstance("dummy");
+		sut.value = null;
+
+		Forename secondSut = Forename.newInstance("dummy");
+		secondSut.value = null;
 
 		boolean result = sut.equals(secondSut);
 

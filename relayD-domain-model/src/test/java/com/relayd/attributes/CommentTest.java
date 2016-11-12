@@ -31,7 +31,7 @@ public class CommentTest {
 		@SuppressWarnings("cast")
 		boolean result = sut instanceof Serializable;
 
-		assertTrue("Class not Serializable!", result);
+		assertTrue("Class is not Serializable!", result);
 	}
 
 	@Test
@@ -43,22 +43,13 @@ public class CommentTest {
 
 	@Test
 	public void testCreateInstance() {
-		// Diskutieren: Benötigt man einen "default" Constructor?
-		Comment comment = Comment.newInstance();
+		Comment sut = Comment.newInstance();
 
-		assertNotNull(comment);
+		assertNotNull("Not a valid instance!", sut);
 
-		boolean result = comment.getClass() == Comment.class;
-		assertFalse("Instance not correct!", result);
+		boolean result = sut.getClass() == CommentNullObject.class;
 
-		// Diskutieren: Sollte man die Sichtbarkeit fürs testen öffnen?
-		//		boolean result = comment.getClass() == Comment.CommentNullObject.class;
-		//		assertTrue("Instance not correct!", result);
-
-		//Oder
-		String toString = comment.toString();
-		assertEquals("", toString);
-
+		assertTrue("Instance is not correct!", result);
 	}
 
 	@Test
@@ -84,40 +75,109 @@ public class CommentTest {
 	}
 
 	@Test
-	public void testIsEmpty_usualValue() {
-		Comment sut = Comment.newInstance("Comment");
+	public void testCreateInstance_ForEmptyValue() {
+		Comment sut = Comment.newInstance("");
 
-		boolean actual = sut.isEmpty();
+		assertNotNull("Not a valid instance!", sut);
 
-		assertFalse("'isEmpty' check is not correct!", actual);
+		boolean actual = sut.getClass() == CommentNullObject.class;
+
+		assertTrue("Instance is not correct!", actual);
 	}
 
 	@Test
-	public void testIsEmpty_nullValue() {
+	public void testCreateInstance_ForBlankValue() {
+		Comment sut = Comment.newInstance("   ");
+
+		assertNotNull("Not a valid instance!", sut);
+
+		boolean actual = sut.getClass() == CommentNullObject.class;
+
+		assertTrue("Instance is not correct!", actual);
+	}
+
+	@Test
+	public void testIsEmpty_ForValueEmpty() {
+		Comment sut = Comment.newInstance("");
+
+		boolean result = sut.isEmpty();
+
+		assertTrue("[result] for isEmpty is not correct!", result);
+	}
+
+	@Test
+	public void testIsEmpty_ForValueFilled() {
+		String comment = "Gerne kurze Strecke";
+		Comment sut = Comment.newInstance(comment);
+
+		boolean result = sut.isEmpty();
+
+		assertFalse("[result] for isEmpty is not correct!", result);
+	}
+
+	@Test
+	public void testIsEmpty_ForValueFilledWithBlank() {
+		Comment sut = Comment.newInstance("    ");
+
+		boolean result = sut.isEmpty();
+
+		assertTrue("[result] for isEmpty is not correct!", result);
+	}
+
+	@Test
+	public void testIsEmpty_ForValueNull() {
+		Comment sut = Comment.newInstance(null);
+
+		boolean result = sut.isEmpty();
+
+		assertTrue("[result] for isEmpty is not correct!", result);
+	}
+
+	@Test
+	public void testSamenessOfTwoNullComment() {
 		Comment sut = Comment.newInstance();
+		Comment otherNullComment = Comment.newInstance();
 
-		boolean actual = sut.isEmpty();
-
-		assertTrue("'isEmpty' check is not correct!", actual);
-	}
-
-	@Test
-	public void testSameInstanceForTwoObjects() {
-		Comment firstComment = Comment.newInstance();
-
-		Comment secondComment = Comment.newInstance();
-
-		assertSame("Should be the same!", firstComment, secondComment);
+		assertSame("Two EventnameNullObjects are not the same!", sut, otherNullComment);
 	}
 
 	@Test
 	public void testToString() {
-		String commentText = "This is a comment!";
-		Comment comment = Comment.newInstance(commentText);
+		String expected = "a comment";
 
-		String actual = comment.toString();
+		Comment sut = Comment.newInstance(expected);
 
-		assertEquals(commentText, actual);
+		String actual = sut.toString();
+
+		assertEquals(expected, actual);
+	}
+
+	@Test
+	public void testToString_ForEmptyValue() {
+		String expected = "";
+		Comment sut = Comment.newInstance(expected);
+
+		String actual = sut.toString();
+
+		assertEquals("String representation is not correct!", expected, actual);
+	}
+
+	@Test
+	public void testToString_ForBlankValue() {
+		Comment sut = Comment.newInstance("   ");
+
+		String actual = sut.toString();
+
+		assertEquals("String representation is not correct!", "", actual);
+	}
+
+	@Test
+	public void testToString_ForNullValue() {
+		Comment sut = Comment.newInstance(null);
+
+		String actual = sut.toString();
+
+		assertEquals("String representation is not correct!", "", actual);
 	}
 
 	@Test
@@ -136,7 +196,7 @@ public class CommentTest {
 	}
 
 	@Test
-	public void testEqualsWithMyself() {
+	public void testEquals_WithMyself() {
 		Comment sut = Comment.newInstance("Comment");
 
 		boolean result = sut.equals(sut);
@@ -145,7 +205,7 @@ public class CommentTest {
 	}
 
 	@Test
-	public void testEqualsWithNull() {
+	public void testEquals_WithNull() {
 		Comment sut = Comment.newInstance("Comment");
 
 		boolean result = sut.equals(null);
@@ -154,7 +214,7 @@ public class CommentTest {
 	}
 
 	@Test
-	public void testEqualsWithNotCompatibleClass() {
+	public void testEquals_WithNotCompatibleClass() {
 		Comment sut = Comment.newInstance("Comment");
 
 		boolean result = sut.equals(new String());
@@ -163,7 +223,7 @@ public class CommentTest {
 	}
 
 	@Test
-	public void testEqualsWithValueIsNull() {
+	public void testEquals_WithValueIsNull() {
 		Comment sut = Comment.newInstance("Comment");
 		sut.value = null;
 		Comment secondSut = Comment.newInstance("Comment");
@@ -174,7 +234,7 @@ public class CommentTest {
 	}
 
 	@Test
-	public void testEqualsWithBothValuesAreNull() {
+	public void testEquals_WithBothValuesAreNull() {
 		Comment sut = Comment.newInstance("Comment");
 		sut.value = null;
 		Comment secondSut = Comment.newInstance("Comment");
@@ -186,7 +246,7 @@ public class CommentTest {
 	}
 
 	@Test
-	public void testEqualsWithTwoDiffrentValues() {
+	public void testEquals_WithTwoDiffrentValues() {
 		Comment sut = Comment.newInstance("Comment");
 		Comment secondSut = Comment.newInstance("NotComment");
 
@@ -196,7 +256,7 @@ public class CommentTest {
 	}
 
 	@Test
-	public void testEqualsWithSameValues() {
+	public void testEquals_WithSameValues() {
 		Comment sut = Comment.newInstance("Comment");
 		Comment secondSut = Comment.newInstance("Comment");
 

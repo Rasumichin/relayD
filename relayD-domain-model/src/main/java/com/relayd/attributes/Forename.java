@@ -9,7 +9,7 @@ import java.io.Serializable;
  *
  */
 public class Forename implements Serializable {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -1054781657742578752L;
 
 	String value;
 
@@ -21,8 +21,11 @@ public class Forename implements Serializable {
 		value = forename;
 	}
 
+	/**
+	 * Bloch, Joshua, Effective Java, 2nd Edition, Item 1, p. 5
+	 */
 	static public Forename newInstance() {
-		return NullObjectForename.instance();
+		return ForenameNullObject.instance();
 	}
 
 	/**
@@ -30,7 +33,7 @@ public class Forename implements Serializable {
 	 */
 	static public Forename newInstance(String forename) {
 		if (forename == null || forename.trim().isEmpty()) {
-			return NullObjectForename.instance();
+			return ForenameNullObject.instance();
 		}
 
 		return new Forename(forename);
@@ -75,12 +78,12 @@ public class Forename implements Serializable {
 		return true;
 	}
 
-	private static final class NullObjectForename extends Forename {
+	static final class ForenameNullObject extends Forename {
 		private static final long serialVersionUID = 6577776791000840413L;
 
-		private static final NullObjectForename SINGLETON = new NullObjectForename();
+		private static final ForenameNullObject SINGLETON = new ForenameNullObject();
 
-		private static NullObjectForename instance() {
+		private static ForenameNullObject instance() {
 			return SINGLETON;
 		}
 

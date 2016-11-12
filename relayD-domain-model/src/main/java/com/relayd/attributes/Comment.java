@@ -27,7 +27,7 @@ public class Comment implements Serializable {
 	}
 
 	public static Comment newInstance(String aComment) {
-		if (aComment == null) {
+		if (aComment == null || aComment.trim().isEmpty()) {
 			return CommentNullObject.instance();
 		}
 		return new Comment(aComment);

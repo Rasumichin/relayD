@@ -29,17 +29,51 @@ public class RelaynameTest {
 		@SuppressWarnings("cast")
 		boolean result = sut instanceof Serializable;
 
-		assertTrue("Class not Serializable!", result);
+		assertTrue("Class is not Serializable!", result);
 	}
 
 	@Test
 	public void testCreateInstance() {
 		Relayname sut = Relayname.newInstance();
 
-		assertNotNull("[relayname] not a valid instance!", sut);
+		assertNotNull("Not a valid instance!", sut);
 
 		boolean result = sut.getClass() == RelaynameNullObject.class;
-		assertTrue("Instance not correct!", result);
+
+		assertTrue("Instance is not correct!", result);
+	}
+
+	@Test
+	public void testCreateInstance_ForNullValue() {
+		Relayname sut = Relayname.newInstance(null);
+
+		assertNotNull("Not a valid instance!", sut);
+
+		boolean actual = sut.getClass() == RelaynameNullObject.class;
+
+		assertTrue("Instance is not correct!", actual);
+	}
+
+	@Test
+	public void testCreateInstance_ForEmptyValue() {
+		Relayname sut = Relayname.newInstance("");
+
+		assertNotNull("Not a valid instance!", sut);
+
+		boolean actual = sut.getClass() == RelaynameNullObject.class;
+
+		assertTrue("Instance is not correct!", actual);
+	}
+
+	@Test
+	public void testCreateInstance_ForBlankValue() {
+		Relayname sut = Relayname.newInstance("   ");
+
+		assertNotNull("Not a valid instance!", sut);
+
+		boolean actual = sut.getClass() == RelaynameNullObject.class;
+
+		assertTrue("Instance is not correct!", actual);
 	}
 
 	@Test
@@ -55,7 +89,7 @@ public class RelaynameTest {
 	}
 
 	@Test
-	public void testIsEmpty_ForNameFilled() {
+	public void testIsEmpty_ForValueFilled() {
 		String relayName = "Die vier ????";
 		Relayname sut = Relayname.newInstance(relayName);
 
@@ -65,9 +99,8 @@ public class RelaynameTest {
 	}
 
 	@Test
-	public void testIsEmpty_ForNameFilledWithBlank() {
-		String relayName = "  ";
-		Relayname sut = Relayname.newInstance(relayName);
+	public void testIsEmpty_ForValueFilledWithBlank() {
+		Relayname sut = Relayname.newInstance("    ");
 
 		boolean result = sut.isEmpty();
 
@@ -75,9 +108,8 @@ public class RelaynameTest {
 	}
 
 	@Test
-	public void testIsEmpty_ForNameEmpty() {
-		String relayName = "";
-		Relayname sut = Relayname.newInstance(relayName);
+	public void testIsEmpty_ForValueEmpty() {
+		Relayname sut = Relayname.newInstance("");
 
 		boolean result = sut.isEmpty();
 
@@ -85,9 +117,8 @@ public class RelaynameTest {
 	}
 
 	@Test
-	public void testIsEmpty_ForNameNull() {
-		String relayName = null;
-		Relayname sut = Relayname.newInstance(relayName);
+	public void testIsEmpty_ForValueNull() {
+		Relayname sut = Relayname.newInstance(null);
 
 		boolean result = sut.isEmpty();
 
@@ -125,7 +156,15 @@ public class RelaynameTest {
 	}
 
 	@Test
-	public void testToString_ForUsualValue() {
+	public void testSamenessOfTwoNullRelayname() {
+		Relayname sut = Relayname.newInstance();
+		Relayname otherNullRelayname = Relayname.newInstance();
+
+		assertSame("Two RelaynameNullObjects are not the same!", sut, otherNullRelayname);
+	}
+
+	@Test
+	public void testToString() {
 		String relayname = "Staubwolke";
 		Relayname sut = Relayname.newInstance(relayname);
 
@@ -136,18 +175,17 @@ public class RelaynameTest {
 
 	@Test
 	public void testToString_ForEmptyValue() {
-		String relayname = "";
-		Relayname sut = Relayname.newInstance(relayname);
+		String expected = "";
+		Relayname sut = Relayname.newInstance(expected);
 
 		String actual = sut.toString();
 
-		assertEquals("String representation is not correct!", "", actual);
+		assertEquals("String representation is not correct!", expected, actual);
 	}
 
 	@Test
 	public void testToString_ForBlankValue() {
-		String relayname = "  ";
-		Relayname sut = Relayname.newInstance(relayname);
+		Relayname sut = Relayname.newInstance("   ");
 
 		String actual = sut.toString();
 
@@ -156,8 +194,7 @@ public class RelaynameTest {
 
 	@Test
 	public void testToString_ForNullValue() {
-		String relayname = null;
-		Relayname sut = Relayname.newInstance(relayname);
+		Relayname sut = Relayname.newInstance(null);
 
 		String actual = sut.toString();
 
@@ -180,7 +217,7 @@ public class RelaynameTest {
 	}
 
 	@Test
-	public void testEqualsWithMyself() {
+	public void testEquals_WithMyself() {
 		Relayname sut = Relayname.newInstance("Relayname");
 
 		boolean result = sut.equals(sut);
@@ -189,7 +226,7 @@ public class RelaynameTest {
 	}
 
 	@Test
-	public void testEqualsWithNull() {
+	public void testEquals_WithNull() {
 		Relayname sut = Relayname.newInstance("Relayname");
 
 		boolean result = sut.equals(null);
@@ -198,7 +235,7 @@ public class RelaynameTest {
 	}
 
 	@Test
-	public void testEqualsWithNotCompatibleClass() {
+	public void testEquals_WithNotCompatibleClass() {
 		Relayname sut = Relayname.newInstance("Relayname");
 
 		boolean result = sut.equals(new String());
@@ -207,7 +244,7 @@ public class RelaynameTest {
 	}
 
 	@Test
-	public void testEqualsWithValueIsNull() {
+	public void testEquals_WithValueIsNull() {
 		Relayname sut = Relayname.newInstance("Relayname");
 		sut.value = null;
 		Relayname secondSut = Relayname.newInstance("Relayname");
@@ -218,7 +255,7 @@ public class RelaynameTest {
 	}
 
 	@Test
-	public void testEqualsWithBothValuesAreNull() {
+	public void testEquals_WithBothValuesAreNull() {
 		Relayname sut = Relayname.newInstance("Relayname");
 		sut.value = null;
 		Relayname secondSut = Relayname.newInstance("Relayname");
@@ -230,7 +267,7 @@ public class RelaynameTest {
 	}
 
 	@Test
-	public void testEqualsWithTwoDiffrentValues() {
+	public void testEquals_WithTwoDiffrentValues() {
 		Relayname sut = Relayname.newInstance("Relayname");
 		Relayname secondSut = Relayname.newInstance("NotRelayname");
 
@@ -240,7 +277,7 @@ public class RelaynameTest {
 	}
 
 	@Test
-	public void testEqualsWithSameValues() {
+	public void testEquals_WithSameValues() {
 		Relayname sut = Relayname.newInstance("Relayname");
 		Relayname secondSut = Relayname.newInstance("Relayname");
 

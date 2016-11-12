@@ -5,9 +5,7 @@ import static org.junit.Assert.*;
 import java.io.Serializable;
 
 import org.junit.FixMethodOrder;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import org.junit.runners.MethodSorters;
 
 import com.relayd.attributes.Eventname.EventnameNullObject;
@@ -24,8 +22,42 @@ import com.relayd.attributes.Eventname.EventnameNullObject;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class EventnameTest {
 
-	@Rule
-	public ExpectedException expectedException = ExpectedException.none();
+	@Test
+	public void testIsEmpty_ForValueEmpty() {
+		Eventname sut = Eventname.newInstance("");
+
+		boolean result = sut.isEmpty();
+
+		assertTrue("[result] for isEmpty is not correct!", result);
+	}
+
+	@Test
+	public void testIsEmpty_ForValueFilled() {
+		String comment = "Marathon Düsseldorf";
+		Eventname sut = Eventname.newInstance(comment);
+
+		boolean result = sut.isEmpty();
+
+		assertFalse("[result] for isEmpty is not correct!", result);
+	}
+
+	@Test
+	public void testIsEmpty_ForValueFilledWithBlank() {
+		Eventname sut = Eventname.newInstance("    ");
+
+		boolean result = sut.isEmpty();
+
+		assertTrue("[result] for isEmpty is not correct!", result);
+	}
+
+	@Test
+	public void testIsEmpty_ForValueNull() {
+		Eventname sut = Eventname.newInstance(null);
+
+		boolean result = sut.isEmpty();
+
+		assertTrue("[result] for isEmpty is not correct!", result);
+	}
 
 	@Test
 	public void testIsSerializable() {
@@ -42,11 +74,11 @@ public class EventnameTest {
 	public void testCreateInstance() {
 		Eventname sut = Eventname.newInstance();
 
-		assertNotNull(sut);
+		assertNotNull("Not a valid instance!", sut);
 
 		boolean result = sut.getClass() == EventnameNullObject.class;
 
-		assertTrue("Instance not correct!", result);
+		assertTrue("Instance is not correct!", result);
 	}
 
 	@Test
@@ -68,25 +100,37 @@ public class EventnameTest {
 
 		boolean actual = sut.getClass() == EventnameNullObject.class;
 
-		assertTrue("Instance not correct!", actual);
+		assertTrue("Instance is not correct!", actual);
 	}
 
 	@Test
-	public void testIsEmpty_usualValue() {
-		Eventname sut = Eventname.newInstance("Eventname");
+	public void testCreateInstance_ForEmptyValue() {
+		Eventname sut = Eventname.newInstance("");
 
-		boolean result = sut.isEmpty();
+		assertNotNull("Not a valid instance!", sut);
 
-		assertFalse("'isEmpty' check is not correct!", result);
+		boolean actual = sut.getClass() == EventnameNullObject.class;
+
+		assertTrue("Instance is not correct!", actual);
 	}
 
 	@Test
-	public void testIsEmpty_nullValue() {
+	public void testCreateInstance_ForBlankValue() {
+		Eventname sut = Eventname.newInstance("   ");
+
+		assertNotNull("Not a valid instance!", sut);
+
+		boolean actual = sut.getClass() == EventnameNullObject.class;
+
+		assertTrue("Instance is not correct!", actual);
+	}
+
+	@Test
+	public void testSamenessOfTwoNullEventname() {
 		Eventname sut = Eventname.newInstance(null);
+		Eventname otherNullEventname = Eventname.newInstance(null);
 
-		boolean result = sut.isEmpty();
-
-		assertTrue("'isEmpty' check is not correct!", result);
+		assertSame("Two EventnameNullObjects are not the same!", sut, otherNullEventname);
 	}
 
 	@Test
@@ -112,23 +156,20 @@ public class EventnameTest {
 
 	@Test
 	public void testToString_ForBlankValue() {
-		String blankForename = "   ";
-		Eventname sut = Eventname.newInstance(blankForename);
+		Eventname sut = Eventname.newInstance("   ");
 
 		String actual = sut.toString();
 
-		String expected = "";
-		assertEquals("String representation is not correct!", expected, actual);
+		assertEquals("String representation is not correct!", "", actual);
 	}
 
 	@Test
 	public void testToString_ForNullValue() {
 		Eventname sut = Eventname.newInstance(null);
 
-		String expected = "";
 		String actual = sut.toString();
 
-		assertEquals("String representation is not correct!", expected, actual);
+		assertEquals("String representation is not correct!", "", actual);
 	}
 
 	@Test
