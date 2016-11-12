@@ -25,7 +25,7 @@ import com.relayd.web.theme.ThemeService;
 public class SettingsPageBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private Settings settings = Settings.newInstance();
+	Settings settings = Settings.newInstance();
 
 	private List<Theme> themes;
 

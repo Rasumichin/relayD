@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.mockito.Mockito;
 
+import com.relayd.Settings;
 import com.relayd.web.theme.Theme;
 import com.relayd.web.theme.ThemeService;
 
@@ -26,6 +27,7 @@ import static org.mockito.Mockito.*;
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class SettingsPageBeanTest {
+
 	private SettingsPageBean sut = new SettingsPageBean();
 
 	@Test
@@ -74,11 +76,15 @@ public class SettingsPageBeanTest {
 
 	@Test
 	public void getVersion() {
+		Settings settingsMock = Mockito.mock(Settings.class);
+		sut.settings = settingsMock;
+		String expected = "Version 0.0";
+		Mockito.doReturn(expected).when(settingsMock).getVersion();
 
 		String actual = sut.getVersion();
 
-		String expected = "1.0 - Codename Augustiner";
+		Mockito.verify(settingsMock).getVersion();
+		assertEquals("[version] not correct!", expected, actual);
 
-		assertEquals("[Version] not correct!", expected, actual);
 	}
 }
