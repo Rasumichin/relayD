@@ -8,24 +8,40 @@ import java.io.Serializable;
  *
  */
 public class Eventname implements Serializable {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -239584936730007592L;
 
 	String value;
+
+	private Eventname() {
+		super();
+	}
 
 	private Eventname(String eventname) {
 		super();
 		value = eventname;
 	}
 
+	static public Eventname newInstance() {
+		return EventnameNullObject.instance();
+	}
+
+	/**
+	 * Bloch, Joshua, Effective Java, 2nd Edition, Item 1, p. 5
+	 */
 	public static Eventname newInstance(String eventname) {
-		if (eventname == null) {
-			throw new IllegalArgumentException("[eventname] must not be 'null'.");
+		if (eventname == null || eventname.trim().isEmpty()) {
+			return EventnameNullObject.instance();
 		}
+
 		return new Eventname(eventname);
 	}
 
 	private String getValue() {
 		return value;
+	}
+
+	public boolean isEmpty() {
+		return false;
 	}
 
 	@Override
@@ -61,5 +77,25 @@ public class Eventname implements Serializable {
 			return false;
 		}
 		return true;
+	}
+
+	static final class EventnameNullObject extends Eventname {
+		private static final long serialVersionUID = 5459181639652243416L;
+
+		private static final EventnameNullObject SINGLETON = new EventnameNullObject();
+
+		private static EventnameNullObject instance() {
+			return SINGLETON;
+		}
+
+		@Override
+		public boolean isEmpty() {
+			return true;
+		}
+
+		@Override
+		public String toString() {
+			return "";
+		}
 	}
 }

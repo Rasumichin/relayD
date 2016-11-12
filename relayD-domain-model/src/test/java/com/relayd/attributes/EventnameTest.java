@@ -10,6 +10,8 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runners.MethodSorters;
 
+import com.relayd.attributes.Eventname.EventnameNullObject;
+
 /**
  * Der Mann, der den Berg abtrug, war derselbe,
  * der anfing, kleine Steine wegzutragen.
@@ -33,22 +35,58 @@ public class EventnameTest {
 		@SuppressWarnings("cast")
 		boolean result = sut instanceof Serializable;
 
-		assertTrue("Class not Serializable!", result);
+		assertTrue("Class is not Serializable!", result);
 	}
 
 	@Test
 	public void testCreateInstance() {
-		Eventname eventName = Eventname.newInstance("Name");
+		Eventname sut = Eventname.newInstance();
 
-		assertNotNull(eventName);
+		assertNotNull(sut);
+
+		boolean result = sut.getClass() == EventnameNullObject.class;
+
+		assertTrue("Instance not correct!", result);
 	}
 
 	@Test
-	public void testEventNameMustNotBeNull() {
-		expectedException.expect(IllegalArgumentException.class);
-		expectedException.expectMessage("[eventname] must not be 'null'.");
+	public void testCreateInstance_ForParameter() {
+		Eventname sut = Eventname.newInstance("eventname");
 
-		Eventname.newInstance(null);
+		assertNotNull(sut);
+
+		boolean result = sut.getClass() == Eventname.class;
+
+		assertTrue("Instance not correct!", result);
+	}
+
+	@Test
+	public void testCreateInstance_ForNullValue() {
+		Eventname sut = Eventname.newInstance(null);
+
+		assertNotNull(sut);
+
+		boolean actual = sut.getClass() == EventnameNullObject.class;
+
+		assertTrue("Instance not correct!", actual);
+	}
+
+	@Test
+	public void testIsEmpty_usualValue() {
+		Eventname sut = Eventname.newInstance("Eventname");
+
+		boolean result = sut.isEmpty();
+
+		assertFalse("'isEmpty' check is not correct!", result);
+	}
+
+	@Test
+	public void testIsEmpty_nullValue() {
+		Eventname sut = Eventname.newInstance(null);
+
+		boolean result = sut.isEmpty();
+
+		assertTrue("'isEmpty' check is not correct!", result);
 	}
 
 	@Test
@@ -60,6 +98,37 @@ public class EventnameTest {
 		String actual = sut.toString();
 
 		assertEquals(expected, actual);
+	}
+
+	@Test
+	public void testToString_ForEmptyValue() {
+		String expected = "";
+		Eventname sut = Eventname.newInstance(expected);
+
+		String actual = sut.toString();
+
+		assertEquals("String representation is not correct!", expected, actual);
+	}
+
+	@Test
+	public void testToString_ForBlankValue() {
+		String blankForename = "   ";
+		Eventname sut = Eventname.newInstance(blankForename);
+
+		String actual = sut.toString();
+
+		String expected = "";
+		assertEquals("String representation is not correct!", expected, actual);
+	}
+
+	@Test
+	public void testToString_ForNullValue() {
+		Eventname sut = Eventname.newInstance(null);
+
+		String expected = "";
+		String actual = sut.toString();
+
+		assertEquals("String representation is not correct!", expected, actual);
 	}
 
 	@Test
@@ -79,7 +148,7 @@ public class EventnameTest {
 	}
 
 	@Test
-	public void testEqualsWithMyself() {
+	public void testEquals_WithMyself() {
 		Eventname sut = Eventname.newInstance("Name");
 
 		boolean result = sut.equals(sut);
@@ -88,7 +157,7 @@ public class EventnameTest {
 	}
 
 	@Test
-	public void testEqualsWithNull() {
+	public void testEquals_WithNull() {
 		Eventname sut = Eventname.newInstance("Name");
 
 		boolean result = sut.equals(null);
@@ -97,7 +166,7 @@ public class EventnameTest {
 	}
 
 	@Test
-	public void testEqualsWithNotCompatibleClass() {
+	public void testEquals_WithNotCompatibleClass() {
 		Eventname sut = Eventname.newInstance("Name");
 
 		boolean result = sut.equals(new String());
@@ -106,7 +175,7 @@ public class EventnameTest {
 	}
 
 	@Test
-	public void testEqualsWithDiffrentValues() {
+	public void testEquals_WithDiffrentValues() {
 		Eventname sut = Eventname.newInstance("Name1");
 
 		Eventname secondSut = Eventname.newInstance("Name2");
@@ -118,7 +187,7 @@ public class EventnameTest {
 	}
 
 	@Test
-	public void testEqualsWithSameValues() {
+	public void testEquals_WithSameValues() {
 		Eventname sut = Eventname.newInstance("Name");
 
 		Eventname secondSut = Eventname.newInstance("Name");
@@ -129,7 +198,7 @@ public class EventnameTest {
 	}
 
 	@Test
-	public void testEqualsWithValueIsNull() {
+	public void testEquals_WithValueIsNull() {
 		Eventname sut = Eventname.newInstance("dummy");
 		sut.value = null;
 
@@ -142,7 +211,7 @@ public class EventnameTest {
 	}
 
 	@Test
-	public void testEqualsWithBothValuesAreNull() {
+	public void testEquals_WithBothValuesAreNull() {
 		Eventname sut = Eventname.newInstance("dummy");
 		sut.value = null;
 
