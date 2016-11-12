@@ -23,7 +23,7 @@ public class Settings implements Serializable {
 	}
 
 	public String getVersion() {
-		return "1.0 - Codename Augustiner";
+		return "1.1 - Codename Bitburger";
 	}
 
 	public String getEmailDomain() {
