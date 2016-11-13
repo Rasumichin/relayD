@@ -42,16 +42,34 @@ public class DistanceTest {
 		Distance sut = Distance.newInstance(distance);
 
 		assertNotNull(sut);
-		assertEquals("10.12", sut.toString());
+		assertEquals("[value] not correct!", "10.12", sut.toString());
 	}
 
 	@Test
 	public void testCreateInstance_For3Digits() {
 		BigDecimal distance = new BigDecimal("10.127");
-		Distance sut = Distance.newInstance(distance);
+		Distance sut = Distance.kilometers(distance);
 
 		assertNotNull(sut);
-		assertEquals("10.13", sut.toString());
+		assertEquals("[value] not correct!", "10.13", sut.toString());
+	}
+
+	@Test
+	public void testKilometers() {
+		BigDecimal distance = new BigDecimal("12.34");
+		Distance sut = Distance.kilometers(distance);
+
+		assertNotNull(sut);
+		assertEquals("12.34 km", sut.toStringWithUnity());
+	}
+
+	@Test
+	public void testMeters() {
+		BigDecimal distance = new BigDecimal("12.34");
+		Distance sut = Distance.meters(distance);
+
+		assertNotNull(sut);
+		assertEquals("12.34 m", sut.toStringWithUnity());
 	}
 
 	@Test
@@ -63,13 +81,56 @@ public class DistanceTest {
 	}
 
 	@Test
+	public void testAdd_WithSameUnity() {
+		Distance sutFirst = Distance.kilometers(new BigDecimal("7.34"));
+		Distance sutSecond = Distance.kilometers(new BigDecimal("3.57"));
+
+		Distance actual = sutFirst.add(sutSecond);
+
+		Distance expected = Distance.kilometers(new BigDecimal("10.91"));
+		assertEquals("[add] not corret!", expected, actual);
+	}
+
+	@Test
+	public void testAdd_WithDiffrentUnity() {
+		expectedException.expect(IllegalArgumentException.class);
+		expectedException.expectMessage("Only Distances with same unity are supported!");
+
+		Distance sutFirst = Distance.kilometers(new BigDecimal("7.34"));
+		Distance sutSecond = Distance.meters(new BigDecimal("3.57"));
+
+		sutFirst.add(sutSecond);
+	}
+
+	@Test
+	public void testToString_ForCutZeros() {
+		BigDecimal distance = new BigDecimal("12.400");
+
+		Distance sut = Distance.kilometers(distance);
+
+		String actual = sut.toString();
+
+		assertEquals("[value] not correct!", "12.4", actual);
+	}
+
+	@Test
+	public void testToString_ForUnity() {
+		BigDecimal expected = new BigDecimal("11.23");
+		Distance sut = Distance.newInstance(expected);
+
+		String result = sut.toStringWithUnity();
+
+		assertEquals("11.23 km", result);
+	}
+
+	@Test
 	public void testToString() {
 		BigDecimal expected = new BigDecimal("11.23");
 		Distance sut = Distance.newInstance(expected);
 
-		String result = sut.toString();
+		String actual = sut.toString();
 
-		assertEquals(expected.toString(), result);
+		assertEquals(expected.toString(), actual);
 	}
 
 	@Test
@@ -89,7 +150,7 @@ public class DistanceTest {
 	}
 
 	@Test
-	public void testEqualsWithMyself() {
+	public void testEquals_WithMyself() {
 		BigDecimal distance = BigDecimal.TEN;
 		Distance sut = Distance.newInstance(distance);
 
@@ -99,7 +160,7 @@ public class DistanceTest {
 	}
 
 	@Test
-	public void testEqualsWithNull() {
+	public void testEquals_WithNull() {
 		BigDecimal distance = BigDecimal.TEN;
 		Distance sut = Distance.newInstance(distance);
 
@@ -109,7 +170,7 @@ public class DistanceTest {
 	}
 
 	@Test
-	public void testEqualsWithNotCompatibleClass() {
+	public void testEquals_WithNotCompatibleClass() {
 		BigDecimal distance = BigDecimal.TEN;
 		Distance sut = Distance.newInstance(distance);
 
@@ -119,7 +180,7 @@ public class DistanceTest {
 	}
 
 	@Test
-	public void testEqualsWithValueIsNull() {
+	public void testEquals_WithValueIsNull() {
 		BigDecimal distance = BigDecimal.TEN;
 		Distance sut = Distance.newInstance(distance);
 		sut.value = null;
@@ -131,7 +192,7 @@ public class DistanceTest {
 	}
 
 	@Test
-	public void testEqualsWithBothValuesAreNull() {
+	public void testEquals_WithBothValuesAreNull() {
 		BigDecimal distance = BigDecimal.TEN;
 		Distance sut = Distance.newInstance(distance);
 		sut.value = null;
@@ -144,7 +205,7 @@ public class DistanceTest {
 	}
 
 	@Test
-	public void testEqualsWithTwoDiffrentValues() {
+	public void testEquals_WithTwoDiffrentValues() {
 		BigDecimal distanceOne = BigDecimal.ONE;
 		Distance sut = Distance.newInstance(distanceOne);
 		BigDecimal distanceTwo = BigDecimal.TEN;
@@ -156,7 +217,7 @@ public class DistanceTest {
 	}
 
 	@Test
-	public void testEqualsWithSameValues() {
+	public void testEquals_WithSameValues() {
 		BigDecimal distance = BigDecimal.TEN;
 		Distance sut = Distance.newInstance(distance);
 		Distance secondSut = Distance.newInstance(distance);

@@ -30,10 +30,10 @@ public class Relay implements Serializable {
 		uuid = UUID.randomUUID();
 		year = aYear;
 
-		tracks.add(Track.newInstance(Distance.newInstance(new BigDecimal("11.3"))));
-		tracks.add(Track.newInstance(Distance.newInstance(new BigDecimal("8.6"))));
-		tracks.add(Track.newInstance(Distance.newInstance(new BigDecimal("9.2"))));
-		tracks.add(Track.newInstance(Distance.newInstance(new BigDecimal("13.1"))));
+		tracks.add(Track.newInstance(Distance.kilometers(new BigDecimal("11.3"))));
+		tracks.add(Track.newInstance(Distance.kilometers(new BigDecimal("8.6"))));
+		tracks.add(Track.newInstance(Distance.kilometers(new BigDecimal("9.2"))));
+		tracks.add(Track.newInstance(Distance.kilometers(new BigDecimal("13.1"))));
 	}
 
 	public static Relay newInstance() {
