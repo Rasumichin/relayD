@@ -55,17 +55,6 @@ public class DistanceTest {
 	}
 
 	@Test
-	public void testToString_ForCutZeros() {
-		BigDecimal distance = new BigDecimal("12.400");
-
-		Distance sut = Distance.kilometers(distance);
-
-		String actual = sut.toString();
-
-		assertEquals("[value] not correct!", "12.4", actual);
-	}
-
-	@Test
 	public void testKilometers() {
 		BigDecimal distance = new BigDecimal("12.34");
 		Distance sut = Distance.kilometers(distance);
@@ -114,7 +103,18 @@ public class DistanceTest {
 	}
 
 	@Test
-	public void testToStringWithUnity() {
+	public void testToString_ForCutZeros() {
+		BigDecimal distance = new BigDecimal("12.400");
+
+		Distance sut = Distance.kilometers(distance);
+
+		String actual = sut.toString();
+
+		assertEquals("[value] not correct!", "12.4", actual);
+	}
+
+	@Test
+	public void testToString_ForUnity() {
 		BigDecimal expected = new BigDecimal("11.23");
 		Distance sut = Distance.newInstance(expected);
 
@@ -150,7 +150,7 @@ public class DistanceTest {
 	}
 
 	@Test
-	public void testEqualsWithMyself() {
+	public void testEquals_WithMyself() {
 		BigDecimal distance = BigDecimal.TEN;
 		Distance sut = Distance.newInstance(distance);
 
@@ -160,7 +160,7 @@ public class DistanceTest {
 	}
 
 	@Test
-	public void testEqualsWithNull() {
+	public void testEquals_WithNull() {
 		BigDecimal distance = BigDecimal.TEN;
 		Distance sut = Distance.newInstance(distance);
 
@@ -170,7 +170,7 @@ public class DistanceTest {
 	}
 
 	@Test
-	public void testEqualsWithNotCompatibleClass() {
+	public void testEquals_WithNotCompatibleClass() {
 		BigDecimal distance = BigDecimal.TEN;
 		Distance sut = Distance.newInstance(distance);
 
@@ -180,7 +180,7 @@ public class DistanceTest {
 	}
 
 	@Test
-	public void testEqualsWithValueIsNull() {
+	public void testEquals_WithValueIsNull() {
 		BigDecimal distance = BigDecimal.TEN;
 		Distance sut = Distance.newInstance(distance);
 		sut.value = null;
@@ -192,7 +192,7 @@ public class DistanceTest {
 	}
 
 	@Test
-	public void testEqualsWithBothValuesAreNull() {
+	public void testEquals_WithBothValuesAreNull() {
 		BigDecimal distance = BigDecimal.TEN;
 		Distance sut = Distance.newInstance(distance);
 		sut.value = null;
@@ -205,7 +205,7 @@ public class DistanceTest {
 	}
 
 	@Test
-	public void testEqualsWithTwoDiffrentValues() {
+	public void testEquals_WithTwoDiffrentValues() {
 		BigDecimal distanceOne = BigDecimal.ONE;
 		Distance sut = Distance.newInstance(distanceOne);
 		BigDecimal distanceTwo = BigDecimal.TEN;
@@ -217,7 +217,7 @@ public class DistanceTest {
 	}
 
 	@Test
-	public void testEqualsWithSameValues() {
+	public void testEquals_WithSameValues() {
 		BigDecimal distance = BigDecimal.TEN;
 		Distance sut = Distance.newInstance(distance);
 		Distance secondSut = Distance.newInstance(distance);
