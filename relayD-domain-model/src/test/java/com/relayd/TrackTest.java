@@ -55,23 +55,23 @@ public class TrackTest {
 
 	@Test
 	public void testToString_ForDistance() {
-		Distance distance = Distance.newInstance(new BigDecimal("9.80"));
+		Distance distance = Distance.kilometers(new BigDecimal("9.80"));
 		Track sut = Track.newInstance(distance);
 
 		String result = sut.toString();
 
-		assertEquals("[result] not correct!", "9.80km ", result);
+		assertEquals("[result] not correct!", "9.8 km ", result);
 	}
 
 	@Test
 	public void testToString_ForDistanceAndComment() {
-		Distance distance = Distance.newInstance(new BigDecimal("10.40"));
+		Distance distance = Distance.kilometers(new BigDecimal("10.40"));
 		Comment comment = Comment.newInstance("Linksseitiges Rheinufer");
 		Track sut = Track.newInstance(distance, comment);
 
 		String result = sut.toString();
 
-		assertEquals("[result] not correct!", "10.40km Linksseitiges Rheinufer", result);
+		assertEquals("[result] not correct!", "10.4 km Linksseitiges Rheinufer", result);
 	}
 
 	@Test

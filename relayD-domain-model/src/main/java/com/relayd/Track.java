@@ -44,6 +44,6 @@ public class Track implements Serializable {
 
 	@Override
 	public String toString() {
-		return distance + "km " + comment;
+		return distance.toStringWithUnity() + " " + comment;
 	}
 }
