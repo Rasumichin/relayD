@@ -18,6 +18,10 @@ public class Distance implements Serializable {
 
 	private Unity unity = Unity.KM;
 
+	private Distance() {
+		super();
+	}
+
 	private Distance(BigDecimal distance) {
 		super();
 		value = distance.setScale(2, RoundingMode.HALF_UP);
@@ -28,31 +32,42 @@ public class Distance implements Serializable {
 		unity = anUnity;
 	}
 
-	// TODO -Team relayd- Braucht man diesen Konstruktor eigentlich?
-	// Eine Distance sollte doch eigentlich immer genau eine Ausprägung an Unity besitzen
-	public static Distance newInstance(BigDecimal aDistance) {
-		validate(aDistance);
-		return new Distance(aDistance);
+	public static Distance newInstance() {
+		return DistanceNullObject.instance();
 	}
 
-	public static Distance kilometers(BigDecimal distance) {
-		validate(distance);
+	// TODO -Team relayd- Braucht man diesen Konstruktor eigentlich?
+	// Eine Distance sollte doch eigentlich immer genau eine Ausprägung an Unity besitzen
+	// Standard ist Kilometer gesetzt, aber weiß man das als Aufrufer auch?
+	// Die static kilometers/meters sind da schon sprechender
+	public static Distance newInstance(BigDecimal distance) {
+		if (distance == null) {
+			return DistanceNullObject.instance();
+		}
 		return new Distance(distance);
 	}
 
-	public static Distance meters(BigDecimal aDistance) {
-		validate(aDistance);
-		return new Distance(aDistance, Unity.METER);
+	public static Distance kilometers(BigDecimal distance) {
+		if (distance == null) {
+			return DistanceNullObject.instance();
+		}
+		return new Distance(distance);
 	}
 
-	private static void validate(BigDecimal distance) {
+	public static Distance meters(BigDecimal distance) {
 		if (distance == null) {
-			throw new IllegalArgumentException("[distance] must not be 'null'.");
+			return DistanceNullObject.instance();
 		}
+
+		return new Distance(distance, Unity.METER);
 	}
 
 	private Unity getUnity() {
 		return unity;
+	}
+
+	public boolean isEmpty() {
+		return false;
 	}
 
 	public Distance add(Distance aDistance) {
@@ -104,5 +119,25 @@ public class Distance implements Serializable {
 			return false;
 		}
 		return true;
+	}
+
+	static final class DistanceNullObject extends Distance {
+		private static final long serialVersionUID = 6577776791000840413L;
+
+		private static final DistanceNullObject SINGLETON = new DistanceNullObject();
+
+		private static DistanceNullObject instance() {
+			return SINGLETON;
+		}
+
+		@Override
+		public boolean isEmpty() {
+			return true;
+		}
+
+		@Override
+		public String toString() {
+			return "";
+		}
 	}
 }

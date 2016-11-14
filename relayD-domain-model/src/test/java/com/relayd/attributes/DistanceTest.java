@@ -11,6 +11,8 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runners.MethodSorters;
 
+import com.relayd.attributes.Distance.DistanceNullObject;
+
 /**
  * Glück entsteht oft durch Aufmerksamkeit in kleinen Dingen, Unglück oft durch Vernachlässigung kleiner Dinge.
  *  - Wilhelm Busch
@@ -34,6 +36,17 @@ public class DistanceTest {
 		boolean result = sut instanceof Serializable;
 
 		assertTrue("Class not Serializable!", result);
+	}
+
+	@Test
+	public void testCreateInstance() {
+		Distance sut = Distance.newInstance();
+
+		assertNotNull("Not a valid instance!", sut);
+
+		boolean result = sut.getClass() == DistanceNullObject.class;
+
+		assertTrue("Instance is not correct!", result);
 	}
 
 	@Test
@@ -73,11 +86,55 @@ public class DistanceTest {
 	}
 
 	@Test
-	public void testCreateInstanceWithIllegalNullValue() {
-		expectedException.expect(IllegalArgumentException.class);
-		expectedException.expectMessage("[distance] must not be 'null'.");
+	public void testCreateInstance_ForNullValue() {
+		Distance sut = Distance.newInstance(null);
 
-		Distance.newInstance(null);
+		assertNotNull(sut);
+
+		boolean actual = sut.getClass() == DistanceNullObject.class;
+
+		assertTrue("Instance not correct!", actual);
+	}
+
+	@Test
+	public void testKilometers_ForNullValue() {
+		Distance sut = Distance.kilometers(null);
+
+		assertNotNull(sut);
+
+		boolean actual = sut.getClass() == DistanceNullObject.class;
+
+		assertTrue("Instance not correct!", actual);
+	}
+
+	@Test
+	public void testMeters_ForNullValue() {
+		Distance sut = Distance.meters(null);
+
+		assertNotNull(sut);
+
+		boolean actual = sut.getClass() == DistanceNullObject.class;
+
+		assertTrue("Instance not correct!", actual);
+	}
+
+	@Test
+	public void testIsEmpty_ForValueFilled() {
+		BigDecimal distance = new BigDecimal("12.34");
+		Distance sut = Distance.newInstance(distance);
+
+		boolean result = sut.isEmpty();
+
+		assertFalse("[result] for isEmpty is not correct!", result);
+	}
+
+	@Test
+	public void testIsEmpty_ForValueNull() {
+		Distance sut = Distance.newInstance(null);
+
+		boolean result = sut.isEmpty();
+
+		assertTrue("[result] for isEmpty is not correct!", result);
 	}
 
 	@Test
@@ -131,6 +188,16 @@ public class DistanceTest {
 		String actual = sut.toString();
 
 		assertEquals(expected.toString(), actual);
+	}
+
+	@Test
+	public void testToString_ForNullValue() {
+		Distance sut = Distance.newInstance(null);
+
+		String actual = sut.toString();
+
+		String expected = "";
+		assertEquals("String representation is not correct!", expected, actual);
 	}
 
 	@Test
