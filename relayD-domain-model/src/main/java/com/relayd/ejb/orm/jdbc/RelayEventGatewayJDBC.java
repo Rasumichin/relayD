@@ -49,11 +49,11 @@ public class RelayEventGatewayJDBC implements RelayEventGateway {
 		} catch (NamingException e) {
 			// TODO -all- Logging? Wie? Wo?
 			//			System.out.println("Error :" + e);
-			RelayEvent relayEvent = RelayEvent.newInstance(Eventname.newInstance("NamingException:" + e), EventDay.newInstance());
+			RelayEvent relayEvent = RelayEvent.newInstance(Eventname.newInstance("NamingException:" + e), EventDay.today());
 			resultList.add(relayEvent);
 		} catch (SQLException e) {
 			//			System.out.println("Error :" + e);
-			RelayEvent relayEvent = RelayEvent.newInstance(Eventname.newInstance("SQLException:" + e), EventDay.newInstance());
+			RelayEvent relayEvent = RelayEvent.newInstance(Eventname.newInstance("SQLException:" + e), EventDay.today());
 			resultList.add(relayEvent);
 		}
 		return resultList;

@@ -7,10 +7,10 @@ import java.time.LocalDate;
 import java.time.Month;
 
 import org.junit.FixMethodOrder;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import org.junit.runners.MethodSorters;
+
+import com.relayd.attributes.EventDay.EventDayNullObject;
 
 /**
  * Niemand, der seine Arbeit tatsächlich versteht würde sich einen Experten nennen.
@@ -23,12 +23,9 @@ import org.junit.runners.MethodSorters;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class EventDayTest {
 
-	@Rule
-	public ExpectedException expectedException = ExpectedException.none();
-
 	@Test
 	public void testIsSerializable() {
-		EventDay sut = EventDay.newInstance();
+		EventDay sut = EventDay.today();
 
 		@SuppressWarnings("cast")
 		boolean result = sut instanceof Serializable;
@@ -37,8 +34,8 @@ public class EventDayTest {
 	}
 
 	@Test
-	public void testCreateDefaultInstanceAsForToday() {
-		EventDay sut = EventDay.newInstance();
+	public void testToday() {
+		EventDay sut = EventDay.today();
 		boolean isToday = sut.isToday();
 
 		assertTrue("Default day of event is not today.", isToday);
@@ -58,11 +55,15 @@ public class EventDayTest {
 	}
 
 	@Test
-	public void testCreateInstanceWithIllegalNullValue() {
-		expectedException.expect(IllegalArgumentException.class);
-		expectedException.expectMessage("[dateOfEvent] must not be 'null'.");
+	public void testCreateInstance_ForNullValue() {
+		EventDay sut = EventDay.newInstance(null);
 
-		EventDay.newInstance(null);
+		assertNotNull(sut);
+
+		boolean actual = sut.getClass() == EventDayNullObject.class;
+
+		assertTrue("Instance is not correct!", actual);
+
 	}
 
 	@Test
@@ -93,6 +94,25 @@ public class EventDayTest {
 	}
 
 	@Test
+	public void testIsEmpty_ForValueFilled() {
+		LocalDate dateOfEvent = getDefinedLocalDateInThePast();
+		EventDay sut = EventDay.newInstance(dateOfEvent);
+
+		boolean result = sut.isEmpty();
+
+		assertFalse("[result] for isEmpty is not correct!", result);
+	}
+
+	@Test
+	public void testIsEmpty_ForValueNull() {
+		EventDay sut = EventDay.newInstance(null);
+
+		boolean result = sut.isEmpty();
+
+		assertTrue("[result] for isEmpty is not correct!", result);
+	}
+
+	@Test
 	public void testToString() {
 		LocalDate dateOfEvent = getDefinedLocalDateInThePast();
 		EventDay sut = EventDay.newInstance(dateOfEvent);
@@ -101,6 +121,16 @@ public class EventDayTest {
 		String actualResult = sut.toString();
 
 		assertEquals("toString() does not match expected result.", expectedResult, actualResult);
+	}
+
+	@Test
+	public void testToString_ForNullValue() {
+		EventDay sut = EventDay.newInstance(null);
+
+		String actual = sut.toString();
+
+		String expected = "";
+		assertEquals("String representation is not correct!", expected, actual);
 	}
 
 	@Test
@@ -119,7 +149,7 @@ public class EventDayTest {
 	}
 
 	@Test
-	public void testEqualsWithMyself() {
+	public void testEquals_WithMyself() {
 		EventDay sut = EventDay.newInstance(LocalDate.now());
 
 		boolean result = sut.equals(sut);
@@ -128,7 +158,7 @@ public class EventDayTest {
 	}
 
 	@Test
-	public void testEqualsWithNull() {
+	public void testEquals_WithNull() {
 		EventDay sut = EventDay.newInstance(LocalDate.now());
 
 		boolean result = sut.equals(null);
@@ -137,7 +167,7 @@ public class EventDayTest {
 	}
 
 	@Test
-	public void testEqualsWithNotCompatibleClass() {
+	public void testEquals_WithNotCompatibleClass() {
 		EventDay sut = EventDay.newInstance(LocalDate.now());
 
 		boolean result = sut.equals(new String());
@@ -146,7 +176,7 @@ public class EventDayTest {
 	}
 
 	@Test
-	public void testEqualsWithValueIsNull() {
+	public void testEquals_WithValueIsNull() {
 		EventDay sut = EventDay.newInstance(LocalDate.now());
 		sut.value = null;
 		EventDay secondSut = EventDay.newInstance(LocalDate.now());
@@ -157,7 +187,7 @@ public class EventDayTest {
 	}
 
 	@Test
-	public void testEqualsWithBothValuesAreNull() {
+	public void testEquals_WithBothValuesAreNull() {
 		EventDay sut = EventDay.newInstance(LocalDate.now());
 		sut.value = null;
 		EventDay secondSut = EventDay.newInstance(LocalDate.now());
@@ -169,7 +199,7 @@ public class EventDayTest {
 	}
 
 	@Test
-	public void testEqualsWithTwoDiffrentValues() {
+	public void testEquals_WithTwoDiffrentValues() {
 		EventDay sut = EventDay.newInstance(LocalDate.now());
 		EventDay secondSut = EventDay.newInstance(getDefinedLocalDateInThePast());
 
@@ -179,7 +209,7 @@ public class EventDayTest {
 	}
 
 	@Test
-	public void testEqualsWithSameValues() {
+	public void testEquals_WithSameValues() {
 		EventDay sut = EventDay.newInstance(LocalDate.now());
 		EventDay secondSut = EventDay.newInstance(LocalDate.now());
 

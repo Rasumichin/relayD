@@ -21,16 +21,13 @@ public class EventDay implements Serializable {
 	}
 
 	private EventDay(LocalDate dateOfEvent) {
-		if (dateOfEvent == null) {
-			throw new IllegalArgumentException("[dateOfEvent] must not be 'null'.");
-		}
 		value = dateOfEvent;
 	}
 
 	/**
 	 * Bloch, Joshua, Effective Java, 2nd Edition, Item 1, p. 5
 	 */
-	static public EventDay newInstance() {
+	static public EventDay today() {
 		return new EventDay();
 	}
 
@@ -38,6 +35,9 @@ public class EventDay implements Serializable {
 	 * Bloch, Joshua, Effective Java, 2nd Edition, Item 1, p. 5
 	 */
 	static public EventDay newInstance(LocalDate dateOfEvent) {
+		if (dateOfEvent == null) {
+			return EventDayNullObject.instance();
+		}
 		return new EventDay(dateOfEvent);
 	}
 
@@ -55,6 +55,10 @@ public class EventDay implements Serializable {
 
 	public boolean isInTheFuture() {
 		return getValue().isAfter(LocalDate.now());
+	}
+
+	public boolean isEmpty() {
+		return false;
 	}
 
 	@Override
@@ -90,5 +94,25 @@ public class EventDay implements Serializable {
 			return false;
 		}
 		return true;
+	}
+
+	static final class EventDayNullObject extends EventDay {
+		private static final long serialVersionUID = -6726731303311850956L;
+
+		private static final EventDayNullObject SINGLETON = new EventDayNullObject();
+
+		private static EventDayNullObject instance() {
+			return SINGLETON;
+		}
+
+		@Override
+		public boolean isEmpty() {
+			return true;
+		}
+
+		@Override
+		public String toString() {
+			return "";
+		}
 	}
 }
