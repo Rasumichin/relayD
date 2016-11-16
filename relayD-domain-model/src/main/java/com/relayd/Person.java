@@ -24,7 +24,7 @@ public class Person implements Serializable {
 	private UUID uuid;
 	private Surename surename;
 	private Forename forename = Forename.newInstance();
-	private YearOfBirth yearOfBirth;
+	private YearOfBirth yearOfBirth = YearOfBirth.newInstance();
 	private Shirtsize shirtsize;
 	private Email email;
 	private Relayname relayname = Relayname.newInstance(); // Refactor Dieses Attribut ist Jahresabhängig!
@@ -155,7 +155,11 @@ public class Person implements Serializable {
 	}
 
 	public void setYearOfBirth(YearOfBirth aYearOfBirth) {
-		yearOfBirth = aYearOfBirth;
+		if (aYearOfBirth == null) {
+			yearOfBirth = YearOfBirth.newInstance();
+		} else {
+			yearOfBirth = aYearOfBirth;
+		}
 	}
 
 	public YearOfBirth getYearOfBirth() {
