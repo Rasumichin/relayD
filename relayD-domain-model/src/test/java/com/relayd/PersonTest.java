@@ -114,16 +114,33 @@ public class PersonTest {
 	}
 
 	@Test
-	public void testYearOfBirth() {
-		YearOfBirth expected = YearOfBirth.newInstance(1972);
-
+	public void testGetInitialYearOfBirth() {
 		Person sut = Person.newInstance();
+		
+		YearOfBirth result = sut.getYearOfBirth();
+		
+		assertNotNull("[yearOfBirth] is not correct!", result);
+	}
+	
+	@Test
+	public void testSetYearOfBirth() {
+		Person sut = Person.newInstance();
+		YearOfBirth expected = YearOfBirth.newInstance(1972);
 
 		sut.setYearOfBirth(expected);
 
 		YearOfBirth actual = sut.getYearOfBirth();
-
 		assertEquals("[yearOfBirth] not correct!", expected, actual);
+	}
+	
+	@Test
+	public void testSetYearOfBirth_ForNullValue() {
+		Person sut = Person.newInstance();
+		
+		sut.setYearOfBirth(null);
+		
+		YearOfBirth result = sut.getYearOfBirth();
+		assertNotNull("[yearOfBirth] not correct!", result);
 	}
 
 	@Test

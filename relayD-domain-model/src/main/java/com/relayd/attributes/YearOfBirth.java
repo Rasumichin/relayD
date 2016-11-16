@@ -16,6 +16,10 @@ public class YearOfBirth implements Serializable {
 	private YearOfBirth() {
 	}
 
+	public static YearOfBirth newInstance() {
+		return YearOfBirthNullObject.instance();
+	}
+
 	public static YearOfBirth newInstance(Integer year) {
 		if (year == null) {
 			return YearOfBirthNullObject.instance();
