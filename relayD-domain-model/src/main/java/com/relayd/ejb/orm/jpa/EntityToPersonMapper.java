@@ -32,12 +32,12 @@ public class EntityToPersonMapper {
 
 		// Thank god for the 'NullObjectPattern'.
 		person.setForename(Forename.newInstance(personEntity.getForename()));
+		person.setYearOfBirth(YearOfBirth.newInstance(personEntity.getYearOfBirth()));
 		
 		person.setPosition((personEntity.getPos() == null) ? null : (Position.decode(personEntity.getPos())));
 		person.setRelayname((personEntity.getRelayname() == null) ? null : (Relayname.newInstance(personEntity.getRelayname())));
 		person.setShirtsize((personEntity.getShirtsize() == null) ? null : (Shirtsize.decode(personEntity.getShirtsize())));
 		person.setSurename((personEntity.getSurename() == null) ? null : (Surename.newInstance(personEntity.getSurename())));
-		person.setYearOfBirth((personEntity.getYearOfBirth() == null) ? null : (YearOfBirth.newInstance(personEntity.getYearOfBirth())));
 
 		return person;
 	}
