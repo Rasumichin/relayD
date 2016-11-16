@@ -10,6 +10,8 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runners.MethodSorters;
 
+import com.relayd.attributes.YearOfBirth.YearOfBirthNullObject;
+
 /**
  * Verantwortlich ist man nicht nur für das, was man tut, sondern auch für das, was man nicht tut.
  *  - Laotse
@@ -40,18 +42,21 @@ public class YearOfBirthTest {
 	public void testCreateInstance() {
 		Integer expected = 1971;
 
-		YearOfBirth yearOfBirth = YearOfBirth.newInstance(expected);
+		YearOfBirth sut = YearOfBirth.newInstance(expected);
 
-		Integer actual = yearOfBirth.value;
+		Integer actual = sut.getValue();
 		assertEquals(expected, actual);
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Test
-	public void testCreateInstanceWithIllegalNullValue() {
-		expectedException.expect(IllegalArgumentException.class);
-		expectedException.expectMessage("[year] must not be 'null'!");
-
-		YearOfBirth.newInstance(null);
+	public void testCreateInstance_ForNullValue() {
+		YearOfBirth sut = YearOfBirth.newInstance(null);
+		assertNotNull("Instance creation was not correct!", sut);
+		
+		Class expected = YearOfBirthNullObject.class;
+		Class actual = sut.getClass();
+		assertEquals("Instance creation was not correct!", expected, actual);
 	}
 
 	@Test
@@ -63,6 +68,16 @@ public class YearOfBirthTest {
 		String actual = yearOfBirth.toString();
 
 		assertEquals("1978", actual);
+	}
+
+	@Test
+	public void testToString_ForNullValue() {
+		YearOfBirth sut = YearOfBirth.newInstance(null);
+
+		String actual = sut.toString();
+
+		String expected = "";
+		assertEquals("String representation is not correct!", expected, actual);
 	}
 
 	@Test
@@ -157,5 +172,21 @@ public class YearOfBirthTest {
 
 		Integer actual = sut.getValue();
 		assertEquals("[value] is not correct.", expected, actual);
+	}
+	
+	@Test
+	public void isEmpty_ForValueFilled() {
+		YearOfBirth sut = YearOfBirth.newInstance(2001);
+		
+		boolean result = sut.isEmpty();
+		assertFalse("[result] for isEmpty is not correct!", result);
+	}
+	
+	@Test
+	public void isEmpty_ForValueNull() {
+		YearOfBirth sut = YearOfBirth.newInstance(null);
+		
+		boolean result = sut.isEmpty();
+		assertTrue("[result] for isEmpty is not correct!", result);
 	}
 }
