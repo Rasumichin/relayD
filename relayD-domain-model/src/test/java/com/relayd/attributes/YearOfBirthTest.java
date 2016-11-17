@@ -175,7 +175,7 @@ public class YearOfBirthTest {
 	}
 	
 	@Test
-	public void isEmpty_ForValueFilled() {
+	public void testIsEmpty_ForValueFilled() {
 		YearOfBirth sut = YearOfBirth.newInstance(2001);
 		
 		boolean result = sut.isEmpty();
@@ -183,7 +183,7 @@ public class YearOfBirthTest {
 	}
 	
 	@Test
-	public void isEmpty_ForValueNull() {
+	public void testIsEmpty_ForValueNull() {
 		YearOfBirth sut = YearOfBirth.newInstance(null);
 		
 		boolean result = sut.isEmpty();

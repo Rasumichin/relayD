@@ -19,7 +19,7 @@ import com.relayd.attributes.YearOfBirth;
  *
  */
 public class Person implements Serializable {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2856140961938434688L;
 
 	private UUID uuid;
 	private Surename surename;
@@ -88,7 +88,11 @@ public class Person implements Serializable {
 	}
 
 	public void setEmail(Email anEmail) {
-		email = anEmail;
+		if (anEmail == null) {
+			email = Email.newInstance();
+		} else {
+			email = anEmail;
+		}
 	}
 
 	/**
@@ -167,7 +171,7 @@ public class Person implements Serializable {
 	}
 
 	public boolean hasEmail() {
-		return getEmail() != null;
+		return !(getEmail().isEmpty());
 	}
 
 	public boolean hasRelay() {

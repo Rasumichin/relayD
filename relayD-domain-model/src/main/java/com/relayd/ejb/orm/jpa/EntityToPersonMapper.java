@@ -27,15 +27,15 @@ public class EntityToPersonMapper {
 		
 		Person person = Person.newInstance();
 		person.setUuid(UUID.fromString(personEntity.getId()));
-		person.setComment((personEntity.getComment() == null) ? null : (Comment.newInstance(personEntity.getComment())));
-		person.setEmail((personEntity.getEmail() == null) ? person.getEmail() : (Email.newInstance(personEntity.getEmail())));
 
 		// Thank god for the 'NullObjectPattern'.
+		person.setComment(Comment.newInstance(personEntity.getComment()));
+		person.setEmail(Email.newInstance(personEntity.getEmail()));
 		person.setForename(Forename.newInstance(personEntity.getForename()));
 		person.setYearOfBirth(YearOfBirth.newInstance(personEntity.getYearOfBirth()));
+		person.setRelayname(Relayname.newInstance(personEntity.getRelayname()));
 		
 		person.setPosition((personEntity.getPos() == null) ? null : (Position.decode(personEntity.getPos())));
-		person.setRelayname((personEntity.getRelayname() == null) ? null : (Relayname.newInstance(personEntity.getRelayname())));
 		person.setShirtsize((personEntity.getShirtsize() == null) ? null : (Shirtsize.decode(personEntity.getShirtsize())));
 		person.setSurename((personEntity.getSurename() == null) ? null : (Surename.newInstance(personEntity.getSurename())));
 
