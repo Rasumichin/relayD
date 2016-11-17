@@ -12,7 +12,7 @@ public class Settings implements Serializable {
 
 	private static final String TO_DO = "ToDo";
 
-	private String theme = "cupertino";
+	private String theme = "afterwork";
 
 	private Settings() {
 		super();

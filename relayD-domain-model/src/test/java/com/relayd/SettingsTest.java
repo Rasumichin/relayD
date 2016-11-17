@@ -63,7 +63,7 @@ public class SettingsTest {
 	// Memo an mich selbst: In Maui sollte ich das auf jeden Fall nochmal überdenken!
 	@Test
 	public void testTheme_ForInitialSut() {
-		String expected = "cupertino";
+		String expected = "afterwork";
 
 		String actual = sut.getTheme();
 
