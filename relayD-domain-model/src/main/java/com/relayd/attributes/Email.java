@@ -22,6 +22,13 @@ public class Email implements Serializable, Cloneable {
 		setValue(email);
 	}
 
+	private Email() {
+	}
+
+	public static Email newInstance() {
+		return EmailNullObject.instance();
+	}
+
 	private void setValue(String email) {
 		try {
 			value = new InternetAddress(email, true);
@@ -34,6 +41,10 @@ public class Email implements Serializable, Cloneable {
 	 * Bloch, Joshua, Effective Java, 2nd Edition, Item 1, p. 5
 	 */
 	public static Email newInstance(String email) {
+		if ((email == null) || (email.trim().isEmpty())) {
+			return EmailNullObject.instance();
+		}
+		
 		validate(email);
 		return new Email(email);
 	}
@@ -46,6 +57,10 @@ public class Email implements Serializable, Cloneable {
 		if (!isValidAddress(email)) {
 			throw new IllegalArgumentException("[email] has not a valid format!");
 		}
+	}
+
+	public boolean isEmpty() {
+		return false;
 	}
 
 	public static boolean isValidAddress(String email) {
@@ -154,5 +169,25 @@ public class Email implements Serializable, Cloneable {
 			return false;
 		}
 		return true;
+	}
+	
+	static final class EmailNullObject extends Email {
+		private static final long serialVersionUID = -2878506169503489232L;
+		
+		private static final EmailNullObject SINGLETON = new EmailNullObject();
+		
+		private static EmailNullObject instance() {
+			return SINGLETON;
+		}
+		
+		@Override
+		public boolean isEmpty() {
+			return true;
+		}
+		
+		@Override
+		public String toString() {
+			return "";
+		}
 	}
 }
