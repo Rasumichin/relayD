@@ -27,7 +27,7 @@ public class PersonToEntityMapper {
 
 		personEntity.setForename(person.getForename().isEmpty() ? null : person.getForename().toString());
 		personEntity.setSurename((person.getSurename() == null) ? null : person.getSurename().toString());
-		personEntity.setEmail((person.getEmail() == null) ? null : person.getEmail().toString());
+		personEntity.setEmail((person.getEmail().isEmpty()) ? null : person.getEmail().toString());
 		personEntity.setYearOfBirth((person.getYearOfBirth().isEmpty()) ? null : person.getYearOfBirth().getValue());
 		personEntity.setComment((person.getComment().isEmpty()) ? null : person.getComment().toString());
 		personEntity.setRelayname(person.getRelayname().isEmpty() ? null : person.getRelayname().toString());
