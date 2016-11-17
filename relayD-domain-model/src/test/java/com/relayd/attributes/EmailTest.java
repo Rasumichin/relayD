@@ -87,6 +87,17 @@ public class EmailTest {
 		assertFalse("email '" + eMailAddress + "' should be invalid.", result);
 	}
 
+	@SuppressWarnings("rawtypes")
+	@Test
+	public void testNewInstance() {
+		Class expected = EmailNullObject.class;
+
+		Email sut = Email.newInstance();
+
+		Class actual = sut.getClass();
+		assertEquals("Instance creation was not correct!", expected, actual);
+	}
+	
 	@Test
 	public void testCreateInstanceWithValidEmailAdress() {
 		String value = VALID_MAIL_OF_JUSTUS_JONAS;
@@ -106,14 +117,25 @@ public class EmailTest {
 		assertEquals(value, email.toString());
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Test
-	public void testCreateInstanceWithIllegalNullValue() {
-		expectedException.expect(IllegalArgumentException.class);
-		expectedException.expectMessage("[email] must not be 'null'.");
+	public void testCreateInstance_ForNullValue() {
+		Class expected = EmailNullObject.class;
 
-		Email.newInstance(null);
+		Email sut = Email.newInstance(null);
+		assertNotNull("Instance creation was not correct!", sut);
+
+		Class actual = sut.getClass();
+		assertEquals("Instance creation was not correct!", expected, actual);
 	}
 
+	@Test
+	public void testCreateInstance_ForEmptyString() {
+		Email sut = Email.newInstance("");
+		
+		boolean actual = sut.isEmpty();
+		assertTrue("Instance creation was not correct!", actual);
+	}
 	@Test
 	public void testHashCode() {
 		Email sut = Email.newInstance(VALID_MAIL_OF_JUSTUS_JONAS);
@@ -271,5 +293,31 @@ public class EmailTest {
 
 		assertNotSame("Cloning failed.", sut, clone);
 		assertEquals("Cloning failed.", sut, clone);
+	}
+
+	@Test
+	public void testIsEmpty_ForValueFilled() {
+		Email sut = Email.newInstance(VALID_MAIL_OF_JUSTUS_JONAS);
+		
+		boolean result = sut.isEmpty();
+		assertFalse("[result] for isEmpty is not correct!", result);
+	}
+	
+	@Test
+	public void testIsEmpty_ForValueNull() {
+		Email sut = Email.newInstance(null);
+		
+		boolean result = sut.isEmpty();
+		assertTrue("[result] for isEmpty is not correct!", result);
+	}
+	
+	@Test
+	public void testToString_ForNullValue() {
+		Email sut = Email.newInstance();
+		String expected = "";
+		
+		String actual = sut.toString();
+		
+		assertEquals("String representation not correct!", expected, actual);
 	}
 }

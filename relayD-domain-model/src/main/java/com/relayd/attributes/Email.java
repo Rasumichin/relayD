@@ -50,10 +50,6 @@ public class Email implements Serializable, Cloneable {
 	}
 
 	private static void validate(String email) {
-		if (email == null) {
-			throw new IllegalArgumentException("[email] must not be 'null'.");
-		}
-
 		if (!isValidAddress(email)) {
 			throw new IllegalArgumentException("[email] has not a valid format!");
 		}
