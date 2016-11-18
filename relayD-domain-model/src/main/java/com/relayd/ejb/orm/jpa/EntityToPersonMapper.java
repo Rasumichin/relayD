@@ -36,6 +36,8 @@ public class EntityToPersonMapper {
 		person.setUuid(UUID.fromString(personEntity.getId()));
 
 		// Thank god for the 'NullObjectPattern'.
+		person.setComment(Comment.newInstance(personEntity.getComment()));
+		person.setEmail(Email.newInstance(personEntity.getEmail()));
 		person.setForename(Forename.newInstance(personEntity.getForename()));
 		person.setYearOfBirth(YearOfBirth.newInstance(personEntity.getYearOfBirth()));
 		person.setRelayname(Relayname.newInstance(personEntity.getRelayname()));

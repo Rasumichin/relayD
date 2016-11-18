@@ -46,27 +46,23 @@ public class PersonTest {
 
 	@Test
 	public void testSurename() {
-		Surename expected = Surename.newInstance("Justus");
-
 		Person sut = Person.newInstance();
+		Surename expected = Surename.newInstance("Justus");
 
 		sut.setSurename(expected);
 
 		Surename actual = sut.getSurename();
-
 		assertEquals("[surename] not correct!", expected, actual);
 	}
 
 	@Test
 	public void testForename() {
-		Forename expected = Forename.newInstance("Jonas");
-
 		Person sut = Person.newInstance();
+		Forename expected = Forename.newInstance("Jonas");
 
 		sut.setForename(expected);
 
 		Forename actual = sut.getForename();
-
 		assertEquals("[forename] not correct!", expected, actual);
 	}
 
@@ -101,15 +97,23 @@ public class PersonTest {
 	}
 
 	@Test
-	public void testShirtsize() {
-		Shirtsize expected = Shirtsize.HerrenXXL;
-
+	public void testSetEmail_ForNullValue() {
 		Person sut = Person.newInstance();
+		
+		sut.setEmail(null);
+		
+		Email actual = sut.getEmail();
+		assertNotNull("Person must not return [email] equals 'null'!", actual);
+	}
+	
+	@Test
+	public void testShirtsize() {
+		Person sut = Person.newInstance();
+		Shirtsize expected = Shirtsize.HerrenXXL;
 
 		sut.setShirtsize(expected);
 
 		Shirtsize actual = sut.getShirtsize();
-
 		assertEquals("[shirtsize] not correct!", expected, actual);
 	}
 
@@ -117,9 +121,9 @@ public class PersonTest {
 	public void testGetInitialYearOfBirth() {
 		Person sut = Person.newInstance();
 		
-		YearOfBirth result = sut.getYearOfBirth();
+		YearOfBirth actual = sut.getYearOfBirth();
 		
-		assertNotNull("[yearOfBirth] is not correct!", result);
+		assertNotNull("[yearOfBirth] not correct!", actual);
 	}
 	
 	@Test
@@ -139,21 +143,28 @@ public class PersonTest {
 		
 		sut.setYearOfBirth(null);
 		
-		YearOfBirth result = sut.getYearOfBirth();
-		assertNotNull("[yearOfBirth] not correct!", result);
+		YearOfBirth actual = sut.getYearOfBirth();
+		assertNotNull("[yearOfBirth] not correct!", actual);
 	}
 
 	@Test
 	public void testEmail() {
-		Email expected = Email.newInstance("Justus.Jonas@rockyBeach.com");
-
 		Person sut = Person.newInstance();
+		Email expected = Email.newInstance("Justus.Jonas@rockyBeach.com");
 
 		sut.setEmail(expected);
 
 		Email actual = sut.getEmail();
-
 		assertEquals("[email] not correct!", expected, actual);
+	}
+	
+	@Test
+	public void testGetInitialEmail() {
+		Person sut = Person.newInstance();
+		
+		Email result = sut.getEmail();
+		
+		assertNotNull("[email] not correct!", result);
 	}
 
 	@Test
@@ -175,40 +186,34 @@ public class PersonTest {
 
 	@Test
 	public void testPosition() {
-		Position expected = Position.FOURTH;
-
 		Person sut = Person.newInstance();
+		Position expected = Position.FOURTH;
 
 		sut.setPosition(expected);
 
 		Position actual = sut.getPosition();
-
 		assertEquals("[position] not correct!", expected, actual);
 	}
 
 	@Test
 	public void testComment() {
-		Comment expected = Comment.newInstance("Spitzenläufer");
-
 		Person sut = Person.newInstance();
+		Comment expected = Comment.newInstance("What a runner!");
 
 		sut.setComment(expected);
 
 		Comment actual = sut.getComment();
-
 		assertEquals("[comment] not correct!", expected, actual);
 	}
 
 	@Test
 	public void testUUID() {
-		UUID expected = UUID.randomUUID();
-
 		Person sut = Person.newInstance();
+		UUID expected = UUID.randomUUID();
 
 		sut.setUuid(expected);
 
 		UUID actual = sut.getUuid();
-
 		assertEquals("[uuid] not correct!", expected, actual);
 	}
 
@@ -310,7 +315,9 @@ public class PersonTest {
 
 		String domainPart = "xerox-parc.com";
 		Email actual = sut.inferEmailFromNameAnd(domainPart);
-		assertNull("Attribute [email] is unexpectedly not 'null'.", actual);
+		
+		boolean result = actual.isEmpty();
+		assertTrue("Attribute [email] is not empty!", result);
 	}
 
 	@Test
@@ -324,8 +331,10 @@ public class PersonTest {
 	public void testHasEmail_ForPersonWithNoEmail() {
 		Person sut = getDefaultPersonForEmailInference();
 		sut.setEmail(null);
+		
+		boolean result = sut.hasEmail();
 
-		assertFalse("Person should have no Email!", sut.hasEmail());
+		assertFalse("Person should have no Email!", result);
 	}
 
 	@Test
