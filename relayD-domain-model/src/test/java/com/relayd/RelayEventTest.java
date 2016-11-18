@@ -52,8 +52,8 @@ public class RelayEventTest {
 	}
 
 	@Test
-	public void testCreateDefaultInstance() {
-		Eventname eventName = Eventname.newInstance("MetroGroup Marathon Düsseldorf");
+	public void testCreateDuesseldorf() {
+		Eventname eventName = Eventname.newInstance("Metro Group Marathon Düsseldorf");
 		EventDay eventDay = EventDay.newInstance(LocalDate.of(2017, Month.APRIL, 30));
 
 		RelayEvent sut = RelayEvent.duesseldorf();

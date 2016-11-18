@@ -33,7 +33,7 @@ public class RelayEvent implements Serializable {
 	}
 
 	public static RelayEvent duesseldorf() {
-		Eventname eventName = Eventname.newInstance("MetroGroup Marathon Düsseldorf");
+		Eventname eventName = Eventname.newInstance("Metro Group Marathon Düsseldorf");
 		EventDay eventDay = EventDay.newInstance(LocalDate.of(2017, Month.APRIL, 30));
 
 		return new RelayEvent(eventName, eventDay);
