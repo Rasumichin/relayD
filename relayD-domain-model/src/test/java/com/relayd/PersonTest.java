@@ -99,13 +99,13 @@ public class PersonTest {
 	@Test
 	public void testSetEmail_ForNullValue() {
 		Person sut = Person.newInstance();
-		
+
 		sut.setEmail(null);
-		
+
 		Email actual = sut.getEmail();
 		assertNotNull("Person must not return [email] equals 'null'!", actual);
 	}
-	
+
 	@Test
 	public void testShirtsize() {
 		Person sut = Person.newInstance();
@@ -120,12 +120,12 @@ public class PersonTest {
 	@Test
 	public void testGetInitialYearOfBirth() {
 		Person sut = Person.newInstance();
-		
+
 		YearOfBirth actual = sut.getYearOfBirth();
-		
+
 		assertNotNull("[yearOfBirth] not correct!", actual);
 	}
-	
+
 	@Test
 	public void testSetYearOfBirth() {
 		Person sut = Person.newInstance();
@@ -136,13 +136,13 @@ public class PersonTest {
 		YearOfBirth actual = sut.getYearOfBirth();
 		assertEquals("[yearOfBirth] not correct!", expected, actual);
 	}
-	
+
 	@Test
 	public void testSetYearOfBirth_ForNullValue() {
 		Person sut = Person.newInstance();
-		
+
 		sut.setYearOfBirth(null);
-		
+
 		YearOfBirth actual = sut.getYearOfBirth();
 		assertNotNull("[yearOfBirth] not correct!", actual);
 	}
@@ -157,13 +157,13 @@ public class PersonTest {
 		Email actual = sut.getEmail();
 		assertEquals("[email] not correct!", expected, actual);
 	}
-	
+
 	@Test
 	public void testGetInitialEmail() {
 		Person sut = Person.newInstance();
-		
+
 		Email result = sut.getEmail();
-		
+
 		assertNotNull("[email] not correct!", result);
 	}
 
@@ -187,6 +187,10 @@ public class PersonTest {
 	@Test
 	public void testPosition() {
 		Person sut = Person.newInstance();
+		Position defaultPosition = sut.getPosition();
+
+		assertEquals("[position] for default is not correct!", Position.DEFAULT, defaultPosition);
+
 		Position expected = Position.FOURTH;
 
 		sut.setPosition(expected);
@@ -315,7 +319,7 @@ public class PersonTest {
 
 		String domainPart = "xerox-parc.com";
 		Email actual = sut.inferEmailFromNameAnd(domainPart);
-		
+
 		boolean result = actual.isEmpty();
 		assertTrue("Attribute [email] is not empty!", result);
 	}
@@ -331,7 +335,7 @@ public class PersonTest {
 	public void testHasEmail_ForPersonWithNoEmail() {
 		Person sut = getDefaultPersonForEmailInference();
 		sut.setEmail(null);
-		
+
 		boolean result = sut.hasEmail();
 
 		assertFalse("Person should have no Email!", result);

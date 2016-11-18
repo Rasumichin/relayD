@@ -26,12 +26,13 @@ public class PersonToEntityMapper {
 		}
 
 		personEntity.setForename(person.getForename().isEmpty() ? null : person.getForename().toString());
-		personEntity.setSurename((person.getSurename() == null) ? null : person.getSurename().toString());
 		personEntity.setEmail((person.getEmail().isEmpty()) ? null : person.getEmail().toString());
 		personEntity.setYearOfBirth((person.getYearOfBirth().isEmpty()) ? null : person.getYearOfBirth().getValue());
 		personEntity.setComment((person.getComment().isEmpty()) ? null : person.getComment().toString());
 		personEntity.setRelayname(person.getRelayname().isEmpty() ? null : person.getRelayname().toString());
-		personEntity.setPos((person.getPosition() == null) ? null : person.getPosition().getValue());
+		personEntity.setPos(person.getPosition().isEmpty() ? null : person.getPosition().getValue());
+
+		personEntity.setSurename((person.getSurename() == null) ? null : person.getSurename().toString());
 		personEntity.setShirtsize((person.getShirtsize() == null) ? null : person.getShirtsize().getSize().intValue());
 	}
 }

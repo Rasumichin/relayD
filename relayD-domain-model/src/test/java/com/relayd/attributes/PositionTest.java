@@ -18,9 +18,25 @@ import org.junit.runners.MethodSorters;
 public class PositionTest {
 
 	@Test
+	public void testCount() {
+		Position[] values = Position.values();
+
+		assertEquals("Wrong count for Enum entries!", 5, values.length);
+	}
+
+	@Test
 	public void testGetDescription() {
 		Position second = Position.SECOND;
 		assertEquals("[description] not correct!", "Second", second.getDescription());
+	}
+
+	@Test
+	public void testDecodeForDefault() {
+		Integer position = null;
+
+		Position defaultValue = Position.decode(position);
+
+		assertEquals("[Position] not correct!", Position.DEFAULT, defaultValue);
 	}
 
 	@Test
@@ -62,6 +78,24 @@ public class PositionTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void testDecodeForUnkwonValue() {
 		Position.decode(5);
+	}
+
+	@Test
+	public void testIsEmpty_ForDefault() {
+		Position position = Position.DEFAULT;
+
+		boolean actual = position.isEmpty();
+
+		assertTrue("[Position] not correct!", actual);
+	}
+
+	@Test
+	public void testIsEmpty_ForNotDefault() {
+		Position position = Position.FIRST;
+
+		boolean actual = position.isEmpty();
+
+		assertFalse("[Position] not correct!", actual);
 	}
 
 	@Test

@@ -41,12 +41,10 @@ public class EntityToPersonMapper {
 		person.setForename(Forename.newInstance(personEntity.getForename()));
 		person.setYearOfBirth(YearOfBirth.newInstance(personEntity.getYearOfBirth()));
 		person.setRelayname(Relayname.newInstance(personEntity.getRelayname()));
-		person.setComment(Comment.newInstance(personEntity.getComment()));
+		person.setPosition(Position.decode(personEntity.getPos()));
 
-		person.setEmail((personEntity.getEmail() == null) ? person.getEmail() : Email.newInstance(personEntity.getEmail()));
-		person.setPosition((personEntity.getPos() == null) ? null : Position.decode(personEntity.getPos()));
-		person.setShirtsize((personEntity.getShirtsize() == null) ? null : Shirtsize.decode(personEntity.getShirtsize()));
-		person.setSurename((personEntity.getSurename() == null) ? null : Surename.newInstance(personEntity.getSurename()));
+		person.setShirtsize((personEntity.getShirtsize() == null) ? null : (Shirtsize.decode(personEntity.getShirtsize())));
+		person.setSurename((personEntity.getSurename() == null) ? null : (Surename.newInstance(personEntity.getSurename())));
 
 		return person;
 	}

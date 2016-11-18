@@ -48,7 +48,7 @@ public class SelectItemBeanTest {
 
 		int size = result.size();
 
-		assertEquals("[result] size not correct!", 4, size);
+		assertEquals("[result] size not correct!", 5, size);
 	}
 
 	@Test(expected = UnsupportedOperationException.class)
