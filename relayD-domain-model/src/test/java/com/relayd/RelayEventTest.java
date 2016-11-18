@@ -52,9 +52,23 @@ public class RelayEventTest {
 	}
 
 	@Test
-	public void testCreateValidInstance() {
+	public void testCreateDefaultInstance() {
 		Eventname eventName = Eventname.newInstance("MetroGroup Marathon Düsseldorf");
 		EventDay eventDay = EventDay.newInstance(LocalDate.of(2017, Month.APRIL, 30));
+
+		RelayEvent sut = RelayEvent.duesseldorf();
+
+		Eventname actualName = sut.getName();
+		EventDay actualEventDay = sut.getEventDay();
+
+		assertEquals("[Name] not correct.", eventName, actualName);
+		assertEquals("[EventDay] not correct.", eventDay, actualEventDay);
+	}
+
+	@Test
+	public void testCreateValidInstance() {
+		Eventname eventName = Eventname.newInstance("MetroGroup Marathon Essen");
+		EventDay eventDay = EventDay.newInstance(LocalDate.of(2015, Month.MARCH, 17));
 
 		RelayEvent sut = RelayEvent.newInstance(eventName, eventDay);
 
@@ -86,6 +100,24 @@ public class RelayEventTest {
 		secondSut.setUuid(sut.getUuid());
 
 		assertEquals(sut, secondSut);
+	}
+
+	@Test
+	public void testGetMaxNumberOfRelays() {
+		RelayEvent sut = RelayEvent.duesseldorf();
+
+		Integer actual = sut.getMaxNumberOfRelays();
+
+		assertEquals(Integer.valueOf(18), actual);
+	}
+
+	@Test
+	public void testGetNumberOfRelays_ForEmptyRelayList() {
+		RelayEvent sut = RelayEvent.duesseldorf();
+
+		Integer actual = sut.getNumberOfRelays();
+
+		assertEquals(Integer.valueOf(0), actual);
 	}
 
 	@Test

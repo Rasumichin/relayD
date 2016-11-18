@@ -41,9 +41,27 @@
 				<h:outputText value="#{relayEvent.eventDay}" />
 			</p:column>
 
-			<p:column headerText="Event">
+			<p:column headerText="Event"
+				width="400">
 				<h:outputText value="#{relayEvent.name}" />
 			</p:column>
+
+			<p:column
+				headerText="Max. Relays"
+				width="70">
+				<h:outputText
+					value="#{relayEvent.maxNumberOfRelays}"
+					style="float:right" />
+			</p:column>
+
+			<p:column
+				headerText="Participant Relays"
+				width="70">
+				<h:outputText
+					value="#{relayEvent.numberOfRelays}"
+					style="float:right" />
+			</p:column>
+
 			<f:facet name="footer">
 	        	In total there are #{fn:length(relayEventBrowsePageBean.relayEvents)} events.
 	    	</f:facet>
