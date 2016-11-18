@@ -210,7 +210,34 @@ public class ShirtsizeTest {
 
 		Shirtsize shirtsizeEnum = Shirtsize.decode(shirtsize);
 
-		assertEquals(Shirtsize.Unknown.getDescription(), shirtsizeEnum.getDescription());
+		assertEquals(Shirtsize.UNKNOWN.getDescription(), shirtsizeEnum.getDescription());
+	}
+
+	@Test
+	public void testDecodeForNull() {
+		Integer shirtsize = null;
+
+		Shirtsize shirtsizeEnum = Shirtsize.decode(shirtsize);
+
+		assertEquals(Shirtsize.UNKNOWN.getDescription(), shirtsizeEnum.getDescription());
+	}
+
+	@Test
+	public void testIsEmpty_ForDefault() {
+		Shirtsize position = Shirtsize.UNKNOWN;
+
+		boolean actual = position.isEmpty();
+
+		assertTrue("[Shirtsize] not correct!", actual);
+	}
+
+	@Test
+	public void testIsEmpty_ForNotDefault() {
+		Shirtsize position = Shirtsize.DamenM;
+
+		boolean actual = position.isEmpty();
+
+		assertFalse("[Shirtsize] not correct!", actual);
 	}
 
 	@Test

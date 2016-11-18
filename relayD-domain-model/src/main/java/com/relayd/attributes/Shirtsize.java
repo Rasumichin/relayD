@@ -14,7 +14,7 @@ package com.relayd.attributes;
  */
 public enum Shirtsize {
 	//@formatter:off
-	Unknown		(-1, "Unknown"),
+	UNKNOWN		(-1, "Unknown"),
 	DamenXS		( 1, "Damen XS"),
 	DamenS		( 2, "Damen S"),
 	DamenM		( 3, "Damen M"),
@@ -58,11 +58,15 @@ public enum Shirtsize {
 				return shirtsize;
 			}
 		}
-		return Unknown;
+		return UNKNOWN;
 	}
 
 	@Override
 	public String toString() {
 		return getDescription();
+	}
+
+	public boolean isEmpty() {
+		return this == UNKNOWN;
 	}
 }

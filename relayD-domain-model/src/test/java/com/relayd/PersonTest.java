@@ -109,6 +109,10 @@ public class PersonTest {
 	@Test
 	public void testShirtsize() {
 		Person sut = Person.newInstance();
+		Shirtsize defaultShirtsize = sut.getShirtsize();
+
+		assertEquals("[position] for default is not correct!", Shirtsize.UNKNOWN, defaultShirtsize);
+
 		Shirtsize expected = Shirtsize.HerrenXXL;
 
 		sut.setShirtsize(expected);
@@ -189,7 +193,7 @@ public class PersonTest {
 		Person sut = Person.newInstance();
 		Position defaultPosition = sut.getPosition();
 
-		assertEquals("[position] for default is not correct!", Position.DEFAULT, defaultPosition);
+		assertEquals("[position] for default is not correct!", Position.UNKNOWN, defaultPosition);
 
 		Position expected = Position.FOURTH;
 

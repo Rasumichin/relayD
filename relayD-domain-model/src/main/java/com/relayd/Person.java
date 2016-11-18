@@ -25,10 +25,10 @@ public class Person implements Serializable {
 	private Surename surename;
 	private Forename forename = Forename.newInstance();
 	private YearOfBirth yearOfBirth = YearOfBirth.newInstance();
-	private Shirtsize shirtsize;
+	private Shirtsize shirtsize = Shirtsize.UNKNOWN;
 	private Email email;
 	private Relayname relayname = Relayname.newInstance(); // Refactor Dieses Attribut ist Jahresabhängig!
-	private Position position = Position.DEFAULT; // Refactor Dieses Attribut ist Jahresabhängig!
+	private Position position = Position.UNKNOWN; // Refactor Dieses Attribut ist Jahresabhängig!
 	private Comment comment = Comment.newInstance();
 	Email lastCalculatedEmail;
 

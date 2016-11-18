@@ -126,7 +126,7 @@ public abstract class PersonGatewayTest {
 		person.setForename(Forename.newInstance(forename));
 		person.setSurename(Surename.newInstance(surename));
 		person.setYearOfBirth(YearOfBirth.newInstance(yearofBirth));
-		person.setShirtsize(Shirtsize.Unknown);
+		person.setShirtsize(Shirtsize.UNKNOWN);
 		person.setEmail(Email.newInstance(email));
 		return person;
 	}

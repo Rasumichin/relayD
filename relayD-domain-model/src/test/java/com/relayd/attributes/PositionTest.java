@@ -31,12 +31,12 @@ public class PositionTest {
 	}
 
 	@Test
-	public void testDecodeForDefault() {
+	public void testDecodeForNull() {
 		Integer position = null;
 
 		Position defaultValue = Position.decode(position);
 
-		assertEquals("[Position] not correct!", Position.DEFAULT, defaultValue);
+		assertEquals("[Position] not correct!", Position.UNKNOWN, defaultValue);
 	}
 
 	@Test
@@ -75,14 +75,16 @@ public class PositionTest {
 		assertEquals("[Position] not correct!", Position.FOURTH, fourth);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	public void testDecodeForUnkwonValue() {
-		Position.decode(5);
+		Position unknwon = Position.decode(5);
+
+		assertEquals("[Position] not correct!", Position.UNKNOWN, unknwon);
 	}
 
 	@Test
 	public void testIsEmpty_ForDefault() {
-		Position position = Position.DEFAULT;
+		Position position = Position.UNKNOWN;
 
 		boolean actual = position.isEmpty();
 

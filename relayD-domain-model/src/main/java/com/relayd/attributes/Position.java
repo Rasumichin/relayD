@@ -7,7 +7,7 @@ package com.relayd.attributes;
  */
 public enum Position {
 	//@formatter:off
-	DEFAULT (-1, ""),
+	UNKNOWN (-1, "Unknown"),
 	FIRST	(1, "First"),
 	SECOND	(2, "Second"),
 	THIRD	(3, "Third"),
@@ -31,19 +31,16 @@ public enum Position {
 	}
 
 	public static Position decode(Integer aPosition) {
-		if (aPosition == null) {
-			return Position.DEFAULT;
-		}
 		for (Position position : values()) {
 			if (position.getValue().equals(aPosition)) {
 				return position;
 			}
 		}
-		throw new IllegalArgumentException("[" + aPosition + "] is an invalid parameter for Position");
+		return UNKNOWN;
 	}
 
 	public boolean isEmpty() {
-		return this == Position.DEFAULT;
+		return this == UNKNOWN;
 	}
 
 	@Override

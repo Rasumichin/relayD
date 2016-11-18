@@ -31,8 +31,8 @@ public class PersonToEntityMapper {
 		personEntity.setComment((person.getComment().isEmpty()) ? null : person.getComment().toString());
 		personEntity.setRelayname(person.getRelayname().isEmpty() ? null : person.getRelayname().toString());
 		personEntity.setPos(person.getPosition().isEmpty() ? null : person.getPosition().getValue());
+		personEntity.setShirtsize(person.getShirtsize().isEmpty() ? null : person.getShirtsize().getSize().intValue());
 
 		personEntity.setSurename((person.getSurename() == null) ? null : person.getSurename().toString());
-		personEntity.setShirtsize((person.getShirtsize() == null) ? null : person.getShirtsize().getSize().intValue());
 	}
 }
