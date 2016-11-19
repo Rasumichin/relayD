@@ -9,6 +9,7 @@ import javax.faces.bean.SessionScoped;
 import org.primefaces.context.RequestContext;
 
 import com.relayd.Relay;
+import com.relayd.RelayEvent;
 import com.relayd.attributes.Relayname;
 import com.relayd.web.bridge.RelayBridge;
 import com.relayd.web.bridge.RelayBridgeImpl;
@@ -62,8 +63,14 @@ public class RelayEditPageBean implements Serializable {
 	}
 
 	public void save() {
+		addRelayToSelectedEvent();
 		persistRelay();
 		closeDialog();
+	}
+
+	private void addRelayToSelectedEvent() {
+		RelayEvent relayEvent = RelayEvent.duesseldorf();
+		relayEvent.addRelay(workingRelay);
 	}
 
 	void openDialog() {

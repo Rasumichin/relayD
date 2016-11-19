@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -22,14 +23,18 @@ import com.relayd.attributes.Position;
 public class RelayEvent implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private Integer MAX_NUMBER_OF_RELAYS = 18;
-	private Integer MAX_NUMBER_OF_TRACKS = 4;
+	static Integer MAX_NUMBER_OF_RELAYS = 18;
+	private static Integer MAX_NUMBER_OF_TRACKS = 4;
 
 	private UUID uuid;
 	private Eventname name;
 	private EventDay eventDay;
 	private List<Relay> relays = new ArrayList<Relay>(MAX_NUMBER_OF_RELAYS);
 	private List<Track> tracks = new ArrayList<Track>(MAX_NUMBER_OF_TRACKS);
+
+	private RelayEvent() {
+
+	}
 
 	private RelayEvent(Eventname anEventName, EventDay anEventDay) {
 		super();
@@ -45,10 +50,7 @@ public class RelayEvent implements Serializable {
 	}
 
 	public static RelayEvent duesseldorf() {
-		Eventname eventName = Eventname.newInstance("Metro Group Marathon Düsseldorf");
-		EventDay eventDay = EventDay.newInstance(LocalDate.of(2017, Month.APRIL, 30));
-
-		return new RelayEvent(eventName, eventDay);
+		return RelayEventDuesseldorf.instance();
 	}
 
 	/**
@@ -96,6 +98,20 @@ public class RelayEvent implements Serializable {
 		return track;
 	}
 
+	public void addRelay(Relay relay) {
+		// Warum "<=" und nicht "==" ?
+		// Wenn man irgendwann einen Fehler einbaut und es wären aus irgendwelchen Gründen 19 Relays
+		// in der Liste würde diese Methode dann nicht mehr motzen, da ja "nur" bei size == 18 eine Exception fliegt!
+		if (MAX_NUMBER_OF_RELAYS <= relays.size()) {
+			throw new IllegalArgumentException();
+		}
+		relays.add(relay);
+	}
+
+	public List<Relay> getRelays() {
+		return Collections.unmodifiableList(relays);
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -124,5 +140,21 @@ public class RelayEvent implements Serializable {
 			return false;
 		}
 		return true;
+	}
+
+	static final class RelayEventDuesseldorf extends RelayEvent {
+		private static final long serialVersionUID = -3419762542997706672L;
+		private static final Eventname eventName = Eventname.newInstance("Metro Group Marathon Düsseldorf");
+		private static final EventDay eventDay = EventDay.newInstance(LocalDate.of(2017, Month.APRIL, 30));
+
+		private static final RelayEventDuesseldorf SINGLETON = new RelayEventDuesseldorf();
+
+		RelayEventDuesseldorf() {
+			super(eventName, eventDay);
+		}
+
+		private static RelayEventDuesseldorf instance() {
+			return SINGLETON;
+		}
 	}
 }
