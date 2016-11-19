@@ -2,6 +2,7 @@ package com.relayd;
 
 import static org.junit.Assert.*;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.UUID;
@@ -12,6 +13,7 @@ import org.junit.runners.MethodSorters;
 
 import com.relayd.attributes.EventDay;
 import com.relayd.attributes.Eventname;
+import com.relayd.attributes.Position;
 
 /**
  * Keine Straße ist zu lang mit einem Test an der Seite.
@@ -26,29 +28,13 @@ import com.relayd.attributes.Eventname;
 public class RelayEventTest {
 
 	@Test
-	public void testName() {
-		RelayEvent sut = RelayEvent.newInstance(null, null);
+	public void testIsSerializable() {
+		RelayEvent sut = RelayEvent.duesseldorf();
 
-		Eventname expected = Eventname.newInstance("Name");
+		@SuppressWarnings("cast")
+		boolean result = sut instanceof Serializable;
 
-		sut.setName(expected);
-
-		Eventname result = sut.getName();
-
-		assertEquals(expected, result);
-	}
-
-	@Test
-	public void testEventDay() {
-		RelayEvent sut = RelayEvent.newInstance(null, null);
-
-		EventDay expected = EventDay.newInstance(LocalDate.now());
-
-		sut.setEventDay(expected);
-
-		EventDay result = sut.getEventDay();
-
-		assertEquals(expected, result);
+		assertTrue("Class not Serializable!", result);
 	}
 
 	@Test
@@ -77,6 +63,32 @@ public class RelayEventTest {
 
 		assertEquals("[Name] not correct.", eventName, actualName);
 		assertEquals("[EventDay] not correct.", eventDay, actualEventDay);
+	}
+
+	@Test
+	public void testName() {
+		RelayEvent sut = RelayEvent.newInstance(null, null);
+
+		Eventname expected = Eventname.newInstance("Name");
+
+		sut.setName(expected);
+
+		Eventname result = sut.getName();
+
+		assertEquals(expected, result);
+	}
+
+	@Test
+	public void testEventDay() {
+		RelayEvent sut = RelayEvent.newInstance(null, null);
+
+		EventDay expected = EventDay.newInstance(LocalDate.now());
+
+		sut.setEventDay(expected);
+
+		EventDay result = sut.getEventDay();
+
+		assertEquals(expected, result);
 	}
 
 	@Test
@@ -118,6 +130,42 @@ public class RelayEventTest {
 		Integer actual = sut.getNumberOfRelays();
 
 		assertEquals(Integer.valueOf(0), actual);
+	}
+
+	@Test
+	public void testGetTrackForPosition_ForPositionOne() {
+		RelayEvent sut = RelayEvent.duesseldorf();
+
+		Track track = sut.getTrackForPosition(Position.FIRST);
+
+		assertEquals("[track] for given position is not correct!", "11.3 km ", track.toString());
+	}
+
+	@Test
+	public void testGetTrackForPosition_ForPositionTwo() {
+		RelayEvent sut = RelayEvent.duesseldorf();
+
+		Track track = sut.getTrackForPosition(Position.SECOND);
+
+		assertEquals("[track] for given position is not correct!", "8.6 km ", track.toString());
+	}
+
+	@Test
+	public void testGetTrackForPosition_ForPositionThree() {
+		RelayEvent sut = RelayEvent.duesseldorf();
+
+		Track track = sut.getTrackForPosition(Position.THIRD);
+
+		assertEquals("[track] for given position is not correct!", "9.2 km ", track.toString());
+	}
+
+	@Test
+	public void testGetTrackForPosition_ForPositionFour() {
+		RelayEvent sut = RelayEvent.duesseldorf();
+
+		Track track = sut.getTrackForPosition(Position.FOURTH);
+
+		assertEquals("[track] for given position is not correct!", "13.1 km ", track.toString());
 	}
 
 	@Test
