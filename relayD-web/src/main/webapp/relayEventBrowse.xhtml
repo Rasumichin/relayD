@@ -38,17 +38,18 @@
 			<p:column
 				headerText="Date"
 				width="65">
-				<h:outputText value="#{relayEvent.eventDay}" />
+				<h:outputText
+					value="#{relayEvent.eventDay}"
+					style="float:center" />
 			</p:column>
 
-			<p:column headerText="Event"
-				width="400">
+			<p:column headerText="Event">
 				<h:outputText value="#{relayEvent.name}" />
 			</p:column>
 
 			<p:column
 				headerText="Max. Relays"
-				width="70">
+				width="110">
 				<h:outputText
 					value="#{relayEvent.maxNumberOfRelays}"
 					style="float:right" />
@@ -56,7 +57,7 @@
 
 			<p:column
 				headerText="Participant Relays"
-				width="70">
+				width="110">
 				<h:outputText
 					value="#{relayEvent.numberOfRelays}"
 					style="float:right" />
