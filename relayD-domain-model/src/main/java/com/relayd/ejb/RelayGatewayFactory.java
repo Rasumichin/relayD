@@ -1,5 +1,6 @@
 package com.relayd.ejb;
 
+import com.relayd.ejb.orm.jpa.RelayGatewayJPA;
 import com.relayd.ejb.orm.memory.RelayGatewayMemory;
 
 /**
@@ -14,6 +15,8 @@ public class RelayGatewayFactory {
 		switch (gatewayType) {
 			case MEMORY:
 				return new RelayGatewayMemory();
+			case JPA:
+				return new RelayGatewayJPA();
 			default:
 				throw new IllegalArgumentException("[" + gatewayType + "] is unsupported Gateway Type.");
 		}

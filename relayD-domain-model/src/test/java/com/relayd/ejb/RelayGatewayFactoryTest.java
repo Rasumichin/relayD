@@ -6,6 +6,7 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import com.relayd.ejb.orm.jpa.RelayGatewayJPA;
 import com.relayd.ejb.orm.memory.RelayGatewayMemory;
 
 /**
@@ -32,9 +33,12 @@ public class RelayGatewayFactoryTest {
 		RelayGatewayFactory.get(GatewayType.FILE);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	public void testGet_ForPersonGatewayJPA() {
-		RelayGatewayFactory.get(GatewayType.JPA);
+		RelayGateway instance = RelayGatewayFactory.get(GatewayType.JPA);
+
+		assertEquals("Instance not korrekt!", instance.getClass(), RelayGatewayJPA.class);
+
 	}
 
 	@Test(expected = IllegalArgumentException.class)
