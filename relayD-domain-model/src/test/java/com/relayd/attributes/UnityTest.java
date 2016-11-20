@@ -17,6 +17,13 @@ import org.junit.runners.MethodSorters;
 public class UnityTest {
 
 	@Test
+	public void testCount() {
+		Unity[] values = Unity.values();
+
+		assertEquals("Wrong count for Enum entries!", 2, values.length);
+	}
+
+	@Test
 	public void testToString_ForMeters() {
 		Unity sut = Unity.METER;
 
