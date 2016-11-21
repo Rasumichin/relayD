@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.relayd.Relay;
@@ -24,7 +23,6 @@ public abstract class RelayGatewayTest {
 	public abstract RelayGateway getSut();
 
 	@Test
-	@Ignore("Bauen hartverdrahtet immer 2 Relays, darum schlägt Test in Zeile 32 fehl!")
 	public void set() {
 		List<Relay> someRelays = getSut().getAll();
 		assertNotNull("Expect valid instance!", someRelays);

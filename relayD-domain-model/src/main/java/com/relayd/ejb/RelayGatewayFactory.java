@@ -1,5 +1,6 @@
 package com.relayd.ejb;
 
+import com.relayd.ejb.orm.file.RelayGatewayFile;
 import com.relayd.ejb.orm.jpa.RelayGatewayJPA;
 import com.relayd.ejb.orm.memory.RelayGatewayMemory;
 
@@ -15,6 +16,8 @@ public class RelayGatewayFactory {
 		switch (gatewayType) {
 			case MEMORY:
 				return new RelayGatewayMemory();
+			case FILE:
+				return new RelayGatewayFile();
 			case JPA:
 				return new RelayGatewayJPA();
 			default:

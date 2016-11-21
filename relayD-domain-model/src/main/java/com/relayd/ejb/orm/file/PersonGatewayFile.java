@@ -45,6 +45,7 @@ public class PersonGatewayFile implements PersonGateway {
 		}
 	}
 
+	// TODO - CC - umbennen in clear (Wie fuer Map/nnGatewayMemory)
 	public void clean() {
 		try {
 			put(new ArrayList<>());
@@ -122,6 +123,7 @@ public class PersonGatewayFile implements PersonGateway {
 		List<Person> relays = new ArrayList<>();
 		try {
 			fileInputStream = new FileInputStream(getFileName());
+			// TODO - CC - umbennen
 			relays = (ArrayList<Person>) SerializationUtils.deserialize(fileInputStream);
 			fileInputStream.close();
 		} catch (FileNotFoundException e) {
