@@ -8,6 +8,7 @@ import org.primefaces.model.TreeNode;
 
 import com.relayd.PersonRelay;
 import com.relayd.Relay;
+import com.relayd.RelayEvent;
 import com.relayd.attributes.Forename;
 import com.relayd.attributes.Position;
 import com.relayd.attributes.Relayname;
@@ -24,7 +25,7 @@ import com.relayd.ejb.RelayGatewayFactory;
 public class RelayBridgeImpl implements RelayBridge {
 
 	private RelayGateway gateway = null;
-	private GatewayType gatewayType = GatewayType.FILE;
+	private GatewayType gatewayType = GatewayType.MEMORY;
 
 	public RelayBridgeImpl() {
 		super();
@@ -80,7 +81,7 @@ public class RelayBridgeImpl implements RelayBridge {
 	}
 
 	private Relay createDie4() {
-		Relay relay = Relay.newInstance();
+		Relay relay = Relay.newInstance(RelayEvent.duesseldorf());
 
 		relay.setRelayname(Relayname.newInstance("Die 4 ????"));
 
@@ -106,7 +107,7 @@ public class RelayBridgeImpl implements RelayBridge {
 	}
 
 	private Relay createDieFanta4() {
-		Relay relay = Relay.newInstance();
+		Relay relay = Relay.newInstance(RelayEvent.duesseldorf());
 
 		relay.setRelayname(Relayname.newInstance("Die Fanta 4"));
 
