@@ -76,7 +76,7 @@ public abstract class PersonGatewayTest {
 	}
 
 	@Test
-	public void update() {
+	public void testSet_ForExistingPerson() {
 		// ARRANGE
 		Person firstMember = createJustusJonas();
 		UUID uuidFromFirstMember = firstMember.getUuid();
@@ -102,7 +102,6 @@ public abstract class PersonGatewayTest {
 		// ASSERT
 		Person checkPerson = getSut().get(uuidFromFirstMember);
 		assertNotNull(checkPerson);
-		assertEquals(newForename, checkPerson.getForename());
 
 		assertEquals("[Forename] not correct.", newForename, checkPerson.getForename());
 		assertEquals("[Surename] not correct.", newSurename, checkPerson.getSurename());
