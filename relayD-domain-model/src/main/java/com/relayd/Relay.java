@@ -22,13 +22,10 @@ public class Relay implements Serializable {
 
 	UUID uuid = null;
 	private Relayname relayname = null;
-	// TODO Ein Jahr ist ein Jahr, und kein Integer!!!!
-	private Integer year;
 	private List<Track> tracks = new ArrayList<>();
 
 	private Relay(Integer aYear) {
 		uuid = UUID.randomUUID();
-		year = aYear;
 
 		tracks.add(Track.newInstance(Distance.kilometers(new BigDecimal("11.3"))));
 		tracks.add(Track.newInstance(Distance.kilometers(new BigDecimal("8.6"))));
@@ -38,10 +35,6 @@ public class Relay implements Serializable {
 
 	public static Relay newInstance() {
 		return new Relay(new GregorianCalendar().get(Calendar.YEAR));
-	}
-
-	public static Relay newInstance(Integer aYear) {
-		return new Relay(aYear);
 	}
 
 	public void setRelayname(Relayname aRelayname) {
@@ -54,10 +47,6 @@ public class Relay implements Serializable {
 
 	public UUID getUuid() {
 		return uuid;
-	}
-
-	public Integer getYear() {
-		return year;
 	}
 
 	public Track getTrackFor(Position position) {

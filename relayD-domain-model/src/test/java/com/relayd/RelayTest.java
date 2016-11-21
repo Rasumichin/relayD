@@ -4,8 +4,6 @@ import static org.junit.Assert.*;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.UUID;
 
 import org.junit.FixMethodOrder;
@@ -47,25 +45,20 @@ public class RelayTest {
 	public void testConstructor() {
 		Relay sut = Relay.newInstance();
 
-		Integer expectedYear = new GregorianCalendar().get(Calendar.YEAR);
-
-		Integer year = sut.getYear();
-
-		assertEquals("[year] not correct!", expectedYear, year);
 		assertNotNull("[UUID] not correct!", sut.getUuid());
 	}
 
-	@Test
-	public void testConstructorWithParameter() {
-		Integer expected = 2015;
-
-		Relay sut = Relay.newInstance(expected);
-
-		Integer actual = sut.getYear();
-
-		assertEquals("[year] not correct!", expected, actual);
-		assertNotNull("[UUID] not correct!", sut.getUuid());
-	}
+	//	@Test
+	//	public void testConstructor_ForParameterYear() {
+	//		Integer expected = 2015;
+	//
+	//		Relay sut = Relay.newInstance(expected);
+	//
+	//		Integer actual = sut.getYear();
+	//
+	//		assertEquals("[year] not correct!", expected, actual);
+	//		assertNotNull("[UUID] not correct!", sut.getUuid());
+	//	}
 
 	@Test
 	public void testRelayname() {
