@@ -85,7 +85,7 @@ public class RelayTest {
 
 	@Test
 	public void testAddPerson() {
-		Relay sut = Relay.newInstance();
+		Relay sut = Relay.newInstance(RelayEvent.duesseldorf());
 
 		PersonRelay expected = PersonRelay.newInstance();
 		expected.setForename(Forename.newInstance("Justus"));

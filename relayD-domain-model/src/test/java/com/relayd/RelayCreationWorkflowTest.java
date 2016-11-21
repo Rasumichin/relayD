@@ -27,7 +27,7 @@ public class RelayCreationWorkflowTest {
 
 		// Macht das Anlegen einer Relay ohne ein Event überhaupt Sinn?
 		// Sollte die newInstance nicht als Parameter ein Event besitzen?
-		Relay staubwolke = Relay.newInstance();
+		Relay staubwolke = Relay.newInstance(duesseldorf);
 
 		Relayname relayname = Relayname.newInstance("Staubwolke");
 		staubwolke.setRelayname(relayname);
@@ -51,7 +51,7 @@ public class RelayCreationWorkflowTest {
 		// Sollte ein Fehler verursachen, da Position 1 schon vergeben!
 		staubwolke.addPersonRelay(peterShaw, Position.FIRST);
 
-		Relay dieVierFragezeichen = Relay.newInstance();
+		Relay dieVierFragezeichen = Relay.newInstance(duesseldorf);
 		dieVierFragezeichen.setRelayname(Relayname.newInstance("Die 4 ????"));
 
 		// KEIN Fehler! Aber vielleicht eine Warnung?

@@ -1,12 +1,8 @@
 package com.relayd;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
-import com.relayd.attributes.Distance;
 import com.relayd.attributes.Position;
 import com.relayd.attributes.Relayname;
 
@@ -21,15 +17,10 @@ public class Relay implements Serializable {
 	UUID uuid = null;
 	private Relayname relayname = null;
 	private RelayEvent relayEvent = null;
-	private List<Track> tracks = new ArrayList<>();
 
 	private Relay(RelayEvent aRelayEvent) {
 		uuid = UUID.randomUUID();
 		relayEvent = aRelayEvent;
-		tracks.add(Track.newInstance(Distance.kilometers(new BigDecimal("11.3"))));
-		tracks.add(Track.newInstance(Distance.kilometers(new BigDecimal("8.6"))));
-		tracks.add(Track.newInstance(Distance.kilometers(new BigDecimal("9.2"))));
-		tracks.add(Track.newInstance(Distance.kilometers(new BigDecimal("13.1"))));
 	}
 
 	public static Relay newInstance() {
@@ -57,8 +48,7 @@ public class Relay implements Serializable {
 	}
 
 	public Track getTrackFor(Position position) {
-		int index = position.getValue() - 1;
-		Track track = tracks.get(index);
+		Track track = relayEvent.getTrackForPosition(position);
 		return track;
 	}
 
