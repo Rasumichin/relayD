@@ -48,17 +48,17 @@ public class RelayTest {
 		assertNotNull("[UUID] not correct!", sut.getUuid());
 	}
 
-	//	@Test
-	//	public void testConstructor_ForParameterYear() {
-	//		Integer expected = 2015;
-	//
-	//		Relay sut = Relay.newInstance(expected);
-	//
-	//		Integer actual = sut.getYear();
-	//
-	//		assertEquals("[year] not correct!", expected, actual);
-	//		assertNotNull("[UUID] not correct!", sut.getUuid());
-	//	}
+	@Test
+	public void testConstructor_ForParameterRelayEvent() {
+		RelayEvent expected = RelayEvent.duesseldorf();
+
+		Relay sut = Relay.newInstance(expected);
+
+		RelayEvent actual = sut.getRelayEvent();
+
+		assertEquals("[relayEvent ] not correct!", expected, actual);
+		assertNotNull("[UUID] not correct!", sut.getUuid());
+	}
 
 	@Test
 	public void testRelayname() {
