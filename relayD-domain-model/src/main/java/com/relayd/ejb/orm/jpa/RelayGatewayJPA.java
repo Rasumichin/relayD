@@ -1,6 +1,7 @@
 package com.relayd.ejb.orm.jpa;
 
 import java.util.List;
+import java.util.UUID;
 
 import com.relayd.Relay;
 import com.relayd.ejb.RelayGateway;
@@ -19,6 +20,11 @@ public class RelayGatewayJPA implements RelayGateway {
 
 	@Override
 	public void set(Relay aRelay) {
+		throw new UnsupportedOperationException("not implemented yet!");
+	}
+
+	@Override
+	public Relay get(UUID aUuid) {
 		throw new UnsupportedOperationException("not implemented yet!");
 	}
 }

@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.apache.commons.lang3.SerializationUtils;
 
@@ -107,5 +108,15 @@ public class RelayGatewayFile implements RelayGateway {
 			throw new RuntimeException("Error - IOException ", e);
 		}
 
+	}
+
+	@Override
+	public Relay get(UUID uuid) {
+		for (Relay relay : getAll()) {
+			if (uuid.equals(relay.getUuid())) {
+				return relay;
+			}
+		}
+		return null;
 	}
 }
