@@ -58,7 +58,8 @@ public class RelayEditPageBean implements Serializable {
 	}
 
 	Relay createNewRelay() {
-		Relay relay = Relay.newInstance();
+		//TODO darf nichtnur düsseldorf sein - sollte auswählbar sein???
+		Relay relay = Relay.newInstance(RelayEvent.duesseldorf());
 		return relay;
 	}
 
