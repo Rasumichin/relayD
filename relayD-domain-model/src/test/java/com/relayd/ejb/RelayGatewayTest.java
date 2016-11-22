@@ -35,7 +35,7 @@ public abstract class RelayGatewayTest {
 	}
 
 	@Test
-	public void testSet() {
+	public void testSet_ForRelayWithoutParticipants() {
 		List<Relay> someRelays = getSut().getAll();
 		assertNotNull("Expect valid instance!", someRelays);
 

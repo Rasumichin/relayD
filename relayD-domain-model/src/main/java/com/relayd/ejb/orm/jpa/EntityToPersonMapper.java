@@ -41,8 +41,8 @@ public class EntityToPersonMapper {
 		person.setForename(Forename.newInstance(personEntity.getForename()));
 		person.setYearOfBirth(YearOfBirth.newInstance(personEntity.getYearOfBirth()));
 		person.setRelayname(Relayname.newInstance(personEntity.getRelayname()));
-		person.setPosition(Position.decode(personEntity.getPos()));
-		person.setShirtsize(Shirtsize.decode(personEntity.getShirtsize()));
+		person.setPosition(Position.newInstance(personEntity.getPos()));
+		person.setShirtsize(Shirtsize.newInstance(personEntity.getShirtsize()));
 
 		person.setSurename((personEntity.getSurename() == null) ? null : (Surename.newInstance(personEntity.getSurename())));
 

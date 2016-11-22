@@ -127,7 +127,7 @@ public class PersonToEntityMapperTest {
 	@Test
 	public void testMapPersonToEntity_position() {
 		Integer expected = Position.FIRST.getValue();
-		person.setPosition(Position.decode(expected));
+		person.setPosition(Position.newInstance(expected));
 
 		sut.mapPersonToEntity(person, personEntity);
 
@@ -138,7 +138,7 @@ public class PersonToEntityMapperTest {
 	@Test
 	public void testMapPersonToEntity_shirtsize() {
 		Integer expected = Shirtsize.HerrenL.getSize();
-		person.setShirtsize(Shirtsize.decode(expected));
+		person.setShirtsize(Shirtsize.newInstance(expected));
 
 		sut.mapPersonToEntity(person, personEntity);
 

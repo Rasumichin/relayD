@@ -76,9 +76,9 @@ public class PersonGatewayJDBCTest {
 		assertEquals("[forename] not correct!", Forename.newInstance(FORENAME), person.getForename());
 		assertEquals("[surename] not correct!", Surename.newInstance(SURENAME), person.getSurename());
 		assertEquals("[yearOfBirth] not correct!", YearOfBirth.newInstance(YEAROFBIRTH), person.getYearOfBirth());
-		assertEquals("[shirtsize] not correct!", Shirtsize.decode(SHIRTSIZE), person.getShirtsize());
+		assertEquals("[shirtsize] not correct!", Shirtsize.newInstance(SHIRTSIZE), person.getShirtsize());
 		assertEquals("[relayname] not correct!", Relayname.newInstance(RELAYNAME), person.getRelayname());
-		assertEquals("[pos] not correct!", Position.decode(POS), person.getPosition());
+		assertEquals("[pos] not correct!", Position.newInstance(POS), person.getPosition());
 		assertEquals("[email] not correct!", Email.newInstance(EMAIL), person.getEmail());
 		assertEquals("[comment] not correct!", Comment.newInstance(COMMENT), person.getComment());
 	}

@@ -31,53 +31,53 @@ public class PositionTest {
 	}
 
 	@Test
-	public void testDecodeForNull() {
+	public void testNewInstance_ForNull() {
 		Integer position = null;
 
-		Position defaultValue = Position.decode(position);
+		Position defaultValue = Position.newInstance(position);
 
 		assertEquals("[Position] not correct!", Position.UNKNOWN, defaultValue);
 	}
 
 	@Test
-	public void testDecodeForOne() {
+	public void testNewInstance_ForOne() {
 		Integer position = 1;
 
-		Position first = Position.decode(position);
+		Position first = Position.newInstance(position);
 
 		assertEquals("[Position] not correct!", Position.FIRST, first);
 	}
 
 	@Test
-	public void testDecodeForTwo() {
+	public void testNewInstance_ForTwo() {
 		Integer position = 2;
 
-		Position second = Position.decode(position);
+		Position second = Position.newInstance(position);
 
 		assertEquals("[Position] not correct!", Position.SECOND, second);
 	}
 
 	@Test
-	public void testDecodeForThree() {
+	public void testNewInstance_ForThree() {
 		Integer position = 3;
 
-		Position third = Position.decode(position);
+		Position third = Position.newInstance(position);
 
 		assertEquals("[Position] not correct!", Position.THIRD, third);
 	}
 
 	@Test
-	public void testDecodeForFour() {
+	public void testNewInstance_ForFour() {
 		Integer position = 4;
 
-		Position fourth = Position.decode(position);
+		Position fourth = Position.newInstance(position);
 
 		assertEquals("[Position] not correct!", Position.FOURTH, fourth);
 	}
 
 	@Test
-	public void testDecodeForUnkwonValue() {
-		Position unknwon = Position.decode(5);
+	public void testNewInstance_ForUnkwonValue() {
+		Position unknwon = Position.newInstance(5);
 
 		assertEquals("[Position] not correct!", Position.UNKNOWN, unknwon);
 	}

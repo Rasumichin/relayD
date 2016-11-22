@@ -52,7 +52,7 @@ public enum Shirtsize {
 		return param.getSize();
 	}
 
-	public static Shirtsize decode(Integer param) {
+	public static Shirtsize newInstance(Integer param) {
 		for (Shirtsize shirtsize : values()) {
 			if (shirtsize.getSize().equals(param)) {
 				return shirtsize;

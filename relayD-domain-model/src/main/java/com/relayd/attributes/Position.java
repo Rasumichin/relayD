@@ -30,7 +30,7 @@ public enum Position {
 		return description;
 	}
 
-	public static Position decode(Integer aPosition) {
+	public static Position newInstance(Integer aPosition) {
 		for (Position position : values()) {
 			if (position.getValue().equals(aPosition)) {
 				return position;
