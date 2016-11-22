@@ -25,10 +25,10 @@ public class ShirtsizeTest {
 	}
 
 	@Test
-	public void testDecodeDamenXS() {
+	public void testNewInstance_DamenXS() {
 		Integer shirtsize = Integer.valueOf(1);
 
-		Shirtsize shirtsizeEnum = Shirtsize.decode(shirtsize);
+		Shirtsize shirtsizeEnum = Shirtsize.newInstance(shirtsize);
 
 		assertEquals(Shirtsize.DamenXS.getDescription(), shirtsizeEnum.getDescription());
 	}
@@ -43,10 +43,10 @@ public class ShirtsizeTest {
 	}
 
 	@Test
-	public void testDecodeDamenS() {
+	public void testNewInstance_DamenS() {
 		Integer shirtsize = Integer.valueOf(2);
 
-		Shirtsize shirtsizeEnum = Shirtsize.decode(shirtsize);
+		Shirtsize shirtsizeEnum = Shirtsize.newInstance(shirtsize);
 
 		assertEquals(Shirtsize.DamenS.getDescription(), shirtsizeEnum.getDescription());
 	}
@@ -61,10 +61,10 @@ public class ShirtsizeTest {
 	}
 
 	@Test
-	public void testDecodeDamenM() {
+	public void testNewInstance_DamenM() {
 		Integer shirtsize = Integer.valueOf(3);
 
-		Shirtsize shirtsizeEnum = Shirtsize.decode(shirtsize);
+		Shirtsize shirtsizeEnum = Shirtsize.newInstance(shirtsize);
 
 		assertEquals(Shirtsize.DamenM.getDescription(), shirtsizeEnum.getDescription());
 	}
@@ -79,10 +79,10 @@ public class ShirtsizeTest {
 	}
 
 	@Test
-	public void testDecodeDamenL() {
+	public void testNewInstance_DamenL() {
 		Integer shirtsize = Integer.valueOf(4);
 
-		Shirtsize shirtsizeEnum = Shirtsize.decode(shirtsize);
+		Shirtsize shirtsizeEnum = Shirtsize.newInstance(shirtsize);
 
 		assertEquals(Shirtsize.DamenL.getDescription(), shirtsizeEnum.getDescription());
 	}
@@ -97,10 +97,10 @@ public class ShirtsizeTest {
 	}
 
 	@Test
-	public void testDecodeDamenXL() {
+	public void testNewInstance_DamenXL() {
 		Integer shirtsize = Integer.valueOf(5);
 
-		Shirtsize shirtsizeEnum = Shirtsize.decode(shirtsize);
+		Shirtsize shirtsizeEnum = Shirtsize.newInstance(shirtsize);
 
 		assertEquals(Shirtsize.DamenXL.getDescription(), shirtsizeEnum.getDescription());
 	}
@@ -115,10 +115,10 @@ public class ShirtsizeTest {
 	}
 
 	@Test
-	public void testDecodeHerrenS() {
+	public void testNewInstance_HerrenS() {
 		Integer shirtsize = Integer.valueOf(6);
 
-		Shirtsize shirtsizeEnum = Shirtsize.decode(shirtsize);
+		Shirtsize shirtsizeEnum = Shirtsize.newInstance(shirtsize);
 
 		assertEquals(Shirtsize.HerrenS.getDescription(), shirtsizeEnum.getDescription());
 	}
@@ -133,10 +133,10 @@ public class ShirtsizeTest {
 	}
 
 	@Test
-	public void testDecodeHerrenM() {
+	public void testNewInstance_HerrenM() {
 		Integer shirtsize = Integer.valueOf(7);
 
-		Shirtsize shirtsizeEnum = Shirtsize.decode(shirtsize);
+		Shirtsize shirtsizeEnum = Shirtsize.newInstance(shirtsize);
 
 		assertEquals(Shirtsize.HerrenM.getDescription(), shirtsizeEnum.getDescription());
 	}
@@ -151,10 +151,10 @@ public class ShirtsizeTest {
 	}
 
 	@Test
-	public void testDecodeHerrenL() {
+	public void testNewInstance_HerrenL() {
 		Integer shirtsize = Integer.valueOf(8);
 
-		Shirtsize shirtsizeEnum = Shirtsize.decode(shirtsize);
+		Shirtsize shirtsizeEnum = Shirtsize.newInstance(shirtsize);
 
 		assertEquals(Shirtsize.HerrenL.getDescription(), shirtsizeEnum.getDescription());
 	}
@@ -169,10 +169,10 @@ public class ShirtsizeTest {
 	}
 
 	@Test
-	public void testDecodeHerrenXL() {
+	public void testNewInstance_HerrenXL() {
 		Integer shirtsize = Integer.valueOf(9);
 
-		Shirtsize shirtsizeEnum = Shirtsize.decode(shirtsize);
+		Shirtsize shirtsizeEnum = Shirtsize.newInstance(shirtsize);
 
 		assertEquals(Shirtsize.HerrenXL.getDescription(), shirtsizeEnum.getDescription());
 	}
@@ -187,10 +187,10 @@ public class ShirtsizeTest {
 	}
 
 	@Test
-	public void testDecodeHerrenXXL() {
+	public void testNewInstance_HerrenXXL() {
 		Integer shirtsize = Integer.valueOf(10);
 
-		Shirtsize shirtsizeEnum = Shirtsize.decode(shirtsize);
+		Shirtsize shirtsizeEnum = Shirtsize.newInstance(shirtsize);
 
 		assertEquals(Shirtsize.HerrenXXL.getDescription(), shirtsizeEnum.getDescription());
 	}
@@ -205,19 +205,19 @@ public class ShirtsizeTest {
 	}
 
 	@Test
-	public void testDecodeInvalidValue() {
+	public void testNewInstance_InvalidValue() {
 		Integer shirtsize = Integer.valueOf(99);
 
-		Shirtsize shirtsizeEnum = Shirtsize.decode(shirtsize);
+		Shirtsize shirtsizeEnum = Shirtsize.newInstance(shirtsize);
 
 		assertEquals(Shirtsize.UNKNOWN.getDescription(), shirtsizeEnum.getDescription());
 	}
 
 	@Test
-	public void testDecodeForNull() {
+	public void testNewInstance_ForNull() {
 		Integer shirtsize = null;
 
-		Shirtsize shirtsizeEnum = Shirtsize.decode(shirtsize);
+		Shirtsize shirtsizeEnum = Shirtsize.newInstance(shirtsize);
 
 		assertEquals(Shirtsize.UNKNOWN.getDescription(), shirtsizeEnum.getDescription());
 	}
