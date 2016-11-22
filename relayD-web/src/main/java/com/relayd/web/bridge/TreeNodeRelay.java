@@ -90,4 +90,8 @@ public class TreeNodeRelay implements Serializable, Comparable<TreeNodeRelay> {
 	public int compareTo(TreeNodeRelay document) {
 		return getName().compareTo(document.getName());
 	}
+
+	public void setParticipant(PersonRelay participant) {
+		this.participant = participant;
+	}
 }
