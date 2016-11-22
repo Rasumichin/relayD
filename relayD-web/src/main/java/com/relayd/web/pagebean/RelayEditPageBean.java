@@ -58,7 +58,7 @@ public class RelayEditPageBean implements Serializable {
 	}
 
 	Relay createNewRelay() {
-		Relay relay = Relay.newInstance();
+		Relay relay = Relay.newInstance(RelayEvent.duesseldorf());
 		return relay;
 	}
 
