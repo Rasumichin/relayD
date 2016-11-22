@@ -1,13 +1,14 @@
 package com.relayd;
 
+import static org.junit.Assert.*;
+
+import java.time.LocalDate;
+
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import com.relayd.attributes.Forename;
-import com.relayd.attributes.Position;
-import com.relayd.attributes.Relayname;
-import com.relayd.attributes.Surename;
+import com.relayd.attributes.*;
 
 /**
  * Langweilige Aktivitäten sind perverserweise längst nicht so langweilig, wenn man sich intensiv auf sie konzentriert.
@@ -98,5 +99,32 @@ public class RelayCreationWorkflowTest {
 		//		justusJonas.setNotAvailableForEvent(duesseldorf);
 		// dann sollte er automatisch aus den Relays entfernt werden in welchen er teilnimmt
 
+	}
+	
+	@Test
+	public void testShowcaseRelationTrackToPersonRelayIsWrong() {
+		Eventname eventName = Eventname.newInstance("Boston Marathon");
+		EventDay eventDay = EventDay.newInstance(LocalDate.now());
+		RelayEvent boston = RelayEvent.newInstance(eventName, eventDay);
+		Track firstTrack = boston.getTrackForPosition(Position.FIRST);
+		
+		assertNull("The person for the first track is not correct!", firstTrack.getPersonRelay());
+		
+		Relay slowMovers = Relay.newInstance(boston);
+		PersonRelay mike = PersonRelay.newInstance();
+		mike.setForename(Forename.newInstance("Mike"));
+		slowMovers.addPersonRelay(mike, Position.FIRST);
+
+		PersonRelay actual = firstTrack.getPersonRelay();
+		assertEquals("Person at first position of Track is not Mike!", mike, actual);
+		
+		Relay dillyDallies = Relay.newInstance(boston);
+		PersonRelay sarah = PersonRelay.newInstance();
+		sarah.setForename(Forename.newInstance("Sarah"));
+		dillyDallies.addPersonRelay(sarah, Position.FIRST);
+		
+		actual = firstTrack.getPersonRelay();
+		assertEquals("Person at first position of Track is not Sarah!", sarah, actual);
+		// But what about Mike? He lost his track position to Sarah!
 	}
 }
