@@ -24,7 +24,11 @@ public class Relay implements Serializable {
 	private Relay(RelayEvent aRelayEvent) {
 		uuid = UUID.randomUUID();
 		relayEvent = aRelayEvent;
-		for (int tempI = 0; tempI < 4; tempI++) {
+		initParticipants();
+	}
+
+	private void initParticipants() {
+		for (int i = 0; i < RelayEvent.MAX_NUMBER_OF_TRACKS; i++) {
 			participants.add(null);
 		}
 	}
@@ -51,6 +55,11 @@ public class Relay implements Serializable {
 
 	public UUID getUuid() {
 		return uuid;
+	}
+
+	public PersonRelay getPersonFor(Position position) {
+		PersonRelay person = participants.get(position.getValue() - 1);
+		return person;
 	}
 
 	public Track getTrackFor(Position position) {

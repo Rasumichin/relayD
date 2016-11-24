@@ -24,7 +24,7 @@ public class RelayEvent implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	static Integer MAX_NUMBER_OF_RELAYS = 18;
-	private static Integer MAX_NUMBER_OF_TRACKS = 4;
+	static Integer MAX_NUMBER_OF_TRACKS = 4;
 
 	private UUID uuid;
 	private Eventname name;

@@ -84,7 +84,7 @@ public class RelayTest {
 	}
 
 	@Test
-	public void testAddPerson() {
+	public void testAddPerson_ForPositionFirst() {
 		Relay sut = Relay.newInstance(RelayEvent.duesseldorf());
 
 		PersonRelay expected = PersonRelay.newInstance();
@@ -93,11 +93,66 @@ public class RelayTest {
 
 		sut.addPersonRelay(expected, Position.FIRST);
 
-		Track track = sut.getTrackFor(Position.FIRST);
+		PersonRelay actual = sut.getPersonFor(Position.FIRST);
 
-		PersonRelay actual = track.getPersonRelay();
+		assertEquals("Person on first position is wrong!", expected, actual);
+		assertNull("second position not null!", sut.getPersonFor(Position.SECOND));
+		assertNull("third position not null!", sut.getPersonFor(Position.THIRD));
+		assertNull("fourth position not null!", sut.getPersonFor(Position.FOURTH));
+	}
 
-		assertEquals(expected, actual);
+	@Test
+	public void testAddPerson_ForPositionSecond() {
+		Relay sut = Relay.newInstance(RelayEvent.duesseldorf());
+
+		PersonRelay expected = PersonRelay.newInstance();
+		expected.setForename(Forename.newInstance("Justus"));
+		expected.setSurename(Surename.newInstance("Jonas"));
+
+		sut.addPersonRelay(expected, Position.SECOND);
+
+		PersonRelay actual = sut.getPersonFor(Position.SECOND);
+
+		assertNull("first position not null!", sut.getPersonFor(Position.FIRST));
+		assertEquals("Person on second position is wrong!", expected, actual);
+		assertNull("third position not null!", sut.getPersonFor(Position.THIRD));
+		assertNull("fourth position not null!", sut.getPersonFor(Position.FOURTH));
+	}
+
+	@Test
+	public void testAddPerson_ForPositionThird() {
+		Relay sut = Relay.newInstance(RelayEvent.duesseldorf());
+
+		PersonRelay expected = PersonRelay.newInstance();
+		expected.setForename(Forename.newInstance("Justus"));
+		expected.setSurename(Surename.newInstance("Jonas"));
+
+		sut.addPersonRelay(expected, Position.THIRD);
+
+		PersonRelay actual = sut.getPersonFor(Position.THIRD);
+
+		assertNull("first position not null!", sut.getPersonFor(Position.FIRST));
+		assertNull("second position not null!", sut.getPersonFor(Position.SECOND));
+		assertEquals("Person on third position is wrong!", expected, actual);
+		assertNull("fourth position not null!", sut.getPersonFor(Position.FOURTH));
+	}
+
+	@Test
+	public void testAddPerson_ForPositionFourth() {
+		Relay sut = Relay.newInstance(RelayEvent.duesseldorf());
+
+		PersonRelay expected = PersonRelay.newInstance();
+		expected.setForename(Forename.newInstance("Justus"));
+		expected.setSurename(Surename.newInstance("Jonas"));
+
+		sut.addPersonRelay(expected, Position.FOURTH);
+
+		PersonRelay actual = sut.getPersonFor(Position.FOURTH);
+
+		assertNull("first position not null!", sut.getPersonFor(Position.FIRST));
+		assertNull("second position not null!", sut.getPersonFor(Position.SECOND));
+		assertNull("third position not null!", sut.getPersonFor(Position.THIRD));
+		assertEquals("Person on fourth position is wrong!", expected, actual);
 	}
 
 	@Test
