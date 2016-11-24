@@ -1,12 +1,33 @@
 package com.relayd.web.pagebean;
 
 import static org.junit.Assert.*;
+import static org.mockito.Matchers.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.event.ActionEvent;
+
+import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
+import org.mockito.Spy;
+import org.mockito.runners.MockitoJUnitRunner;
+import org.primefaces.model.DefaultTreeNode;
+import org.primefaces.model.TreeNode;
+
+import com.relayd.Person;
+import com.relayd.PersonRelay;
+import com.relayd.attributes.Forename;
+import com.relayd.attributes.Relayname;
+import com.relayd.attributes.Surename;
+import com.relayd.web.bridge.TreeNodeRelay;
+
+import static org.mockito.Mockito.*;
 
 /**
  * Tests are the Programmer’s stone, transmuting fear into boredom.
@@ -16,9 +37,17 @@ import org.junit.runners.MethodSorters;
  * @since 10.10.2016
  *
  */
+@RunWith(MockitoJUnitRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class RelayBrowsePageBeanTest {
-	private RelayBrowsePageBean sut = new RelayBrowsePageBean();
+
+	@Spy
+	private RelayBrowsePageBean sut;
+
+	@Before
+	public void setUp() {
+		doNothing().when(sut).showMessage(any(FacesMessage.Severity.class), anyString(), anyString());
+	}
 
 	@Test
 	public void testIsSerializable() {
@@ -27,5 +56,52 @@ public class RelayBrowsePageBeanTest {
 		boolean result = sut instanceof Serializable;
 
 		assertTrue("Class not Serializable!", result);
+	}
+
+	@Test
+	public void testAddPersonToRelay_ForWrongSelection() {
+		ActionEvent dummyActionEvent = null;
+
+		Relayname relayname = Relayname.newInstance("Staubwolke");
+		TreeNode relayTreeNode = new DefaultTreeNode(new TreeNodeRelay(relayname), null);
+		sut.setSelectedNode(relayTreeNode);
+
+		Person justusJonas = Person.newInstance();
+		justusJonas.setForename(Forename.newInstance("Justus"));
+		justusJonas.setSurename(Surename.newInstance("Jonas"));
+		sut.setSelectedPersons(createListFor(justusJonas));
+
+		sut.addPersonToRelay(dummyActionEvent);
+
+		verify(sut).showMessage(any(FacesMessage.Severity.class), anyString(), anyString());
+	}
+
+	@Test
+	public void testAddPersonToRelay_ForRightSelection() {
+		ActionEvent dummyActionEvent = null;
+
+		PersonRelay personRelay = PersonRelay.newInstance();
+		TreeNode relayTreeNode = new DefaultTreeNode(new TreeNodeRelay(personRelay), null);
+		sut.setSelectedNode(relayTreeNode);
+
+		Person justusJonas = Person.newInstance();
+		justusJonas.setForename(Forename.newInstance("Justus"));
+		justusJonas.setSurename(Surename.newInstance("Jonas"));
+		sut.setSelectedPersons(createListFor(justusJonas));
+
+		sut.addPersonToRelay(dummyActionEvent);
+
+		verify(sut, never()).showMessage(any(FacesMessage.Severity.class), anyString(), anyString());
+
+		TreeNodeRelay selectedRelayNode = (TreeNodeRelay) relayTreeNode.getData();
+		PersonRelay actual = selectedRelayNode.getParticipant();
+
+		assertEquals("UUID not correct!", justusJonas.getUuid(), actual.getUuid());
+	}
+
+	private List<Person> createListFor(Person person) {
+		List<Person> somePersons = new ArrayList<Person>();
+		somePersons.add(person);
+		return somePersons;
 	}
 }

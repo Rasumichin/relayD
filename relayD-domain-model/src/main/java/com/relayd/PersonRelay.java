@@ -11,6 +11,7 @@ import com.relayd.attributes.Surename;
  * @since   11.06.2016
  *
  */
+// TODO it38, 24.11.2016: Statt PersonRelay bitte Participant nennen
 public class PersonRelay implements Serializable {
 	private static final long serialVersionUID = 1L;
 
