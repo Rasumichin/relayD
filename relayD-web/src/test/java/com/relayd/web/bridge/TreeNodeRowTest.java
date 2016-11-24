@@ -12,6 +12,7 @@ import org.junit.runners.MethodSorters;
 import com.relayd.PersonRelay;
 import com.relayd.Relay;
 import com.relayd.RelayEvent;
+import com.relayd.attributes.Relayname;
 
 /**
  * The time to write good code is at the time you are writing it.
@@ -70,7 +71,7 @@ public class TreeNodeRowTest {
 
 		boolean actual = sut.isRelay();
 
-		assertTrue("Expect that row is a relay!", actual);
+		assertTrue("row is not a relay!", actual);
 	}
 
 	@Test
@@ -82,6 +83,31 @@ public class TreeNodeRowTest {
 
 		boolean actual = sut.isRelay();
 
-		assertFalse("Expect that row is a participant!", actual);
+		assertFalse("row is not a participant!", actual);
 	}
+
+	@Test
+	public void testGetRelayName_ForRelay() {
+		Relay relay = Relay.newInstance(RelayEvent.duesseldorf());
+		Relayname expected = Relayname.newInstance("Staubwolke");
+		relay.setRelayname(expected);
+		TreeNodeRow sut = TreeNodeRow.newInstance(relay);
+
+		Relayname actual = sut.getRelayname();
+
+		assertEquals("relayName not correct!", expected, actual);
+	}
+
+	@Test
+	public void testGetRelayname_ForParticipant() {
+		UUID uuid = UUID.randomUUID();
+		PersonRelay personRelay = PersonRelay.newInstance();
+		personRelay.setUuid(uuid);
+		TreeNodeRow sut = TreeNodeRow.newInstance(personRelay);
+
+		Relayname actual = sut.getRelayname();
+		// TODO mit Erik drüber sprechen. Ohne toString interessantes Phänomen
+		assertEquals("relayName not correct!", "", actual.toString());
+	}
+
 }

@@ -62,16 +62,8 @@ public class Relay implements Serializable {
 		return person;
 	}
 
-	public Track getTrackFor(Position position) {
-		Track track = relayEvent.getTrackForPosition(position);
-		return track;
-	}
-
 	public void addPersonRelay(PersonRelay person, Position position) {
 		participants.set(position.getValue() - 1, person);
-
-		//		Track track = getTrackFor(position);
-		//		track.setPersonRelay(person);
 	}
 
 	@Override

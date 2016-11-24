@@ -24,7 +24,7 @@ import com.relayd.web.browse.PersonBrowse;
 public class PersonBridgeImpl implements PersonBridge {
 
 	private PersonGateway gateway = null;
-	private GatewayType gatewayType = GatewayType.FILE;
+	private GatewayType gatewayType = GatewayType.JPA;
 
 	public PersonBridgeImpl() {
 		gateway = PersonGatewayFactory.get(getGatewayType());

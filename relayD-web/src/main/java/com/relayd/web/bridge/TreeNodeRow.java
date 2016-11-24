@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import com.relayd.PersonRelay;
 import com.relayd.Relay;
+import com.relayd.attributes.Relayname;
 
 /**
  * Klasse übernommen aus dem Primefaces-Beispiel.
@@ -15,7 +16,7 @@ public class TreeNodeRow implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private PersonRelay participant;
-	private Relay relay;
+	private Relay relay; // TODO mit Erik sprechen. Eine Relay hat auch ein NOP?
 
 	public TreeNodeRow(PersonRelay aParticipant) {
 		participant = aParticipant;
@@ -47,5 +48,12 @@ public class TreeNodeRow implements Serializable {
 
 	public boolean isRelay() {
 		return relay != null;
+	}
+
+	public Relayname getRelayname() {
+		if (relay == null) {
+			return Relayname.newInstance();
+		}
+		return relay.getRelayname();
 	}
 }
