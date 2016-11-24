@@ -1,6 +1,8 @@
 package com.relayd;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import com.relayd.attributes.Position;
@@ -17,10 +19,14 @@ public class Relay implements Serializable {
 	UUID uuid = null;
 	private Relayname relayname = null;
 	private RelayEvent relayEvent = null;
+	private List<PersonRelay> participants = new ArrayList<PersonRelay>();
 
 	private Relay(RelayEvent aRelayEvent) {
 		uuid = UUID.randomUUID();
 		relayEvent = aRelayEvent;
+		for (int tempI = 0; tempI < 4; tempI++) {
+			participants.add(null);
+		}
 	}
 
 	public static Relay newInstance() {
@@ -53,8 +59,10 @@ public class Relay implements Serializable {
 	}
 
 	public void addPersonRelay(PersonRelay person, Position position) {
-		Track track = getTrackFor(position);
-		track.setPersonRelay(person);
+		participants.set(position.getValue() - 1, person);
+
+		//		Track track = getTrackFor(position);
+		//		track.setPersonRelay(person);
 	}
 
 	@Override

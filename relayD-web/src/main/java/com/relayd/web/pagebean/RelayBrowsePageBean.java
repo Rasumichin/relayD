@@ -2,11 +2,9 @@ package com.relayd.web.pagebean;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
-import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.application.FacesMessage.Severity;
 import javax.faces.bean.ManagedBean;
@@ -26,7 +24,7 @@ import com.relayd.web.bridge.PersonBridge;
 import com.relayd.web.bridge.PersonBridgeImpl;
 import com.relayd.web.bridge.RelayBridge;
 import com.relayd.web.bridge.RelayBridgeImpl;
-import com.relayd.web.bridge.TreeNodeRelay;
+import com.relayd.web.bridge.TreeNodeRow;
 
 /**
  * @author schmollc (Christian@relayd.de)
@@ -40,28 +38,26 @@ public class RelayBrowsePageBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private static final String NOT_POSSIBLE = "Not Possible!";
 	private static final String PLEASE_SELECT_A_ROW = "Please select one row!";
-	
+
 	private TreeNode root;
 
 	private TreeNode selectedTreeNode;
 
 	private RelayBridge relayBridge = null;
 	private PersonBridge personBridge = null;
-	
+
 	private PersonSort personSort = new PersonSort();
 	private List<Person> searchResult = new ArrayList<Person>();
 	private List<Person> filteredPersons;
 
 	private List<Person> selectedPersons;
-	
-	
+
 	private boolean canceled;
 	@ManagedProperty(value = "#{personEditPageBean}")
 	private PersonEditPageBean personEditPageBean;
 
 	@ManagedProperty(value = "#{relayEditPageBean}")
 	private RelayEditPageBean relayEditPageBean;
-	
 
 	public RelayBrowsePageBean() {
 		relayBridge = new RelayBridgeImpl();
@@ -69,8 +65,6 @@ public class RelayBrowsePageBean implements Serializable {
 		refreshRelays();
 		refreshPersons();
 	}
-	
-	
 
 	private void refreshRelays() {
 		root = relayBridge.all();
@@ -99,27 +93,21 @@ public class RelayBrowsePageBean implements Serializable {
 	public void addRelay(@SuppressWarnings("unused") ActionEvent actionEvent) {
 		getRelayEditPageBean().openDialogForCreateRelay();
 	}
-	
+
 	public void addPersonToRelay(@SuppressWarnings("unused") ActionEvent actionEvent) {
 		System.out.println("addPersonToRelay");
-		
-		
-		TreeNodeRelay selectedRelayNode = (TreeNodeRelay)selectedTreeNode.getData();
-		
+
+		TreeNodeRow selectedRelayNode = (TreeNodeRow) selectedTreeNode.getData();
+
 		if (selectedTreeNode != null) {
-			if (selectedRelayNode.getName() != null) {
-				System.out.println("Relay selected: " + selectedRelayNode.getName().toString());
+			if (selectedRelayNode.getRelay() != null) {
 				if (isOnlyOnePersonRowSelected()) {
 					Person selectedPerson = getSelectedPerson();
 					System.out.println("Person selected: " + selectedPerson.toString());
-					
-					
-					
-					
 				}
-				
+
 				showMessage(FacesMessage.SEVERITY_ERROR, NOT_POSSIBLE, "Pleasê select a RelayPosition!");
-				
+
 			} else {
 				System.out.println("No Relay selected - check if Participant is selected");
 				if (selectedRelayNode.getParticipant() != null) {
@@ -127,36 +115,34 @@ public class RelayBrowsePageBean implements Serializable {
 					if (isOnlyOnePersonRowSelected()) {
 						Person selectedPerson = getSelectedPerson();
 						System.out.println("Person selected: " + selectedPerson.toString());
-						
+
 						PersonRelay newRelayParticipant = PersonRelay.newInstance();
 						newRelayParticipant.setUuid(selectedPerson.getUuid());
 						newRelayParticipant.setForename(selectedPerson.getForename());
 						newRelayParticipant.setSurename(selectedPerson.getSurename());
-						
+
 						selectedRelayNode.setParticipant(newRelayParticipant);
 					}
-					
-					
+
 				} else {
 					System.out.println("Unknown Participant selected");
-					
+
 					if (isOnlyOnePersonRowSelected()) {
 						Person selectedPerson = getSelectedPerson();
 						System.out.println("Person selected: " + selectedPerson.toString());
-						
+
 						PersonRelay newRelayParticipant = PersonRelay.newInstance();
 						newRelayParticipant.setUuid(selectedPerson.getUuid());
 						newRelayParticipant.setForename(selectedPerson.getForename());
 						newRelayParticipant.setSurename(selectedPerson.getSurename());
-						
+
 						selectedRelayNode.setParticipant(newRelayParticipant);
 					}
 				}
 			}
-			
-			
-		}	
-		
+
+		}
+
 	}
 
 	public void editRelay(@SuppressWarnings("unused") ActionEvent actionEvent) {
@@ -166,14 +152,13 @@ public class RelayBrowsePageBean implements Serializable {
 	public void removeRelay(@SuppressWarnings("unused") ActionEvent actionEvent) {
 		showMessage(FacesMessage.SEVERITY_ERROR, NOT_POSSIBLE, "Not implemented yet!");
 	}
-	
+
 	public void removePersonFromRelay(@SuppressWarnings("unused") ActionEvent actionEvent) {
 		System.out.println("removePersonFromRelay");
-		
-		
+
 		if (selectedTreeNode != null) {
-			TreeNodeRelay selectedRelayNode = (TreeNodeRelay)selectedTreeNode.getData();
-			
+			TreeNodeRow selectedRelayNode = (TreeNodeRow) selectedTreeNode.getData();
+
 			if (selectedRelayNode.getParticipant() != null) {
 				System.out.println("Relay Participant selected: " + selectedRelayNode.getParticipant().toString());
 				selectedRelayNode.setParticipant(null);
@@ -181,7 +166,7 @@ public class RelayBrowsePageBean implements Serializable {
 				showMessage(FacesMessage.SEVERITY_ERROR, NOT_POSSIBLE, "Please select a RelayParticipant!");
 			}
 		}
-		
+
 	}
 
 	void showMessage(Severity severityInfo, String summary, String textMessage) {
@@ -196,28 +181,27 @@ public class RelayBrowsePageBean implements Serializable {
 	public void onRelayEditClosed(@SuppressWarnings("unused") SelectEvent event) {
 		refreshRelays();
 	}
-	
+
 	public void onAddPersonToRelayClosed(@SuppressWarnings("unused") SelectEvent event) {
 		System.out.println("onAddPersonToRelayClosed");
 	}
-	
+
 	public void onRemovePersonFromRelayClosed(@SuppressWarnings("unused") SelectEvent event) {
 		System.out.println("onRemovePersonFromRelayClosed");
 	}
-	
-	
+
 	public void showAllWithoutRelay() {
 		searchResult = personBridge.allWithoutRelay();
 	}
-	
+
 	public void showRelaysWithSpace() {
 		searchResult = personBridge.relaysWithSpace();
 	}
-	
+
 	public void showAll() {
 		refreshPersons();
 	}
-	
+
 	public void emailExport(@SuppressWarnings("unused") ActionEvent actionEvent) {
 		String output = null;
 		if (isPersonRowSelected()) {
@@ -227,7 +211,7 @@ public class RelayBrowsePageBean implements Serializable {
 		}
 		showMessage(FacesMessage.SEVERITY_INFO, "Email", output);
 	}
-	
+
 	public void onPersonEditClosed(@SuppressWarnings("unused") SelectEvent event) {
 		if (canceled) {
 			showMessage(FacesMessage.SEVERITY_INFO, "Canceled!", "");
@@ -240,27 +224,27 @@ public class RelayBrowsePageBean implements Serializable {
 
 		refreshPersons();
 	}
-	
+
 	public List<Person> getFilteredPersons() {
 		return filteredPersons;
 	}
-	
+
 	public void setFilteredPersons(List<Person> someFilteredPersons) {
 		filteredPersons = someFilteredPersons;
 	}
-	
+
 	public List<Person> getPersons() {
 		return searchResult;
 	}
-	
+
 	public List<Person> getSelectedPersons() {
 		return selectedPersons;
 	}
-	
+
 	public void setSelectedPersons(List<Person> someSelectedPersons) {
 		selectedPersons = someSelectedPersons;
 	}
-	
+
 	public int sortByForename(Forename name1, Forename name2) {
 		return personSort.sortByForename(name1, name2);
 	}
@@ -268,26 +252,26 @@ public class RelayBrowsePageBean implements Serializable {
 	public int sortBySurename(Surename name1, Surename name2) {
 		return personSort.sortBySurename(name1, name2);
 	}
-	
+
 	void refreshPersons() {
 		searchResult = personBridge.all();
 	}
-	
+
 	private boolean isOnlyOnePersonRowSelected() {
 		return getSelectedPersons() != null && getSelectedPersons().size() == 1;
 	}
-	
+
 	private Person getSelectedPerson() {
 		return selectedPersons.get(0);
 	}
-	
+
 	private boolean isPersonRowSelected() {
 		return getSelectedPersons() != null && !getSelectedPersons().isEmpty();
 	}
-	
+
 	private boolean isRelayParticipantSelected() {
 		if (selectedTreeNode != null) {
-			TreeNodeRelay selectedRelayNode = (TreeNodeRelay)selectedTreeNode.getData();
+			TreeNodeRow selectedRelayNode = (TreeNodeRow) selectedTreeNode.getData();
 			if (selectedRelayNode.getParticipant() != null) {
 				System.out.println("Participant selected: " + selectedRelayNode.getParticipant().toString());
 				return true;
@@ -295,39 +279,38 @@ public class RelayBrowsePageBean implements Serializable {
 		}
 		return false;
 	}
-	
+
 	private boolean isRelaySelected() {
 		if (selectedTreeNode != null) {
-			TreeNodeRelay selectedRelayNode = (TreeNodeRelay)selectedTreeNode.getData();
-			if (selectedRelayNode.getName() != null) {
-				System.out.println("Relay selected: " + selectedRelayNode.getName().toString());
+			TreeNodeRow selectedRelayNode = (TreeNodeRow) selectedTreeNode.getData();
+			if (selectedRelayNode.getRelay() != null) {
 				return true;
 			}
 		}
 		return false;
 	}
-	
+
 	public boolean isAddingPersonToRelayAllowed() {
 		if (isRelaySelected()) {
 			//hinzufügen geht nur wenn eine Staffel ausgewählt wurde
-			
+
 			if (isOnlyOnePersonRowSelected()) {
 				//man kann nur einen Participant hinzufügen.
-				
+
 			}
 		}
 		return false;
-		
+
 	}
-	
+
 	public boolean isRemovingPersonFromRelayAllowed() {
 		return false;
 	}
-	
+
 	public void addPerson(@SuppressWarnings("unused") ActionEvent actionEvent) {
 		getPersonEditPageBean().openDialogForCreatePerson();
 	}
-	
+
 	public void editPerson(@SuppressWarnings("unused") ActionEvent actionEvent) {
 		if (isOnlyOnePersonRowSelected()) {
 			UUID uuid = getSelectedPerson().getUuid();
@@ -336,7 +319,7 @@ public class RelayBrowsePageBean implements Serializable {
 			showMessageErrorNoRowSelected();
 		}
 	}
-	
+
 	public void removePerson(@SuppressWarnings("unused") ActionEvent actionEvent) {
 		if (isOnlyOnePersonRowSelected()) {
 			personBridge.remove(getSelectedPerson());
@@ -346,15 +329,15 @@ public class RelayBrowsePageBean implements Serializable {
 			showMessageErrorNoRowSelected();
 		}
 	}
-	
+
 	public PersonEditPageBean getPersonEditPageBean() {
 		return personEditPageBean;
 	}
-	
+
 	public void setPersonEditPageBean(PersonEditPageBean aPersonEditPageBean) {
 		personEditPageBean = aPersonEditPageBean;
 	}
-	
+
 	void showMessageErrorNoRowSelected() {
 		showMessage(FacesMessage.SEVERITY_ERROR, NOT_POSSIBLE, PLEASE_SELECT_A_ROW);
 	}
