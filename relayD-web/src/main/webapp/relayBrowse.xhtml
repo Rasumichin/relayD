@@ -115,15 +115,15 @@
 					selection="#{relayBrowsePageBean.selectedNode}"
 					selectionMode="single"
 					value="#{relayBrowsePageBean.root}"
-					var="relay">
+					var="relayRow">
 					<f:facet name="header">
 		            Relays
 		        	</f:facet>
 					<p:column headerText="Name">
-						<h:outputText value="#{relay.name}" />
+						<h:outputText value="#{relayRow.relay}" />
 					</p:column>
 					<p:column headerText="Participant">
-						<h:outputText value="#{relay.participant}" />
+						<h:outputText value="#{relayRow.participant}" />
 					</p:column>
 				</p:treeTable>
 				

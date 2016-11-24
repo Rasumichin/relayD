@@ -22,10 +22,11 @@ import org.primefaces.model.TreeNode;
 
 import com.relayd.Person;
 import com.relayd.PersonRelay;
+import com.relayd.Relay;
+import com.relayd.RelayEvent;
 import com.relayd.attributes.Forename;
-import com.relayd.attributes.Relayname;
 import com.relayd.attributes.Surename;
-import com.relayd.web.bridge.TreeNodeRelay;
+import com.relayd.web.bridge.TreeNodeRow;
 
 import static org.mockito.Mockito.*;
 
@@ -62,8 +63,8 @@ public class RelayBrowsePageBeanTest {
 	public void testAddPersonToRelay_ForWrongSelection() {
 		ActionEvent dummyActionEvent = null;
 
-		Relayname relayname = Relayname.newInstance("Staubwolke");
-		TreeNode relayTreeNode = new DefaultTreeNode(new TreeNodeRelay(relayname), null);
+		Relay relay = Relay.newInstance(RelayEvent.duesseldorf());
+		TreeNode relayTreeNode = new DefaultTreeNode(new TreeNodeRow(relay), null);
 		sut.setSelectedNode(relayTreeNode);
 
 		Person justusJonas = Person.newInstance();
@@ -81,7 +82,7 @@ public class RelayBrowsePageBeanTest {
 		ActionEvent dummyActionEvent = null;
 
 		PersonRelay personRelay = PersonRelay.newInstance();
-		TreeNode relayTreeNode = new DefaultTreeNode(new TreeNodeRelay(personRelay), null);
+		TreeNode relayTreeNode = new DefaultTreeNode(new TreeNodeRow(personRelay), null);
 		sut.setSelectedNode(relayTreeNode);
 
 		Person justusJonas = Person.newInstance();
@@ -93,7 +94,7 @@ public class RelayBrowsePageBeanTest {
 
 		verify(sut, never()).showMessage(any(FacesMessage.Severity.class), anyString(), anyString());
 
-		TreeNodeRelay selectedRelayNode = (TreeNodeRelay) relayTreeNode.getData();
+		TreeNodeRow selectedRelayNode = (TreeNodeRow) relayTreeNode.getData();
 		PersonRelay actual = selectedRelayNode.getParticipant();
 
 		assertEquals("UUID not correct!", justusJonas.getUuid(), actual.getUuid());

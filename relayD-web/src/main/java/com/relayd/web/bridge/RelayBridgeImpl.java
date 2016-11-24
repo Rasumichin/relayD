@@ -34,7 +34,7 @@ public class RelayBridgeImpl implements RelayBridge {
 
 	@Override
 	public TreeNode all() {
-		TreeNode root = new DefaultTreeNode(new TreeNodeRelay(PersonRelay.newInstance()), null);
+		TreeNode root = new DefaultTreeNode(new TreeNodeRow(PersonRelay.newInstance()), null);
 
 		List<Relay> all = gateway.getAll();
 		// TODO - schmollc- entfernen wenn alles rund läuft!
@@ -43,18 +43,18 @@ public class RelayBridgeImpl implements RelayBridge {
 		for (Relay relay : all) {
 
 			// Methodik übernommen aus dem Primefaces-Beispiel.
-			TreeNode relayTreeNode = new DefaultTreeNode(new TreeNodeRelay(relay.getRelayname()), root);
+			TreeNode relayTreeNode = new DefaultTreeNode(new TreeNodeRow(relay), root);
 
 			// TODO -schmollc/lotz- Sieht nach Trainwreck aus. Aber wenn man direkt auf Person geht... Dann "verschwindet" der Track...
 			// Moment.. mmm... dann würde die toString von Track halt sagen: "8.3km, Justus, Jonas, usw.."... mmmmm.....
 			@SuppressWarnings("unused")
-			TreeNode trackOne = new DefaultTreeNode("Etappe 1", new TreeNodeRelay(relay.getTrackFor(Position.FIRST).getPersonRelay()), relayTreeNode);
+			TreeNode trackOne = new DefaultTreeNode("Etappe 1", new TreeNodeRow(relay.getTrackFor(Position.FIRST).getPersonRelay()), relayTreeNode);
 			@SuppressWarnings("unused")
-			TreeNode trackTwo = new DefaultTreeNode("Etappe 2", new TreeNodeRelay(relay.getTrackFor(Position.SECOND).getPersonRelay()), relayTreeNode);
+			TreeNode trackTwo = new DefaultTreeNode("Etappe 2", new TreeNodeRow(relay.getTrackFor(Position.SECOND).getPersonRelay()), relayTreeNode);
 			@SuppressWarnings("unused")
-			TreeNode trackThree = new DefaultTreeNode("Etappe 3", new TreeNodeRelay(relay.getTrackFor(Position.THIRD).getPersonRelay()), relayTreeNode);
+			TreeNode trackThree = new DefaultTreeNode("Etappe 3", new TreeNodeRow(relay.getTrackFor(Position.THIRD).getPersonRelay()), relayTreeNode);
 			@SuppressWarnings("unused")
-			TreeNode trackFour = new DefaultTreeNode("Etappe 4", new TreeNodeRelay(relay.getTrackFor(Position.FOURTH).getPersonRelay()), relayTreeNode);
+			TreeNode trackFour = new DefaultTreeNode("Etappe 4", new TreeNodeRow(relay.getTrackFor(Position.FOURTH).getPersonRelay()), relayTreeNode);
 
 		}
 
@@ -131,5 +131,12 @@ public class RelayBridgeImpl implements RelayBridge {
 		relay.addPersonRelay(person, Position.FOURTH);
 
 		return relay;
+	}
+
+	/**
+	 *
+	 */
+	@Override
+	public void persist(TreeNode aRelay) {
 	}
 }

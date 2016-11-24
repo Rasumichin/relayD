@@ -25,7 +25,7 @@ import com.relayd.web.bridge.PersonBridge;
 import com.relayd.web.bridge.PersonBridgeImpl;
 import com.relayd.web.bridge.RelayBridge;
 import com.relayd.web.bridge.RelayBridgeImpl;
-import com.relayd.web.bridge.TreeNodeRelay;
+import com.relayd.web.bridge.TreeNodeRow;
 
 /**
  * @author schmollc (Christian@relayd.de)
@@ -102,11 +102,10 @@ public class RelayBrowsePageBean implements Serializable {
 	public void addPersonToRelay(@SuppressWarnings("unused") ActionEvent actionEvent) {
 		System.out.println("addPersonToRelay");
 
-		TreeNodeRelay selectedRelayNode = (TreeNodeRelay) selectedTreeNode.getData();
+		TreeNodeRow selectedRelayNode = (TreeNodeRow) selectedTreeNode.getData();
 
 		if (selectedTreeNode != null) {
-			if (selectedRelayNode.getName() != null) {
-				System.out.println("Relay selected: " + selectedRelayNode.getName().toString());
+			if (selectedRelayNode.getRelay() != null) {
 				if (isOnlyOnePersonRowSelected()) {
 					Person selectedPerson = getSelectedPerson();
 					System.out.println("Person selected: " + selectedPerson.toString());
@@ -164,7 +163,7 @@ public class RelayBrowsePageBean implements Serializable {
 		System.out.println("removePersonFromRelay");
 
 		if (selectedTreeNode != null) {
-			TreeNodeRelay selectedRelayNode = (TreeNodeRelay) selectedTreeNode.getData();
+			TreeNodeRow selectedRelayNode = (TreeNodeRow) selectedTreeNode.getData();
 
 			if (selectedRelayNode.getParticipant() != null) {
 				System.out.println("Relay Participant selected: " + selectedRelayNode.getParticipant().toString());
@@ -278,7 +277,7 @@ public class RelayBrowsePageBean implements Serializable {
 
 	private boolean isRelayParticipantSelected() {
 		if (selectedTreeNode != null) {
-			TreeNodeRelay selectedRelayNode = (TreeNodeRelay) selectedTreeNode.getData();
+			TreeNodeRow selectedRelayNode = (TreeNodeRow) selectedTreeNode.getData();
 			if (selectedRelayNode.getParticipant() != null) {
 				System.out.println("Participant selected: " + selectedRelayNode.getParticipant().toString());
 				return true;
@@ -289,9 +288,8 @@ public class RelayBrowsePageBean implements Serializable {
 
 	private boolean isRelaySelected() {
 		if (selectedTreeNode != null) {
-			TreeNodeRelay selectedRelayNode = (TreeNodeRelay) selectedTreeNode.getData();
-			if (selectedRelayNode.getName() != null) {
-				System.out.println("Relay selected: " + selectedRelayNode.getName().toString());
+			TreeNodeRow selectedRelayNode = (TreeNodeRow) selectedTreeNode.getData();
+			if (selectedRelayNode.getRelay() != null) {
 				return true;
 			}
 		}
