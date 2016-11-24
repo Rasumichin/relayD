@@ -19,7 +19,7 @@ public class Relay implements Serializable {
 	UUID uuid = null;
 	private Relayname relayname = null;
 	private RelayEvent relayEvent = null;
-	private List<PersonRelay> participants = new ArrayList<PersonRelay>();
+	private List<Participant> participants = new ArrayList<Participant>();
 
 	private Relay(RelayEvent aRelayEvent) {
 		uuid = UUID.randomUUID();
@@ -57,13 +57,13 @@ public class Relay implements Serializable {
 		return uuid;
 	}
 
-	public PersonRelay getPersonFor(Position position) {
-		PersonRelay person = participants.get(position.getValue() - 1);
+	public Participant getParticipantFor(Position position) {
+		Participant person = participants.get(position.getValue() - 1);
 		return person;
 	}
 
-	public void addPersonRelay(PersonRelay person, Position position) {
-		participants.set(position.getValue() - 1, person);
+	public void addParticipant(Participant participant, Position position) {
+		participants.set(position.getValue() - 1, participant);
 	}
 
 	@Override

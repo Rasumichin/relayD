@@ -45,28 +45,28 @@ public class RelayCreationWorkflowTest {
 		// Nun kann schon ein persistieren erfolgen?
 		// Oder sollte jede Relay immer min. eine Person besitzen?
 
-		PersonRelay justusJonas = PersonRelay.newInstance();
+		Participant justusJonas = Participant.newInstance();
 		justusJonas.setForename(Forename.newInstance("Justus"));
 		justusJonas.setSurename(Surename.newInstance("Jonas"));
 
-		staubwolke.addPersonRelay(justusJonas, Position.FIRST);
+		staubwolke.addParticipant(justusJonas, Position.FIRST);
 
 		// Prüfungen
-		PersonRelay peterShaw = PersonRelay.newInstance();
+		Participant peterShaw = Participant.newInstance();
 		peterShaw.setForename(Forename.newInstance("Peter"));
 		peterShaw.setSurename(Surename.newInstance("Shaw"));
 		// Sollte ein Fehler verursachen, da Position 1 schon vergeben!
-		staubwolke.addPersonRelay(peterShaw, Position.FIRST);
+		staubwolke.addParticipant(peterShaw, Position.FIRST);
 
 		Relay dieVierFragezeichen = Relay.newInstance(duesseldorf);
 		dieVierFragezeichen.setRelayname(Relayname.newInstance("Die 4 ????"));
 
 		// KEIN Fehler! Aber vielleicht eine Warnung?
 		// (Theoretisch kann EINE Person ALLE 4 Strecken für ALLE Staffeln laufen! -> Shirtsize XXL!)
-		dieVierFragezeichen.addPersonRelay(justusJonas, Position.FIRST);
+		dieVierFragezeichen.addParticipant(justusJonas, Position.FIRST);
 
 		// Bedenkliche Konstellation
-		PersonRelay bobAndrews = PersonRelay.newInstance();
+		Participant bobAndrews = Participant.newInstance();
 		bobAndrews.setForename(Forename.newInstance("Bob"));
 		bobAndrews.setSurename(Surename.newInstance("Andrews"));
 
@@ -77,8 +77,8 @@ public class RelayCreationWorkflowTest {
 		// Bei untigem Code sollte dann ggf eine Warnung erscheinen?
 		// Die Konstellation würde nur "sicher" sein wenn Bob auch die ERSTE Position in
 		// der Staffel 4???? ist.
-		staubwolke.addPersonRelay(bobAndrews, Position.FIRST);
-		dieVierFragezeichen.addPersonRelay(bobAndrews, Position.SECOND);
+		staubwolke.addParticipant(bobAndrews, Position.FIRST);
+		dieVierFragezeichen.addParticipant(bobAndrews, Position.SECOND);
 
 		// Justus jonas fällt aus
 		//		staubwolke.remove(Position.FIRST);
@@ -109,28 +109,28 @@ public class RelayCreationWorkflowTest {
 
 	@Test
 	@Ignore("Relay befindet sich in der Umstellung. Dieser Test scheitert nun!")
-	public void testShowcaseRelationTrackToPersonRelayIsWrong() {
+	public void testShowcaseRelationTrackToParticipantIsWrong() {
 		Eventname eventName = Eventname.newInstance("Boston Marathon");
 		EventDay eventDay = EventDay.newInstance(LocalDate.now());
 		RelayEvent boston = RelayEvent.newInstance(eventName, eventDay);
 		Track firstTrack = boston.getTrackForPosition(Position.FIRST);
 
-		assertNull("The person for the first track is not correct!", firstTrack.getPersonRelay());
+		assertNull("The person for the first track is not correct!", firstTrack.getParticipantRelay());
 
 		Relay slowMovers = Relay.newInstance(boston);
-		PersonRelay mike = PersonRelay.newInstance();
+		Participant mike = Participant.newInstance();
 		mike.setForename(Forename.newInstance("Mike"));
-		slowMovers.addPersonRelay(mike, Position.FIRST);
+		slowMovers.addParticipant(mike, Position.FIRST);
 
-		PersonRelay actual = firstTrack.getPersonRelay();
+		Participant actual = firstTrack.getParticipantRelay();
 		assertEquals("Person at first position of Track is not Mike!", mike, actual);
 
 		Relay dillyDallies = Relay.newInstance(boston);
-		PersonRelay sarah = PersonRelay.newInstance();
+		Participant sarah = Participant.newInstance();
 		sarah.setForename(Forename.newInstance("Sarah"));
-		dillyDallies.addPersonRelay(sarah, Position.FIRST);
+		dillyDallies.addParticipant(sarah, Position.FIRST);
 
-		actual = firstTrack.getPersonRelay();
+		actual = firstTrack.getParticipantRelay();
 		assertEquals("Person at first position of Track is not Sarah!", sarah, actual);
 		// But what about Mike? He lost his track position to Sarah!
 	}

@@ -9,7 +9,7 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import com.relayd.PersonRelay;
+import com.relayd.Participant;
 import com.relayd.Relay;
 import com.relayd.RelayEvent;
 import com.relayd.attributes.Relayname;
@@ -50,18 +50,18 @@ public class TreeNodeRowTest {
 	}
 
 	@Test
-	public void testCreateInstance_ForParameterPersonRelay() {
+	public void testCreateInstance_ForParameterParticipant() {
 		UUID uuid = UUID.randomUUID();
-		PersonRelay expected = PersonRelay.newInstance();
-		expected.setUuid(uuid);
+		Participant expected = Participant.newInstance();
+		expected.setUuidPerson(uuid);
 
 		TreeNodeRow sut = TreeNodeRow.newInstance(expected);
 
 		assertNotNull("Expected valid instance!", sut);
 
-		PersonRelay actual = sut.getParticipant();
+		Participant actual = sut.getParticipant();
 
-		assertEquals("PersonRelay not corret!", expected, actual);
+		assertEquals("Participant not corret!", expected, actual);
 	}
 
 	@Test
@@ -77,8 +77,8 @@ public class TreeNodeRowTest {
 	@Test
 	public void testIsRelay_ForParticipant() {
 		UUID uuid = UUID.randomUUID();
-		PersonRelay personRelay = PersonRelay.newInstance();
-		personRelay.setUuid(uuid);
+		Participant personRelay = Participant.newInstance();
+		personRelay.setUuidPerson(uuid);
 		TreeNodeRow sut = TreeNodeRow.newInstance(personRelay);
 
 		boolean actual = sut.isRelay();
@@ -101,8 +101,8 @@ public class TreeNodeRowTest {
 	@Test
 	public void testGetRelayname_ForParticipant() {
 		UUID uuid = UUID.randomUUID();
-		PersonRelay personRelay = PersonRelay.newInstance();
-		personRelay.setUuid(uuid);
+		Participant personRelay = Participant.newInstance();
+		personRelay.setUuidPerson(uuid);
 		TreeNodeRow sut = TreeNodeRow.newInstance(personRelay);
 
 		Relayname actual = sut.getRelayname();

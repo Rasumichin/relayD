@@ -75,15 +75,15 @@ public class TrackTest {
 	}
 
 	@Test
-	public void testPersonRelay() {
+	public void testParticipant() {
 		Distance dummyDistance = Distance.newInstance(BigDecimal.ONE);
 		Track sut = Track.newInstance(dummyDistance);
 
-		PersonRelay expected = PersonRelay.newInstance();
+		Participant expected = Participant.newInstance();
 
-		sut.setPersonRelay(expected);
+		sut.setParticipant(expected);
 
-		PersonRelay actual = sut.getPersonRelay();
+		Participant actual = sut.getParticipantRelay();
 
 		assertEquals(expected, actual);
 	}

@@ -17,8 +17,8 @@ import javax.faces.event.ActionEvent;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.TreeNode;
 
+import com.relayd.Participant;
 import com.relayd.Person;
-import com.relayd.PersonRelay;
 import com.relayd.attributes.Forename;
 import com.relayd.attributes.Surename;
 import com.relayd.web.bridge.PersonBridge;
@@ -122,8 +122,8 @@ public class RelayBrowsePageBean implements Serializable {
 						Person selectedPerson = getSelectedPerson();
 						System.out.println("Person selected: " + selectedPerson.toString());
 
-						PersonRelay newRelayParticipant = PersonRelay.newInstance();
-						newRelayParticipant.setUuid(selectedPerson.getUuid());
+						Participant newRelayParticipant = Participant.newInstance();
+						newRelayParticipant.setUuidPerson(selectedPerson.getUuid());
 						newRelayParticipant.setForename(selectedPerson.getForename());
 						newRelayParticipant.setSurename(selectedPerson.getSurename());
 
@@ -137,8 +137,8 @@ public class RelayBrowsePageBean implements Serializable {
 						Person selectedPerson = getSelectedPerson();
 						System.out.println("Person selected: " + selectedPerson.toString());
 
-						PersonRelay newRelayParticipant = PersonRelay.newInstance();
-						newRelayParticipant.setUuid(selectedPerson.getUuid());
+						Participant newRelayParticipant = Participant.newInstance();
+						newRelayParticipant.setUuidPerson(selectedPerson.getUuid());
 						newRelayParticipant.setForename(selectedPerson.getForename());
 						newRelayParticipant.setSurename(selectedPerson.getSurename());
 

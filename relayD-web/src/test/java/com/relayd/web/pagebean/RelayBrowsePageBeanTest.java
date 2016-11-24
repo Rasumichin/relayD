@@ -20,8 +20,8 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.TreeNode;
 
+import com.relayd.Participant;
 import com.relayd.Person;
-import com.relayd.PersonRelay;
 import com.relayd.Relay;
 import com.relayd.RelayEvent;
 import com.relayd.attributes.Forename;
@@ -81,7 +81,7 @@ public class RelayBrowsePageBeanTest {
 	public void testAddPersonToRelay_ForRightSelection() {
 		ActionEvent dummyActionEvent = null;
 
-		PersonRelay personRelay = PersonRelay.newInstance();
+		Participant personRelay = Participant.newInstance();
 		TreeNode relayTreeNode = new DefaultTreeNode(new TreeNodeRow(personRelay), null);
 		sut.setSelectedNode(relayTreeNode);
 
@@ -95,9 +95,9 @@ public class RelayBrowsePageBeanTest {
 		verify(sut, never()).showMessage(any(FacesMessage.Severity.class), anyString(), anyString());
 
 		TreeNodeRow selectedRelayNode = (TreeNodeRow) relayTreeNode.getData();
-		PersonRelay actual = selectedRelayNode.getParticipant();
+		Participant actual = selectedRelayNode.getParticipant();
 
-		assertEquals("UUID not correct!", justusJonas.getUuid(), actual.getUuid());
+		assertEquals("UUID not correct!", justusJonas.getUuid(), actual.getUuidPerson());
 	}
 
 	private List<Person> createListFor(Person person) {

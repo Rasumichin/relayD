@@ -2,7 +2,7 @@ package com.relayd.web.bridge;
 
 import java.io.Serializable;
 
-import com.relayd.PersonRelay;
+import com.relayd.Participant;
 import com.relayd.Relay;
 import com.relayd.attributes.Relayname;
 
@@ -15,10 +15,10 @@ import com.relayd.attributes.Relayname;
 public class TreeNodeRow implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private PersonRelay participant;
+	private Participant participant;
 	private Relay relay; // TODO mit Erik sprechen. Eine Relay hat auch ein NOP?
 
-	public TreeNodeRow(PersonRelay aParticipant) {
+	public TreeNodeRow(Participant aParticipant) {
 		participant = aParticipant;
 	}
 
@@ -26,7 +26,7 @@ public class TreeNodeRow implements Serializable {
 		relay = aRelay;
 	}
 
-	public static TreeNodeRow newInstance(PersonRelay personRelay) {
+	public static TreeNodeRow newInstance(Participant personRelay) {
 		return new TreeNodeRow(personRelay);
 	}
 
@@ -34,11 +34,11 @@ public class TreeNodeRow implements Serializable {
 		return new TreeNodeRow(relay);
 	}
 
-	public PersonRelay getParticipant() {
+	public Participant getParticipant() {
 		return participant;
 	}
 
-	public void setParticipant(PersonRelay aParticipant) {
+	public void setParticipant(Participant aParticipant) {
 		participant = aParticipant;
 	}
 

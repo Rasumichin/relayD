@@ -6,7 +6,7 @@ import java.util.List;
 import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.TreeNode;
 
-import com.relayd.PersonRelay;
+import com.relayd.Participant;
 import com.relayd.Relay;
 import com.relayd.RelayEvent;
 import com.relayd.attributes.Forename;
@@ -34,7 +34,7 @@ public class RelayBridgeImpl implements RelayBridge {
 
 	@Override
 	public TreeNode all() {
-		TreeNode root = new DefaultTreeNode(new TreeNodeRow(PersonRelay.newInstance()), null);
+		TreeNode root = new DefaultTreeNode(new TreeNodeRow(Participant.newInstance()), null);
 
 		List<Relay> all = gateway.getAll();
 		// TODO - schmollc- entfernen wenn alles rund läuft!
@@ -48,13 +48,13 @@ public class RelayBridgeImpl implements RelayBridge {
 			// TODO -schmollc/lotz- Sieht nach Trainwreck aus. Aber wenn man direkt auf Person geht... Dann "verschwindet" der Track...
 			// Moment.. mmm... dann würde die toString von Track halt sagen: "8.3km, Justus, Jonas, usw.."... mmmmm.....
 			@SuppressWarnings("unused")
-			TreeNode trackOne = new DefaultTreeNode("Etappe 1", new TreeNodeRow(relay.getPersonFor(Position.FIRST)), relayTreeNode);
+			TreeNode trackOne = new DefaultTreeNode("Etappe 1", new TreeNodeRow(relay.getParticipantFor(Position.FIRST)), relayTreeNode);
 			@SuppressWarnings("unused")
-			TreeNode trackTwo = new DefaultTreeNode("Etappe 2", new TreeNodeRow(relay.getPersonFor(Position.SECOND)), relayTreeNode);
+			TreeNode trackTwo = new DefaultTreeNode("Etappe 2", new TreeNodeRow(relay.getParticipantFor(Position.SECOND)), relayTreeNode);
 			@SuppressWarnings("unused")
-			TreeNode trackThree = new DefaultTreeNode("Etappe 3", new TreeNodeRow(relay.getPersonFor(Position.THIRD)), relayTreeNode);
+			TreeNode trackThree = new DefaultTreeNode("Etappe 3", new TreeNodeRow(relay.getParticipantFor(Position.THIRD)), relayTreeNode);
 			@SuppressWarnings("unused")
-			TreeNode trackFour = new DefaultTreeNode("Etappe 4", new TreeNodeRow(relay.getPersonFor(Position.FOURTH)), relayTreeNode);
+			TreeNode trackFour = new DefaultTreeNode("Etappe 4", new TreeNodeRow(relay.getParticipantFor(Position.FOURTH)), relayTreeNode);
 
 		}
 
@@ -85,23 +85,23 @@ public class RelayBridgeImpl implements RelayBridge {
 
 		relay.setRelayname(Relayname.newInstance("Die 4 ????"));
 
-		PersonRelay person = PersonRelay.newInstance();
-		person.setForename(Forename.newInstance("Justus"));
-		person.setSurename(Surename.newInstance("Jonas"));
-		relay.addPersonRelay(person, Position.FIRST);
+		Participant participant = Participant.newInstance();
+		participant.setForename(Forename.newInstance("Justus"));
+		participant.setSurename(Surename.newInstance("Jonas"));
+		relay.addParticipant(participant, Position.FIRST);
 
-		person = PersonRelay.newInstance();
-		person.setForename(Forename.newInstance("Peter"));
-		person.setSurename(Surename.newInstance("Shaw"));
-		relay.addPersonRelay(person, Position.SECOND);
+		participant = Participant.newInstance();
+		participant.setForename(Forename.newInstance("Peter"));
+		participant.setSurename(Surename.newInstance("Shaw"));
+		relay.addParticipant(participant, Position.SECOND);
 
-		person = PersonRelay.newInstance();
-		person.setForename(Forename.newInstance("Bob"));
-		person.setSurename(Surename.newInstance("Andrews"));
-		relay.addPersonRelay(person, Position.THIRD);
+		participant = Participant.newInstance();
+		participant.setForename(Forename.newInstance("Bob"));
+		participant.setSurename(Surename.newInstance("Andrews"));
+		relay.addParticipant(participant, Position.THIRD);
 
-		person = PersonRelay.newInstance();
-		relay.addPersonRelay(person, Position.FOURTH);
+		participant = Participant.newInstance();
+		relay.addParticipant(participant, Position.FOURTH);
 
 		return relay;
 	}
@@ -111,24 +111,24 @@ public class RelayBridgeImpl implements RelayBridge {
 
 		relay.setRelayname(Relayname.newInstance("Die Fanta 4"));
 
-		PersonRelay person = PersonRelay.newInstance();
-		person.setForename(Forename.newInstance("Smudo"));
-		relay.addPersonRelay(person, Position.FIRST);
+		Participant participant = Participant.newInstance();
+		participant.setForename(Forename.newInstance("Smudo"));
+		relay.addParticipant(participant, Position.FIRST);
 
-		person = PersonRelay.newInstance();
-		person.setForename(Forename.newInstance("Michi"));
-		person.setSurename(Surename.newInstance("Beck"));
-		relay.addPersonRelay(person, Position.SECOND);
+		participant = Participant.newInstance();
+		participant.setForename(Forename.newInstance("Michi"));
+		participant.setSurename(Surename.newInstance("Beck"));
+		relay.addParticipant(participant, Position.SECOND);
 
-		person = PersonRelay.newInstance();
-		person.setForename(Forename.newInstance("Thomas"));
-		person.setSurename(Surename.newInstance("D."));
-		relay.addPersonRelay(person, Position.THIRD);
+		participant = Participant.newInstance();
+		participant.setForename(Forename.newInstance("Thomas"));
+		participant.setSurename(Surename.newInstance("D."));
+		relay.addParticipant(participant, Position.THIRD);
 
-		person = PersonRelay.newInstance();
-		person.setForename(Forename.newInstance("Andy"));
-		person.setSurename(Surename.newInstance("Epsilon"));
-		relay.addPersonRelay(person, Position.FOURTH);
+		participant = Participant.newInstance();
+		participant.setForename(Forename.newInstance("Andy"));
+		participant.setSurename(Surename.newInstance("Epsilon"));
+		relay.addParticipant(participant, Position.FOURTH);
 
 		return relay;
 	}
