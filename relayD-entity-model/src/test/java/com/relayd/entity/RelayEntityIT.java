@@ -2,6 +2,8 @@ package com.relayd.entity;
 
 import static org.junit.Assert.*;
 
+import java.util.UUID;
+
 import javax.persistence.EntityTransaction;
 
 import org.junit.FixMethodOrder;
@@ -24,6 +26,10 @@ public class RelayEntityIT extends EntityIT {
 	public void testInsertRelayEntity() {
 		RelayEntity sut = RelayEntity.newInstance();
 		sut.setRelayname("Staubwolke");
+		sut.setParticipantOne(UUID.randomUUID());
+		sut.setParticipantTwo(UUID.randomUUID());
+		sut.setParticipantThree(UUID.randomUUID());
+		sut.setParticipantFour(UUID.randomUUID());
 
 		EntityTransaction tx = getEntityManager().getTransaction();
 

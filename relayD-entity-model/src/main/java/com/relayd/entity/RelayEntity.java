@@ -23,6 +23,18 @@ public class RelayEntity {
 	@Column
 	private String relayname;
 
+	@Column
+	private String participantOne;
+
+	@Column
+	private String participantTwo;
+
+	@Column
+	private String participantThree;
+
+	@Column
+	private String participantFour;
+
 	public static RelayEntity newInstance() {
 		RelayEntity relayEntity = new RelayEntity();
 		relayEntity.setId(UUID.randomUUID().toString());
@@ -55,6 +67,38 @@ public class RelayEntity {
 
 	public void setRelayname(String aRelayname) {
 		relayname = aRelayname;
+	}
+
+	public UUID getParticipantOne() {
+		return UUID.fromString(participantOne);
+	}
+
+	public void setParticipantOne(UUID anUUID) {
+		participantOne = anUUID.toString();
+	}
+
+	public UUID getParticipantTwo() {
+		return UUID.fromString(participantTwo);
+	}
+
+	public void setParticipantTwo(UUID anUUID) {
+		participantTwo = anUUID.toString();
+	}
+
+	public UUID getParticipantThree() {
+		return UUID.fromString(participantThree);
+	}
+
+	public void setParticipantThree(UUID anUUID) {
+		participantThree = anUUID.toString();
+	}
+
+	public UUID getParticipantFour() {
+		return UUID.fromString(participantFour);
+	}
+
+	public void setParticipantFour(UUID anUUID) {
+		participantFour = anUUID.toString();
 	}
 
 	@Override

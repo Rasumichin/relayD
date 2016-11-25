@@ -52,6 +52,58 @@ public class RelayEntityTest {
 	}
 
 	@Test
+	public void testParticipantOne() {
+		RelayEntity sut = RelayEntity.newInstance();
+
+		UUID expected = UUID.randomUUID();
+
+		sut.setParticipantOne(expected);
+
+		UUID actual = sut.getParticipantOne();
+
+		assertEquals("[participantOne] has not been set correctly!", expected, actual);
+	}
+
+	@Test
+	public void testParticipantTwo() {
+		RelayEntity sut = RelayEntity.newInstance();
+
+		UUID expected = UUID.randomUUID();
+
+		sut.setParticipantTwo(expected);
+
+		UUID actual = sut.getParticipantTwo();
+
+		assertEquals("[participantTwo] has not been set correctly!", expected, actual);
+	}
+
+	@Test
+	public void testParticipantThree() {
+		RelayEntity sut = RelayEntity.newInstance();
+
+		UUID expected = UUID.randomUUID();
+
+		sut.setParticipantThree(expected);
+
+		UUID actual = sut.getParticipantThree();
+
+		assertEquals("[participantThree] has not been set correctly!", expected, actual);
+	}
+
+	@Test
+	public void testParticipantFour() {
+		RelayEntity sut = RelayEntity.newInstance();
+
+		UUID expected = UUID.randomUUID();
+
+		sut.setParticipantFour(expected);
+
+		UUID actual = sut.getParticipantFour();
+
+		assertEquals("[participantFour] has not been set correctly!", expected, actual);
+	}
+
+	@Test
 	public void testToString() {
 		RelayEntity sut = RelayEntity.newInstance();
 		String relayname = "Staubwolke";
