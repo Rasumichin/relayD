@@ -18,7 +18,7 @@ public class TreeNodeRow implements Serializable {
 
 	private Participant participant;
 	private Position position = Position.UNKNOWN;
-	private Relay relay; // TODO mit Erik sprechen. Eine Relay hat auch ein NOP?
+	private Relay relay; // TODO (Christian, Version 1.3): mit Erik sprechen. Eine Relay hat auch ein NOP?
 
 	public TreeNodeRow(Participant aParticipant, Position aPosition) {
 		participant = aParticipant;

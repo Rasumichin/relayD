@@ -37,7 +37,7 @@ public class RelayBridgeImpl implements RelayBridge {
 		TreeNode root = new DefaultTreeNode(new TreeNodeRow(Participant.newInstance(), Position.UNKNOWN), null);
 
 		List<Relay> all = gateway.getAll();
-		// TODO - schmollc- entfernen wenn alles rund läuft!
+		// TODO (Christian, Version 1.3): entfernen wenn alles rund läuft!
 		//		all.addAll(getAllMock());
 
 		for (Relay relay : all) {
@@ -45,7 +45,7 @@ public class RelayBridgeImpl implements RelayBridge {
 			// Methodik übernommen aus dem Primefaces-Beispiel.
 			TreeNode relayTreeNode = new DefaultTreeNode(new TreeNodeRow(relay), root);
 
-			// TODO -schmollc/lotz- Sieht nach Trainwreck aus. Aber wenn man direkt auf Person geht... Dann "verschwindet" der Track...
+			// TODO (Christian, Erik, Version 1.3): Sieht nach Trainwreck aus. Aber wenn man direkt auf Person geht... Dann "verschwindet" der Track...
 			// Moment.. mmm... dann würde die toString von Track halt sagen: "8.3km, Justus, Jonas, usw.."... mmmmm.....
 			@SuppressWarnings("unused")
 			TreeNode trackOne = new DefaultTreeNode("Etappe 1", new TreeNodeRow(relay.getParticipantFor(Position.FIRST), Position.FIRST), relayTreeNode);

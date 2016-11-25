@@ -57,7 +57,7 @@ public class PersonGatewayJDBC implements PersonGateway {
 			}
 
 		} catch (NamingException e) {
-			// TODO -all- Logging? Wie? Wo?
+			// TODO (All, Version 1.3): Logging? Wie? Wo?
 			//			System.out.println("Error :" + e);
 			Person person = Person.newInstance();
 			person.setComment(Comment.newInstance("NamingException:" + e));
@@ -94,7 +94,7 @@ public class PersonGatewayJDBC implements PersonGateway {
 			}
 
 		} catch (NamingException e) {
-			// TODO -all- Logging? Wie? Wo?
+			// TODO (All, Version 1.3): Logging? Wie? Wo?
 			person.setComment(Comment.newInstance("NamingException:" + e));
 		} catch (SQLException e) {
 			person.setComment(Comment.newInstance("SQLException:" + e));
@@ -104,15 +104,15 @@ public class PersonGatewayJDBC implements PersonGateway {
 
 	@Override
 	public void set(@SuppressWarnings("unused") Person aPerson) {
-		// TODO -schmollc- Implementieren
+		// TODO (Christian, Version 1.3): Implementieren
 	}
 
 	@Override
 	public void remove(@SuppressWarnings("unused") UUID uuid) {
-		// TODO -schmollc- Implementieren
+		// TODO (Christian, Version 1.3): Implementieren
 	}
 
-	// TODO -schmollc- In eigene Klasse verschieben
+	// TODO (Christian, Version 1.3): In eigene Klasse verschieben
 	Person mapValues(ResultSet rs) throws SQLException {
 		Person person = Person.newInstance();
 

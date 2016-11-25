@@ -110,7 +110,7 @@ public class TreeNodeRowTest {
 		TreeNodeRow sut = TreeNodeRow.newInstance(personRelay, dummyPosition);
 
 		Relayname actual = sut.getRelayname();
-		// TODO mit Erik drüber sprechen. Ohne toString interessantes Phänomen
+		// TODO (Christian, Version 1.3): mit Erik drüber sprechen. Ohne toString interessantes Phänomen
 		assertEquals("relayName not correct!", "", actual.toString());
 	}
 

@@ -42,10 +42,10 @@ public class EventsResource {
 		// Action here:
 		// Validate and persist new resource.
 
-		// TODO Erik, 2016-03-31: discuss the level of input validation here
+		// TODO (Erik, Version 1.3): discuss the level of input validation here
 		URI newEventUri = null;
 		try {
-			// TODO Erik, 2016-03-31: Find out whether there is away to explicitely avoid the path separator.
+			// TODO (Erik, Version 1.3): Find out whether there is away to explicitely avoid the path separator.
 			newEventUri = new URI(uriInfo.getAbsolutePath().toString() + "/" + anEvent.getId());
 		} catch (URISyntaxException ex) {
 			Logger.getLogger(EventsResource.class.getName()).log(Level.SEVERE, null, ex);

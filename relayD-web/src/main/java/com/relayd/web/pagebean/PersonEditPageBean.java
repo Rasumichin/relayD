@@ -72,12 +72,12 @@ public class PersonEditPageBean implements Serializable {
 	}
 
 	public void save() {
-		// TODO -schmollc- Sollte die Validierung lieber in der Bridge passieren?
+		// TODO (Christian, Version 1.3): Sollte die Validierung lieber in der Bridge passieren?
 		// Denn wenn die Validierung ok war wieso sollte ich dann das Object nochmal der Bridge geben?
 		// Es könnte direkt weitermachen....
 
 		ValidationResult validateResult = getBridge().validateEMail(workingPerson);
-		// TODO Also ne! Schmoll!! Tell, don't ask!!!!
+		// TODO (Christian, Version 1.3): Also ne! Schmoll!! Tell, don't ask!!!!
 		if (validateResult.getMessage().isEmpty()) {
 			persistPerson();
 			closeDialog();
@@ -95,7 +95,7 @@ public class PersonEditPageBean implements Serializable {
 	}
 
 	void showError() {
-		// TODO -schmollc- wie im ObjectConverter sollte die Nachricht aus dem ValidationResult Object kommen!
+		// TODO (Christian, Version 1.3): wie im ObjectConverter sollte die Nachricht aus dem ValidationResult Object kommen!
 		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Email not uniqe!", null);
 		FacesContext.getCurrentInstance().addMessage(null, message);
 	}

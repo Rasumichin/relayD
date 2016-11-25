@@ -36,7 +36,7 @@ public class Distance implements Serializable {
 		return DistanceNullObject.instance();
 	}
 
-	// TODO -Team relayd- Braucht man diesen Konstruktor eigentlich?
+	// TODO (All, Version 1.3): Braucht man diesen Konstruktor eigentlich?
 	// Eine Distance sollte doch eigentlich immer genau eine Ausprägung an Unity besitzen
 	// Standard ist Kilometer gesetzt, aber weiß man das als Aufrufer auch?
 	// Die static kilometers/meters sind da schon sprechender

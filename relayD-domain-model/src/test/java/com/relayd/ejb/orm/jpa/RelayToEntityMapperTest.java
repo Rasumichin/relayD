@@ -42,9 +42,9 @@ public class RelayToEntityMapperTest {
 	}
 
 	@Test
-	// TODO Name überprüfen. In PersonMapper hießt es anders...
+	// TODO (Christian, Version 1.3): Name überprüfen. In PersonMapper hießt es anders...
 	public void testMapDomainToEntity_whenDomainIsNull() {
-		//TODO Im Person Mapper ist eine Vertauschung drin
+		//TODO (Christian, Version 1.3): Im Person Mapper ist eine Vertauschung drin
 		expectedException.expect(IllegalArgumentException.class);
 		expectedException.expectMessage("[relay] must not be 'null'!");
 
@@ -67,7 +67,7 @@ public class RelayToEntityMapperTest {
 		sut.mapRelayToEntity(relay, relayEntity);
 
 		String actual = relayEntity.getId();
-		// TODO Wird doch gar nicht gemappt?! Dachte ich nun eigentlich....
+		// TODO (Christian, Version 1.3): Wird doch gar nicht gemappt?! Dachte ich nun eigentlich....
 		assertEquals("Mapping of [uuid] is not correct!", expected, actual);
 	}
 
@@ -85,7 +85,7 @@ public class RelayToEntityMapperTest {
 	@Test
 	@Ignore("Das ist immer gleich! Wie machen wir das am besten?")
 	public void testMapDomainToEntity_relayevent() {
-		// TODO Das ist immer gleich! Wie machen wir das am besten?
+		// TODO (Christian, Version 1.3): Das ist immer gleich! Wie machen wir das am besten?
 	}
 
 	@Test

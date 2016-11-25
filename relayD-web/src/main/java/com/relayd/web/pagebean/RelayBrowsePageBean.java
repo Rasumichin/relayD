@@ -128,7 +128,7 @@ public class RelayBrowsePageBean implements Serializable {
 						newRelayParticipant.setSurename(selectedPerson.getSurename());
 
 						selectedRelayNode.setParticipant(newRelayParticipant);
-						// TODO REMOVE!!!!! ONLY FOR TESTING THE SERVER VERSION!!
+						// TODO (Christian, Version 1.3): REMOVE!!!!! ONLY FOR TESTING THE SERVER VERSION!!
 						relayBridge.persist(selectedTreeNode);
 					}
 
@@ -146,7 +146,7 @@ public class RelayBrowsePageBean implements Serializable {
 
 						selectedRelayNode.setParticipant(newRelayParticipant);
 
-						// TODO REMOVE!!!!! ONLY FOR TESTING THE SERVER VERSION!!
+						// TODO (Christian, Version 1.3): REMOVE!!!!! ONLY FOR TESTING THE SERVER VERSION!!
 						relayBridge.persist(selectedTreeNode);
 					}
 				}

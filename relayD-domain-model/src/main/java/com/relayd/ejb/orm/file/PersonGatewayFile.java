@@ -45,7 +45,7 @@ public class PersonGatewayFile implements PersonGateway {
 		}
 	}
 
-	// TODO - CC - umbennen in clear (Wie fuer Map/nnGatewayMemory)
+	// TODO (Christian, Version 1.3): umbennen in clear (Wie fuer Map/nnGatewayMemory)
 	public void clean() {
 		try {
 			put(new ArrayList<>());
@@ -78,7 +78,7 @@ public class PersonGatewayFile implements PersonGateway {
 		if (somePersons.contains(updatePerson)) {
 			for (Person person : somePersons) {
 				if (updatePerson.equals(person)) {
-					// TODO -schmollc- Mapper einbauen
+					// TODO (Christian, Version 1.3): Mapper einbauen
 					person.setYearOfBirth(updatePerson.getYearOfBirth());
 					person.setSurename(updatePerson.getSurename());
 					person.setForename(updatePerson.getForename());
@@ -123,7 +123,7 @@ public class PersonGatewayFile implements PersonGateway {
 		List<Person> relays = new ArrayList<>();
 		try {
 			fileInputStream = new FileInputStream(getFileName());
-			// TODO - CC - umbennen
+			// TODO (Christian, Version 1.3): umbennen
 			relays = (ArrayList<Person>) SerializationUtils.deserialize(fileInputStream);
 			fileInputStream.close();
 		} catch (FileNotFoundException e) {

@@ -13,7 +13,7 @@ import com.relayd.attributes.Surename;
 import com.relayd.attributes.YearOfBirth;
 
 /**
- * TODO -schmollc- Noch zu klären wo genau die Builder hinsollen oder jede DomainKlasse Ihren eigenen innerClass Builder hat.
+ * TODO (Christian, Version 1.3): Noch zu klären wo genau die Builder hinsollen oder jede DomainKlasse Ihren eigenen innerClass Builder hat.
  * @author  schmollc (Christian@relayd.de)
  * @since   30.03.2016
  *

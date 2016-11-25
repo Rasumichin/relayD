@@ -29,7 +29,7 @@ public class RelayToEntityMapper {
 
 		relayEntity.setRelayname(relay.getRelayname().isEmpty() ? null : relay.getRelayname().toString());
 
-		// TODO Ist aktuell so. 4 Teilnehmer also 4x "einfach" mappen
+		// TODO (Christian, Version 1.3): Ist aktuell so. 4 Teilnehmer also 4x "einfach" mappen
 		Participant participantOne = relay.getParticipantFor(Position.FIRST);
 		if (participantOne != null) {
 			relayEntity.setParticipantOne(participantOne.getUuidPerson());

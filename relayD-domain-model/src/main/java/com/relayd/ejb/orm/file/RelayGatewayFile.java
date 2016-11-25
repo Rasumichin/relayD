@@ -93,7 +93,7 @@ public class RelayGatewayFile implements RelayGateway {
 		if (someRelays.contains(updateRelay)) {
 			for (Relay relay : someRelays) {
 				if (updateRelay.equals(relay)) {
-					// TODO -schmollc- Mapper einbauen
+					// TODO (Christian, Version 1.3): Mapper einbauen
 					relay.setRelayname(updateRelay.getRelayname());
 					break;
 				}

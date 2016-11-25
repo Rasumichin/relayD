@@ -8,10 +8,12 @@ import java.util.UUID;
 
 import javax.persistence.EntityNotFoundException;
 
-import org.junit.*;
+import org.junit.FixMethodOrder;
+import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
-import org.mockito.*;
+import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.relayd.Person;
@@ -24,7 +26,7 @@ import static org.mockito.Mockito.*;
 /**
  * Designers make the mistake of not taking error into account.
  * 		- Donald A. Norman (The Design of Everyday Things) -
- * 
+ *
  * @author  Rasumichin (Erik@relayd.de)
  * @since   03.10.2016
  *
@@ -47,7 +49,7 @@ public class PersonGatewayJPATest {
 		EntityToPersonMapper result = sut.getPersonEntityMapper();
 		assertNotNull("[personEntityMapper] has not been initialized!", result);
 	}
-	
+
 	@Test(expected = IllegalArgumentException.class)
 	public void testGetWithIllegalNullValue() {
 		sut.get(null);
@@ -61,7 +63,7 @@ public class PersonGatewayJPATest {
 
 		Person result = sut.get(expectedUuid);
 		assertNotNull("Result 'Person' must not be 'null'!", result);
-		
+
 		UUID actualUuid = result.getUuid();
 		assertEquals("Mapping from PersonEntity to Person was not correct.", expectedUuid, actualUuid);
 	}
@@ -108,7 +110,7 @@ public class PersonGatewayJPATest {
 		assertTrue("Restult list is not correct.", result.isEmpty());
 	}
 
-	// TODO: (EL, 2016-10-09): Discuss with CS: Do we need further tests here for the other cases for 'getAll' (one element, many elements)?
+	// TODO (Erik, Version 1.3): Discuss with CS: Do we need further tests here for the other cases for 'getAll' (one element, many elements)?
 
 	@Test(expected = EntityNotFoundException.class)
 	public void testRemoveWhenPersonDoesNotExistForUuid() {
@@ -148,7 +150,7 @@ public class PersonGatewayJPATest {
 		verify(sut, times(1)).mergePersonEntity(expectedPersonEntity);
 	}
 
-	// TODO (EL, 2016-10-22): Been unable to stub the method call 'findById' to return 'null'. Any attempt is starting JPA ?!
+	// TODO (Erik, Version 1.3): Been unable to stub the method call 'findById' to return 'null'. Any attempt is starting JPA ?!
 	@Ignore
 	@Test
 	public void testSet_whenPersonIsNew() {
