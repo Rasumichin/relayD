@@ -1,5 +1,5 @@
 --------------------------------------------------
--- Drop Table person
+-- Drop Table relay_event
 --------------------------------------------------
 DROP TABLE relay_event;
 
