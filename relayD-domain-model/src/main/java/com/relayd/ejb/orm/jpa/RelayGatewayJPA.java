@@ -1,5 +1,6 @@
 package com.relayd.ejb.orm.jpa;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -16,6 +17,7 @@ import com.relayd.entity.RelayEntity;
  */
 public class RelayGatewayJPA extends GatewayJPA implements RelayGateway {
 	private RelayToEntityMapper relayMapper = RelayToEntityMapper.newInstance();
+	private EntityToRelayMapper entityMapper = EntityToRelayMapper.newInstance();
 
 	@Override
 	public void set(Relay relay) {
@@ -59,7 +61,36 @@ public class RelayGatewayJPA extends GatewayJPA implements RelayGateway {
 
 	@Override
 	public List<Relay> getAll() {
-		throw new UnsupportedOperationException("not implemented yet!");
+		List<RelayEntity> relayEntities = findAll();
+		List<Relay> relays = mapPersonEntityListToPersonList(relayEntities);
+
+		return relays;
+
+	}
+
+	private List<Relay> mapPersonEntityListToPersonList(List<RelayEntity> relayEntities) {
+
+		List<Relay> relays = new ArrayList<>();
+		for (RelayEntity eachEntity : relayEntities) {
+			relays.add(getEntityMapper().mapToRelay(eachEntity));
+		}
+		return relays;
+	}
+
+	private EntityToRelayMapper getEntityMapper() {
+		return entityMapper;
+	}
+
+	List<RelayEntity> findAll() {
+		startTransaction();
+
+		EntityManager em = getEntityManager();
+		List<RelayEntity> result = em.createQuery("SELECT p FROM RelayEntity p", RelayEntity.class).getResultList();
+
+		commitTransaction();
+		endTransaction();
+
+		return result;
 	}
 
 	@Override

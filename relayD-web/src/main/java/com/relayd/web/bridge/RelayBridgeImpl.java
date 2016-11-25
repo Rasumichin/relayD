@@ -25,7 +25,7 @@ import com.relayd.ejb.RelayGatewayFactory;
 public class RelayBridgeImpl implements RelayBridge {
 
 	private RelayGateway gateway = null;
-	private GatewayType gatewayType = GatewayType.MEMORY;
+	private GatewayType gatewayType = GatewayType.JPA;
 
 	public RelayBridgeImpl() {
 		super();
@@ -38,7 +38,7 @@ public class RelayBridgeImpl implements RelayBridge {
 
 		List<Relay> all = gateway.getAll();
 		// TODO - schmollc- entfernen wenn alles rund läuft!
-		all.addAll(getAllMock());
+		//		all.addAll(getAllMock());
 
 		for (Relay relay : all) {
 

@@ -57,6 +57,10 @@ public class Relay implements Serializable {
 		return uuid;
 	}
 
+	public void setUuid(UUID anUuid) {
+		uuid = anUuid;
+	}
+
 	public Participant getParticipantFor(Position position) {
 		Participant person = participants.get(position.getValue() - 1);
 		return person;
