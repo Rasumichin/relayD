@@ -134,9 +134,20 @@ public class RelayBridgeImpl implements RelayBridge {
 	}
 
 	/**
-	 *
+	 * @deprecated Nur zu testzwecken eingebaut um das persitieren zu checken!
+	 * Muss dringend umgeschrieben werden -> Das treeNodeModel sollte besser oder anders werden.
 	 */
 	@Override
-	public void persist(TreeNode aRelay) {
+	@Deprecated
+	public void persist(TreeNode treeNode) {
+		TreeNodeRow relayNode = (TreeNodeRow) treeNode.getParent().getData();
+		TreeNodeRow participantRow = (TreeNodeRow) treeNode.getData();
+
+		Relay relay = relayNode.getRelay();
+		relay.addParticipant(participantRow.getParticipant(), Position.FIRST);
+
+		RelayGateway jpaGateway = RelayGatewayFactory.get(GatewayType.JPA);
+
+		jpaGateway.set(relay);
 	}
 }

@@ -128,6 +128,8 @@ public class RelayBrowsePageBean implements Serializable {
 						newRelayParticipant.setSurename(selectedPerson.getSurename());
 
 						selectedRelayNode.setParticipant(newRelayParticipant);
+						// TODO REMOVE!!!!! ONLY FOR TESTING THE SERVER VERSION!!
+						relayBridge.persist(selectedTreeNode);
 					}
 
 				} else {
@@ -143,6 +145,9 @@ public class RelayBrowsePageBean implements Serializable {
 						newRelayParticipant.setSurename(selectedPerson.getSurename());
 
 						selectedRelayNode.setParticipant(newRelayParticipant);
+
+						// TODO REMOVE!!!!! ONLY FOR TESTING THE SERVER VERSION!!
+						relayBridge.persist(selectedTreeNode);
 					}
 				}
 			}
