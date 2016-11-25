@@ -7,7 +7,10 @@ import java.util.UUID;
 
 import org.junit.Test;
 
+import com.relayd.Participant;
+import com.relayd.ParticipantBuilder;
 import com.relayd.Relay;
+import com.relayd.attributes.Position;
 import com.relayd.attributes.Relayname;
 
 /**
@@ -53,6 +56,46 @@ public abstract class RelayGatewayTest {
 		actual = someRelays.isEmpty();
 
 		assertFalse("The List of relays should contain data!", actual);
+	}
+
+	@Test
+	public void testSet_ForRelayWithParticipants() {
+		// ARRANGE
+		List<Relay> someRelays = getSut().getAll();
+		assertNotNull("Expect valid instance!", someRelays);
+
+		boolean isEmpty = someRelays.isEmpty();
+
+		assertTrue("The List of relays must be empty!", isEmpty);
+
+		Relay relay = Relay.newInstance();
+		Relayname relayname = Relayname.newInstance("Die 4 ????");
+		relay.setRelayname(relayname);
+
+		Participant justusJonas = new ParticipantBuilder().withForename("Justus").withSurename("Jonas").build();
+		relay.addParticipant(justusJonas, Position.FIRST);
+
+		Participant peterShaw = new ParticipantBuilder().withForename("Peter").withSurename("Shaw").build();
+		relay.addParticipant(peterShaw, Position.SECOND);
+
+		// ACT
+		getSut().set(relay);
+
+		// ASSERT
+		someRelays = getSut().getAll();
+		assertNotNull("Expect valid instance!", someRelays);
+
+		isEmpty = someRelays.isEmpty();
+
+		assertFalse("The List of relays should contain data!", isEmpty);
+
+		Relay relayInGateway = someRelays.get(0);
+		assertEquals("[relayname] is not correct!", relayname, relayInGateway.getRelayname());
+
+		assertEquals("[participantOne] is not correct!", justusJonas, relayInGateway.getParticipantFor(Position.FIRST));
+		assertEquals("[participantTwo] is not correct!", peterShaw, relayInGateway.getParticipantFor(Position.SECOND));
+		assertNull("[participantThree] is not correct!", relayInGateway.getParticipantFor(Position.THIRD));
+		assertNull("[participantFour] is not correct!", relayInGateway.getParticipantFor(Position.FOURTH));
 	}
 
 	@Test
