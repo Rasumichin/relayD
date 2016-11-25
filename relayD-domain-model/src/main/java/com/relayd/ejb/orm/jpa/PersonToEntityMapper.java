@@ -18,6 +18,7 @@ public class PersonToEntityMapper {
 	}
 
 	public void mapPersonToEntity(Person person, PersonEntity personEntity) {
+		// TODO Fehlermeldung ist falsch bzgl Parameter- mit @Rule lösen um das zu bemerken!
 		if (person == null) {
 			throw new IllegalArgumentException("[personEntity] must not be 'null'!");
 		}
