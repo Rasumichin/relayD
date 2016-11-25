@@ -140,14 +140,16 @@ public class RelayBridgeImpl implements RelayBridge {
 	@Override
 	@Deprecated
 	public void persist(TreeNode treeNode) {
-		TreeNodeRow relayNode = (TreeNodeRow) treeNode.getParent().getData();
-		TreeNodeRow participantRow = (TreeNodeRow) treeNode.getData();
+		if (treeNode.getParent() != null) {
+			TreeNodeRow relayNode = (TreeNodeRow) treeNode.getParent().getData();
+			TreeNodeRow participantRow = (TreeNodeRow) treeNode.getData();
 
-		Relay relay = relayNode.getRelay();
-		relay.addParticipant(participantRow.getParticipant(), Position.FIRST);
+			Relay relay = relayNode.getRelay();
+			relay.addParticipant(participantRow.getParticipant(), Position.FIRST);
 
-		RelayGateway jpaGateway = RelayGatewayFactory.get(GatewayType.JPA);
+			RelayGateway jpaGateway = RelayGatewayFactory.get(GatewayType.JPA);
 
-		jpaGateway.set(relay);
+			jpaGateway.set(relay);
+		}
 	}
 }
