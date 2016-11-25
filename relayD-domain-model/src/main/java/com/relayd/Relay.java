@@ -17,8 +17,8 @@ public class Relay implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	UUID uuid = null;
-	private Relayname relayname = null;
-	private RelayEvent relayEvent = null;
+	private Relayname relayname = Relayname.newInstance();
+	private RelayEvent relayEvent = RelayEvent.duesseldorf();
 	private List<Participant> participants = new ArrayList<Participant>();
 
 	private Relay(RelayEvent aRelayEvent) {
