@@ -26,6 +26,6 @@ public class RelayBridgeImplTest {
 	public void testGatewayType() {
 		GatewayType result = sut.getGatewayType();
 
-		assertEquals("[gatewayType] not correct!", GatewayType.MEMORY, result);
+		assertEquals("[gatewayType] not correct!", GatewayType.JPA, result);
 	}
 }

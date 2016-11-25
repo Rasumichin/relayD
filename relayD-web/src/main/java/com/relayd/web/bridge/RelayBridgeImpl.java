@@ -34,7 +34,7 @@ public class RelayBridgeImpl implements RelayBridge {
 
 	@Override
 	public TreeNode all() {
-		TreeNode root = new DefaultTreeNode(new TreeNodeRow(Participant.newInstance()), null);
+		TreeNode root = new DefaultTreeNode(new TreeNodeRow(Participant.newInstance(), Position.UNKNOWN), null);
 
 		List<Relay> all = gateway.getAll();
 		// TODO - schmollc- entfernen wenn alles rund läuft!
@@ -48,13 +48,13 @@ public class RelayBridgeImpl implements RelayBridge {
 			// TODO -schmollc/lotz- Sieht nach Trainwreck aus. Aber wenn man direkt auf Person geht... Dann "verschwindet" der Track...
 			// Moment.. mmm... dann würde die toString von Track halt sagen: "8.3km, Justus, Jonas, usw.."... mmmmm.....
 			@SuppressWarnings("unused")
-			TreeNode trackOne = new DefaultTreeNode("Etappe 1", new TreeNodeRow(relay.getParticipantFor(Position.FIRST)), relayTreeNode);
+			TreeNode trackOne = new DefaultTreeNode("Etappe 1", new TreeNodeRow(relay.getParticipantFor(Position.FIRST), Position.FIRST), relayTreeNode);
 			@SuppressWarnings("unused")
-			TreeNode trackTwo = new DefaultTreeNode("Etappe 2", new TreeNodeRow(relay.getParticipantFor(Position.SECOND)), relayTreeNode);
+			TreeNode trackTwo = new DefaultTreeNode("Etappe 2", new TreeNodeRow(relay.getParticipantFor(Position.SECOND), Position.SECOND), relayTreeNode);
 			@SuppressWarnings("unused")
-			TreeNode trackThree = new DefaultTreeNode("Etappe 3", new TreeNodeRow(relay.getParticipantFor(Position.THIRD)), relayTreeNode);
+			TreeNode trackThree = new DefaultTreeNode("Etappe 3", new TreeNodeRow(relay.getParticipantFor(Position.THIRD), Position.THIRD), relayTreeNode);
 			@SuppressWarnings("unused")
-			TreeNode trackFour = new DefaultTreeNode("Etappe 4", new TreeNodeRow(relay.getParticipantFor(Position.FOURTH)), relayTreeNode);
+			TreeNode trackFour = new DefaultTreeNode("Etappe 4", new TreeNodeRow(relay.getParticipantFor(Position.FOURTH), Position.FOURTH), relayTreeNode);
 
 		}
 
@@ -145,8 +145,23 @@ public class RelayBridgeImpl implements RelayBridge {
 			TreeNodeRow participantRow = (TreeNodeRow) treeNode.getData();
 
 			Relay relay = relayNode.getRelay();
-			relay.addParticipant(participantRow.getParticipant(), Position.FIRST);
+			switch (participantRow.getPosition()) {
+				case FIRST:
+					relay.addParticipant(participantRow.getParticipant(), Position.FIRST);
+					break;
+				case SECOND:
+					relay.addParticipant(participantRow.getParticipant(), Position.SECOND);
+					break;
+				case THIRD:
+					relay.addParticipant(participantRow.getParticipant(), Position.THIRD);
+					break;
+				case FOURTH:
+					relay.addParticipant(participantRow.getParticipant(), Position.FOURTH);
+					break;
+				default:
+					relay.addParticipant(participantRow.getParticipant(), Position.FIRST);
 
+			}
 			RelayGateway jpaGateway = RelayGatewayFactory.get(GatewayType.JPA);
 
 			jpaGateway.set(relay);

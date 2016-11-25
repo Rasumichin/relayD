@@ -31,43 +31,50 @@ public class EntityToRelayMapper {
 
 		// Again: Thank god for the 'NullObjectPattern'.
 		relay.setRelayname(Relayname.newInstance(relayEntity.getRelayname()));
+		Person person;
+		if (relayEntity.getParticipantOne() != null) {
+			person = personGateway.get(relayEntity.getParticipantOne());
 
-		Person person = personGateway.get(relayEntity.getParticipantOne());
+			Participant participantOne = Participant.newInstance();
+			participantOne.setUuidPerson(person.getUuid());
+			participantOne.setForename(person.getForename());
+			participantOne.setSurename(person.getSurename());
 
-		Participant participantOne = Participant.newInstance();
-		participantOne.setUuidPerson(person.getUuid());
-		participantOne.setForename(person.getForename());
-		participantOne.setSurename(person.getSurename());
+			relay.addParticipant(participantOne, Position.FIRST);
+		}
+		if (relayEntity.getParticipantTwo() != null) {
 
-		relay.addParticipant(participantOne, Position.FIRST);
+			person = personGateway.get(relayEntity.getParticipantTwo());
 
-		person = personGateway.get(relayEntity.getParticipantTwo());
+			Participant participantTwo = Participant.newInstance();
+			participantTwo.setUuidPerson(person.getUuid());
+			participantTwo.setForename(person.getForename());
+			participantTwo.setSurename(person.getSurename());
 
-		Participant participantTwo = Participant.newInstance();
-		participantTwo.setUuidPerson(person.getUuid());
-		participantTwo.setForename(person.getForename());
-		participantTwo.setSurename(person.getSurename());
+			relay.addParticipant(participantTwo, Position.SECOND);
+		}
+		if (relayEntity.getParticipantThree() != null) {
 
-		relay.addParticipant(participantTwo, Position.SECOND);
+			person = personGateway.get(relayEntity.getParticipantThree());
 
-		person = personGateway.get(relayEntity.getParticipantThree());
+			Participant participantThree = Participant.newInstance();
+			participantThree.setUuidPerson(person.getUuid());
+			participantThree.setForename(person.getForename());
+			participantThree.setSurename(person.getSurename());
 
-		Participant participantThree = Participant.newInstance();
-		participantThree.setUuidPerson(person.getUuid());
-		participantThree.setForename(person.getForename());
-		participantThree.setSurename(person.getSurename());
+			relay.addParticipant(participantThree, Position.THIRD);
+		}
+		if (relayEntity.getParticipantFour() != null) {
 
-		relay.addParticipant(participantThree, Position.THIRD);
+			person = personGateway.get(relayEntity.getParticipantFour());
 
-		person = personGateway.get(relayEntity.getParticipantFour());
+			Participant participantFour = Participant.newInstance();
+			participantFour.setUuidPerson(person.getUuid());
+			participantFour.setForename(person.getForename());
+			participantFour.setSurename(person.getSurename());
 
-		Participant participantFour = Participant.newInstance();
-		participantFour.setUuidPerson(person.getUuid());
-		participantFour.setForename(person.getForename());
-		participantFour.setSurename(person.getSurename());
-
-		relay.addParticipant(participantFour, Position.FOURTH);
-
+			relay.addParticipant(participantFour, Position.FOURTH);
+		}
 		return relay;
 	}
 }

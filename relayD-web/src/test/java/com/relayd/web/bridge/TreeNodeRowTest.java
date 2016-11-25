@@ -12,6 +12,7 @@ import org.junit.runners.MethodSorters;
 import com.relayd.Participant;
 import com.relayd.Relay;
 import com.relayd.RelayEvent;
+import com.relayd.attributes.Position;
 import com.relayd.attributes.Relayname;
 
 /**
@@ -50,18 +51,19 @@ public class TreeNodeRowTest {
 	}
 
 	@Test
-	public void testCreateInstance_ForParameterParticipant() {
+	public void testCreateInstance_ForParameter() {
 		UUID uuid = UUID.randomUUID();
 		Participant expected = Participant.newInstance();
 		expected.setUuidPerson(uuid);
 
-		TreeNodeRow sut = TreeNodeRow.newInstance(expected);
+		TreeNodeRow sut = TreeNodeRow.newInstance(expected, Position.FIRST);
 
 		assertNotNull("Expected valid instance!", sut);
 
 		Participant actual = sut.getParticipant();
 
 		assertEquals("Participant not corret!", expected, actual);
+		assertEquals("Position not correct!", Position.FIRST, sut.getPosition());
 	}
 
 	@Test
@@ -76,10 +78,11 @@ public class TreeNodeRowTest {
 
 	@Test
 	public void testIsRelay_ForParticipant() {
+		Position dummyPosition = Position.UNKNOWN;
 		UUID uuid = UUID.randomUUID();
 		Participant personRelay = Participant.newInstance();
 		personRelay.setUuidPerson(uuid);
-		TreeNodeRow sut = TreeNodeRow.newInstance(personRelay);
+		TreeNodeRow sut = TreeNodeRow.newInstance(personRelay, dummyPosition);
 
 		boolean actual = sut.isRelay();
 
@@ -100,10 +103,11 @@ public class TreeNodeRowTest {
 
 	@Test
 	public void testGetRelayname_ForParticipant() {
+		Position dummyPosition = Position.UNKNOWN;
 		UUID uuid = UUID.randomUUID();
 		Participant personRelay = Participant.newInstance();
 		personRelay.setUuidPerson(uuid);
-		TreeNodeRow sut = TreeNodeRow.newInstance(personRelay);
+		TreeNodeRow sut = TreeNodeRow.newInstance(personRelay, dummyPosition);
 
 		Relayname actual = sut.getRelayname();
 		// TODO mit Erik drüber sprechen. Ohne toString interessantes Phänomen

@@ -70,7 +70,10 @@ public class RelayEntity {
 	}
 
 	public UUID getParticipantOne() {
-		return UUID.fromString(participantOne);
+		if (participantOne != null) {
+			return UUID.fromString(participantOne);
+		}
+		return null;
 	}
 
 	public void setParticipantOne(UUID anUUID) {
@@ -78,7 +81,10 @@ public class RelayEntity {
 	}
 
 	public UUID getParticipantTwo() {
-		return UUID.fromString(participantTwo);
+		if (participantTwo != null) {
+			return UUID.fromString(participantTwo);
+		}
+		return null;
 	}
 
 	public void setParticipantTwo(UUID anUUID) {
@@ -86,7 +92,10 @@ public class RelayEntity {
 	}
 
 	public UUID getParticipantThree() {
-		return UUID.fromString(participantThree);
+		if (participantThree != null) {
+			return UUID.fromString(participantThree);
+		}
+		return null;
 	}
 
 	public void setParticipantThree(UUID anUUID) {
@@ -94,7 +103,10 @@ public class RelayEntity {
 	}
 
 	public UUID getParticipantFour() {
-		return UUID.fromString(participantFour);
+		if (participantFour != null) {
+			return UUID.fromString(participantFour);
+		}
+		return null;
 	}
 
 	public void setParticipantFour(UUID anUUID) {

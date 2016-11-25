@@ -25,6 +25,7 @@ import com.relayd.Person;
 import com.relayd.Relay;
 import com.relayd.RelayEvent;
 import com.relayd.attributes.Forename;
+import com.relayd.attributes.Position;
 import com.relayd.attributes.Surename;
 import com.relayd.web.bridge.TreeNodeRow;
 
@@ -82,7 +83,7 @@ public class RelayBrowsePageBeanTest {
 		ActionEvent dummyActionEvent = null;
 
 		Participant personRelay = Participant.newInstance();
-		TreeNode relayTreeNode = new DefaultTreeNode(new TreeNodeRow(personRelay), null);
+		TreeNode relayTreeNode = new DefaultTreeNode(new TreeNodeRow(personRelay, Position.FIRST), null);
 		sut.setSelectedNode(relayTreeNode);
 
 		Person justusJonas = Person.newInstance();
