@@ -8,14 +8,7 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import com.relayd.attributes.Comment;
-import com.relayd.attributes.Email;
-import com.relayd.attributes.Forename;
-import com.relayd.attributes.Position;
-import com.relayd.attributes.Relayname;
-import com.relayd.attributes.Shirtsize;
-import com.relayd.attributes.Surename;
-import com.relayd.attributes.YearOfBirth;
+import com.relayd.attributes.*;
 
 /**
  * Discipline is the best tool.
@@ -36,12 +29,11 @@ public class PersonTest {
 		sut.setYearOfBirth(YearOfBirth.newInstance(1956));
 		sut.setShirtsize(Shirtsize.HerrenM);
 		sut.setEmail(Email.newInstance("Jonas.Justus@rockyBeach.com"));
-		sut.setRelayname(Relayname.newInstance("Die 4 ????"));
 		sut.setPosition(Position.FIRST);
 
 		String personAsString = sut.toString();
 
-		assertEquals("Justus Jonas, 1956, Herren M, Jonas.Justus@rockyBeach.com, Die 4 ????, First", personAsString);
+		assertEquals("Justus Jonas, 1956, Herren M, Jonas.Justus@rockyBeach.com, First", personAsString);
 	}
 
 	@Test
@@ -84,16 +76,6 @@ public class PersonTest {
 
 		Surename actual = sut.getSurename();
 		assertNotNull("Person must not return [surename] equals 'null'!", actual);
-	}
-
-	@Test
-	public void testSetRelayname_ForNullValue() {
-		Person sut = Person.newInstance();
-
-		sut.setRelayname(null);
-
-		Relayname actual = sut.getRelayname();
-		assertNotNull("Person must not return [relayname] equals 'null'!", actual);
 	}
 
 	@Test
@@ -182,23 +164,6 @@ public class PersonTest {
 	}
 
 	@Test
-	public void testRelayname() {
-		Person sut = Person.newInstance();
-
-		Relayname relayname = sut.getRelayname();
-
-		assertNotNull("[relayname] not valid instance!", relayname);
-
-		Relayname expected = Relayname.newInstance("Die 4 ????");
-
-		sut.setRelayname(expected);
-
-		Relayname actual = sut.getRelayname();
-
-		assertEquals("[relayname] not correct!", expected, actual);
-	}
-
-	@Test
 	public void testPosition() {
 		Person sut = Person.newInstance();
 		Position defaultPosition = sut.getPosition();
@@ -233,35 +198,6 @@ public class PersonTest {
 
 		UUID actual = sut.getUuid();
 		assertEquals("[uuid] not correct!", expected, actual);
-	}
-
-	@Test
-	public void testHasRelay_ForRelaynameIsNull() {
-		Person sut = Person.newInstance();
-
-		boolean actual = sut.hasRelay();
-
-		assertFalse("[actual] for hasRelay() is not correct!", actual);
-	}
-
-	@Test
-	public void testHasRelay_ForRelaynameIsFilled() {
-		Person sut = Person.newInstance();
-		sut.setRelayname(Relayname.newInstance("Die 4 ????"));
-
-		boolean actual = sut.hasRelay();
-
-		assertTrue("[actual] for hasRelay() is not correct!", actual);
-	}
-
-	@Test
-	public void testHasRelay_ForRelaynameIsFilledWithEmptyString() {
-		Person sut = Person.newInstance();
-		sut.setRelayname(Relayname.newInstance("  "));
-
-		boolean actual = sut.hasRelay();
-
-		assertFalse("[actual] for hasRelay() is not correct!", actual);
 	}
 
 	@Test

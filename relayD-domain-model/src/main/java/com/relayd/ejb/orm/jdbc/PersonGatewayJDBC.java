@@ -13,18 +13,12 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import com.relayd.Person;
-import com.relayd.attributes.Comment;
-import com.relayd.attributes.Email;
-import com.relayd.attributes.Forename;
-import com.relayd.attributes.Position;
-import com.relayd.attributes.Relayname;
-import com.relayd.attributes.Shirtsize;
-import com.relayd.attributes.Surename;
-import com.relayd.attributes.YearOfBirth;
+import com.relayd.attributes.*;
 import com.relayd.ejb.PersonGateway;
 
 /**
  * @author  schmollc (Christian@relayd.de)
+ * @author  Rasumichin (Erik@relayd.de)
  * @since   15.09.2016
  *
  */
@@ -35,7 +29,6 @@ public class PersonGatewayJDBC implements PersonGateway {
 	static final int INDEX_SURENAME = 3;
 	static final int INDEX_YEAROFBIRTH = 4;
 	static final int INDEX_SHIRTSIZE = 5;
-	static final int INDEX_RELAYNAME = 6;
 	static final int INDEX_POS = 7;
 	static final int INDEX_EMAIL = 9;
 	static final int INDEX_COMMENT = 10;
@@ -123,7 +116,6 @@ public class PersonGatewayJDBC implements PersonGateway {
 		person.setYearOfBirth(YearOfBirth.newInstance(yearOfBirth));
 
 		person.setShirtsize(Shirtsize.newInstance(rs.getInt(INDEX_SHIRTSIZE)));
-		person.setRelayname(Relayname.newInstance(rs.getString(INDEX_RELAYNAME)));
 		person.setPosition(Position.newInstance(rs.getInt(INDEX_POS)));
 		person.setEmail(Email.newInstance(rs.getString(INDEX_EMAIL)));
 		person.setComment(Comment.newInstance(rs.getString(INDEX_COMMENT)));

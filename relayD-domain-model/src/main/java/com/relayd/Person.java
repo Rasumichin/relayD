@@ -3,14 +3,7 @@ package com.relayd;
 import java.io.Serializable;
 import java.util.UUID;
 
-import com.relayd.attributes.Comment;
-import com.relayd.attributes.Email;
-import com.relayd.attributes.Forename;
-import com.relayd.attributes.Position;
-import com.relayd.attributes.Relayname;
-import com.relayd.attributes.Shirtsize;
-import com.relayd.attributes.Surename;
-import com.relayd.attributes.YearOfBirth;
+import com.relayd.attributes.*;
 
 /**
  * @author  schmollc (Christian@relayd.de)
@@ -27,7 +20,6 @@ public class Person implements Serializable {
 	private YearOfBirth yearOfBirth = YearOfBirth.newInstance();
 	private Shirtsize shirtsize = Shirtsize.UNKNOWN;
 	private Email email;
-	private Relayname relayname = Relayname.newInstance(); // Refactor Dieses Attribut ist Jahresabhängig!
 	private Position position = Position.UNKNOWN; // Refactor Dieses Attribut ist Jahresabhängig!
 	private Comment comment = Comment.newInstance();
 	Email lastCalculatedEmail;
@@ -130,18 +122,6 @@ public class Person implements Serializable {
 		return getEmail();
 	}
 
-	public Relayname getRelayname() {
-		return relayname;
-	}
-
-	public void setRelayname(Relayname aRelayname) {
-		if (aRelayname == null) {
-			relayname = Relayname.newInstance();
-		} else {
-			relayname = aRelayname;
-		}
-	}
-
 	public Position getPosition() {
 		return position;
 	}
@@ -176,10 +156,6 @@ public class Person implements Serializable {
 
 	public boolean hasEmail() {
 		return !(getEmail().isEmpty());
-	}
-
-	public boolean hasRelay() {
-		return getRelayname() != null && !getRelayname().isEmpty();
 	}
 
 	public void nameValueChanged() {
@@ -220,7 +196,12 @@ public class Person implements Serializable {
 
 	@Override
 	public String toString() {
-		return getForename() + " " + getSurename() + ", " + getYearOfBirth() + ", " + getShirtsize() + ", " + getEmail() + ", " + getRelayname() + ", " + getPosition();
+		return getForename() + " "
+				+ getSurename() + ", "
+				+ getYearOfBirth() + ", "
+				+ getShirtsize() + ", "
+				+ getEmail() + ", "
+				+ getPosition();
 	}
 
 	@Override
