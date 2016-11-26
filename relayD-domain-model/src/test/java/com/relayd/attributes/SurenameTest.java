@@ -5,24 +5,22 @@ import static org.junit.Assert.*;
 import java.io.Serializable;
 
 import org.junit.FixMethodOrder;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import org.junit.runners.MethodSorters;
+
+import com.relayd.attributes.Surename.SurenameNullObject;
 
 /**
  * Jede lange Reise beginnt mit dem ersten Schritt
  *  - Laotse
  *
  * @author  schmollc (Christian@relayd.de)
+ * @author  Rasumichin (Erik@relayd.de)
  * @since   22.03.2016
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class SurenameTest {
-
-	@Rule
-	public ExpectedException expectedException = ExpectedException.none();
 
 	@Test
 	public void testIsSerializable() {
@@ -31,12 +29,21 @@ public class SurenameTest {
 
 		@SuppressWarnings("cast")
 		boolean result = sut instanceof Serializable;
-
 		assertTrue("Class not Serializable!", result);
+	}
+	
+	@Test
+	public void testNewInstance() {
+		Surename sut = Surename.newInstance();
+
+		assertNotNull("Not a valid instance!", sut);
+
+		boolean actual = (sut.getClass() == SurenameNullObject.class);
+		assertTrue("Instance is not correct!", actual);
 	}
 
 	@Test
-	public void testCreateInstance() {
+	public void testNewInstance_ForValidValue() {
 		String expected = "Jonas";
 		Surename surename = Surename.newInstance(expected);
 
@@ -45,20 +52,69 @@ public class SurenameTest {
 	}
 
 	@Test
-	public void testCreateInstanceWithIllegalNullValue() {
-		expectedException.expect(IllegalArgumentException.class);
-		expectedException.expectMessage("[surename] must not be 'null'.");
-		Surename.newInstance(null);
+	public void testNewInstance_ForBlankValue() {
+		Surename sut = Surename.newInstance("   ");
+
+		assertNotNull("Not a valid instance!", sut);
+
+		boolean actual = (sut.getClass() == SurenameNullObject.class);
+		assertTrue("Instance is not correct!", actual);
 	}
 
 	@Test
-	public void testToString() {
-		String name = "Jonas";
-		Surename surename = Surename.newInstance(name);
+	public void testNewInstance_ForEmptyValue() {
+		Surename sut = Surename.newInstance("");
+
+		assertNotNull("Not a valid instance!", sut);
+
+		boolean actual = (sut.getClass() == SurenameNullObject.class);
+		assertTrue("Instance is not correct!", actual);
+	}
+
+	@Test
+	public void testNewInstance_ForNullValue() {
+		Surename sut = Surename.newInstance(null);
+
+		assertNotNull("Not a valid instance!", sut);
+
+		boolean actual = (sut.getClass() == SurenameNullObject.class);
+		assertTrue("Instance is not correct!", actual);
+	}
+
+	@Test
+	public void testIsEmpty_ForValidValue() {
+		Surename sut = Surename.newInstance("Jonas");
+
+		boolean result = sut.isEmpty();
+
+		assertFalse("[result] for isEmpty is not correct!", result);
+	}
+
+	@Test
+	public void testIsEmpty_ForNullObject() {
+		Surename sut = Surename.newInstance();
+
+		boolean result = sut.isEmpty();
+
+		assertTrue("[result] for isEmpty is not correct!", result);
+	}
+
+	@Test
+	public void testToString_ForValidValue() {
+		String expected = "Jonas";
+		Surename surename = Surename.newInstance(expected);
 
 		String actual = surename.toString();
+		assertEquals("String representation is not correct!", expected, actual);
+	}
 
-		assertEquals("Jonas", actual);
+	@Test
+	public void testToString_ForNullObject() {
+		String expected = "";
+		Surename surename = Surename.newInstance();
+
+		String actual = surename.toString();
+		assertEquals("String representation is not correct!", expected, actual);
 	}
 
 	@Test
@@ -66,13 +122,11 @@ public class SurenameTest {
 		Surename sut = Surename.newInstance("Surename");
 
 		int hashCode = sut.hashCode();
-
 		assertEquals(-1551509409, hashCode);
 
 		sut.value = null;
 
 		hashCode = sut.hashCode();
-
 		assertEquals(31, hashCode);
 	}
 
@@ -145,5 +199,4 @@ public class SurenameTest {
 
 		assertTrue(result);
 	}
-
 }

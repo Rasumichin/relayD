@@ -22,7 +22,7 @@ public class Person implements Serializable {
 	private static final long serialVersionUID = 2856140961938434688L;
 
 	private UUID uuid;
-	private Surename surename;
+	private Surename surename = Surename.newInstance();
 	private Forename forename = Forename.newInstance();
 	private YearOfBirth yearOfBirth = YearOfBirth.newInstance();
 	private Shirtsize shirtsize = Shirtsize.UNKNOWN;
@@ -60,7 +60,11 @@ public class Person implements Serializable {
 	}
 
 	public void setSurename(Surename aSurename) {
-		surename = aSurename;
+		if (aSurename == null) {
+			surename = Surename.newInstance();
+		} else {
+			surename = aSurename;
+		}
 	}
 
 	public Forename getForename() {
@@ -102,7 +106,7 @@ public class Person implements Serializable {
 	 * @param domainPart The desired domain part of the new email address. Must not be 'null'.
 	 *
 	 * @return The inferred new email address (might be 'null' in case 'forename' AND 'surename'
-	 * 			are both currently 'null'.
+	 * 			are both currently empty.
 	 *
 	 */
 	public Email inferEmailFromNameAnd(String domainPart) {
@@ -110,13 +114,13 @@ public class Person implements Serializable {
 			throw new IllegalArgumentException("Provided domain part must not be 'null'.");
 		}
 
-		if (getForename().isEmpty() && getSurename() == null) {
+		if (getForename().isEmpty() && getSurename().isEmpty()) {
 			setEmail(null);
 			return getEmail();
 		}
 
 		String localPart = getForename().toString();
-		if (getSurename() != null) {
+		if (!getSurename().isEmpty()) {
 			localPart += localPart.isEmpty() ? "" : ".";
 			localPart += getSurename();
 		}
@@ -204,13 +208,12 @@ public class Person implements Serializable {
 		Surename currentSurename = getSurename();
 
 		String currentLocalPart = currentForename.toString();
-		if (currentSurename != null) {
+		if (!currentSurename.isEmpty()) {
 			currentLocalPart = (currentLocalPart.isEmpty()) ? currentSurename.toString() : currentLocalPart + '.' + currentSurename;
 		}
 
-		if (currentLocalPart != null) {
-			currentLocalPart = currentLocalPart.replaceAll("\\s+", "");
-		}
+		// Replace all whitespace with empty strings
+		currentLocalPart = currentLocalPart.replaceAll("\\s+", "");
 
 		return currentLocalPart;
 	}
