@@ -77,6 +77,16 @@ public class PersonTest {
 	}
 
 	@Test
+	public void testSetSurename_ForNullValue() {
+		Person sut = Person.newInstance();
+
+		sut.setSurename(null);
+
+		Surename actual = sut.getSurename();
+		assertNotNull("Person must not return [surename] equals 'null'!", actual);
+	}
+
+	@Test
 	public void testSetRelayname_ForNullValue() {
 		Person sut = Person.newInstance();
 
