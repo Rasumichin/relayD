@@ -7,7 +7,6 @@ import com.relayd.attributes.Comment;
 import com.relayd.attributes.Email;
 import com.relayd.attributes.Forename;
 import com.relayd.attributes.Position;
-import com.relayd.attributes.Relayname;
 import com.relayd.attributes.Shirtsize;
 import com.relayd.attributes.Surename;
 import com.relayd.attributes.YearOfBirth;
@@ -39,7 +38,6 @@ public class EntityToPersonMapper {
 		person.setComment(Comment.newInstance(personEntity.getComment()));
 		person.setEmail(Email.newInstance(personEntity.getEmail()));
 		person.setYearOfBirth(YearOfBirth.newInstance(personEntity.getYearOfBirth()));
-		person.setRelayname(Relayname.newInstance(personEntity.getRelayname()));
 		person.setPosition(Position.newInstance(personEntity.getPos()));
 		person.setShirtsize(Shirtsize.newInstance(personEntity.getShirtsize()));
 

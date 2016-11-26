@@ -7,7 +7,7 @@ import javax.persistence.*;
 /**
  * @author schmollc (Christian@relayd.de)
  * @author Rasumichin (Erik@relayd.de)
- * @since 09.09.2016
+ * @since  09.09.2016
  *
  */
 @Entity
@@ -35,9 +35,6 @@ public class PersonEntity {
 
 	@Column(name = "info")
 	private String comment;
-
-	@Column
-	private String relayname;
 
 	@Column
 	private Integer pos;
@@ -122,14 +119,6 @@ public class PersonEntity {
 
 	public void setComment(String aComment) {
 		comment = aComment;
-	}
-
-	public String getRelayname() {
-		return relayname;
-	}
-
-	public void setRelayname(String aRelayname) {
-		relayname = aRelayname;
 	}
 
 	public Integer getPos() {
