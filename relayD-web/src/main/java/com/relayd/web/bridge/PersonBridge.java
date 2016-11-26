@@ -12,18 +12,15 @@ import com.relayd.web.browse.PersonBrowse;
  * Actual its only a layer for the PersonGateway.
  *
  * @author schmollc (Christian@relayD.de)
+ * @author Rasumichin (Erik@relayd.de)
  * @since 20.06.2016
- * status initial
+ * 
  */
 public interface PersonBridge {
 
 	List<PersonBrowse> allPersonBrowse();
 
 	List<Person> all();
-
-	List<Person> allWithoutRelay();
-
-	List<Person> relaysWithSpace();
 
 	void persistPerson(Person person);
 
@@ -36,5 +33,4 @@ public interface PersonBridge {
 	String getEmailList(List<Person> somePersons);
 
 	GatewayType getGatewayType();
-
 }

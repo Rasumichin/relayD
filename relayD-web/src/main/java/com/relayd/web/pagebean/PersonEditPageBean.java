@@ -16,7 +16,6 @@ import com.relayd.attributes.Comment;
 import com.relayd.attributes.Email;
 import com.relayd.attributes.Forename;
 import com.relayd.attributes.Position;
-import com.relayd.attributes.Relayname;
 import com.relayd.attributes.Shirtsize;
 import com.relayd.attributes.Surename;
 import com.relayd.attributes.YearOfBirth;
@@ -151,14 +150,6 @@ public class PersonEditPageBean implements Serializable {
 
 	public void setEmail(Email anEmail) {
 		workingPerson.setEmail(anEmail);
-	}
-
-	public void setRelayname(Relayname aRelayname) {
-		workingPerson.setRelayname(aRelayname);
-	}
-
-	public Relayname getRelayname() {
-		return workingPerson.getRelayname();
 	}
 
 	public void setPosition(Position aPosition) {

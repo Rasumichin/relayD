@@ -91,17 +91,6 @@ public class EntityToPersonMapperTest {
 	}
 
 	@Test
-	public void testMapToPerson_relayname() {
-		personEntity.setRelayname("Fists of Fury");
-		Relayname expected = Relayname.newInstance(personEntity.getRelayname());
-
-		Person person = sut.mapToPerson(personEntity);
-
-		Relayname actual = person.getRelayname();
-		assertEquals("Mapping of [relayname] is not correct!", expected, actual);
-	}
-	
-	@Test
 	public void testMapToPerson_shirtsize() {
 		Integer shirtsizeValue = Shirtsize.HerrenXL.getSize();
 		personEntity.setShirtsize(Integer.valueOf(shirtsizeValue));

@@ -9,6 +9,9 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 /**
+ * The real problem is not whether machines think but whether men do.
+ * 	  - B. F. Skinner
+ *   
  * @author schmollc (Christian@relayd.de)
  * @author Rasumichin (Erik@relayd.de)
  * @since  09.09.2016
@@ -25,7 +28,6 @@ public class PersonEntityTest {
 		assertNull("[surename] not correct!", sut.getSurename());
 		assertNull("[emailadress] not correct!", sut.getEmail());
 		assertNull("[yearOfBirth] not correct!", sut.getYearOfBirth());
-		assertNull("[relayname] not correct!", sut.getRelayname());
 		assertNull("[pos] not correct!", sut.getPos());
 		assertNull("[shirtsize] not correct!", sut.getShirtsize());
 		assertNull("[comment] not correct!", sut.getComment());
@@ -47,7 +49,6 @@ public class PersonEntityTest {
 		assertNull("[surename] not correct!", sut.getSurename());
 		assertNull("[emailadress] not correct!", sut.getEmail());
 		assertNull("[yearOfBirth] not correct!", sut.getYearOfBirth());
-		assertNull("[relayname] not correct!", sut.getRelayname());
 		assertNull("[pos] not correct!", sut.getPos());
 		assertNull("[shirtsize] not correct!", sut.getShirtsize());
 		assertNull("[comment] not correct!", sut.getComment());
@@ -111,16 +112,6 @@ public class PersonEntityTest {
 
 		sut.setShirtsize(shirtsize);
 		assertEquals("[shirtsize] has not been set correctly!", shirtsize, sut.getShirtsize());
-	}
-
-
-	@Test
-	public void testSetRelayname() {
-		String relayname = "Die 4 ????";
-		PersonEntity sut = PersonEntity.newInstance();
-		
-		sut.setRelayname(relayname);
-		assertEquals("[relayname] has not been set correctly!", relayname, sut.getRelayname());
 	}
 
 	@Test

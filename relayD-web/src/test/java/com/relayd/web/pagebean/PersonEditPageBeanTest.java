@@ -20,7 +20,6 @@ import com.relayd.attributes.Comment;
 import com.relayd.attributes.Email;
 import com.relayd.attributes.Forename;
 import com.relayd.attributes.Position;
-import com.relayd.attributes.Relayname;
 import com.relayd.attributes.Shirtsize;
 import com.relayd.attributes.Surename;
 import com.relayd.attributes.YearOfBirth;
@@ -116,7 +115,6 @@ public class PersonEditPageBeanTest {
 
 	@Test
 	public void testCancel() {
-
 		sut.cancel();
 
 		verify(sut, never()).persistPerson();
@@ -131,7 +129,6 @@ public class PersonEditPageBeanTest {
 		sut.setForename(expected);
 
 		Forename result = sut.getForename();
-
 		assertEquals("[Forename] not correct!", expected, result);
 	}
 
@@ -143,7 +140,6 @@ public class PersonEditPageBeanTest {
 		sut.setSurename(expected);
 
 		Surename result = sut.getSurename();
-
 		assertEquals("[Surename] not correct!", expected, result);
 	}
 
@@ -155,7 +151,6 @@ public class PersonEditPageBeanTest {
 		sut.setYearOfBirth(expected);
 
 		YearOfBirth result = sut.getYearOfBirth();
-
 		assertEquals("[YearOfBirth] not correct!", expected, result);
 	}
 
@@ -167,9 +162,7 @@ public class PersonEditPageBeanTest {
 		sut.setComment(expected);
 
 		Comment result = sut.getComment();
-
 		assertEquals("[Comment] not correct!", expected, result);
-
 	}
 
 	@Test
@@ -180,7 +173,6 @@ public class PersonEditPageBeanTest {
 		sut.setShirtsize(expected);
 
 		Shirtsize result = sut.getShirtsize();
-
 		assertEquals("[Shirtsize] not correct!", expected, result);
 	}
 
@@ -192,20 +184,7 @@ public class PersonEditPageBeanTest {
 		sut.setEmail(expected);
 
 		Email result = sut.getEmail();
-
 		assertEquals("[Email] not correct!", expected, result);
-	}
-
-	@Test
-	public void testRelayname() {
-		sut.openDialogForCreatePerson();
-		Relayname expected = Relayname.newInstance("Die 4 ????");
-
-		sut.setRelayname(expected);
-
-		Relayname result = sut.getRelayname();
-
-		assertEquals("[Relayname] not correct!", expected, result);
 	}
 
 	@Test
@@ -216,7 +195,6 @@ public class PersonEditPageBeanTest {
 		sut.setPosition(expected);
 
 		Position result = sut.getPosition();
-
 		assertEquals("[Position] not correct!", expected, result);
 	}
 

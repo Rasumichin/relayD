@@ -11,7 +11,6 @@ import com.relayd.attributes.Comment;
 import com.relayd.attributes.Email;
 import com.relayd.attributes.Forename;
 import com.relayd.attributes.Position;
-import com.relayd.attributes.Relayname;
 import com.relayd.attributes.Shirtsize;
 import com.relayd.attributes.Surename;
 import com.relayd.attributes.YearOfBirth;
@@ -111,17 +110,6 @@ public class PersonToEntityMapperTest {
 
 		String actual = personEntity.getComment();
 		assertEquals("Mapping of [comment] is not correct!", expected, actual);
-	}
-
-	@Test
-	public void testMapPersonToEntity_relayname() {
-		String expected = "Fists of Fury";
-		person.setRelayname(Relayname.newInstance(expected));
-
-		sut.mapPersonToEntity(person, personEntity);
-
-		String actual = personEntity.getRelayname();
-		assertEquals("Mapping of [relayname] is not correct!", expected, actual);
 	}
 
 	@Test

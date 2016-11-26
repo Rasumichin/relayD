@@ -30,6 +30,7 @@ import com.relayd.web.bridge.PersonBridgeImpl;
 
 /**
  * @author schmollc (Christian@relayd.de)
+ * @author Rasumichin (Erik@relayd.de)
  * @since 15.06.2016
  *
  */
@@ -59,7 +60,7 @@ public class PersonBrowsePageBean implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		visibleColumns = Arrays.asList(true, true, true, true, true, true, true, true, true);
+		visibleColumns = Arrays.asList(true, true, true, true, true, true, true, true);
 		refreshPersons();
 	}
 
@@ -85,10 +86,6 @@ public class PersonBrowsePageBean implements Serializable {
 
 	public void setSelectedPersons(List<Person> someSelectedPersons) {
 		selectedPersons = someSelectedPersons;
-	}
-
-	public int sortByRelayname(Person personOne, Person personTwo) {
-		return personSort.sortByRelayname(personOne, personTwo);
 	}
 
 	public int sortByForename(Forename name1, Forename name2) {
@@ -202,14 +199,6 @@ public class PersonBrowsePageBean implements Serializable {
 
 	public void showAll() {
 		refreshPersons();
-	}
-
-	public void showRelaysWithSpace() {
-		searchResult = personBridge.relaysWithSpace();
-	}
-
-	public void showAllWithoutRelay() {
-		searchResult = personBridge.allWithoutRelay();
 	}
 
 	public List<Boolean> getVisibleColumns() {

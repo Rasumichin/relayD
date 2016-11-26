@@ -100,18 +100,6 @@ public class PersonBridgeImplTest {
 		assertEquals("[result] not correct!", "Peter.Shaw@RockyBeach.com, Justus.Jonas@RockyBeach.com", result);
 	}
 
-	@Test
-	public void testAllWithoutRelay_For2PersonsWithoutRelay() {
-		doReturn(listWithPersons()).when(gateway).getAll();
-
-		List<Person> result = sut.allWithoutRelay();
-
-		assertNotNull("[result] keine gültige Instanz!", result);
-		assertEquals("[result] größe nicht korrekt!", 2, result.size());
-		Person personFirst = result.get(0);
-		assertEquals("[forename] nicht korrekt!", "Dirk", personFirst.getForename().toString());
-	}
-
 	private List<Person> listWithPersons() {
 		List<Person> somePersons = new ArrayList<Person>();
 		PersonBuilder builder = new PersonBuilder();
@@ -122,13 +110,13 @@ public class PersonBridgeImplTest {
 		Person personTwo = builder.withForename(Forename.newInstance("Christian")).build();
 		somePersons.add(personTwo);
 
-		Person personThree = builder.withForename(Forename.newInstance("Peter")).withEmail(EMAIL_PETER).withRelayname("Die 4 ???").build();
+		Person personThree = builder.withForename(Forename.newInstance("Peter")).withEmail(EMAIL_PETER).build();
 		somePersons.add(personThree);
 
-		Person personFour = builder.withForename(Forename.newInstance("Justus")).withEmail(EMAIL_JUSTUS).withRelayname("Die 4 ???").build();
+		Person personFour = builder.withForename(Forename.newInstance("Justus")).withEmail(EMAIL_JUSTUS).build();
 		somePersons.add(personFour);
 
-		builder = new PersonBuilder().withRelayname("Die fanta 4");
+		builder = new PersonBuilder();
 
 		Person personFive = builder.withForename(Forename.newInstance("Michi")).build();
 		somePersons.add(personFive);
@@ -143,22 +131,6 @@ public class PersonBridgeImplTest {
 		somePersons.add(personEight);
 
 		return somePersons;
-	}
-
-	@Test
-	public void testRelaysWithSpace() {
-		doReturn(listWithPersons()).when(gateway).getAll();
-
-		List<Person> result = sut.relaysWithSpace();
-
-		assertNotNull("[result] not correct!", result);
-		assertEquals("[result] element count not correct!", 2, result.size());
-
-		Person firstPerson = result.get(0);
-		assertEquals("[Forename] from first Person not correct!", Forename.newInstance("Peter"), firstPerson.getForename());
-
-		Person secondPerson = result.get(1);
-		assertEquals("[Forename] from second Person not correct!", Forename.newInstance("Justus"), secondPerson.getForename());
 	}
 
 	@Test
@@ -198,7 +170,6 @@ public class PersonBridgeImplTest {
 								.withYearOfBirth(expectedYearOfBirth)
 								.withShirtsize(expectedShirtsize)
 								.withEmail(EMAIL_PETER)
-								.withRelayname("Die 4 ???")
 								.withComment(expectedComment)
 								.build();
 		//@formatter:on

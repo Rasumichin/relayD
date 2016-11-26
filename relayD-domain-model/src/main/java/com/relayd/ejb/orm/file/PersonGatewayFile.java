@@ -17,6 +17,7 @@ import com.relayd.ejb.PersonGateway;
 
 /**
  * @author  schmollc (Christian@relayd.de)
+ * @author  Rasumichin (Erik@relayd.de)
  * @since   26.03.2016
  *
  */
@@ -84,7 +85,6 @@ public class PersonGatewayFile implements PersonGateway {
 					person.setForename(updatePerson.getForename());
 					person.setShirtsize(updatePerson.getShirtsize());
 					person.setEmail(updatePerson.getEmail());
-					person.setRelayname(updatePerson.getRelayname());
 					person.setPosition(updatePerson.getPosition());
 					person.setComment(updatePerson.getComment());
 					break;

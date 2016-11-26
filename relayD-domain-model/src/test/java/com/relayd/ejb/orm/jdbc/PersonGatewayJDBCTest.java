@@ -15,14 +15,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.relayd.Person;
-import com.relayd.attributes.Comment;
-import com.relayd.attributes.Email;
-import com.relayd.attributes.Forename;
-import com.relayd.attributes.Position;
-import com.relayd.attributes.Relayname;
-import com.relayd.attributes.Shirtsize;
-import com.relayd.attributes.Surename;
-import com.relayd.attributes.YearOfBirth;
+import com.relayd.attributes.*;
 
 import static org.mockito.Mockito.*;
 
@@ -31,6 +24,7 @@ import static org.mockito.Mockito.*;
  *  - Laotse
  *
  * @author  schmollc (Christian@relayd.de)
+ * @author  Rasumichin (Erik@relayd.de)
  * @since   15.09.2016
  *
  */
@@ -45,7 +39,6 @@ public class PersonGatewayJDBCTest {
 	private static final String FORENAME = "Justus";
 	private static final Integer SHIRTSIZE = 3;
 	private static final Integer YEAROFBIRTH = 1971;
-	private static final String RELAYNAME = "Die 4 ????";
 	private static final Integer POS = 1;
 	private static final String EMAIL = "Justus.Jonas@RockyBeach.com";
 	private static final String COMMENT = "Erster Detektiv!";
@@ -60,7 +53,6 @@ public class PersonGatewayJDBCTest {
 		doReturn(SURENAME).when(resultSetMock).getString(PersonGatewayJDBC.INDEX_SURENAME);
 		doReturn(YEAROFBIRTH).when(resultSetMock).getInt(PersonGatewayJDBC.INDEX_YEAROFBIRTH);
 		doReturn(SHIRTSIZE).when(resultSetMock).getInt(PersonGatewayJDBC.INDEX_SHIRTSIZE);
-		doReturn(RELAYNAME).when(resultSetMock).getString(PersonGatewayJDBC.INDEX_RELAYNAME);
 		doReturn(POS).when(resultSetMock).getInt(PersonGatewayJDBC.INDEX_POS);
 		doReturn(EMAIL).when(resultSetMock).getString(PersonGatewayJDBC.INDEX_EMAIL);
 		doReturn(COMMENT).when(resultSetMock).getString(PersonGatewayJDBC.INDEX_COMMENT);
@@ -77,7 +69,6 @@ public class PersonGatewayJDBCTest {
 		assertEquals("[surename] not correct!", Surename.newInstance(SURENAME), person.getSurename());
 		assertEquals("[yearOfBirth] not correct!", YearOfBirth.newInstance(YEAROFBIRTH), person.getYearOfBirth());
 		assertEquals("[shirtsize] not correct!", Shirtsize.newInstance(SHIRTSIZE), person.getShirtsize());
-		assertEquals("[relayname] not correct!", Relayname.newInstance(RELAYNAME), person.getRelayname());
 		assertEquals("[pos] not correct!", Position.newInstance(POS), person.getPosition());
 		assertEquals("[email] not correct!", Email.newInstance(EMAIL), person.getEmail());
 		assertEquals("[comment] not correct!", Comment.newInstance(COMMENT), person.getComment());
