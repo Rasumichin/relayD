@@ -12,7 +12,6 @@ CREATE TABLE person (
 	forename						VARCHAR(256),
 	yearOfBirth						INTEGER,
     shirtsize						INTEGER,
-    relayname						VARCHAR(256),
     pos								INTEGER, -- POSITION geht nicht!
 	email							VARCHAR(256),
 	info							VARCHAR(1024) -- COMMENT geht nicht!
@@ -23,7 +22,6 @@ COMMENT on COLUMN person.surename is 'The Surename of a Person.';
 COMMENT on COLUMN person.forename is 'The Forename of a Person.';
 COMMENT on COLUMN person.yearOfBirth is 'The Year Of Birth of a Person.';
 COMMENT on COLUMN person.shirtsize is 'TODO - Is this not a ref to a table?';
-COMMENT on COLUMN person.relayname is 'TODO - A workaround-should be an own entity.';
 COMMENT on COLUMN person.position is 'TODO - A workaround-should be an own entity.';
 COMMENT on COLUMN person.email is 'The Email of a Person.';
 COMMENT on COLUMN person.comment is 'A comment for a Person.';
