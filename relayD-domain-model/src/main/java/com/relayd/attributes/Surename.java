@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * @author schmollc (Christian@relayD.de)
+ * @author Rasumichin (Erik@relayd.de)
  * @since 22.03.2016
  *
  */
@@ -12,23 +13,31 @@ public class Surename implements Serializable {
 
 	String value;
 
+	private Surename() {
+	}
+	
 	private Surename(String surename) {
 		super();
 		value = surename;
+	}
+
+	public static Surename newInstance() {
+		return SurenameNullObject.instance();
 	}
 
 	/**
 	 * Bloch, Joshua, Effective Java, 2nd Edition, Item 1, p. 5
 	 */
 	static public Surename newInstance(String surename) {
-		validate(surename);
+		if (surename == null || surename.trim().isEmpty()) {
+			return SurenameNullObject.instance();
+		}
+		
 		return new Surename(surename);
 	}
 
-	private static void validate(String surename) {
-		if (surename == null) {
-			throw new IllegalArgumentException("[surename] must not be 'null'.");
-		}
+	public boolean isEmpty() {
+		return false;
 	}
 
 	@Override
@@ -64,5 +73,25 @@ public class Surename implements Serializable {
 			return false;
 		}
 		return true;
+	}
+
+	static final class SurenameNullObject extends Surename {
+		private static final long serialVersionUID = -1400372422930380396L;
+
+		private static final SurenameNullObject SINGLETON = new SurenameNullObject();
+
+		private static SurenameNullObject instance() {
+			return SINGLETON;
+		}
+
+		@Override
+		public boolean isEmpty() {
+			return true;
+		}
+
+		@Override
+		public String toString() {
+			return "";
+		}
 	}
 }
