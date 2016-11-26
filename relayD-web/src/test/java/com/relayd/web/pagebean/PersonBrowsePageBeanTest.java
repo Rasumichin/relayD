@@ -35,6 +35,7 @@ import static org.mockito.Mockito.*;
  *  - John Ruskin
  *
  * @author schmollc (Christian@relayd.de)
+ * @author Rasumichin (Erik@relayd.de)
  * @since 15.06.2016
  *
  */
@@ -236,18 +237,6 @@ public class PersonBrowsePageBeanTest {
 	}
 
 	@Test
-	public void testShowRelaysWithSpace() {
-		sut.showRelaysWithSpace();
-		verify(personBridge).relaysWithSpace();
-	}
-
-	@Test
-	public void testShowAllWithoutRelay() {
-		sut.showAllWithoutRelay();
-		verify(personBridge).allWithoutRelay();
-	}
-
-	@Test
 	public void testSortByYearOfBirth() {
 		YearOfBirth yearOfBirth1 = YearOfBirth.newInstance(1971);
 		YearOfBirth yearOfBirth2 = YearOfBirth.newInstance(1973);
@@ -292,17 +281,6 @@ public class PersonBrowsePageBeanTest {
 	}
 
 	@Test
-	public void testSortByRelayname() {
-		Person person1 = new PersonBuilder().withRelayname("A").build();
-		Person person2 = new PersonBuilder().withRelayname("B").build();
-
-		@SuppressWarnings("unused")
-		int resultForDocumentation = sut.sortByRelayname(person1, person2);
-
-		verify(personSort).sortByRelayname(person1, person2);
-	}
-
-	@Test
 	public void testSortByshirtsize() {
 		Shirtsize size1 = Shirtsize.DamenL;
 		Shirtsize size2 = Shirtsize.HerrenM;
@@ -312,5 +290,4 @@ public class PersonBrowsePageBeanTest {
 
 		verify(personSort).sortByShirtsize(size1, size2);
 	}
-
 }

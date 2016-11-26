@@ -202,11 +202,9 @@ public class RelayBrowsePageBean implements Serializable {
 	}
 
 	public void showAllWithoutRelay() {
-		searchResult = personBridge.allWithoutRelay();
 	}
 
 	public void showRelaysWithSpace() {
-		searchResult = personBridge.relaysWithSpace();
 	}
 
 	public void showAll() {

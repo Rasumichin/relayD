@@ -6,10 +6,8 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import com.relayd.Person;
 import com.relayd.attributes.Email;
 import com.relayd.attributes.Forename;
-import com.relayd.attributes.Position;
 import com.relayd.attributes.Shirtsize;
 import com.relayd.attributes.Surename;
 import com.relayd.attributes.YearOfBirth;
@@ -23,71 +21,6 @@ import com.relayd.attributes.YearOfBirth;
 public class PersonSortTest {
 
 	private PersonSort sut = new PersonSort();
-
-	@Test
-	public void testSortByRelayname_FirstRelaynameIsNull() {
-		Person first = Person.newInstance();
-		Person second = Person.newInstance();
-
-		int position = sut.sortByRelayname(first, second);
-
-		assertEquals("[position] not correct!", 0, position);
-	}
-
-	@Test
-	public void testSortByRelayname_SecondRelaynameIsNull() {
-		Person first = new PersonBuilder().withRelayname("Die 4 ????").build();
-
-		Person second = Person.newInstance();
-
-		int position = sut.sortByRelayname(first, second);
-
-		assertEquals("[position] not correct!", 10, position);
-	}
-
-	@Test
-	public void testSortByRelayname_WithSameName() {
-		Person first = new PersonBuilder().withRelayname("A").build();
-
-		Person second = new PersonBuilder().withRelayname("A").build();
-
-		int position = sut.sortByRelayname(first, second);
-
-		assertEquals("[position] not correct!", 0, position);
-	}
-
-	@Test
-	public void testSortByRelayname_WithSecondPositionIsNull() {
-		Person first = new PersonBuilder().withRelayname("A").withPosition(Position.FOURTH).build();
-
-		Person second = new PersonBuilder().withRelayname("A").build();
-
-		int position = sut.sortByRelayname(first, second);
-
-		assertEquals("[position] not correct!", 0, position);
-	}
-
-	@Test
-	public void testSortByRelayname_WithBothPositions() {
-		Person first = new PersonBuilder().withRelayname("A").withPosition(Position.FOURTH).build();
-
-		Person second = new PersonBuilder().withRelayname("A").withPosition(Position.SECOND).build();
-
-		int position = sut.sortByRelayname(first, second);
-
-		assertEquals("[position] not correct!", 2, position);
-	}
-
-	@Test
-	public void testSortByRelayname_WithBothPositions2() {
-		Person first = new PersonBuilder().withRelayname("A").withPosition(Position.SECOND).build();
-
-		Person second = new PersonBuilder().withRelayname("A").withPosition(Position.FOURTH).build();
-
-		int position = sut.sortByRelayname(first, second);
-
-		assertEquals("[position] not correct!", -2, position);
-	}
 
 	@Test
 	public void testSortByYear() {

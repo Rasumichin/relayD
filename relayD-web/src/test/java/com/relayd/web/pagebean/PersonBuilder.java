@@ -7,7 +7,6 @@ import com.relayd.attributes.Comment;
 import com.relayd.attributes.Email;
 import com.relayd.attributes.Forename;
 import com.relayd.attributes.Position;
-import com.relayd.attributes.Relayname;
 import com.relayd.attributes.Shirtsize;
 import com.relayd.attributes.Surename;
 import com.relayd.attributes.YearOfBirth;
@@ -15,6 +14,7 @@ import com.relayd.attributes.YearOfBirth;
 /**
  * TODO (Christian, Version 1.3): Noch zu klären wo genau die Builder hinsollen oder jede DomainKlasse Ihren eigenen innerClass Builder hat.
  * @author  schmollc (Christian@relayd.de)
+ * @author  Rasumichin (Erik@relayd.de)
  * @since   30.03.2016
  *
  */
@@ -23,7 +23,6 @@ public class PersonBuilder {
 	private UUID uuid = UUID.randomUUID();
 	private Surename surename = Surename.newInstance("Surename");
 	private Forename forename = Forename.newInstance("Forename");
-	private Relayname relayname;
 	private Position position;
 	private YearOfBirth yearOfBirth = YearOfBirth.newInstance(1956);
 	private Shirtsize shirtsize = Shirtsize.HerrenM;
@@ -42,11 +41,6 @@ public class PersonBuilder {
 
 	public PersonBuilder withForename(Forename aForename) {
 		forename = aForename;
-		return this;
-	}
-
-	public PersonBuilder withRelayname(String aRelayname) {
-		relayname = Relayname.newInstance(aRelayname);
 		return this;
 	}
 
@@ -80,7 +74,6 @@ public class PersonBuilder {
 		person.setUuid(uuid);
 		person.setSurename(surename);
 		person.setForename(forename);
-		person.setRelayname(relayname);
 		person.setPosition(position);
 		person.setYearOfBirth(yearOfBirth);
 		person.setShirtsize(shirtsize);

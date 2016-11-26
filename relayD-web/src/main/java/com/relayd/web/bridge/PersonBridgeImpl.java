@@ -1,14 +1,11 @@
 package com.relayd.web.bridge;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 import com.relayd.Person;
 import com.relayd.attributes.Email;
-import com.relayd.attributes.Relayname;
 import com.relayd.ejb.GatewayType;
 import com.relayd.ejb.PersonGateway;
 import com.relayd.ejb.PersonGatewayFactory;
@@ -18,6 +15,7 @@ import com.relayd.web.browse.PersonBrowse;
  * Only a simple Wrapper for the Gateway.
  *
  * @author schmollc (Christian@relayD.de)
+ * @author Rasumichin (Erik@relayd.de)
  * @since 20.06.2016
  *
  */
@@ -79,43 +77,6 @@ public class PersonBridgeImpl implements PersonBridge {
 		output = output.replaceFirst(", ", "");
 
 		return output;
-	}
-
-	@Override
-	public List<Person> allWithoutRelay() {
-		List<Person> result = new ArrayList<Person>();
-		for (Person person : all()) {
-			if (!person.hasRelay()) {
-				result.add(person);
-			}
-		}
-		return result;
-	}
-
-	@Override
-	public List<Person> relaysWithSpace() {
-		Map<Relayname, Integer> bundleRelay = new HashMap<Relayname, Integer>();
-		List<Person> resultList = new ArrayList<Person>();
-		for (Person person : all()) {
-			if (person.hasRelay()) {
-				int relayCount = 0;
-				if (bundleRelay.get(person.getRelayname()) != null) {
-					relayCount = bundleRelay.get(person.getRelayname());
-				}
-				relayCount++;
-				if (relayCount == 4) {
-					bundleRelay.remove(person.getRelayname());
-				} else {
-					bundleRelay.put(person.getRelayname(), relayCount);
-				}
-			}
-		}
-		for (Person person : all()) {
-			if (bundleRelay.containsKey(person.getRelayname())) {
-				resultList.add(person);
-			}
-		}
-		return resultList;
 	}
 
 	@Override

@@ -59,18 +59,6 @@
 						actionListener="#{personBrowsePageBean.showAll}"
 						update="form"
 						icon="ui-icon-disk" />
-					<p:separator />
-					<p:menuitem
-						value="Relays with space"
-						actionListener="#{personBrowsePageBean.showRelaysWithSpace}"
-						update="form"
-						icon="ui-icon-arrow-4-diag" />
-					<p:separator />
-					<p:menuitem
-						value="All without relay"
-						actionListener="#{personBrowsePageBean.showAllWithoutRelay}"
-						update="form"
-						icon="ui-icon-person" />
 				</p:menuButton>
 			</f:facet>
 			<f:facet name="right">
@@ -140,24 +128,15 @@
 			</p:column>
 
 			<p:column
-				headerText="Relayname"
-				visible="#{personBrowsePageBean.visibleColumns[3]}"
-				sortBy="#{person}"
-				sortFunction="#{personBrowsePageBean.sortByRelayname}"
-				width="150">
-				<h:outputText value="#{person.relayname}" />
-			</p:column>
-
-			<p:column
 				headerText="Position"
-				visible="#{personBrowsePageBean.visibleColumns[4]}"
+				visible="#{personBrowsePageBean.visibleColumns[3]}"
 				width="70">
 				<h:outputText value="#{person.position.toString()}" />
 			</p:column>
 
 			<p:column
 				headerText="Year of Birth"
-				visible="#{personBrowsePageBean.visibleColumns[5]}"
+				visible="#{personBrowsePageBean.visibleColumns[4]}"
 				sortBy="#{person.yearOfBirth}"
 				sortFunction="#{personBrowsePageBean.sortByYearOfBirth}"
 				width="120">
@@ -166,7 +145,7 @@
 
 			<p:column
 				headerText="Shirtsize"
-				visible="#{personBrowsePageBean.visibleColumns[6]}"
+				visible="#{personBrowsePageBean.visibleColumns[5]}"
 				sortBy="#{person.shirtsize}"
 				sortFunction="#{personBrowsePageBean.sortByShirtsize}"
 				width="100">
@@ -175,7 +154,7 @@
 
 			<p:column
 				headerText="E-Mail"
-				visible="#{personBrowsePageBean.visibleColumns[7]}"
+				visible="#{personBrowsePageBean.visibleColumns[6]}"
 				sortBy="#{person.email}"
 				sortFunction="#{personBrowsePageBean.sortByEmail}"
 				width="200">
@@ -184,7 +163,7 @@
 
 			<p:column
 				headerText="Comment"
-				visible="#{personBrowsePageBean.visibleColumns[8]}">
+				visible="#{personBrowsePageBean.visibleColumns[7]}">
 				<h:outputText
 					id="comment"
 					value="#{person.comment}" />
