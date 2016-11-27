@@ -96,9 +96,9 @@ public class TreeNodeRowTest {
 		relay.setRelayname(expected);
 		TreeNodeRow sut = TreeNodeRow.newInstance(relay);
 
-		Relayname actual = sut.getRelayname();
+		String actual = sut.getRelayname();
 
-		assertEquals("relayName not correct!", expected, actual);
+		assertEquals("relayName not correct!", expected + " [0/4]", actual);
 	}
 
 	@Test
@@ -109,8 +109,8 @@ public class TreeNodeRowTest {
 		personRelay.setUuidPerson(uuid);
 		TreeNodeRow sut = TreeNodeRow.newInstance(personRelay, dummyPosition);
 
-		Relayname actual = sut.getRelayname();
-		// TODO (Christian, Version 1.3): mit Erik drüber sprechen. Ohne toString interessantes Phänomen
+		String actual = sut.getRelayname();
+		// TODO (Christian, Version 1.3): mit Erik drüber sprechen. Ohne toString interessantes Phänomen (wenn es ein Relayname Domain Objekt ist)
 		assertEquals("relayName not correct!", "", actual.toString());
 	}
 

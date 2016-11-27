@@ -70,9 +70,19 @@ public class Relay implements Serializable {
 		participants.set(position.getValue() - 1, participant);
 	}
 
+	public Integer participantCount() {
+		int count = 0;
+		for (Participant participant : participants) {
+			if (participant != null) {
+				count++;
+			}
+		}
+		return count;
+	}
+
 	@Override
 	public String toString() {
-		return "Relay: " + getRelayname();
+		return getRelayname() + " [" + participantCount() + "/" + RelayEvent.MAX_NUMBER_OF_TRACKS + "]";
 	}
 
 	@Override

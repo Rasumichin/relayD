@@ -143,14 +143,47 @@ public class RelayTest {
 	}
 
 	@Test
-	public void testToString() {
+	public void testParticipantCount_ForEmptyRelay() {
+		Relay sut = Relay.newInstance();
+
+		Integer actual = sut.participantCount();
+
+		assertEquals("count not correct for empty participants!", Integer.valueOf(0), actual);
+	}
+
+	@Test
+	public void testParticipantCount_ForTowParticipants() {
+		Relay sut = Relay.newInstance();
+		sut.addParticipant(Participant.newInstance(), Position.FIRST);
+		sut.addParticipant(Participant.newInstance(), Position.SECOND);
+
+		Integer actual = sut.participantCount();
+
+		assertEquals("count not correct for empty participants!", Integer.valueOf(2), actual);
+	}
+
+	@Test
+	public void testToString_ForRelayWithoutParticipant() {
 		Relay sut = Relay.newInstance();
 
 		String relayname = "Die vier ????";
 
 		sut.setRelayname(Relayname.newInstance(relayname));
 
-		assertEquals("Relay: " + relayname, sut.toString());
+		assertEquals(relayname + " [0/4]", sut.toString());
+	}
+
+	@Test
+	public void testToString_ForRelayWithTwoParticipant() {
+		Relay sut = Relay.newInstance();
+
+		String relayname = "Die vier ????";
+
+		sut.setRelayname(Relayname.newInstance(relayname));
+		sut.addParticipant(Participant.newInstance(), Position.FIRST);
+		sut.addParticipant(Participant.newInstance(), Position.SECOND);
+
+		assertEquals(relayname + " [2/4]", sut.toString());
 	}
 
 	@Test
