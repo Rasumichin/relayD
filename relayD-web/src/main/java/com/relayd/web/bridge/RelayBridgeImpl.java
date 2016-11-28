@@ -1,6 +1,5 @@
 package com.relayd.web.bridge;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.primefaces.model.DefaultTreeNode;
@@ -8,11 +7,7 @@ import org.primefaces.model.TreeNode;
 
 import com.relayd.Participant;
 import com.relayd.Relay;
-import com.relayd.RelayEvent;
-import com.relayd.attributes.Forename;
 import com.relayd.attributes.Position;
-import com.relayd.attributes.Relayname;
-import com.relayd.attributes.Surename;
 import com.relayd.ejb.GatewayType;
 import com.relayd.ejb.RelayGateway;
 import com.relayd.ejb.RelayGatewayFactory;
@@ -37,8 +32,6 @@ public class RelayBridgeImpl implements RelayBridge {
 		TreeNode root = new DefaultTreeNode(new TreeNodeRow(Participant.newInstance(), Position.UNKNOWN), null);
 
 		List<Relay> all = gateway.getAll();
-		// TODO (Christian, Version 1.3): entfernen wenn alles rund läuft!
-		//		all.addAll(getAllMock());
 
 		for (Relay relay : all) {
 
@@ -69,68 +62,6 @@ public class RelayBridgeImpl implements RelayBridge {
 	@Override
 	public void create(Relay relay) {
 		gateway.set(relay);
-	}
-
-	private List<Relay> getAllMock() {
-		List<Relay> result = new ArrayList<Relay>();
-
-		result.add(createDie4());
-		result.add(createDieFanta4());
-
-		return result;
-	}
-
-	private Relay createDie4() {
-		Relay relay = Relay.newInstance(RelayEvent.duesseldorf());
-
-		relay.setRelayname(Relayname.newInstance("Die 4 ????"));
-
-		Participant participant = Participant.newInstance();
-		participant.setForename(Forename.newInstance("Justus"));
-		participant.setSurename(Surename.newInstance("Jonas"));
-		relay.addParticipant(participant, Position.FIRST);
-
-		participant = Participant.newInstance();
-		participant.setForename(Forename.newInstance("Peter"));
-		participant.setSurename(Surename.newInstance("Shaw"));
-		relay.addParticipant(participant, Position.SECOND);
-
-		participant = Participant.newInstance();
-		participant.setForename(Forename.newInstance("Bob"));
-		participant.setSurename(Surename.newInstance("Andrews"));
-		relay.addParticipant(participant, Position.THIRD);
-
-		participant = Participant.newInstance();
-		relay.addParticipant(participant, Position.FOURTH);
-
-		return relay;
-	}
-
-	private Relay createDieFanta4() {
-		Relay relay = Relay.newInstance(RelayEvent.duesseldorf());
-
-		relay.setRelayname(Relayname.newInstance("Die Fanta 4"));
-
-		Participant participant = Participant.newInstance();
-		participant.setForename(Forename.newInstance("Smudo"));
-		relay.addParticipant(participant, Position.FIRST);
-
-		participant = Participant.newInstance();
-		participant.setForename(Forename.newInstance("Michi"));
-		participant.setSurename(Surename.newInstance("Beck"));
-		relay.addParticipant(participant, Position.SECOND);
-
-		participant = Participant.newInstance();
-		participant.setForename(Forename.newInstance("Thomas"));
-		participant.setSurename(Surename.newInstance("D."));
-		relay.addParticipant(participant, Position.THIRD);
-
-		participant = Participant.newInstance();
-		participant.setForename(Forename.newInstance("Andy"));
-		participant.setSurename(Surename.newInstance("Epsilon"));
-		relay.addParticipant(participant, Position.FOURTH);
-
-		return relay;
 	}
 
 	/**
