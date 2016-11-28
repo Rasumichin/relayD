@@ -44,7 +44,6 @@ public class RelayToEntityMapperTest {
 	@Test
 	// TODO (Christian, Version 1.3): Name überprüfen. In PersonMapper hießt es anders...
 	public void testMapDomainToEntity_whenDomainIsNull() {
-		//TODO (Christian, Version 1.3): Im Person Mapper ist eine Vertauschung drin
 		expectedException.expect(IllegalArgumentException.class);
 		expectedException.expectMessage("[relay] must not be 'null'!");
 

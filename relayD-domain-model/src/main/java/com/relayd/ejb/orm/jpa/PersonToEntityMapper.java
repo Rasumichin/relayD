@@ -18,12 +18,11 @@ public class PersonToEntityMapper {
 	}
 
 	public void mapPersonToEntity(Person person, PersonEntity personEntity) {
-		// TODO (Erik, Version 1.3): Fehlermeldung ist falsch bzgl Parameter- mit @Rule lösen um das zu bemerken!
 		if (person == null) {
-			throw new IllegalArgumentException("[personEntity] must not be 'null'!");
+			throw new IllegalArgumentException("[person] must not be 'null'!");
 		}
 		if (personEntity == null) {
-			throw new IllegalArgumentException("[person] must not be 'null'!");
+			throw new IllegalArgumentException("[personEntity] must not be 'null'!");
 		}
 
 		personEntity.setForename(person.getForename().isEmpty() ? null : person.getForename().toString());

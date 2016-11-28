@@ -3,7 +3,9 @@ package com.relayd.ejb.orm.jpa;
 import static org.junit.Assert.*;
 
 import org.junit.FixMethodOrder;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runners.MethodSorters;
 
 import com.relayd.Person;
@@ -19,33 +21,42 @@ import com.relayd.entity.PersonEntity;
 /**
  * The value of layers is that each specializes in a particular aspect of a computer program.
  * 		- Eric Evans (Domain-Driven Design) -
- * 
+ *
  * @author  Rasumichin (Erik@relayd.de)
  * @since   25.09.2016
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class PersonToEntityMapperTest {
-	
+
 	private PersonToEntityMapper sut = PersonToEntityMapper.newInstance();
 	private Person person = Person.newInstance();
 	private PersonEntity personEntity = PersonEntity.newInstance();
+
+	@Rule
+	public ExpectedException expectedException = ExpectedException.none();
 
 	@Test
 	public void testNewInstance() {
 		assertNotNull("Instance creation is not correct!", sut);
 	}
-	
-	@Test(expected=IllegalArgumentException.class)
+
+	@Test
 	public void testMapPersonToEntity_whenPersonIsNull() {
+		expectedException.expect(IllegalArgumentException.class);
+		expectedException.expectMessage("[person] must not be 'null'!");
+
 		sut.mapPersonToEntity(null, personEntity);
 	}
-	
-	@Test(expected=IllegalArgumentException.class)
+
+	@Test
 	public void testMapPersonToEntity_whenPersonEntityIsNull() {
+		expectedException.expect(IllegalArgumentException.class);
+		expectedException.expectMessage("[personEntity] must not be 'null'!");
+
 		sut.mapPersonToEntity(person, null);
 	}
-	
+
 	@Test
 	public void testMapPersonToEntity_id() {
 		PersonEntity personEntity = PersonEntity.newInstance(person.getUuid());
