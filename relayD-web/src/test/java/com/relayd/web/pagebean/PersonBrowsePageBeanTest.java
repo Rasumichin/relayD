@@ -21,11 +21,7 @@ import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.relayd.Person;
-import com.relayd.attributes.Email;
-import com.relayd.attributes.Forename;
-import com.relayd.attributes.Shirtsize;
-import com.relayd.attributes.Surename;
-import com.relayd.attributes.YearOfBirth;
+import com.relayd.attributes.*;
 import com.relayd.web.bridge.PersonBridge;
 
 import static org.mockito.Mockito.*;

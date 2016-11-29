@@ -24,12 +24,12 @@ import com.relayd.ejb.PersonGateway;
  */
 public class PersonGatewayJDBC implements PersonGateway {
 
+	// TODO (EL, 2016-11-29): Adjust indexes after removing 'relayName' and 'pos' from the Person table.
 	static final int INDEX_UUID = 1;
 	static final int INDEX_FORENAME = 2;
 	static final int INDEX_SURENAME = 3;
 	static final int INDEX_YEAROFBIRTH = 4;
 	static final int INDEX_SHIRTSIZE = 5;
-	static final int INDEX_POS = 7;
 	static final int INDEX_EMAIL = 9;
 	static final int INDEX_COMMENT = 10;
 
@@ -116,7 +116,6 @@ public class PersonGatewayJDBC implements PersonGateway {
 		person.setYearOfBirth(YearOfBirth.newInstance(yearOfBirth));
 
 		person.setShirtsize(Shirtsize.newInstance(rs.getInt(INDEX_SHIRTSIZE)));
-		person.setPosition(Position.newInstance(rs.getInt(INDEX_POS)));
 		person.setEmail(Email.newInstance(rs.getString(INDEX_EMAIL)));
 		person.setComment(Comment.newInstance(rs.getString(INDEX_COMMENT)));
 

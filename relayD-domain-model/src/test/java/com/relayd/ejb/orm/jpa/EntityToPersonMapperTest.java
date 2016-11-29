@@ -80,17 +80,6 @@ public class EntityToPersonMapperTest {
 	}
 	
 	@Test
-	public void testMapToPerson_position() {
-		personEntity.setPos(Position.FIRST.getValue());
-		Position expected = Position.newInstance(personEntity.getPos());
-
-		Person person = sut.mapToPerson(personEntity);
-
-		Position actual = person.getPosition();
-		assertEquals("Mapping of [pos] is not correct!", expected, actual);
-	}
-
-	@Test
 	public void testMapToPerson_shirtsize() {
 		Integer shirtsizeValue = Shirtsize.HerrenXL.getSize();
 		personEntity.setShirtsize(Integer.valueOf(shirtsizeValue));

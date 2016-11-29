@@ -30,7 +30,6 @@ public class PersonToEntityMapper {
 		personEntity.setEmail((person.getEmail().isEmpty()) ? null : person.getEmail().toString());
 		personEntity.setYearOfBirth((person.getYearOfBirth().isEmpty()) ? null : person.getYearOfBirth().getValue());
 		personEntity.setComment((person.getComment().isEmpty()) ? null : person.getComment().toString());
-		personEntity.setPos(person.getPosition().isEmpty() ? null : person.getPosition().getValue());
 		personEntity.setShirtsize(person.getShirtsize().isEmpty() ? null : person.getShirtsize().getSize().intValue());
 	}
 }

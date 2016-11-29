@@ -29,11 +29,10 @@ public class PersonTest {
 		sut.setYearOfBirth(YearOfBirth.newInstance(1956));
 		sut.setShirtsize(Shirtsize.HerrenM);
 		sut.setEmail(Email.newInstance("Jonas.Justus@rockyBeach.com"));
-		sut.setPosition(Position.FIRST);
 
 		String personAsString = sut.toString();
 
-		assertEquals("Justus Jonas, 1956, Herren M, Jonas.Justus@rockyBeach.com, First", personAsString);
+		assertEquals("Justus Jonas, 1956, Herren M, Jonas.Justus@rockyBeach.com", personAsString);
 	}
 
 	@Test
@@ -161,21 +160,6 @@ public class PersonTest {
 		Email result = sut.getEmail();
 
 		assertNotNull("[email] not correct!", result);
-	}
-
-	@Test
-	public void testPosition() {
-		Person sut = Person.newInstance();
-		Position defaultPosition = sut.getPosition();
-
-		assertEquals("[position] for default is not correct!", Position.UNKNOWN, defaultPosition);
-
-		Position expected = Position.FOURTH;
-
-		sut.setPosition(expected);
-
-		Position actual = sut.getPosition();
-		assertEquals("[position] not correct!", expected, actual);
 	}
 
 	@Test

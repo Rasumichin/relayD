@@ -3,13 +3,7 @@ package com.relayd.ejb.orm.jpa;
 import java.util.UUID;
 
 import com.relayd.Person;
-import com.relayd.attributes.Comment;
-import com.relayd.attributes.Email;
-import com.relayd.attributes.Forename;
-import com.relayd.attributes.Position;
-import com.relayd.attributes.Shirtsize;
-import com.relayd.attributes.Surename;
-import com.relayd.attributes.YearOfBirth;
+import com.relayd.attributes.*;
 import com.relayd.entity.PersonEntity;
 
 /**
@@ -38,7 +32,6 @@ public class EntityToPersonMapper {
 		person.setComment(Comment.newInstance(personEntity.getComment()));
 		person.setEmail(Email.newInstance(personEntity.getEmail()));
 		person.setYearOfBirth(YearOfBirth.newInstance(personEntity.getYearOfBirth()));
-		person.setPosition(Position.newInstance(personEntity.getPos()));
 		person.setShirtsize(Shirtsize.newInstance(personEntity.getShirtsize()));
 
 		return person;

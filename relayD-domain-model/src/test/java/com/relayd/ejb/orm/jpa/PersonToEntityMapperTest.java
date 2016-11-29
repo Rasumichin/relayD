@@ -9,13 +9,7 @@ import org.junit.rules.ExpectedException;
 import org.junit.runners.MethodSorters;
 
 import com.relayd.Person;
-import com.relayd.attributes.Comment;
-import com.relayd.attributes.Email;
-import com.relayd.attributes.Forename;
-import com.relayd.attributes.Position;
-import com.relayd.attributes.Shirtsize;
-import com.relayd.attributes.Surename;
-import com.relayd.attributes.YearOfBirth;
+import com.relayd.attributes.*;
 import com.relayd.entity.PersonEntity;
 
 /**
@@ -121,17 +115,6 @@ public class PersonToEntityMapperTest {
 
 		String actual = personEntity.getComment();
 		assertEquals("Mapping of [comment] is not correct!", expected, actual);
-	}
-
-	@Test
-	public void testMapPersonToEntity_position() {
-		Integer expected = Position.FIRST.getValue();
-		person.setPosition(Position.newInstance(expected));
-
-		sut.mapPersonToEntity(person, personEntity);
-
-		Integer actual = personEntity.getPos();
-		assertEquals("Mapping of [position] is not correct!", expected, actual);
 	}
 
 	@Test
