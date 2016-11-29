@@ -15,8 +15,8 @@ public class Participant implements Serializable {
 	private static final long serialVersionUID = -2300361519146795905L;
 
 	private UUID uuidPerson;
-	private Forename forename;
-	private Surename surename;
+	private Forename forename = Forename.newInstance();
+	private Surename surename = Surename.newInstance();
 
 	private Participant() {
 		super();

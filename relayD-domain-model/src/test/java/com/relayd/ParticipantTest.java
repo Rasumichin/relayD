@@ -72,7 +72,17 @@ public class ParticipantTest {
 	}
 
 	@Test
-	public void testToString() {
+	public void testToString_ForEmptyForeAndSurename() {
+
+		Participant sut = Participant.newInstance();
+
+		String actual = sut.toString();
+
+		assertEquals("[toString] not correct!", " ", actual);
+	}
+
+	@Test
+	public void testToString_ForFilledForeAndSurename() {
 		Forename forename = Forename.newInstance("Justus");
 		Surename surename = Surename.newInstance("Jonas");
 
