@@ -41,6 +41,7 @@ public class RelayBridgeImpl implements RelayBridge {
 			// TODO (Christian, Erik, Version 1.3): Sieht nach Trainwreck aus. Aber wenn man direkt auf Person geht... Dann "verschwindet" der Track...
 			// Moment.. mmm... dann würde die toString von Track halt sagen: "8.3km, Justus, Jonas, usw.."... mmmmm.....
 			@SuppressWarnings("unused")
+			// TODO (Christian, Erik, Version 1.3): Scheinbar wird "Etappe 1" gar nicht gebraucht
 			TreeNode trackOne = new DefaultTreeNode("Etappe 1", TreeNodeRow.newInstance(relay.getParticipantFor(Position.FIRST), Position.FIRST), relayTreeNode);
 			@SuppressWarnings("unused")
 			TreeNode trackTwo = new DefaultTreeNode("Etappe 2", TreeNodeRow.newInstance(relay.getParticipantFor(Position.SECOND), Position.SECOND), relayTreeNode);
