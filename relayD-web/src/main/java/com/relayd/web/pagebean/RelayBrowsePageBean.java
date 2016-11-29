@@ -105,7 +105,7 @@ public class RelayBrowsePageBean implements Serializable {
 		TreeNodeRow selectedRelayNode = (TreeNodeRow) selectedTreeNode.getData();
 
 		if (selectedTreeNode != null) {
-			if (selectedRelayNode.getRelay() != null) {
+			if (selectedRelayNode.isRelay()) {
 				if (isOnlyOnePersonRowSelected()) {
 					Person selectedPerson = getSelectedPerson();
 					System.out.println("Person selected: " + selectedPerson.toString());
