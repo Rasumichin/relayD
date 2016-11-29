@@ -13,7 +13,6 @@ import javax.faces.event.ActionEvent;
 
 import org.junit.Before;
 import org.junit.FixMethodOrder;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
@@ -143,14 +142,12 @@ public class RelayBrowsePageBeanTest {
 	}
 
 	@Test
-	@Ignore
 	public void testEditRow_ForNonSelectedRow() {
 		ActionEvent dummyActionEvent = null;
 
 		sut.editRelay(dummyActionEvent);
 
 		verify(relayEditPageBean, never()).openDialogFor(any(UUID.class));
-		verify(sut).showMessageErrorNoRowPersonSelected();
+		verify(sut).showMessageErrorNoRowRelaySelected();
 	}
-
 }
