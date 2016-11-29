@@ -150,4 +150,29 @@ public class RelayBrowsePageBeanTest {
 		verify(relayEditPageBean, never()).openDialogFor(any(UUID.class));
 		verify(sut).showMessageErrorNoRowRelaySelected();
 	}
+
+	@Test
+	public void testEditRow_ForSelectedRowParticipant() {
+		TreeNode selectedTreeNode = new DefaultTreeNode(TreeNodeRow.newInstance(Participant.newInstance(), Position.FIRST));
+		sut.setSelectedNode(selectedTreeNode);
+		ActionEvent dummyActionEvent = null;
+
+		sut.editRelay(dummyActionEvent);
+
+		verify(relayEditPageBean, never()).openDialogFor(any(UUID.class));
+		verify(sut).showMessageErrorNoRowRelaySelected();
+	}
+
+	@Test
+	public void testEditRow_ForSelectedRowRelay() {
+		TreeNode selectedTreeNode = new DefaultTreeNode(TreeNodeRow.newInstance(Relay.newInstance()));
+		sut.setSelectedNode(selectedTreeNode);
+		ActionEvent dummyActionEvent = null;
+
+		sut.editRelay(dummyActionEvent);
+
+		verify(relayEditPageBean).openDialogFor(any(UUID.class));
+		verify(sut, never()).showMessageErrorNoRowRelaySelected();
+	}
+
 }

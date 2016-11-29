@@ -19,6 +19,7 @@ import org.primefaces.model.TreeNode;
 
 import com.relayd.Participant;
 import com.relayd.Person;
+import com.relayd.Relay;
 import com.relayd.attributes.Forename;
 import com.relayd.attributes.Surename;
 import com.relayd.web.bridge.PersonBridge;
@@ -159,8 +160,8 @@ public class RelayBrowsePageBean implements Serializable {
 
 	public void editRelay(@SuppressWarnings("unused") ActionEvent actionEvent) {
 		if (isRelayRowSelected()) {
-			UUID uuid = getSelectedPerson().getUuid();
-			getPersonEditPageBean().openDialogFor(uuid);
+			UUID uuid = getSelectedRelay().getUuid();
+			getRelayEditPageBean().openDialogFor(uuid);
 		} else {
 			showMessageErrorNoRowRelaySelected();
 		}
@@ -282,6 +283,11 @@ public class RelayBrowsePageBean implements Serializable {
 
 	private boolean isPersonRowSelected() {
 		return getSelectedPersons() != null && !getSelectedPersons().isEmpty();
+	}
+
+	private Relay getSelectedRelay() {
+		TreeNodeRow selectedRelayNode = (TreeNodeRow) selectedTreeNode.getData();
+		return selectedRelayNode.getRelay();
 	}
 
 	boolean isRelayRowSelected() {
