@@ -69,27 +69,6 @@
 			</p:inputText>
 
 			<p:outputLabel
-				for="position"
-				value="Position:" />
-			<p:selectOneMenu
-				id="position"
-				value="#{personEditPageBean.position}"
-				var="entry"
-				style="width:160px">
-				<f:selectItem
-					itemLabel="Select Position"
-					itemValue="" />
-				<f:selectItems
-					value="#{selectItemBean.positions}"
-					var="position"
-					itemLabel="#{position.description}"
-					itemValue="#{position}" />
-				<p:column>
-					#{entry.description}
-				</p:column>
-			</p:selectOneMenu>
-
-			<p:outputLabel
 				for="shirtsize"
 				value="Shirtsize:" />
 			<p:selectOneMenu
