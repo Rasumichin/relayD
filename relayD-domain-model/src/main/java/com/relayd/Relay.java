@@ -115,6 +115,10 @@ public class Relay implements Serializable {
 		return true;
 	}
 
+	/**
+	 * @deprecated Nur zum testen der Drag&Drop Möglichkeit! Nicht nutzen!
+	 */
+	@Deprecated
 	public void addParticipant(Participant aParticipant) {
 		int i = 0;
 		for (Participant each : participants) {
