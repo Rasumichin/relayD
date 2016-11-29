@@ -10,7 +10,6 @@ import javax.faces.application.FacesMessage.Severity;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
 
 import org.primefaces.event.DragDropEvent;
 import org.primefaces.model.DefaultTreeNode;
@@ -113,39 +112,6 @@ public class RelayBrowseMapPageBean implements Serializable {
 		return root;
 	}
 
-	public void addPersonToRelay(@SuppressWarnings("unused") ActionEvent actionEvent) {
-		TreeNodeRow selectedRelayNode = (TreeNodeRow) selectedTreeNode.getData();
-		if (selectedTreeNode != null) {
-			if (selectedRelayNode.isRelay()) {
-				if (isOnlyOnePersonRowSelected()) {
-					Person selectedPerson = getSelectedPerson();
-				}
-				showMessage(FacesMessage.SEVERITY_ERROR, NOT_POSSIBLE, "Pleasê select a RelayPosition!");
-			} else {
-				if (selectedRelayNode.getParticipant() != null) {
-					if (isOnlyOnePersonRowSelected()) {
-						Person selectedPerson = getSelectedPerson();
-						Participant newRelayParticipant = Participant.newInstance();
-						newRelayParticipant.setUuidPerson(selectedPerson.getUuid());
-						newRelayParticipant.setForename(selectedPerson.getForename());
-						newRelayParticipant.setSurename(selectedPerson.getSurename());
-						selectedRelayNode.setParticipant(newRelayParticipant);
-					}
-
-				} else {
-					if (isOnlyOnePersonRowSelected()) {
-						Person selectedPerson = getSelectedPerson();
-						Participant newRelayParticipant = Participant.newInstance();
-						newRelayParticipant.setUuidPerson(selectedPerson.getUuid());
-						newRelayParticipant.setForename(selectedPerson.getForename());
-						newRelayParticipant.setSurename(selectedPerson.getSurename());
-						selectedRelayNode.setParticipant(newRelayParticipant);
-					}
-				}
-			}
-		}
-	}
-
 	void showMessage(Severity severityInfo, String summary, String textMessage) {
 		FacesMessage message = new FacesMessage(severityInfo, summary, textMessage);
 		FacesContext.getCurrentInstance().addMessage(null, message);
@@ -173,18 +139,6 @@ public class RelayBrowseMapPageBean implements Serializable {
 
 	void refreshPersons() {
 		searchResult = allPersons();
-	}
-
-	private boolean isOnlyOnePersonRowSelected() {
-		return getSelectedPersons() != null && getSelectedPersons().size() == 1;
-	}
-
-	private Person getSelectedPerson() {
-		return selectedPersons.get(0);
-	}
-
-	private boolean isPersonRowSelected() {
-		return getSelectedPersons() != null && !getSelectedPersons().isEmpty();
 	}
 
 	boolean isRelayRowSelected() {
