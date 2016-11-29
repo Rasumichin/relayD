@@ -6,7 +6,9 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import com.relayd.attributes.Distance;
@@ -29,7 +31,7 @@ public class RelayEvent implements Serializable {
 	private UUID uuid;
 	private Eventname name;
 	private EventDay eventDay;
-	private List<Relay> relays = new ArrayList<Relay>(MAX_NUMBER_OF_RELAYS);
+	private Set<Relay> relays = new HashSet<Relay>(MAX_NUMBER_OF_RELAYS);
 	private List<Track> tracks = new ArrayList<Track>(MAX_NUMBER_OF_TRACKS);
 
 	private RelayEvent() {
@@ -108,8 +110,8 @@ public class RelayEvent implements Serializable {
 		relays.add(relay);
 	}
 
-	public List<Relay> getRelays() {
-		return Collections.unmodifiableList(relays);
+	public Set<Relay> getRelays() {
+		return Collections.unmodifiableSet(relays);
 	}
 
 	@Override

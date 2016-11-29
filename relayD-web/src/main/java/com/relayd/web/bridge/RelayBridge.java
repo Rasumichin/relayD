@@ -16,7 +16,7 @@ public interface RelayBridge {
 
 	TreeNode all();
 
-	void create(Relay aWorkingRelay);
+	void persistRelay(Relay aWorkingRelay);
 
 	void persist(TreeNode relay);
 

@@ -64,7 +64,7 @@ public class RelayBridgeImpl implements RelayBridge {
 	}
 
 	@Override
-	public void create(Relay relay) {
+	public void persistRelay(Relay relay) {
 		gateway.set(relay);
 	}
 
@@ -107,6 +107,7 @@ public class RelayBridgeImpl implements RelayBridge {
 	public Relay get(UUID uuid) {
 		// TODO (Christian, Erik, Version 1.3): Ausimplementieren.
 		Relay dummy = Relay.newInstance(RelayEvent.duesseldorf());
+		dummy.setUuid(uuid);
 		dummy.setRelayname(Relayname.newInstance("Testname"));
 		return dummy;
 	}

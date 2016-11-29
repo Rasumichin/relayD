@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Month;
-import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import org.junit.FixMethodOrder;
@@ -110,7 +110,7 @@ public class RelayEventTest {
 
 		sut.addRelay(dieVierFragezeichen);
 
-		List<Relay> relays = sut.getRelays();
+		Set<Relay> relays = sut.getRelays();
 		assertNotNull("[relays] instance not correct!", relays);
 		assertEquals("[size] of relaylist is not correct!", 1, relays.size());
 	}
@@ -128,7 +128,7 @@ public class RelayEventTest {
 
 	@Test(expected = UnsupportedOperationException.class)
 	public void testGetRelay_ForUnmodifiable() {
-		List<Relay> relays = sut.getRelays();
+		Set<Relay> relays = sut.getRelays();
 		relays.add(Relay.newInstance());
 	}
 
