@@ -6,15 +6,19 @@ import static org.mockito.Matchers.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.event.ActionEvent;
 
 import org.junit.Before;
 import org.junit.FixMethodOrder;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.primefaces.model.DefaultTreeNode;
@@ -44,7 +48,11 @@ import static org.mockito.Mockito.*;
 public class RelayBrowsePageBeanTest {
 
 	@Spy
+	@InjectMocks
 	private RelayBrowsePageBean sut;
+
+	@Mock
+	private RelayEditPageBean relayEditPageBean;
 
 	@Before
 	public void setUp() {
@@ -106,4 +114,43 @@ public class RelayBrowsePageBeanTest {
 		somePersons.add(person);
 		return somePersons;
 	}
+
+	@Test
+	public void testIsRelayRowSelected_ForNorRowSelected() {
+		boolean condition = sut.isRelayRowSelected();
+
+		assertFalse("Relay selected not correct!", condition);
+	}
+
+	@Test
+	public void testIsRelayRowSelected_ForRowParticipantSelected() {
+		TreeNode selectedTreeNode = new DefaultTreeNode(TreeNodeRow.newInstance(Participant.newInstance(), Position.FIRST));
+		sut.setSelectedNode(selectedTreeNode);
+
+		boolean condition = sut.isRelayRowSelected();
+
+		assertFalse("Relay selected not correct!", condition);
+	}
+
+	@Test
+	public void testIsRelayRowSelected_ForRowRelaySelected() {
+		TreeNode selectedTreeNode = new DefaultTreeNode(TreeNodeRow.newInstance(Relay.newInstance()));
+		sut.setSelectedNode(selectedTreeNode);
+
+		boolean condition = sut.isRelayRowSelected();
+
+		assertTrue("Relay selected not correct!", condition);
+	}
+
+	@Test
+	@Ignore
+	public void testEditRow_ForNonSelectedRow() {
+		ActionEvent dummyActionEvent = null;
+
+		sut.editRelay(dummyActionEvent);
+
+		verify(relayEditPageBean, never()).openDialogFor(any(UUID.class));
+		verify(sut).showMessageErrorNoRowPersonSelected();
+	}
+
 }

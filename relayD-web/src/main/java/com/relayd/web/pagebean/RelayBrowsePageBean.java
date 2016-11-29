@@ -38,7 +38,8 @@ import com.relayd.web.bridge.TreeNodeRow;
 public class RelayBrowsePageBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private static final String NOT_POSSIBLE = "Not Possible!";
-	private static final String PLEASE_SELECT_A_ROW = "Please select one row!";
+	private static final String PLEASE_SELECT_A_ROW_PERSON = "Please select one person row!";
+	private static final String PLEASE_SELECT_A_ROW_RELAY = "Please select one relay row!";
 
 	private TreeNode root;
 
@@ -157,7 +158,12 @@ public class RelayBrowsePageBean implements Serializable {
 	}
 
 	public void editRelay(@SuppressWarnings("unused") ActionEvent actionEvent) {
-		showMessage(FacesMessage.SEVERITY_ERROR, NOT_POSSIBLE, "Not implemented yet!");
+		if (isRelayRowSelected()) {
+			UUID uuid = getSelectedPerson().getUuid();
+			getPersonEditPageBean().openDialogFor(uuid);
+		} else {
+			showMessageErrorNoRowRelaySelected();
+		}
 	}
 
 	public void removeRelay(@SuppressWarnings("unused") ActionEvent actionEvent) {
@@ -278,38 +284,12 @@ public class RelayBrowsePageBean implements Serializable {
 		return getSelectedPersons() != null && !getSelectedPersons().isEmpty();
 	}
 
-	private boolean isRelayParticipantSelected() {
+	boolean isRelayRowSelected() {
 		if (selectedTreeNode != null) {
 			TreeNodeRow selectedRelayNode = (TreeNodeRow) selectedTreeNode.getData();
-			if (selectedRelayNode.getParticipant() != null) {
-				System.out.println("Participant selected: " + selectedRelayNode.getParticipant().toString());
-				return true;
-			}
+			return selectedRelayNode.isRelay();
 		}
 		return false;
-	}
-
-	private boolean isRelaySelected() {
-		if (selectedTreeNode != null) {
-			TreeNodeRow selectedRelayNode = (TreeNodeRow) selectedTreeNode.getData();
-			if (selectedRelayNode.getRelay() != null) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	public boolean isAddingPersonToRelayAllowed() {
-		if (isRelaySelected()) {
-			//hinzufügen geht nur wenn eine Staffel ausgewählt wurde
-
-			if (isOnlyOnePersonRowSelected()) {
-				//man kann nur einen Participant hinzufügen.
-
-			}
-		}
-		return false;
-
 	}
 
 	public boolean isRemovingPersonFromRelayAllowed() {
@@ -325,7 +305,7 @@ public class RelayBrowsePageBean implements Serializable {
 			UUID uuid = getSelectedPerson().getUuid();
 			getPersonEditPageBean().openDialogFor(uuid);
 		} else {
-			showMessageErrorNoRowSelected();
+			showMessageErrorNoRowPersonSelected();
 		}
 	}
 
@@ -335,7 +315,7 @@ public class RelayBrowsePageBean implements Serializable {
 			showMessage(FacesMessage.SEVERITY_INFO, "Success", "Remove" + getSelectedPerson().toString());
 			refreshPersons();
 		} else {
-			showMessageErrorNoRowSelected();
+			showMessageErrorNoRowPersonSelected();
 		}
 	}
 
@@ -347,7 +327,12 @@ public class RelayBrowsePageBean implements Serializable {
 		personEditPageBean = aPersonEditPageBean;
 	}
 
-	void showMessageErrorNoRowSelected() {
-		showMessage(FacesMessage.SEVERITY_ERROR, NOT_POSSIBLE, PLEASE_SELECT_A_ROW);
+	void showMessageErrorNoRowPersonSelected() {
+		showMessage(FacesMessage.SEVERITY_ERROR, NOT_POSSIBLE, PLEASE_SELECT_A_ROW_PERSON);
 	}
+
+	void showMessageErrorNoRowRelaySelected() {
+		showMessage(FacesMessage.SEVERITY_ERROR, NOT_POSSIBLE, PLEASE_SELECT_A_ROW_RELAY);
+	}
+
 }
