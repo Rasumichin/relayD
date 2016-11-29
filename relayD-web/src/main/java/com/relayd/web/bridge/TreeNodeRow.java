@@ -5,6 +5,7 @@ import java.io.Serializable;
 import com.relayd.Participant;
 import com.relayd.Relay;
 import com.relayd.attributes.Position;
+import com.relayd.attributes.Relayname;
 
 /**
  * Klasse übernommen aus dem Primefaces-Beispiel.
@@ -12,59 +13,47 @@ import com.relayd.attributes.Position;
  * @author schmollc (Christian@relayd.de)
  * @since 10.10.2016
  */
-public class TreeNodeRow implements Serializable {
+public abstract class TreeNodeRow implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private Participant participant;
-	private Position position = Position.UNKNOWN;
-	private Relay relay; // TODO (Christian, Version 1.3): mit Erik sprechen. Eine Relay hat auch ein NOP?
-
-	public TreeNodeRow(Participant aParticipant, Position aPosition) {
-		participant = aParticipant;
-		position = aPosition;
+	TreeNodeRow() {
 	}
 
-	public TreeNodeRow(Relay aRelay) {
-		relay = aRelay;
-	}
-
-	public static TreeNodeRow newInstance(Participant personRelay, Position aPosition) {
-		return new TreeNodeRow(personRelay, aPosition);
+	public static TreeNodeRow newInstance(Participant participant, Position aPosition) {
+		return new TreeNodeRowParticipant(participant, aPosition);
 	}
 
 	public static TreeNodeRow newInstance(Relay relay) {
-		return new TreeNodeRow(relay);
-	}
-
-	public Participant getParticipant() {
-		return participant;
-	}
-
-	public void setParticipant(Participant aParticipant) {
-		participant = aParticipant;
+		return new TreeNodeRowRelay(relay);
 	}
 
 	public Relay getRelay() {
-		return relay;
+		return Relay.newInstance();
 	}
 
 	public boolean isRelay() {
-		return relay != null;
+		return false;
 	}
 
 	// TODO (Christian, Version 1.3): Im Zuge der GUI Darstellung auf String umgestellt. Sollte eher ein Domain/GUI Objekt werden/sein?
 	public String getRelayname() {
-		if (relay == null) {
-			return "";
-		}
-		return relay.toString();
+		return Relayname.newInstance().toString();
+	}
+
+	public Participant getParticipant() {
+		return Participant.newInstance();
+	}
+
+	public void setParticipant(Participant participant) {
+		// TODO (Christian, Version 1.3): Idee ist diese abstract zu machen, so daß beim klicken auf Participant Zeile genau dort eingefügt wird,
+		// bei klicken auf RelayZeile die nächste freie stelle befüllt wird. Somit haben beide mit dieser Methode zu tun.
 	}
 
 	public Position getPosition() {
-		return position;
+		return Position.UNKNOWN;
 	}
 
-	public void setPosition(Position aPosition) {
-		position = aPosition;
+	public void setPosition(Position position) {
+		// TODO (Christian, Version 1.3): Siehe methode setParticipant.
 	}
 }
