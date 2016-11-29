@@ -211,8 +211,6 @@ public class RelayBrowseMapPageBean implements Serializable {
 		System.out.println("Im onPersonDrop");
 
 		Person person = (Person) ddEvent.getData();
-		String draggedId = ddEvent.getDragId();
-		String droppedId = ddEvent.getDropId();
 
 		Participant participant = createParticipant(person);
 		TreeNodeRow selectedRelayNode = (TreeNodeRow) selectedTreeNode.getData();

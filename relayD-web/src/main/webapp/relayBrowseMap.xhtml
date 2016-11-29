@@ -38,7 +38,6 @@
 				position="west"
 				resizable="true"
 				size="45%">
-				<p:fieldset id="relays" legend="Selected Cars" style="margin-top:20px">				
 					<p:treeTable
 						id="relayTable"
 						selection="#{relayBrowseMapPageBean.selectedNode}"
@@ -55,7 +54,6 @@
 							<h:outputText value="#{relayRow.participant}" />
 						</p:column>
 					</p:treeTable>
-				</p:fieldset>
 			</p:layoutUnit>
 
 			<p:layoutUnit
@@ -65,7 +63,6 @@
 			<p:layoutUnit
 				position="east"
 				size="45%">
-				<p:fieldset id="availablePersons" legend="Available Cars">
 					<p:dataTable
 						var="person"
 						widgetVar="personTable"
@@ -85,7 +82,6 @@
 						<p:column
 							headerText="Forename"
 							sortBy="#{person.forename}"
-							sortFunction="#{relayBrowseMapPageBean.sortByForename}"
 							width="45%">
 							<h:outputText
 								id="forenameId"
@@ -94,26 +90,22 @@
 								for="forenameId"
 								revert="true"
 								helper="clone" />
-	
 						</p:column>
 	
 						<p:column
 							headerText="Surename"
 							filterMatchMode="contains"
 							sortBy="#{person.surename}"
-							sortFunction="#{relayBrowseMapPageBean.sortBySurename}"
 							width="45%">
 							<h:outputText value="#{person.surename}" />
 						</p:column>
 					</p:dataTable>
-				</p:fieldset>
 			</p:layoutUnit>
 		</p:layout>
 
 		<p:droppable for="relayTable" tolerance="touch" activeStyleClass="ui-state-highlight" datasource="personTable" onDrop="handleDrop">
         	<p:ajax listener="#{relayBrowseMapPageBean.onPersonDrop}" update="form" />
     	</p:droppable>
-
 
 		<ui:include src="/dock.xhtml" />
 
