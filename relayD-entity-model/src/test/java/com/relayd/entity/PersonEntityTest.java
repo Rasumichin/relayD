@@ -28,7 +28,6 @@ public class PersonEntityTest {
 		assertNull("[surename] not correct!", sut.getSurename());
 		assertNull("[emailadress] not correct!", sut.getEmail());
 		assertNull("[yearOfBirth] not correct!", sut.getYearOfBirth());
-		assertNull("[pos] not correct!", sut.getPos());
 		assertNull("[shirtsize] not correct!", sut.getShirtsize());
 		assertNull("[comment] not correct!", sut.getComment());
 	}
@@ -49,7 +48,6 @@ public class PersonEntityTest {
 		assertNull("[surename] not correct!", sut.getSurename());
 		assertNull("[emailadress] not correct!", sut.getEmail());
 		assertNull("[yearOfBirth] not correct!", sut.getYearOfBirth());
-		assertNull("[pos] not correct!", sut.getPos());
 		assertNull("[shirtsize] not correct!", sut.getShirtsize());
 		assertNull("[comment] not correct!", sut.getComment());
 	}
@@ -112,15 +110,6 @@ public class PersonEntityTest {
 
 		sut.setShirtsize(shirtsize);
 		assertEquals("[shirtsize] has not been set correctly!", shirtsize, sut.getShirtsize());
-	}
-
-	@Test
-	public void testSetPos() {
-		Integer position = 1;
-		PersonEntity sut = PersonEntity.newInstance();
-		
-		sut.setPos(position);
-		assertEquals("[pos] has not been set correctly!", position, sut.getPos());
 	}
 
 	@Test

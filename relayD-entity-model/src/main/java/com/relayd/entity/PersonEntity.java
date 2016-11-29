@@ -36,9 +36,6 @@ public class PersonEntity {
 	@Column(name = "info")
 	private String comment;
 
-	@Column
-	private Integer pos;
-
 	public static PersonEntity newInstance() {
 		PersonEntity personEntity = new PersonEntity();
 		personEntity.setId(UUID.randomUUID().toString());
@@ -119,14 +116,6 @@ public class PersonEntity {
 
 	public void setComment(String aComment) {
 		comment = aComment;
-	}
-
-	public Integer getPos() {
-		return pos;
-	}
-
-	public void setPos(Integer aPosition) {
-		pos = aPosition;
 	}
 
 	@Override
