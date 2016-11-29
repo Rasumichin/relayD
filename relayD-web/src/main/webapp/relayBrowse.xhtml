@@ -25,9 +25,12 @@
 			showDetail="true" />
 
 		<div class="divStartHeader"></div>
-		
+
 		<p:layout>
-			<p:layoutUnit position="north">
+			<p:layoutUnit
+				position="west"
+				resizable="true"
+				size="45%">
 				<p:toolbar>
 					<f:facet name="left">
 						<p:commandButton
@@ -53,9 +56,54 @@
 								listener="#{relayBrowsePageBean.onRelayEditClosed}"
 								update="form" />
 						</p:commandButton>
-		
 					</f:facet>
-					
+				</p:toolbar>
+				<p:treeTable
+					id="relayTable"
+					selection="#{relayBrowsePageBean.selectedNode}"
+					selectionMode="single"
+					value="#{relayBrowsePageBean.root}"
+					var="relayRow">
+					<f:facet name="header">
+		            Relays
+		        	</f:facet>
+					<p:column headerText="Name">
+						<h:outputText value="#{relayRow.relayname}" />
+					</p:column>
+					<p:column headerText="Participant">
+						<h:outputText value="#{relayRow.participant}" />
+					</p:column>
+				</p:treeTable>
+
+			</p:layoutUnit>
+
+			<p:layoutUnit
+				position="center"
+				size="5%">
+				<p:commandButton
+					value="add"
+					style="width:95%"
+					update="form"
+					icon="ui-icon-circle-triangle-w"
+					actionListener="#{relayBrowsePageBean.addPersonToRelay}">
+
+				</p:commandButton>
+
+				<p:commandButton
+					value="remove"
+					style="width:95%"
+					update="form"
+					icon="ui-icon-circle-triangle-e"
+					actionListener="#{relayBrowsePageBean.removePersonFromRelay}">
+
+				</p:commandButton>
+
+			</p:layoutUnit>
+
+			<p:layoutUnit
+				position="east"
+				size="45%">
+				<p:toolbar>
 					<f:facet name="right">
 						<p:commandButton
 							update="personTable"
@@ -104,55 +152,8 @@
 								icon="ui-icon-person" />
 						</p:menuButton>
 					</f:facet>
-				
 				</p:toolbar>
-			</p:layoutUnit>
-		
-		    <p:layoutUnit position="west" resizable="true" size="45%">
-		    
-		        <p:treeTable
-					id="relayTable"
-					selection="#{relayBrowsePageBean.selectedNode}"
-					selectionMode="single"
-					value="#{relayBrowsePageBean.root}"
-					var="relayRow">
-					<f:facet name="header">
-		            Relays
-		        	</f:facet>
-					<p:column headerText="Name">
-						<h:outputText value="#{relayRow.relayname}" />
-					</p:column>
-					<p:column headerText="Participant">
-						<h:outputText value="#{relayRow.participant}" />
-					</p:column>
-				</p:treeTable>
-				
-		    </p:layoutUnit>
-		    
-		    <p:layoutUnit position="center" size="10%" >
-		    	<p:commandButton
-					value="add"
-					style="width:95%"
-					update="form"
-					icon="ui-icon-circle-triangle-w"
-					actionListener="#{relayBrowsePageBean.addPersonToRelay}">
-					
-				</p:commandButton>
-				
-				<p:commandButton
-					value="remove"
-					style="width:95%"
-					update="form"
-					icon="ui-icon-circle-triangle-e"
-					actionListener="#{relayBrowsePageBean.removePersonFromRelay}">
-					
-				</p:commandButton>
-				
-		    </p:layoutUnit>
-		 
-		    <p:layoutUnit position="east" size="45%">
-		    
-		        <p:dataTable
+				<p:dataTable
 					var="person"
 					widgetVar="personTable"
 					filteredValue="#{relayBrowsePageBean.filteredPersons}"
@@ -167,56 +168,59 @@
 					<f:facet name="header">
 			     		List of Persons
 					</f:facet>
-		
+
 					<p:column
 						visible="true"
 						toggleable="false"
-						width="10%">
+						width="2%">
 						<p:rowToggler />
 					</p:column>
-		
+
 					<p:column
 						headerText="Forename"
 						sortBy="#{person.forename}"
 						sortFunction="#{relayBrowsePageBean.sortByForename}"
-						width="45%">
+						width="20%">
 						<h:outputText value="#{person.forename}" />
 					</p:column>
-		
+
 					<p:column
 						headerText="Surename"
 						filterMatchMode="contains"
 						sortBy="#{person.surename}"
 						sortFunction="#{relayBrowsePageBean.sortBySurename}"
-						width="45%">
+						width="25%">
 						<h:outputText value="#{person.surename}" />
 					</p:column>
-		
+
+					<p:column
+						headerText="Comment"
+						width="53%">
+						<h:outputText value="#{person.comment}" />
+					</p:column>
+
 					<p:rowExpansion>
 						<p:panelGrid
 							columns="2"
 							columnClasses="label,value">
-		
+
 							<h:outputText value="Year of Birth" />
 							<h:outputText value="#{person.yearOfBirth}" />
-		
+
 							<h:outputText value="Shirtsize" />
 							<h:outputText value="#{person.shirtsize.toString()}" />
-		
+
 							<h:outputText value="Email" />
 							<h:outputText value="#{person.email}" />
-							
-							<h:outputText value="Comment" />
-							<h:outputText value="#{person.comment}" />
-		
+
 						</p:panelGrid>
-		
+
 					</p:rowExpansion>
-			    	
+
 				</p:dataTable>
-		    </p:layoutUnit>
+			</p:layoutUnit>
 		</p:layout>
-	
+
 
 		<ui:include src="/dock.xhtml" />
 
