@@ -12,13 +12,7 @@ import javax.faces.context.FacesContext;
 import org.primefaces.context.RequestContext;
 
 import com.relayd.Person;
-import com.relayd.attributes.Comment;
-import com.relayd.attributes.Email;
-import com.relayd.attributes.Forename;
-import com.relayd.attributes.Position;
-import com.relayd.attributes.Shirtsize;
-import com.relayd.attributes.Surename;
-import com.relayd.attributes.YearOfBirth;
+import com.relayd.attributes.*;
 import com.relayd.web.bridge.PersonBridge;
 import com.relayd.web.bridge.PersonBridgeImpl;
 import com.relayd.web.bridge.ValidationResult;
@@ -150,14 +144,6 @@ public class PersonEditPageBean implements Serializable {
 
 	public void setEmail(Email anEmail) {
 		workingPerson.setEmail(anEmail);
-	}
-
-	public void setPosition(Position aPosition) {
-		workingPerson.setPosition(aPosition);
-	}
-
-	public Position getPosition() {
-		return workingPerson.getPosition();
 	}
 
 	public void setComment(Comment aComment) {

@@ -60,6 +60,7 @@ public class PersonBrowsePageBean implements Serializable {
 
 	@PostConstruct
 	public void init() {
+		// TODO (EL, 2016-11-29): Clarify with CS what this list is needed for.
 		visibleColumns = Arrays.asList(true, true, true, true, true, true, true, true);
 		refreshPersons();
 	}

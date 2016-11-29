@@ -19,7 +19,6 @@ import com.relayd.Person;
 import com.relayd.attributes.Comment;
 import com.relayd.attributes.Email;
 import com.relayd.attributes.Forename;
-import com.relayd.attributes.Position;
 import com.relayd.attributes.Shirtsize;
 import com.relayd.attributes.Surename;
 import com.relayd.attributes.YearOfBirth;
@@ -185,17 +184,6 @@ public class PersonEditPageBeanTest {
 
 		Email result = sut.getEmail();
 		assertEquals("[Email] not correct!", expected, result);
-	}
-
-	@Test
-	public void testPosition() {
-		sut.openDialogForCreatePerson();
-		Position expected = Position.SECOND;
-
-		sut.setPosition(expected);
-
-		Position result = sut.getPosition();
-		assertEquals("[Position] not correct!", expected, result);
 	}
 
 	@Test
