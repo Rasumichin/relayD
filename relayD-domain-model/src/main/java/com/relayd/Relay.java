@@ -114,4 +114,15 @@ public class Relay implements Serializable {
 		}
 		return true;
 	}
+
+	public void addParticipant(Participant aParticipant) {
+		int i = 0;
+		for (Participant each : participants) {
+			if (each == null) {
+				break;
+			}
+			i++;
+		}
+		participants.set(i, aParticipant);
+	}
 }

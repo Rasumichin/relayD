@@ -9,6 +9,13 @@
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 
 <h:head>
+	<script type="text/javascript">
+    	function handleDrop(event, ui) {
+        	var droppedPerson = ui.draggable;
+	        droppedPerson.fadeOut('fast');
+    	}
+	</script>
+	
 	<link
 		rel="stylesheet"
 		href="./styles/relayd.css"></link>
@@ -16,7 +23,6 @@
 		rel="icon"
 		href="http://relayd.de:8080/relayD-web/favicon.ico" />
 </h:head>
-
 <h:body>
 	<h:form id="form">
 
@@ -25,76 +31,89 @@
 			showDetail="true" />
 
 		<div class="divStartHeader"></div>
-		
+
 		<p:layout>
-		
-		    <p:layoutUnit position="west" resizable="true" size="45%">
-		    
-		        <p:treeTable
-					id="relayTable"
-					selection="#{relayBrowseMapPageBean.selectedNode}"
-					selectionMode="single"
-					value="#{relayBrowseMapPageBean.root}"
-					var="relayRow">
-					<f:facet name="header">
-		            Relays
-		        	</f:facet>
-					<p:column headerText="Name">
-						<h:outputText value="#{relayRow.relayname}" />
-					</p:column>
-					<p:column headerText="Participant">
-						<h:outputText value="#{relayRow.participant}" />
-					</p:column>
-				</p:treeTable>
-		    </p:layoutUnit>
-    		
-    		<p:layoutUnit position="center" size="10%" />
-		 
-		    <p:layoutUnit position="east" size="45%">
-		        <p:dataTable
-					var="person"
-					widgetVar="personTable"
-					filteredValue="#{relayBrowseMapPageBean.filteredPersons}"
-					id="personTable"
-					selectionMode="multiple"
-					value="#{relayBrowseMapPageBean.persons}"
-					selection="#{relayBrowseMapPageBean.selectedPersons}"
-					scrollable="true"
-					sortBy="#{person.surename.toString()}"
-					rowKey="#{person.uuid}"
-					resizableColumns="true">
-					<f:facet name="header">
-			     		List of Persons
-					</f:facet>
-		
-					<p:column
-						visible="true"
-						toggleable="false"
-						width="10%">
-						<p:rowToggler />
-					</p:column>
-		
-					<p:column
-						headerText="Forename"
-						sortBy="#{person.forename}"
-						sortFunction="#{relayBrowseMapPageBean.sortByForename}"
-						width="45%">
-						<h:outputText value="#{person.forename}" />
-					</p:column>
-		
-					<p:column
-						headerText="Surename"
-						filterMatchMode="contains"
-						sortBy="#{person.surename}"
-						sortFunction="#{relayBrowseMapPageBean.sortBySurename}"
-						width="45%">
-						<h:outputText value="#{person.surename}" />
-					</p:column>
-			    	
-				</p:dataTable>
-		    </p:layoutUnit>
-		</p:layout>
+
+			<p:layoutUnit
+				position="west"
+				resizable="true"
+				size="45%">
+				<p:fieldset id="relays" legend="Selected Cars" style="margin-top:20px">				
+					<p:treeTable
+						id="relayTable"
+						selection="#{relayBrowseMapPageBean.selectedNode}"
+						selectionMode="single"
+						value="#{relayBrowseMapPageBean.root}"
+						var="relayRow">
+						<f:facet name="header">
+			            Relays
+			        	</f:facet>
+						<p:column headerText="Name">
+							<h:outputText value="#{relayRow.relayname}" />
+						</p:column>
+						<p:column headerText="Participant">
+							<h:outputText value="#{relayRow.participant}" />
+						</p:column>
+					</p:treeTable>
+				</p:fieldset>
+			</p:layoutUnit>
+
+			<p:layoutUnit
+				position="center"
+				size="10%" />
+
+			<p:layoutUnit
+				position="east"
+				size="45%">
+				<p:fieldset id="availablePersons" legend="Available Cars">
+					<p:dataTable
+						var="person"
+						widgetVar="personTable"
+						filteredValue="#{relayBrowseMapPageBean.filteredPersons}"
+						id="personTable"
+						selectionMode="multiple"
+						value="#{relayBrowseMapPageBean.persons}"
+						selection="#{relayBrowseMapPageBean.selectedPersons}"
+						scrollable="true"
+						sortBy="#{person.surename.toString()}"
+						rowKey="#{person.uuid}"
+						resizableColumns="true">
+						<f:facet name="header">
+				     		List of Persons
+						</f:facet>
 	
+						<p:column
+							headerText="Forename"
+							sortBy="#{person.forename}"
+							sortFunction="#{relayBrowseMapPageBean.sortByForename}"
+							width="45%">
+							<h:outputText
+								id="forenameId"
+								value="#{person.forename}" />
+							<p:draggable
+								for="forenameId"
+								revert="true"
+								helper="clone" />
+	
+						</p:column>
+	
+						<p:column
+							headerText="Surename"
+							filterMatchMode="contains"
+							sortBy="#{person.surename}"
+							sortFunction="#{relayBrowseMapPageBean.sortBySurename}"
+							width="45%">
+							<h:outputText value="#{person.surename}" />
+						</p:column>
+					</p:dataTable>
+				</p:fieldset>
+			</p:layoutUnit>
+		</p:layout>
+
+		<p:droppable for="relayTable" tolerance="touch" activeStyleClass="ui-state-highlight" datasource="personTable" onDrop="handleDrop">
+        	<p:ajax listener="#{relayBrowseMapPageBean.onPersonDrop}" update="form" />
+    	</p:droppable>
+
 
 		<ui:include src="/dock.xhtml" />
 

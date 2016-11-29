@@ -12,6 +12,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
+import org.primefaces.event.DragDropEvent;
 import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.TreeNode;
 
@@ -206,4 +207,25 @@ public class RelayBrowseMapPageBean implements Serializable {
 		showMessage(FacesMessage.SEVERITY_ERROR, NOT_POSSIBLE, PLEASE_SELECT_A_ROW_RELAY);
 	}
 
+	public void onPersonDrop(DragDropEvent ddEvent) {
+		System.out.println("Im onPersonDrop");
+
+		Person person = (Person) ddEvent.getData();
+		String draggedId = ddEvent.getDragId();
+		String droppedId = ddEvent.getDropId();
+
+		Participant participant = createParticipant(person);
+		TreeNodeRow selectedRelayNode = (TreeNodeRow) selectedTreeNode.getData();
+
+		Relay relay = selectedRelayNode.getRelay();
+		relay.addParticipant(participant);
+	}
+
+	private Participant createParticipant(Person person) {
+		Participant newRelayParticipant = Participant.newInstance();
+		newRelayParticipant.setUuidPerson(person.getUuid());
+		newRelayParticipant.setForename(person.getForename());
+		newRelayParticipant.setSurename(person.getSurename());
+		return newRelayParticipant;
+	}
 }
