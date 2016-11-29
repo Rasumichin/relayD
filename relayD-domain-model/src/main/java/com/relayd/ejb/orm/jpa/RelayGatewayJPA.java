@@ -95,6 +95,13 @@ public class RelayGatewayJPA extends GatewayJPA implements RelayGateway {
 
 	@Override
 	public Relay get(UUID uuid) {
-		throw new UnsupportedOperationException("not implemented yet!");
+		if (uuid == null) {
+			throw new IllegalArgumentException("[uuid] must not be 'null'.");
+		}
+
+		RelayEntity relayEntity = findById(uuid);
+		Relay relay = getEntityMapper().mapToRelay(relayEntity);
+
+		return relay;
 	}
 }

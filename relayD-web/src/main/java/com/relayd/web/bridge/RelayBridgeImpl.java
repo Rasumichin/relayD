@@ -8,9 +8,7 @@ import org.primefaces.model.TreeNode;
 
 import com.relayd.Participant;
 import com.relayd.Relay;
-import com.relayd.RelayEvent;
 import com.relayd.attributes.Position;
-import com.relayd.attributes.Relayname;
 import com.relayd.ejb.GatewayType;
 import com.relayd.ejb.RelayGateway;
 import com.relayd.ejb.RelayGatewayFactory;
@@ -105,10 +103,6 @@ public class RelayBridgeImpl implements RelayBridge {
 
 	@Override
 	public Relay get(UUID uuid) {
-		// TODO (Christian, Erik, Version 1.3): Ausimplementieren.
-		Relay dummy = Relay.newInstance(RelayEvent.duesseldorf());
-		dummy.setUuid(uuid);
-		dummy.setRelayname(Relayname.newInstance("Testname"));
-		return dummy;
+		return gateway.get(uuid);
 	}
 }
