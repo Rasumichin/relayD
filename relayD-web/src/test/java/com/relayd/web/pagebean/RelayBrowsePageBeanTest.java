@@ -65,7 +65,7 @@ public class RelayBrowsePageBeanTest {
 		ActionEvent dummyActionEvent = null;
 
 		Relay relay = Relay.newInstance(RelayEvent.duesseldorf());
-		TreeNode relayTreeNode = new DefaultTreeNode(new TreeNodeRow(relay), null);
+		TreeNode relayTreeNode = new DefaultTreeNode(TreeNodeRow.newInstance(relay), null);
 		sut.setSelectedNode(relayTreeNode);
 
 		Person justusJonas = Person.newInstance();
@@ -83,7 +83,7 @@ public class RelayBrowsePageBeanTest {
 		ActionEvent dummyActionEvent = null;
 
 		Participant personRelay = Participant.newInstance();
-		TreeNode relayTreeNode = new DefaultTreeNode(new TreeNodeRow(personRelay, Position.FIRST), null);
+		TreeNode relayTreeNode = new DefaultTreeNode(TreeNodeRow.newInstance(personRelay, Position.FIRST), null);
 		sut.setSelectedNode(relayTreeNode);
 
 		Person justusJonas = Person.newInstance();
