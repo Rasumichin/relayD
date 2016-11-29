@@ -2,6 +2,8 @@ package com.relayd.web.pagebean;
 
 import static org.junit.Assert.*;
 
+import java.util.UUID;
+
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -53,6 +55,20 @@ public class RelayEditPageBeanTest {
 	public void testCreateNewRelay() {
 		Relay actual = sut.createNewRelay();
 		assertNotNull("Relay is not initialized.", actual);
+	}
+
+	@Test
+	public void testOpenDialogFor() {
+		UUID uuid = UUID.fromString("12345-42-32-23-32");
+		doReturn(Relay.newInstance()).when(sut).getRelay(uuid);
+
+		assertNull("[workingRelay] not corret!", sut.workingRelay);
+
+		sut.openDialogFor(uuid);
+
+		assertNotNull("[workingRelay] not corret!", sut.workingRelay);
+		verify(sut).getRelay(uuid);
+		verify(sut).openDialog();
 	}
 
 	@Test

@@ -25,7 +25,7 @@ import com.relayd.web.bridge.RelayBridgeImpl;
 public class RelayEditPageBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private Relay workingRelay;
+	Relay workingRelay;
 
 	private RelayBridge relayBridge;
 
@@ -81,6 +81,12 @@ public class RelayEditPageBean implements Serializable {
 	}
 
 	public void openDialogFor(UUID uuid) {
+		workingRelay = getRelay(uuid);
+		openDialog();
+	}
+
+	Relay getRelay(UUID uuid) {
+		return getBridge().get(uuid);
 	}
 
 	void persistRelay() {
