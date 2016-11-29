@@ -12,7 +12,7 @@ import com.relayd.attributes.*;
  *
  */
 public class Person implements Serializable {
-	private static final long serialVersionUID = 2856140961938434688L;
+	private static final long serialVersionUID = -7937105233874151745L;
 
 	private UUID uuid;
 	private Surename surename = Surename.newInstance();
@@ -20,7 +20,6 @@ public class Person implements Serializable {
 	private YearOfBirth yearOfBirth = YearOfBirth.newInstance();
 	private Shirtsize shirtsize = Shirtsize.UNKNOWN;
 	private Email email;
-	private Position position = Position.UNKNOWN; // Refactor Dieses Attribut ist Jahresabhängig!
 	private Comment comment = Comment.newInstance();
 	Email lastCalculatedEmail;
 
@@ -122,14 +121,6 @@ public class Person implements Serializable {
 		return getEmail();
 	}
 
-	public Position getPosition() {
-		return position;
-	}
-
-	public void setPosition(Position aPosition) {
-		position = aPosition;
-	}
-
 	public Comment getComment() {
 		return comment;
 	}
@@ -200,8 +191,7 @@ public class Person implements Serializable {
 				+ getSurename() + ", "
 				+ getYearOfBirth() + ", "
 				+ getShirtsize() + ", "
-				+ getEmail() + ", "
-				+ getPosition();
+				+ getEmail();
 	}
 
 	@Override

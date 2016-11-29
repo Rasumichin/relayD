@@ -39,7 +39,6 @@ public class PersonGatewayJDBCTest {
 	private static final String FORENAME = "Justus";
 	private static final Integer SHIRTSIZE = 3;
 	private static final Integer YEAROFBIRTH = 1971;
-	private static final Integer POS = 1;
 	private static final String EMAIL = "Justus.Jonas@RockyBeach.com";
 	private static final String COMMENT = "Erster Detektiv!";
 
@@ -53,7 +52,6 @@ public class PersonGatewayJDBCTest {
 		doReturn(SURENAME).when(resultSetMock).getString(PersonGatewayJDBC.INDEX_SURENAME);
 		doReturn(YEAROFBIRTH).when(resultSetMock).getInt(PersonGatewayJDBC.INDEX_YEAROFBIRTH);
 		doReturn(SHIRTSIZE).when(resultSetMock).getInt(PersonGatewayJDBC.INDEX_SHIRTSIZE);
-		doReturn(POS).when(resultSetMock).getInt(PersonGatewayJDBC.INDEX_POS);
 		doReturn(EMAIL).when(resultSetMock).getString(PersonGatewayJDBC.INDEX_EMAIL);
 		doReturn(COMMENT).when(resultSetMock).getString(PersonGatewayJDBC.INDEX_COMMENT);
 	}
@@ -69,7 +67,6 @@ public class PersonGatewayJDBCTest {
 		assertEquals("[surename] not correct!", Surename.newInstance(SURENAME), person.getSurename());
 		assertEquals("[yearOfBirth] not correct!", YearOfBirth.newInstance(YEAROFBIRTH), person.getYearOfBirth());
 		assertEquals("[shirtsize] not correct!", Shirtsize.newInstance(SHIRTSIZE), person.getShirtsize());
-		assertEquals("[pos] not correct!", Position.newInstance(POS), person.getPosition());
 		assertEquals("[email] not correct!", Email.newInstance(EMAIL), person.getEmail());
 		assertEquals("[comment] not correct!", Comment.newInstance(COMMENT), person.getComment());
 	}
