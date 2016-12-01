@@ -1,6 +1,9 @@
 package com.relayd;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
+import java.util.Properties;
 
 /**
  * @author schmollc (Christian@relayd.de)
@@ -9,6 +12,10 @@ import java.io.Serializable;
  */
 public class Settings implements Serializable {
 	private static final long serialVersionUID = 6060470764587750857L;
+
+	private static final String APPLICATION_PROPERTIES = "/application.properties";
+
+	private Properties applicationProperties;
 
 	private static final String TO_DO = "ToDo";
 
@@ -23,7 +30,9 @@ public class Settings implements Serializable {
 	}
 
 	public String getVersion() {
-		return "1.1 - Codename Bitburger";
+		String version = getProperty("application.version");
+		VersionName versionName = VersionName.getVersionNameForNumber(version.substring(0, 3));
+		return versionName.getVersion() + " - Codename " + versionName.getCodename();
 	}
 
 	public String getEmailDomain() {
@@ -45,4 +54,26 @@ public class Settings implements Serializable {
 	public void setTheme(String aTheme) {
 		theme = aTheme;
 	}
+
+	String getProperty(String aKey) {
+		if (!getApplicationProperties().containsKey(aKey)) {
+			return "UNKNOWN";
+		} else {
+			return getApplicationProperties().getProperty(aKey);
+		}
+	}
+
+	public Properties getApplicationProperties() {
+		if (applicationProperties == null) {
+			try {
+				applicationProperties = new Properties();
+				InputStream tempResourceAsStream = Settings.class.getResourceAsStream("/application.properties");
+				applicationProperties.load(tempResourceAsStream);
+			} catch (IOException tempException) {
+				System.err.println("IOException: unable to read application.properties");
+			}
+		}
+		return applicationProperties;
+	}
+
 }
