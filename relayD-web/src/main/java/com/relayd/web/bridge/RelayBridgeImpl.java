@@ -95,9 +95,7 @@ public class RelayBridgeImpl implements RelayBridge {
 					relay.addParticipant(participantRow.getParticipant(), Position.FIRST);
 
 			}
-			RelayGateway jpaGateway = RelayGatewayFactory.get(GatewayType.JPA);
-
-			jpaGateway.set(relay);
+			gateway.set(relay);
 		}
 	}
 
