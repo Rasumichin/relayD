@@ -4,13 +4,14 @@
 	<parent>
 		<groupId>com.relayd</groupId>
 		<artifactId>relayD-parent</artifactId>
-		<version>1.2-SNAPSHOT</version>
+		<version>1.3-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>relayD-domain-model</artifactId>
 	<packaging>jar</packaging>
 
 	<properties>
+		<application.version>${project.version}</application.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
@@ -18,7 +19,7 @@
 		<dependency>
 			<groupId>com.relayd</groupId>
 			<artifactId>relayD-entity-model</artifactId>
-			<version>1.2-SNAPSHOT</version>
+			<version>1.3-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.commons</groupId>
@@ -39,4 +40,12 @@
 			<type>jar</type>
 		</dependency>
 	</dependencies>
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+	</build>
 </project>

@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.io.Serializable;
 
 import org.junit.FixMethodOrder;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
@@ -30,9 +31,9 @@ public class SettingsTest {
 	}
 
 	@Test
+	@Ignore
 	public void testGetVersion() {
 		String actual = sut.getVersion();
-
 		assertEquals("[getVersion] not correct!", "1.1 - Codename Bitburger", actual);
 	}
 
