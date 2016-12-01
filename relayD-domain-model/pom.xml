@@ -11,6 +11,7 @@
 	<packaging>jar</packaging>
 
 	<properties>
+		<application.version>${project.version}</application.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
@@ -39,4 +40,12 @@
 			<type>jar</type>
 		</dependency>
 	</dependencies>
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+	</build>
 </project>
