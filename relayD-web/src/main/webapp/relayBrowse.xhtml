@@ -56,6 +56,11 @@
 								listener="#{relayBrowsePageBean.onRelayEditClosed}"
 								update="form" />
 						</p:commandButton>
+						<p:commandButton
+							value="export"
+							icon="ui-icon-mail-closed"
+							update="form"
+							actionListener="#{relayBrowsePageBean.emailExportRelay}" />
 					</f:facet>
 				</p:toolbar>
 				<p:treeTable
@@ -131,7 +136,7 @@
 							value="export"
 							icon="ui-icon-mail-closed"
 							update="form"
-							actionListener="#{relayBrowsePageBean.emailExport}" />
+							actionListener="#{relayBrowsePageBean.emailExportPerson}" />
 						<p:menuButton value="Filter">
 							<p:menuitem
 								value="All"

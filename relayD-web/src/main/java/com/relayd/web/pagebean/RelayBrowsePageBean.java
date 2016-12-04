@@ -218,7 +218,7 @@ public class RelayBrowsePageBean implements Serializable {
 		refreshPersons();
 	}
 
-	public void emailExport(@SuppressWarnings("unused") ActionEvent actionEvent) {
+	public void emailExportPerson(@SuppressWarnings("unused") ActionEvent actionEvent) {
 		String output = null;
 		if (isPersonRowSelected()) {
 			output = personBridge.getEmailList(getSelectedPersons());
@@ -226,6 +226,10 @@ public class RelayBrowsePageBean implements Serializable {
 			output = personBridge.getEmailList(getPersons());
 		}
 		showMessage(FacesMessage.SEVERITY_INFO, "Email", output);
+	}
+
+	public void emailExportRelay(@SuppressWarnings("unused") ActionEvent actionEvent) {
+		showMessage(FacesMessage.SEVERITY_ERROR, NOT_POSSIBLE, "Not implemented yet!");
 	}
 
 	public void onPersonEditClosed(@SuppressWarnings("unused") SelectEvent event) {
