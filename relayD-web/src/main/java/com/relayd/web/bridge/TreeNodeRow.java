@@ -56,4 +56,8 @@ public abstract class TreeNodeRow implements Serializable {
 	public void setPosition(Position position) {
 		// TODO (Christian, Version 1.3): Siehe methode setParticipant.
 	}
+	
+	public String getStatus() {
+		return "";
+	}
 }
