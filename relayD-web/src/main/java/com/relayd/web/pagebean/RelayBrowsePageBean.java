@@ -183,6 +183,8 @@ public class RelayBrowsePageBean implements Serializable {
 			} else {
 				showMessage(FacesMessage.SEVERITY_ERROR, NOT_POSSIBLE, "Please select a RelayParticipant!");
 			}
+			// TODO (Christian, Version 1.3): REMOVE!!!!! ONLY FOR TESTING THE SERVER VERSION!!
+			relayBridge.persist(selectedTreeNode);
 		}
 
 	}
