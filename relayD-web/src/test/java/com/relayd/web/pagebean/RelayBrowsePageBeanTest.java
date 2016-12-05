@@ -30,6 +30,7 @@ import com.relayd.RelayEvent;
 import com.relayd.attributes.Forename;
 import com.relayd.attributes.Position;
 import com.relayd.attributes.Surename;
+import com.relayd.web.bridge.RelayBridge;
 import com.relayd.web.bridge.TreeNodeRow;
 
 import static org.mockito.Mockito.*;
@@ -52,6 +53,9 @@ public class RelayBrowsePageBeanTest {
 
 	@Mock
 	private RelayEditPageBean relayEditPageBean;
+
+	@Mock
+	private RelayBridge relayBridge;
 
 	@Before
 	public void setUp() {
@@ -115,7 +119,58 @@ public class RelayBrowsePageBeanTest {
 	}
 
 	@Test
-	public void testIsRelayRowSelected_ForNorRowSelected() {
+	public void testRemovePersonFromRelay_ForNoRelayRowIsSelected() {
+		ActionEvent dummyActionEvent = null;
+
+		sut.removePersonFromRelay(dummyActionEvent);
+
+		verify(sut).showMessage(any(FacesMessage.Severity.class), anyString(), anyString());
+		verify(relayBridge, never()).persist(any(TreeNode.class));
+	}
+
+	@Test
+	public void testRemovePersonFromRelay_ForNonRelayParticipantRowIsSelected() {
+		ActionEvent dummyActionEvent = null;
+		Relay relay = Relay.newInstance(RelayEvent.duesseldorf());
+		TreeNode relayTreeNode = new DefaultTreeNode(TreeNodeRow.newInstance(relay), null);
+		sut.setSelectedNode(relayTreeNode);
+
+		sut.removePersonFromRelay(dummyActionEvent);
+
+		verify(sut).showMessage(any(FacesMessage.Severity.class), anyString(), anyString());
+		verify(relayBridge, never()).persist(any(TreeNode.class));
+	}
+
+	@Test
+	public void testRemovePersonFromRelay_ForRelayParticipantRowIsSelected() {
+		ActionEvent dummyActionEvent = null;
+		Participant personRelay = Participant.newInstance();
+		personRelay.setUuidPerson(UUID.randomUUID());
+		TreeNode relayTreeNode = new DefaultTreeNode(TreeNodeRow.newInstance(personRelay, Position.FIRST), null);
+		sut.setSelectedNode(relayTreeNode);
+
+		sut.removePersonFromRelay(dummyActionEvent);
+
+		verify(sut, never()).showMessage(any(FacesMessage.Severity.class), anyString(), anyString());
+		verify(relayBridge).persist(any(TreeNode.class));
+	}
+
+	@Test
+	public void testRemovePersonFromRelay_ForRelayParticipantRowIsSelectedAndEmpty() {
+		ActionEvent dummyActionEvent = null;
+		Participant personRelay = Participant.newInstance();
+		personRelay.setUuidPerson(null);
+		TreeNode relayTreeNode = new DefaultTreeNode(TreeNodeRow.newInstance(personRelay, Position.FIRST), null);
+		sut.setSelectedNode(relayTreeNode);
+
+		sut.removePersonFromRelay(dummyActionEvent);
+
+		verify(sut, never()).showMessage(any(FacesMessage.Severity.class), anyString(), anyString());
+		verify(relayBridge, never()).persist(any(TreeNode.class));
+	}
+
+	@Test
+	public void testIsRelayRowSelected_ForNoRowSelected() {
 		boolean condition = sut.isRelayRowSelected();
 
 		assertFalse("Relay selected not correct!", condition);
@@ -139,6 +194,33 @@ public class RelayBrowsePageBeanTest {
 		boolean condition = sut.isRelayRowSelected();
 
 		assertTrue("Relay selected not correct!", condition);
+	}
+
+	@Test
+	public void testIsParticipantRowSelected() {
+		boolean condition = sut.isParticipantRowSelected();
+
+		assertFalse("Participant selected not corret!", condition);
+	}
+
+	@Test
+	public void testIsParticipantRowSelected_ForRowParticipantSelected() {
+		TreeNode selectedTreeNode = new DefaultTreeNode(TreeNodeRow.newInstance(Participant.newInstance(), Position.FIRST));
+		sut.setSelectedNode(selectedTreeNode);
+
+		boolean condition = sut.isParticipantRowSelected();
+
+		assertTrue("Participant selected not correct!", condition);
+	}
+
+	@Test
+	public void testIsParticipantRowSelected_ForRowRelaySelected() {
+		TreeNode selectedTreeNode = new DefaultTreeNode(TreeNodeRow.newInstance(Relay.newInstance()));
+		sut.setSelectedNode(selectedTreeNode);
+
+		boolean condition = sut.isParticipantRowSelected();
+
+		assertFalse("Participant selected not correct!", condition);
 	}
 
 	@Test

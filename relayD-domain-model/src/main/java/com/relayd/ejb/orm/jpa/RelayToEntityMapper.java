@@ -33,21 +33,29 @@ public class RelayToEntityMapper {
 		Participant participantOne = relay.getParticipantFor(Position.FIRST);
 		if (participantOne != null) {
 			relayEntity.setParticipantOne(participantOne.getUuidPerson());
+		} else {
+			relayEntity.setParticipantOne(null);
 		}
 
 		Participant participantTwo = relay.getParticipantFor(Position.SECOND);
 		if (participantTwo != null) {
 			relayEntity.setParticipantTwo(participantTwo.getUuidPerson());
+		} else {
+			relayEntity.setParticipantTwo(null);
 		}
 
 		Participant participantThree = relay.getParticipantFor(Position.THIRD);
 		if (participantThree != null) {
 			relayEntity.setParticipantThree(participantThree.getUuidPerson());
+		} else {
+			relayEntity.setParticipantThree(null);
 		}
 
 		Participant participantFour = relay.getParticipantFor(Position.FOURTH);
 		if (participantFour != null) {
 			relayEntity.setParticipantFour(participantFour.getUuidPerson());
+		} else {
+			relayEntity.setParticipantFour(null);
 		}
 	}
 }

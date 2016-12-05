@@ -64,12 +64,12 @@ public class RelayBrowsePageBean implements Serializable {
 
 	@PostConstruct
 	public void init() {
+		relayBridge = new RelayBridgeImpl();
 		refreshRelays();
 		refreshPersons();
 	}
 
 	public RelayBrowsePageBean() {
-		relayBridge = new RelayBridgeImpl();
 		personBridge = new PersonBridgeImpl();
 	}
 
@@ -172,21 +172,28 @@ public class RelayBrowsePageBean implements Serializable {
 	}
 
 	public void removePersonFromRelay(@SuppressWarnings("unused") ActionEvent actionEvent) {
-		System.out.println("removePersonFromRelay");
-
-		if (selectedTreeNode != null) {
+		if (isParticipantRowSelected()) {
 			TreeNodeRow selectedRelayNode = (TreeNodeRow) selectedTreeNode.getData();
 
-			if (selectedRelayNode.getParticipant() != null) {
-				System.out.println("Relay Participant selected: " + selectedRelayNode.getParticipant().toString());
+			// TODO (Christian, Erik Version 1.3): NOP(NullObjectPattern) für Participant einführen?
+			if (selectedRelayNode.getParticipant().getUuidPerson() != null) {
+				// TODO (Christian, Erik Version 1.3): ein remove im Fachobjekt TreeNodeRow einführen
+				// TODO (Christian, Erik Version 1.3): NOP(NullObjectPattern) für Participant einführen?
 				selectedRelayNode.setParticipant(null);
-			} else {
-				showMessage(FacesMessage.SEVERITY_ERROR, NOT_POSSIBLE, "Please select a RelayParticipant!");
+				// TODO (Christian, Version 1.3): REMOVE!!!!! ONLY FOR TESTING THE SERVER VERSION!!
+				relayBridge.persist(selectedTreeNode);
 			}
-			// TODO (Christian, Version 1.3): REMOVE!!!!! ONLY FOR TESTING THE SERVER VERSION!!
-			relayBridge.persist(selectedTreeNode);
+		} else {
+			showMessage(FacesMessage.SEVERITY_ERROR, NOT_POSSIBLE, "Please select a RelayParticipant!");
 		}
+	}
 
+	boolean isParticipantRowSelected() {
+		if (selectedTreeNode != null) {
+			TreeNodeRow selectedRelayNode = (TreeNodeRow) selectedTreeNode.getData();
+			return !selectedRelayNode.isRelay();
+		}
+		return false;
 	}
 
 	void showMessage(Severity severityInfo, String summary, String textMessage) {
