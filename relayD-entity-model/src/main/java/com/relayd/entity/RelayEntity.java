@@ -77,7 +77,12 @@ public class RelayEntity {
 	}
 
 	public void setParticipantOne(UUID anUUID) {
-		participantOne = anUUID.toString();
+		// TODO (Christian, Version 1.3): machen wir ein "unmap" so? Oder sollte eine remove Methode her? Eigentlich sollte add/remove her....
+		if (anUUID != null) {
+			participantOne = anUUID.toString();
+		} else {
+			participantOne = null;
+		}
 	}
 
 	public UUID getParticipantTwo() {
@@ -88,7 +93,11 @@ public class RelayEntity {
 	}
 
 	public void setParticipantTwo(UUID anUUID) {
-		participantTwo = anUUID.toString();
+		if (anUUID != null) {
+			participantTwo = anUUID.toString();
+		} else {
+			participantTwo = null;
+		}
 	}
 
 	public UUID getParticipantThree() {
@@ -99,7 +108,11 @@ public class RelayEntity {
 	}
 
 	public void setParticipantThree(UUID anUUID) {
-		participantThree = anUUID.toString();
+		if (anUUID != null) {
+			participantThree = anUUID.toString();
+		} else {
+			participantThree = null;
+		}
 	}
 
 	public UUID getParticipantFour() {
@@ -110,7 +123,11 @@ public class RelayEntity {
 	}
 
 	public void setParticipantFour(UUID anUUID) {
-		participantFour = anUUID.toString();
+		if (anUUID != null) {
+			participantFour = anUUID.toString();
+		} else {
+			participantFour = null;
+		}
 	}
 
 	@Override
