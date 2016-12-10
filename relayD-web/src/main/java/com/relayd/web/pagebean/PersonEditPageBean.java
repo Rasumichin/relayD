@@ -12,7 +12,12 @@ import javax.faces.context.FacesContext;
 import org.primefaces.context.RequestContext;
 
 import com.relayd.Person;
-import com.relayd.attributes.*;
+import com.relayd.attributes.Comment;
+import com.relayd.attributes.Email;
+import com.relayd.attributes.Forename;
+import com.relayd.attributes.Shirtsize;
+import com.relayd.attributes.Surename;
+import com.relayd.attributes.YearOfBirth;
 import com.relayd.web.bridge.PersonBridge;
 import com.relayd.web.bridge.PersonBridgeImpl;
 import com.relayd.web.bridge.ValidationResult;
@@ -51,7 +56,7 @@ public class PersonEditPageBean implements Serializable {
 	}
 
 	void openDialog() {
-		Map<String, Object> options = new DialogOptionsBuilder().build();
+		Map<String, Object> options = new DialogOptionsBuilder().height(400).build();
 		RequestContext.getCurrentInstance().openDialog(NavigationConstants.PERSON_PERSON_DIALOG_ID, options, null);
 	}
 
