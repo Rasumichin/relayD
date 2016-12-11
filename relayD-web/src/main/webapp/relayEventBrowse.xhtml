@@ -34,6 +34,13 @@
 			<f:facet name="header">
 	        	List of Events
 	    	</f:facet>
+	    	
+	    	<p:column
+				visible="true"
+				toggleable="false"
+				style="width:16px">
+				<p:rowToggler />
+			</p:column>
 
 			<p:column
 				headerText="Date"
@@ -62,6 +69,35 @@
 					value="#{relayEvent.numberOfRelays}"
 					style="float:right" />
 			</p:column>
+			
+			<p:rowExpansion>
+				<p:panelGrid
+					columns="2"
+					columnClasses="label,value"
+					style="width:500px">
+					
+					<f:facet name="header">
+	                    <p:graphicImage name="./images/track2.jpg"/> 
+	                </f:facet>
+ 
+
+					<h:outputText value="Distance first track" />
+					<h:outputText style="float:right" value="#{relayEvent.trackDistanceOne}" />
+					
+					
+
+					<h:outputText value="Distance second track" />
+					<h:outputText style="float:right" value="#{relayEvent.trackDistanceTwo}" />
+					
+					<h:outputText value="Distance third track" />
+					<h:outputText style="float:right" value="#{relayEvent.trackDistanceThree}" />
+					
+					<h:outputText value="Distance forth track" />
+					<h:outputText style="float:right" value="#{relayEvent.trackDistanceFour}" />
+
+				</p:panelGrid>
+
+			</p:rowExpansion>
 
 			<f:facet name="footer">
 	        	In total there are #{fn:length(relayEventBrowsePageBean.relayEvents)} events.
