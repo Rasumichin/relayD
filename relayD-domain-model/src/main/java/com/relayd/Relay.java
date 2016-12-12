@@ -29,7 +29,7 @@ public class Relay implements Serializable {
 
 	private void initParticipants() {
 		for (int i = 0; i < RelayEvent.MAX_NUMBER_OF_TRACKS; i++) {
-			participants.add(null);
+			participants.add(Participant.newInstance());
 		}
 	}
 
@@ -73,7 +73,7 @@ public class Relay implements Serializable {
 	public Integer participantCount() {
 		int count = 0;
 		for (Participant participant : participants) {
-			if (participant != null) {
+			if (!participant.isEmpty()) {
 				count++;
 			}
 		}

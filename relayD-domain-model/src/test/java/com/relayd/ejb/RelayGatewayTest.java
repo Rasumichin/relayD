@@ -94,8 +94,8 @@ public abstract class RelayGatewayTest {
 
 		assertEquals("[participantOne] is not correct!", justusJonas, relayInGateway.getParticipantFor(Position.FIRST));
 		assertEquals("[participantTwo] is not correct!", peterShaw, relayInGateway.getParticipantFor(Position.SECOND));
-		assertNull("[participantThree] is not correct!", relayInGateway.getParticipantFor(Position.THIRD));
-		assertNull("[participantFour] is not correct!", relayInGateway.getParticipantFor(Position.FOURTH));
+		assertTrue("[participantThree] is not correct!", relayInGateway.getParticipantFor(Position.THIRD).isEmpty());
+		assertTrue("[participantFour] is not correct!", relayInGateway.getParticipantFor(Position.FOURTH).isEmpty());
 	}
 
 	@Test

@@ -81,9 +81,10 @@ public class RelayTest {
 		Participant actual = sut.getParticipantFor(Position.FIRST);
 
 		assertEquals("Person on first position is wrong!", expected, actual);
-		assertNull("second position not null!", sut.getParticipantFor(Position.SECOND));
-		assertNull("third position not null!", sut.getParticipantFor(Position.THIRD));
-		assertNull("fourth position not null!", sut.getParticipantFor(Position.FOURTH));
+
+		assertTrue("second position not empty!", sut.getParticipantFor(Position.SECOND).isEmpty());
+		assertTrue("third position not empty!", sut.getParticipantFor(Position.THIRD).isEmpty());
+		assertTrue("fourth position not empty!", sut.getParticipantFor(Position.FOURTH).isEmpty());
 	}
 
 	@Test
@@ -96,10 +97,10 @@ public class RelayTest {
 
 		Participant actual = sut.getParticipantFor(Position.SECOND);
 
-		assertNull("first position not null!", sut.getParticipantFor(Position.FIRST));
+		assertTrue("first position not empty!", sut.getParticipantFor(Position.FIRST).isEmpty());
 		assertEquals("Person on second position is wrong!", expected, actual);
-		assertNull("third position not null!", sut.getParticipantFor(Position.THIRD));
-		assertNull("fourth position not null!", sut.getParticipantFor(Position.FOURTH));
+		assertTrue("third position not empty!", sut.getParticipantFor(Position.THIRD).isEmpty());
+		assertTrue("fourth position not empty!", sut.getParticipantFor(Position.FOURTH).isEmpty());
 	}
 
 	@Test
@@ -112,10 +113,10 @@ public class RelayTest {
 
 		Participant actual = sut.getParticipantFor(Position.THIRD);
 
-		assertNull("first position not null!", sut.getParticipantFor(Position.FIRST));
-		assertNull("second position not null!", sut.getParticipantFor(Position.SECOND));
+		assertTrue("first position not empty!", sut.getParticipantFor(Position.FIRST).isEmpty());
+		assertTrue("second position not empty!", sut.getParticipantFor(Position.SECOND).isEmpty());
 		assertEquals("Person on third position is wrong!", expected, actual);
-		assertNull("fourth position not null!", sut.getParticipantFor(Position.FOURTH));
+		assertTrue("fourth position not empty!", sut.getParticipantFor(Position.FOURTH).isEmpty());
 	}
 
 	@Test
@@ -128,9 +129,9 @@ public class RelayTest {
 
 		Participant actual = sut.getParticipantFor(Position.FOURTH);
 
-		assertNull("first position not null!", sut.getParticipantFor(Position.FIRST));
-		assertNull("second position not null!", sut.getParticipantFor(Position.SECOND));
-		assertNull("third position not null!", sut.getParticipantFor(Position.THIRD));
+		assertTrue("first position not empty!", sut.getParticipantFor(Position.FIRST).isEmpty());
+		assertTrue("second position not empty!", sut.getParticipantFor(Position.SECOND).isEmpty());
+		assertTrue("third position not empty!", sut.getParticipantFor(Position.THIRD).isEmpty());
 		assertEquals("Person on fourth position is wrong!", expected, actual);
 	}
 
@@ -146,8 +147,8 @@ public class RelayTest {
 	@Test
 	public void testParticipantCount_ForTowParticipants() {
 		Relay sut = Relay.newInstance();
-		sut.addParticipant(Participant.newInstance(), Position.FIRST);
-		sut.addParticipant(Participant.newInstance(), Position.SECOND);
+		sut.addParticipant(Participant.newInstance(Forename.newInstance(), Surename.newInstance(), UUID.randomUUID()), Position.FIRST);
+		sut.addParticipant(Participant.newInstance(Forename.newInstance(), Surename.newInstance(), UUID.randomUUID()), Position.SECOND);
 
 		Integer actual = sut.participantCount();
 
@@ -172,8 +173,8 @@ public class RelayTest {
 		String relayname = "Die vier ????";
 
 		sut.setRelayname(Relayname.newInstance(relayname));
-		sut.addParticipant(Participant.newInstance(), Position.FIRST);
-		sut.addParticipant(Participant.newInstance(), Position.SECOND);
+		sut.addParticipant(Participant.newInstance(Forename.newInstance(), Surename.newInstance(), UUID.randomUUID()), Position.FIRST);
+		sut.addParticipant(Participant.newInstance(Forename.newInstance(), Surename.newInstance(), UUID.randomUUID()), Position.SECOND);
 
 		assertEquals(relayname + " [2/4]", sut.toString());
 	}
