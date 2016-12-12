@@ -124,10 +124,7 @@ public class RelayBrowsePageBean implements Serializable {
 						Person selectedPerson = getSelectedPerson();
 						System.out.println("Person selected: " + selectedPerson.toString());
 
-						Participant newRelayParticipant = Participant.newInstance();
-						newRelayParticipant.setUuidPerson(selectedPerson.getUuid());
-						newRelayParticipant.setForename(selectedPerson.getForename());
-						newRelayParticipant.setSurename(selectedPerson.getSurename());
+						Participant newRelayParticipant = Participant.newInstance(selectedPerson.getForename(), selectedPerson.getSurename(), selectedPerson.getUuid());
 
 						selectedRelayNode.setParticipant(newRelayParticipant);
 						// TODO (Christian, Version 1.3): REMOVE!!!!! ONLY FOR TESTING THE SERVER VERSION!!
@@ -141,10 +138,7 @@ public class RelayBrowsePageBean implements Serializable {
 						Person selectedPerson = getSelectedPerson();
 						System.out.println("Person selected: " + selectedPerson.toString());
 
-						Participant newRelayParticipant = Participant.newInstance();
-						newRelayParticipant.setUuidPerson(selectedPerson.getUuid());
-						newRelayParticipant.setForename(selectedPerson.getForename());
-						newRelayParticipant.setSurename(selectedPerson.getSurename());
+						Participant newRelayParticipant = Participant.newInstance(selectedPerson.getForename(), selectedPerson.getSurename(), selectedPerson.getUuid());
 
 						selectedRelayNode.setParticipant(newRelayParticipant);
 

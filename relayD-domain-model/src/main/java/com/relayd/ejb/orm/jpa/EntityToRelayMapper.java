@@ -35,10 +35,7 @@ public class EntityToRelayMapper {
 		if (relayEntity.getParticipantOne() != null) {
 			person = personGateway.get(relayEntity.getParticipantOne());
 
-			Participant participantOne = Participant.newInstance();
-			participantOne.setUuidPerson(person.getUuid());
-			participantOne.setForename(person.getForename());
-			participantOne.setSurename(person.getSurename());
+			Participant participantOne = createParticipant(person);
 
 			relay.addParticipant(participantOne, Position.FIRST);
 		}
@@ -46,10 +43,7 @@ public class EntityToRelayMapper {
 
 			person = personGateway.get(relayEntity.getParticipantTwo());
 
-			Participant participantTwo = Participant.newInstance();
-			participantTwo.setUuidPerson(person.getUuid());
-			participantTwo.setForename(person.getForename());
-			participantTwo.setSurename(person.getSurename());
+			Participant participantTwo = createParticipant(person);
 
 			relay.addParticipant(participantTwo, Position.SECOND);
 		}
@@ -57,10 +51,7 @@ public class EntityToRelayMapper {
 
 			person = personGateway.get(relayEntity.getParticipantThree());
 
-			Participant participantThree = Participant.newInstance();
-			participantThree.setUuidPerson(person.getUuid());
-			participantThree.setForename(person.getForename());
-			participantThree.setSurename(person.getSurename());
+			Participant participantThree = createParticipant(person);
 
 			relay.addParticipant(participantThree, Position.THIRD);
 		}
@@ -68,13 +59,15 @@ public class EntityToRelayMapper {
 
 			person = personGateway.get(relayEntity.getParticipantFour());
 
-			Participant participantFour = Participant.newInstance();
-			participantFour.setUuidPerson(person.getUuid());
-			participantFour.setForename(person.getForename());
-			participantFour.setSurename(person.getSurename());
+			Participant participantFour = createParticipant(person);
 
 			relay.addParticipant(participantFour, Position.FOURTH);
 		}
 		return relay;
+	}
+
+	private Participant createParticipant(Person person) {
+		Participant participant = Participant.newInstance(person.getForename(), person.getSurename(), person.getUuid());
+		return participant;
 	}
 }

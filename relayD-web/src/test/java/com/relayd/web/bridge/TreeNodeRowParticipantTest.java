@@ -10,7 +10,9 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import com.relayd.Participant;
+import com.relayd.attributes.Forename;
 import com.relayd.attributes.Position;
+import com.relayd.attributes.Surename;
 
 /**
  * The only way to learn a new programming language is by writing tests in it.
@@ -39,8 +41,7 @@ public class TreeNodeRowParticipantTest {
 	@Test
 	public void testCreateInstance_ForParticipant() {
 		UUID uuid = UUID.randomUUID();
-		Participant expected = Participant.newInstance();
-		expected.setUuidPerson(uuid);
+		Participant expected = Participant.newInstance(Forename.newInstance(), Surename.newInstance(), uuid);
 
 		TreeNodeRow sut = TreeNodeRow.newInstance(expected, Position.FIRST);
 

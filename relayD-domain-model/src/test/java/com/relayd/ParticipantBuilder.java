@@ -42,10 +42,7 @@ public class ParticipantBuilder {
 	}
 
 	public Participant build() {
-		Participant participant = Participant.newInstance();
-		participant.setUuidPerson(uuidPerson);
-		participant.setSurename(surename);
-		participant.setForename(forename);
+		Participant participant = Participant.newInstance(forename, surename, uuidPerson);
 		return participant;
 	}
 }

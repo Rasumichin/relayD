@@ -174,10 +174,7 @@ public class RelayBrowseMapPageBean implements Serializable {
 	}
 
 	private Participant createParticipant(Person person) {
-		Participant newRelayParticipant = Participant.newInstance();
-		newRelayParticipant.setUuidPerson(person.getUuid());
-		newRelayParticipant.setForename(person.getForename());
-		newRelayParticipant.setSurename(person.getSurename());
+		Participant newRelayParticipant = Participant.newInstance(person.getForename(), person.getSurename(), person.getUuid());
 		return newRelayParticipant;
 	}
 }

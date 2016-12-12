@@ -19,35 +19,36 @@ public class Participant implements Serializable {
 	private Surename surename = Surename.newInstance();
 
 	private Participant() {
-		super();
+	}
+
+	private Participant(Forename aForename, Surename aSurename, UUID anUuid) {
+		forename = aForename;
+		surename = aSurename;
+		uuidPerson = anUuid;
+	}
+
+	public boolean isEmpty() {
+		return false;
 	}
 
 	public static Participant newInstance() {
-		return new Participant();
+		return ParticipantNullObject.instance();
+	}
+
+	public static Participant newInstance(Forename forename, Surename surename, UUID uuid) {
+		return new Participant(forename, surename, uuid);
 	}
 
 	public UUID getUuidPerson() {
 		return uuidPerson;
 	}
 
-	public void setUuidPerson(UUID anUuidPerson) {
-		uuidPerson = anUuidPerson;
-	}
-
 	public Forename getForename() {
 		return forename;
 	}
 
-	public void setForename(Forename aForename) {
-		forename = aForename;
-	}
-
 	public Surename getSurename() {
 		return surename;
-	}
-
-	public void setSurename(Surename aSurename) {
-		surename = aSurename;
 	}
 
 	@Override
@@ -85,4 +86,23 @@ public class Participant implements Serializable {
 		return true;
 	}
 
+	static final class ParticipantNullObject extends Participant {
+		private static final long serialVersionUID = 6577776791000840413L;
+
+		private static final ParticipantNullObject SINGLETON = new ParticipantNullObject();
+
+		private static ParticipantNullObject instance() {
+			return SINGLETON;
+		}
+
+		@Override
+		public boolean isEmpty() {
+			return true;
+		}
+
+		@Override
+		public String toString() {
+			return "";
+		}
+	}
 }

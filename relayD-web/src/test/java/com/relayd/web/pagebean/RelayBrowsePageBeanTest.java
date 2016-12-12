@@ -144,8 +144,7 @@ public class RelayBrowsePageBeanTest {
 	@Test
 	public void testRemovePersonFromRelay_ForRelayParticipantRowIsSelected() {
 		ActionEvent dummyActionEvent = null;
-		Participant personRelay = Participant.newInstance();
-		personRelay.setUuidPerson(UUID.randomUUID());
+		Participant personRelay = Participant.newInstance(Forename.newInstance(), Surename.newInstance(), UUID.randomUUID());
 		TreeNode relayTreeNode = new DefaultTreeNode(TreeNodeRow.newInstance(personRelay, Position.FIRST), null);
 		sut.setSelectedNode(relayTreeNode);
 
@@ -158,8 +157,7 @@ public class RelayBrowsePageBeanTest {
 	@Test
 	public void testRemovePersonFromRelay_ForRelayParticipantRowIsSelectedAndEmpty() {
 		ActionEvent dummyActionEvent = null;
-		Participant personRelay = Participant.newInstance();
-		personRelay.setUuidPerson(null);
+		Participant personRelay = Participant.newInstance(Forename.newInstance(), Surename.newInstance(), null);
 		TreeNode relayTreeNode = new DefaultTreeNode(TreeNodeRow.newInstance(personRelay, Position.FIRST), null);
 		sut.setSelectedNode(relayTreeNode);
 

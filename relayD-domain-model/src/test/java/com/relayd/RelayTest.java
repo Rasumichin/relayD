@@ -74,9 +74,7 @@ public class RelayTest {
 	public void testAddPerson_ForPositionFirst() {
 		Relay sut = Relay.newInstance(RelayEvent.duesseldorf());
 
-		Participant expected = Participant.newInstance();
-		expected.setForename(Forename.newInstance("Justus"));
-		expected.setSurename(Surename.newInstance("Jonas"));
+		Participant expected = Participant.newInstance(Forename.newInstance("Justus"), Surename.newInstance("Jonas"), UUID.randomUUID());
 
 		sut.addParticipant(expected, Position.FIRST);
 
@@ -92,9 +90,7 @@ public class RelayTest {
 	public void testAddPerson_ForPositionSecond() {
 		Relay sut = Relay.newInstance(RelayEvent.duesseldorf());
 
-		Participant expected = Participant.newInstance();
-		expected.setForename(Forename.newInstance("Justus"));
-		expected.setSurename(Surename.newInstance("Jonas"));
+		Participant expected = Participant.newInstance(Forename.newInstance("Justus"), Surename.newInstance("Jonas"), UUID.randomUUID());
 
 		sut.addParticipant(expected, Position.SECOND);
 
@@ -110,9 +106,7 @@ public class RelayTest {
 	public void testAddPerson_ForPositionThird() {
 		Relay sut = Relay.newInstance(RelayEvent.duesseldorf());
 
-		Participant expected = Participant.newInstance();
-		expected.setForename(Forename.newInstance("Justus"));
-		expected.setSurename(Surename.newInstance("Jonas"));
+		Participant expected = Participant.newInstance(Forename.newInstance("Justus"), Surename.newInstance("Jonas"), UUID.randomUUID());
 
 		sut.addParticipant(expected, Position.THIRD);
 
@@ -128,9 +122,7 @@ public class RelayTest {
 	public void testAddPerson_ForPositionFourth() {
 		Relay sut = Relay.newInstance(RelayEvent.duesseldorf());
 
-		Participant expected = Participant.newInstance();
-		expected.setForename(Forename.newInstance("Justus"));
-		expected.setSurename(Surename.newInstance("Jonas"));
+		Participant expected = Participant.newInstance(Forename.newInstance("Justus"), Surename.newInstance("Jonas"), UUID.randomUUID());
 
 		sut.addParticipant(expected, Position.FOURTH);
 
