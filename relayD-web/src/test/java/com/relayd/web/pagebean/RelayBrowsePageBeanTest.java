@@ -84,7 +84,7 @@ public class RelayBrowsePageBeanTest {
 
 		sut.addPersonToRelay(dummyActionEvent);
 
-		verify(sut).showMessage(FacesMessage.SEVERITY_ERROR, RelayBrowsePageBean.NOT_POSSIBLE, "Please select a single Person!");
+		verify(sut).showMessage(FacesMessage.SEVERITY_ERROR, RelayBrowsePageBean.NOT_POSSIBLE, "Please select a Person!");
 	}
 
 	@Test
