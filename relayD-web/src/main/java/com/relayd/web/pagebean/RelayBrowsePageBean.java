@@ -136,8 +136,7 @@ public class RelayBrowsePageBean implements Serializable {
 			showMessage(FacesMessage.SEVERITY_ERROR, NOT_POSSIBLE, "Please select a single Person!");
 		} else {
 			TreeNodeRow selectedRelayNode = (TreeNodeRow) selectedTreeNode.getData();
-			Person selectedPerson = getSelectedPerson();
-			Participant newRelayParticipant = Participant.newInstance(selectedPerson.getForename(), selectedPerson.getSurename(), selectedPerson.getUuid());
+			Participant newRelayParticipant = Participant.newInstance(getSelectedPerson());
 			selectedRelayNode.setParticipant(newRelayParticipant);
 			// TODO (Christian, Version 1.3): REMOVE!!!!! ONLY FOR TESTING THE SERVER VERSION!!
 			relayBridge.persist(selectedTreeNode);
