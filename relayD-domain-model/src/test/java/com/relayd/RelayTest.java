@@ -9,10 +9,8 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import com.relayd.attributes.Forename;
 import com.relayd.attributes.Position;
 import com.relayd.attributes.Relayname;
-import com.relayd.attributes.Surename;
 
 /**
  * Test code is just as important as production code.
@@ -72,9 +70,11 @@ public class RelayTest {
 
 	@Test
 	public void testAddPerson_ForPositionFirst() {
+
 		Relay sut = Relay.newInstance(RelayEvent.duesseldorf());
 
-		Participant expected = Participant.newInstance(Forename.newInstance("Justus"), Surename.newInstance("Jonas"), UUID.randomUUID());
+		Person person = new PersonBuilder().withForename("Justus").withSurename("Jonas").build();
+		Participant expected = Participant.newInstance(person);
 
 		sut.addParticipant(expected, Position.FIRST);
 
@@ -91,7 +91,8 @@ public class RelayTest {
 	public void testAddPerson_ForPositionSecond() {
 		Relay sut = Relay.newInstance(RelayEvent.duesseldorf());
 
-		Participant expected = Participant.newInstance(Forename.newInstance("Justus"), Surename.newInstance("Jonas"), UUID.randomUUID());
+		Person person = new PersonBuilder().withForename("Justus").withSurename("Jonas").build();
+		Participant expected = Participant.newInstance(person);
 
 		sut.addParticipant(expected, Position.SECOND);
 
@@ -107,7 +108,8 @@ public class RelayTest {
 	public void testAddPerson_ForPositionThird() {
 		Relay sut = Relay.newInstance(RelayEvent.duesseldorf());
 
-		Participant expected = Participant.newInstance(Forename.newInstance("Justus"), Surename.newInstance("Jonas"), UUID.randomUUID());
+		Person person = new PersonBuilder().withForename("Justus").withSurename("Jonas").build();
+		Participant expected = Participant.newInstance(person);
 
 		sut.addParticipant(expected, Position.THIRD);
 
@@ -123,7 +125,8 @@ public class RelayTest {
 	public void testAddPerson_ForPositionFourth() {
 		Relay sut = Relay.newInstance(RelayEvent.duesseldorf());
 
-		Participant expected = Participant.newInstance(Forename.newInstance("Justus"), Surename.newInstance("Jonas"), UUID.randomUUID());
+		Person person = new PersonBuilder().withForename("Justus").withSurename("Jonas").build();
+		Participant expected = Participant.newInstance(person);
 
 		sut.addParticipant(expected, Position.FOURTH);
 
@@ -147,8 +150,8 @@ public class RelayTest {
 	@Test
 	public void testParticipantCount_ForTowParticipants() {
 		Relay sut = Relay.newInstance();
-		sut.addParticipant(Participant.newInstance(Forename.newInstance(), Surename.newInstance(), UUID.randomUUID()), Position.FIRST);
-		sut.addParticipant(Participant.newInstance(Forename.newInstance(), Surename.newInstance(), UUID.randomUUID()), Position.SECOND);
+		sut.addParticipant(Participant.newInstance(new PersonBuilder().build()), Position.FIRST);
+		sut.addParticipant(Participant.newInstance(new PersonBuilder().build()), Position.SECOND);
 
 		Integer actual = sut.participantCount();
 
@@ -173,8 +176,8 @@ public class RelayTest {
 		String relayname = "Die vier ????";
 
 		sut.setRelayname(Relayname.newInstance(relayname));
-		sut.addParticipant(Participant.newInstance(Forename.newInstance(), Surename.newInstance(), UUID.randomUUID()), Position.FIRST);
-		sut.addParticipant(Participant.newInstance(Forename.newInstance(), Surename.newInstance(), UUID.randomUUID()), Position.SECOND);
+		sut.addParticipant(Participant.newInstance(new PersonBuilder().build()), Position.FIRST);
+		sut.addParticipant(Participant.newInstance(new PersonBuilder().build()), Position.SECOND);
 
 		assertEquals(relayname + " [2/4]", sut.toString());
 	}

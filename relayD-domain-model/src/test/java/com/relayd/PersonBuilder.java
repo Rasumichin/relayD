@@ -1,5 +1,7 @@
 package com.relayd;
 
+import java.util.UUID;
+
 import com.relayd.attributes.Forename;
 import com.relayd.attributes.Shirtsize;
 import com.relayd.attributes.Surename;
@@ -39,6 +41,7 @@ public class PersonBuilder {
 
 	Person build() {
 		Person person = Person.newInstance();
+		person.setUuid(UUID.randomUUID());
 		person.setSurename(surename);
 		person.setForename(forename);
 		person.setYearOfBirth(yearOfBirth);
