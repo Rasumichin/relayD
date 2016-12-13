@@ -16,9 +16,9 @@ public interface RelayBridge {
 
 	TreeNode all();
 
-	void persistRelay(Relay aWorkingRelay);
+	void set(Relay relay);
 
-	void persist(TreeNode relay);
+	void set(TreeNode treeNode);
 
 	GatewayType getGatewayType();
 

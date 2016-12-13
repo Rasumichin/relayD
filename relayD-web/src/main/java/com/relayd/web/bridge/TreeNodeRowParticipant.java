@@ -4,6 +4,8 @@ import com.relayd.Participant;
 import com.relayd.attributes.Position;
 
 /**
+ * @author schmollc (Christian@relayd.de)
+ * @since 29.11.2016
  *
  */
 public class TreeNodeRowParticipant extends TreeNodeRow {

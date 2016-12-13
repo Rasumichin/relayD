@@ -116,7 +116,7 @@ public class RelayBrowsePageBeanTest {
 
 		sut.addPersonToRelay(dummyActionEvent);
 
-		verify(relayBridge, never()).persist(any(TreeNode.class));
+		verify(relayBridge, never()).set(any(TreeNode.class));
 		verify(sut).showMessage(FacesMessage.SEVERITY_ERROR, RelayBrowsePageBean.NOT_POSSIBLE, "Please select a Row!");
 	}
 
@@ -139,7 +139,7 @@ public class RelayBrowsePageBeanTest {
 		Participant actual = selectedRelayNode.getParticipant();
 
 		assertEquals("UUID not correct!", justusJonas.getUuid(), actual.getUuidPerson());
-		verify(relayBridge).persist(any(TreeNode.class));
+		verify(relayBridge).set(any(TreeNode.class));
 		verify(sut, never()).showMessage(any(FacesMessage.Severity.class), anyString(), anyString());
 	}
 
@@ -159,7 +159,7 @@ public class RelayBrowsePageBeanTest {
 
 		sut.addPersonToRelay(dummyActionEvent);
 
-		verify(relayBridge, never()).persist(any(TreeNode.class));
+		verify(relayBridge, never()).set(any(TreeNode.class));
 		verify(sut).showMessage(FacesMessage.SEVERITY_ERROR, RelayBrowsePageBean.NOT_POSSIBLE, "Only for Participant Row possible!");
 	}
 
@@ -170,7 +170,7 @@ public class RelayBrowsePageBeanTest {
 		sut.removePersonFromRelay(dummyActionEvent);
 
 		verify(sut).showMessage(FacesMessage.SEVERITY_ERROR, RelayBrowsePageBean.NOT_POSSIBLE, "Please select a Row!");
-		verify(relayBridge, never()).persist(any(TreeNode.class));
+		verify(relayBridge, never()).set(any(TreeNode.class));
 	}
 
 	@Test
@@ -183,7 +183,7 @@ public class RelayBrowsePageBeanTest {
 		sut.removePersonFromRelay(dummyActionEvent);
 
 		verify(sut).showMessage(FacesMessage.SEVERITY_ERROR, RelayBrowsePageBean.NOT_POSSIBLE, "Only for Participant Row possible!");
-		verify(relayBridge, never()).persist(any(TreeNode.class));
+		verify(relayBridge, never()).set(any(TreeNode.class));
 	}
 
 	@Test
@@ -201,7 +201,7 @@ public class RelayBrowsePageBeanTest {
 		sut.removePersonFromRelay(dummyActionEvent);
 
 		verify(sut, never()).showMessage(any(FacesMessage.Severity.class), anyString(), anyString());
-		verify(relayBridge).persist(any(TreeNode.class));
+		verify(relayBridge).set(any(TreeNode.class));
 	}
 
 	@Test
@@ -214,7 +214,7 @@ public class RelayBrowsePageBeanTest {
 		sut.removePersonFromRelay(dummyActionEvent);
 
 		verify(sut, never()).showMessage(any(FacesMessage.Severity.class), anyString(), anyString());
-		verify(relayBridge, never()).persist(any(TreeNode.class));
+		verify(relayBridge, never()).set(any(TreeNode.class));
 	}
 
 	@Test
