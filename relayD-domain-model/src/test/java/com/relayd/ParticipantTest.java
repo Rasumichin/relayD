@@ -58,7 +58,33 @@ public class ParticipantTest {
 		boolean result = sut.getClass() == Participant.class;
 
 		assertTrue("Instance is not correct!", result);
+	}
 
+	@Test
+	public void testCreateInstance_ForParameterPerson() {
+		Person dummyPerson = Person.newInstance();
+		dummyPerson.setUuid(UUID.randomUUID());
+		dummyPerson.setForename(Forename.newInstance("Justus"));
+		dummyPerson.setSurename(Surename.newInstance("Jonas"));
+
+		Participant sut = Participant.newInstance(dummyPerson);
+
+		assertNotNull("Not a valid instance!", sut);
+
+		boolean result = sut.getClass() == Participant.class;
+
+		assertTrue("Instance is not correct!", result);
+	}
+
+	@Test
+	public void testCreateInstance_ForNullValue() {
+		Participant sut = Participant.newInstance(null);
+
+		assertNotNull("Not a valid instance!", sut);
+
+		boolean result = sut.getClass() == ParticipantNullObject.class;
+
+		assertTrue("Instance is not correct!", result);
 	}
 
 	@Test
