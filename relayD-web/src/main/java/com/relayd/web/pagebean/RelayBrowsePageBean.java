@@ -136,8 +136,7 @@ public class RelayBrowsePageBean implements Serializable {
 			showMessage(FacesMessage.SEVERITY_ERROR, NOT_POSSIBLE, "Please select a single Person!");
 		} else {
 			TreeNodeRow selectedRelayNode = (TreeNodeRow) selectedTreeNode.getData();
-			Person selectedPerson = getSelectedPerson();
-			Participant newRelayParticipant = Participant.newInstance(selectedPerson.getForename(), selectedPerson.getSurename(), selectedPerson.getUuid());
+			Participant newRelayParticipant = Participant.newInstance(getSelectedPerson());
 			selectedRelayNode.setParticipant(newRelayParticipant);
 			// TODO (Christian, Version 1.3): REMOVE!!!!! ONLY FOR TESTING THE SERVER VERSION!!
 			relayBridge.persist(selectedTreeNode);
@@ -151,8 +150,7 @@ public class RelayBrowsePageBean implements Serializable {
 			showMessage(FacesMessage.SEVERITY_ERROR, NOT_POSSIBLE, "Only for Participant Row possible!");
 		} else {
 			TreeNodeRow selectedRelayNode = (TreeNodeRow) selectedTreeNode.getData();
-			// TODO (Christian, Erik Version 1.3): NOP(NullObjectPattern) für Participant einführen?
-			if (selectedRelayNode.getParticipant().getUuidPerson() != null) {
+			if (!selectedRelayNode.getParticipant().isEmpty()) {
 				// TODO (Christian, Erik Version 1.3): ein remove im Fachobjekt TreeNodeRow einführen
 				selectedRelayNode.setParticipant(Participant.newInstance());
 				// TODO (Christian, Version 1.3): REMOVE!!!!! ONLY FOR TESTING THE SERVER VERSION!!
