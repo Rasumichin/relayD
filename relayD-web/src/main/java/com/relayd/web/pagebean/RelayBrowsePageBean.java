@@ -145,9 +145,12 @@ public class RelayBrowsePageBean implements Serializable {
 	}
 
 	public void removePersonFromRelay(@SuppressWarnings("unused") ActionEvent actionEvent) {
-		if (isParticipantRowSelected()) {
+		if (!isRelayRowSelected() && !isParticipantRowSelected()) {
+			showMessage(FacesMessage.SEVERITY_ERROR, NOT_POSSIBLE, "Please select a Row!");
+		} else if (isRelayRowSelected()) {
+			showMessage(FacesMessage.SEVERITY_ERROR, NOT_POSSIBLE, "Only for Participant Row possible!");
+		} else {
 			TreeNodeRow selectedRelayNode = (TreeNodeRow) selectedTreeNode.getData();
-
 			// TODO (Christian, Erik Version 1.3): NOP(NullObjectPattern) für Participant einführen?
 			if (selectedRelayNode.getParticipant().getUuidPerson() != null) {
 				// TODO (Christian, Erik Version 1.3): ein remove im Fachobjekt TreeNodeRow einführen
@@ -155,8 +158,6 @@ public class RelayBrowsePageBean implements Serializable {
 				// TODO (Christian, Version 1.3): REMOVE!!!!! ONLY FOR TESTING THE SERVER VERSION!!
 				relayBridge.persist(selectedTreeNode);
 			}
-		} else {
-			showMessage(FacesMessage.SEVERITY_ERROR, NOT_POSSIBLE, "Please select a RelayParticipant!");
 		}
 	}
 

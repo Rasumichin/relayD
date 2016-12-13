@@ -164,17 +164,17 @@ public class RelayBrowsePageBeanTest {
 	}
 
 	@Test
-	public void testRemovePersonFromRelay_ForNoRelayRowIsSelected() {
+	public void testRemovePersonFromRelay_ForNoRowIsSelected() {
 		ActionEvent dummyActionEvent = null;
 
 		sut.removePersonFromRelay(dummyActionEvent);
 
-		verify(sut).showMessage(any(FacesMessage.Severity.class), anyString(), anyString());
+		verify(sut).showMessage(FacesMessage.SEVERITY_ERROR, RelayBrowsePageBean.NOT_POSSIBLE, "Please select a Row!");
 		verify(relayBridge, never()).persist(any(TreeNode.class));
 	}
 
 	@Test
-	public void testRemovePersonFromRelay_ForNonRelayParticipantRowIsSelected() {
+	public void testRemovePersonFromRelay_ForRelayRowIsSelected() {
 		ActionEvent dummyActionEvent = null;
 		Relay relay = Relay.newInstance(RelayEvent.duesseldorf());
 		TreeNode relayTreeNode = new DefaultTreeNode(TreeNodeRow.newInstance(relay), null);
@@ -182,12 +182,12 @@ public class RelayBrowsePageBeanTest {
 
 		sut.removePersonFromRelay(dummyActionEvent);
 
-		verify(sut).showMessage(any(FacesMessage.Severity.class), anyString(), anyString());
+		verify(sut).showMessage(FacesMessage.SEVERITY_ERROR, RelayBrowsePageBean.NOT_POSSIBLE, "Only for Participant Row possible!");
 		verify(relayBridge, never()).persist(any(TreeNode.class));
 	}
 
 	@Test
-	public void testRemovePersonFromRelay_ForRelayParticipantRowIsSelected() {
+	public void testRemovePersonFromRelay_ForParticipantRowIsSelected() {
 		ActionEvent dummyActionEvent = null;
 		Participant personRelay = Participant.newInstance(Forename.newInstance(), Surename.newInstance(), UUID.randomUUID());
 		TreeNode relayTreeNode = new DefaultTreeNode(TreeNodeRow.newInstance(personRelay, Position.FIRST), null);
