@@ -54,7 +54,11 @@ DROP TABLE relay2;
 CREATE TABLE relay2 (
 	id								CHAR(36)		NOT NULL	COMMENT 'UUID as string representation.',
 	eventId							CHAR(36) 		NOT NULL	COMMENT 'UUID from the Event string representation.',
-	relayname						VARCHAR(256)	NOT NULL	COMMENT 'The name of the relay.'
+	relayname						VARCHAR(256)	NOT NULL	COMMENT 'The name of the relay.',
+	CONSTRAINT fk_relay_relay_event
+		FOREIGN KEY (eventId) REFERENCES relay_event (id)
+		ON DELETE CASCADE
+		ON UPDATE RESTRICT
 ) COMMENT 'relayD - The table for the relay entities.';
 
 
@@ -81,4 +85,4 @@ ALTER TABLE relay2 ADD PRIMARY KEY (id);
 -- ------------------------------------------------
 -- Grant relay
 -- ------------------------------------------------
-GRANT ALL ON relay2 TO PUBLIC; -- geht nicht!
+-- Does not work, probably due to unsufficient rights: GRANT ALL ON relay2 TO PUBLIC;
