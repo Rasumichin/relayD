@@ -6,7 +6,6 @@ import java.util.UUID;
 import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.TreeNode;
 
-import com.relayd.Participant;
 import com.relayd.Relay;
 import com.relayd.attributes.Position;
 import com.relayd.ejb.GatewayType;
@@ -30,7 +29,7 @@ public class RelayBridgeImpl implements RelayBridge {
 
 	@Override
 	public TreeNode all() {
-		TreeNode root = new DefaultTreeNode(TreeNodeRow.newInstance(Participant.newInstance(), Position.UNKNOWN), null);
+		TreeNode root = new DefaultTreeNode();
 
 		List<Relay> all = gateway.getAll();
 
@@ -39,18 +38,11 @@ public class RelayBridgeImpl implements RelayBridge {
 			// Methodik übernommen aus dem Primefaces-Beispiel.
 			TreeNode relayTreeNode = new DefaultTreeNode(TreeNodeRow.newInstance(relay), root);
 
-			// TODO (Christian, Erik, Version 1.3): Sieht nach Trainwreck aus. Aber wenn man direkt auf Person geht... Dann "verschwindet" der Track...
-			// Moment.. mmm... dann würde die toString von Track halt sagen: "8.3km, Justus, Jonas, usw.."... mmmmm.....
-			@SuppressWarnings("unused")
-			// TODO (Christian, Erik, Version 1.3): Scheinbar wird "Etappe 1" gar nicht gebraucht
-			TreeNode trackOne = new DefaultTreeNode("Etappe 1", TreeNodeRow.newInstance(relay.getParticipantFor(Position.FIRST), Position.FIRST), relayTreeNode);
-			@SuppressWarnings("unused")
-			TreeNode trackTwo = new DefaultTreeNode("Etappe 2", TreeNodeRow.newInstance(relay.getParticipantFor(Position.SECOND), Position.SECOND), relayTreeNode);
-			@SuppressWarnings("unused")
-			TreeNode trackThree = new DefaultTreeNode("Etappe 3", TreeNodeRow.newInstance(relay.getParticipantFor(Position.THIRD), Position.THIRD), relayTreeNode);
-			@SuppressWarnings("unused")
-			TreeNode trackFour = new DefaultTreeNode("Etappe 4", TreeNodeRow.newInstance(relay.getParticipantFor(Position.FOURTH), Position.FOURTH), relayTreeNode);
-
+			// TODO (Christian, Erik, Version 1.3): Aus dem Primefacesbeispiel. Sollte man nochmal verifizieren.
+			new DefaultTreeNode(TreeNodeRow.newInstance(relay.getParticipantFor(Position.FIRST), Position.FIRST), relayTreeNode);
+			new DefaultTreeNode(TreeNodeRow.newInstance(relay.getParticipantFor(Position.SECOND), Position.SECOND), relayTreeNode);
+			new DefaultTreeNode(TreeNodeRow.newInstance(relay.getParticipantFor(Position.THIRD), Position.THIRD), relayTreeNode);
+			new DefaultTreeNode(TreeNodeRow.newInstance(relay.getParticipantFor(Position.FOURTH), Position.FOURTH), relayTreeNode);
 		}
 
 		return root;
@@ -62,7 +54,7 @@ public class RelayBridgeImpl implements RelayBridge {
 	}
 
 	@Override
-	public void persistRelay(Relay relay) {
+	public void set(Relay relay) {
 		gateway.set(relay);
 	}
 
@@ -72,7 +64,7 @@ public class RelayBridgeImpl implements RelayBridge {
 	 */
 	@Override
 	@Deprecated
-	public void persist(TreeNode treeNode) {
+	public void set(TreeNode treeNode) {
 		if (treeNode.getParent() != null) {
 			TreeNodeRow relayNode = (TreeNodeRow) treeNode.getParent().getData();
 			TreeNodeRow participantRow = (TreeNodeRow) treeNode.getData();

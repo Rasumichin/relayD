@@ -90,7 +90,7 @@ public class RelayEditPageBean implements Serializable {
 	}
 
 	void persistRelay() {
-		getBridge().persistRelay(workingRelay);
+		getBridge().set(workingRelay);
 	}
 
 	private RelayBridge getBridge() {

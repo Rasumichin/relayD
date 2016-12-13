@@ -139,7 +139,7 @@ public class RelayBrowsePageBean implements Serializable {
 			Participant newRelayParticipant = Participant.newInstance(getSelectedPerson());
 			selectedRelayNode.setParticipant(newRelayParticipant);
 			// TODO (Christian, Version 1.3): REMOVE!!!!! ONLY FOR TESTING THE SERVER VERSION!!
-			relayBridge.persist(selectedTreeNode);
+			relayBridge.set(selectedTreeNode);
 		}
 	}
 
@@ -154,7 +154,7 @@ public class RelayBrowsePageBean implements Serializable {
 				// TODO (Christian, Erik Version 1.3): ein remove im Fachobjekt TreeNodeRow einführen
 				selectedRelayNode.setParticipant(Participant.newInstance());
 				// TODO (Christian, Version 1.3): REMOVE!!!!! ONLY FOR TESTING THE SERVER VERSION!!
-				relayBridge.persist(selectedTreeNode);
+				relayBridge.set(selectedTreeNode);
 			}
 		}
 	}
