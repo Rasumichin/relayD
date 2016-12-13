@@ -67,7 +67,7 @@ public class EntityToRelayMapper {
 	}
 
 	private Participant createParticipant(Person person) {
-		Participant participant = Participant.newInstance(person.getForename(), person.getSurename(), person.getUuid());
+		Participant participant = Participant.newInstance(person);
 		return participant;
 	}
 }
