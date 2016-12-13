@@ -35,14 +35,6 @@ public class Participant implements Serializable {
 		return ParticipantNullObject.instance();
 	}
 
-	/**
-	 * @deprecated Please use newInstance(Person person)
-	 */
-	@Deprecated
-	public static Participant newInstance(Forename forename, Surename surename, UUID uuid) {
-		return new Participant(forename, surename, uuid);
-	}
-
 	public static Participant newInstance(Person person) {
 		if (person == null) {
 			return ParticipantNullObject.instance();
