@@ -151,8 +151,7 @@ public class RelayBrowsePageBean implements Serializable {
 			showMessage(FacesMessage.SEVERITY_ERROR, NOT_POSSIBLE, "Only for Participant Row possible!");
 		} else {
 			TreeNodeRow selectedRelayNode = (TreeNodeRow) selectedTreeNode.getData();
-			// TODO (Christian, Erik Version 1.3): NOP(NullObjectPattern) für Participant einführen?
-			if (selectedRelayNode.getParticipant().getUuidPerson() != null) {
+			if (!selectedRelayNode.getParticipant().isEmpty()) {
 				// TODO (Christian, Erik Version 1.3): ein remove im Fachobjekt TreeNodeRow einführen
 				selectedRelayNode.setParticipant(Participant.newInstance());
 				// TODO (Christian, Version 1.3): REMOVE!!!!! ONLY FOR TESTING THE SERVER VERSION!!
