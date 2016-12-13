@@ -46,12 +46,12 @@ public class RelayCreationWorkflowTest {
 		// Nun kann schon ein persistieren erfolgen?
 		// Oder sollte jede Relay immer min. eine Person besitzen?
 
-		Participant justusJonas = Participant.newInstance(Forename.newInstance("Justus"), Surename.newInstance("Jonas"), UUID.randomUUID());
+		Participant justusJonas = Participant.newInstance(createPersonFor(Forename.newInstance("Justus"), Surename.newInstance("Jonas"), UUID.randomUUID()));
 
 		staubwolke.addParticipant(justusJonas, Position.FIRST);
 
 		// Prüfungen
-		Participant peterShaw = Participant.newInstance(Forename.newInstance("Peter"), Surename.newInstance("Shaw"), UUID.randomUUID());
+		Participant peterShaw = Participant.newInstance(createPersonFor(Forename.newInstance("Peter"), Surename.newInstance("Shaw"), UUID.randomUUID()));
 
 		// Sollte ein Fehler verursachen, da Position 1 schon vergeben!
 		staubwolke.addParticipant(peterShaw, Position.FIRST);
@@ -64,7 +64,7 @@ public class RelayCreationWorkflowTest {
 		dieVierFragezeichen.addParticipant(justusJonas, Position.FIRST);
 
 		// Bedenkliche Konstellation
-		Participant bobAndrews = Participant.newInstance(Forename.newInstance("Bob"), Surename.newInstance("Andrews"), UUID.randomUUID());
+		Participant bobAndrews = Participant.newInstance(createPersonFor(Forename.newInstance("Bob"), Surename.newInstance("Andrews"), UUID.randomUUID()));
 
 		// Bob springt ein in Staffel Staubwolke die 1. Strecke mit z.B. 56:33min
 		// und möchte in Staffel 4???? die zweite Strecke laufen.
@@ -114,18 +114,26 @@ public class RelayCreationWorkflowTest {
 		assertNull("The person for the first track is not correct!", firstTrack.getParticipantRelay());
 
 		Relay slowMovers = Relay.newInstance(boston);
-		Participant mike = Participant.newInstance(Forename.newInstance("Mike"), Surename.newInstance(), UUID.randomUUID());
+		Participant mike = Participant.newInstance(createPersonFor(Forename.newInstance("Mike"), Surename.newInstance(), UUID.randomUUID()));
 		slowMovers.addParticipant(mike, Position.FIRST);
 
 		Participant actual = firstTrack.getParticipantRelay();
 		assertEquals("Person at first position of Track is not Mike!", mike, actual);
 
 		Relay dillyDallies = Relay.newInstance(boston);
-		Participant sarah = Participant.newInstance(Forename.newInstance("Sarah"), Surename.newInstance(), UUID.randomUUID());
+		Participant sarah = Participant.newInstance(createPersonFor(Forename.newInstance("Sarah"), Surename.newInstance(), UUID.randomUUID()));
 		dillyDallies.addParticipant(sarah, Position.FIRST);
 
 		actual = firstTrack.getParticipantRelay();
 		assertEquals("Person at first position of Track is not Sarah!", sarah, actual);
 		// But what about Mike? He lost his track position to Sarah!
+	}
+
+	private Person createPersonFor(Forename aForename, Surename aSurename, UUID anUuid) {
+		Person person = Person.newInstance();
+		person.setUuid(anUuid);
+		person.setForename(aForename);
+		person.setSurename(aSurename);
+		return person;
 	}
 }
