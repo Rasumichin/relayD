@@ -99,6 +99,30 @@ public class RelayEvent implements Serializable {
 		Track track = tracks.get(index);
 		return track;
 	}
+	
+	public String getTrackDistanceOne() {
+		Track track = getTrackForPosition(Position.FIRST);
+		Distance distance = track.getDistance();
+		return distance.toStringWithUnity();
+	}
+	
+	public String getTrackDistanceTwo() {
+		Track track = getTrackForPosition(Position.SECOND);
+		Distance distance = track.getDistance();
+		return distance.toStringWithUnity();
+	}
+	
+	public String getTrackDistanceThree() {
+		Track track = getTrackForPosition(Position.THIRD);
+		Distance distance = track.getDistance();
+		return distance.toStringWithUnity();
+	}
+	
+	public String getTrackDistanceFour() {
+		Track track = getTrackForPosition(Position.FOURTH);
+		Distance distance = track.getDistance();
+		return distance.toStringWithUnity();
+	}
 
 	public void addRelay(Relay relay) {
 		// Warum "<=" und nicht "==" ?
