@@ -45,9 +45,9 @@ public class RelayEvent implements Serializable {
 		eventDay = anEventDay;
 
 		tracks.add(Track.newInstance(Distance.kilometers(new BigDecimal("11.3"))));
+		tracks.add(Track.newInstance(Distance.kilometers(new BigDecimal("13.1"))));
 		tracks.add(Track.newInstance(Distance.kilometers(new BigDecimal("8.6"))));
 		tracks.add(Track.newInstance(Distance.kilometers(new BigDecimal("9.2"))));
-		tracks.add(Track.newInstance(Distance.kilometers(new BigDecimal("13.1"))));
 
 	}
 
