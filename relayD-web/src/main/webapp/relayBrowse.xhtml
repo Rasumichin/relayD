@@ -24,9 +24,15 @@
 			id="growl"
 			showDetail="true" />
 
-		<div class="divStartHeader"></div>
-
-		<p:layout>
+		<p:layout fullPage="true">
+		
+			<p:layoutUnit
+				position="north"
+				resizable="false"
+				size="166">
+				<div class="divStartHeader"></div>
+			</p:layoutUnit>
+		
 			<p:layoutUnit
 				position="west"
 				resizable="true"
@@ -81,13 +87,13 @@
 			<p:layoutUnit
 				position="center"
 				size="5%">
+				
 				<p:commandButton
 					value="add"
 					style="width:95%"
 					update="form"
 					icon="ui-icon-circle-triangle-w"
 					actionListener="#{relayBrowsePageBean.addPersonToRelay}">
-
 				</p:commandButton>
 
 				<p:commandButton
@@ -96,7 +102,6 @@
 					update="form"
 					icon="ui-icon-circle-triangle-e"
 					actionListener="#{relayBrowsePageBean.removePersonFromRelay}">
-
 				</p:commandButton>
 
 			</p:layoutUnit>
@@ -104,6 +109,7 @@
 			<p:layoutUnit
 				position="east"
 				size="45%">
+				
 				<p:toolbar>
 					<f:facet name="right">
 						<p:commandButton
@@ -154,6 +160,7 @@
 						</p:menuButton>
 					</f:facet>
 				</p:toolbar>
+				
 				<p:dataTable
 					var="person"
 					widgetVar="personTable"
@@ -213,15 +220,19 @@
 
 							<h:outputText value="Email" />
 							<h:outputText value="#{person.email}" />
-
 						</p:panelGrid>
-
 					</p:rowExpansion>
 
 				</p:dataTable>
 			</p:layoutUnit>
+			
+			<p:layoutUnit
+				position="south"
+				resizable="false"
+				size="52">
+			</p:layoutUnit>
+			
 		</p:layout>
-
 
 		<ui:include src="/dock.xhtml" />
 
