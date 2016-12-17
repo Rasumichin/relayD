@@ -22,84 +22,128 @@
 		<p:growl
 			id="growl"
 			showDetail="true" />
-		<p />
 		
-		<p:dataTable
-			var="relayEvent"
-			id="relayEventTable"
-			value="#{relayEventBrowsePageBean.relayEvents}"
-			selection="#{relayEventBrowsePageBean.selectedRelayEvent}"
-			rowKey="#{relayEvent.uuid}"
-			resizableColumns="true">
-			<f:facet name="header">
-	        	List of Events
-	    	</f:facet>
-	    	
-	    	<p:column
-				visible="true"
-				toggleable="false"
-				style="width:16px">
-				<p:rowToggler />
-			</p:column>
-
-			<p:column
-				headerText="Date"
-				width="65">
-				<h:outputText
-					value="#{relayEvent.eventDay}"
-					style="float:center" />
-			</p:column>
-
-			<p:column headerText="Event">
-				<h:outputText value="#{relayEvent.name}" />
-			</p:column>
-
-			<p:column
-				headerText="Max. Relays"
-				width="110">
-				<h:outputText
-					value="#{relayEvent.maxNumberOfRelays}"
-					style="float:right" />
-			</p:column>
-
-			<p:column
-				headerText="Participant Relays"
-				width="110">
-				<h:outputText
-					value="#{relayEvent.numberOfRelays}"
-					style="float:right" />
-			</p:column>
+		<p:layout fullPage="true">
+		
+			<p:layoutUnit
+				position="north"
+				resizable="false"
+				size="166">
+				<div class="divStartHeader"></div>
+			</p:layoutUnit>
 			
-			<p:rowExpansion>
-				<p:panelGrid
-					columns="2"
-					columnClasses="label,value"
-					style="width:600px">
+			
+			<p:layoutUnit
+				position="center"
+				style="height:100%">
 					
+				<p:toolbar>
+					<f:facet name="left">
+						<p:commandButton
+							update="form"
+							icon="ui-icon-plus">
+							<p:ajax
+								event="dialogReturn"
+								update="form" />
+						</p:commandButton>
+						<p:commandButton
+							icon="ui-icon-pencil"
+							update="form">
+							<p:ajax
+								event="dialogReturn"
+								update="form" />
+						</p:commandButton>
+						
+					</f:facet>
+				</p:toolbar>
+					
+				<p:dataTable
+					var="relayEvent"
+					id="relayEventTable"
+					value="#{relayEventBrowsePageBean.relayEvents}"
+					selection="#{relayEventBrowsePageBean.selectedRelayEvent}"
+					scrollable="true"
+					scrollHeight="92%"
+					rowKey="#{relayEvent.uuid}"
+					resizableColumns="true">
 					<f:facet name="header">
-	                    <p:graphicImage value="images/tracks2017.png" width="100%" height="100%"/> 
-	                </f:facet>
- 
-					<h:outputText value="Distance first track" />
-					<h:outputText style="float:right" value="#{relayEvent.trackDistanceOne}" />
+			        	List of Events
+			    	</f:facet>
+			    	
+			    	<p:column
+						visible="true"
+						toggleable="false"
+						width="2%">
+						<p:rowToggler />
+					</p:column>
+		
+					<p:column
+						headerText="Date"
+						width="10%">
+						<h:outputText
+							value="#{relayEvent.eventDay}"
+							style="float:center" />
+					</p:column>
+		
+					<p:column 
+						headerText="Event"
+						width="58%">
+						<h:outputText value="#{relayEvent.name}" />
+					</p:column>
+		
+					<p:column
+						headerText="Max. Relays"
+						width="10%">
+						<h:outputText
+							value="#{relayEvent.maxNumberOfRelays}"
+							style="float:right" />
+					</p:column>
+		
+					<p:column
+						headerText="Participant Relays"
+						width="10%">
+						<h:outputText
+							value="#{relayEvent.numberOfRelays}"
+							style="float:right" />
+					</p:column>
 					
-					<h:outputText value="Distance second track" />
-					<h:outputText style="float:right" value="#{relayEvent.trackDistanceTwo}" />
-					
-					<h:outputText value="Distance third track" />
-					<h:outputText style="float:right" value="#{relayEvent.trackDistanceThree}" />
-					
-					<h:outputText value="Distance forth track" />
-					<h:outputText style="float:right" value="#{relayEvent.trackDistanceFour}" />
+					<p:rowExpansion styleClass="width:50%">
+						<p:panelGrid
+							columns="2"
+							columnClasses="label,value"
+							style="width:40%">
+							
+							<h:outputText value="Distance first track" />
+							<h:outputText style="float:right" value="#{relayEvent.trackDistanceOne}" />
+							<h:outputText value="Distance second track" />
+							<h:outputText style="float:right" value="#{relayEvent.trackDistanceTwo}" />
+							<h:outputText value="Distance third track" />
+							<h:outputText style="float:right" value="#{relayEvent.trackDistanceThree}" />
+							<h:outputText value="Distance forth track" />
+							<h:outputText style="float:right" value="#{relayEvent.trackDistanceFour}" />
+						    
+						</p:panelGrid>
+						<p:panelGrid
+							columns="1"
+							columnClasses="label"
+							style="width:40%">
+							<p:graphicImage value="images/tracks2017.png" width="100%" height="100%"/>
+						</p:panelGrid>
+		
+					</p:rowExpansion>
+				</p:dataTable>
 
-				</p:panelGrid>
-
-			</p:rowExpansion>
-
-			<f:facet name="footer">
-	        	In total there are #{fn:length(relayEventBrowsePageBean.relayEvents)} events.
-	    	</f:facet>
-		</p:dataTable>
+			</p:layoutUnit>
+			
+			<p:layoutUnit
+				position="south"
+				resizable="false"
+				size="52">
+			</p:layoutUnit>
+			
+		</p:layout>
+		
+		
 
 		<ui:include src="/dock.xhtml" />
 
