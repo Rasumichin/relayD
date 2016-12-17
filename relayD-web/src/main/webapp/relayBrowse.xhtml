@@ -35,7 +35,7 @@
 		
 			<p:layoutUnit
 				position="west"
-				resizable="true"
+				resizable="false" 
 				size="45%">
 				<p:toolbar>
 					<f:facet name="left">
@@ -68,6 +68,8 @@
 					id="relayTable"
 					selection="#{relayBrowsePageBean.selectedNode}"
 					selectionMode="single"
+					scrollable="true"
+					scrollHeight="92%"
 					value="#{relayBrowsePageBean.root}"
 					var="relayRow">
 					<f:facet name="header">
@@ -170,6 +172,7 @@
 					value="#{relayBrowsePageBean.persons}"
 					selection="#{relayBrowsePageBean.selectedPersons}"
 					scrollable="true"
+					scrollHeight="92%"
 					sortBy="#{person.surename.toString()}"
 					rowKey="#{person.uuid}"
 					resizableColumns="true">
