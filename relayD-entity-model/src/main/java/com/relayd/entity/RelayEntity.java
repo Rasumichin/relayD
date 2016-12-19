@@ -77,7 +77,7 @@ public class RelayEntity {
 	}
 
 	public void setParticipantOne(UUID anUUID) {
-		// TODO (Christian, Version 1.3): machen wir ein "unmap" so? Oder sollte eine remove Methode her? Eigentlich sollte add/remove her....
+		// TODO (Christian, Version 1.4): machen wir ein "unmap" so? Oder sollte eine remove Methode her? Eigentlich sollte add/remove her....
 		if (anUUID != null) {
 			participantOne = anUUID.toString();
 		} else {

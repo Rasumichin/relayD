@@ -47,7 +47,7 @@ public class RelayGatewayJPA extends GatewayJPA implements RelayGateway {
 		return result;
 	}
 
-	// TODO (Christian, Version 1.3): Gleicher Code wie in der PersonGatewayJPA Klasse
+	// TODO (Christian, Version 1.4): Gleicher Code wie in der PersonGatewayJPA Klasse
 	void mergePersonEntity(RelayEntity relayEntity) {
 		startTransaction();
 		getEntityManager().merge(relayEntity);

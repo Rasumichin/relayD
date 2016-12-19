@@ -47,7 +47,7 @@ public class RelayEventGatewayJDBC implements RelayEventGateway {
 			}
 
 		} catch (NamingException e) {
-			// TODO (All, Version 1.3): Logging? Wie? Wo?
+			// TODO (All, Version 1.4): Logging? Wie? Wo?
 			//			System.out.println("Error :" + e);
 			RelayEvent relayEvent = RelayEvent.newInstance(Eventname.newInstance("NamingException:" + e), EventDay.today());
 			resultList.add(relayEvent);
@@ -66,7 +66,7 @@ public class RelayEventGatewayJDBC implements RelayEventGateway {
 		return connection;
 	}
 
-	// TODO (Christian, Version 1.3): In eigene Klasse verschieben
+	// TODO (Christian, Version 1.4): In eigene Klasse verschieben
 	RelayEvent mapValues(ResultSet rs) throws SQLException {
 
 		Eventname eventName = Eventname.newInstance(rs.getString(INDEX_EVENT_NAME));

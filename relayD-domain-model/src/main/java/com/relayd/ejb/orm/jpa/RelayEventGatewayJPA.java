@@ -13,7 +13,7 @@ import com.relayd.ejb.RelayEventGateway;
  */
 public class RelayEventGatewayJPA implements RelayEventGateway {
 
-	// TODO (Christian, Version 1.3): Hier muss auf JPA umgestellt werden!!!!
+	// TODO (Christian, Version 1.4): Hier muss auf JPA umgestellt werden!!!!
 	@Override
 	public List<RelayEvent> getAll() {
 		ArrayList<RelayEvent> eventsAsList = new ArrayList<RelayEvent>();
