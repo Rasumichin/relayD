@@ -46,8 +46,7 @@ public class PersonGatewayFile implements PersonGateway {
 		}
 	}
 
-	// TODO (Christian, Version 1.3): umbennen in clear (Wie fuer Map/nnGatewayMemory)
-	public void clean() {
+	public void clear() {
 		try {
 			put(new ArrayList<>());
 		} catch (IOException e) {
@@ -79,7 +78,7 @@ public class PersonGatewayFile implements PersonGateway {
 		if (somePersons.contains(updatePerson)) {
 			for (Person person : somePersons) {
 				if (updatePerson.equals(person)) {
-					// TODO (Christian, Version 1.3): Mapper einbauen
+					// TODO (Christian, Version 1.4): Mapper einbauen
 					person.setYearOfBirth(updatePerson.getYearOfBirth());
 					person.setSurename(updatePerson.getSurename());
 					person.setForename(updatePerson.getForename());
@@ -98,7 +97,6 @@ public class PersonGatewayFile implements PersonGateway {
 		} catch (IOException e) {
 			throw new RuntimeException("Error - IOException ", e);
 		}
-
 	}
 
 	@Override
@@ -112,26 +110,23 @@ public class PersonGatewayFile implements PersonGateway {
 		} catch (IOException e) {
 			throw new RuntimeException("Error", e);
 		}
-
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Person> getAll() {
 		FileInputStream fileInputStream;
-		List<Person> relays = new ArrayList<>();
+		List<Person> somePersons = new ArrayList<>();
 		try {
 			fileInputStream = new FileInputStream(getFileName());
-			// TODO (Christian, Version 1.3): umbennen
-			relays = (ArrayList<Person>) SerializationUtils.deserialize(fileInputStream);
+			somePersons = (ArrayList<Person>) SerializationUtils.deserialize(fileInputStream);
 			fileInputStream.close();
 		} catch (FileNotFoundException e) {
 			throw new RuntimeException("Error - FileNotFoundException", e);
 		} catch (IOException e) {
 			throw new RuntimeException("Error - IOException", e);
 		}
-		return relays;
-
+		return somePersons;
 	}
 
 	public String getFileName() {
