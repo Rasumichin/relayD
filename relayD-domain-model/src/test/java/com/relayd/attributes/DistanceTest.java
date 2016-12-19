@@ -30,12 +30,12 @@ public class DistanceTest {
 	@Test
 	public void testIsSerializable() {
 		BigDecimal dummyBigDecimal = BigDecimal.ONE;
-		Distance sut = Distance.newInstance(dummyBigDecimal);
+		Distance sut = Distance.kilometers(dummyBigDecimal);
 
 		@SuppressWarnings("cast")
-		boolean result = sut instanceof Serializable;
+		boolean condition = sut instanceof Serializable;
 
-		assertTrue("Class not Serializable!", result);
+		assertTrue("Class not Serializable!", condition);
 	}
 
 	@Test
@@ -44,17 +44,17 @@ public class DistanceTest {
 
 		assertNotNull("Not a valid instance!", sut);
 
-		boolean result = sut.getClass() == DistanceNullObject.class;
+		boolean condition = sut.getClass() == DistanceNullObject.class;
 
-		assertTrue("Instance is not correct!", result);
+		assertTrue("Instance is not correct!", condition);
 	}
 
 	@Test
 	public void testCreateInstance_For2Digits() {
 		BigDecimal distance = new BigDecimal("10.12");
-		Distance sut = Distance.newInstance(distance);
+		Distance sut = Distance.kilometers(distance);
 
-		assertNotNull(sut);
+		assertNotNull("Not a valid instance!", sut);
 		assertEquals("[value] not correct!", "10.12", sut.toString());
 	}
 
@@ -63,7 +63,7 @@ public class DistanceTest {
 		BigDecimal distance = new BigDecimal("10.127");
 		Distance sut = Distance.kilometers(distance);
 
-		assertNotNull(sut);
+		assertNotNull("Not a valid instance!", sut);
 		assertEquals("[value] not correct!", "10.13", sut.toString());
 	}
 
@@ -72,7 +72,7 @@ public class DistanceTest {
 		BigDecimal distance = new BigDecimal("12.34");
 		Distance sut = Distance.kilometers(distance);
 
-		assertNotNull(sut);
+		assertNotNull("Not a valid instance!", sut);
 		assertEquals("12.34 km", sut.toStringWithUnity());
 	}
 
@@ -81,26 +81,15 @@ public class DistanceTest {
 		BigDecimal distance = new BigDecimal("12.34");
 		Distance sut = Distance.meters(distance);
 
-		assertNotNull(sut);
+		assertNotNull("Not a valid instance!", sut);
 		assertEquals("12.34 m", sut.toStringWithUnity());
-	}
-
-	@Test
-	public void testCreateInstance_ForNullValue() {
-		Distance sut = Distance.newInstance(null);
-
-		assertNotNull(sut);
-
-		boolean actual = sut.getClass() == DistanceNullObject.class;
-
-		assertTrue("Instance not correct!", actual);
 	}
 
 	@Test
 	public void testKilometers_ForNullValue() {
 		Distance sut = Distance.kilometers(null);
 
-		assertNotNull(sut);
+		assertNotNull("Not a valid instance!", sut);
 
 		boolean actual = sut.getClass() == DistanceNullObject.class;
 
@@ -111,7 +100,7 @@ public class DistanceTest {
 	public void testMeters_ForNullValue() {
 		Distance sut = Distance.meters(null);
 
-		assertNotNull(sut);
+		assertNotNull("Not a valid instance!", sut);
 
 		boolean actual = sut.getClass() == DistanceNullObject.class;
 
@@ -121,24 +110,24 @@ public class DistanceTest {
 	@Test
 	public void testIsEmpty_ForValueFilled() {
 		BigDecimal distance = new BigDecimal("12.34");
-		Distance sut = Distance.newInstance(distance);
+		Distance sut = Distance.kilometers(distance);
 
-		boolean result = sut.isEmpty();
+		boolean condition = sut.isEmpty();
 
-		assertFalse("[result] for isEmpty is not correct!", result);
+		assertFalse("[condition] for isEmpty is not correct!", condition);
 	}
 
 	@Test
 	public void testIsEmpty_ForValueNull() {
-		Distance sut = Distance.newInstance(null);
+		Distance sut = Distance.kilometers(null);
 
-		boolean result = sut.isEmpty();
+		boolean condition = sut.isEmpty();
 
-		assertTrue("[result] for isEmpty is not correct!", result);
+		assertTrue("[condition] for isEmpty is not correct!", condition);
 	}
 
 	@Test
-	public void testAdd_WithSameUnity() {
+	public void testAdd_ForSameUnity() {
 		Distance sutFirst = Distance.kilometers(new BigDecimal("7.34"));
 		Distance sutSecond = Distance.kilometers(new BigDecimal("3.57"));
 
@@ -149,7 +138,7 @@ public class DistanceTest {
 	}
 
 	@Test
-	public void testAdd_WithDiffrentUnity() {
+	public void testAdd_ForDiffrentUnity() {
 		expectedException.expect(IllegalArgumentException.class);
 		expectedException.expectMessage("Only Distances with same unity are supported!");
 
@@ -173,17 +162,17 @@ public class DistanceTest {
 	@Test
 	public void testToString_ForUnity() {
 		BigDecimal expected = new BigDecimal("11.23");
-		Distance sut = Distance.newInstance(expected);
+		Distance sut = Distance.kilometers(expected);
 
-		String result = sut.toStringWithUnity();
+		String actual = sut.toStringWithUnity();
 
-		assertEquals("11.23 km", result);
+		assertEquals("11.23 km", actual);
 	}
 
 	@Test
 	public void testToString() {
 		BigDecimal expected = new BigDecimal("11.23");
-		Distance sut = Distance.newInstance(expected);
+		Distance sut = Distance.kilometers(expected);
 
 		String actual = sut.toString();
 
@@ -192,7 +181,7 @@ public class DistanceTest {
 
 	@Test
 	public void testToString_ForNullValue() {
-		Distance sut = Distance.newInstance(null);
+		Distance sut = Distance.kilometers(null);
 
 		String actual = sut.toString();
 
@@ -203,7 +192,7 @@ public class DistanceTest {
 	@Test
 	public void testHashCode() {
 		BigDecimal distance = BigDecimal.TEN;
-		Distance sut = Distance.newInstance(distance);
+		Distance sut = Distance.kilometers(distance);
 
 		int hashCode = sut.hashCode();
 
@@ -217,80 +206,80 @@ public class DistanceTest {
 	}
 
 	@Test
-	public void testEquals_WithMyself() {
+	public void testEquals_ForMyself() {
 		BigDecimal distance = BigDecimal.TEN;
-		Distance sut = Distance.newInstance(distance);
+		Distance sut = Distance.kilometers(distance);
 
-		boolean result = sut.equals(sut);
+		boolean condition = sut.equals(sut);
 
-		assertTrue(result);
+		assertTrue(condition);
 	}
 
 	@Test
-	public void testEquals_WithNull() {
+	public void testEquals_ForNull() {
 		BigDecimal distance = BigDecimal.TEN;
-		Distance sut = Distance.newInstance(distance);
+		Distance sut = Distance.kilometers(distance);
 
-		boolean result = sut.equals(null);
+		boolean condition = sut.equals(null);
 
-		assertFalse(result);
+		assertFalse(condition);
 	}
 
 	@Test
-	public void testEquals_WithNotCompatibleClass() {
+	public void testEquals_ForNotCompatibleClass() {
 		BigDecimal distance = BigDecimal.TEN;
-		Distance sut = Distance.newInstance(distance);
+		Distance sut = Distance.kilometers(distance);
 
-		boolean result = sut.equals(new String());
+		boolean condition = sut.equals(new String());
 
-		assertFalse(result);
+		assertFalse(condition);
 	}
 
 	@Test
-	public void testEquals_WithValueIsNull() {
+	public void testEquals_ForValueIsNull() {
 		BigDecimal distance = BigDecimal.TEN;
-		Distance sut = Distance.newInstance(distance);
+		Distance sut = Distance.kilometers(distance);
 		sut.value = null;
-		Distance secondSut = Distance.newInstance(distance);
+		Distance secondSut = Distance.kilometers(distance);
 
-		boolean result = sut.equals(secondSut);
+		boolean condition = sut.equals(secondSut);
 
-		assertFalse(result);
+		assertFalse(condition);
 	}
 
 	@Test
-	public void testEquals_WithBothValuesAreNull() {
+	public void testEquals_ForBothValuesAreNull() {
 		BigDecimal distance = BigDecimal.TEN;
-		Distance sut = Distance.newInstance(distance);
+		Distance sut = Distance.kilometers(distance);
 		sut.value = null;
-		Distance secondSut = Distance.newInstance(distance);
+		Distance secondSut = Distance.kilometers(distance);
 		secondSut.value = null;
 
-		boolean result = sut.equals(secondSut);
+		boolean condition = sut.equals(secondSut);
 
-		assertTrue(result);
+		assertTrue(condition);
 	}
 
 	@Test
-	public void testEquals_WithTwoDiffrentValues() {
+	public void testEquals_ForTwoDiffrentValues() {
 		BigDecimal distanceOne = BigDecimal.ONE;
-		Distance sut = Distance.newInstance(distanceOne);
+		Distance sut = Distance.kilometers(distanceOne);
 		BigDecimal distanceTwo = BigDecimal.TEN;
-		Distance secondSut = Distance.newInstance(distanceTwo);
+		Distance secondSut = Distance.kilometers(distanceTwo);
 
-		boolean result = sut.equals(secondSut);
+		boolean condition = sut.equals(secondSut);
 
-		assertFalse(result);
+		assertFalse(condition);
 	}
 
 	@Test
-	public void testEquals_WithSameValues() {
+	public void testEquals_ForSameValues() {
 		BigDecimal distance = BigDecimal.TEN;
-		Distance sut = Distance.newInstance(distance);
-		Distance secondSut = Distance.newInstance(distance);
+		Distance sut = Distance.kilometers(distance);
+		Distance secondSut = Distance.kilometers(distance);
 
-		boolean result = sut.equals(secondSut);
+		boolean condition = sut.equals(secondSut);
 
-		assertTrue(result);
+		assertTrue(condition);
 	}
 }

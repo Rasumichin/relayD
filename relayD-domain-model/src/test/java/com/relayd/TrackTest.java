@@ -25,18 +25,18 @@ public class TrackTest {
 
 	@Test
 	public void testIsSerializable() {
-		Distance dummyDistance = Distance.newInstance(BigDecimal.ONE);
+		Distance dummyDistance = Distance.kilometers(BigDecimal.ONE);
 		Track sut = Track.newInstance(dummyDistance);
 
 		@SuppressWarnings("cast")
-		boolean result = sut instanceof Serializable;
+		boolean condition = sut instanceof Serializable;
 
-		assertTrue("Class not Serializable!", result);
+		assertTrue("Class not Serializable!", condition);
 	}
 
 	@Test
-	public void testCreateInstanceForOneParameter() {
-		Distance expectedDistance = Distance.newInstance(BigDecimal.TEN);
+	public void testCreateInstance_ForOneParameter() {
+		Distance expectedDistance = Distance.kilometers(BigDecimal.TEN);
 
 		Track sut = Track.newInstance(expectedDistance);
 
@@ -45,7 +45,7 @@ public class TrackTest {
 
 	@Test
 	public void testCreateInstanceForTwoParameter() {
-		Distance expectedDistance = Distance.newInstance(BigDecimal.TEN);
+		Distance expectedDistance = Distance.kilometers(BigDecimal.TEN);
 		Comment expectedComment = Comment.newInstance("DummyComment");
 
 		Track sut = Track.newInstance(expectedDistance, expectedComment);
@@ -58,9 +58,9 @@ public class TrackTest {
 		Distance distance = Distance.kilometers(new BigDecimal("9.80"));
 		Track sut = Track.newInstance(distance);
 
-		String result = sut.toString();
+		String actual = sut.toString();
 
-		assertEquals("[result] not correct!", "9.8 km ", result);
+		assertEquals("[actual] not correct!", "9.8 km ", actual);
 	}
 
 	@Test
@@ -69,14 +69,14 @@ public class TrackTest {
 		Comment comment = Comment.newInstance("Linksseitiges Rheinufer");
 		Track sut = Track.newInstance(distance, comment);
 
-		String result = sut.toString();
+		String actual = sut.toString();
 
-		assertEquals("[result] not correct!", "10.4 km Linksseitiges Rheinufer", result);
+		assertEquals("[actual] not correct!", "10.4 km Linksseitiges Rheinufer", actual);
 	}
 
 	@Test
 	public void testParticipant() {
-		Distance dummyDistance = Distance.newInstance(BigDecimal.ONE);
+		Distance dummyDistance = Distance.kilometers(BigDecimal.ONE);
 		Track sut = Track.newInstance(dummyDistance);
 
 		Participant expected = Participant.newInstance();
@@ -85,6 +85,6 @@ public class TrackTest {
 
 		Participant actual = sut.getParticipantRelay();
 
-		assertEquals(expected, actual);
+		assertEquals("[actual] not correct!", expected, actual);
 	}
 }

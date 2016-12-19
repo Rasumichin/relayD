@@ -36,17 +36,6 @@ public class Distance implements Serializable {
 		return DistanceNullObject.instance();
 	}
 
-	// TODO (All, Version 1.3): Braucht man diesen Konstruktor eigentlich?
-	// Eine Distance sollte doch eigentlich immer genau eine Ausprägung an Unity besitzen
-	// Standard ist Kilometer gesetzt, aber weiß man das als Aufrufer auch?
-	// Die static kilometers/meters sind da schon sprechender
-	public static Distance newInstance(BigDecimal distance) {
-		if (distance == null) {
-			return DistanceNullObject.instance();
-		}
-		return new Distance(distance);
-	}
-
 	public static Distance kilometers(BigDecimal distance) {
 		if (distance == null) {
 			return DistanceNullObject.instance();
