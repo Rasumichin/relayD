@@ -60,7 +60,7 @@ public class RelayEventGatewayJDBCTest {
 		assertNotNull(relayEvent);
 		assertEquals("[uuid] not correct!", UUID.fromString(ID), relayEvent.getUuid());
 		assertEquals("[eventname] not correct!", Eventname.newInstance(EVENT_NAME), relayEvent.getName());
-		// TODO (Christian, Version 1.3): Mann sollte nicht Whisky trinken und dann coden....
+		// TODO (Christian, Version 1.4): Mann sollte nicht Whisky trinken und dann coden....
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(DATE);
 
