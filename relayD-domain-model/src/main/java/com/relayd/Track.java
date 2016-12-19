@@ -47,6 +47,10 @@ public class Track implements Serializable {
 		return distance;
 	}
 
+	public Comment getComment() {
+		return comment;
+	}
+
 	@Override
 	public String toString() {
 		return distance.toStringWithUnity() + " " + comment;

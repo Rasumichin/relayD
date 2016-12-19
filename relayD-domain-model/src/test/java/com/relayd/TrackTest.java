@@ -98,4 +98,16 @@ public class TrackTest {
 
 		assertEquals("[distance] not corret!", expected, actual);
 	}
+
+	@Test
+	public void testGetComment() {
+		Distance dummyDistance = Distance.newInstance(BigDecimal.ONE);
+		Comment expected = Comment.newInstance("Comment for Track");
+		Track sut = Track.newInstance(dummyDistance, expected);
+
+		Comment actual = sut.getComment();
+
+		assertEquals("[comment] not corret!", expected, actual);
+	}
+
 }
