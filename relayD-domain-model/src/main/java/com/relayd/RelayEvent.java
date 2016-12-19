@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
+import com.relayd.attributes.Comment;
 import com.relayd.attributes.Distance;
 import com.relayd.attributes.EventDay;
 import com.relayd.attributes.Eventname;
@@ -39,11 +40,11 @@ public class RelayEvent implements Serializable {
 		uuid = UUID.randomUUID();
 		name = anEventName;
 		eventDay = anEventDay;
-		// TODO (Christian, Version 1.4): Comment mit hinzunehmen und dann die Tests entsprechend auch anpassen!
-		tracks.add(Track.newInstance(Distance.kilometers(new BigDecimal("11.3"))));
-		tracks.add(Track.newInstance(Distance.kilometers(new BigDecimal("13.1"))));
-		tracks.add(Track.newInstance(Distance.kilometers(new BigDecimal("8.6"))));
-		tracks.add(Track.newInstance(Distance.kilometers(new BigDecimal("9.2"))));
+
+		tracks.add(Track.newInstance(Distance.kilometers(new BigDecimal("11.3")), Comment.newInstance("Nordpark")));
+		tracks.add(Track.newInstance(Distance.kilometers(new BigDecimal("13.1")), Comment.newInstance("Oberkassel")));
+		tracks.add(Track.newInstance(Distance.kilometers(new BigDecimal("8.6")), Comment.newInstance("Pempelfort")));
+		tracks.add(Track.newInstance(Distance.kilometers(new BigDecimal("9.2")), Comment.newInstance("Carlstadt")));
 
 	}
 

@@ -159,28 +159,28 @@ public class RelayEventTest {
 	public void testGetTrackForPosition_ForPositionOne() {
 		Track track = sut.getTrackForPosition(Position.FIRST);
 
-		assertEquals("[track] for given position is not correct!", "11.3 km ", track.toString());
+		assertEquals("[track] for given position is not correct!", "11.3 km Nordpark", track.toString());
 	}
 
 	@Test
 	public void testGetTrackForPosition_ForPositionTwo() {
 		Track track = sut.getTrackForPosition(Position.SECOND);
 
-		assertEquals("[track] for given position is not correct!", "13.1 km ", track.toString());
+		assertEquals("[track] for given position is not correct!", "13.1 km Oberkassel", track.toString());
 	}
 
 	@Test
 	public void testGetTrackForPosition_ForPositionThree() {
 		Track track = sut.getTrackForPosition(Position.THIRD);
 
-		assertEquals("[track] for given position is not correct!", "8.6 km ", track.toString());
+		assertEquals("[track] for given position is not correct!", "8.6 km Pempelfort", track.toString());
 	}
 
 	@Test
 	public void testGetTrackForPosition_ForPositionFour() {
 		Track track = sut.getTrackForPosition(Position.FOURTH);
 
-		assertEquals("[track] for given position is not correct!", "9.2 km ", track.toString());
+		assertEquals("[track] for given position is not correct!", "9.2 km Carlstadt", track.toString());
 	}
 
 	@Test
