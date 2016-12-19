@@ -13,7 +13,12 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import com.relayd.Person;
-import com.relayd.attributes.*;
+import com.relayd.attributes.Comment;
+import com.relayd.attributes.Email;
+import com.relayd.attributes.Forename;
+import com.relayd.attributes.Shirtsize;
+import com.relayd.attributes.Surename;
+import com.relayd.attributes.YearOfBirth;
 import com.relayd.ejb.PersonGateway;
 
 /**
@@ -24,7 +29,7 @@ import com.relayd.ejb.PersonGateway;
  */
 public class PersonGatewayJDBC implements PersonGateway {
 
-	// TODO (EL, 2016-11-29): Adjust indexes after removing 'relayName' and 'pos' from the Person table.
+	// TODO (Erik, Version 1.4): Adjust indexes after removing 'relayName' and 'pos' from the Person table.
 	static final int INDEX_UUID = 1;
 	static final int INDEX_FORENAME = 2;
 	static final int INDEX_SURENAME = 3;
@@ -50,7 +55,7 @@ public class PersonGatewayJDBC implements PersonGateway {
 			}
 
 		} catch (NamingException e) {
-			// TODO (All, Version 1.3): Logging? Wie? Wo?
+			// TODO (All, Version 1.4): Logging? Wie? Wo?
 			//			System.out.println("Error :" + e);
 			Person person = Person.newInstance();
 			person.setComment(Comment.newInstance("NamingException:" + e));
@@ -87,7 +92,7 @@ public class PersonGatewayJDBC implements PersonGateway {
 			}
 
 		} catch (NamingException e) {
-			// TODO (All, Version 1.3): Logging? Wie? Wo?
+			// TODO (All, Version 1.4): Logging? Wie? Wo?
 			person.setComment(Comment.newInstance("NamingException:" + e));
 		} catch (SQLException e) {
 			person.setComment(Comment.newInstance("SQLException:" + e));
@@ -97,15 +102,15 @@ public class PersonGatewayJDBC implements PersonGateway {
 
 	@Override
 	public void set(@SuppressWarnings("unused") Person aPerson) {
-		// TODO (Christian, Version 1.3): Implementieren
+		// TODO (Christian, Version 1.4): Implementieren
 	}
 
 	@Override
 	public void remove(@SuppressWarnings("unused") UUID uuid) {
-		// TODO (Christian, Version 1.3): Implementieren
+		// TODO (Christian, Version 1.4): Implementieren
 	}
 
-	// TODO (Christian, Version 1.3): In eigene Klasse verschieben
+	// TODO (Christian, Version 1.4): In eigene Klasse verschieben
 	Person mapValues(ResultSet rs) throws SQLException {
 		Person person = Person.newInstance();
 

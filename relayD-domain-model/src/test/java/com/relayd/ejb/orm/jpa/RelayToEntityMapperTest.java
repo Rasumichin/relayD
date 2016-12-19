@@ -66,7 +66,7 @@ public class RelayToEntityMapperTest {
 		sut.mapRelayToEntity(relay, relayEntity);
 
 		String actual = relayEntity.getId();
-		// TODO (Christian, Version 1.3): Wird doch gar nicht gemappt?! Dachte ich nun eigentlich....
+		// TODO (Christian, Version 1.4): Wird doch gar nicht gemappt?! Dachte ich nun eigentlich....
 		assertEquals("Mapping of [uuid] is not correct!", expected, actual);
 	}
 
@@ -84,7 +84,7 @@ public class RelayToEntityMapperTest {
 	@Test
 	@Ignore("Das ist immer gleich! Wie machen wir das am besten?")
 	public void testMapDomainToEntity_relayevent() {
-		// TODO (Christian, Version 1.3): Das ist immer gleich! Wie machen wir das am besten?
+		// TODO (Christian, Version 1.4): Das ist immer gleich! Wie machen wir das am besten?
 	}
 
 	@Test
