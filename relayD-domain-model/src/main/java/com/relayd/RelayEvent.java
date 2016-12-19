@@ -34,16 +34,12 @@ public class RelayEvent implements Serializable {
 	private Set<Relay> relays = new HashSet<Relay>(MAX_NUMBER_OF_RELAYS);
 	private List<Track> tracks = new ArrayList<Track>(MAX_NUMBER_OF_TRACKS);
 
-	private RelayEvent() {
-
-	}
-
 	private RelayEvent(Eventname anEventName, EventDay anEventDay) {
 		super();
 		uuid = UUID.randomUUID();
 		name = anEventName;
 		eventDay = anEventDay;
-
+		// TODO (Christian, Version 1.4): Comment mit hinzunehmen und dann die Tests entsprechend auch anpassen!
 		tracks.add(Track.newInstance(Distance.kilometers(new BigDecimal("11.3"))));
 		tracks.add(Track.newInstance(Distance.kilometers(new BigDecimal("13.1"))));
 		tracks.add(Track.newInstance(Distance.kilometers(new BigDecimal("8.6"))));
@@ -99,27 +95,28 @@ public class RelayEvent implements Serializable {
 		Track track = tracks.get(index);
 		return track;
 	}
-	
+
 	public String getTrackDistanceOne() {
 		Track track = getTrackForPosition(Position.FIRST);
-		Distance distance = track.getDistance();
-		return distance.toStringWithUnity();
+		return getDistanceAsString(track);
 	}
-	
+
 	public String getTrackDistanceTwo() {
 		Track track = getTrackForPosition(Position.SECOND);
-		Distance distance = track.getDistance();
-		return distance.toStringWithUnity();
+		return getDistanceAsString(track);
 	}
-	
+
 	public String getTrackDistanceThree() {
 		Track track = getTrackForPosition(Position.THIRD);
-		Distance distance = track.getDistance();
-		return distance.toStringWithUnity();
+		return getDistanceAsString(track);
 	}
-	
+
 	public String getTrackDistanceFour() {
 		Track track = getTrackForPosition(Position.FOURTH);
+		return getDistanceAsString(track);
+	}
+
+	private String getDistanceAsString(Track track) {
 		Distance distance = track.getDistance();
 		return distance.toStringWithUnity();
 	}

@@ -184,6 +184,34 @@ public class RelayEventTest {
 	}
 
 	@Test
+	public void testGetTrackDistanceOne() {
+		String trackDistanceOne = sut.getTrackDistanceOne();
+
+		assertEquals("trackDistance not corret!", "11.3 km", trackDistanceOne);
+	}
+
+	@Test
+	public void testGetTrackDistanceTwo() {
+		String trackDistanceTwo = sut.getTrackDistanceTwo();
+
+		assertEquals("trackDistance not corret!", "13.1 km", trackDistanceTwo);
+	}
+
+	@Test
+	public void testGetTrackDistanceThree() {
+		String trackDistanceThree = sut.getTrackDistanceThree();
+
+		assertEquals("trackDistance not corret!", "8.6 km", trackDistanceThree);
+	}
+
+	@Test
+	public void testGetTrackDistanceFour() {
+		String trackDistanceFour = sut.getTrackDistanceFour();
+
+		assertEquals("trackDistance not corret!", "9.2 km", trackDistanceFour);
+	}
+
+	@Test
 	public void testGetHashCode() {
 		UUID uuid = UUID.fromString("53a27b33-a5cb-4997-8eaf-dcf8bd1cb2d2");
 		sut.setUuid(uuid);
