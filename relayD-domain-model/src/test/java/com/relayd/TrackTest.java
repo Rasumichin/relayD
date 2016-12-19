@@ -87,4 +87,15 @@ public class TrackTest {
 
 		assertEquals(expected, actual);
 	}
+
+	@Test
+	public void testGetDistance() {
+		Distance expected = Distance.newInstance(BigDecimal.ONE);
+
+		Track sut = Track.newInstance(expected);
+
+		Distance actual = sut.getDistance();
+
+		assertEquals("[distance] not corret!", expected, actual);
+	}
 }

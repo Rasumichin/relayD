@@ -34,6 +34,7 @@ public class Track implements Serializable {
 		return new Track(aDistance, aComment);
 	}
 
+	// TODO (Christian, Version 1.4): get heißt "ParticipantRelay", set heißt "Participant"
 	public Participant getParticipantRelay() {
 		return participant;
 	}
@@ -42,16 +43,12 @@ public class Track implements Serializable {
 		participant = aParticipant;
 	}
 
-	@Override
-	public String toString() {
-		return distance.toStringWithUnity() + " " + comment;
-	}
-
 	public Distance getDistance() {
 		return distance;
 	}
 
-	public void setDistance(Distance distance) {
-		this.distance = distance;
+	@Override
+	public String toString() {
+		return distance.toStringWithUnity() + " " + comment;
 	}
 }
