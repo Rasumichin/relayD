@@ -25,6 +25,8 @@ public class PersonGatewayFile implements PersonGateway {
 
 	private String fileName = "person.relayD";
 
+	private PersonToPersonMapper personToPersonMapper = PersonToPersonMapper.newInstance();
+
 	public PersonGatewayFile() {
 		initFile();
 	}
@@ -78,13 +80,7 @@ public class PersonGatewayFile implements PersonGateway {
 		if (somePersons.contains(updatePerson)) {
 			for (Person person : somePersons) {
 				if (updatePerson.equals(person)) {
-					// TODO (Christian, Version 1.4): Mapper einbauen
-					person.setYearOfBirth(updatePerson.getYearOfBirth());
-					person.setSurename(updatePerson.getSurename());
-					person.setForename(updatePerson.getForename());
-					person.setShirtsize(updatePerson.getShirtsize());
-					person.setEmail(updatePerson.getEmail());
-					person.setComment(updatePerson.getComment());
+					getPersonToPersonMapper().mapPersonToPerson(updatePerson, person);
 					break;
 				}
 			}
@@ -135,5 +131,9 @@ public class PersonGatewayFile implements PersonGateway {
 
 	public void setFileName(String aFileName) {
 		fileName = aFileName;
+	}
+
+	private PersonToPersonMapper getPersonToPersonMapper() {
+		return personToPersonMapper;
 	}
 }
