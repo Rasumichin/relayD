@@ -35,7 +35,7 @@ public abstract class TreeNodeRow implements Serializable {
 		return false;
 	}
 
-	// TODO (Christian, Version 1.3): Im Zuge der GUI Darstellung auf String umgestellt. Sollte eher ein Domain/GUI Objekt werden/sein?
+	// TODO (Christian, Version 1.4): Im Zuge der GUI Darstellung auf String umgestellt. Sollte eher ein Domain/GUI Objekt werden/sein?
 	public String getRelayname() {
 		return Relayname.newInstance().toString();
 	}
@@ -45,7 +45,7 @@ public abstract class TreeNodeRow implements Serializable {
 	}
 
 	public void setParticipant(Participant participant) {
-		// TODO (Christian, Version 1.3): Idee ist diese abstract zu machen, so daß beim klicken auf Participant Zeile genau dort eingefügt wird,
+		// TODO (Christian, Version 1.4): Idee ist diese abstract zu machen, so daß beim klicken auf Participant Zeile genau dort eingefügt wird,
 		// bei klicken auf RelayZeile die nächste freie stelle befüllt wird. Somit haben beide mit dieser Methode zu tun.
 	}
 
@@ -54,9 +54,9 @@ public abstract class TreeNodeRow implements Serializable {
 	}
 
 	public void setPosition(Position position) {
-		// TODO (Christian, Version 1.3): Siehe methode setParticipant.
+		// TODO (Christian, Version 1.4): Siehe methode setParticipant.
 	}
-	
+
 	public String getStatus() {
 		return "";
 	}

@@ -21,7 +21,7 @@ import com.relayd.RelayEvent;
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TreeNodeRowTest {
-	// TODO (Christian, Version 1.3): Wie teste ich diese Klasse die ja eigentlich abstract ist!
+	// TODO (Christian, Version 1.4): Wie teste ich diese Klasse die ja eigentlich abstract ist!
 	// Test ist nur drin damit JUnit nicht motzt!
 
 	@Test

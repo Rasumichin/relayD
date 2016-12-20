@@ -23,7 +23,7 @@ public class EmailValueObjectConverter implements Converter {
 			return null;
 		}
 		if (!Email.isValidAddress(value)) {
-			// TODO (Christian, Version 1.3): Was genau schiefgegangen ist würde auch noch in der  EMail Klasse stehen.
+			// TODO (Christian, Version 1.4): Was genau schiefgegangen ist würde auch noch in der  EMail Klasse stehen.
 			// isValid() könnte auch direkt den Fehler zurückliefen als Code z.B.
 			// - 150 - @ fehlt
 			// - 151 - zu lang
