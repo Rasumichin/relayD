@@ -16,4 +16,12 @@ public class ValidationResultImpl implements ValidationResult {
 	public String getMessage() {
 		return message;
 	}
+
+	@Override
+	public boolean isEmpty() {
+		if (message != null && !message.isEmpty()) {
+			return false;
+		}
+		return true;
+	}
 }

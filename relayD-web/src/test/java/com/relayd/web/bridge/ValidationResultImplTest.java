@@ -7,6 +7,9 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 /**
+ * Dienen Sie dem Benutzer, nicht weil Sie es müssen, sondern weil Sie es wollen.
+ *  - Philip Toshio Sudo
+ *
  * @author schmollc (Christian@relayd.de)
  * @since 03.07.2016
  *
@@ -24,4 +27,38 @@ public class ValidationResultImplTest {
 
 		assertEquals("[message] not correct!", expected, result);
 	}
+
+	@Test
+	public void testIsEmpty_ForMessageIsNull() {
+		String message = null;
+
+		ValidationResultImpl sut = new ValidationResultImpl(message);
+
+		boolean condition = sut.isEmpty();
+
+		assertTrue("[isEmpty] not correct!", condition);
+	}
+
+	@Test
+	public void testIsEmpty_ForMessageIsEmpty() {
+		String message = "";
+
+		ValidationResultImpl sut = new ValidationResultImpl(message);
+
+		boolean condition = sut.isEmpty();
+
+		assertTrue("[isEmpty] not correct!", condition);
+	}
+
+	@Test
+	public void testIsEmpty_ForMessageIsFilled() {
+		String message = "Value is not corret!";
+
+		ValidationResultImpl sut = new ValidationResultImpl(message);
+
+		boolean condition = sut.isEmpty();
+
+		assertFalse("[isEmpty] not correct!", condition);
+	}
+
 }
