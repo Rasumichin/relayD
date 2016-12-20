@@ -73,7 +73,7 @@ public class TreeNodeRowParticipantTest {
 		TreeNodeRow sut = TreeNodeRow.newInstance(dummyParticipant, dummyPosition);
 
 		String actual = sut.getRelayname();
-		// TODO (Christian, Version 1.3): mit Erik drüber sprechen. Ohne toString interessantes Phänomen (wenn es ein Relayname Domain Objekt ist)
+		// TODO (Christian, Version 1.4): mit Erik drüber sprechen. Ohne toString interessantes Phänomen (wenn es ein Relayname Domain Objekt ist)
 		assertEquals("relayName not correct!", "", actual.toString());
 	}
 }

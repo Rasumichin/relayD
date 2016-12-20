@@ -159,7 +159,7 @@ public class PersonBrowsePageBean implements Serializable {
 		refreshPersons();
 	}
 
-	// TODO (Christian, Version 1.3): Der Name ist schlecht! Mit Lotz absprechen!
+	// TODO (Christian, Version 1.4): Der Name ist schlecht! Mit Lotz absprechen!
 	private boolean isRowSelected() {
 		return getSelectedPersons() != null && !getSelectedPersons().isEmpty();
 	}
