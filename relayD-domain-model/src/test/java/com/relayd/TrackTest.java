@@ -90,7 +90,7 @@ public class TrackTest {
 
 	@Test
 	public void testGetDistance() {
-		Distance expected = Distance.newInstance(BigDecimal.ONE);
+		Distance expected = Distance.kilometers(BigDecimal.ONE);
 
 		Track sut = Track.newInstance(expected);
 
@@ -114,7 +114,7 @@ public class TrackTest {
 
 	@Test
 	public void testGetComment() {
-		Distance dummyDistance = Distance.newInstance(BigDecimal.ONE);
+		Distance dummyDistance = Distance.kilometers(BigDecimal.ONE);
 		Comment expected = Comment.newInstance("Comment for Track");
 		Track sut = Track.newInstance(dummyDistance, expected);
 
