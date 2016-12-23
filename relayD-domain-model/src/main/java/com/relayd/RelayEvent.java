@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
+import com.relayd.attributes.Comment;
 import com.relayd.attributes.Distance;
 import com.relayd.attributes.EventDay;
 import com.relayd.attributes.Eventname;
@@ -31,12 +32,8 @@ public class RelayEvent implements Serializable {
 	private UUID uuid;
 	private Eventname name;
 	private EventDay eventDay;
-	private Set<Relay> relays = new HashSet<Relay>(MAX_NUMBER_OF_RELAYS);
-	private List<Track> tracks = new ArrayList<Track>(MAX_NUMBER_OF_TRACKS);
-
-	private RelayEvent() {
-
-	}
+	private Set<Relay> relays = new HashSet<>(MAX_NUMBER_OF_RELAYS);
+	private List<Track> tracks = new ArrayList<>(MAX_NUMBER_OF_TRACKS);
 
 	private RelayEvent(Eventname anEventName, EventDay anEventDay) {
 		super();
@@ -44,10 +41,10 @@ public class RelayEvent implements Serializable {
 		name = anEventName;
 		eventDay = anEventDay;
 
-		tracks.add(Track.newInstance(Distance.kilometers(new BigDecimal("11.3"))));
-		tracks.add(Track.newInstance(Distance.kilometers(new BigDecimal("13.1"))));
-		tracks.add(Track.newInstance(Distance.kilometers(new BigDecimal("8.6"))));
-		tracks.add(Track.newInstance(Distance.kilometers(new BigDecimal("9.2"))));
+		tracks.add(Track.newInstance(Distance.kilometers(new BigDecimal("11.3")), Comment.newInstance("Nordpark - Wechselzone: ")));
+		tracks.add(Track.newInstance(Distance.kilometers(new BigDecimal("13.1")), Comment.newInstance("Oberkassel - Wechselzone: ")));
+		tracks.add(Track.newInstance(Distance.kilometers(new BigDecimal("8.6")), Comment.newInstance("Pempelfort - Wechselzone: ")));
+		tracks.add(Track.newInstance(Distance.kilometers(new BigDecimal("9.2")), Comment.newInstance("Carlstadt - Wechselzone: ")));
 
 	}
 
@@ -94,34 +91,14 @@ public class RelayEvent implements Serializable {
 		return relays.size();
 	}
 
+	public List<Track> getTracks() {
+		return Collections.unmodifiableList(tracks);
+	}
+
 	public Track getTrackForPosition(Position position) {
 		int index = position.getValue() - 1;
-		Track track = tracks.get(index);
+		Track track = getTracks().get(index);
 		return track;
-	}
-	
-	public String getTrackDistanceOne() {
-		Track track = getTrackForPosition(Position.FIRST);
-		Distance distance = track.getDistance();
-		return distance.toStringWithUnity();
-	}
-	
-	public String getTrackDistanceTwo() {
-		Track track = getTrackForPosition(Position.SECOND);
-		Distance distance = track.getDistance();
-		return distance.toStringWithUnity();
-	}
-	
-	public String getTrackDistanceThree() {
-		Track track = getTrackForPosition(Position.THIRD);
-		Distance distance = track.getDistance();
-		return distance.toStringWithUnity();
-	}
-	
-	public String getTrackDistanceFour() {
-		Track track = getTrackForPosition(Position.FOURTH);
-		Distance distance = track.getDistance();
-		return distance.toStringWithUnity();
 	}
 
 	public void addRelay(Relay relay) {

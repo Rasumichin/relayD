@@ -87,4 +87,40 @@ public class TrackTest {
 
 		assertEquals("[actual] not correct!", expected, actual);
 	}
+
+	@Test
+	public void testGetDistance() {
+		Distance expected = Distance.newInstance(BigDecimal.ONE);
+
+		Track sut = Track.newInstance(expected);
+
+		Distance actual = sut.getDistance();
+
+		assertEquals("[distance] not corret!", expected, actual);
+	}
+
+	@Test
+	public void testGetDistanceWithUnity() {
+		Distance distance = Distance.kilometers(BigDecimal.ONE);
+
+		Track sut = Track.newInstance(distance);
+
+		String actual = sut.getDistanceWithUnity();
+
+		String expected = "1 km";
+
+		assertEquals("[distanceWithUnity] not corret!", expected, actual);
+	}
+
+	@Test
+	public void testGetComment() {
+		Distance dummyDistance = Distance.newInstance(BigDecimal.ONE);
+		Comment expected = Comment.newInstance("Comment for Track");
+		Track sut = Track.newInstance(dummyDistance, expected);
+
+		Comment actual = sut.getComment();
+
+		assertEquals("[comment] not corret!", expected, actual);
+	}
+
 }

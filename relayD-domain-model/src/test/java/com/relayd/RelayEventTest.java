@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -12,6 +13,7 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import com.relayd.attributes.Distance;
 import com.relayd.attributes.EventDay;
 import com.relayd.attributes.Eventname;
 import com.relayd.attributes.Position;
@@ -159,28 +161,45 @@ public class RelayEventTest {
 	public void testGetTrackForPosition_ForPositionOne() {
 		Track track = sut.getTrackForPosition(Position.FIRST);
 
-		assertEquals("[track] for given position is not correct!", "11.3 km ", track.toString());
+		assertEquals("[track] for given position is not correct!", "11.3 km Nordpark - Wechselzone: ", track.toString());
 	}
 
 	@Test
 	public void testGetTrackForPosition_ForPositionTwo() {
 		Track track = sut.getTrackForPosition(Position.SECOND);
 
-		assertEquals("[track] for given position is not correct!", "13.1 km ", track.toString());
+		assertEquals("[track] for given position is not correct!", "13.1 km Oberkassel - Wechselzone: ", track.toString());
 	}
 
 	@Test
 	public void testGetTrackForPosition_ForPositionThree() {
 		Track track = sut.getTrackForPosition(Position.THIRD);
 
-		assertEquals("[track] for given position is not correct!", "8.6 km ", track.toString());
+		assertEquals("[track] for given position is not correct!", "8.6 km Pempelfort - Wechselzone: ", track.toString());
 	}
 
 	@Test
 	public void testGetTrackForPosition_ForPositionFour() {
 		Track track = sut.getTrackForPosition(Position.FOURTH);
 
-		assertEquals("[track] for given position is not correct!", "9.2 km ", track.toString());
+		assertEquals("[track] for given position is not correct!", "9.2 km Carlstadt - Wechselzone: ", track.toString());
+	}
+
+	@Test
+	public void testGetTracks() {
+		List<Track> actual = sut.getTracks();
+
+		assertNotNull("[getTracks] list no valid instance!", actual);
+
+		int expected = 4;
+		assertEquals("size of list not correct!", expected, actual.size());
+	}
+
+	@Test(expected = UnsupportedOperationException.class)
+	public void testGetTracks_ForImmutable() {
+		List<Track> actual = sut.getTracks();
+
+		actual.add(Track.newInstance(Distance.newInstance()));
 	}
 
 	@Test
