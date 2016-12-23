@@ -100,6 +100,19 @@ public class TrackTest {
 	}
 
 	@Test
+	public void testGetDistanceWithUnity() {
+		Distance distance = Distance.kilometers(BigDecimal.ONE);
+
+		Track sut = Track.newInstance(distance);
+
+		String actual = sut.getDistanceWithUnity();
+
+		String expected = "1 km";
+
+		assertEquals("[distanceWithUnity] not corret!", expected, actual);
+	}
+
+	@Test
 	public void testGetComment() {
 		Distance dummyDistance = Distance.newInstance(BigDecimal.ONE);
 		Comment expected = Comment.newInstance("Comment for Track");
