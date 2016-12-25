@@ -38,7 +38,7 @@ public class RelayBridgeImpl implements RelayBridge {
 			// Methodik übernommen aus dem Primefaces-Beispiel.
 			TreeNode relayTreeNode = new DefaultTreeNode(TreeNodeRow.newInstance(relay), root);
 
-			// TODO (Christian, Erik, Version 1.3): Aus dem Primefacesbeispiel. Sollte man nochmal verifizieren.
+			// TODO (Christian, Erik, Version 1.4): Aus dem Primefacesbeispiel. Sollte man nochmal verifizieren.
 			new DefaultTreeNode(TreeNodeRow.newInstance(relay.getParticipantFor(Position.FIRST), Position.FIRST), relayTreeNode);
 			new DefaultTreeNode(TreeNodeRow.newInstance(relay.getParticipantFor(Position.SECOND), Position.SECOND), relayTreeNode);
 			new DefaultTreeNode(TreeNodeRow.newInstance(relay.getParticipantFor(Position.THIRD), Position.THIRD), relayTreeNode);

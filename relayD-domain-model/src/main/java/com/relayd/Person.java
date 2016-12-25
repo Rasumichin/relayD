@@ -3,7 +3,12 @@ package com.relayd;
 import java.io.Serializable;
 import java.util.UUID;
 
-import com.relayd.attributes.*;
+import com.relayd.attributes.Comment;
+import com.relayd.attributes.Email;
+import com.relayd.attributes.Forename;
+import com.relayd.attributes.Shirtsize;
+import com.relayd.attributes.Surename;
+import com.relayd.attributes.YearOfBirth;
 
 /**
  * @author  schmollc (Christian@relayd.de)
@@ -24,7 +29,7 @@ public class Person implements Serializable {
 	Email lastCalculatedEmail;
 
 	private Person() {
-		// TODO (Erik, Version 1.3): Discuss. When do we do initialization here and when directly on field declaration level (see above)?
+		// TODO (Erik, Version 1.4): Discuss. When do we do initialization here and when directly on field declaration level (see above)?
 		uuid = UUID.randomUUID();
 		email = getDefaultEmail();
 		lastCalculatedEmail = email.clone();
@@ -150,7 +155,7 @@ public class Person implements Serializable {
 	}
 
 	public void nameValueChanged() {
-		// TODO (Erik, Version 1.3): Mit CS abstimmen, ob die Methode ihm so eher verständlich erscheint.
+		// TODO (Erik, Version 1.4): Mit CS abstimmen, ob die Methode ihm so eher verständlich erscheint.
 		if (currentEmailHasBeenCalculated()) {
 			recalculateEmail();
 		}
