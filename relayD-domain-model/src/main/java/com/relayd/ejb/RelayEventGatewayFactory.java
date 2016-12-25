@@ -1,6 +1,5 @@
 package com.relayd.ejb;
 
-import com.relayd.ejb.orm.jdbc.RelayEventGatewayJDBC;
 import com.relayd.ejb.orm.jpa.RelayEventGatewayJPA;
 import com.relayd.ejb.orm.memory.RelayEventGatewayMemory;
 
@@ -19,9 +18,6 @@ public class RelayEventGatewayFactory {
 
 			case JPA:
 				return new RelayEventGatewayJPA();
-
-			case JDBC:
-				return new RelayEventGatewayJDBC();
 
 			default:
 				throw new IllegalArgumentException("[" + gatewayType + "] is unsupported Gateway Type.");

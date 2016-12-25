@@ -42,9 +42,4 @@ public class RelayGatewayFactoryTest {
 
 		assertEquals("Instance not korrekt!", instance.getClass(), RelayGatewayJPA.class);
 	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void testGet_ForPersonGatewayJDBC() {
-		RelayGatewayFactory.get(GatewayType.JDBC);
-	}
 }

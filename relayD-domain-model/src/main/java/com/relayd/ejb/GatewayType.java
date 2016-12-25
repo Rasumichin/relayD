@@ -7,7 +7,6 @@ package com.relayd.ejb;
  */
 public enum GatewayType {
 	JPA,
-	JDBC,
 	MEMORY,
 	FILE;
 }
