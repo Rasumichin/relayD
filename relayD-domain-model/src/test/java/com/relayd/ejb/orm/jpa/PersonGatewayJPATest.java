@@ -110,7 +110,7 @@ public class PersonGatewayJPATest {
 		assertTrue("Restult list is not correct.", result.isEmpty());
 	}
 
-	// TODO (Erik, Version 1.3): Discuss with CS: Do we need further tests here for the other cases for 'getAll' (one element, many elements)?
+	// TODO (Erik, Version 1.4): Discuss with CS: Do we need further tests here for the other cases for 'getAll' (one element, many elements)?
 
 	@Test(expected = EntityNotFoundException.class)
 	public void testRemoveWhenPersonDoesNotExistForUuid() {
@@ -150,7 +150,7 @@ public class PersonGatewayJPATest {
 		verify(sut, times(1)).mergePersonEntity(expectedPersonEntity);
 	}
 
-	// TODO (Erik, Version 1.3): Been unable to stub the method call 'findById' to return 'null'. Any attempt is starting JPA ?!
+	// TODO (Erik, Version 1.4): Been unable to stub the method call 'findById' to return 'null'. Any attempt is starting JPA ?!
 	@Ignore
 	@Test
 	public void testSet_whenPersonIsNew() {
