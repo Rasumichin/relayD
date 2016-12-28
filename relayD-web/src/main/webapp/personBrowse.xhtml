@@ -27,22 +27,22 @@
 		<p:toolbar>
 			<f:facet name="left">
 				<p:commandButton
-					value="+"
-					update="personTable"
-					actionListener="#{personBrowsePageBean.add}">
+					actionListener="#{personBrowsePageBean.add}"
+					icon="ui-icon-plus"
+					update="personTable">
 					<p:ajax
 						event="dialogReturn"
 						listener="#{personBrowsePageBean.onEditClosed}"
 						update="form" />
 				</p:commandButton>
 				<p:commandButton
-					value="-"
+					icon="ui-icon-trash"
 					update="form"
 					actionListener="#{personBrowsePageBean.remove}" />
 				<p:commandButton
 					update="form"
 					actionListener="#{personBrowsePageBean.edit}"
-					icon="ui-icon-folder-open">
+					icon="ui-icon-pencil">
 					<p:ajax
 						event="dialogReturn"
 						listener="#{personBrowsePageBean.onEditClosed}"
