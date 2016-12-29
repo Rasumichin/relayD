@@ -7,7 +7,7 @@
         <artifactId>relayD-parent</artifactId>
         <version>1.3-SNAPSHOT</version>
     </parent>
-    
+
     <artifactId>relayD-api</artifactId>
     <packaging>war</packaging>
 
@@ -16,7 +16,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    
+
     <!-- Added according to http://docs.jboss.org/resteasy/docs/3.0.13.Final/userguide/html_single/index.html#Maven_and_RESTEasy -->
     <repositories>
         <repository>
@@ -56,7 +56,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-war-plugin</artifactId>
-                    <!-- TODO: actual version seems to be 2.6 - migration? -->
+                    <!-- TODO (Dirk, Version 1.4): actual version seems to be 2.6 - migration? -->
                     <version>2.3</version>
                 </plugin>
             </plugins>
