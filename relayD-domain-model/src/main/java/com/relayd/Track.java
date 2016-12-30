@@ -34,8 +34,7 @@ public class Track implements Serializable {
 		return new Track(aDistance, aComment);
 	}
 
-	// TODO (Christian, Version 1.4): get heißt "ParticipantRelay", set heißt "Participant"
-	public Participant getParticipantRelay() {
+	public Participant getParticipant() {
 		return participant;
 	}
 

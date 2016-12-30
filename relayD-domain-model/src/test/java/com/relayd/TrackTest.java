@@ -83,7 +83,7 @@ public class TrackTest {
 
 		sut.setParticipant(expected);
 
-		Participant actual = sut.getParticipantRelay();
+		Participant actual = sut.getParticipant();
 
 		assertEquals("[actual] not correct!", expected, actual);
 	}

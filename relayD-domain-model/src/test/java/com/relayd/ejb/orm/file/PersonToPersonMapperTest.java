@@ -47,7 +47,7 @@ public class PersonToPersonMapperTest {
 	}
 
 	@Test
-	public void testMapPersonToPerson_ForPersonSourceIsNull() {
+	public void testMapPersonToPerson_ForSourceIsNull() {
 		expectedException.expect(IllegalArgumentException.class);
 		expectedException.expectMessage("[source] must not be 'null'!");
 
@@ -55,7 +55,7 @@ public class PersonToPersonMapperTest {
 	}
 
 	@Test
-	public void testMapPersonToPerson_ForPersonTargetIsNull() {
+	public void testMapPersonToPerson_ForTargetIsNull() {
 		expectedException.expect(IllegalArgumentException.class);
 		expectedException.expectMessage("[target] must not be 'null'!");
 

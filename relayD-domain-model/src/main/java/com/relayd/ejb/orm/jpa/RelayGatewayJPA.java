@@ -29,7 +29,7 @@ public class RelayGatewayJPA extends GatewayJPA implements RelayGateway {
 
 		getRelayMapper().mapRelayToEntity(relay, relayEntity);
 
-		mergePersonEntity(relayEntity);
+		mergeEntity(relayEntity);
 	}
 
 	private RelayEntity getRelayEntitiy(Relay relay) {
@@ -45,14 +45,6 @@ public class RelayGatewayJPA extends GatewayJPA implements RelayGateway {
 		RelayEntity result = em.find(RelayEntity.class, uuid.toString());
 
 		return result;
-	}
-
-	// TODO (Christian, Version 1.4): Gleicher Code wie in der PersonGatewayJPA Klasse
-	void mergePersonEntity(RelayEntity relayEntity) {
-		startTransaction();
-		getEntityManager().merge(relayEntity);
-		commitTransaction();
-		endTransaction();
 	}
 
 	private RelayToEntityMapper getRelayMapper() {

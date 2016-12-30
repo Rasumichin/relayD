@@ -24,6 +24,8 @@ public class RelayGatewayFile implements RelayGateway {
 
 	private String fileName = "relay.relayD";
 
+	private RelayToRelayMapper relayToRelayMapper = RelayToRelayMapper.newInstance();
+
 	public RelayGatewayFile() {
 		initFile();
 	}
@@ -91,10 +93,11 @@ public class RelayGatewayFile implements RelayGateway {
 		List<Relay> someRelays = getAll();
 
 		if (someRelays.contains(updateRelay)) {
-			for (Relay relay : someRelays) {
-				if (updateRelay.equals(relay)) {
+			for (Relay eachRelay : someRelays) {
+				if (updateRelay.equals(eachRelay)) {
 					// TODO (Christian, Version 1.4): Mapper einbauen
-					relay.setRelayname(updateRelay.getRelayname());
+					eachRelay.setRelayname(updateRelay.getRelayname());
+					getRelayToRelayMapper().mapRelayToRelay(updateRelay, eachRelay);
 					break;
 				}
 			}
@@ -118,5 +121,9 @@ public class RelayGatewayFile implements RelayGateway {
 			}
 		}
 		return null;
+	}
+
+	private RelayToRelayMapper getRelayToRelayMapper() {
+		return relayToRelayMapper;
 	}
 }
