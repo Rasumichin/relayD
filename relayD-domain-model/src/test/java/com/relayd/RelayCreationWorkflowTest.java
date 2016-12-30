@@ -111,20 +111,20 @@ public class RelayCreationWorkflowTest {
 		RelayEvent boston = RelayEvent.newInstance(eventName, eventDay);
 		Track firstTrack = boston.getTrackForPosition(Position.FIRST);
 
-		assertNull("The person for the first track is not correct!", firstTrack.getParticipantRelay());
+		assertNull("The person for the first track is not correct!", firstTrack.getParticipant());
 
 		Relay slowMovers = Relay.newInstance(boston);
 		Participant mike = Participant.newInstance(createPersonFor(Forename.newInstance("Mike"), Surename.newInstance(), UUID.randomUUID()));
 		slowMovers.addParticipant(mike, Position.FIRST);
 
-		Participant actual = firstTrack.getParticipantRelay();
+		Participant actual = firstTrack.getParticipant();
 		assertEquals("Person at first position of Track is not Mike!", mike, actual);
 
 		Relay dillyDallies = Relay.newInstance(boston);
 		Participant sarah = Participant.newInstance(createPersonFor(Forename.newInstance("Sarah"), Surename.newInstance(), UUID.randomUUID()));
 		dillyDallies.addParticipant(sarah, Position.FIRST);
 
-		actual = firstTrack.getParticipantRelay();
+		actual = firstTrack.getParticipant();
 		assertEquals("Person at first position of Track is not Sarah!", sarah, actual);
 		// But what about Mike? He lost his track position to Sarah!
 	}
