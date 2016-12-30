@@ -5,7 +5,6 @@ import java.io.Serializable;
 import com.relayd.Participant;
 import com.relayd.Relay;
 import com.relayd.attributes.Position;
-import com.relayd.attributes.Relayname;
 
 /**
  * Klasse übernommen aus dem Primefaces-Beispiel.
@@ -37,7 +36,7 @@ public abstract class TreeNodeRow implements Serializable {
 
 	// TODO (Christian, Version 1.4): Im Zuge der GUI Darstellung auf String umgestellt. Sollte eher ein Domain/GUI Objekt werden/sein?
 	public String getRelayname() {
-		return Relayname.newInstance().toString();
+		return "";
 	}
 
 	public Participant getParticipant() {
