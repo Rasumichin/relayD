@@ -1,11 +1,14 @@
 package com.relayd.ejb.orm.jpa;
 
-import javax.persistence.*;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
 
 /**
  * Abstract super class for all JPA gateway types. Provides methods to handle the EntityManager and transactions
  * in the context of Java SE.
- * 
+ *
  * @author  Rasumichin (Erik@relayd.de)
  * @since   09.10.2016
  *
@@ -19,21 +22,21 @@ public abstract class GatewayJPA {
 		if (entityManager == null) {
 			entityManager = EM_FACTORY.createEntityManager();
 		}
-		
+
 		return entityManager;
 	}
 
 	protected void startTransaction() {
 		EntityManager em = getEntityManager();
 		EntityTransaction tx = em.getTransaction();
-		
+
 		tx.begin();
 	}
 
 	protected void commitTransaction() {
 		EntityManager em = getEntityManager();
 		EntityTransaction tx = em.getTransaction();
-		
+
 		tx.commit();
 	}
 
@@ -45,4 +48,12 @@ public abstract class GatewayJPA {
 	private void resetEntityManager() {
 		entityManager = null;
 	}
+
+	void mergeEntity(Object entity) {
+		startTransaction();
+		getEntityManager().merge(entity);
+		commitTransaction();
+		endTransaction();
+	}
+
 }

@@ -144,10 +144,10 @@ public class PersonGatewayJPATest {
 		sut.getPersonMapper().mapPersonToEntity(person, expectedPersonEntity);
 
 		doReturn(expectedPersonEntity).when(sut).findById(person.getUuid());
-		doNothing().when(sut).mergePersonEntity(expectedPersonEntity);
+		doNothing().when(sut).mergeEntity(expectedPersonEntity);
 
 		sut.set(person);
-		verify(sut, times(1)).mergePersonEntity(expectedPersonEntity);
+		verify(sut, times(1)).mergeEntity(expectedPersonEntity);
 	}
 
 	// TODO (Erik, Version 1.4): Been unable to stub the method call 'findById' to return 'null'. Any attempt is starting JPA ?!
@@ -158,10 +158,10 @@ public class PersonGatewayJPATest {
 		PersonEntity expectedPersonEntity = PersonEntity.newInstance();
 		sut.getPersonMapper().mapPersonToEntity(person, expectedPersonEntity);
 
-		doNothing().when(sut).mergePersonEntity(expectedPersonEntity);
+		doNothing().when(sut).mergeEntity(expectedPersonEntity);
 
 		sut.set(person);
-		verify(sut, times(1)).mergePersonEntity(expectedPersonEntity);
+		verify(sut, times(1)).mergeEntity(expectedPersonEntity);
 	}
 
 	private Person getPersonToSet() {

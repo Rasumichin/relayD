@@ -44,7 +44,6 @@ public class PersonGatewayJPA extends GatewayJPA implements PersonGateway {
 		return personMapper;
 	}
 
-
 	EntityToPersonMapper getPersonEntityMapper() {
 		return personEntityMapper;
 	}
@@ -89,14 +88,7 @@ public class PersonGatewayJPA extends GatewayJPA implements PersonGateway {
 		}
 		getPersonMapper().mapPersonToEntity(person, personEntity);
 
-		mergePersonEntity(personEntity);
-	}
-
-	void mergePersonEntity(PersonEntity personEntity) {
-		startTransaction();
-		getEntityManager().merge(personEntity);
-		commitTransaction();
-		endTransaction();
+		mergeEntity(personEntity);
 	}
 
 	@Override
