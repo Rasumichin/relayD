@@ -24,37 +24,42 @@
 			id="growl"
 			showDetail="true" />
 
-		<div class="divStartHeader"></div>
+		<p:layout fullPage="true">
 
-		<p:layout>
+			<p:layoutUnit
+				position="north"
+				resizable="false"
+				size="166">
+				<div class="divStartHeader"></div>
+			</p:layoutUnit>
+
 			<p:layoutUnit
 				position="west"
-				resizable="true"
+				resizable="false"
 				size="45%">
 				<p:toolbar>
 					<f:facet name="left">
 						<p:commandButton
 							actionListener="#{relayBrowsePageBean.addRelay}"
-							update="form"
+							update="relayTable"
 							icon="ui-icon-plus">
 							<p:ajax
 								event="dialogReturn"
 								listener="#{relayBrowsePageBean.onRelayEditClosed}"
-								update="form" />
+								update="relayTable" />
 						</p:commandButton>
 						<p:commandButton
 							actionListener="#{relayBrowsePageBean.editRelay}"
-							icon="ui-icon-pencil"
-							update="form">
+							icon="ui-icon-pencil">
 							<p:ajax
 								event="dialogReturn"
 								listener="#{relayBrowsePageBean.onRelayEditClosed}"
-								update="form" />
+								update="relayTable" />
 						</p:commandButton>
 						<p:commandButton
 							value="export"
 							icon="ui-icon-mail-closed"
-							update="form"
+							update="relayTable"
 							actionListener="#{relayBrowsePageBean.emailExportRelay}" />
 					</f:facet>
 				</p:toolbar>
@@ -62,6 +67,8 @@
 					id="relayTable"
 					selection="#{relayBrowsePageBean.selectedNode}"
 					selectionMode="single"
+					scrollable="true"
+					scrollHeight="92%"
 					value="#{relayBrowsePageBean.root}"
 					var="relayRow">
 					<f:facet name="header">
@@ -72,7 +79,9 @@
 					</p:column>
 					<p:column headerText="Participant">
 						<h:outputText value="#{relayRow.participant}" />
-						<div align="right"><h:outputText styleClass="#{relayRow.status}" /></div>
+						<div align="right">
+							<h:outputText styleClass="#{relayRow.status}" />
+						</div>
 					</p:column>
 				</p:treeTable>
 
@@ -81,22 +90,21 @@
 			<p:layoutUnit
 				position="center"
 				size="5%">
+
 				<p:commandButton
 					value="add"
 					style="width:95%"
-					update="form"
+					update="relayTable"
 					icon="ui-icon-circle-triangle-w"
 					actionListener="#{relayBrowsePageBean.addPersonToRelay}">
-
 				</p:commandButton>
 
 				<p:commandButton
 					value="remove"
 					style="width:95%"
-					update="form"
+					update="relayTable"
 					icon="ui-icon-circle-triangle-e"
 					actionListener="#{relayBrowsePageBean.removePersonFromRelay}">
-
 				</p:commandButton>
 
 			</p:layoutUnit>
@@ -104,65 +112,66 @@
 			<p:layoutUnit
 				position="east"
 				size="45%">
+
 				<p:toolbar>
 					<f:facet name="right">
 						<p:commandButton
-							update="personTable"
 							icon="ui-icon-plus"
 							actionListener="#{relayBrowsePageBean.addPerson}">
 							<p:ajax
 								event="dialogReturn"
 								listener="#{relayBrowsePageBean.onPersonEditClosed}"
-								update="form" />
+								update="personTable" />
 						</p:commandButton>
 						<p:commandButton
-							update="form"
 							icon="ui-icon-trash"
+							update="personTable"
 							actionListener="#{relayBrowsePageBean.removePerson}" />
 						<p:commandButton
-							update="form"
 							actionListener="#{relayBrowsePageBean.editPerson}"
 							icon="ui-icon-pencil">
 							<p:ajax
 								event="dialogReturn"
 								listener="#{relayBrowsePageBean.onPersonEditClosed}"
-								update="form" />
+								update="personTable" />
 						</p:commandButton>
 						<p:commandButton
 							value="export"
 							icon="ui-icon-mail-closed"
-							update="form"
+							update="personTable"
 							actionListener="#{relayBrowsePageBean.emailExportPerson}" />
 						<p:menuButton value="Filter">
 							<p:menuitem
 								value="All"
 								actionListener="#{relayBrowsePageBean.showAll}"
-								update="form"
+								update="personTable"
 								icon="ui-icon-disk" />
 							<p:separator />
 							<p:menuitem
 								value="Relays with space"
 								actionListener="#{relayBrowsePageBean.showRelaysWithSpace}"
-								update="form"
+								update="personTable"
 								icon="ui-icon-arrow-4-diag" />
 							<p:separator />
 							<p:menuitem
 								value="All without relay"
 								actionListener="#{relayBrowsePageBean.showAllWithoutRelay}"
-								update="form"
+								update="personTable"
 								icon="ui-icon-person" />
 						</p:menuButton>
 					</f:facet>
 				</p:toolbar>
+
 				<p:dataTable
+					id="personTable"
 					var="person"
 					widgetVar="personTable"
 					filteredValue="#{relayBrowsePageBean.filteredPersons}"
-					id="personTable"
 					selectionMode="multiple"
 					value="#{relayBrowsePageBean.persons}"
 					selection="#{relayBrowsePageBean.selectedPersons}"
 					scrollable="true"
+					scrollHeight="92%"
 					sortBy="#{person.surename.toString()}"
 					rowKey="#{person.uuid}"
 					resizableColumns="true">
@@ -213,13 +222,18 @@
 
 							<h:outputText value="Email" />
 							<h:outputText value="#{person.email}" />
-
 						</p:panelGrid>
-
 					</p:rowExpansion>
 
 				</p:dataTable>
 			</p:layoutUnit>
+
+			<p:layoutUnit
+				position="south"
+				resizable="false"
+				size="52">
+			</p:layoutUnit>
+
 		</p:layout>
 
 		<ui:include src="/dock.xhtml" />
