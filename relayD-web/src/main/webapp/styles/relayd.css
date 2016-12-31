@@ -8,3 +8,8 @@ div.divStartHeader {
     text-align: center;
     background-image: url('../images/people.jpg');
 }
+.ui-growl {
+    position:absolute;
+    top:50%;
+    left:42%;
+}

@@ -21,7 +21,7 @@
 	<h:form id="form">
 
 		<p:growl
-			id="growl"
+			id="messages"
 			showDetail="true" />
 
 		<p:layout fullPage="true">
@@ -40,27 +40,39 @@
 				<p:toolbar>
 					<f:facet name="left">
 						<p:commandButton
-							actionListener="#{relayBrowsePageBean.addRelay}"
 							update="relayTable"
-							icon="ui-icon-plus">
+							icon="ui-icon-plus"
+							actionListener="#{relayBrowsePageBean.addRelay}">
 							<p:ajax
 								event="dialogReturn"
-								listener="#{relayBrowsePageBean.onRelayEditClosed}"
-								update="relayTable" />
+								update="relayTable"
+								listener="#{relayBrowsePageBean.onRelayEditClosed}" />
 						</p:commandButton>
 						<p:commandButton
-							actionListener="#{relayBrowsePageBean.editRelay}"
-							icon="ui-icon-pencil">
+							icon="ui-icon-pencil"
+							actionListener="#{relayBrowsePageBean.editRelay}">
 							<p:ajax
 								event="dialogReturn"
-								listener="#{relayBrowsePageBean.onRelayEditClosed}"
-								update="relayTable" />
+								update="relayTable"
+								listener="#{relayBrowsePageBean.onRelayEditClosed}" />
 						</p:commandButton>
 						<p:commandButton
 							value="export"
 							icon="ui-icon-mail-closed"
-							update="relayTable"
+							update="messages"
 							actionListener="#{relayBrowsePageBean.emailExportRelay}" />
+					</f:facet>
+					<f:facet name="right">
+						<p:commandButton
+							actionListener="#{relayBrowsePageBean.openAllRelays}"
+							update="messages"
+							icon="ui-icon-zoomin">
+						</p:commandButton>
+						<p:commandButton
+							actionListener="#{relayBrowsePageBean.closeAllRelays}"
+							update="messages"
+							icon="ui-icon-zoomout">
+						</p:commandButton>
 					</f:facet>
 				</p:toolbar>
 				<p:treeTable
@@ -94,7 +106,7 @@
 				<p:commandButton
 					value="add"
 					style="width:95%"
-					update="relayTable"
+					update="relayTable messages"
 					icon="ui-icon-circle-triangle-w"
 					actionListener="#{relayBrowsePageBean.addPersonToRelay}">
 				</p:commandButton>
@@ -102,7 +114,7 @@
 				<p:commandButton
 					value="remove"
 					style="width:95%"
-					update="relayTable"
+					update="relayTable messages"
 					icon="ui-icon-circle-triangle-e"
 					actionListener="#{relayBrowsePageBean.removePersonFromRelay}">
 				</p:commandButton>
@@ -125,39 +137,40 @@
 						</p:commandButton>
 						<p:commandButton
 							icon="ui-icon-trash"
-							update="personTable"
+							update="personTable messages"
 							actionListener="#{relayBrowsePageBean.removePerson}" />
 						<p:commandButton
-							actionListener="#{relayBrowsePageBean.editPerson}"
-							icon="ui-icon-pencil">
+							icon="ui-icon-pencil"
+							update="messages"
+							actionListener="#{relayBrowsePageBean.editPerson}">
 							<p:ajax
 								event="dialogReturn"
-								listener="#{relayBrowsePageBean.onPersonEditClosed}"
-								update="personTable" />
+								update="personTable"
+								listener="#{relayBrowsePageBean.onPersonEditClosed}" />
 						</p:commandButton>
 						<p:commandButton
 							value="export"
 							icon="ui-icon-mail-closed"
-							update="personTable"
+							update="personTable messages"
 							actionListener="#{relayBrowsePageBean.emailExportPerson}" />
 						<p:menuButton value="Filter">
 							<p:menuitem
 								value="All"
-								actionListener="#{relayBrowsePageBean.showAll}"
 								update="personTable"
-								icon="ui-icon-disk" />
+								icon="ui-icon-disk"
+								actionListener="#{relayBrowsePageBean.showAll}" />
 							<p:separator />
 							<p:menuitem
 								value="Relays with space"
-								actionListener="#{relayBrowsePageBean.showRelaysWithSpace}"
 								update="personTable"
-								icon="ui-icon-arrow-4-diag" />
+								icon="ui-icon-arrow-4-diag"
+								actionListener="#{relayBrowsePageBean.showRelaysWithSpace}" />
 							<p:separator />
 							<p:menuitem
 								value="All without relay"
-								actionListener="#{relayBrowsePageBean.showAllWithoutRelay}"
 								update="personTable"
-								icon="ui-icon-person" />
+								icon="ui-icon-person"
+								actionListener="#{relayBrowsePageBean.showAllWithoutRelay}" />
 						</p:menuButton>
 					</f:facet>
 				</p:toolbar>

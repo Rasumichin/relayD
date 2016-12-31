@@ -161,7 +161,7 @@ public class RelayBrowsePageBean implements Serializable {
 
 	void showMessage(Severity severityInfo, String summary, String textMessage) {
 		FacesMessage message = new FacesMessage(severityInfo, summary, textMessage);
-		FacesContext.getCurrentInstance().addMessage(null, message);
+		FacesContext.getCurrentInstance().addMessage("messages", message);
 	}
 
 	public void cancelEditDialog() {
@@ -282,4 +282,12 @@ public class RelayBrowsePageBean implements Serializable {
 		showMessage(FacesMessage.SEVERITY_ERROR, NOT_POSSIBLE, PLEASE_SELECT_A_ROW_RELAY);
 	}
 
+	public void openAllRelays(@SuppressWarnings("unused") ActionEvent actionEvent) {
+		showMessage(FacesMessage.SEVERITY_INFO, NOT_POSSIBLE, "Not implemented yet!");
+	}
+
+	public void closeAllRelays(@SuppressWarnings("unused") ActionEvent actionEvent) {
+		showMessage(FacesMessage.SEVERITY_INFO, NOT_POSSIBLE, "Not implemented yet!");
+
+	}
 }
