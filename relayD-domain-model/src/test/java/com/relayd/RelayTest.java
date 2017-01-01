@@ -3,6 +3,7 @@ package com.relayd;
 import static org.junit.Assert.*;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.UUID;
 
 import org.junit.FixMethodOrder;
@@ -51,7 +52,7 @@ public class RelayTest {
 
 		RelayEvent actual = sut.getRelayEvent();
 
-		assertEquals("[relayEvent ] not correct!", expected, actual);
+		assertEquals("[relayEvent] not correct!", expected, actual);
 		assertNotNull("[UUID] not correct!", sut.getUuid());
 	}
 
@@ -156,6 +157,31 @@ public class RelayTest {
 		Integer actual = sut.participantCount();
 
 		assertEquals("count not correct for empty participants!", Integer.valueOf(2), actual);
+	}
+
+	@Test
+	public void testGetParticipants() {
+		Relay sut = Relay.newInstance();
+		Participant firstParticipant = Participant.newInstance(new PersonBuilder().build());
+		Participant secondParticipant = Participant.newInstance(new PersonBuilder().build());
+		sut.addParticipant(firstParticipant, Position.FIRST);
+		sut.addParticipant(secondParticipant, Position.SECOND);
+
+		List<Participant> actual = sut.getParticipants();
+
+		assertNotNull("instance not correct!", actual);
+		assertEquals("size of List not correct!", 4, actual.size());
+		assertEquals("Participant at position 0 not correct!", firstParticipant, actual.get(0));
+		assertEquals("Participant at position 1 not correct!", secondParticipant, actual.get(1));
+	}
+
+	@Test(expected = UnsupportedOperationException.class)
+	public void testGetParticipants_ForUnmodifiable() {
+		Relay sut = Relay.newInstance();
+
+		List<Participant> actual = sut.getParticipants();
+
+		actual.add(Participant.newInstance());
 	}
 
 	@Test

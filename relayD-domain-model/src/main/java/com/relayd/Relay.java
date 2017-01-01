@@ -2,6 +2,7 @@ package com.relayd;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -80,9 +81,23 @@ public class Relay implements Serializable {
 		return count;
 	}
 
-	@Override
-	public String toString() {
-		return getRelayname() + " [" + participantCount() + "/" + RelayEvent.MAX_NUMBER_OF_TRACKS + "]";
+	public List<Participant> getParticipants() {
+		return Collections.unmodifiableList(participants);
+	}
+
+	/**
+	 * @deprecated Nur zum testen der Drag&Drop Möglichkeit! Nicht nutzen!
+	 */
+	@Deprecated
+	public void addParticipant(Participant aParticipant) {
+		int i = 0;
+		for (Participant each : participants) {
+			if (each == null) {
+				break;
+			}
+			i++;
+		}
+		participants.set(i, aParticipant);
 	}
 
 	@Override
@@ -115,18 +130,8 @@ public class Relay implements Serializable {
 		return true;
 	}
 
-	/**
-	 * @deprecated Nur zum testen der Drag&Drop Möglichkeit! Nicht nutzen!
-	 */
-	@Deprecated
-	public void addParticipant(Participant aParticipant) {
-		int i = 0;
-		for (Participant each : participants) {
-			if (each == null) {
-				break;
-			}
-			i++;
-		}
-		participants.set(i, aParticipant);
+	@Override
+	public String toString() {
+		return getRelayname() + " [" + participantCount() + "/" + RelayEvent.MAX_NUMBER_OF_TRACKS + "]";
 	}
 }
