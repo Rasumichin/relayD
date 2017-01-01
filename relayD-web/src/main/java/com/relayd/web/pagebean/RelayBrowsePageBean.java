@@ -288,11 +288,24 @@ public class RelayBrowsePageBean implements Serializable {
 	}
 
 	public void openAllRelays(@SuppressWarnings("unused") ActionEvent actionEvent) {
-		showMessage(FacesMessage.SEVERITY_INFO, NOT_POSSIBLE, "Not implemented yet!");
+		boolean openAllNodes = true;
+		collapsingORexpanding(root, openAllNodes);
 	}
 
 	public void closeAllRelays(@SuppressWarnings("unused") ActionEvent actionEvent) {
-		showMessage(FacesMessage.SEVERITY_INFO, NOT_POSSIBLE, "Not implemented yet!");
+		boolean openAllNodes = false;
+		collapsingORexpanding(root, openAllNodes);
+	}
 
+	public void collapsingORexpanding(TreeNode treeNode, boolean option) {
+		if (treeNode.getChildren().isEmpty()) {
+			treeNode.setSelected(false);
+		} else {
+			for (TreeNode s : treeNode.getChildren()) {
+				collapsingORexpanding(s, option);
+			}
+			treeNode.setExpanded(option);
+			treeNode.setSelected(false);
+		}
 	}
 }
