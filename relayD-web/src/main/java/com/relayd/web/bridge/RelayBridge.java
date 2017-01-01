@@ -23,4 +23,6 @@ public interface RelayBridge {
 	GatewayType getGatewayType();
 
 	Relay get(UUID uuid);
+
+	String getEmailList(Relay relay);
 }

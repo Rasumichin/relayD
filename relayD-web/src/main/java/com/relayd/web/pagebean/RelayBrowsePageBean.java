@@ -188,7 +188,8 @@ public class RelayBrowsePageBean implements Serializable {
 
 	public void emailExportRelay(@SuppressWarnings("unused") ActionEvent actionEvent) {
 		if (isRelayRowSelected()) {
-			showMessage(FacesMessage.SEVERITY_ERROR, NOT_POSSIBLE, "Not implemented yet!");
+			String output = relayBridge.getEmailList(getSelectedRelay());
+			showMessage(FacesMessage.SEVERITY_INFO, "Email", output);
 		} else {
 			showMessageErrorNoRowRelaySelected();
 		}

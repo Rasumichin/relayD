@@ -315,4 +315,18 @@ public class RelayBrowsePageBeanTest {
 
 		verify(sut).showMessageErrorNoRowRelaySelected();
 	}
+
+	@Test
+	public void testEmailExport_ForSelectedRelay() {
+		Relay expectedRelay = Relay.newInstance();
+		TreeNode selectedTreeNode = new DefaultTreeNode(TreeNodeRow.newInstance(expectedRelay));
+		sut.setSelectedNode(selectedTreeNode);
+
+		ActionEvent dummyActionEvent = null;
+
+		sut.emailExportRelay(dummyActionEvent);
+
+		verify(relayBridge).getEmailList(expectedRelay);
+		verify(sut, never()).showMessageErrorNoRowRelaySelected();
+	}
 }

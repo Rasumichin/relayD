@@ -95,4 +95,10 @@ public class RelayBridgeImpl implements RelayBridge {
 	public Relay get(UUID uuid) {
 		return gateway.get(uuid);
 	}
+
+	@Override
+	public String getEmailList(Relay aRelay) {
+		// TODO (Christian, Version 1.4): Muss noch gecodet werden.
+		return "Not implemented yet!";
+	}
 }
