@@ -305,4 +305,14 @@ public class RelayBrowsePageBeanTest {
 		verify(sut, never()).showMessageErrorNoRowRelaySelected();
 	}
 
+	@Test
+	public void testEmailExport_ForNonSelectedRelay() {
+		sut.setSelectedNode(null);
+
+		ActionEvent dummyActionEvent = null;
+
+		sut.emailExportRelay(dummyActionEvent);
+
+		verify(sut).showMessageErrorNoRowRelaySelected();
+	}
 }
