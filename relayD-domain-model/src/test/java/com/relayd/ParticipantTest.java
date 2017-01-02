@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import com.relayd.Participant.ParticipantNullObject;
+import com.relayd.attributes.Email;
 import com.relayd.attributes.Forename;
 import com.relayd.attributes.Surename;
 
@@ -48,9 +49,6 @@ public class ParticipantTest {
 	@Test
 	public void testCreateInstance_ForParameterPerson() {
 		Person dummyPerson = Person.newInstance();
-		dummyPerson.setUuid(UUID.randomUUID());
-		dummyPerson.setForename(Forename.newInstance("Justus"));
-		dummyPerson.setSurename(Surename.newInstance("Jonas"));
 
 		Participant sut = Participant.newInstance(dummyPerson);
 
@@ -78,8 +76,6 @@ public class ParticipantTest {
 
 		Person person = Person.newInstance();
 		person.setUuid(expected);
-		person.setForename(Forename.newInstance("Dummy"));
-		person.setSurename(Surename.newInstance("Dummy"));
 
 		Participant sut = Participant.newInstance(person);
 
@@ -95,7 +91,6 @@ public class ParticipantTest {
 		Person person = Person.newInstance();
 		person.setUuid(UUID.randomUUID());
 		person.setForename(expected);
-		person.setSurename(Surename.newInstance("Dummy"));
 
 		Participant sut = Participant.newInstance(person);
 
@@ -110,7 +105,6 @@ public class ParticipantTest {
 
 		Person person = Person.newInstance();
 		person.setUuid(UUID.randomUUID());
-		person.setForename(Forename.newInstance("Dummy"));
 		person.setSurename(expected);
 
 		Participant sut = Participant.newInstance(person);
@@ -118,6 +112,21 @@ public class ParticipantTest {
 		Surename actual = sut.getSurename();
 
 		assertEquals("[surename] not correct!", expected, actual);
+	}
+
+	@Test
+	public void testGetEmail() {
+		Email expected = Email.newInstance("Justus.Jonas@canda.com");
+
+		Person person = Person.newInstance();
+		person.setUuid(UUID.randomUUID());
+		person.setEmail(expected);
+
+		Participant sut = Participant.newInstance(person);
+
+		Email actual = sut.getEmail();
+
+		assertEquals("[email] not correct!", expected, actual);
 	}
 
 	@Test
@@ -135,6 +144,7 @@ public class ParticipantTest {
 		dummyPerson.setUuid(UUID.randomUUID());
 		dummyPerson.setForename(Forename.newInstance("Justus"));
 		dummyPerson.setSurename(Surename.newInstance("Jonas"));
+		dummyPerson.setEmail(Email.newInstance("Justus.Jonas@canda.com"));
 
 		Participant sut = Participant.newInstance(dummyPerson);
 
@@ -153,11 +163,12 @@ public class ParticipantTest {
 	}
 
 	@Test
-	public void testToString_ForFilledForeAndSurename() {
+	public void testToString_ForFilledForeNameSurenameAndEmail() {
 		Person person = Person.newInstance();
 		person.setUuid(UUID.randomUUID());
 		person.setForename(Forename.newInstance("Justus"));
 		person.setSurename(Surename.newInstance("Jonas"));
+		person.setEmail(Email.newInstance("Justus.Jonas@canda.com"));
 
 		Participant sut = Participant.newInstance(person);
 
@@ -170,8 +181,6 @@ public class ParticipantTest {
 	public void testHashCode() {
 		Person person = Person.newInstance();
 		person.setUuid(UUID.fromString("5697d710-8967-4b2d-9ab2-8fc50ddc6138"));
-		person.setForename(Forename.newInstance("Dummy"));
-		person.setSurename(Surename.newInstance("Dummy"));
 
 		Participant sut = Participant.newInstance(person);
 		int hashCode = sut.hashCode();
@@ -216,8 +225,6 @@ public class ParticipantTest {
 	public void testEqualsWithValueIsNull() {
 		Person dummyPerson = Person.newInstance();
 		dummyPerson.setUuid(null);
-		dummyPerson.setForename(Forename.newInstance("Justus"));
-		dummyPerson.setSurename(Surename.newInstance("Jonas"));
 
 		Participant sut = Participant.newInstance(dummyPerson);
 
@@ -234,8 +241,6 @@ public class ParticipantTest {
 	public void testEqualsWithBothValuesAreNull() {
 		Person dummyPerson = Person.newInstance();
 		dummyPerson.setUuid(null);
-		dummyPerson.setForename(Forename.newInstance("Justus"));
-		dummyPerson.setSurename(Surename.newInstance("Jonas"));
 
 		Participant sut = Participant.newInstance(dummyPerson);
 		Participant secondSut = Participant.newInstance(dummyPerson);
@@ -250,8 +255,6 @@ public class ParticipantTest {
 		UUID uuidForSut = UUID.randomUUID();
 		Person dummyPerson = Person.newInstance();
 		dummyPerson.setUuid(uuidForSut);
-		dummyPerson.setForename(Forename.newInstance("Justus"));
-		dummyPerson.setSurename(Surename.newInstance("Jonas"));
 
 		Participant sut = Participant.newInstance(dummyPerson);
 
@@ -268,8 +271,6 @@ public class ParticipantTest {
 	public void testEqualsWithSameValues() {
 		Person dummyPerson = Person.newInstance();
 		dummyPerson.setUuid(UUID.randomUUID());
-		dummyPerson.setForename(Forename.newInstance("Justus"));
-		dummyPerson.setSurename(Surename.newInstance("Jonas"));
 
 		Participant sut = Participant.newInstance(dummyPerson);
 		Participant secondSut = Participant.newInstance(dummyPerson);
