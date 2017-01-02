@@ -81,8 +81,25 @@ public class Relay implements Serializable {
 		return count;
 	}
 
+	// TODO (Christian, Version 1.4): Wird durch die Lösung mit getEmailList nicht mehr gebraucht! Rückbauen
 	public List<Participant> getParticipants() {
 		return Collections.unmodifiableList(participants);
+	}
+
+	public String getEmailList() {
+		StringBuilder builder = new StringBuilder();
+
+		for (Participant each : participants) {
+			// TODO (Christian, Version 1.4): Umstellen auf hasMail wie in Person!
+			if (!each.getEmail().isEmpty()) {
+				builder.append(", " + each.getEmail());
+			}
+		}
+		String output = builder.toString();
+		output = output.replaceFirst(", ", "");
+
+		return output;
+
 	}
 
 	/**

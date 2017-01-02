@@ -24,5 +24,6 @@ public interface RelayBridge {
 
 	Relay get(UUID uuid);
 
+	// TODO (Christian, Version 1.4): Wird durch die Lösung mit getEmailList nicht mehr gebraucht! Rückbauen
 	String getEmailList(Relay relay);
 }

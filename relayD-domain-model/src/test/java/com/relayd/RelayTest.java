@@ -185,6 +185,52 @@ public class RelayTest {
 	}
 
 	@Test
+	public void testGetEmails_ForEmptyParticipantList() {
+		Relay sut = Relay.newInstance();
+
+		String actual = sut.getEmailList();
+
+		assertTrue("[getEmailList] not correct!", actual.isEmpty());
+	}
+
+	@Test
+	public void testGetEmails_ForOneParticipant() {
+		String expected = "Justus.Jonas@canda.com";
+		Person justusJonas = new PersonBuilder().withEmail(expected).build();
+		Participant one = Participant.newInstance(justusJonas);
+
+		Relay sut = Relay.newInstance();
+		sut.addParticipant(one, Position.FIRST);
+
+		String actual = sut.getEmailList();
+
+		assertEquals("[getEmailList] not correct!", expected, actual);
+	}
+
+	@Test
+	public void testGetEmails_ForFourParticipant() {
+		Person justusJonas = new PersonBuilder().withEmail("Justus.Jonas@canda.com").build();
+		Participant one = Participant.newInstance(justusJonas);
+		Person peterShaw = new PersonBuilder().withEmail("Peter.Shaw@canda.com").build();
+		Participant two = Participant.newInstance(peterShaw);
+		Person bobAndrews = new PersonBuilder().withEmail("Bob.Andrews@canda.com").build();
+		Participant three = Participant.newInstance(bobAndrews);
+		Person skinnyNorris = new PersonBuilder().withEmail("Skinny.Norris@canda.com").build();
+		Participant four = Participant.newInstance(skinnyNorris);
+
+		Relay sut = Relay.newInstance();
+		sut.addParticipant(one, Position.FIRST);
+		sut.addParticipant(two, Position.SECOND);
+		sut.addParticipant(three, Position.THIRD);
+		sut.addParticipant(four, Position.FOURTH);
+
+		String actual = sut.getEmailList();
+
+		String expected = "Justus.Jonas@canda.com, Peter.Shaw@canda.com, Bob.Andrews@canda.com, Skinny.Norris@canda.com";
+		assertEquals("[getEmailList] not correct!", expected, actual);
+	}
+
+	@Test
 	public void testToString_ForRelayWithoutParticipant() {
 		Relay sut = Relay.newInstance();
 

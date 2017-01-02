@@ -19,6 +19,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.primefaces.model.DefaultTreeNode;
@@ -318,15 +319,15 @@ public class RelayBrowsePageBeanTest {
 
 	@Test
 	public void testEmailExport_ForSelectedRelay() {
-		Relay expectedRelay = Relay.newInstance();
-		TreeNode selectedTreeNode = new DefaultTreeNode(TreeNodeRow.newInstance(expectedRelay));
+		Relay relayMock = Mockito.mock(Relay.class);
+		TreeNode selectedTreeNode = new DefaultTreeNode(TreeNodeRow.newInstance(relayMock));
 		sut.setSelectedNode(selectedTreeNode);
 
 		ActionEvent dummyActionEvent = null;
 
 		sut.emailExportRelay(dummyActionEvent);
 
-		verify(relayBridge).getEmailList(expectedRelay);
+		verify(relayMock).getEmailList();
 		verify(sut, never()).showMessageErrorNoRowRelaySelected();
 	}
 }
