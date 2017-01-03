@@ -96,15 +96,25 @@ public class ParticipantEntityTest {
 		assertEquals("[position] has not been set correctly!", expected, actual);
 	}
 
-	@Ignore
 	@Test
 	public void testSetPersonEntity() {
+		ParticipantEntity sut = ParticipantEntity.newInstance();
+		PersonEntity expected = PersonEntity.newInstance(UUID.randomUUID());
 		
+		sut.setPersonEntity(expected);
+		
+		PersonEntity actual = sut.getPersonEntity();
+		assertEquals("[personEntity] has not been set correctly!", expected, actual);
 	}
-	
-	@Ignore
+
 	@Test
 	public void testSetRelayId() {
+		ParticipantEntity sut = ParticipantEntity.newInstance();
+		String expected = UUID.randomUUID().toString();
 		
+		sut.setRelayId(expected);
+		
+		String actual = sut.getRelayId();
+		assertEquals("[relayId] has not been set correctly!", expected, actual);
 	}
 }

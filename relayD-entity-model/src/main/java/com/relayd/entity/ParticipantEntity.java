@@ -18,6 +18,11 @@ public class ParticipantEntity {
 	@Column(name="relayPosition")
 	private Integer position;
 
+	private PersonEntity personEntity;
+
+	@Column(name="relay2Id")
+	private String relayId;
+
 	public static ParticipantEntity newInstance(UUID uuid) {
 		if (uuid == null) {
 			throw new IllegalArgumentException("[uuid] must not be 'null'.");
@@ -46,6 +51,22 @@ public class ParticipantEntity {
 
 	public Integer getPosition() {
 		return position;
+	}
+	
+	public void setPersonEntity(PersonEntity aPersonEntity) {
+		personEntity = aPersonEntity;
+	}
+
+	public PersonEntity getPersonEntity() {
+		return personEntity;
+	}
+
+	public void setRelayId(String aRelayId) {
+		relayId = aRelayId;
+	}
+	
+	public String getRelayId() {
+		return relayId;
 	}
 	
 	@Override
