@@ -8,32 +8,34 @@ package com.relayd;
  */
 public enum VersionName {
 	//@formatter:off
-	UNKNOWN("UNKNOWN","Unknown Codename"),
-	AUGUSTINER("1.0", "Augustiner"),
-	BITBURGER("1.1", "Bitburger"),
-	COELLNER("1.2", "Cöllner Hofbräu Früh"),
-	DUCKSTEIN("1.3", "Duckstein");
+	UNKNOWN		("UNKNOWN", "Unknown Description"),
+	AUGUSTINER	("1.0", 	"Augustiner"),
+	BITBURGER	("1.1", 	"Bitburger"),
+	COELLNER	("1.2", 	"Cöllner Hofbräu Früh"),
+	DUCKSTEIN	("1.3", 	"Duckstein"),
+	ENGEL		("1.4", 	"Engel"),
+	F			("1.5", 	"F");
 	//@formatter:on
 
-	private String version;
-	private String codename;
+	private String value;
+	private String description;
 
 	private VersionName(String aVersion, String aCodename) {
-		version = aVersion;
-		codename = aCodename;
+		value = aVersion;
+		description = aCodename;
 	}
 
-	public String getVersion() {
-		return version;
+	public String getValue() {
+		return value;
 	}
 
-	public String getCodename() {
-		return codename;
+	public String getDescription() {
+		return description;
 	}
 
 	public static VersionName newInstance(String aVersion) {
 		for (VersionName versionName : values()) {
-			if (versionName.getVersion().equals(aVersion)) {
+			if (versionName.getValue().equals(aVersion)) {
 				return versionName;
 			}
 		}

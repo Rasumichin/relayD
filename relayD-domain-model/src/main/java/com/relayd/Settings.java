@@ -32,7 +32,7 @@ public class Settings implements Serializable {
 	public String getVersion() {
 		String version = getProperty("application.version");
 		VersionName versionName = VersionName.newInstance(version.substring(0, 3));
-		return versionName.getVersion() + " - Codename " + versionName.getCodename();
+		return versionName.getValue() + " - Codename " + versionName.getDescription();
 	}
 
 	public String getEmailDomain() {
