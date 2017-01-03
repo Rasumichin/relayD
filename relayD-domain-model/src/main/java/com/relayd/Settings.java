@@ -43,6 +43,10 @@ public class Settings implements Serializable {
 		return TO_DO;
 	}
 
+	public String getRelayAppendix() {
+		return " @ C&A";
+	}
+
 	public String getClosingDate() {
 		return "01.04.2017 (ToDo)";
 	}
@@ -75,5 +79,4 @@ public class Settings implements Serializable {
 		}
 		return applicationProperties;
 	}
-
 }

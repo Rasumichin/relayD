@@ -52,6 +52,13 @@ public class SettingsTest {
 	}
 
 	@Test
+	public void testGetRelayAppendix() {
+		String actual = sut.getRelayAppendix();
+
+		assertEquals("[getRelayAppendix] not correct!", " @ C&A", actual);
+	}
+
+	@Test
 	public void testGetClosingDate() {
 		String actual = sut.getClosingDate();
 
