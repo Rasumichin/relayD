@@ -53,6 +53,10 @@ public class SettingsPageBean implements Serializable {
 		return settings.getEmailDomain();
 	}
 
+	public String getRelayAppendix() {
+		return settings.getRelayAppendix();
+	}
+
 	public String getGatewayType() {
 		return settings.getGatewayType();
 	}

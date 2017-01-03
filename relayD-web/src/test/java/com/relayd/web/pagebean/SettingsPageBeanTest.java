@@ -87,4 +87,19 @@ public class SettingsPageBeanTest {
 		assertEquals("[version] not correct!", expected, actual);
 
 	}
+
+	@Test
+	public void getRelayAppendix() {
+		Settings settingsMock = Mockito.mock(Settings.class);
+		sut.settings = settingsMock;
+		String expected = " @ C&A";
+		Mockito.doReturn(expected).when(settingsMock).getRelayAppendix();
+
+		String actual = sut.getRelayAppendix();
+
+		Mockito.verify(settingsMock).getRelayAppendix();
+		assertEquals("[relayAppendix] not correct!", expected, actual);
+
+	}
+
 }
