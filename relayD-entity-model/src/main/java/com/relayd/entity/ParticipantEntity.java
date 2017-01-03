@@ -14,6 +14,9 @@ public class ParticipantEntity {
 	@Id
 	@Column
 	private String id;
+	
+	@Column(name="relayPosition")
+	private Integer position;
 
 	public static ParticipantEntity newInstance(UUID uuid) {
 		if (uuid == null) {
@@ -38,10 +41,11 @@ public class ParticipantEntity {
 	}
 
 	public void setPosition(Integer aPosition) {
+		position = aPosition;
 	}
 
 	public Integer getPosition() {
-		return null;
+		return position;
 	}
 	
 	@Override

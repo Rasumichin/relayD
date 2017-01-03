@@ -54,6 +54,11 @@ public class ParticipantEntityTest {
 		ParticipantEntity wayne = ParticipantEntity.newInstance(someId);
 		
 		assertEquals("Equality has not been tested correctly!", bruce, wayne);
+		assertEquals("Equality has not been tested correctly!", bruce, bruce);
+		
+		ParticipantEntity sut1 = new ParticipantEntity();
+		ParticipantEntity sut2 = new ParticipantEntity();
+		assertEquals("Equality has not been tested correctly!", sut1, sut2);
 	}
 
 	@Test
@@ -62,6 +67,11 @@ public class ParticipantEntityTest {
 		ParticipantEntity wayne = ParticipantEntity.newInstance();
 		
 		assertNotEquals("Equality has not been tested correctly!", bruce, wayne);
+		assertNotEquals("Equality has not been tested correctly!", bruce, null);
+		assertNotEquals("Equality has not been tested correctly!", bruce, Integer.valueOf(42));
+		
+		ParticipantEntity sut = new ParticipantEntity();
+		assertNotEquals("Equality has not been tested correctly!", sut, bruce);
 	}
 
 	@Test
@@ -75,7 +85,6 @@ public class ParticipantEntityTest {
 		assertEquals("String representation is not correct!", expected, actual);
 	}
 	
-	@Ignore
 	@Test
 	public void testSetPosition() {
 		ParticipantEntity sut = ParticipantEntity.newInstance();
