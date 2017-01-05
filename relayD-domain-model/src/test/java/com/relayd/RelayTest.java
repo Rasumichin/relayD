@@ -340,4 +340,47 @@ public class RelayTest {
 
 		assertTrue(actual);
 	}
+
+	@Test
+	public void testIsParticipant_forExistingParticipant() {
+		Person justus = Person.newInstance();
+		Person peter = Person.newInstance();
+		Person bob = Person.newInstance();
+
+		Relay sut = Relay.newInstance();
+
+		Participant participant = Participant.newInstance(justus);
+		sut.addParticipant(participant, Position.FIRST);
+		participant = Participant.newInstance(peter);
+		sut.addParticipant(participant, Position.SECOND);
+		participant = Participant.newInstance(bob);
+		sut.addParticipant(participant, Position.THIRD);
+
+		boolean condition = sut.isParticipant(peter);
+
+		assertTrue("Person isn't participant of relay!", condition);
+
+	}
+
+	@Test
+	public void testIsParticipant_forNonExistingParticipant() {
+		Person justus = Person.newInstance();
+		Person peter = Person.newInstance();
+		Person bob = Person.newInstance();
+		Person skinny = Person.newInstance();
+
+		Relay sut = Relay.newInstance();
+
+		Participant participant = Participant.newInstance(justus);
+		sut.addParticipant(participant, Position.FIRST);
+		participant = Participant.newInstance(peter);
+		sut.addParticipant(participant, Position.SECOND);
+		participant = Participant.newInstance(bob);
+		sut.addParticipant(participant, Position.THIRD);
+
+		boolean condition = sut.isParticipant(skinny);
+
+		assertFalse("Person is participant of relay!", condition);
+
+	}
 }

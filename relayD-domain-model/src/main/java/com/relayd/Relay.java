@@ -102,6 +102,15 @@ public class Relay implements Serializable {
 
 	}
 
+	public boolean isParticipant(Person aPerson) {
+		for (Participant each : participants) {
+			if (aPerson.getUuid().equals(each.getUuidPerson())) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	/**
 	 * @deprecated Nur zum testen der Drag&Drop Möglichkeit! Nicht nutzen!
 	 */
@@ -151,4 +160,5 @@ public class Relay implements Serializable {
 	public String toString() {
 		return getRelayname() + " [" + participantCount() + "/" + RelayEvent.MAX_NUMBER_OF_TRACKS + "]";
 	}
+
 }
