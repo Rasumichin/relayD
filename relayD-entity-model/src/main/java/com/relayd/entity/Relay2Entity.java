@@ -21,7 +21,7 @@ public class Relay2Entity {
 	private String relayname;
 
 	@ManyToOne
-	@Column(name="eventId")
+	@Column(name="eventId", nullable=false)
 	private RelayEventEntity relayEventEntity;
 
 	public static Relay2Entity newInstance() {
