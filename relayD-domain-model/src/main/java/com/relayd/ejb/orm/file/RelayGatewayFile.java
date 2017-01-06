@@ -85,7 +85,6 @@ public class RelayGatewayFile implements RelayGateway {
 			throw new RuntimeException("Error - IOException", e);
 		}
 		return relays;
-
 	}
 
 	@Override
@@ -95,8 +94,6 @@ public class RelayGatewayFile implements RelayGateway {
 		if (someRelays.contains(updateRelay)) {
 			for (Relay eachRelay : someRelays) {
 				if (updateRelay.equals(eachRelay)) {
-					// TODO (Christian, Version 1.4): Mapper einbauen
-					eachRelay.setRelayname(updateRelay.getRelayname());
 					getRelayToRelayMapper().mapRelayToRelay(updateRelay, eachRelay);
 					break;
 				}
@@ -110,7 +107,6 @@ public class RelayGatewayFile implements RelayGateway {
 		} catch (IOException e) {
 			throw new RuntimeException("Error - IOException ", e);
 		}
-
 	}
 
 	@Override
