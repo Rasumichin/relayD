@@ -6,7 +6,6 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import com.relayd.Relay;
 import com.relayd.ejb.GatewayType;
 
 /**
@@ -28,15 +27,5 @@ public class RelayBridgeImplTest {
 		GatewayType result = sut.getGatewayType();
 
 		assertEquals("[gatewayType] not correct!", GatewayType.JPA, result);
-	}
-
-	@Test
-	public void testGetEmailList() {
-		Relay dummyRelay = null;
-		String actual = sut.getEmailList(dummyRelay);
-
-		String expected = "Not implemented yet!";
-
-		assertEquals(expected, actual);
 	}
 }
