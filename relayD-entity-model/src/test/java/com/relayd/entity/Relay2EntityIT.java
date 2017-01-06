@@ -45,22 +45,45 @@ public class Relay2EntityIT extends EntityIT {
 	@Test
 	public void testInsertRelay2Entity() {
 		String expectedId = UUID.randomUUID().toString();
-		Relay2Entity sut = Relay2Entity.newInstance(expectedId);
-		sut.setRelayname("Four Star Runners");
-		sut.setRelayEventEntity(getRelayEventEntity());
-
-		EntityTransaction tx = getEntityManager().getTransaction();
-
-		tx.begin();
-		getEntityManager().persist(sut);
-		tx.commit();
-
-		getEntityManager().clear();
+		insertRelay2Entity(expectedId);
 		
-		Relay2Entity result = getEntityManager().find(Relay2Entity.class, expectedId);
+		Relay2Entity result = findById(expectedId);
 		assertNotNull("Relay2Entity could not be found with 'id=" + expectedId + "'!", result);
 
 		String resultId = result.getId();
 		assertEquals("Relay2Entity could not be found with 'id=" + expectedId + "'!", expectedId, resultId);
+	}
+
+	private Relay2Entity findById(String anId) {
+		return getEntityManager().find(Relay2Entity.class, anId);
+	}
+
+	@Test
+	public void testRelationToRelayEvent() {
+		RelayEventEntity expected = getRelayEventEntity();
+
+		String id = UUID.randomUUID().toString();
+		insertRelay2Entity(id);
+		Relay2Entity relay2Entity = findById(id);
+		
+		RelayEventEntity actual = relay2Entity.getRelayEventEntity();
+		
+		assertEquals("Relation to 'RelayEvent' has not been correctly resolved!", expected, actual);
+	}
+	
+	private Relay2Entity insertRelay2Entity(String expectedId) {
+		Relay2Entity relay2Entity = Relay2Entity.newInstance(expectedId);
+		relay2Entity.setRelayname("Four Star Runners");
+		relay2Entity.setRelayEventEntity(getRelayEventEntity());
+
+		EntityTransaction tx = getEntityManager().getTransaction();
+
+		tx.begin();
+		getEntityManager().persist(relay2Entity);
+		tx.commit();
+
+		getEntityManager().clear();
+		
+		return relay2Entity;
 	}
 }
