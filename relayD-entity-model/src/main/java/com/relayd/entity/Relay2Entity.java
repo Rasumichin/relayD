@@ -17,10 +17,10 @@ import javax.persistence.Table;
 public class Relay2Entity {
 
 	@Id
-	@Column
+	@Column(length=36)
 	private String id;
 
-	@Column
+	@Column(nullable=false, length=256)
 	private String relayname;
 
 	@Column
@@ -33,12 +33,17 @@ public class Relay2Entity {
 		return relayEntity;
 	}
 
-	public static Relay2Entity newInstance(UUID anUuid) {
-		if (anUuid == null) {
+	public static Relay2Entity newInstance(String anId) {
+		if (anId == null) {
 			throw new IllegalArgumentException("[anUuid] must not be 'null'.");
 		}
+		try {
+			UUID.fromString(anId);
+		} catch (IllegalArgumentException iAEx) {
+			throw new IllegalArgumentException("[anId] is not a valid representation of an UUID.");
+		}
 		Relay2Entity relayEntity = new Relay2Entity();
-		relayEntity.setId(anUuid.toString());
+		relayEntity.setId(anId);
 
 		return relayEntity;
 	}

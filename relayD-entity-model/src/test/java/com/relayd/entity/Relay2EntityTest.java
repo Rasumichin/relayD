@@ -29,10 +29,10 @@ public class Relay2EntityTest {
 
 	@Test
 	public void testNewInstance_withUuid() {
-		UUID expected = UUID.randomUUID();
+		String expected = UUID.randomUUID().toString();
 		Relay2Entity sut = Relay2Entity.newInstance(expected);
 
-		UUID actual = UUID.fromString(sut.getId());
+		String actual = sut.getId();
 		assertEquals("[id] has not been set correctly!", expected, actual);
 	}
 
@@ -40,6 +40,24 @@ public class Relay2EntityTest {
 	public void testNewInstance_forUuidWithNullValue() {
 		@SuppressWarnings("unused")
 		Relay2Entity sut = Relay2Entity.newInstance(null);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testNewInstance_forIncorrectEmptyUuid() {
+		@SuppressWarnings("unused")
+		Relay2Entity sut = Relay2Entity.newInstance("");
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testNewInstance_forIncorrectBlankUuid() {
+		@SuppressWarnings("unused")
+		Relay2Entity sut = Relay2Entity.newInstance("   ");
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testNewInstance_forIncorrectFalseUuid() {
+		@SuppressWarnings("unused")
+		Relay2Entity sut = Relay2Entity.newInstance("345-acf-123");
 	}
 
 	@Test
