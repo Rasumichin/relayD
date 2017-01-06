@@ -75,6 +75,22 @@ public class Relay2EntityIT extends EntityIT {
 	}
 
 	@Test
+	public void testUpdateRelay2Entity_Set_RelayEventEntity() {
+		String id = UUID.randomUUID().toString();
+		insertRelay2Entity(id);
+		Relay2Entity relay2Entity = findById(id);
+		
+		RelayEventEntity expected = new RelayEventEntity.Builder("New Event").build();
+		persistEntity(expected);
+		
+		relay2Entity.setRelayEventEntity(expected);
+		Relay2Entity result = mergeEntity(relay2Entity);
+		
+		RelayEventEntity actual = result.getRelayEventEntity();
+		assertEquals("[relayEventEntity] has not been updated correctly!", expected, actual);
+	}
+
+	@Test
 	public void testDeleteRelay2Entity() {
 		String id = UUID.randomUUID().toString();
 		insertRelay2Entity(id);
