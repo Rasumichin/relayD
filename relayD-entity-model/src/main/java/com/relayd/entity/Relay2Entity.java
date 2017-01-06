@@ -2,10 +2,7 @@ package com.relayd.entity;
 
 import java.util.UUID;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * @author Rasumichin (Erik@relayd.de)
@@ -23,7 +20,8 @@ public class Relay2Entity {
 	@Column(nullable=false, length=256)
 	private String relayname;
 
-	@Column
+	@ManyToOne
+	@Column(name="eventId")
 	private RelayEventEntity relayEventEntity;
 
 	public static Relay2Entity newInstance() {

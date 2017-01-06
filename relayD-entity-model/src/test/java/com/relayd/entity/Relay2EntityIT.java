@@ -19,12 +19,35 @@ import org.junit.runners.MethodSorters;
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class Relay2EntityIT extends EntityIT {
+	private RelayEventEntity relayEventEntity;
+	
+	private RelayEventEntity getRelayEventEntity() {
+		return relayEventEntity;
+	}
+	
+	@Override
+	@Before
+	public void setUp() {
+		super.setUp();
+		
+		RelayEventEntity eventToBeInserted = new RelayEventEntity.Builder("Foo Event").build();
+		EntityTransaction tx = getEntityManager().getTransaction();
+
+		tx.begin();
+		getEntityManager().persist(eventToBeInserted);
+		tx.commit();
+
+		getEntityManager().clear();
+		
+		relayEventEntity = getEntityManager().find(RelayEventEntity.class, eventToBeInserted.getId());
+	}
 
 	@Test
 	public void testInsertRelay2Entity() {
 		String expectedId = UUID.randomUUID().toString();
 		Relay2Entity sut = Relay2Entity.newInstance(expectedId);
 		sut.setRelayname("Four Star Runners");
+		sut.setRelayEventEntity(getRelayEventEntity());
 
 		EntityTransaction tx = getEntityManager().getTransaction();
 
