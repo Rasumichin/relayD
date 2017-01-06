@@ -4,8 +4,6 @@ import static org.junit.Assert.*;
 
 import java.util.UUID;
 
-import javax.persistence.EntityTransaction;
-
 import org.junit.*;
 import org.junit.runners.MethodSorters;
 
@@ -31,14 +29,7 @@ public class Relay2EntityIT extends EntityIT {
 		super.setUp();
 		
 		RelayEventEntity eventToBeInserted = new RelayEventEntity.Builder("Foo Event").build();
-		EntityTransaction tx = getEntityManager().getTransaction();
-
-		tx.begin();
-		getEntityManager().persist(eventToBeInserted);
-		tx.commit();
-
-		getEntityManager().clear();
-		
+		persistEntity(eventToBeInserted);
 		relayEventEntity = getEntityManager().find(RelayEventEntity.class, eventToBeInserted.getId());
 	}
 
@@ -54,10 +45,6 @@ public class Relay2EntityIT extends EntityIT {
 		assertEquals("Relay2Entity could not be found with 'id=" + expectedId + "'!", expectedId, resultId);
 	}
 	
-
-	private Relay2Entity findById(String anId) {
-		return getEntityManager().find(Relay2Entity.class, anId);
-	}
 
 	@Test
 	public void testRelationToRelayEvent() {
@@ -81,7 +68,7 @@ public class Relay2EntityIT extends EntityIT {
 		String expected = "New Relayname";
 		relay2Entity.setRelayname(expected);
 		
-		Relay2Entity result = mergeRelay2Entity(relay2Entity);
+		Relay2Entity result = mergeEntity(relay2Entity);
 		
 		String actual = result.getRelayname();
 		assertEquals("[relayName] has not been updated correctly!", expected, actual);
@@ -93,7 +80,7 @@ public class Relay2EntityIT extends EntityIT {
 		insertRelay2Entity(id);
 		Relay2Entity relay2Entity = findById(id);
 		
-		removeRelay2Entity(relay2Entity);
+		removeEntity(relay2Entity);
 		
 		Relay2Entity result = findById(id);
 		assertNull("Relay2Entity has not been deleted correctly!", result);
@@ -103,37 +90,12 @@ public class Relay2EntityIT extends EntityIT {
 		Relay2Entity relay2Entity = Relay2Entity.newInstance(expectedId);
 		relay2Entity.setRelayname("Four Star Runners");
 		relay2Entity.setRelayEventEntity(getRelayEventEntity());
-
-		EntityTransaction tx = getEntityManager().getTransaction();
-
-		tx.begin();
-		getEntityManager().persist(relay2Entity);
-		tx.commit();
-
-		getEntityManager().clear();
+		persistEntity(relay2Entity);
 		
 		return relay2Entity;
 	}
 
-	private Relay2Entity mergeRelay2Entity(Relay2Entity relay2Entity) {
-		EntityTransaction tx = getEntityManager().getTransaction();
-
-		tx.begin();
-		Relay2Entity result = getEntityManager().merge(relay2Entity);
-		tx.commit();
-
-		getEntityManager().clear();
-		
-		return result;
-	}
-
-	private void removeRelay2Entity(Relay2Entity relay2Entity) {
-		EntityTransaction tx = getEntityManager().getTransaction();
-
-		tx.begin();
-		getEntityManager().remove(relay2Entity);
-		tx.commit();
-
-		getEntityManager().clear();
+	private Relay2Entity findById(String anId) {
+		return getEntityManager().find(Relay2Entity.class, anId);
 	}
 }
