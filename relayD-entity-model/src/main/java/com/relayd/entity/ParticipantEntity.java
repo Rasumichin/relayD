@@ -9,32 +9,41 @@ import javax.persistence.*;
  * @since  14.12.2016
  *
  */
+@Entity
+@Table(name="participant")
 public class ParticipantEntity {
 	
 	@Id
-	@Column
+	@Column(length=36)
 	private String id;
 	
-	@Column(name="relayPosition")
+	@Column(name="relayPosition", nullable=false)
 	private Integer position;
 
+	@Column(name="personId", nullable=false)
 	private PersonEntity personEntity;
 
-	@Column(name="relay2Id")
+	@Column(name="relay2Id", nullable=false)
 	private String relayId;
 
-	public static ParticipantEntity newInstance(UUID uuid) {
-		if (uuid == null) {
+	public static ParticipantEntity newInstance(String anId) {
+		// TODO EL (2017-01-07): Introduce a class to handle strings that should represent a UUID.
+		if (anId == null) {
 			throw new IllegalArgumentException("[uuid] must not be 'null'.");
 		}
+		try {
+			UUID.fromString(anId);
+		} catch (IllegalArgumentException iAEx) {
+			throw new IllegalArgumentException("[anId] is not a valid representation of an UUID.");
+		}
 		ParticipantEntity participantEntity = new ParticipantEntity();
-		participantEntity.setId(uuid.toString());
+		participantEntity.setId(anId);
 		
 		return participantEntity;
 	}
 
 	public static ParticipantEntity newInstance() {
-		return ParticipantEntity.newInstance(UUID.randomUUID());
+		return ParticipantEntity.newInstance(UUID.randomUUID().toString());
 	}
 	
 	private void setId(String anId) {
