@@ -24,6 +24,7 @@ public class ParticipantEntity {
 	@Column(name="personId", nullable=false)
 	private PersonEntity personEntity;
 
+	@ManyToOne
 	@Column(name="relay2Id", nullable=false)
 	private Relay2Entity relay2Entity;
 

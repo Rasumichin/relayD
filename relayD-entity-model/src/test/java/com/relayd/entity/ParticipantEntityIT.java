@@ -86,6 +86,20 @@ public class ParticipantEntityIT extends EntityIT {
 		assertEquals("Relation to 'PersonEntity' has not been correctly resolved!", expected, actual);
 	}
 	
+	@Test
+	public void testRelationToRelay2Entity() {
+		Relay2Entity relay2Entity = getRelayEntity();
+		String expected = relay2Entity.getId();
+		
+		String uuid = UUID.randomUUID().toString();
+		persistEntity(getDefaultParticipantEntity(uuid));
+		ParticipantEntity result = findById(uuid);
+		
+		String actual = result.getRelay2Entity().getId();
+
+		assertEquals("Relation to 'Relay2Entity' has not been correctly resolved!", expected, actual);
+	}
+	
 	private ParticipantEntity getDefaultParticipantEntity(String anId) {
 		ParticipantEntity participantEntity = ParticipantEntity.newInstance(anId);
 		participantEntity.setPosition(Integer.valueOf(1));
