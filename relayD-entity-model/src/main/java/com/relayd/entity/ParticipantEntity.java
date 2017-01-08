@@ -24,7 +24,7 @@ public class ParticipantEntity {
 	private PersonEntity personEntity;
 
 	@Column(name="relay2Id", nullable=false)
-	private String relayId;
+	private Relay2Entity relay2Entity;
 
 	public static ParticipantEntity newInstance(String anId) {
 		// TODO EL (2017-01-07): Introduce a class to handle strings that should represent a UUID.
@@ -70,12 +70,12 @@ public class ParticipantEntity {
 		return personEntity;
 	}
 
-	public void setRelayId(String aRelayId) {
-		relayId = aRelayId;
+	void setRelay2Entity(Relay2Entity aRelay2Entity) {
+		relay2Entity = aRelay2Entity;
 	}
 	
-	public String getRelayId() {
-		return relayId;
+	public Relay2Entity getRelay2Entity() {
+		return relay2Entity;
 	}
 	
 	@Override

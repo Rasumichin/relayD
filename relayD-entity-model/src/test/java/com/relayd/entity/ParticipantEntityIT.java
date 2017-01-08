@@ -72,12 +72,11 @@ public class ParticipantEntityIT extends EntityIT {
 		assertEquals("ParticipantEntity could not be found with 'id=" + expectedId + "'!", expectedId, resultId);
 	}
 	
-
 	private ParticipantEntity getDefaultParticipantEntity(String anId) {
 		ParticipantEntity participantEntity = ParticipantEntity.newInstance(anId);
 		participantEntity.setPosition(Integer.valueOf(1));
 		participantEntity.setPersonEntity(getPersonEntity());
-		participantEntity.setRelayId(getRelayEntity().getId());
+		participantEntity.setRelay2Entity(getRelayEntity());
 		
 		return participantEntity;
 	}

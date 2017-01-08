@@ -124,11 +124,12 @@ public class ParticipantEntityTest {
 	@Test
 	public void testSetRelayId() {
 		ParticipantEntity sut = ParticipantEntity.newInstance();
-		String expected = UUID.randomUUID().toString();
+		Relay2Entity relay2Entity = Relay2Entity.newInstance();
+		String expected = relay2Entity.getId();
 		
-		sut.setRelayId(expected);
+		sut.setRelay2Entity(relay2Entity);
 		
-		String actual = sut.getRelayId();
+		String actual = sut.getRelay2Entity().getId();
 		assertEquals("[relayId] has not been set correctly!", expected, actual);
 	}
 }
