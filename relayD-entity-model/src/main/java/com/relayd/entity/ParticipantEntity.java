@@ -20,6 +20,7 @@ public class ParticipantEntity {
 	@Column(name="relayPosition", nullable=false)
 	private Integer position;
 
+	@ManyToOne
 	@Column(name="personId", nullable=false)
 	private PersonEntity personEntity;
 

@@ -72,6 +72,20 @@ public class ParticipantEntityIT extends EntityIT {
 		assertEquals("ParticipantEntity could not be found with 'id=" + expectedId + "'!", expectedId, resultId);
 	}
 	
+	@Test
+	public void testRelationToPersonEntity() {
+		PersonEntity personEntity = getPersonEntity();
+		String expected = personEntity.getId();
+		
+		String uuid = UUID.randomUUID().toString();
+		persistEntity(getDefaultParticipantEntity(uuid));
+		ParticipantEntity result = findById(uuid);
+		
+		String actual = result.getPersonEntity().getId();
+
+		assertEquals("Relation to 'PersonEntity' has not been correctly resolved!", expected, actual);
+	}
+	
 	private ParticipantEntity getDefaultParticipantEntity(String anId) {
 		ParticipantEntity participantEntity = ParticipantEntity.newInstance(anId);
 		participantEntity.setPosition(Integer.valueOf(1));
