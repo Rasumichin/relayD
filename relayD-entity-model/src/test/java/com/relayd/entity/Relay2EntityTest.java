@@ -2,7 +2,7 @@ package com.relayd.entity;
 
 import static org.junit.Assert.*;
 
-import java.util.UUID;
+import java.util.*;
 
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -92,6 +92,57 @@ public class Relay2EntityTest {
 		sut.setRelayEventEntity(null);
 	}
 	
+	@Test
+	public void testGetParticipants_initialSize() {
+		Relay2Entity sut = Relay2Entity.newInstance();
+		
+		List<ParticipantEntity> result = sut.getParticipantEntities();
+		
+		assertTrue("Initialization of [participantEntities] is not correct!", result.isEmpty());
+	}
+	
+	@Test
+	public void testAddParticipantEntity() {
+		Relay2Entity sut = Relay2Entity.newInstance();
+		ParticipantEntity participantEntity = ParticipantEntity.newInstance();
+		
+		sut.addParticipantEntity(participantEntity);
+		
+		List<ParticipantEntity> result = sut.getParticipantEntities();
+		boolean actual = (result.size() == 1);
+		assertTrue("Adding of a 'ParticipantEntity' was not successful!", actual);
+	}
+	
+	@Test
+	public void testRemoveParticipantEntity_element_is_present() {
+		Relay2Entity sut = Relay2Entity.newInstance();
+		ParticipantEntity participantEntity = ParticipantEntity.newInstance();
+		sut.addParticipantEntity(participantEntity);
+		
+		// Create another instance with the same 'id' and let the 'sut' remove this one.
+		String uuid = participantEntity.getId();
+		ParticipantEntity participantEntityToBeRemoved = ParticipantEntity.newInstance(uuid);
+		
+		sut.removeParticipantEntity(participantEntityToBeRemoved);
+		
+		List<ParticipantEntity> result = sut.getParticipantEntities();
+		assertTrue("Removing of a 'ParticipantEntity' was not successful!", result.isEmpty());
+	}
+
+	@Test
+	public void testRemoveParticipantEntity_element_is_not_present() {
+		Relay2Entity sut = Relay2Entity.newInstance();
+		ParticipantEntity participantEntity = ParticipantEntity.newInstance();
+		sut.addParticipantEntity(participantEntity);
+		ParticipantEntity participantEntityToBeRemoved = ParticipantEntity.newInstance();
+
+		sut.removeParticipantEntity(participantEntityToBeRemoved);
+		
+		List<ParticipantEntity> result = sut.getParticipantEntities();
+		boolean actual = (result.size() == 1);
+		assertTrue("Removing of a 'ParticipantEntity' was not successful!", actual);
+	}
+
 	@Test
 	public void testToString() {
 		Relay2Entity sut = Relay2Entity.newInstance();

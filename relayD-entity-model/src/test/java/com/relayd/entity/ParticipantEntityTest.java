@@ -122,7 +122,7 @@ public class ParticipantEntityTest {
 	}
 
 	@Test
-	public void testSetRelayId() {
+	public void testSetRelay2Entity() {
 		ParticipantEntity sut = ParticipantEntity.newInstance();
 		Relay2Entity relay2Entity = Relay2Entity.newInstance();
 		String expected = relay2Entity.getId();
@@ -131,5 +131,29 @@ public class ParticipantEntityTest {
 		
 		String actual = sut.getRelay2Entity().getId();
 		assertEquals("[relayId] has not been set correctly!", expected, actual);
+	}
+
+	@Test
+	public void testSetRelay2Entity_addParticipantEntity() {
+		ParticipantEntity sut = ParticipantEntity.newInstance();
+		Relay2Entity relay2Entity = Relay2Entity.newInstance();
+		String expected = relay2Entity.getId();
+		
+		relay2Entity.addParticipantEntity(sut);
+		
+		String actual = sut.getRelay2Entity().getId();
+		assertEquals("[relayId] has not been set correctly!", expected, actual);
+	}
+
+	@Test
+	public void testSetRelay2Entity_removeParticipantEntity() {
+		ParticipantEntity sut = ParticipantEntity.newInstance();
+		Relay2Entity relay2Entity = Relay2Entity.newInstance();
+		relay2Entity.addParticipantEntity(sut);
+		
+		relay2Entity.removeParticipantEntity(sut);
+		
+		Relay2Entity actual = sut.getRelay2Entity();
+		assertNull("[relayId] has not been set correctly!", actual);
 	}
 }

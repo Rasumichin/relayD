@@ -1,6 +1,6 @@
 package com.relayd.entity;
 
-import java.util.UUID;
+import java.util.*;
 
 import javax.persistence.*;
 
@@ -24,6 +24,8 @@ public class Relay2Entity {
 	@Column(name="eventId", nullable=false)
 	private RelayEventEntity relayEventEntity;
 
+	private List<ParticipantEntity> participantEntities = new ArrayList<>();
+	
 	public static Relay2Entity newInstance() {
 		Relay2Entity relayEntity = new Relay2Entity();
 		relayEntity.setId(UUID.randomUUID().toString());
@@ -76,6 +78,26 @@ public class Relay2Entity {
 		return relayEventEntity;
 	}
 	
+	// TODO EL (2017-01-08): Discuss with CS - better remove boolean result of 'add' operation here?
+	public void addParticipantEntity(ParticipantEntity participantEntity) {
+		// TODO EL (2017-01-08): Discuss with CS - validation checks here (up to 4 participants, no duplicate positions)?
+		participantEntities.add(participantEntity);
+		participantEntity.setRelay2Entity(this);
+	}
+
+	public void removeParticipantEntity(ParticipantEntity participantEntity) {
+		int indexInList = getParticipantEntities().indexOf(participantEntity);
+		if (indexInList >= 0) {
+			ParticipantEntity participantEntityToBeRemoved = getParticipantEntities().get(indexInList);
+			participantEntityToBeRemoved.setRelay2Entity(null);
+			participantEntities.remove(indexInList);
+		}
+	}
+
+	public List<ParticipantEntity> getParticipantEntities() {
+		return Collections.unmodifiableList(participantEntities);
+	}
+
 	@Override
 	public String toString() {
 		return getClass().getSimpleName() + " [id=" + id + ", relayname=" + relayname + "]";
