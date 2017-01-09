@@ -140,6 +140,77 @@ public class RelayTest {
 	}
 
 	@Test
+	public void testAddParticipant_WithoutPositionForEmptyRelay() {
+		Relay sut = Relay.newInstance(RelayEvent.duesseldorf());
+
+		Person person = new PersonBuilder().withForename("Justus").withSurename("Jonas").build();
+		Participant expected = Participant.newInstance(person);
+
+		sut.addParticipant(expected);
+
+		Participant actual = sut.getParticipantFor(Position.FIRST);
+
+		assertEquals("Person on first position is wrong!", expected, actual);
+		assertTrue("second position not empty!", sut.getParticipantFor(Position.SECOND).isEmpty());
+		assertTrue("third position not empty!", sut.getParticipantFor(Position.THIRD).isEmpty());
+		assertTrue("fourth position not empty!", sut.getParticipantFor(Position.FOURTH).isEmpty());
+
+	}
+
+	@Test
+	public void testAddParticipant_WithoutPositionForRelayWithEntryOnFirstPosition() {
+		Relay sut = Relay.newInstance(RelayEvent.duesseldorf());
+
+		Person justusJonas = new PersonBuilder().withForename("Justus").withSurename("Jonas").build();
+		Participant firstParticipant = Participant.newInstance(justusJonas);
+
+		sut.addParticipant(firstParticipant, Position.FIRST);
+
+		Person person = new PersonBuilder().withForename("Peter").withSurename("Shaw").build();
+		Participant expected = Participant.newInstance(person);
+
+		sut.addParticipant(expected);
+
+		Participant actual = sut.getParticipantFor(Position.SECOND);
+
+		assertEquals("Perosn on first position is wrong!", firstParticipant, sut.getParticipantFor(Position.FIRST));
+		assertEquals("Person on second position is wrong!", expected, actual);
+		assertTrue("third position not empty!", sut.getParticipantFor(Position.THIRD).isEmpty());
+		assertTrue("fourth position not empty!", sut.getParticipantFor(Position.FOURTH).isEmpty());
+
+	}
+
+	@Test
+	public void testAddParticipant_WithoutPositionForRelayWithSpaceOnPositionThree() {
+		Relay sut = Relay.newInstance(RelayEvent.duesseldorf());
+
+		Person justusJonas = new PersonBuilder().withForename("Justus").withSurename("Jonas").build();
+		Participant firstParticipant = Participant.newInstance(justusJonas);
+
+		Person peterShaw = new PersonBuilder().withForename("Peter").withSurename("Shaw").build();
+		Participant secondParticipant = Participant.newInstance(peterShaw);
+
+		Person skinnyNoris = new PersonBuilder().withForename("Skinny").withSurename("Norris").build();
+		Participant fourthParticipant = Participant.newInstance(skinnyNoris);
+
+		sut.addParticipant(firstParticipant, Position.FIRST);
+		sut.addParticipant(secondParticipant, Position.SECOND);
+		sut.addParticipant(fourthParticipant, Position.FOURTH);
+
+		Person person = new PersonBuilder().withForename("Bob").withSurename("Andrews").build();
+		Participant expected = Participant.newInstance(person);
+
+		sut.addParticipant(expected);
+
+		Participant actual = sut.getParticipantFor(Position.THIRD);
+
+		assertEquals("Person on first position is wrong!", firstParticipant, sut.getParticipantFor(Position.FIRST));
+		assertEquals("Person on second position is wrong!", secondParticipant, sut.getParticipantFor(Position.SECOND));
+		assertEquals("Person on third position is wrong!", expected, actual);
+		assertEquals("Person on fourth position is wrong!", fourthParticipant, sut.getParticipantFor(Position.FOURTH));
+	}
+
+	@Test
 	public void testParticipantCount_ForEmptyRelay() {
 		Relay sut = Relay.newInstance();
 

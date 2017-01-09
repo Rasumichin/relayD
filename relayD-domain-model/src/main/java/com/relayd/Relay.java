@@ -111,19 +111,14 @@ public class Relay implements Serializable {
 		return false;
 	}
 
-	/**
-	 * @deprecated Nur zum testen der Drag&Drop Möglichkeit! Nicht nutzen!
-	 */
-	@Deprecated
+	// TODO (Christian, Erik, Version 1.4): Wie reagieren wir bei einer vollen Relay und dem Versuch einen Participant hinzuzufügen?
 	public void addParticipant(Participant aParticipant) {
-		int i = 0;
-		for (Participant each : participants) {
-			if (each == null) {
+		for (int index = 0; index < RelayEvent.MAX_NUMBER_OF_TRACKS; index++) {
+			if (participants.get(index).isEmpty()) {
+				participants.set(index, aParticipant);
 				break;
 			}
-			i++;
 		}
-		participants.set(i, aParticipant);
 	}
 
 	@Override
