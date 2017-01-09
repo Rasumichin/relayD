@@ -330,4 +330,10 @@ public class RelayBrowsePageBeanTest {
 		verify(relayMock).getEmailList();
 		verify(sut, never()).showMessageErrorNoRowRelaySelected();
 	}
+
+	@Test
+	public void testShowAllWithoutRelay() {
+		sut.showAllWithoutRelay();
+		verify(sut).showMessage(FacesMessage.SEVERITY_ERROR, RelayBrowsePageBean.NOT_POSSIBLE, "Not implemented yet!");
+	}
 }
