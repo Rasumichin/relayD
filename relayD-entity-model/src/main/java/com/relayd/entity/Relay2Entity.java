@@ -4,6 +4,8 @@ import java.util.*;
 
 import javax.persistence.*;
 
+import org.apache.openjpa.persistence.jdbc.ForeignKey;
+
 /**
  * @author Rasumichin (Erik@relayd.de)
  * @since  03.01.2017
@@ -21,7 +23,8 @@ public class Relay2Entity {
 	private String relayname;
 
 	@ManyToOne
-	@Column(name="eventId", nullable=false)
+	@Column(name="eventId", nullable=false, length=36)
+	@ForeignKey
 	private RelayEventEntity relayEventEntity;
 
 	private List<ParticipantEntity> participantEntities = new ArrayList<>();
