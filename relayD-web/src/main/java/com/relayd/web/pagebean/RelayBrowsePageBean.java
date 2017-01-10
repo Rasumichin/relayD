@@ -316,7 +316,6 @@ public class RelayBrowsePageBean implements Serializable {
 	}
 	
 	public String statusOf(Person aPerson) {
-		System.out.println("getStatus");
 		if (belongsToRelay(aPerson)) {
 			return "ui-icon ui-icon-check";
 		} else {
