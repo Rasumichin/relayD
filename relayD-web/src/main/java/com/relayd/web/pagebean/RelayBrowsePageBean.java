@@ -2,6 +2,7 @@ package com.relayd.web.pagebean;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
@@ -27,6 +28,7 @@ import com.relayd.web.bridge.PersonBridgeImpl;
 import com.relayd.web.bridge.RelayBridge;
 import com.relayd.web.bridge.RelayBridgeImpl;
 import com.relayd.web.bridge.TreeNodeRow;
+import com.relayd.web.bridge.TreeNodeRowRelay;
 
 /**
  * @author schmollc (Christian@relayd.de)
@@ -311,5 +313,38 @@ public class RelayBrowsePageBean implements Serializable {
 			treeNode.setExpanded(option);
 			treeNode.setSelected(false);
 		}
+	}
+	
+	public String statusOf(Person aPerson) {
+		System.out.println("getStatus");
+		if (belongsToRelay(aPerson)) {
+			return "ui-icon ui-icon-check";
+		} else {
+			return "ui-icon ui-icon-help";
+		}
+		
+	}
+
+	private boolean belongsToRelay(Person aPerson) {
+		List<TreeNode> tempList = root.getChildren();
+		for (TreeNode treeNode : tempList) {
+			TreeNodeRow relayNode = (TreeNodeRow) treeNode.getData();
+			if (relayNode.isRelay()) {
+				Relay relay = ((TreeNodeRowRelay) relayNode).getRelay();
+				for (Participant participant : relay.getParticipants()) {
+					if (aPerson.getUuid().equals(participant.getUuidPerson())) {
+						return true;
+					}
+				}
+			} else {
+				if (relayNode.getParticipant() != null) {
+					if (aPerson.getUuid().equals(relayNode.getParticipant().getUuidPerson())) {
+						return true;
+					}
+				}
+				
+			}
+		}
+		return false;
 	}
 }
