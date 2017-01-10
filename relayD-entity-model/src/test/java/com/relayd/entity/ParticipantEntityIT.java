@@ -100,6 +100,35 @@ public class ParticipantEntityIT extends EntityIT {
 		assertEquals("Relation to 'Relay2Entity' has not been correctly resolved!", expected, actual);
 	}
 	
+	@Test
+	public void testUpdateParticipantEntity_Set_Position() {
+		String id = UUID.randomUUID().toString();
+		ParticipantEntity participantEntity = getDefaultParticipantEntity(id);
+		persistEntity(participantEntity);
+		ParticipantEntity sut = findById(id);
+		
+		Integer expected = Integer.valueOf(4);
+		sut.setPosition(expected);
+		
+		ParticipantEntity result = mergeEntity(sut);
+		
+		Integer actual = result.getPosition();
+		assertEquals("[position] has not been updated correctly!", expected, actual);
+	}
+
+	@Test
+	public void testDeleteParticipantEntity() {
+		String id = UUID.randomUUID().toString();
+		ParticipantEntity participantEntity = getDefaultParticipantEntity(id);
+		persistEntity(participantEntity);
+		ParticipantEntity sut = findById(id);
+		
+		removeEntity(sut);
+		
+		ParticipantEntity result = findById(id);
+		assertNull("ParticipantEntity has not been deleted correctly!", result);
+	}
+
 	private ParticipantEntity getDefaultParticipantEntity(String anId) {
 		ParticipantEntity participantEntity = ParticipantEntity.newInstance(anId);
 		participantEntity.setPosition(Integer.valueOf(1));
