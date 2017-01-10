@@ -4,6 +4,8 @@ import java.util.UUID;
 
 import javax.persistence.*;
 
+import org.apache.openjpa.persistence.jdbc.ForeignKey;
+
 /**
  * @author Rasumichin (Erik@relayd.de)
  * @since  14.12.2016
@@ -21,11 +23,13 @@ public class ParticipantEntity {
 	private Integer position;
 
 	@ManyToOne
-	@Column(name="personId", nullable=false)
+	@Column(name="personId", nullable=false, length=36)
+	@ForeignKey
 	private PersonEntity personEntity;
 
 	@ManyToOne
-	@Column(name="relay2Id", nullable=false)
+	@Column(name="relay2Id", nullable=false, length=36)
+	@ForeignKey
 	private Relay2Entity relay2Entity;
 
 	public static ParticipantEntity newInstance(String anId) {
