@@ -1,6 +1,7 @@
 package com.relayd.ejb.orm.file;
 
 import com.relayd.Relay;
+import com.relayd.attributes.Position;
 
 /**
  * @author schmollc (Christian@relayd.de)
@@ -24,5 +25,11 @@ public class RelayToRelayMapper {
 			throw new IllegalArgumentException("[target] must not be 'null'!");
 		}
 		target.setRelayname(source.getRelayname());
+		for (Position each : Position.values()) {
+			if (Position.UNKNOWN.equals(each)) {
+				continue;
+			}
+			target.addParticipant(source.getParticipantFor(each), each);
+		}
 	}
 }
