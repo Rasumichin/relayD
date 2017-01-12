@@ -81,6 +81,28 @@ public class Relay2EntityIT extends EntityIT {
 	}
 	
 	@Test
+	public void testInsertRelay2Entity_with_multiple_new_participants() {
+		Relay2Entity sut = getDefaultRelay2Entity(UUID.randomUUID().toString());
+		
+		ParticipantEntity participantEntity = getDefaultParticipantEntity(UUID.randomUUID().toString());
+		sut.addParticipantEntity(participantEntity);
+		
+		participantEntity = getDefaultParticipantEntity(UUID.randomUUID().toString());
+		participantEntity.setPosition(Integer.valueOf(2));
+		sut.addParticipantEntity(participantEntity);
+		
+		participantEntity = getDefaultParticipantEntity(UUID.randomUUID().toString());
+		participantEntity.setPosition(Integer.valueOf(3));
+		sut.addParticipantEntity(participantEntity);
+
+		persistEntity(sut);
+		
+		Relay2Entity result = findById(sut.getId());
+		List<ParticipantEntity> participants = result.getParticipantEntities();
+		assertTrue("Relation to 'ParticipantEntity' has not been correctly resolved!", (participants.size() == 3));
+	}
+	
+	@Test
 	public void testRelationToRelayEvent() {
 		RelayEventEntity expected = getRelayEventEntity();
 
