@@ -201,6 +201,15 @@
 							<h:outputText styleClass="#{relayBrowsePageBean.statusOf(person)}" />
 						</div>
 					</p:column>
+					
+					<p:column
+						visible="true"
+						toggleable="false"
+						width="2%">
+						<div align="left">
+							<h:outputText value="#{relayBrowsePageBean.relayCountOf(person)}"/>
+						</div>
+					</p:column>
 
 					<p:column
 						headerText="Forename"
@@ -215,7 +224,7 @@
 						filterMatchMode="contains"
 						sortBy="#{person.surename}"
 						sortFunction="#{relayBrowsePageBean.sortBySurename}"
-						width="25%">
+						width="23%">
 						<h:outputText value="#{person.surename}" />
 					</p:column>
 

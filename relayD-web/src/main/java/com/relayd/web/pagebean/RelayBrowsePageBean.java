@@ -2,6 +2,7 @@ package com.relayd.web.pagebean;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
@@ -56,7 +57,7 @@ public class RelayBrowsePageBean implements Serializable {
 	private List<Person> filteredPersons;
 
 	private List<Person> selectedPersons;
-
+	
 	@ManagedProperty(value = "#{personEditPageBean}")
 	private PersonEditPageBean personEditPageBean;
 
@@ -315,16 +316,22 @@ public class RelayBrowsePageBean implements Serializable {
 		}
 	}
 	
+	public String relayCountOf(Person aPerson) {
+		int relayCount = belongsToRelay(aPerson);
+		return "(" + relayCount + ")";
+	}
+	
 	public String statusOf(Person aPerson) {
-		if (belongsToRelay(aPerson)) {
+		int relayCount = belongsToRelay(aPerson);
+		if (relayCount > 0) {
 			return "ui-icon ui-icon-check";
 		} else {
 			return "ui-icon ui-icon-help";
 		}
-		
 	}
 
-	private boolean belongsToRelay(Person aPerson) {
+	private int belongsToRelay(Person aPerson) {
+		int relayCount = 0;
 		List<TreeNode> tempList = root.getChildren();
 		for (TreeNode treeNode : tempList) {
 			TreeNodeRow relayNode = (TreeNodeRow) treeNode.getData();
@@ -332,18 +339,18 @@ public class RelayBrowsePageBean implements Serializable {
 				Relay relay = ((TreeNodeRowRelay) relayNode).getRelay();
 				for (Participant participant : relay.getParticipants()) {
 					if (aPerson.getUuid().equals(participant.getUuidPerson())) {
-						return true;
+						relayCount++;
 					}
 				}
 			} else {
 				if (relayNode.getParticipant() != null) {
 					if (aPerson.getUuid().equals(relayNode.getParticipant().getUuidPerson())) {
-						return true;
+						relayCount++;
 					}
 				}
 				
 			}
 		}
-		return false;
+		return relayCount;
 	}
 }
