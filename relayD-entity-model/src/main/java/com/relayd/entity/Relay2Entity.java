@@ -27,7 +27,7 @@ public class Relay2Entity {
 	@ForeignKey
 	private RelayEventEntity relayEventEntity;
 
-	@OneToMany(mappedBy="relay2Entity", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="relay2Entity", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	private List<ParticipantEntity> participantEntities = new ArrayList<>();
 	
 	public static Relay2Entity newInstance() {
