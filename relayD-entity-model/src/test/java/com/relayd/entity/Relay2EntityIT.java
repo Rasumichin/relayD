@@ -74,7 +74,7 @@ public class Relay2EntityIT extends EntityIT {
 		
 		Relay2Entity result = findById(sut.getId());
 		List<ParticipantEntity> participants = result.getParticipantEntities();
-		assertTrue("Relation to 'ParticipantEntity' has not been resolved correctly!", participants.size() == 1);
+		assertEquals("Relation to 'ParticipantEntity' has not been resolved correctly!", 1, participants.size());
 		
 		String actual = participants.get(0).getId();
 		assertEquals("Relation to 'ParticipantEntity' has not been resolved correctly!", expected, actual);
@@ -82,24 +82,15 @@ public class Relay2EntityIT extends EntityIT {
 	
 	@Test
 	public void testInsertRelay2Entity_with_multiple_new_participants() {
-		Relay2Entity sut = getDefaultRelay2Entity(UUID.randomUUID().toString());
-		
-		ParticipantEntity participantEntity = getDefaultParticipantEntity(UUID.randomUUID().toString());
-		sut.addParticipantEntity(participantEntity);
-		
-		participantEntity = getDefaultParticipantEntity(UUID.randomUUID().toString());
-		participantEntity.setPosition(Integer.valueOf(2));
-		sut.addParticipantEntity(participantEntity);
-		
-		participantEntity = getDefaultParticipantEntity(UUID.randomUUID().toString());
-		participantEntity.setPosition(Integer.valueOf(3));
-		sut.addParticipantEntity(participantEntity);
+		int expected = 3;
+		Relay2Entity sut = getRelay2EntityWithParticipants(Integer.valueOf(expected));
 
 		persistEntity(sut);
 		
 		Relay2Entity result = findById(sut.getId());
 		List<ParticipantEntity> participants = result.getParticipantEntities();
-		assertTrue("Relation to 'ParticipantEntity' has not been resolved correctly!", participants.size() == 3);
+		int actual = participants.size();
+		assertEquals("Relation to 'ParticipantEntity' has not been resolved correctly!", expected, actual);
 	}
 	
 	@Test
@@ -144,7 +135,9 @@ public class Relay2EntityIT extends EntityIT {
 		Relay2Entity result = mergeEntity(relay2Entity);
 
 		List<ParticipantEntity> participants = result.getParticipantEntities();
-		assertTrue("Relation to 'ParticipantEntity' has not been resolved correctly!", participants.size() == 1);
+		int expected = 1;
+		int actual = participants.size();
+		assertEquals("Relation to 'ParticipantEntity' has not been resolved correctly!", expected, actual);
 	}
 
 	@Test
@@ -200,5 +193,17 @@ public class Relay2EntityIT extends EntityIT {
 		participantEntity.setPersonEntity(getPersonEntity());
 		
 		return participantEntity;
+	}
+	
+	private Relay2Entity getRelay2EntityWithParticipants(Integer numberOfParticipants) {
+		Relay2Entity relay2Entity = getDefaultRelay2Entity(UUID.randomUUID().toString());
+		
+		for (int i = 0; i < numberOfParticipants.intValue(); i++) {
+			ParticipantEntity participantEntity = getDefaultParticipantEntity(UUID.randomUUID().toString());
+			participantEntity.setPosition(Integer.valueOf(i+1));
+			relay2Entity.addParticipantEntity(participantEntity);
+		}
+		
+		return relay2Entity;
 	}
 }
