@@ -1,8 +1,6 @@
 package com.relayd.entity;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import javax.persistence.*;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -47,5 +45,37 @@ public abstract class EntityIT {
 
 	public void setEntityManager(EntityManager aEntityManager) {
 		entityManager = aEntityManager;
+	}
+	
+	protected <T> void removeEntity(T anEntity) {
+		EntityTransaction tx = getEntityManager().getTransaction();
+
+		tx.begin();
+		getEntityManager().remove(anEntity);
+		tx.commit();
+
+		getEntityManager().clear();
+	}
+
+	protected <T> T mergeEntity(T anEntity) {
+		EntityTransaction tx = getEntityManager().getTransaction();
+
+		tx.begin();
+		T result = getEntityManager().merge(anEntity);
+		tx.commit();
+
+		getEntityManager().clear();
+		
+		return result;
+	}
+
+	protected <T> void persistEntity(T anEntity) {
+		EntityTransaction tx = getEntityManager().getTransaction();
+
+		tx.begin();
+		getEntityManager().persist(anEntity);
+		tx.commit();
+
+		getEntityManager().clear();
 	}
 }
