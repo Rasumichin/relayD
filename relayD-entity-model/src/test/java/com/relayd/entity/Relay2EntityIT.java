@@ -3,6 +3,7 @@ package com.relayd.entity;
 import static org.junit.Assert.*;
 
 import java.util.*;
+import java.util.stream.*;
 
 import org.junit.*;
 import org.junit.runners.MethodSorters;
@@ -74,10 +75,10 @@ public class Relay2EntityIT extends EntityIT {
 		Relay2Entity result = findRelay2EntityById(sut.getId());
 		List<ParticipantEntity> participants = result.getParticipantEntities();
 		int actual = participants.size();
-		assertEquals("Relation to 'ParticipantEntity' has not been resolved correctly!", expected, actual);
+		assertEquals("Relation to 'ParticipantEntity' has not been inserted correctly!", expected, actual);
 		
 		String actualId = participants.get(0).getId();
-		assertEquals("Relation to 'ParticipantEntity' has not been resolved correctly!", expectedId, actualId);
+		assertEquals("Relation to 'ParticipantEntity' has not been inserted correctly!", expectedId, actualId);
 	}
 	
 	@Test
@@ -90,7 +91,7 @@ public class Relay2EntityIT extends EntityIT {
 		Relay2Entity result = findRelay2EntityById(sut.getId());
 		List<ParticipantEntity> participants = result.getParticipantEntities();
 		int actual = participants.size();
-		assertEquals("Relation to 'ParticipantEntity' has not been resolved correctly!", expected, actual);
+		assertEquals("Relation to 'ParticipantEntity' has not been inserted correctly!", expected, actual);
 	}
 	
 	@Test
@@ -114,7 +115,7 @@ public class Relay2EntityIT extends EntityIT {
 		insertRelay2Entity(id);
 		Relay2Entity relay2Entity = findRelay2EntityById(id);
 		
-		assertTrue("Relation to 'ParticipantEntity' has not been resolved correctly!", relay2Entity.getParticipantEntities().isEmpty());
+		assertTrue("Relation to 'ParticipantEntity' has not been updated correctly!", relay2Entity.getParticipantEntities().isEmpty());
 		
 		ParticipantEntity participantEntity = getDefaultParticipantEntity(UUID.randomUUID().toString());
 		relay2Entity.addParticipantEntity(participantEntity);
@@ -124,7 +125,7 @@ public class Relay2EntityIT extends EntityIT {
 		List<ParticipantEntity> participants = result.getParticipantEntities();
 		int expected = 1;
 		int actual = participants.size();
-		assertEquals("Relation to 'ParticipantEntity' has not been resolved correctly!", expected, actual);
+		assertEquals("Relation to 'ParticipantEntity' has not been updated correctly!", expected, actual);
 	}
 
 	@Test
@@ -142,13 +143,14 @@ public class Relay2EntityIT extends EntityIT {
 		List<ParticipantEntity> participants = result.getParticipantEntities();
 		int expected = 2;
 		int actual = participants.size();
-		assertEquals("Relation to 'ParticipantEntity' has not been resolved correctly!", expected, actual);
+		assertEquals("Relation to 'ParticipantEntity' has not been removed correctly!", expected, actual);
 		
 		String removedId = participantToBeRemoved.getId();
-		for (ParticipantEntity eachParticipant : result.getParticipantEntities()) {
-			String actualId = eachParticipant.getId();
-			assertNotEquals("Relation to 'ParticipantEntity' has not been resolved correctly!", removedId, actualId);
-		}
+		participants = result.getParticipantEntities()
+				.stream()
+				.filter(eachParticipant -> eachParticipant.getId().equals(removedId))
+				.collect(Collectors.toList());
+		assertTrue("Relation to 'ParticipantEntity' has not been removed correctly!", participants.isEmpty());
 	}
 
 	@Test
@@ -166,7 +168,7 @@ public class Relay2EntityIT extends EntityIT {
 		
 		participantEntity = result.getParticipantEntities().get(0);
 		int actual = participantEntity.getPosition().intValue();
-		assertEquals("Relation to 'ParticipantEntity' has not been resolved correctly!", expected, actual);
+		assertEquals("Relation to 'ParticipantEntity' has not been updated correctly!", expected, actual);
 	}
 
 	@Test
