@@ -53,31 +53,31 @@ public class Relay2EntityIT extends EntityIT {
 
 	@Test
 	public void testInsertRelay2Entity() {
-		String expectedId = UUID.randomUUID().toString();
-		insertRelay2Entity(expectedId);
+		String expected = UUID.randomUUID().toString();
+		insertRelay2Entity(expected);
 		
-		Relay2Entity result = findById(expectedId);
-		assertNotNull("Relay2Entity could not be found with 'id=" + expectedId + "'!", result);
+		Relay2Entity result = findRelay2EntityById(expected);
+		assertNotNull("Relay2Entity could not be found with 'id=" + expected + "'!", result);
 
-		String resultId = result.getId();
-		assertEquals("Relay2Entity could not be found with 'id=" + expectedId + "'!", expectedId, resultId);
+		String actual = result.getId();
+		assertEquals("Relay2Entity could not be found with 'id=" + expected + "'!", expected, actual);
 	}
 	
 	@Test
 	public void testInsertRelay2Entity_with_one_new_participant() {
-		Relay2Entity sut = getDefaultRelay2Entity(UUID.randomUUID().toString());
-		String expected = UUID.randomUUID().toString();
-		ParticipantEntity participantEntity = getDefaultParticipantEntity(expected);
-		sut.addParticipantEntity(participantEntity);
+		int expected = 1;
+		Relay2Entity sut = getRelay2EntityWithParticipants(Integer.valueOf(expected));
+		String expectedId = sut.getParticipantEntities().get(0).getId();
 		
 		persistEntity(sut);
 		
-		Relay2Entity result = findById(sut.getId());
+		Relay2Entity result = findRelay2EntityById(sut.getId());
 		List<ParticipantEntity> participants = result.getParticipantEntities();
-		assertEquals("Relation to 'ParticipantEntity' has not been resolved correctly!", 1, participants.size());
-		
-		String actual = participants.get(0).getId();
+		int actual = participants.size();
 		assertEquals("Relation to 'ParticipantEntity' has not been resolved correctly!", expected, actual);
+		
+		String actualId = participants.get(0).getId();
+		assertEquals("Relation to 'ParticipantEntity' has not been resolved correctly!", expectedId, actualId);
 	}
 	
 	@Test
@@ -87,30 +87,17 @@ public class Relay2EntityIT extends EntityIT {
 
 		persistEntity(sut);
 		
-		Relay2Entity result = findById(sut.getId());
+		Relay2Entity result = findRelay2EntityById(sut.getId());
 		List<ParticipantEntity> participants = result.getParticipantEntities();
 		int actual = participants.size();
 		assertEquals("Relation to 'ParticipantEntity' has not been resolved correctly!", expected, actual);
 	}
 	
 	@Test
-	public void testRelationToRelayEvent() {
-		RelayEventEntity expected = getRelayEventEntity();
-
-		String id = UUID.randomUUID().toString();
-		insertRelay2Entity(id);
-		Relay2Entity relay2Entity = findById(id);
-		
-		RelayEventEntity actual = relay2Entity.getRelayEventEntity();
-		
-		assertEquals("Relation to 'RelayEventEntity' has not been resolved correctly!", expected, actual);
-	}
-	
-	@Test
 	public void testUpdateRelay2Entity_Set_Relayname() {
 		String id = UUID.randomUUID().toString();
 		insertRelay2Entity(id);
-		Relay2Entity relay2Entity = findById(id);
+		Relay2Entity relay2Entity = findRelay2EntityById(id);
 		
 		String expected = "New Relayname";
 		relay2Entity.setRelayname(expected);
@@ -125,7 +112,7 @@ public class Relay2EntityIT extends EntityIT {
 	public void testUpdateRelay2Entity_Add_Participant() {
 		String id = UUID.randomUUID().toString();
 		insertRelay2Entity(id);
-		Relay2Entity relay2Entity = findById(id);
+		Relay2Entity relay2Entity = findRelay2EntityById(id);
 		
 		assertTrue("Relation to 'ParticipantEntity' has not been resolved correctly!", relay2Entity.getParticipantEntities().isEmpty());
 		
@@ -146,7 +133,7 @@ public class Relay2EntityIT extends EntityIT {
 		Relay2Entity sut = getRelay2EntityWithParticipants(Integer.valueOf(initialParticipants));
 		persistEntity(sut);
 		
-		sut = findById(sut.getId());
+		sut = findRelay2EntityById(sut.getId());
 		ParticipantEntity participantToBeRemoved = sut.getParticipantEntities().get(0);
 		sut.removeParticipantEntity(participantToBeRemoved);
 		
@@ -165,10 +152,28 @@ public class Relay2EntityIT extends EntityIT {
 	}
 
 	@Test
+	public void testUpdateRelay2Entity_Update_Participant() {
+		int initialParticipants = 1;
+		Relay2Entity sut = getRelay2EntityWithParticipants(Integer.valueOf(initialParticipants));
+		persistEntity(sut);
+		
+		sut = findRelay2EntityById(sut.getId());
+		ParticipantEntity participantEntity = sut.getParticipantEntities().get(0);
+		int expected = 4;
+		participantEntity.setPosition(Integer.valueOf(expected));
+		
+		Relay2Entity result = mergeEntity(sut);
+		
+		participantEntity = result.getParticipantEntities().get(0);
+		int actual = participantEntity.getPosition().intValue();
+		assertEquals("Relation to 'ParticipantEntity' has not been resolved correctly!", expected, actual);
+	}
+
+	@Test
 	public void testUpdateRelay2Entity_Set_RelayEventEntity() {
 		String id = UUID.randomUUID().toString();
 		insertRelay2Entity(id);
-		Relay2Entity relay2Entity = findById(id);
+		Relay2Entity relay2Entity = findRelay2EntityById(id);
 		
 		RelayEventEntity expected = new RelayEventEntity.Builder("New Event").build();
 		persistEntity(expected);
@@ -184,14 +189,43 @@ public class Relay2EntityIT extends EntityIT {
 	public void testDeleteRelay2Entity() {
 		String id = UUID.randomUUID().toString();
 		insertRelay2Entity(id);
-		Relay2Entity relay2Entity = findById(id);
+		Relay2Entity relay2Entity = findRelay2EntityById(id);
 		
 		removeEntity(relay2Entity);
 		
-		Relay2Entity result = findById(id);
+		Relay2Entity result = findRelay2EntityById(id);
 		assertNull("Relay2Entity has not been deleted correctly!", result);
 	}
 
+	@Test
+	public void testDeleteRelay2Entity_with_one_participant() {
+		int initialParticipants = 1;
+		Relay2Entity sut = getRelay2EntityWithParticipants(Integer.valueOf(initialParticipants));
+		persistEntity(sut);
+		
+		sut = findRelay2EntityById(sut.getId());
+		ParticipantEntity participantEntity = sut.getParticipantEntities().get(0);
+		String participantIdNotToBeFound = participantEntity.getId();
+		
+		removeEntity(sut);
+		
+		ParticipantEntity result = getEntityManager().find(ParticipantEntity.class, participantIdNotToBeFound);
+		assertNull("Relay2Entity has not been deleted correctly!", result);
+	}
+
+	@Test
+	public void testRelationToRelayEvent() {
+		RelayEventEntity expected = getRelayEventEntity();
+
+		String id = UUID.randomUUID().toString();
+		insertRelay2Entity(id);
+		Relay2Entity relay2Entity = findRelay2EntityById(id);
+		
+		RelayEventEntity actual = relay2Entity.getRelayEventEntity();
+		
+		assertEquals("Relation to 'RelayEventEntity' has not been resolved correctly!", expected, actual);
+	}
+	
 	private Relay2Entity insertRelay2Entity(String anId) {
 		Relay2Entity relay2Entity = getDefaultRelay2Entity(anId);
 		persistEntity(relay2Entity);
@@ -207,7 +241,7 @@ public class Relay2EntityIT extends EntityIT {
 		return relay2Entity;
 	}
 
-	private Relay2Entity findById(String anId) {
+	private Relay2Entity findRelay2EntityById(String anId) {
 		return getEntityManager().find(Relay2Entity.class, anId);
 	}
 	
