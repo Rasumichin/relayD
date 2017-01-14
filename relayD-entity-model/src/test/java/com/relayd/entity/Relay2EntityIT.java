@@ -141,6 +141,30 @@ public class Relay2EntityIT extends EntityIT {
 	}
 
 	@Test
+	public void testUpdateRelay2Entity_Remove_Participant() {
+		int initialParticipants = 3;
+		Relay2Entity sut = getRelay2EntityWithParticipants(Integer.valueOf(initialParticipants));
+		persistEntity(sut);
+		
+		sut = findById(sut.getId());
+		ParticipantEntity participantToBeRemoved = sut.getParticipantEntities().get(0);
+		sut.removeParticipantEntity(participantToBeRemoved);
+		
+		Relay2Entity result = mergeEntity(sut);
+		
+		List<ParticipantEntity> participants = result.getParticipantEntities();
+		int expected = 2;
+		int actual = participants.size();
+		assertEquals("Relation to 'ParticipantEntity' has not been resolved correctly!", expected, actual);
+		
+		String removedId = participantToBeRemoved.getId();
+		for (ParticipantEntity eachParticipant : result.getParticipantEntities()) {
+			String actualId = eachParticipant.getId();
+			assertNotEquals("Relation to 'ParticipantEntity' has not been resolved correctly!", removedId, actualId);
+		}
+	}
+
+	@Test
 	public void testUpdateRelay2Entity_Set_RelayEventEntity() {
 		String id = UUID.randomUUID().toString();
 		insertRelay2Entity(id);
