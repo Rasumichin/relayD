@@ -246,10 +246,12 @@ public class RelayBrowsePageBeanTest {
 	}
 
 	@Test
-	public void testIsParticipantRowSelected() {
-		boolean condition = sut.isParticipantRowSelected();
+	public void testIsRelayTableRowSelected() {
+		sut.setSelectedNode(null);
 
-		assertFalse("Participant selected not corret!", condition);
+		boolean condition = sut.isRelayTableRowSelected();
+
+		assertFalse("RelayTableRow selected not corret!", condition);
 	}
 
 	@Test
@@ -257,9 +259,9 @@ public class RelayBrowsePageBeanTest {
 		TreeNode selectedTreeNode = new DefaultTreeNode(TreeNodeRow.newInstance(Participant.newInstance(), Position.FIRST));
 		sut.setSelectedNode(selectedTreeNode);
 
-		boolean condition = sut.isParticipantRowSelected();
+		boolean condition = sut.isRelayTableRowSelected();
 
-		assertTrue("Participant selected not correct!", condition);
+		assertTrue("RelayTableRow selected not correct!", condition);
 	}
 
 	@Test
@@ -267,9 +269,9 @@ public class RelayBrowsePageBeanTest {
 		TreeNode selectedTreeNode = new DefaultTreeNode(TreeNodeRow.newInstance(Relay.newInstance()));
 		sut.setSelectedNode(selectedTreeNode);
 
-		boolean condition = sut.isParticipantRowSelected();
+		boolean condition = sut.isRelayTableRowSelected();
 
-		assertFalse("Participant selected not correct!", condition);
+		assertTrue("RelayTableRow selected not correct!", condition);
 	}
 
 	@Test

@@ -2,8 +2,6 @@ package com.relayd.web.pagebean;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
@@ -57,7 +55,7 @@ public class RelayBrowsePageBean implements Serializable {
 	private List<Person> filteredPersons;
 
 	private List<Person> selectedPersons;
-	
+
 	@ManagedProperty(value = "#{personEditPageBean}")
 	private PersonEditPageBean personEditPageBean;
 
@@ -120,16 +118,15 @@ public class RelayBrowsePageBean implements Serializable {
 		return false;
 	}
 
-	boolean isParticipantRowSelected() {
+	boolean isRelayTableRowSelected() {
 		if (selectedTreeNode != null) {
-			TreeNodeRow selectedRelayNode = (TreeNodeRow) selectedTreeNode.getData();
-			return !selectedRelayNode.isRelay();
+			return true;
 		}
 		return false;
 	}
 
 	public void addPersonToRelay(@SuppressWarnings("unused") ActionEvent actionEvent) {
-		if (!isRelayRowSelected() && !isParticipantRowSelected()) {
+		if (!isRelayTableRowSelected()) {
 			showMessage(FacesMessage.SEVERITY_ERROR, NOT_POSSIBLE, "Please select a Row!");
 		} else if (isRelayRowSelected()) {
 			showMessage(FacesMessage.SEVERITY_ERROR, NOT_POSSIBLE, "Only for Participant Row possible!");
@@ -147,7 +144,7 @@ public class RelayBrowsePageBean implements Serializable {
 	}
 
 	public void removePersonFromRelay(@SuppressWarnings("unused") ActionEvent actionEvent) {
-		if (!isRelayRowSelected() && !isParticipantRowSelected()) {
+		if (!isRelayTableRowSelected()) {
 			showMessage(FacesMessage.SEVERITY_ERROR, NOT_POSSIBLE, "Please select a Row!");
 		} else if (isRelayRowSelected()) {
 			showMessage(FacesMessage.SEVERITY_ERROR, NOT_POSSIBLE, "Only for Participant Row possible!");
@@ -315,12 +312,12 @@ public class RelayBrowsePageBean implements Serializable {
 			treeNode.setSelected(false);
 		}
 	}
-	
+
 	public String relayCountOf(Person aPerson) {
 		int relayCount = belongsToRelay(aPerson);
 		return "(" + relayCount + ")";
 	}
-	
+
 	public String statusOf(Person aPerson) {
 		int relayCount = belongsToRelay(aPerson);
 		if (relayCount > 0) {
@@ -348,7 +345,7 @@ public class RelayBrowsePageBean implements Serializable {
 						relayCount++;
 					}
 				}
-				
+
 			}
 		}
 		return relayCount;
