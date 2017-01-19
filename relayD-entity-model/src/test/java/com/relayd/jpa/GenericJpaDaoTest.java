@@ -1,17 +1,17 @@
 package com.relayd.jpa;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
-import javax.persistence.EntityManager;
+import javax.persistence.*;
 
-import org.junit.FixMethodOrder;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runners.MethodSorters;
 import org.mockito.Mockito;
 
 /**
- * Second Law of TDD: You are not allowed to write any more of a unit test than is sufficient to fail;
- * and compilation failures are failures.
+ * Second Law of TDD: You may not write more of a unit test than is sufficient to fail,
+ * and not compiling is failing.
  *  - Robert C. Martin (Chapter 9 of "Clean Code")
  *
  * @author Rasumichin (Erik@relayd.de)
@@ -20,18 +20,63 @@ import org.mockito.Mockito;
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class GenericJpaDaoTest {
-
+	private static EntityManager EM = Mockito.mock(EntityManager.class);
+	
+	private EntityTransaction tx = Mockito.mock(EntityTransaction.class);
+	private GenericJpaDao sut = GenericJpaDao.newInstance(EM);
+	
 	@Test
 	public void testNewInstance() {
-		EntityManager em = Mockito.mock(EntityManager.class);
-
-		GenericJpaDao sut = GenericJpaDao.newInstance(em);
 		assertNotNull("Instance could not be created!", sut);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testNewInstance_withNull() {
-		@SuppressWarnings("unused")
-		GenericJpaDao sut = GenericJpaDao.newInstance(null);
+		GenericJpaDao.newInstance(null);
+	}
+	
+	@Test
+	public void testGetEntityManager() {
+		EntityManager actual = sut.getEntityManager();
+		
+		assertEquals("EntityManager is not correct!", EM, actual);
+	}
+	
+	@Test
+	public void testPersistEntity() {
+		String entity = "Some Entity";
+		
+		doReturn(tx).when(EM).getTransaction();
+		sut.persistEntity(entity);
+		
+		verify(EM, times(1)).persist(entity);
+	}
+
+	@Test
+	public void testMergeEntity() {
+		String entity = "Some Entity";
+		
+		doReturn(tx).when(EM).getTransaction();
+		sut.mergeEntity(entity);
+		
+		verify(EM, times(1)).merge(entity);
+	}
+
+	@Test
+	public void testRemoveEntity() {
+		String entity = "Some Entity";
+		
+		doReturn(tx).when(EM).getTransaction();
+		sut.removeEntity(entity);
+		
+		verify(EM, times(1)).remove(entity);
+	}
+	
+	@Test
+	public void testClose() {
+		sut.close();
+		
+		EntityManager actual = sut.getEntityManager();
+		assertNull("Closing was not correct!", actual);
 	}
 }
