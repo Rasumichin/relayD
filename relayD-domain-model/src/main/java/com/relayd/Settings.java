@@ -5,6 +5,8 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.util.Properties;
 
+import com.relayd.ejb.GatewayType;
+
 /**
  * @author schmollc (Christian@relayd.de)
  * @since 16.10.2016
@@ -20,6 +22,8 @@ public class Settings implements Serializable {
 	private static final String TO_DO = "ToDo";
 
 	private String theme = "afterwork";
+
+	private static GatewayType gatewayType = GatewayType.JPA;
 
 	private Settings() {
 		super();
@@ -39,8 +43,12 @@ public class Settings implements Serializable {
 		return TO_DO;
 	}
 
-	public String getGatewayType() {
-		return TO_DO;
+	public static GatewayType getGatewayType() {
+		return gatewayType;
+	}
+
+	public static void setGatewayType(GatewayType aGatewayType) {
+		gatewayType = aGatewayType;
 	}
 
 	public String getRelayAppendix() {

@@ -9,6 +9,8 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import com.relayd.ejb.GatewayType;
+
 /**
  * If you don't like unit testing your product, most likely your customers won't like to test it either.
  * - Anonymous
@@ -25,9 +27,9 @@ public class SettingsTest {
 	public void testIsSerializable() {
 
 		@SuppressWarnings("cast")
-		boolean result = sut instanceof Serializable;
+		boolean condition = sut instanceof Serializable;
 
-		assertTrue("Class not Serializable!", result);
+		assertTrue("Class not Serializable!", condition);
 	}
 
 	@Test
@@ -45,10 +47,18 @@ public class SettingsTest {
 	}
 
 	@Test
-	public void testGetGatewayType() {
-		String actual = sut.getGatewayType();
+	public void testGatewayType() {
+		GatewayType defaultValue = Settings.getGatewayType();
 
-		assertEquals("[getGatewayType] not correct!", "ToDo", actual);
+		assertEquals("Default GatewayType not correct!", GatewayType.JPA, defaultValue);
+
+		GatewayType expected = GatewayType.FILE;
+
+		Settings.setGatewayType(expected);
+
+		GatewayType actual = Settings.getGatewayType();
+
+		assertEquals("[gatewayType] nicht korrekt!", expected, actual);
 	}
 
 	@Test
