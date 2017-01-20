@@ -7,6 +7,7 @@ import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.TreeNode;
 
 import com.relayd.Relay;
+import com.relayd.Settings;
 import com.relayd.attributes.Position;
 import com.relayd.ejb.GatewayType;
 import com.relayd.ejb.RelayGateway;
@@ -19,19 +20,11 @@ import com.relayd.ejb.RelayGatewayFactory;
  */
 public class RelayBridgeImpl implements RelayBridge {
 
-	private RelayGateway gateway = null;
-	private GatewayType gatewayType = GatewayType.JPA;
-
-	public RelayBridgeImpl() {
-		super();
-		gateway = RelayGatewayFactory.get(getGatewayType());
-	}
-
 	@Override
 	public TreeNode all() {
 		TreeNode root = new DefaultTreeNode();
 
-		List<Relay> all = gateway.getAll();
+		List<Relay> all = getGateway().getAll();
 
 		for (Relay relay : all) {
 
@@ -50,12 +43,12 @@ public class RelayBridgeImpl implements RelayBridge {
 
 	@Override
 	public GatewayType getGatewayType() {
-		return gatewayType;
+		return Settings.getGatewayType();
 	}
 
 	@Override
 	public void set(Relay relay) {
-		gateway.set(relay);
+		getGateway().set(relay);
 	}
 
 	/**
@@ -87,12 +80,16 @@ public class RelayBridgeImpl implements RelayBridge {
 					relay.addParticipant(participantRow.getParticipant(), Position.FIRST);
 
 			}
-			gateway.set(relay);
+			getGateway().set(relay);
 		}
 	}
 
 	@Override
 	public Relay get(UUID uuid) {
-		return gateway.get(uuid);
+		return getGateway().get(uuid);
+	}
+
+	public RelayGateway getGateway() {
+		return RelayGatewayFactory.get(getGatewayType());
 	}
 }

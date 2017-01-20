@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.UUID;
 
 import com.relayd.Person;
+import com.relayd.Settings;
 import com.relayd.attributes.Email;
 import com.relayd.ejb.GatewayType;
 import com.relayd.ejb.PersonGateway;
@@ -21,31 +22,24 @@ import com.relayd.web.browse.PersonBrowse;
  */
 public class PersonBridgeImpl implements PersonBridge {
 
-	private PersonGateway gateway = null;
-	private GatewayType gatewayType = GatewayType.JPA;
-
-	public PersonBridgeImpl() {
-		gateway = PersonGatewayFactory.get(getGatewayType());
-	}
-
 	@Override
 	public List<Person> all() {
-		return gateway.getAll();
+		return getGateway().getAll();
 	}
 
 	@Override
 	public void persistPerson(Person aPerson) {
-		gateway.set(aPerson);
+		getGateway().set(aPerson);
 	}
 
 	@Override
 	public Person get(UUID uuid) {
-		return gateway.get(uuid);
+		return getGateway().get(uuid);
 	}
 
 	@Override
 	public void remove(Person person) {
-		gateway.remove(person.getUuid());
+		getGateway().remove(person.getUuid());
 	}
 
 	@Override
@@ -81,7 +75,7 @@ public class PersonBridgeImpl implements PersonBridge {
 
 	@Override
 	public GatewayType getGatewayType() {
-		return gatewayType;
+		return Settings.getGatewayType();
 	}
 
 	@Override
@@ -107,5 +101,9 @@ public class PersonBridgeImpl implements PersonBridge {
 													.build();
 		//@formatter:on
 		return personBrowse;
+	}
+
+	public PersonGateway getGateway() {
+		return PersonGatewayFactory.get(getGatewayType());
 	}
 }
