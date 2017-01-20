@@ -47,18 +47,16 @@ public class SettingsTest {
 	}
 
 	@Test
-	public void testGetGatewayType_ForDefault() {
-		GatewayType actual = sut.getGatewayType();
-		assertEquals("Default GatewayType not correct!", GatewayType.JPA, actual);
-	}
-
-	@Test
 	public void testGatewayType() {
+		GatewayType defaultValue = Settings.getGatewayType();
+
+		assertEquals("Default GatewayType not correct!", GatewayType.JPA, defaultValue);
+
 		GatewayType expected = GatewayType.FILE;
 
-		sut.setGatewayType(expected);
+		Settings.setGatewayType(expected);
 
-		GatewayType actual = sut.getGatewayType();
+		GatewayType actual = Settings.getGatewayType();
 
 		assertEquals("[gatewayType] nicht korrekt!", expected, actual);
 	}

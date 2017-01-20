@@ -23,7 +23,7 @@ public class Settings implements Serializable {
 
 	private String theme = "afterwork";
 
-	private GatewayType gatewayType = GatewayType.JPA;
+	private static GatewayType gatewayType = GatewayType.JPA;
 
 	private Settings() {
 		super();
@@ -43,11 +43,11 @@ public class Settings implements Serializable {
 		return TO_DO;
 	}
 
-	public GatewayType getGatewayType() {
+	public static GatewayType getGatewayType() {
 		return gatewayType;
 	}
 
-	public void setGatewayType(GatewayType aGatewayType) {
+	public static void setGatewayType(GatewayType aGatewayType) {
 		gatewayType = aGatewayType;
 	}
 
