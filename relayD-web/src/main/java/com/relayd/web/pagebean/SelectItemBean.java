@@ -11,6 +11,7 @@ import javax.faces.bean.SessionScoped;
 
 import com.relayd.attributes.Position;
 import com.relayd.attributes.Shirtsize;
+import com.relayd.ejb.GatewayType;
 
 /**
  * Holds the methods for Comboboxes in the GUI.
@@ -26,12 +27,24 @@ public class SelectItemBean implements Serializable {
 
 	private List<Shirtsize> shirtsizes;
 	private List<Position> positions;
+	private List<GatewayType> gateways;
+
+	// TODO -small- (Version 1.4): Wird nicht mehr benötigt. Kann gelöscht werden.
 	private List<Locale> nationalities;
 
 	public SelectItemBean() {
 		initShirtsizes();
 		initPositions();
 		initAllNationalities();
+		initGateways();
+	}
+
+	private void initGateways() {
+		gateways = new ArrayList<GatewayType>();
+
+		for (GatewayType eachGatewayType : GatewayType.values()) {
+			gateways.add(eachGatewayType);
+		}
 	}
 
 	private void initShirtsizes() {
@@ -76,4 +89,7 @@ public class SelectItemBean implements Serializable {
 		return Collections.unmodifiableList(nationalities);
 	}
 
+	public List<GatewayType> getGatewayTypes() {
+		return Collections.unmodifiableList(gateways);
+	}
 }

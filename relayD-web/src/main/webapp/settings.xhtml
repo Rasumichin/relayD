@@ -38,12 +38,12 @@
 				<p:outputLabel value="#{settingsPageBean.emailDomain}" />
 				<p:outputLabel value="Relay Appendix: " />
 				<p:outputLabel value="#{settingsPageBean.relayAppendix}" />
-				<p:outputLabel value="Gateway: " />
-				<p:outputLabel value="#{settingsPageBean.gatewayType}" />
 				<p:outputLabel value="Anmeldeschluß: " />
 				<p:outputLabel value="#{settingsPageBean.closingDate}" />
 				<p:outputLabel value="Theme: " />
-				<p:themeSwitcher style="width:150px" effect="fade">
+				<p:themeSwitcher
+					style="width:150px"
+					effect="fade">
 					<f:selectItem
 						itemLabel="Choose Theme"
 						itemValue="" />
@@ -52,6 +52,25 @@
 						global="false"
 						listener="#{settingsPageBean.saveTheme}" />
 				</p:themeSwitcher>
+
+				<p:outputLabel
+					for="gatewayType"
+					value="Gateway Type:" />
+
+				<p:selectOneMenu
+					id="gatewayType"
+					value="#{settingsPageBean.gatewayType}"
+					var="entry"
+					style="width:150px">
+					<f:selectItems
+						value="#{selectItemBean.gatewayTypes}"
+						var="gateway"
+						itemValue="#{gateway}" />
+					<p:column>
+					#{entry}
+				</p:column>
+				</p:selectOneMenu>
+
 			</h:panelGrid>
 		</p:panel>
 

@@ -11,6 +11,7 @@ import org.junit.runners.MethodSorters;
 
 import com.relayd.attributes.Position;
 import com.relayd.attributes.Shirtsize;
+import com.relayd.ejb.GatewayType;
 
 /**
  * Testen ist wie Rudern gegen den Strom. Hört man damit auf, treibt man zurück.
@@ -23,6 +24,17 @@ import com.relayd.attributes.Shirtsize;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class SelectItemBeanTest {
 	private SelectItemBean sut = new SelectItemBean();
+
+	@Test
+	public void testGetGatewayTypes() {
+		List<GatewayType> result = sut.getGatewayTypes();
+
+		assertNotNull("[result] not correct!", result);
+
+		int size = result.size();
+
+		assertEquals("[result] size not correct!", 3, size);
+	}
 
 	@Test
 	public void testGetShirtsizes() {

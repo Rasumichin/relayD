@@ -8,9 +8,9 @@ import java.util.List;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
-import org.mockito.Mockito;
 
 import com.relayd.Settings;
+import com.relayd.ejb.GatewayType;
 import com.relayd.web.theme.Theme;
 import com.relayd.web.theme.ThemeService;
 
@@ -53,7 +53,7 @@ public class SettingsPageBeanTest {
 
 	@Test
 	public void testInit() {
-		ThemeService serviceMock = Mockito.mock(ThemeService.class);
+		ThemeService serviceMock = mock(ThemeService.class);
 		sut.service = serviceMock;
 
 		sut.init();
@@ -76,30 +76,41 @@ public class SettingsPageBeanTest {
 
 	@Test
 	public void getVersion() {
-		Settings settingsMock = Mockito.mock(Settings.class);
+		Settings settingsMock = mock(Settings.class);
 		sut.settings = settingsMock;
 		String expected = "Version 0.0";
-		Mockito.doReturn(expected).when(settingsMock).getVersion();
+		doReturn(expected).when(settingsMock).getVersion();
 
 		String actual = sut.getVersion();
 
-		Mockito.verify(settingsMock).getVersion();
+		verify(settingsMock).getVersion();
 		assertEquals("[version] not correct!", expected, actual);
 
 	}
 
 	@Test
 	public void getRelayAppendix() {
-		Settings settingsMock = Mockito.mock(Settings.class);
+		Settings settingsMock = mock(Settings.class);
 		sut.settings = settingsMock;
 		String expected = " @ C&A";
-		Mockito.doReturn(expected).when(settingsMock).getRelayAppendix();
+		doReturn(expected).when(settingsMock).getRelayAppendix();
 
 		String actual = sut.getRelayAppendix();
 
-		Mockito.verify(settingsMock).getRelayAppendix();
+		verify(settingsMock).getRelayAppendix();
 		assertEquals("[relayAppendix] not correct!", expected, actual);
 
+	}
+
+	@Test
+	public void testGatewayType() {
+		GatewayType expected = GatewayType.JPA;
+
+		sut.setGatewayType(expected);
+
+		GatewayType actual = sut.getGatewayType();
+
+		assertEquals("[gatewayType] nicht korrekt!", expected, actual);
 	}
 
 }

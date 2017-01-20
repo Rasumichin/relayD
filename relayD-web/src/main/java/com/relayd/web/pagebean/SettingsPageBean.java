@@ -12,6 +12,7 @@ import javax.faces.event.AjaxBehaviorEvent;
 import org.primefaces.component.themeswitcher.ThemeSwitcher;
 
 import com.relayd.Settings;
+import com.relayd.ejb.GatewayType;
 import com.relayd.web.theme.Theme;
 import com.relayd.web.theme.ThemeService;
 
@@ -28,6 +29,8 @@ public class SettingsPageBean implements Serializable {
 	Settings settings = Settings.newInstance();
 
 	private List<Theme> themes;
+
+	private GatewayType gatewayType = GatewayType.FILE;
 
 	@ManagedProperty("#{themeService}")
 	ThemeService service;
@@ -57,8 +60,12 @@ public class SettingsPageBean implements Serializable {
 		return settings.getRelayAppendix();
 	}
 
-	public String getGatewayType() {
-		return settings.getGatewayType();
+	public GatewayType getGatewayType() {
+		return gatewayType;
+	}
+
+	public void setGatewayType(GatewayType aGatewayType) {
+		gatewayType = aGatewayType;
 	}
 
 	public String getClosingDate() {
