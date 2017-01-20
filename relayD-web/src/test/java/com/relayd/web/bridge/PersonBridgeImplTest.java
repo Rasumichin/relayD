@@ -10,8 +10,7 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
+import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.relayd.Person;
@@ -22,7 +21,6 @@ import com.relayd.attributes.Shirtsize;
 import com.relayd.attributes.Surename;
 import com.relayd.attributes.YearOfBirth;
 import com.relayd.ejb.GatewayType;
-import com.relayd.ejb.PersonGateway;
 import com.relayd.web.browse.PersonBrowse;
 import com.relayd.web.pagebean.PersonBuilder;
 
@@ -48,15 +46,12 @@ public class PersonBridgeImplTest {
 
 	private static final String EMAIL_BOB = "Bob.Andrews@RockyBeach.com";
 
-	@InjectMocks
+	@Spy
 	private PersonBridgeImpl sut = new PersonBridgeImpl();
-
-	@Mock
-	private PersonGateway gateway;
 
 	@Test
 	public void testValidateEMail_ForNewPersonWithSameEMail() {
-		doReturn(listWithPersons()).when(gateway).getAll();
+		doReturn(listWithPersons()).when(sut).all();
 		Person newPerson = Person.newInstance();
 		newPerson.setEmail(Email.newInstance(EMAIL_JUSTUS));
 
@@ -67,7 +62,7 @@ public class PersonBridgeImplTest {
 
 	@Test
 	public void testValidateEMail_ForNewPersonWithNotSameEMail() {
-		doReturn(listWithPersons()).when(gateway).getAll();
+		doReturn(listWithPersons()).when(sut).all();
 		Person newPerson = Person.newInstance();
 		newPerson.setEmail(Email.newInstance(EMAIL_BOB));
 
@@ -79,7 +74,7 @@ public class PersonBridgeImplTest {
 	@Test
 	public void testValidateEMail_ForExistingPersonWithEMail() {
 		List<Person> somePersons = listWithPersons();
-		doReturn(somePersons).when(gateway).getAll();
+		doReturn(somePersons).when(sut).all();
 
 		int positionFomrPeterShaw = 2;
 		Person person = somePersons.get(positionFomrPeterShaw);
@@ -142,7 +137,7 @@ public class PersonBridgeImplTest {
 
 	@Test
 	public void testAllPersonBrowse() {
-		doReturn(listWithPersons()).when(gateway).getAll();
+		doReturn(listWithPersons()).when(sut).all();
 
 		List<PersonBrowse> actual = sut.allPersonBrowse();
 
