@@ -89,7 +89,7 @@ public class SelectItemBean implements Serializable {
 		return Collections.unmodifiableList(nationalities);
 	}
 
-	public List<GatewayType> getGateways() {
+	public List<GatewayType> getGatewayTypes() {
 		return Collections.unmodifiableList(gateways);
 	}
 }

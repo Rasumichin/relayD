@@ -26,8 +26,8 @@ public class SelectItemBeanTest {
 	private SelectItemBean sut = new SelectItemBean();
 
 	@Test
-	public void testGetGateways() {
-		List<GatewayType> result = sut.getGateways();
+	public void testGetGatewayTypes() {
+		List<GatewayType> result = sut.getGatewayTypes();
 
 		assertNotNull("[result] not correct!", result);
 
