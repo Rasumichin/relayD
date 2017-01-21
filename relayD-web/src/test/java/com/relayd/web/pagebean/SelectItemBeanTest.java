@@ -3,7 +3,6 @@ package com.relayd.web.pagebean;
 import static org.junit.Assert.*;
 
 import java.util.List;
-import java.util.Locale;
 
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -67,10 +66,4 @@ public class SelectItemBeanTest {
 	public void testPositionsModify() {
 		sut.getPositions().add(Position.FIRST);
 	}
-
-	@Test(expected = UnsupportedOperationException.class)
-	public void testModifyNationalities() {
-		sut.getNationalities().add(Locale.CANADA);
-	}
-
 }
