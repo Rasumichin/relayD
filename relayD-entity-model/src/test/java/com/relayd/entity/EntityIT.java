@@ -7,17 +7,20 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 
+import com.relayd.jpa.GenericJpaDao;
+
 /**
  * To create quality software, the ability to say „no“ is usually far more important than the ability to say „yes“.
  *  - Michi Henning
  *
  * @author schmollc (Christian@relayd.de)
+ * @author Rasumichin (Erik@relayd.de)
  * @since 20.11.2016
  *
  */
 public abstract class EntityIT {
 	private static EntityManagerFactory EMF;
-	private EntityManager entityManager;
+	private GenericJpaDao jpaDao;
 
 	@BeforeClass
 	public static void setUpBeforeClass() {
@@ -31,22 +34,18 @@ public abstract class EntityIT {
 
 	@Before
 	public void setUp() {
-		setEntityManager(EMF.createEntityManager());
+		jpaDao = GenericJpaDao.newInstance(EMF.createEntityManager());
 	}
 
 	@After
 	public void tearDown() {
-		getEntityManager().close();
+		jpaDao.close();
 	}
 
 	public EntityManager getEntityManager() {
-		return entityManager;
+		return jpaDao.getEntityManager();
 	}
 
-	public void setEntityManager(EntityManager aEntityManager) {
-		entityManager = aEntityManager;
-	}
-	
 	protected <T> void removeEntity(T anEntity) {
 		EntityTransaction tx = getEntityManager().getTransaction();
 

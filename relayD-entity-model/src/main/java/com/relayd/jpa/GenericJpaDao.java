@@ -23,7 +23,7 @@ public class GenericJpaDao {
 		return new GenericJpaDao(anEntityManager);
 	}
 
-	EntityManager getEntityManager() {
+	public EntityManager getEntityManager() {
 		return entityManager;
 	}
 
