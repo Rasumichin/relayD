@@ -27,6 +27,12 @@
 		<p:toolbar>
 			<f:facet name="left">
 				<p:commandButton
+					actionListener="#{personBrowsePageBean.showAll}"
+					icon="ui-icon-arrowrefresh-1-w"
+					update="personTable">
+				</p:commandButton>
+	
+				<p:commandButton
 					actionListener="#{personBrowsePageBean.add}"
 					icon="ui-icon-plus"
 					update="personTable">

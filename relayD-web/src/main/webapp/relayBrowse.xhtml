@@ -40,6 +40,11 @@
 				<p:toolbar>
 					<f:facet name="left">
 						<p:commandButton
+							actionListener="#{relayBrowsePageBean.showAllRelays}"
+							icon="ui-icon-arrowrefresh-1-w"
+							update="relayTable">
+						</p:commandButton>
+						<p:commandButton
 							update="relayTable"
 							icon="ui-icon-plus"
 							actionListener="#{relayBrowsePageBean.addRelay}">
@@ -127,6 +132,11 @@
 
 				<p:toolbar>
 					<f:facet name="right">
+						<p:commandButton
+							actionListener="#{relayBrowsePageBean.showAllPersons}"
+							icon="ui-icon-arrowrefresh-1-w"
+							update="personTable">
+						</p:commandButton>
 						<p:commandButton
 							icon="ui-icon-plus"
 							actionListener="#{relayBrowsePageBean.addPerson}">

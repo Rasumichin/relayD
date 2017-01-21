@@ -172,7 +172,11 @@ public class RelayBrowsePageBean implements Serializable {
 		refreshRelays();
 	}
 
-	public void showAll() {
+	public void showAllRelays() {
+		refreshRelays();
+	}
+
+	public void showAllPersons() {
 		refreshPersons();
 	}
 

@@ -30,8 +30,6 @@ public class SettingsPageBean implements Serializable {
 
 	private List<Theme> themes;
 
-	private GatewayType gatewayType = GatewayType.FILE;
-
 	@ManagedProperty("#{themeService}")
 	ThemeService service;
 
@@ -61,11 +59,11 @@ public class SettingsPageBean implements Serializable {
 	}
 
 	public GatewayType getGatewayType() {
-		return gatewayType;
+		return Settings.getGatewayType();
 	}
 
 	public void setGatewayType(GatewayType aGatewayType) {
-		gatewayType = aGatewayType;
+		Settings.setGatewayType(aGatewayType);
 	}
 
 	public String getClosingDate() {

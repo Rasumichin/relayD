@@ -29,17 +29,25 @@
 			header="Settings"
 			style="margin-bottom:10px;">
 			<h:panelGrid
-				columns="2"
+				columns="3"
 				id="inputgrid"
 				cellpadding="5">
 				<p:outputLabel value="Version:" />
 				<p:outputLabel value="#{settingsPageBean.version}" />
+				<p:outputLabel value="" />
+
 				<p:outputLabel value="Mail Domain: " />
 				<p:outputLabel value="#{settingsPageBean.emailDomain}" />
+				<p:outputLabel value="" />
+
 				<p:outputLabel value="Relay Appendix: " />
 				<p:outputLabel value="#{settingsPageBean.relayAppendix}" />
+				<p:outputLabel value="" />
+
 				<p:outputLabel value="Anmeldeschluß: " />
 				<p:outputLabel value="#{settingsPageBean.closingDate}" />
+				<p:outputLabel value="" />
+
 				<p:outputLabel value="Theme: " />
 				<p:themeSwitcher
 					style="width:150px"
@@ -52,11 +60,11 @@
 						global="false"
 						listener="#{settingsPageBean.saveTheme}" />
 				</p:themeSwitcher>
+				<p:outputLabel value="" />
 
 				<p:outputLabel
 					for="gatewayType"
 					value="Gateway Type:" />
-
 				<p:selectOneMenu
 					id="gatewayType"
 					value="#{settingsPageBean.gatewayType}"
@@ -70,6 +78,10 @@
 					#{entry}
 				</p:column>
 				</p:selectOneMenu>
+				<p:commandButton
+					update="form"
+					icon="ui-icon-check"
+					style="float:right;" />
 
 			</h:panelGrid>
 		</p:panel>
