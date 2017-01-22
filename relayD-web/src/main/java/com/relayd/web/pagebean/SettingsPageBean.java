@@ -9,6 +9,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.event.AjaxBehaviorEvent;
 
+import org.primefaces.component.selectonemenu.SelectOneMenu;
 import org.primefaces.component.themeswitcher.ThemeSwitcher;
 
 import com.relayd.Settings;
@@ -80,5 +81,11 @@ public class SettingsPageBean implements Serializable {
 
 	public void saveTheme(AjaxBehaviorEvent ajax) {
 		setTheme((String) ((ThemeSwitcher) ajax.getSource()).getValue());
+	}
+
+	public void saveGatewayType(AjaxBehaviorEvent ajax) {
+		SelectOneMenu selectOneMenu = (SelectOneMenu) ajax.getSource();
+		GatewayType selectedGatewayType = (GatewayType) selectOneMenu.getValue();
+		Settings.setGatewayType(selectedGatewayType);
 	}
 }

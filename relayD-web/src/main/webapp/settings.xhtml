@@ -77,12 +77,13 @@
 					<p:column>
 					#{entry}
 				</p:column>
+						<p:ajax
+						global="false"
+						listener="#{settingsPageBean.saveGatewayType}" />
+			
 				</p:selectOneMenu>
-				<p:commandButton
-					update="form"
-					icon="ui-icon-check"
-					style="float:right;" />
-
+				<p:outputLabel value="" />
+			
 			</h:panelGrid>
 		</p:panel>
 
