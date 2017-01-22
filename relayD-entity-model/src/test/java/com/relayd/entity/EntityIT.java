@@ -39,42 +39,28 @@ public abstract class EntityIT {
 
 	@After
 	public void tearDown() {
-		jpaDao.close();
+		getJpaDao().close();
 	}
 
-	public EntityManager getEntityManager() {
-		return jpaDao.getEntityManager();
+	protected EntityManager getEntityManager() {
+		return getJpaDao().getEntityManager();
+	}
+	
+	private GenericJpaDao getJpaDao() {
+		return jpaDao;
 	}
 
 	protected <T> void removeEntity(T anEntity) {
-		EntityTransaction tx = getEntityManager().getTransaction();
-
-		tx.begin();
-		getEntityManager().remove(anEntity);
-		tx.commit();
-
-		getEntityManager().clear();
+		getJpaDao().removeEntity(anEntity);
 	}
 
 	protected <T> T mergeEntity(T anEntity) {
-		EntityTransaction tx = getEntityManager().getTransaction();
-
-		tx.begin();
-		T result = getEntityManager().merge(anEntity);
-		tx.commit();
-
-		getEntityManager().clear();
+		T result = getJpaDao().mergeEntity(anEntity);
 		
 		return result;
 	}
 
 	protected <T> void persistEntity(T anEntity) {
-		EntityTransaction tx = getEntityManager().getTransaction();
-
-		tx.begin();
-		getEntityManager().persist(anEntity);
-		tx.commit();
-
-		getEntityManager().clear();
+		getJpaDao().persistEntity(anEntity);
 	}
 }
