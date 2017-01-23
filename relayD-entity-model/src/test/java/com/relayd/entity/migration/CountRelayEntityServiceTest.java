@@ -22,22 +22,11 @@ public class CountRelayEntityServiceTest {
 	public void testNewInstance() {
 		assertNotNull("Instance could not be created!", sut);
 	}
-
+	
 	@Test
-	public void testCountRelays() {
-		Integer expected = Integer.valueOf(0);
+	public void testGetRelayCounter() {
+		RelayCounter result = sut.getRelayCounter();
 		
-		Integer actual = sut.countRelays();
-		
-		assertEquals("Number of 'relays' were not counted correctly!", expected, actual);
-	}
-
-	@Test
-	public void testCountParticipants() {
-		Integer expected = Integer.valueOf(0);
-		
-		Integer actual = sut.countParticipants();
-		
-		assertEquals("Number of 'participants' were not counted correctly!", expected, actual);
+		assertNotNull("[relayCounter] has not been initialized correctly!", result);
 	}
 }

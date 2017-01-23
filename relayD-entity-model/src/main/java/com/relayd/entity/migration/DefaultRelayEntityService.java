@@ -7,6 +7,7 @@ package com.relayd.entity.migration;
  *
  */
 public class DefaultRelayEntityService implements CountRelayEntityService {
+	private RelayCounter relayCounter = RelayCounter.newIntance();
 
 	private DefaultRelayEntityService() {
 	}
@@ -16,12 +17,7 @@ public class DefaultRelayEntityService implements CountRelayEntityService {
 	}
 
 	@Override
-	public Integer countRelays() {
-		return Integer.valueOf(0);
-	}
-
-	@Override
-	public Integer countParticipants() {
-		return Integer.valueOf(0);
+	public RelayCounter getRelayCounter() {
+		return relayCounter;
 	}
 }

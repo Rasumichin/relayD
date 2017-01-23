@@ -8,6 +8,5 @@ package com.relayd.entity.migration;
  */
 public interface CountRelayEntityService {
 
-	Integer countRelays();
-	Integer countParticipants();
+	RelayCounter getRelayCounter();
 }
