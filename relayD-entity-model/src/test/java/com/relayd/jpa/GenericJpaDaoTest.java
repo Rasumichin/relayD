@@ -84,6 +84,14 @@ public class GenericJpaDaoTest {
 	}
 	
 	@Test
+	public void testCreateQuery() {
+		String jpql = "select m from MyEntity m";
+		
+		sut.createQuery(jpql);
+		verify(EM, times(1)).createQuery(jpql);
+	}
+	
+	@Test
 	public void testClose() {
 		sut.close();
 		

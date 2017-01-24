@@ -79,6 +79,10 @@ public class GenericJpaDao {
 		getEntityManager().clear();
 	}
 	
+	public Query createQuery(String jpql) {
+		return getEntityManager().createQuery(jpql);
+	}
+	
 	public void close() {
 		getEntityManager().close();
 		resetEntityManager();
