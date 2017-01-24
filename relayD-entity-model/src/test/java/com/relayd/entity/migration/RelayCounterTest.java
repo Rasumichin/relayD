@@ -15,7 +15,7 @@ import org.junit.runners.MethodSorters;
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class RelayCounterTest {
-	private RelayCounter sut = RelayCounter.newIntance();
+	private RelayCounter sut = RelayCounter.newInstance();
 
 	@Test
 	public void testNewInstance() {

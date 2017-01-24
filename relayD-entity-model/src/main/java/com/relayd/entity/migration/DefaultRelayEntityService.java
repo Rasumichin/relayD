@@ -13,7 +13,7 @@ import com.relayd.jpa.GenericJpaDao;
 public class DefaultRelayEntityService implements CountRelayEntityService {
 	private static final String PU_NAME = "dataSource";
 
-	private RelayCounter relayCounter = RelayCounter.newIntance();
+	private RelayCounter relayCounter = RelayCounter.newInstance();
 
 	private DefaultRelayEntityService() {
 	}

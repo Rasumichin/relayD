@@ -15,7 +15,7 @@ public class RelayCounter {
 	private RelayCounter() {
 	}
 	
-	public static RelayCounter newIntance() {
+	public static RelayCounter newInstance() {
 		return new RelayCounter();
 	}
 
