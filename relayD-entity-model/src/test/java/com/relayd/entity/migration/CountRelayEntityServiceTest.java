@@ -2,8 +2,13 @@ package com.relayd.entity.migration;
 
 import static org.junit.Assert.*;
 
+import javax.persistence.EntityManager;
+
 import org.junit.*;
 import org.junit.runners.MethodSorters;
+import org.mockito.Mockito;
+
+import com.relayd.jpa.GenericJpaDao;
 
 /**
  * First Law of TDD: You may not write production code until you have written a failing unit test.
@@ -15,12 +20,25 @@ import org.junit.runners.MethodSorters;
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class CountRelayEntityServiceTest {
-	private CountRelayEntityService sut = DefaultRelayEntityService.newInstance();
+	private EntityManager entityManager = Mockito.mock(EntityManager.class);
+	private GenericJpaDao jpaDao = GenericJpaDao.newInstance(entityManager);
+	private CountRelayEntityService sut = DefaultRelayEntityService.newInstance(jpaDao);
 
-	
 	@Test
 	public void testNewInstance() {
 		assertNotNull("Instance could not be created!", sut);
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testNewInstances_With_Null_Value() {
+		DefaultRelayEntityService.newInstance(null);
+	}
+	
+	@Test
+	public void testGetJpaDao() {
+		GenericJpaDao result = ((DefaultRelayEntityService) sut).getJpaDao();
+		
+		assertNotNull("[jpaDao] has not been set correctly!", result);
 	}
 	
 	@Test

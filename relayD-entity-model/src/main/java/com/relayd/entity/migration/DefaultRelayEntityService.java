@@ -1,7 +1,5 @@
 package com.relayd.entity.migration;
 
-import javax.persistence.*;
-
 import com.relayd.jpa.GenericJpaDao;
 
 /**
@@ -11,35 +9,32 @@ import com.relayd.jpa.GenericJpaDao;
  *
  */
 public class DefaultRelayEntityService implements CountRelayEntityService {
-	private static final String PU_NAME = "dataSource";
 
 	private RelayCounter relayCounter = RelayCounter.newInstance();
+	private GenericJpaDao jpaDao;
 
-	private DefaultRelayEntityService() {
+	private DefaultRelayEntityService(GenericJpaDao aJpaDao) {
+		jpaDao = aJpaDao;
 	}
-	
-	public static CountRelayEntityService newInstance() {
-		return new DefaultRelayEntityService();
+
+	public static CountRelayEntityService newInstance(GenericJpaDao aJpaDao) {
+		if (aJpaDao == null) {
+			throw new IllegalArgumentException("[jpaDao] must not be 'null'.");
+		}
+		
+		return new DefaultRelayEntityService(aJpaDao);
 	}
 
 	@Override
 	public RelayCounter getRelayCounter() {
+		count();
 		return relayCounter;
 	}
 
 	private void count() {
-		GenericJpaDao jpaDao = getJpaDao();
 	}
 
 	GenericJpaDao getJpaDao() {
-		GenericJpaDao jpaDao = GenericJpaDao.newInstance(getEntityManager());
-		
 		return jpaDao;
-	}
-	
-	EntityManager getEntityManager() {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory(PU_NAME);
-		
-		return emf.createEntityManager();
 	}
 }
