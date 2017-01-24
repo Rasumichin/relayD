@@ -42,8 +42,8 @@ public class CountRelayEntityServiceTest {
 	}
 	
 	@Test
-	public void testGetRelayCounter() {
-		RelayCounter result = sut.getRelayCounter();
+	public void testCount() {
+		RelayCounter result = sut.count();
 		
 		assertNotNull("[relayCounter] has not been initialized correctly!", result);
 	}

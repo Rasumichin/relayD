@@ -26,12 +26,8 @@ public class DefaultRelayEntityService implements CountRelayEntityService {
 	}
 
 	@Override
-	public RelayCounter getRelayCounter() {
-		count();
+	public RelayCounter count() {
 		return relayCounter;
-	}
-
-	private void count() {
 	}
 
 	GenericJpaDao getJpaDao() {
