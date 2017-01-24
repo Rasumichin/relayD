@@ -23,10 +23,6 @@ public class GenericJpaDao {
 		return new GenericJpaDao(anEntityManager);
 	}
 
-	public EntityManager getEntityManager() {
-		return entityManager;
-	}
-
 	public <T> void persistEntity(T anEntity) {
 		startTransaction();
 
@@ -43,11 +39,24 @@ public class GenericJpaDao {
 		tx.begin();
 	}
 
+	public EntityManager getEntityManager() {
+		return entityManager;
+	}
+	
 	protected void commitTransaction() {
 		EntityManager em = getEntityManager();
 		EntityTransaction tx = em.getTransaction();
 
 		tx.commit();
+	}
+
+	public <T> T findById(Class<T> entityClass, Object id) {
+		startTransaction();
+		
+		T result = getEntityManager().find(entityClass, id);
+		commitTransaction();
+		
+		return result;
 	}
 
 	public <T> T mergeEntity(T anEntity) {

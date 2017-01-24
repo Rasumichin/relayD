@@ -73,6 +73,17 @@ public class GenericJpaDaoTest {
 	}
 	
 	@Test
+	public void testFindById() {
+		Class<String> entityClass = String.class;
+		String id = "id";
+		
+		doReturn(tx).when(EM).getTransaction();
+		sut.findById(entityClass, id);
+		
+		verify(EM, times(1)).find(entityClass, id);
+	}
+	
+	@Test
 	public void testClose() {
 		sut.close();
 		
