@@ -3,6 +3,8 @@ package com.relayd.jpa;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
+import java.util.*;
+
 import javax.persistence.*;
 
 import org.junit.*;
@@ -84,11 +86,23 @@ public class GenericJpaDaoTest {
 	}
 	
 	@Test
-	public void testCreateQuery() {
+	public void testPerformSelectQuery() {
 		String jpql = "select m from MyEntity m";
+		List<?> expected = new ArrayList<>();
 		
-		sut.createQuery(jpql);
+		Query query = Mockito.mock(Query.class);
+		doReturn(expected).when(query).getResultList();
+		doReturn(query).when(EM).createQuery(jpql);
+		
+		sut.performSelectQuery(jpql);
+		
 		verify(EM, times(1)).createQuery(jpql);
+		verify(query, times(1)).getResultList();
+	}
+
+	@Test(expected=IllegalArgumentException.class)
+	public void testPerformSelectQuery_withNull() {
+		sut.performSelectQuery(null);
 	}
 	
 	@Test

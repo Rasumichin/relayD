@@ -1,5 +1,7 @@
 package com.relayd.jpa;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 /**
@@ -79,8 +81,15 @@ public class GenericJpaDao {
 		getEntityManager().clear();
 	}
 	
-	public Query createQuery(String jpql) {
-		return getEntityManager().createQuery(jpql);
+	public List<?> performSelectQuery(String jpql) {
+		if (jpql == null) {
+			throw new IllegalArgumentException("[jpql] must not be 'null'.");
+		}
+		
+		Query query = getEntityManager().createQuery(jpql);
+		List<?> result = query.getResultList();
+		
+		return result;
 	}
 	
 	public void close() {
