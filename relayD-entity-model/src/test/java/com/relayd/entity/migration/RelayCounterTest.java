@@ -69,4 +69,26 @@ public class RelayCounterTest {
 	public void testSetParticipantCount_With_Negative_Value() {
 		sut.setParticipantCount(Integer.valueOf(-10));
 	}
+	
+	@Test
+	public void testIncrementParticipants() {
+		sut.setParticipantCount(Integer.valueOf(0));
+		
+		int expected = 2;
+		sut.incrementParticipants(expected);
+		
+		int actual = sut.getParticipants();
+		assertEquals("[participants] have not been correctly incremented!", expected, actual);
+	}
+	
+	@Test
+	public void testToString() {
+		String expected = sut.getClass().getSimpleName() + " [relays=0, participants=0]";
+		sut.setRelayCount(Integer.valueOf(0));
+		sut.setParticipantCount(Integer.valueOf(0));
+		
+		String actual = sut.toString();
+		
+		assertEquals("String representation is not correct!", expected, actual);
+	}
 }
