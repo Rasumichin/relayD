@@ -1,5 +1,8 @@
 package com.relayd.entity.migration;
 
+import java.util.List;
+
+import com.relayd.entity.RelayEntity;
 import com.relayd.jpa.GenericJpaDao;
 
 /**
@@ -27,9 +30,39 @@ public class DefaultRelayEntityService implements CountRelayEntityService {
 
 	@Override
 	public RelayCounter count() {
+		List<RelayEntity> result = readRelays();
+		relayCounter = countFetchRelayResult(result);
+		
 		return relayCounter;
 	}
 
+	@SuppressWarnings("unchecked")
+	List<RelayEntity> readRelays() {
+		String jpql = getJpqlStatement();
+		List<?> result = getJpaDao().performSelectQuery(jpql);
+		
+		return (List<RelayEntity>) result;
+	}
+
+	String getJpqlStatement() {
+		return "select r from RelayEntity r";
+	}
+
+	RelayCounter countFetchRelayResult(List<RelayEntity> relays) {
+		RelayCounter result = RelayCounter.newInstance();
+		result.setRelayCount(relays.size());
+		result.setParticipantCount(Integer.valueOf(0));
+		
+		for (RelayEntity eachEntity : relays) {
+			result.incrementParticipants((eachEntity.getParticipantOne() == null) ? 0 : 1);
+			result.incrementParticipants((eachEntity.getParticipantTwo() == null) ? 0 : 1);
+			result.incrementParticipants((eachEntity.getParticipantThree() == null) ? 0 : 1);
+			result.incrementParticipants((eachEntity.getParticipantFour() == null) ? 0 : 1);
+		}
+		
+		return result;
+	}
+	
 	GenericJpaDao getJpaDao() {
 		return jpaDao;
 	}
