@@ -2,9 +2,6 @@ package com.relayd.entity.migration;
 
 import javax.persistence.*;
 
-import org.junit.FixMethodOrder;
-import org.junit.runners.MethodSorters;
-
 import com.relayd.jpa.GenericJpaDao;
 
 /**
@@ -14,7 +11,6 @@ import com.relayd.jpa.GenericJpaDao;
  * @since  29.01.2017
  *
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class RelayMigrationServiceBridge {
 	private GenericJpaDao jpaDao;
 	
