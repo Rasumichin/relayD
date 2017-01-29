@@ -75,20 +75,6 @@ public class TrackTest {
 	}
 
 	@Test
-	public void testParticipant() {
-		Distance dummyDistance = Distance.kilometers(BigDecimal.ONE);
-		Track sut = Track.newInstance(dummyDistance);
-
-		Participant expected = Participant.newInstance();
-
-		sut.setParticipant(expected);
-
-		Participant actual = sut.getParticipant();
-
-		assertEquals("[actual] not correct!", expected, actual);
-	}
-
-	@Test
 	public void testGetDistance() {
 		Distance expected = Distance.kilometers(BigDecimal.ONE);
 

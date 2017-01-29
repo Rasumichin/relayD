@@ -1,17 +1,11 @@
 package com.relayd;
 
-import static org.junit.Assert.*;
-
-import java.time.LocalDate;
 import java.util.UUID;
 
 import org.junit.FixMethodOrder;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import com.relayd.attributes.EventDay;
-import com.relayd.attributes.Eventname;
 import com.relayd.attributes.Forename;
 import com.relayd.attributes.Position;
 import com.relayd.attributes.Relayname;
@@ -101,32 +95,6 @@ public class RelayCreationWorkflowTest {
 		//		justusJonas.setNotAvailableForEvent(duesseldorf);
 		// dann sollte er automatisch aus den Relays entfernt werden in welchen er teilnimmt
 
-	}
-
-	@Test
-	@Ignore("Relay befindet sich in der Umstellung. Dieser Test scheitert nun!")
-	public void testShowcaseRelationTrackToParticipantIsWrong() {
-		Eventname eventName = Eventname.newInstance("Boston Marathon");
-		EventDay eventDay = EventDay.newInstance(LocalDate.now());
-		RelayEvent boston = RelayEvent.newInstance(eventName, eventDay);
-		Track firstTrack = boston.getTrackForPosition(Position.FIRST);
-
-		assertNull("The person for the first track is not correct!", firstTrack.getParticipant());
-
-		Relay slowMovers = Relay.newInstance(boston);
-		Participant mike = Participant.newInstance(createPersonFor(Forename.newInstance("Mike"), Surename.newInstance(), UUID.randomUUID()));
-		slowMovers.addParticipant(mike, Position.FIRST);
-
-		Participant actual = firstTrack.getParticipant();
-		assertEquals("Person at first position of Track is not Mike!", mike, actual);
-
-		Relay dillyDallies = Relay.newInstance(boston);
-		Participant sarah = Participant.newInstance(createPersonFor(Forename.newInstance("Sarah"), Surename.newInstance(), UUID.randomUUID()));
-		dillyDallies.addParticipant(sarah, Position.FIRST);
-
-		actual = firstTrack.getParticipant();
-		assertEquals("Person at first position of Track is not Sarah!", sarah, actual);
-		// But what about Mike? He lost his track position to Sarah!
 	}
 
 	private Person createPersonFor(Forename aForename, Surename aSurename, UUID anUuid) {

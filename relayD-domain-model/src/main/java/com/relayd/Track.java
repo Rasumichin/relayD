@@ -17,7 +17,6 @@ public class Track implements Serializable {
 	private UUID uuid;
 	private Distance distance;
 	private Comment comment;
-	private Participant participant;
 
 	private Track(Distance aDistance, Comment aComment) {
 		uuid = UUID.randomUUID();
@@ -32,14 +31,6 @@ public class Track implements Serializable {
 
 	public static Track newInstance(Distance aDistance, Comment aComment) {
 		return new Track(aDistance, aComment);
-	}
-
-	public Participant getParticipant() {
-		return participant;
-	}
-
-	public void setParticipant(Participant aParticipant) {
-		participant = aParticipant;
 	}
 
 	public Distance getDistance() {
