@@ -1,11 +1,14 @@
 package com.relayd.entity.migration;
 
+import javax.xml.bind.annotation.*;
+
 /**
  *
  * @author Rasumichin (Erik@relayd.de)
  * @since  23.01.2017
  *
  */
+@XmlRootElement(name = "relayCounter")
 public class RelayCounter {
 	public static final Integer NOT_YET_COUNTED_VALUE = Integer.valueOf(-1);
 
@@ -19,6 +22,7 @@ public class RelayCounter {
 		return new RelayCounter();
 	}
 
+	@XmlElement
 	public Integer getRelays() {
 		return relays;
 	}
@@ -30,6 +34,7 @@ public class RelayCounter {
 		relays = count;
 	}
 
+	@XmlElement
 	public Integer getParticipants() {
 		return participants;
 	}
