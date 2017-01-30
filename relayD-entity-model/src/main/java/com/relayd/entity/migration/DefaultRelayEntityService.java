@@ -16,16 +16,20 @@ public class DefaultRelayEntityService implements CountRelayEntityService {
 	private RelayCounter relayCounter = RelayCounter.newInstance();
 	private GenericJpaDao jpaDao;
 
-	private DefaultRelayEntityService(GenericJpaDao aJpaDao) {
+	protected DefaultRelayEntityService(GenericJpaDao aJpaDao) {
 		jpaDao = aJpaDao;
 	}
 
 	public static CountRelayEntityService newInstance(GenericJpaDao aJpaDao) {
+		DefaultRelayEntityService.verifyJpaDao(aJpaDao);
+		
+		return new DefaultRelayEntityService(aJpaDao);
+	}
+	
+	protected static void verifyJpaDao(GenericJpaDao aJpaDao) {
 		if (aJpaDao == null) {
 			throw new IllegalArgumentException("[jpaDao] must not be 'null'.");
 		}
-		
-		return new DefaultRelayEntityService(aJpaDao);
 	}
 
 	@Override
