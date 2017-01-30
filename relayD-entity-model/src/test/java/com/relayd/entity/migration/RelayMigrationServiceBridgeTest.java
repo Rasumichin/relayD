@@ -41,4 +41,10 @@ public class RelayMigrationServiceBridgeTest {
 		// TODO (2017-01-29, EL): This documents the API of 'sut', but no need to test that Mockito works. See above.
 		sut.countOldRelays();
 	}
+
+	@Test
+	public void testCountNewRelays() {
+		// TODO (2017-01-30, EL): This documents the API of 'sut', but no need to test that Mockito works. See above.
+		sut.countNewRelays();
+	}
 }
