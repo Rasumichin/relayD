@@ -82,10 +82,9 @@ public class CountRelayEntityServiceTest {
 		expected.setRelayCount(Integer.valueOf(0));
 		expected.setParticipantCount(Integer.valueOf(0));
 		
-		List<?> fetchedRelays = new ArrayList<>();
+		List<?> fetchedRelays = Collections.EMPTY_LIST;
 		
-		@SuppressWarnings("unchecked")
-		RelayCounter actual = ((DefaultRelayEntityService)sut).countFetchRelayResult((List<RelayEntity>) fetchedRelays);
+		RelayCounter actual = ((DefaultRelayEntityService)sut).countFetchRelayResult(fetchedRelays);
 		
 		assertEquals("[relayCounter] is not correct!", expected, actual);
 	}

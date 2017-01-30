@@ -34,30 +34,31 @@ public class DefaultRelayEntityService implements CountRelayEntityService {
 
 	@Override
 	public RelayCounter count() {
-		List<RelayEntity> result = readRelays();
+		List<?> result = readRelays();
 		relayCounter = countFetchRelayResult(result);
 		
 		return relayCounter;
 	}
 
-	@SuppressWarnings("unchecked")
-	List<RelayEntity> readRelays() {
+	List<?> readRelays() {
 		String jpql = getJpqlStatement();
 		List<?> result = getJpaDao().performSelectQuery(jpql);
 		
-		return (List<RelayEntity>) result;
+		return result;
 	}
 
 	String getJpqlStatement() {
 		return "select r from RelayEntity r";
 	}
 
-	RelayCounter countFetchRelayResult(List<RelayEntity> relays) {
+	RelayCounter countFetchRelayResult(List<?> aRelayEntityList) {
 		RelayCounter result = RelayCounter.newInstance();
-		result.setRelayCount(relays.size());
+		result.setRelayCount(aRelayEntityList.size());
 		result.setParticipantCount(Integer.valueOf(0));
 		
-		for (RelayEntity eachEntity : relays) {
+		@SuppressWarnings("unchecked")
+		List<RelayEntity> relayEntityList = (List<RelayEntity>) aRelayEntityList;
+		for (RelayEntity eachEntity : relayEntityList) {
 			result.incrementParticipants((eachEntity.getParticipantOne() == null) ? 0 : 1);
 			result.incrementParticipants((eachEntity.getParticipantTwo() == null) ? 0 : 1);
 			result.incrementParticipants((eachEntity.getParticipantThree() == null) ? 0 : 1);
