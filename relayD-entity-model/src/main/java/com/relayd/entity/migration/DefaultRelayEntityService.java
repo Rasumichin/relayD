@@ -16,44 +16,49 @@ public class DefaultRelayEntityService implements CountRelayEntityService {
 	private RelayCounter relayCounter = RelayCounter.newInstance();
 	private GenericJpaDao jpaDao;
 
-	private DefaultRelayEntityService(GenericJpaDao aJpaDao) {
+	protected DefaultRelayEntityService(GenericJpaDao aJpaDao) {
 		jpaDao = aJpaDao;
 	}
 
 	public static CountRelayEntityService newInstance(GenericJpaDao aJpaDao) {
+		DefaultRelayEntityService.verifyJpaDao(aJpaDao);
+		
+		return new DefaultRelayEntityService(aJpaDao);
+	}
+	
+	protected static void verifyJpaDao(GenericJpaDao aJpaDao) {
 		if (aJpaDao == null) {
 			throw new IllegalArgumentException("[jpaDao] must not be 'null'.");
 		}
-		
-		return new DefaultRelayEntityService(aJpaDao);
 	}
 
 	@Override
 	public RelayCounter count() {
-		List<RelayEntity> result = readRelays();
+		List<?> result = readRelays();
 		relayCounter = countFetchRelayResult(result);
 		
 		return relayCounter;
 	}
 
-	@SuppressWarnings("unchecked")
-	List<RelayEntity> readRelays() {
+	List<?> readRelays() {
 		String jpql = getJpqlStatement();
 		List<?> result = getJpaDao().performSelectQuery(jpql);
 		
-		return (List<RelayEntity>) result;
+		return result;
 	}
 
 	String getJpqlStatement() {
 		return "select r from RelayEntity r";
 	}
 
-	RelayCounter countFetchRelayResult(List<RelayEntity> relays) {
+	RelayCounter countFetchRelayResult(List<?> aRelayEntityList) {
 		RelayCounter result = RelayCounter.newInstance();
-		result.setRelayCount(relays.size());
+		result.setRelayCount(aRelayEntityList.size());
 		result.setParticipantCount(Integer.valueOf(0));
 		
-		for (RelayEntity eachEntity : relays) {
+		@SuppressWarnings("unchecked")
+		List<RelayEntity> relayEntityList = (List<RelayEntity>) aRelayEntityList;
+		for (RelayEntity eachEntity : relayEntityList) {
 			result.incrementParticipants((eachEntity.getParticipantOne() == null) ? 0 : 1);
 			result.incrementParticipants((eachEntity.getParticipantTwo() == null) ? 0 : 1);
 			result.incrementParticipants((eachEntity.getParticipantThree() == null) ? 0 : 1);
