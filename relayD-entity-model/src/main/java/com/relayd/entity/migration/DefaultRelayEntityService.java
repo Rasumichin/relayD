@@ -11,27 +11,17 @@ import com.relayd.jpa.GenericJpaDao;
  * @since  17.01.2017
  *
  */
-public class DefaultRelayEntityService implements CountRelayEntityService {
-
+public class DefaultRelayEntityService extends MigrationService implements CountRelayEntityService {
 	private RelayCounter relayCounter = RelayCounter.newInstance();
-	private GenericJpaDao jpaDao;
 
 	protected DefaultRelayEntityService(GenericJpaDao aJpaDao) {
-		jpaDao = aJpaDao;
+		setJpaDao(aJpaDao);
 	}
 
 	public static CountRelayEntityService newInstance(GenericJpaDao aJpaDao) {
-		DefaultRelayEntityService.verifyJpaDao(aJpaDao);
-		
 		return new DefaultRelayEntityService(aJpaDao);
 	}
 	
-	protected static void verifyJpaDao(GenericJpaDao aJpaDao) {
-		if (aJpaDao == null) {
-			throw new IllegalArgumentException("[jpaDao] must not be 'null'.");
-		}
-	}
-
 	@Override
 	public RelayCounter count() {
 		List<?> result = readRelays();
@@ -66,9 +56,5 @@ public class DefaultRelayEntityService implements CountRelayEntityService {
 		}
 		
 		return result;
-	}
-	
-	GenericJpaDao getJpaDao() {
-		return jpaDao;
 	}
 }

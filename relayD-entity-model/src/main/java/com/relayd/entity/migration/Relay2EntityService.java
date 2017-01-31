@@ -12,8 +12,6 @@ public class Relay2EntityService extends DefaultRelayEntityService {
 	}
 
 	public static CountRelayEntityService newInstance(GenericJpaDao aJpaDao) {
-		DefaultRelayEntityService.verifyJpaDao(aJpaDao);
-		
 		return new Relay2EntityService(aJpaDao);
 	}
 
