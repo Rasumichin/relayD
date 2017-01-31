@@ -5,14 +5,14 @@ import java.util.List;
 import com.relayd.entity.*;
 import com.relayd.jpa.GenericJpaDao;
 
-public class Relay2EntityService extends DefaultRelayEntityService {
+public class CountNewRelayTypeService extends DefaultRelayEntityService {
 	
-	private Relay2EntityService(GenericJpaDao aJpaDao) {
+	private CountNewRelayTypeService(GenericJpaDao aJpaDao) {
 		super(aJpaDao);
 	}
 
 	public static CountRelayEntityService newInstance(GenericJpaDao aJpaDao) {
-		return new Relay2EntityService(aJpaDao);
+		return new CountNewRelayTypeService(aJpaDao);
 	}
 
 	@Override

@@ -21,10 +21,10 @@ import com.relayd.jpa.GenericJpaDao;
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class Relay2EntityServiceTest {
+public class CountNewRelayTypeServiceTest {
 	private EntityManager entityManagerMock = Mockito.mock(EntityManager.class);
 	private GenericJpaDao jpaDao = GenericJpaDao.newInstance(entityManagerMock);
-	private CountRelayEntityService sut = Relay2EntityService.newInstance(jpaDao);
+	private CountRelayEntityService sut = CountNewRelayTypeService.newInstance(jpaDao);
 
 	@Test
 	public void testNewInstance() {
@@ -33,12 +33,12 @@ public class Relay2EntityServiceTest {
 
 	@Test(expected=IllegalArgumentException.class)
 	public void testNewInstances_With_Null_Value() {
-		Relay2EntityService.newInstance(null);
+		CountNewRelayTypeService.newInstance(null);
 	}
 	
 	@Test
 	public void testGetJpaDao() {
-		GenericJpaDao result = ((Relay2EntityService) sut).getJpaDao();
+		GenericJpaDao result = ((CountNewRelayTypeService) sut).getJpaDao();
 		
 		assertNotNull("[jpaDao] has not been set correctly!", result);
 	}
@@ -47,7 +47,7 @@ public class Relay2EntityServiceTest {
 	public void testGetJpqlStatement_RelayEntity() {
 		String expected = "select r2 from Relay2Entity r2";
 		
-		String actual = ((Relay2EntityService)sut).getJpqlStatement();
+		String actual = ((CountNewRelayTypeService)sut).getJpqlStatement();
 		
 		assertEquals("JPQL statement is not correct!", expected, actual);
 	}
@@ -60,7 +60,7 @@ public class Relay2EntityServiceTest {
 		
 		List<?> fetchedRelays = Collections.EMPTY_LIST;
 		
-		RelayCounter actual = ((Relay2EntityService)sut).countFetchRelayResult(fetchedRelays);
+		RelayCounter actual = ((CountNewRelayTypeService)sut).countFetchRelayResult(fetchedRelays);
 		
 		assertEquals("[relayCounter] is not correct!", expected, actual);
 	}
@@ -74,7 +74,7 @@ public class Relay2EntityServiceTest {
 		List<Relay2Entity> fetchedRelays = new ArrayList<>();
 		fetchedRelays.add(Relay2Entity.newInstance());
 		
-		RelayCounter actual = ((Relay2EntityService)sut).countFetchRelayResult(fetchedRelays);
+		RelayCounter actual = ((CountNewRelayTypeService)sut).countFetchRelayResult(fetchedRelays);
 		
 		assertEquals("[relayCounter] is not correct!", expected, actual);
 	}
@@ -90,7 +90,7 @@ public class Relay2EntityServiceTest {
 		relayEntity.addParticipantEntity(ParticipantEntity.newInstance());
 		fetchedRelays.add(relayEntity);
 		
-		RelayCounter actual = ((Relay2EntityService)sut).countFetchRelayResult(fetchedRelays);
+		RelayCounter actual = ((CountNewRelayTypeService)sut).countFetchRelayResult(fetchedRelays);
 		
 		assertEquals("[relayCounter] is not correct!", expected, actual);
 	}
@@ -107,7 +107,7 @@ public class Relay2EntityServiceTest {
 		relayEntity.addParticipantEntity(ParticipantEntity.newInstance());
 		fetchedRelays.add(relayEntity);
 		
-		RelayCounter actual = ((Relay2EntityService)sut).countFetchRelayResult(fetchedRelays);
+		RelayCounter actual = ((CountNewRelayTypeService)sut).countFetchRelayResult(fetchedRelays);
 		
 		assertEquals("[relayCounter] is not correct!", expected, actual);
 	}
@@ -125,7 +125,7 @@ public class Relay2EntityServiceTest {
 		relayEntity.addParticipantEntity(ParticipantEntity.newInstance());
 		fetchedRelays.add(relayEntity);
 		
-		RelayCounter actual = ((Relay2EntityService)sut).countFetchRelayResult(fetchedRelays);
+		RelayCounter actual = ((CountNewRelayTypeService)sut).countFetchRelayResult(fetchedRelays);
 		
 		assertEquals("[relayCounter] is not correct!", expected, actual);
 	}
@@ -144,7 +144,7 @@ public class Relay2EntityServiceTest {
 		relayEntity.addParticipantEntity(ParticipantEntity.newInstance());
 		fetchedRelays.add(relayEntity);
 		
-		RelayCounter actual = ((Relay2EntityService)sut).countFetchRelayResult(fetchedRelays);
+		RelayCounter actual = ((CountNewRelayTypeService)sut).countFetchRelayResult(fetchedRelays);
 		
 		assertEquals("[relayCounter] is not correct!", expected, actual);
 	}
@@ -165,7 +165,7 @@ public class Relay2EntityServiceTest {
 		relayEntity.addParticipantEntity(ParticipantEntity.newInstance());
 		fetchedRelays.add(relayEntity);
 		
-		RelayCounter actual = ((Relay2EntityService)sut).countFetchRelayResult(fetchedRelays);
+		RelayCounter actual = ((CountNewRelayTypeService)sut).countFetchRelayResult(fetchedRelays);
 		
 		assertEquals("[relayCounter] is not correct!", expected, actual);
 	}
