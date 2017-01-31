@@ -26,25 +26,8 @@ import com.relayd.jpa.GenericJpaDao;
 public class DefaultCountRelayEntityServiceTest {
 	private EntityManager entityManagerMock = Mockito.mock(EntityManager.class);
 	private GenericJpaDao jpaDao = GenericJpaDao.newInstance(entityManagerMock);
-	private CountRelayEntityService sut = DefaultCountRelayEntityService.newInstance(jpaDao);
+	private CountRelayEntityService sut = MigrationService.newDefaultCountRelayEntityService(jpaDao);
 
-	@Test
-	public void testNewInstance() {
-		assertNotNull("Instance could not be created!", sut);
-	}
-	
-	@Test(expected=IllegalArgumentException.class)
-	public void testNewInstances_With_Null_Value() {
-		DefaultCountRelayEntityService.newInstance(null);
-	}
-	
-	@Test
-	public void testGetJpaDao() {
-		GenericJpaDao result = ((DefaultCountRelayEntityService) sut).getJpaDao();
-		
-		assertNotNull("[jpaDao] has not been set correctly!", result);
-	}
-	
 	@Test
 	public void testCount() {
 		Query queryMock = Mockito.mock(Query.class);
@@ -60,7 +43,7 @@ public class DefaultCountRelayEntityServiceTest {
 		GenericJpaDao jpaDaoMock = Mockito.mock(GenericJpaDao.class);
 		doReturn(new ArrayList<>()).when(jpaDaoMock).performSelectQuery(Mockito.anyString());
 		
-		CountRelayEntityService relayEntityService = DefaultCountRelayEntityService.newInstance(jpaDaoMock);
+		CountRelayEntityService relayEntityService = MigrationService.newDefaultCountRelayEntityService(jpaDaoMock);
 		
 		((DefaultCountRelayEntityService)relayEntityService).readRelays();
 		

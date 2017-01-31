@@ -10,6 +10,14 @@ import com.relayd.jpa.GenericJpaDao;
 */
 public abstract class MigrationService {
 	private GenericJpaDao jpaDao;
+	
+	public static CountRelayEntityService newDefaultCountRelayEntityService(GenericJpaDao aJpaDao) {
+		return DefaultCountRelayEntityService.newInstance(aJpaDao);
+	}
+
+	public static CountRelayEntityService newCountNewRelayTypeService(GenericJpaDao aJpaDao) {
+		return CountNewRelayTypeService.newInstance(aJpaDao);
+	}
 
 	GenericJpaDao getJpaDao() {
 		return jpaDao;

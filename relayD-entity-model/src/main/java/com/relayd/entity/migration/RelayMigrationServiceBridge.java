@@ -37,13 +37,13 @@ public class RelayMigrationServiceBridge {
 	}
 
 	public RelayCounter countOldRelays() {
-		CountRelayEntityService countOldRelaysService = DefaultCountRelayEntityService.newInstance(getJpaDao());
+		CountRelayEntityService countOldRelaysService = MigrationService.newDefaultCountRelayEntityService(getJpaDao());
 		
 		return countOldRelaysService.count();
 	}
 
 	public RelayCounter countNewRelays() {
-		CountRelayEntityService countNewRelaysService = CountNewRelayTypeService.newInstance(getJpaDao());
+		CountRelayEntityService countNewRelaysService = MigrationService.newCountNewRelayTypeService(getJpaDao());
 		
 		return countNewRelaysService.count();
 	}

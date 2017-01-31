@@ -24,24 +24,7 @@ import com.relayd.jpa.GenericJpaDao;
 public class CountNewRelayTypeServiceTest {
 	private EntityManager entityManagerMock = Mockito.mock(EntityManager.class);
 	private GenericJpaDao jpaDao = GenericJpaDao.newInstance(entityManagerMock);
-	private CountRelayEntityService sut = CountNewRelayTypeService.newInstance(jpaDao);
-
-	@Test
-	public void testNewInstance() {
-		assertNotNull("Instance could not be created!", sut);
-	}
-
-	@Test(expected=IllegalArgumentException.class)
-	public void testNewInstances_With_Null_Value() {
-		CountNewRelayTypeService.newInstance(null);
-	}
-	
-	@Test
-	public void testGetJpaDao() {
-		GenericJpaDao result = ((CountNewRelayTypeService) sut).getJpaDao();
-		
-		assertNotNull("[jpaDao] has not been set correctly!", result);
-	}
+	private CountRelayEntityService sut = MigrationService.newCountNewRelayTypeService(jpaDao);
 
 	@Test
 	public void testGetJpqlStatement_RelayEntity() {
