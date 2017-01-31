@@ -11,15 +11,15 @@ import com.relayd.jpa.GenericJpaDao;
  * @since  17.01.2017
  *
  */
-public class DefaultRelayEntityService extends MigrationService implements CountRelayEntityService {
+public class DefaultCountRelayEntityService extends MigrationService implements CountRelayEntityService {
 	private RelayCounter relayCounter = RelayCounter.newInstance();
 
-	protected DefaultRelayEntityService(GenericJpaDao aJpaDao) {
+	protected DefaultCountRelayEntityService(GenericJpaDao aJpaDao) {
 		setJpaDao(aJpaDao);
 	}
 
 	public static CountRelayEntityService newInstance(GenericJpaDao aJpaDao) {
-		return new DefaultRelayEntityService(aJpaDao);
+		return new DefaultCountRelayEntityService(aJpaDao);
 	}
 	
 	@Override

@@ -5,7 +5,7 @@ import java.util.List;
 import com.relayd.entity.*;
 import com.relayd.jpa.GenericJpaDao;
 
-public class CountNewRelayTypeService extends DefaultRelayEntityService {
+public class CountNewRelayTypeService extends DefaultCountRelayEntityService {
 	
 	private CountNewRelayTypeService(GenericJpaDao aJpaDao) {
 		super(aJpaDao);
