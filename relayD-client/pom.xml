@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>com.relayd</groupId>
 		<artifactId>relayD-parent</artifactId>
-		<version>1.3-SNAPSHOT</version>
+		<version>1.4-SNAPSHOT</version>
 	</parent>
 	<artifactId>relayD-client</artifactId>
 
