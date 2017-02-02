@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.relayd</groupId>
         <artifactId>relayD-parent</artifactId>
-        <version>1.4</version>
+        <version>1.5-SNAPSHOT</version>
     </parent>
 
     <artifactId>relayD-api</artifactId>
@@ -46,14 +46,14 @@
         <dependency>
         	<groupId>com.relayd</groupId>
         	<artifactId>relayD-client</artifactId>
-        	<version>1.4</version>
+        	<version>1.5-SNAPSHOT</version>
         </dependency>
         
         <!-- EL: Include this only for migration purposes -->
 		<dependency>
 			<groupId>com.relayd</groupId>
 			<artifactId>relayD-entity-model</artifactId>
-			<version>1.4</version>
+			<version>1.5-SNAPSHOT</version>
 		</dependency>
     </dependencies>
 
