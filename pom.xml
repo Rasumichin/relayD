@@ -4,26 +4,14 @@
 
 	<groupId>com.relayd</groupId>
 	<artifactId>relayD-parent</artifactId>
-	<version>1.3-SNAPSHOT</version>
+	<version>1.5-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>relayD-parent</name>
 	<scm>
 		<connection>scm:git:https://github.com/Rasumichin/relayD.git</connection>
-	  <tag>HEAD</tag>
-  </scm>
-
-	<distributionManagement>
-		<repository>
-			<id>nexus-site</id>
-			<url>http://relayd.de:9081/content/repositories/releases</url>
-		</repository>
-		<snapshotRepository>
-			<id>nexus-site</id>
-			<url>http://relayd.de:9081/content/repositories/snapshots</url>
-			<uniqueVersion>true</uniqueVersion>
-		</snapshotRepository>
-	</distributionManagement>
+		<tag>HEAD</tag>
+	</scm>
 
 	<modules>
 		<module>relayD-api</module>
