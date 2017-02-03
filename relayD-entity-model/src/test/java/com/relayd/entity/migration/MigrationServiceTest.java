@@ -1,6 +1,9 @@
 package com.relayd.entity.migration;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
+
+import java.util.*;
 
 import javax.persistence.EntityManager;
 
@@ -21,28 +24,26 @@ import com.relayd.jpa.GenericJpaDao;
 public class MigrationServiceTest {
 	private EntityManager entityManagerMock = Mockito.mock(EntityManager.class);
 	private GenericJpaDao jpaDao = GenericJpaDao.newInstance(entityManagerMock);
+	private MigrationService sut = new MigrationService() {};
 
 	@Test
 	public void testNewDefaultCountRelayEntityService() {
-		CountRelayEntityService sut = MigrationService.newDefaultCountRelayEntityService(jpaDao);
+		CountRelayEntityService sutCountRelayEntityService = MigrationService.newDefaultCountRelayEntityService(jpaDao);
 		
-		boolean result = sut instanceof DefaultCountRelayEntityService;
+		boolean result = sutCountRelayEntityService instanceof DefaultCountRelayEntityService;
 		assertTrue("Factory method has not created the correct type!", result);
 	}
 	
 	@Test
 	public void testNewCountNewRelayTypeService() {
-		CountRelayEntityService sut = MigrationService.newCountNewRelayTypeService(jpaDao);
+		CountRelayEntityService sutCountRelayEntityService = MigrationService.newCountNewRelayTypeService(jpaDao);
 		
-		boolean result = sut instanceof CountNewRelayTypeService;
+		boolean result = sutCountRelayEntityService instanceof CountNewRelayTypeService;
 		assertTrue("Factory method has not created the correct type!", result);
 	}
 	
 	@Test
 	public void testSetJpaDao() {
-		MigrationService sut = new MigrationService() {
-		};
-		
 		sut.setJpaDao(jpaDao);
 		
 		GenericJpaDao actual = sut.getJpaDao();
@@ -51,9 +52,23 @@ public class MigrationServiceTest {
 
 	@Test(expected=IllegalArgumentException.class)
 	public void testSetJpaDao_With_Null_Value() {
-		MigrationService sut = new MigrationService() {
-		};
-		
 		sut.setJpaDao(null);
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testReadRelays_With_Null_Value() {
+		sut.readRelays(null);
+	}
+	
+	@Test
+	public void testReadRelays() {
+		GenericJpaDao jpaDaoMock = mock(GenericJpaDao.class);
+		when(jpaDaoMock.performSelectQuery(anyString())).thenReturn(Collections.emptyList());
+		
+		sut.setJpaDao(jpaDaoMock);
+		
+		List<?> result = sut.readRelays("Some SELECT SQL statement");
+		
+		assertTrue("Read result is not correct!", result.isEmpty());
 	}
 }

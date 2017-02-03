@@ -1,5 +1,7 @@
 package com.relayd.entity.migration;
 
+import java.util.List;
+
 import com.relayd.jpa.GenericJpaDao;
 
 /**
@@ -29,5 +31,15 @@ public abstract class MigrationService {
 		}
 
 		jpaDao = aJpaDao;
+	}
+
+	protected List<?> readRelays(String aSelectSqlStatement) {
+		if (aSelectSqlStatement == null) {
+			throw new IllegalArgumentException("[aSelectSqlStatement] must not be 'null'.");
+		}
+		
+		List<?> result = getJpaDao().performSelectQuery(aSelectSqlStatement);
+		
+		return result;
 	}
 }
