@@ -11,7 +11,11 @@ import com.relayd.jpa.GenericJpaDao;
 *
 */
 public abstract class MigrationService {
+	public static final String READ_ALL_RELAY_ENTITIES_SQL = "select r from RelayEntity r";
+	public static final String READ_ALL_RELAY2_ENTITIES_SQL = "select r2 from Relay2Entity r2";
+	
 	private GenericJpaDao jpaDao;
+	
 	
 	public static CountRelayEntityService newDefaultCountRelayEntityService(GenericJpaDao aJpaDao) {
 		return DefaultCountRelayEntityService.newInstance(aJpaDao);

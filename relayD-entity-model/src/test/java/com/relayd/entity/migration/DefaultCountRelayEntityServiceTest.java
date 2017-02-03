@@ -29,6 +29,15 @@ public class DefaultCountRelayEntityServiceTest {
 	private CountRelayEntityService sut = MigrationService.newDefaultCountRelayEntityService(jpaDao);
 
 	@Test
+	public void testGetJpqlStatement_RelayEntity() {
+		String expected = MigrationService.READ_ALL_RELAY_ENTITIES_SQL;
+		
+		String actual = ((DefaultCountRelayEntityService)sut).getJpqlStatement();
+		
+		assertEquals("JPQL statement is not correct!", expected, actual);
+	}
+	
+	@Test
 	public void testCount() {
 		Query queryMock = Mockito.mock(Query.class);
 		doReturn(queryMock).when(entityManagerMock).createQuery(Mockito.anyString());
@@ -38,27 +47,6 @@ public class DefaultCountRelayEntityServiceTest {
 		assertNotNull("[relayCounter] has not been initialized correctly!", result);
 	}
 	
-	@Test
-	public void testReadRelays() {
-		GenericJpaDao jpaDaoMock = Mockito.mock(GenericJpaDao.class);
-		doReturn(new ArrayList<>()).when(jpaDaoMock).performSelectQuery(Mockito.anyString());
-		
-		CountRelayEntityService relayEntityService = MigrationService.newDefaultCountRelayEntityService(jpaDaoMock);
-		
-		((DefaultCountRelayEntityService)relayEntityService).readRelays();
-		
-		verify(jpaDaoMock, times(1)).performSelectQuery(Mockito.anyString());
-	}
-	
-	@Test
-	public void testGetJpqlStatement_RelayEntity() {
-		String expected = "select r from RelayEntity r";
-		
-		String actual = ((DefaultCountRelayEntityService)sut).getJpqlStatement();
-		
-		assertEquals("JPQL statement is not correct!", expected, actual);
-	}
-
 	@Test
 	public void testCountFetchRelayResult_For_Empty_Result() {
 		RelayCounter expected = RelayCounter.newInstance();

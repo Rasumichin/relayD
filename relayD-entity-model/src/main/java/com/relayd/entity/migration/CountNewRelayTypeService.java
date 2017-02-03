@@ -17,21 +17,15 @@ public class CountNewRelayTypeService extends DefaultCountRelayEntityService {
 
 	@Override
 	String getJpqlStatement() {
-		return "select r2 from Relay2Entity r2";
+		return READ_ALL_RELAY2_ENTITIES_SQL;
 	}
 
 	@Override
-	RelayCounter countFetchRelayResult(List<?> aRelay2EntityList) {
-		RelayCounter result = RelayCounter.newInstance();
-		result.setRelayCount(aRelay2EntityList.size());
-		result.setParticipantCount(Integer.valueOf(0));
-		
+	void countParticipants(List<?> aRelay2EntityList, RelayCounter result) {
 		@SuppressWarnings("unchecked")
 		List<Relay2Entity> relay2EntityList = (List<Relay2Entity>) aRelay2EntityList;
 		for (Relay2Entity eachEntity : relay2EntityList) {
 			result.incrementParticipants(eachEntity.getParticipantEntities().size());
 		}
-		
-		return result;
 	}
 }

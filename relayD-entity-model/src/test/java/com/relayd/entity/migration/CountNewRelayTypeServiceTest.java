@@ -28,7 +28,7 @@ public class CountNewRelayTypeServiceTest {
 
 	@Test
 	public void testGetJpqlStatement_RelayEntity() {
-		String expected = "select r2 from Relay2Entity r2";
+		String expected = MigrationService.READ_ALL_RELAY2_ENTITIES_SQL;
 		
 		String actual = ((CountNewRelayTypeService)sut).getJpqlStatement();
 		
