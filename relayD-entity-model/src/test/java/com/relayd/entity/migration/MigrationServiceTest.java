@@ -43,6 +43,34 @@ public class MigrationServiceTest {
 	}
 	
 	@Test
+	public void testNewCopyRelayService() {
+		CopyRelayService sutCopyRelayService = MigrationService.newCopyRelayService(jpaDao);
+		
+		assertNotNull("Factory method has not created the correct type!", sutCopyRelayService);
+	}
+	
+	@Test
+	public void testGetRelayCounter() {
+		RelayCounter expected = RelayCounter.newInstance();
+		
+		RelayCounter actual = sut.getRelayCounter();
+		
+		assertEquals("[relayCounter] has not been correctly initalized!", expected, actual);
+	}
+	
+	@Test
+	public void testSetRelayCounter() {
+		RelayCounter expected = RelayCounter.newInstance();
+		expected.incrementParticipants(1);
+		
+		sut.setRelayCounter(expected);
+		
+		RelayCounter actual = sut.getRelayCounter();
+		
+		assertEquals("[relayCounter] has not been set correctly!", expected, actual);
+	}
+	
+	@Test
 	public void testSetJpaDao() {
 		sut.setJpaDao(jpaDao);
 		

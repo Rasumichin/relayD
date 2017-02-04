@@ -12,7 +12,6 @@ import com.relayd.jpa.GenericJpaDao;
  *
  */
 public class DefaultCountRelayEntityService extends MigrationService implements CountRelayEntityService {
-	private RelayCounter relayCounter = RelayCounter.newInstance();
 
 	protected DefaultCountRelayEntityService(GenericJpaDao aJpaDao) {
 		setJpaDao(aJpaDao);
@@ -25,9 +24,9 @@ public class DefaultCountRelayEntityService extends MigrationService implements 
 	@Override
 	public RelayCounter count() {
 		List<?> result = readRelays(getJpqlStatement());
-		relayCounter = countFetchRelayResult(result);
+		setRelayCounter(countFetchRelayResult(result));
 		
-		return relayCounter;
+		return getRelayCounter();
 	}
 
 	String getJpqlStatement() {
