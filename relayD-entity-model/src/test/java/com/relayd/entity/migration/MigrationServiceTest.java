@@ -5,7 +5,7 @@ import static org.mockito.Mockito.*;
 
 import java.util.*;
 
-import javax.persistence.EntityManager;
+import javax.persistence.*;
 
 import org.junit.*;
 import org.junit.runners.MethodSorters;
@@ -44,6 +44,7 @@ public class MigrationServiceTest {
 	
 	@Test
 	public void testNewCopyRelayService() {
+		when(entityManagerMock.getTransaction()).thenReturn(mock(EntityTransaction.class));
 		CopyRelayService sutCopyRelayService = MigrationService.newCopyRelayService(jpaDao);
 		
 		assertNotNull("Factory method has not created the correct type!", sutCopyRelayService);
