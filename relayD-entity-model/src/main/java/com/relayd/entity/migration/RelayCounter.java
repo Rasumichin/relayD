@@ -34,6 +34,15 @@ public class RelayCounter {
 		relays = count;
 	}
 
+	public void incrementRelays() {
+		if (getRelays().equals(NOT_YET_COUNTED_VALUE)) {
+			setRelayCount(Integer.valueOf(0));
+		}
+		Integer actual = getRelays();
+		actual += 1;
+		setRelayCount(actual);
+	}
+
 	@XmlElement
 	public Integer getParticipants() {
 		return participants;
@@ -47,6 +56,9 @@ public class RelayCounter {
 	}
 	
 	public void incrementParticipants(int increment) {
+		if (getParticipants().equals(NOT_YET_COUNTED_VALUE)) {
+			setParticipantCount(Integer.valueOf(0));
+		}
 		Integer actual = getParticipants();
 		actual += increment;
 		setParticipantCount(actual);
