@@ -21,4 +21,14 @@ public class RelaysResource {
 		
 		return result;
 	}
+
+	@Path("copy")
+	@GET
+	@Produces("application/json")
+	public RelayCounter copy() {
+		RelayMigrationServiceBridge serviceBridge = RelayMigrationServiceBridge.newInstance();
+		RelayCounter result = serviceBridge.copyAllRelays();
+		
+		return result;
+	}
 }

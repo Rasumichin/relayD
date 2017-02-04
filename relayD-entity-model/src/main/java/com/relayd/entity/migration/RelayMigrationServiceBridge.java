@@ -47,4 +47,10 @@ public class RelayMigrationServiceBridge {
 		
 		return countNewRelaysService.count();
 	}
+
+	public RelayCounter copyAllRelays() {
+		CopyRelayService copyRelayService = MigrationService.newCopyRelayService(getJpaDao());
+		
+		return copyRelayService.copyAllRelayToRelay2();
+	}
 }
