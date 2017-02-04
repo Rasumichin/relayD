@@ -39,6 +39,8 @@ public class CopyRelayService extends MigrationService {
 		
 		for (RelayEntity eachRelayEntity : relayEntities) {
 			Relay2Entity relay2Entity = copyToRelay2Entity(eachRelayEntity);
+			getJpaDao().persistEntity(relay2Entity);
+			
 			getRelayCounter().incrementRelays();
 			getRelayCounter().incrementParticipants(relay2Entity.getParticipantEntities().size());
 		}
