@@ -11,51 +11,44 @@ import com.relayd.jpa.GenericJpaDao;
  * @since  17.01.2017
  *
  */
-public class DefaultRelayEntityService implements CountRelayEntityService {
+public class DefaultCountRelayEntityService extends MigrationService implements CountRelayEntityService {
 
-	private RelayCounter relayCounter = RelayCounter.newInstance();
-	private GenericJpaDao jpaDao;
-
-	protected DefaultRelayEntityService(GenericJpaDao aJpaDao) {
-		jpaDao = aJpaDao;
+	protected DefaultCountRelayEntityService(GenericJpaDao aJpaDao) {
+		setJpaDao(aJpaDao);
 	}
 
 	public static CountRelayEntityService newInstance(GenericJpaDao aJpaDao) {
-		DefaultRelayEntityService.verifyJpaDao(aJpaDao);
-		
-		return new DefaultRelayEntityService(aJpaDao);
+		return new DefaultCountRelayEntityService(aJpaDao);
 	}
 	
-	protected static void verifyJpaDao(GenericJpaDao aJpaDao) {
-		if (aJpaDao == null) {
-			throw new IllegalArgumentException("[jpaDao] must not be 'null'.");
-		}
-	}
-
 	@Override
 	public RelayCounter count() {
-		List<?> result = readRelays();
-		relayCounter = countFetchRelayResult(result);
+		List<?> result = readRelays(getJpqlStatement());
+		setRelayCounter(countFetchRelayResult(result));
 		
-		return relayCounter;
+		return getRelayCounter();
 	}
 
-	List<?> readRelays() {
-		String jpql = getJpqlStatement();
-		List<?> result = getJpaDao().performSelectQuery(jpql);
+	String getJpqlStatement() {
+		return READ_ALL_RELAY_ENTITIES_SQL;
+	}
+
+	RelayCounter countFetchRelayResult(List<?> aRelayEntityList) {
+		RelayCounter result = initializeCounter(aRelayEntityList);
+		countParticipants(aRelayEntityList, result);
 		
 		return result;
 	}
 
-	String getJpqlStatement() {
-		return "select r from RelayEntity r";
-	}
-
-	RelayCounter countFetchRelayResult(List<?> aRelayEntityList) {
+	RelayCounter initializeCounter(List<?> aRelayEntityList) {
 		RelayCounter result = RelayCounter.newInstance();
 		result.setRelayCount(aRelayEntityList.size());
 		result.setParticipantCount(Integer.valueOf(0));
 		
+		return result;
+	}
+
+	void countParticipants(List<?> aRelayEntityList, RelayCounter result) {
 		@SuppressWarnings("unchecked")
 		List<RelayEntity> relayEntityList = (List<RelayEntity>) aRelayEntityList;
 		for (RelayEntity eachEntity : relayEntityList) {
@@ -64,11 +57,5 @@ public class DefaultRelayEntityService implements CountRelayEntityService {
 			result.incrementParticipants((eachEntity.getParticipantThree() == null) ? 0 : 1);
 			result.incrementParticipants((eachEntity.getParticipantFour() == null) ? 0 : 1);
 		}
-		
-		return result;
-	}
-	
-	GenericJpaDao getJpaDao() {
-		return jpaDao;
 	}
 }

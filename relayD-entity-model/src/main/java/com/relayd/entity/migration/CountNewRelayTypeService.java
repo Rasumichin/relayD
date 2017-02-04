@@ -5,35 +5,27 @@ import java.util.List;
 import com.relayd.entity.*;
 import com.relayd.jpa.GenericJpaDao;
 
-public class Relay2EntityService extends DefaultRelayEntityService {
+public class CountNewRelayTypeService extends DefaultCountRelayEntityService {
 	
-	private Relay2EntityService(GenericJpaDao aJpaDao) {
+	private CountNewRelayTypeService(GenericJpaDao aJpaDao) {
 		super(aJpaDao);
 	}
 
 	public static CountRelayEntityService newInstance(GenericJpaDao aJpaDao) {
-		DefaultRelayEntityService.verifyJpaDao(aJpaDao);
-		
-		return new Relay2EntityService(aJpaDao);
+		return new CountNewRelayTypeService(aJpaDao);
 	}
 
 	@Override
 	String getJpqlStatement() {
-		return "select r2 from Relay2Entity r2";
+		return READ_ALL_RELAY2_ENTITIES_SQL;
 	}
 
 	@Override
-	RelayCounter countFetchRelayResult(List<?> aRelay2EntityList) {
-		RelayCounter result = RelayCounter.newInstance();
-		result.setRelayCount(aRelay2EntityList.size());
-		result.setParticipantCount(Integer.valueOf(0));
-		
+	void countParticipants(List<?> aRelay2EntityList, RelayCounter result) {
 		@SuppressWarnings("unchecked")
 		List<Relay2Entity> relay2EntityList = (List<Relay2Entity>) aRelay2EntityList;
 		for (Relay2Entity eachEntity : relay2EntityList) {
 			result.incrementParticipants(eachEntity.getParticipantEntities().size());
 		}
-		
-		return result;
 	}
 }

@@ -71,9 +71,17 @@ public class RelayCounterTest {
 	}
 	
 	@Test
-	public void testIncrementParticipants() {
-		sut.setParticipantCount(Integer.valueOf(0));
+	public void testIncrementRelays() {
+		int expected = 1;
 		
+		sut.incrementRelays();
+		
+		int actual = sut.getRelays();
+		assertEquals("[relays] have not been correctly incremented!", expected, actual);
+	}
+	
+	@Test
+	public void testIncrementParticipants() {
 		int expected = 2;
 		sut.incrementParticipants(expected);
 		

@@ -31,7 +31,7 @@ public class RelayEventEntity {
 	private Date eventDay;
 
 	public static class Builder {
-		private final String id = UUID.randomUUID().toString();
+		private String id = UUID.randomUUID().toString();
 		private final String eventName;
 		private Date eventDay = new Date(System.currentTimeMillis());
 
@@ -42,6 +42,13 @@ public class RelayEventEntity {
 			eventName = anEventName;
 		}
 
+		public Builder withId(String anId) {
+			if (anId != null) {
+				id = anId;
+			}
+			return this;
+		}
+		
 		public Builder withEventDay(Date anEventDay) {
 			validateEventDay(anEventDay);
 

@@ -3,12 +3,12 @@ package com.relayd.entity;
 import static org.junit.Assert.*;
 
 import java.sql.Date;
-import java.util.Calendar;
+import java.util.*;
 
 import org.junit.Test;
 
 /**
- * Es gibt nur eine Zeit, in der es wesentlich ist tests zu schreiben.
+ * Es gibt nur eine Zeit, in der es wesentlich ist, Tests zu schreiben.
  * Diese Zeit ist jetzt.
  *  - Siddhartha Gautama
  *
@@ -37,6 +37,20 @@ public class RelayEventEntityTest {
 		String validEventName = "My Event";
 		RelayEventEntity sut = new RelayEventEntity.Builder(validEventName).build();
 		assertEquals("[eventName] has not been set correctly.", validEventName, sut.getEventName());
+	}
+	
+	@Test
+	public void testInstanceCreatedWithId() {
+		String validEventName = "My Event";
+		String expected = UUID.randomUUID().toString();
+		
+		RelayEventEntity sut = new RelayEventEntity.Builder(validEventName)
+				.withId(expected)
+				.build();
+		
+		String actual = sut.getId();
+		assertEquals("[id] has not been set correctly.", expected, actual);
+		
 	}
 
 	@Test
