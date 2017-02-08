@@ -6,7 +6,7 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 
 <h:head>
-	<title>Person</title>
+	<title>Relay Event</title>
 	<style type="text/css">
 .ui-widget {
 	font-size: 90%;
@@ -27,14 +27,13 @@
 			cellpadding="5">
 			<p:outputLabel
 				for="eventDay"
-				value="Event Day:" />
+				value="Event Day(yyyy-MM-dd):" />
 			<p:inputText
 				id="eventDay"
 				value="#{relayEventEditPageBean.eventDay}"
-				style="width:180px">
+				style="width:140px">
 				<f:converter converterId="com.relayd.web.converter.EventDayValueObjectConverter" />
 			</p:inputText>
-
 		</h:panelGrid>
 
 		<p:commandButton
