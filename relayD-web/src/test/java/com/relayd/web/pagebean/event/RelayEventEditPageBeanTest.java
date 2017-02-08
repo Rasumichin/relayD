@@ -6,7 +6,6 @@ import java.io.Serializable;
 
 import org.junit.Before;
 import org.junit.FixMethodOrder;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
@@ -19,7 +18,8 @@ import static org.mockito.Mockito.*;
  * Die Sorge, was andere wohl von einem denken, verfliegt, wenn man merkt, wie selten sie an einen denken,
  *  - David Foster Wallace
  *
- *
+ * @author schmollc
+ * @since 08.02.2017
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -52,11 +52,9 @@ public class RelayEventEditPageBeanTest {
 	}
 
 	@Test
-	@Ignore("Brauchen erst noch eine RelayEvent.newInstance()")
 	public void testPrepareNewRelayEvent() {
 		sut.prepareNewRelayEvent();
 
 		assertNotNull("[workingRelayEvent] has not been created.", sut.workingRelayEvent);
 	}
-
 }
