@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import com.relayd.Relay;
 import com.relayd.ejb.RelayGateway;
 import com.relayd.entity.RelayEntity;
+import com.relayd.jpa.GenericJpaDao;
 
 /**
  * @author  schmollc (Christian@relayd.de)
@@ -16,6 +17,8 @@ import com.relayd.entity.RelayEntity;
  *
  */
 public class RelayGatewayJPA extends GatewayJPA implements RelayGateway {
+	private GenericJpaDao jpaDao;
+
 	private RelayToEntityMapper relayMapper = RelayToEntityMapper.newInstance();
 	private EntityToRelayMapper entityMapper = EntityToRelayMapper.newInstance();
 
@@ -95,5 +98,18 @@ public class RelayGatewayJPA extends GatewayJPA implements RelayGateway {
 		Relay relay = getEntityMapper().mapToRelay(relayEntity);
 
 		return relay;
+	}
+
+	@Override
+	protected EntityManager getEntityManager() {
+		if (jpaDao == null) {
+			jpaDao = GenericJpaDao.newInstance(createEntityManager());
+		}
+
+		return getJpaDao().getEntityManager();
+	}
+	
+	GenericJpaDao getJpaDao() {
+		return jpaDao;
 	}
 }
