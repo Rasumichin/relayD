@@ -25,7 +25,16 @@
 			columns="2"
 			id="inputgrid"
 			cellpadding="5">
-		RelayEventEidtDialog
+			<p:outputLabel
+				for="eventDay"
+				value="Event Day:" />
+			<p:inputText
+				id="eventDay"
+				value="#{relayEventEditPageBean.eventDay}"
+				style="width:180px">
+				<f:converter converterId="com.relayd.web.converter.EventDayValueObjectConverter" />
+			</p:inputText>
+
 		</h:panelGrid>
 
 		<p:commandButton

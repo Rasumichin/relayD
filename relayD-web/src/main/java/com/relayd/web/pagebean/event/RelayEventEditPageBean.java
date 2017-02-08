@@ -12,6 +12,7 @@ import javax.faces.context.FacesContext;
 import org.primefaces.context.RequestContext;
 
 import com.relayd.RelayEvent;
+import com.relayd.attributes.EventDay;
 import com.relayd.web.pagebean.DialogOptionsBuilder;
 import com.relayd.web.pagebean.NavigationConstants;
 
@@ -63,4 +64,13 @@ public class RelayEventEditPageBean implements Serializable {
 		FacesMessage message = new FacesMessage(severityInfo, summary, textMessage);
 		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
+
+	public EventDay getEventDay() {
+		return workingRelayEvent.getEventDay();
+	}
+
+	public void setEventDay(EventDay aEventDay) {
+		workingRelayEvent.setEventDay(aEventDay);
+	}
+
 }

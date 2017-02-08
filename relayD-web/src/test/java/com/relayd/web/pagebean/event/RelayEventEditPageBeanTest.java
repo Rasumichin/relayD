@@ -12,6 +12,8 @@ import org.junit.runners.MethodSorters;
 import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import com.relayd.attributes.EventDay;
+
 import static org.mockito.Mockito.*;
 
 /**
@@ -57,4 +59,16 @@ public class RelayEventEditPageBeanTest {
 
 		assertNotNull("[workingRelayEvent] has not been created.", sut.workingRelayEvent);
 	}
+
+	@Test
+	public void testEventDay() {
+		sut.openDialogForCreateRelayEvent();
+		EventDay expected = EventDay.today();
+
+		sut.setEventDay(expected);
+
+		EventDay result = sut.getEventDay();
+		assertEquals("[EventDay] not correct!", expected, result);
+	}
+
 }
