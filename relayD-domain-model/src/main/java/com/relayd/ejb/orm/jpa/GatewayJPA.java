@@ -20,12 +20,16 @@ public abstract class GatewayJPA {
 
 	protected EntityManager getEntityManager() {
 		if (entityManager == null) {
-			entityManager = EM_FACTORY.createEntityManager();
+			entityManager = createEntityManager();
 		}
 
 		return entityManager;
 	}
 
+	protected EntityManager createEntityManager() {
+		return EM_FACTORY.createEntityManager();
+	}
+	
 	protected void startTransaction() {
 		EntityManager em = getEntityManager();
 		EntityTransaction tx = em.getTransaction();
