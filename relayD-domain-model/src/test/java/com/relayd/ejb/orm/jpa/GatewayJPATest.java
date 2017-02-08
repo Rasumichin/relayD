@@ -20,12 +20,12 @@ import com.relayd.jpa.GenericJpaDao;
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class RelayGatewayJPATest {
-	private RelayGatewayJPA sut = new RelayGatewayJPA();
+public class GatewayJPATest {
+	private GatewayJPA sut = new GatewayJPA() {};
 	
 	@Test
 	public void testGetJpaDao() {
-		RelayGatewayJPA sutSpy = spy(sut);
+		GatewayJPA sutSpy = spy(sut);
 		EntityManager emMock = mock(EntityManager.class);
 		doReturn(emMock).when(sutSpy).createEntityManager();
 		
