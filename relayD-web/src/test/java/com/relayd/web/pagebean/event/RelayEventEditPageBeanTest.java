@@ -6,13 +6,12 @@ import java.io.Serializable;
 
 import org.junit.Before;
 import org.junit.FixMethodOrder;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
-
-import com.relayd.web.pagebean.event.RelayEventEditPageBean;
 
 import static org.mockito.Mockito.*;
 
@@ -43,4 +42,21 @@ public class RelayEventEditPageBeanTest {
 
 		assertTrue("Klasse nicht Serializable!", condition);
 	}
+
+	@Test
+	public void testOpenDialogForCreatePerson() {
+		sut.openDialogForCreateRelayEvent();
+
+		verify(sut).prepareNewRelayEvent();
+		verify(sut).openDialog();
+	}
+
+	@Test
+	@Ignore("Brauchen erst noch eine RelayEvent.newInstance()")
+	public void testPrepareNewRelayEvent() {
+		sut.prepareNewRelayEvent();
+
+		assertNotNull("[workingRelayEvent] has not been created.", sut.workingRelayEvent);
+	}
+
 }

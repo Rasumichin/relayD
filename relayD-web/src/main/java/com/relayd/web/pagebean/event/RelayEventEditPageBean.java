@@ -11,6 +11,7 @@ import javax.faces.context.FacesContext;
 
 import org.primefaces.context.RequestContext;
 
+import com.relayd.RelayEvent;
 import com.relayd.web.pagebean.DialogOptionsBuilder;
 import com.relayd.web.pagebean.NavigationConstants;
 
@@ -25,6 +26,16 @@ public class RelayEventEditPageBean implements Serializable {
 	private static final long serialVersionUID = 453304395884163605L;
 	// TODO -medium- Put String in an I18N class! (or minimal on one position for avoid WET!)
 	static final String NOT_POSSIBLE = "Not Possible!";
+
+	RelayEvent workingRelayEvent = null;
+
+	public void openDialogForCreateRelayEvent() {
+		prepareNewRelayEvent();
+		openDialog();
+	}
+
+	void prepareNewRelayEvent() {
+	}
 
 	public void openDialog() {
 		Map<String, Object> options = new DialogOptionsBuilder().height(400).build();

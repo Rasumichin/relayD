@@ -62,7 +62,7 @@ public class RelayEventBrowsePageBean implements Serializable {
 	}
 
 	public void add(@SuppressWarnings("unused") ActionEvent actionEvent) {
-		getRelayEventEditPageBean().openDialog();
+		getRelayEventEditPageBean().openDialogForCreateRelayEvent();
 	}
 
 	void showMessageNotImplementedYet() {
