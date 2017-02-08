@@ -35,8 +35,12 @@ public class RelayEvent implements Serializable {
 	private Set<Relay> relays = new HashSet<>(MAX_NUMBER_OF_RELAYS);
 	private List<Track> tracks = new ArrayList<>(MAX_NUMBER_OF_TRACKS);
 
+	private RelayEvent() {
+		uuid = UUID.randomUUID();
+		// TODO -medium- NOP für Eventname & Eventday?
+	}
+
 	private RelayEvent(Eventname anEventName, EventDay anEventDay) {
-		super();
 		uuid = UUID.randomUUID();
 		name = anEventName;
 		eventDay = anEventDay;
@@ -50,6 +54,10 @@ public class RelayEvent implements Serializable {
 
 	public static RelayEvent duesseldorf() {
 		return RelayEventDuesseldorf.instance();
+	}
+
+	public static RelayEvent newInstance() {
+		return new RelayEvent();
 	}
 
 	/**

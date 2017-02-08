@@ -66,6 +66,15 @@ public class RelayEventTest {
 	}
 
 	@Test
+	public void testCreateEmptyInstance() {
+		RelayEvent sutEmpty = RelayEvent.newInstance();
+
+		assertNotNull("[Uuid] not correct!", sutEmpty.getUuid());
+		assertNull("[Name] not correct!", sutEmpty.getName());
+		assertNull("[EventDay] not correct!", sutEmpty.getEventDay());
+	}
+
+	@Test
 	public void testName() {
 		Eventname expected = Eventname.newInstance("Name");
 
