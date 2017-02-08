@@ -20,7 +20,7 @@
 
 	<h:form id="form">
 		<p:growl
-			id="growl"
+			id="messagesRelayEventBrowse"
 			showDetail="true" />
 
 		<p:layout fullPage="true">
@@ -40,11 +40,9 @@
 				<p:toolbar>
 					<f:facet name="left">
 						<p:commandButton
-							update="form"
-							icon="ui-icon-plus">
-							<p:ajax
-								event="dialogReturn"
-								update="form" />
+							actionListener="#{relayEventBrowsePageBean.add}"
+							icon="ui-icon-plus"
+							update="messagesRelayEventBrowse">
 						</p:commandButton>
 						<p:commandButton
 							icon="ui-icon-pencil"

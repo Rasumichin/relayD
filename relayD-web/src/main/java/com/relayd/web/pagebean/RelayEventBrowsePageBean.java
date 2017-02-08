@@ -3,8 +3,12 @@ package com.relayd.web.pagebean;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.application.FacesMessage.Severity;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 
 import com.relayd.RelayEvent;
 import com.relayd.ejb.GatewayType;
@@ -21,6 +25,8 @@ import com.relayd.ejb.RelayEventGatewayFactory;
 @SessionScoped
 public class RelayEventBrowsePageBean implements Serializable {
 	private static final long serialVersionUID = 1L;
+	// TODO -medium- Put String in an I18N class! (or minimal on one position for avoid WET!)
+	static final String NOT_POSSIBLE = "Not Possible!";
 
 	private RelayEventGateway gateway = null;
 
@@ -41,4 +47,18 @@ public class RelayEventBrowsePageBean implements Serializable {
 	public void setSelectedRelayEvent(RelayEvent aRelayEvent) {
 		selectedRelayEvent = aRelayEvent;
 	}
+
+	public void add(@SuppressWarnings("unused") ActionEvent actionEvent) {
+		showMessageNotImplementedYet();
+	}
+
+	void showMessageNotImplementedYet() {
+		showMessage(FacesMessage.SEVERITY_ERROR, NOT_POSSIBLE, "Not implemented yet!");
+	}
+
+	void showMessage(Severity severityInfo, String summary, String textMessage) {
+		FacesMessage message = new FacesMessage(severityInfo, summary, textMessage);
+		FacesContext.getCurrentInstance().addMessage(null, message);
+	}
+
 }
