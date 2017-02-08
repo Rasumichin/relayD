@@ -1,4 +1,4 @@
-package com.relayd.web.pagebean.relayevent;
+package com.relayd.web.pagebean.event;
 
 import static org.junit.Assert.*;
 
@@ -11,6 +11,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
+
+import com.relayd.web.pagebean.event.RelayEventEditPageBean;
 
 import static org.mockito.Mockito.*;
 

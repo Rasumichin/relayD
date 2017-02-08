@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title>Person</title>
+	<style type="text/css">
+.ui-widget {
+	font-size: 90%;
+}
+</style>
+</h:head>
+
+<h:body>
+	<h:form id="form">
+		<p:growl
+			id="growl"
+			showDetail="true" />
+		<p:focus/>
+
+		<h:panelGrid
+			columns="2"
+			id="inputgrid"
+			cellpadding="5">
+		RelayEventEidtDialog
+		</h:panelGrid>
+
+		<p:commandButton
+			actionListener="#{relayEventEditPageBean.cancel}"
+			icon="ui-icon-close"
+			style="float:left;" />
+		<p:commandButton
+			update="form"
+			actionListener="#{relayEventEditPageBean.save}"
+			icon="ui-icon-check"
+			style="float:right;" />
+	</h:form>
+</h:body>
+</html>

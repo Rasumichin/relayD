@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import com.relayd.RelayEvent;
+import com.relayd.web.pagebean.event.RelayEventEditPageBean;
 
 /**
  * Natürlich kostet Qualität, aber fehlende Qualität kostet mehr.
@@ -29,5 +30,16 @@ public class RelayEventBrowsePageBeanTest {
 		RelayEvent actual = sut.getSelectedRelayEvent();
 
 		assertEquals("[selectedRelayEvent] nicht korrekt!", expected, actual);
+	}
+
+	@Test
+	public void testRelayEventEditPageBean() {
+		RelayEventEditPageBean expected = new RelayEventEditPageBean();
+
+		sut.setRelayEventEditPageBean(expected);
+
+		RelayEventEditPageBean actual = sut.getRelayEventEditPageBean();
+
+		assertEquals("[relayEventEditPageBean] nicht korrekt!", expected, actual);
 	}
 }
