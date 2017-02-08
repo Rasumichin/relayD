@@ -21,24 +21,14 @@ import com.relayd.jpa.GenericJpaDao;
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class RelayGatewayJPATest {
-
 	private RelayGatewayJPA sut = new RelayGatewayJPA();
 	
 	@Test
 	public void testGetJpaDao() {
-		GenericJpaDao jpaDao = sut.getJpaDao();
-		
-		assertNull("[jpaDao] has not been correctly initialized!", jpaDao);
-	}
-	
-	@Test
-	public void testGetJpaDao_After_lazy_initialization() {
 		RelayGatewayJPA sutSpy = spy(sut);
 		EntityManager emMock = mock(EntityManager.class);
 		doReturn(emMock).when(sutSpy).createEntityManager();
 		
-		sutSpy.getEntityManager();
-
 		GenericJpaDao jpaDao = sutSpy.getJpaDao();
 		
 		assertNotNull("[jpaDao] has not been correctly initialized!", jpaDao);

@@ -12,7 +12,9 @@ import com.relayd.entity.RelayEntity;
 import com.relayd.jpa.GenericJpaDao;
 
 /**
+ * 
  * @author  schmollc (Christian@relayd.de)
+ * @author  Rasumichin (Erik@relayd.de)
  * @since   19.11.2016
  *
  */
@@ -28,24 +30,23 @@ public class RelayGatewayJPA extends GatewayJPA implements RelayGateway {
 			throw new IllegalArgumentException("[relay] must not be 'null'.");
 		}
 
-		RelayEntity relayEntity = getRelayEntitiy(relay);
-
+		RelayEntity relayEntity = getRelayEntity(relay);
 		getRelayMapper().mapRelayToEntity(relay, relayEntity);
 
-		mergeEntity(relayEntity);
+		getJpaDao().mergeEntity(relayEntity);
 	}
 
-	private RelayEntity getRelayEntitiy(Relay relay) {
+	private RelayEntity getRelayEntity(Relay relay) {
 		RelayEntity relayEntity = findById(relay.getUuid());
 		if (relayEntity == null) {
 			relayEntity = RelayEntity.newInstance(relay.getUuid());
 		}
+		
 		return relayEntity;
 	}
 
 	RelayEntity findById(UUID uuid) {
-		EntityManager em = getEntityManager();
-		RelayEntity result = em.find(RelayEntity.class, uuid.toString());
+		RelayEntity result = getJpaDao().findById(RelayEntity.class, uuid.toString());
 
 		return result;
 	}
@@ -64,11 +65,11 @@ public class RelayGatewayJPA extends GatewayJPA implements RelayGateway {
 	}
 
 	private List<Relay> mapPersonEntityListToPersonList(List<RelayEntity> relayEntities) {
-
 		List<Relay> relays = new ArrayList<>();
 		for (RelayEntity eachEntity : relayEntities) {
 			relays.add(getEntityMapper().mapToRelay(eachEntity));
 		}
+		
 		return relays;
 	}
 
@@ -77,13 +78,8 @@ public class RelayGatewayJPA extends GatewayJPA implements RelayGateway {
 	}
 
 	List<RelayEntity> findAll() {
-		startTransaction();
-
-		EntityManager em = getEntityManager();
-		List<RelayEntity> result = em.createQuery("SELECT p FROM RelayEntity p", RelayEntity.class).getResultList();
-
-		commitTransaction();
-		endTransaction();
+		@SuppressWarnings("unchecked")
+		List<RelayEntity> result = (List<RelayEntity>) getJpaDao().performSelectQuery("SELECT p FROM RelayEntity p");
 
 		return result;
 	}
@@ -102,14 +98,14 @@ public class RelayGatewayJPA extends GatewayJPA implements RelayGateway {
 
 	@Override
 	protected EntityManager getEntityManager() {
+		return getJpaDao().getEntityManager();
+	}
+	
+	protected GenericJpaDao getJpaDao() {
 		if (jpaDao == null) {
 			jpaDao = GenericJpaDao.newInstance(createEntityManager());
 		}
 
-		return getJpaDao().getEntityManager();
-	}
-	
-	GenericJpaDao getJpaDao() {
 		return jpaDao;
 	}
 }
