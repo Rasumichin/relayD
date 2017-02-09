@@ -13,6 +13,7 @@ import org.primefaces.context.RequestContext;
 
 import com.relayd.RelayEvent;
 import com.relayd.attributes.EventDay;
+import com.relayd.attributes.Eventname;
 import com.relayd.web.pagebean.DialogOptionsBuilder;
 import com.relayd.web.pagebean.NavigationConstants;
 
@@ -73,4 +74,11 @@ public class RelayEventEditPageBean implements Serializable {
 		workingRelayEvent.setEventDay(aEventDay);
 	}
 
+	public Eventname getEventname() {
+		return workingRelayEvent.getName();
+	}
+
+	public void setEventname(Eventname anEventname) {
+		workingRelayEvent.setName(anEventname);
+	}
 }

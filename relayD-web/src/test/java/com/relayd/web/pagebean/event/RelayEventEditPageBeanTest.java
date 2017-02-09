@@ -13,6 +13,7 @@ import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.relayd.attributes.EventDay;
+import com.relayd.attributes.Eventname;
 
 import static org.mockito.Mockito.*;
 
@@ -69,6 +70,17 @@ public class RelayEventEditPageBeanTest {
 
 		EventDay result = sut.getEventDay();
 		assertEquals("[EventDay] not correct!", expected, result);
+	}
+
+	@Test
+	public void testEventname() {
+		sut.openDialogForCreateRelayEvent();
+		Eventname expected = Eventname.newInstance();
+
+		sut.setEventname(expected);
+
+		Eventname result = sut.getEventname();
+		assertEquals("[Eventname] not correct!", expected, result);
 	}
 
 }

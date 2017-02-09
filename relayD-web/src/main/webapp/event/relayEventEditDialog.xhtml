@@ -34,6 +34,16 @@
 				style="width:140px">
 				<f:converter converterId="com.relayd.web.converter.EventDayValueObjectConverter" />
 			</p:inputText>
+			<p:outputLabel
+				for="eventname"
+				value="Eventname:" />
+			<p:inputText
+				id="eventname"
+				value="#{relayEventEditPageBean.eventname}"
+				style="width:140px">
+				<f:converter converterId="com.relayd.web.converter.EventNameValueObjectConverter" />
+			</p:inputText>
+
 		</h:panelGrid>
 
 		<p:commandButton
