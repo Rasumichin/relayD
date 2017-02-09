@@ -14,6 +14,8 @@ import org.primefaces.context.RequestContext;
 import com.relayd.RelayEvent;
 import com.relayd.attributes.EventDay;
 import com.relayd.attributes.Eventname;
+import com.relayd.web.bridge.RelayEventBridge;
+import com.relayd.web.bridge.RelayEventBridgeImpl;
 import com.relayd.web.pagebean.DialogOptionsBuilder;
 import com.relayd.web.pagebean.NavigationConstants;
 
@@ -29,7 +31,13 @@ public class RelayEventEditPageBean implements Serializable {
 	// TODO -medium- Put String in an I18N class! (or minimal on one position for avoid WET!)
 	static final String NOT_POSSIBLE = "Not Possible!";
 
+	private RelayEventBridge relayEventBridge;
+
 	RelayEvent workingRelayEvent = null;
+
+	public RelayEventEditPageBean() {
+		relayEventBridge = new RelayEventBridgeImpl();
+	}
 
 	public void openDialogForCreateRelayEvent() {
 		prepareNewRelayEvent();
@@ -84,7 +92,10 @@ public class RelayEventEditPageBean implements Serializable {
 	}
 
 	void persistRelayEvent() {
-		//		getBridge().persistPerson(workingRelayEvent);
-		showMessageNotImplementedYet();
+		getBridge().set(workingRelayEvent);
+	}
+
+	private RelayEventBridge getBridge() {
+		return relayEventBridge;
 	}
 }
