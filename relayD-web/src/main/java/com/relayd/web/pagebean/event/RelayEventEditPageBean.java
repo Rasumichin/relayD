@@ -54,7 +54,8 @@ public class RelayEventEditPageBean implements Serializable {
 	}
 
 	public void save() {
-		showMessage(FacesMessage.SEVERITY_ERROR, NOT_POSSIBLE, "Not implemented yet!");
+		persistRelayEvent();
+		closeDialog();
 	}
 
 	void showMessageNotImplementedYet() {
@@ -80,5 +81,10 @@ public class RelayEventEditPageBean implements Serializable {
 
 	public void setEventname(Eventname anEventname) {
 		workingRelayEvent.setName(anEventname);
+	}
+
+	void persistRelayEvent() {
+		//		getBridge().persistPerson(workingRelayEvent);
+		showMessageNotImplementedYet();
 	}
 }

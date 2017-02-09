@@ -6,6 +6,7 @@ import java.io.Serializable;
 
 import org.junit.Before;
 import org.junit.FixMethodOrder;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
@@ -83,4 +84,13 @@ public class RelayEventEditPageBeanTest {
 		assertEquals("[Eventname] not correct!", expected, result);
 	}
 
+	@Test
+	@Ignore("Es muss noch dir Bridge implementiert werden")
+	public void testSave() {
+
+		sut.save();
+
+		verify(sut).persistRelayEvent();
+		verify(sut).closeDialog();
+	}
 }
