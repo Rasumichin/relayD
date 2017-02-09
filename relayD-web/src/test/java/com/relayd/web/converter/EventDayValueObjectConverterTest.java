@@ -12,9 +12,12 @@ import org.junit.runners.MethodSorters;
 import com.relayd.attributes.EventDay;
 
 /**
+ * Die Güte des Werkes ist nicht abhängig vom Werkzeug, sondern von demjenigen, der das Werkzeug bedient.
+ *  - Unbekannt
+ *
  * @author schmollc (Christian@relayd.de)
  * @since 22.06.2016
- * 
+ *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class EventDayValueObjectConverterTest {
@@ -23,7 +26,23 @@ public class EventDayValueObjectConverterTest {
 	private static final String EXPECTED_DAY = "2015-12-31";
 
 	@Test
-	public void testGetAsObject() {
+	public void testGetAsObject_ForNullValue() {
+		String nullValue = null;
+		Object result = sut.getAsObject(null, null, nullValue);
+
+		assertNull("Expected valid instance.", result);
+	}
+
+	@Test
+	public void testGetAsObject_ForEmptyValue() {
+		String emptyValue = "";
+		Object result = sut.getAsObject(null, null, emptyValue);
+
+		assertNull("Expected valid instance.", result);
+	}
+
+	@Test
+	public void testGetAsObject_ForValue() {
 		Object result = sut.getAsObject(null, null, EXPECTED_DAY);
 
 		assertNotNull("Expected valid instance.", result);
