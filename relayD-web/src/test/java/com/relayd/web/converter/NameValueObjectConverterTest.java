@@ -37,15 +37,7 @@ public abstract class NameValueObjectConverterTest {
 	}
 
 	@Test
-	public void testGetAsObjectWithEmptyName() {
-		String emptyName = "";
-		Object result = getSut().getAsObject(null, null, emptyName);
-
-		assertNull("Attribute is not correct.", result);
-	}
-
-	@Test
-	public void testGetAsObjectWithNameContainingOnlySpaces() {
+	public void testGetAsObject_ForValueContainingOnlySpaces() {
 		String nameWithSpaces = "  ";
 		Object result = getSut().getAsObject(null, null, nameWithSpaces);
 
