@@ -11,4 +11,6 @@ import com.relayd.RelayEvent;
  */
 public interface RelayEventGateway {
 	List<RelayEvent> getAll();
+
+	void set(RelayEvent relayEvent);
 }

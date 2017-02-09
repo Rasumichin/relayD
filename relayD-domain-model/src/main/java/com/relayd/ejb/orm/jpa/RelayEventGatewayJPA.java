@@ -27,4 +27,8 @@ public class RelayEventGatewayJPA implements RelayEventGateway {
 		RelayEvent relayEvent = RelayEvent.duesseldorf();
 		return relayEvent;
 	}
+
+	@Override
+	public void set(RelayEvent relayEvent) {
+	}
 }

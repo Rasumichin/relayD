@@ -49,4 +49,28 @@ public abstract class RelayEventGatewayTest {
 		RelayEvent relayEvent = RelayEvent.newInstance(eventName, eventDay);
 		return relayEvent;
 	}
+
+	@Test
+	public void testSet() {
+		Eventname expectedEventname = Eventname.newInstance("Rund um Ennepetal");
+		EventDay expectedEventDay = EventDay.newInstance(LocalDate.of(2017, Month.AUGUST, 28));
+		RelayEvent rundUmEnnepetal = RelayEvent.newInstance(expectedEventname, expectedEventDay);
+
+		getSut().set(rundUmEnnepetal);
+		List<RelayEvent> resultRelayEventList = getSut().getAll();
+
+		assertEquals("resultSize not correct!", 2, resultRelayEventList.size());
+
+		RelayEvent resultRelayEventDuesseldorf = resultRelayEventList.get(0);
+		RelayEvent expectedRelayEventDuesseldorf = createEventForDuesseldorfMarathon();
+
+		assertEquals("[name] for Duesseldorf not correct!", expectedRelayEventDuesseldorf.getName(), resultRelayEventDuesseldorf.getName());
+		assertEquals("[eventDay] for Duesseldorf not correct!", expectedRelayEventDuesseldorf.getEventDay(), resultRelayEventDuesseldorf.getEventDay());
+
+		RelayEvent resultRelayEventRundUmEnnepetal = resultRelayEventList.get(1);
+
+		assertEquals("[name] for Rund um Ennepetal not correct!", expectedEventname, resultRelayEventRundUmEnnepetal.getName());
+		assertEquals("[eventDay] for Rund um Ennepetal not correct!", expectedEventDay, resultRelayEventRundUmEnnepetal.getEventDay());
+
+	}
 }
