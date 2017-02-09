@@ -32,17 +32,19 @@
 				<div class="divStartHeader"></div>
 			</p:layoutUnit>
 
-
 			<p:layoutUnit
 				position="center"
 				style="height:100%">
-
 				<p:toolbar>
 					<f:facet name="left">
 						<p:commandButton
 							actionListener="#{relayEventBrowsePageBean.add}"
 							icon="ui-icon-plus"
 							update="messagesRelayEventBrowse">
+							<p:ajax
+								event="dialogReturn"
+								listener="#{relayEventBrowsePageBean.onEditClosed}"
+								update="relayEventTable" />
 						</p:commandButton>
 						<p:commandButton
 							icon="ui-icon-pencil"
@@ -51,10 +53,8 @@
 								event="dialogReturn"
 								update="form" />
 						</p:commandButton>
-
 					</f:facet>
 				</p:toolbar>
-
 				<p:dataTable
 					var="relayEvent"
 					id="relayEventTable"
