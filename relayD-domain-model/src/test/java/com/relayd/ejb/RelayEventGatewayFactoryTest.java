@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runners.MethodSorters;
 
+import com.relayd.ejb.orm.file.RelayEventGatewayFile;
 import com.relayd.ejb.orm.jpa.RelayEventGatewayJPA;
 import com.relayd.ejb.orm.memory.RelayEventGatewayMemory;
 

@@ -1,5 +1,6 @@
 package com.relayd.ejb;
 
+import com.relayd.ejb.orm.file.RelayEventGatewayFile;
 import com.relayd.ejb.orm.jpa.RelayEventGatewayJPA;
 import com.relayd.ejb.orm.memory.RelayEventGatewayMemory;
 

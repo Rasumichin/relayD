@@ -1,8 +1,9 @@
-package com.relayd.ejb;
+package com.relayd.ejb.orm.file;
 
 import java.util.List;
 
 import com.relayd.RelayEvent;
+import com.relayd.ejb.RelayEventGateway;
 
 /**
  * @author schmollc
