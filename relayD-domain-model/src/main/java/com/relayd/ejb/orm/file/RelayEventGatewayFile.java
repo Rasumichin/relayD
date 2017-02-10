@@ -23,6 +23,8 @@ public class RelayEventGatewayFile implements RelayEventGateway {
 
 	private String fileName = "relay.relayD";
 
+	private RelayEventToRelayEventMapper relayEventToRelayEventMapper = RelayEventToRelayEventMapper.newInstance();
+
 	public RelayEventGatewayFile() {
 		initFile();
 	}
@@ -93,7 +95,7 @@ public class RelayEventGatewayFile implements RelayEventGateway {
 		if (someRelayEvents.contains(updateRelayEvent)) {
 			for (RelayEvent eachRelayEvent : someRelayEvents) {
 				if (updateRelayEvent.equals(eachRelayEvent)) {
-					//					getRelayToRelayMapper().mapRelayToRelay(updateRelayEvent, eachRelayEvent);
+					getRelayEventToRelayEventMapper().mapRelayEventToRelayEvent(updateRelayEvent, eachRelayEvent);
 					break;
 				}
 			}
@@ -106,5 +108,9 @@ public class RelayEventGatewayFile implements RelayEventGateway {
 		} catch (IOException e) {
 			throw new RuntimeException("Error - IOException ", e);
 		}
+	}
+
+	private RelayEventToRelayEventMapper getRelayEventToRelayEventMapper() {
+		return relayEventToRelayEventMapper;
 	}
 }
