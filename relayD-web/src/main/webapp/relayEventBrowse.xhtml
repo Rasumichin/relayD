@@ -48,10 +48,12 @@
 						</p:commandButton>
 						<p:commandButton
 							icon="ui-icon-pencil"
-							update="form">
+							actionListener="#{relayEventBrowsePageBean.add}"
+							update="messagesRelayEventBrowse">
 							<p:ajax
 								event="dialogReturn"
-								update="form" />
+								listener="#{relayEventBrowsePageBean.onEditClosed}"
+								update="relayEventTable" />
 						</p:commandButton>
 					</f:facet>
 				</p:toolbar>
@@ -60,6 +62,7 @@
 					id="relayEventTable"
 					value="#{relayEventBrowsePageBean.relayEvents}"
 					selection="#{relayEventBrowsePageBean.selectedRelayEvent}"
+					selectionMode="single"
 					scrollable="true"
 					scrollHeight="92%"
 					rowKey="#{relayEvent.uuid}"
