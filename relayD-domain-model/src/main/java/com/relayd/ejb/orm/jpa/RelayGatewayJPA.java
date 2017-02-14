@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import javax.persistence.EntityManager;
-
 import com.relayd.Relay;
 import com.relayd.ejb.RelayGateway;
 import com.relayd.entity.RelayEntity;
@@ -91,10 +89,5 @@ public class RelayGatewayJPA extends GatewayJPA implements RelayGateway {
 		Relay relay = getEntityMapper().mapToRelay(relayEntity);
 
 		return relay;
-	}
-
-	@Override
-	protected EntityManager getEntityManager() {
-		return getJpaDao().getEntityManager();
 	}
 }
