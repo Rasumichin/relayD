@@ -1,6 +1,7 @@
 package com.relayd.web.bridge;
 
 import java.util.List;
+import java.util.UUID;
 
 import com.relayd.RelayEvent;
 
@@ -13,4 +14,6 @@ public interface RelayEventBridge {
 	List<RelayEvent> all();
 
 	void set(RelayEvent relayEvent);
+
+	RelayEvent get(UUID uuid);
 }

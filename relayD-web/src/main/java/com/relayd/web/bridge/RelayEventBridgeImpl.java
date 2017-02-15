@@ -1,6 +1,7 @@
 package com.relayd.web.bridge;
 
 import java.util.List;
+import java.util.UUID;
 
 import com.relayd.RelayEvent;
 import com.relayd.Settings;
@@ -31,5 +32,10 @@ public class RelayEventBridgeImpl implements RelayEventBridge {
 	@Override
 	public void set(RelayEvent relayEvent) {
 		getGateway().set(relayEvent);
+	}
+
+	@Override
+	public RelayEvent get(UUID uuid) {
+		return getGateway().get(uuid);
 	}
 }
