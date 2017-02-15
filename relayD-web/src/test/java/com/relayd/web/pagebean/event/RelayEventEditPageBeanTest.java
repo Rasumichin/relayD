@@ -9,11 +9,14 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.relayd.attributes.EventDay;
 import com.relayd.attributes.Eventname;
+import com.relayd.web.bridge.RelayEventBridge;
 
 import static org.mockito.Mockito.*;
 
@@ -30,7 +33,11 @@ import static org.mockito.Mockito.*;
 public class RelayEventEditPageBeanTest {
 
 	@Spy
+	@InjectMocks
 	private RelayEventEditPageBean sut;
+
+	@Mock
+	private RelayEventBridge relayEventBridge;
 
 	@Before
 	public void setUp() {
