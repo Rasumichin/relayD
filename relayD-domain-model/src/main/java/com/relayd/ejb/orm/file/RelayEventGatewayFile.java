@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.apache.commons.lang3.SerializationUtils;
 
@@ -112,5 +113,15 @@ public class RelayEventGatewayFile implements RelayEventGateway {
 
 	private RelayEventToRelayEventMapper getRelayEventToRelayEventMapper() {
 		return relayEventToRelayEventMapper;
+	}
+
+	@Override
+	public RelayEvent get(UUID uuid) {
+		for (RelayEvent eachRelayEvent : getAll()) {
+			if (uuid.equals(eachRelayEvent.getUuid())) {
+				return eachRelayEvent;
+			}
+		}
+		return null;
 	}
 }
