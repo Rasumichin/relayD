@@ -21,6 +21,10 @@ public class EventDayValueObjectConverter implements Converter {
 
 	@Override
 	public Object getAsObject(@SuppressWarnings("unused") FacesContext facesContext, @SuppressWarnings("unused") UIComponent uiComponent, String value) {
+		if (value == null || value.isEmpty()) {
+			return null;
+		}
+
 		LocalDate localDate = LocalDate.parse(value, DateTimeFormatter.ofPattern(FormatConstants.DATE_FORMAT_ISO));
 		EventDay eventDay = EventDay.newInstance(localDate);
 

@@ -1,6 +1,7 @@
 package com.relayd.ejb.orm.jpa;
 
 import org.junit.FixMethodOrder;
+import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import com.relayd.ejb.RelayEventGateway;
@@ -22,4 +23,23 @@ public class RelayEventGatewayJPATest extends RelayEventGatewayTest {
 	public RelayEventGateway getSut() {
 		return sut;
 	}
+
+	@Override
+	@Test(expected = UnsupportedOperationException.class)
+	public void testSet() {
+		sut.set(null);
+	}
+
+	@Override
+	@Test(expected = UnsupportedOperationException.class)
+	public void testGet_ForExistingEntry() {
+		sut.get(null);
+	}
+
+	@Override
+	@Test(expected = UnsupportedOperationException.class)
+	public void testGet_ForNonExistingEntry() {
+		sut.get(null);
+	}
+
 }

@@ -17,6 +17,9 @@ public class EventNameValueObjectConverter implements Converter {
 
 	@Override
 	public Object getAsObject(@SuppressWarnings("unused") FacesContext facesContext, @SuppressWarnings("unused") UIComponent uiComponent, String value) {
+		if (value == null || value.isEmpty()) {
+			return null;
+		}
 		Eventname name = Eventname.newInstance(value);
 		return name;
 	}

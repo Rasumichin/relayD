@@ -1,5 +1,6 @@
 package com.relayd.ejb.orm.memory;
 
+import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.runners.MethodSorters;
 
@@ -17,6 +18,11 @@ import com.relayd.ejb.RelayEventGatewayTest;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class RelayEventGatewayMemoryTest extends RelayEventGatewayTest {
 	private RelayEventGatewayMemory sut = new RelayEventGatewayMemory();
+
+	@Before
+	public void setUp() {
+		RelayEventGatewayMemory.events.clear();
+	}
 
 	@Override
 	public RelayEventGateway getSut() {

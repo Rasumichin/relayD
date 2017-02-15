@@ -20,7 +20,7 @@
 
 	<h:form id="form">
 		<p:growl
-			id="growl"
+			id="messagesRelayEventBrowse"
 			showDetail="true" />
 
 		<p:layout fullPage="true">
@@ -32,36 +32,37 @@
 				<div class="divStartHeader"></div>
 			</p:layoutUnit>
 
-
 			<p:layoutUnit
 				position="center"
 				style="height:100%">
-
 				<p:toolbar>
 					<f:facet name="left">
 						<p:commandButton
-							update="form"
-							icon="ui-icon-plus">
+							actionListener="#{relayEventBrowsePageBean.add}"
+							icon="ui-icon-plus"
+							update="messagesRelayEventBrowse">
 							<p:ajax
 								event="dialogReturn"
-								update="form" />
+								listener="#{relayEventBrowsePageBean.onEditClosed}"
+								update="relayEventTable" />
 						</p:commandButton>
 						<p:commandButton
 							icon="ui-icon-pencil"
-							update="form">
+							actionListener="#{relayEventBrowsePageBean.edit}"
+							update="messagesRelayEventBrowse">
 							<p:ajax
 								event="dialogReturn"
-								update="form" />
+								listener="#{relayEventBrowsePageBean.onEditClosed}"
+								update="relayEventTable" />
 						</p:commandButton>
-
 					</f:facet>
 				</p:toolbar>
-
 				<p:dataTable
 					var="relayEvent"
 					id="relayEventTable"
 					value="#{relayEventBrowsePageBean.relayEvents}"
 					selection="#{relayEventBrowsePageBean.selectedRelayEvent}"
+					selectionMode="single"
 					scrollable="true"
 					scrollHeight="92%"
 					rowKey="#{relayEvent.uuid}"

@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runners.MethodSorters;
 
+import com.relayd.ejb.orm.file.RelayEventGatewayFile;
 import com.relayd.ejb.orm.jpa.RelayEventGatewayJPA;
 import com.relayd.ejb.orm.memory.RelayEventGatewayMemory;
 
@@ -15,7 +16,7 @@ import com.relayd.ejb.orm.memory.RelayEventGatewayMemory;
  * Einen Fehler begangen haben und ihn nicht korrigieren: Erst das ist ein Fehler.
  * - Konfuzius
  *
- * @author schmollc (Christian@relayd.de)
+ * @author schmollc
  * @since 17.06.2016
  *
  */
@@ -34,10 +35,9 @@ public class RelayEventGatewayFactoryTest {
 
 	@Test
 	public void testGetForRelayEventGatewayFile() {
-		expectedException.expect(IllegalArgumentException.class);
-		expectedException.expectMessage("[FILE] is unsupported Gateway Type.");
+		RelayEventGateway instance = RelayEventGatewayFactory.get(GatewayType.FILE);
 
-		RelayEventGatewayFactory.get(GatewayType.FILE);
+		assertEquals("Instance not korrekt.", instance.getClass(), RelayEventGatewayFile.class);
 	}
 
 	@Test

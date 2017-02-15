@@ -16,26 +16,26 @@ import com.relayd.ejb.PersonGateway;
  */
 public class PersonGatewayMemory implements PersonGateway {
 
-	static Map<UUID, Person> events = new HashMap<UUID, Person>();
+	static Map<UUID, Person> persons = new HashMap<UUID, Person>();
 
 	@Override
 	public Person get(UUID uuid) {
-		return events.get(uuid);
+		return persons.get(uuid);
 	}
 
 	@Override
 	public void set(Person person) {
-		events.put(person.getUuid(), person);
+		persons.put(person.getUuid(), person);
 	}
 
 	@Override
 	public void remove(UUID uuid) {
-		events.remove(uuid);
+		persons.remove(uuid);
 	}
 
 	@Override
 	public List<Person> getAll() {
-		ArrayList<Person> personsAsList = new ArrayList<Person>(events.values());
+		ArrayList<Person> personsAsList = new ArrayList<Person>(persons.values());
 		return personsAsList;
 	}
 }

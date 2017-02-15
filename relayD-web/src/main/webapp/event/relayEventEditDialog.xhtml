@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title>Relay Event</title>
+	<style type="text/css">
+.ui-widget {
+	font-size: 90%;
+}
+</style>
+</h:head>
+
+<h:body>
+	<h:form id="form">
+		<p:growl
+			id="growl"
+			showDetail="true" />
+		<p:focus/>
+
+		<h:panelGrid
+			columns="2"
+			id="inputgrid"
+			cellpadding="5">
+			<p:outputLabel
+				for="eventDay"
+				value="Event Day(yyyy-MM-dd):" />
+			<p:inputText
+				id="eventDay"
+				value="#{relayEventEditPageBean.eventDay}"
+				style="width:140px">
+				<f:converter converterId="com.relayd.web.converter.EventDayValueObjectConverter" />
+			</p:inputText>
+			<p:outputLabel
+				for="eventname"
+				value="Eventname:" />
+			<p:inputText
+				id="eventname"
+				value="#{relayEventEditPageBean.eventname}"
+				style="width:140px">
+				<f:converter converterId="com.relayd.web.converter.EventNameValueObjectConverter" />
+			</p:inputText>
+
+		</h:panelGrid>
+
+		<p:commandButton
+			actionListener="#{relayEventEditPageBean.cancel}"
+			icon="ui-icon-close"
+			style="float:left;" />
+		<p:commandButton
+			update="form"
+			actionListener="#{relayEventEditPageBean.save}"
+			icon="ui-icon-check"
+			style="float:right;" />
+	</h:form>
+</h:body>
+</html>
