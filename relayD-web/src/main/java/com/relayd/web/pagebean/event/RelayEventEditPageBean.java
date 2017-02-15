@@ -2,6 +2,7 @@ package com.relayd.web.pagebean.event;
 
 import java.io.Serializable;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.application.FacesMessage.Severity;
@@ -39,6 +40,15 @@ public class RelayEventEditPageBean implements Serializable {
 		relayEventBridge = new RelayEventBridgeImpl();
 	}
 
+	public void openDialogFor(UUID uuid) {
+		workingRelayEvent = getRelayEvent(uuid);
+		openDialog();
+	}
+
+	private RelayEvent getRelayEvent(UUID uuid) {
+		return getBridge().get(uuid);
+	}
+
 	public void openDialogForCreateRelayEvent() {
 		prepareNewRelayEvent();
 		openDialog();
@@ -48,7 +58,7 @@ public class RelayEventEditPageBean implements Serializable {
 		workingRelayEvent = RelayEvent.newInstance();
 	}
 
-	public void openDialog() {
+	void openDialog() {
 		Map<String, Object> options = new DialogOptionsBuilder().height(150).build();
 		RequestContext.getCurrentInstance().openDialog(NavigationConstants.RELAY_EVENT_EDIT_DIALOG_ID, options, null);
 	}

@@ -75,6 +75,11 @@ public class RelayEventBrowsePageBean implements Serializable {
 		getRelayEventEditPageBean().openDialogForCreateRelayEvent();
 	}
 
+	public void edit(@SuppressWarnings("unused") ActionEvent actionEvent) {
+		RelayEvent selectedEvent = getSelectedRelayEvent();
+		getRelayEventEditPageBean().openDialogFor(selectedEvent.getUuid());
+	}
+
 	void showMessageNotImplementedYet() {
 		showMessage(FacesMessage.SEVERITY_ERROR, NOT_POSSIBLE, "Not implemented yet!");
 	}
