@@ -2,6 +2,7 @@ package com.relayd.ejb.orm.jpa;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import com.relayd.RelayEvent;
 import com.relayd.ejb.RelayEventGateway;
@@ -30,5 +31,11 @@ public class RelayEventGatewayJPA implements RelayEventGateway {
 
 	@Override
 	public void set(RelayEvent relayEvent) {
+		throw new UnsupportedOperationException("Muss noch gecodet werden");
+	}
+
+	@Override
+	public RelayEvent get(UUID uuid) {
+		throw new UnsupportedOperationException("Muss noch gecodet werden");
 	}
 }
