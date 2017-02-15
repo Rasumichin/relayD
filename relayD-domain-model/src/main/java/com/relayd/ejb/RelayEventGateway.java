@@ -1,6 +1,7 @@
 package com.relayd.ejb;
 
 import java.util.List;
+import java.util.UUID;
 
 import com.relayd.RelayEvent;
 
@@ -13,4 +14,6 @@ public interface RelayEventGateway {
 	List<RelayEvent> getAll();
 
 	void set(RelayEvent relayEvent);
+
+	RelayEvent get(UUID aUuid);
 }

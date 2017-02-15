@@ -37,4 +37,9 @@ public class RelayEventGatewayMemory implements RelayEventGateway {
 	public void set(RelayEvent relayEvent) {
 		events.put(relayEvent.getUuid(), relayEvent);
 	}
+
+	@Override
+	public RelayEvent get(UUID uuid) {
+		return events.get(uuid);
+	}
 }
