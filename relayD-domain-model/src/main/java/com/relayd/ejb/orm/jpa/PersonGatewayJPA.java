@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
 
 import com.relayd.Person;
@@ -34,8 +33,7 @@ public class PersonGatewayJPA extends GatewayJPA implements PersonGateway {
 	}
 
 	PersonEntity findById(UUID uuid) {
-		EntityManager em = getEntityManager();
-		PersonEntity result = em.find(PersonEntity.class, uuid.toString());
+		PersonEntity result = getJpaDao().findById(PersonEntity.class, uuid.toString());
 
 		return result;
 	}
@@ -57,13 +55,8 @@ public class PersonGatewayJPA extends GatewayJPA implements PersonGateway {
 	}
 
 	List<PersonEntity> findAll() {
-		startTransaction();
-
-		EntityManager em = getEntityManager();
-		List<PersonEntity> result = em.createQuery("SELECT p FROM PersonEntity p", PersonEntity.class).getResultList();
-
-		commitTransaction();
-		endTransaction();
+		@SuppressWarnings("unchecked")
+		List<PersonEntity> result = (List<PersonEntity>) getJpaDao().performSelectQuery("SELECT p FROM PersonEntity p");
 
 		return result;
 	}
@@ -73,6 +66,7 @@ public class PersonGatewayJPA extends GatewayJPA implements PersonGateway {
 		for (PersonEntity eachEntity : personEntities) {
 			persons.add(getPersonEntityMapper().mapToPerson(eachEntity));
 		}
+		
 		return persons;
 	}
 
@@ -88,7 +82,7 @@ public class PersonGatewayJPA extends GatewayJPA implements PersonGateway {
 		}
 		getPersonMapper().mapPersonToEntity(person, personEntity);
 
-		mergeEntity(personEntity);
+		getJpaDao().mergeEntity(personEntity);
 	}
 
 	@Override
@@ -98,13 +92,6 @@ public class PersonGatewayJPA extends GatewayJPA implements PersonGateway {
 			throw new EntityNotFoundException("PersonEntity with 'uuid' (" + uuid + ") does not exist!");
 		}
 
-		removePersonEntity(personEntity);
-	}
-
-	void removePersonEntity(PersonEntity personEntity) {
-		startTransaction();
-		getEntityManager().remove(personEntity);
-		commitTransaction();
-		endTransaction();
+		getJpaDao().removeEntity(personEntity);
 	}
 }

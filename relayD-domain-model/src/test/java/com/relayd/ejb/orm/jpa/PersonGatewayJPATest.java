@@ -9,17 +9,17 @@ import java.util.UUID;
 import javax.persistence.EntityNotFoundException;
 
 import org.junit.FixMethodOrder;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
-import org.mockito.Spy;
+import org.mockito.*;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.relayd.Person;
 import com.relayd.attributes.Forename;
 import com.relayd.attributes.Surename;
 import com.relayd.entity.PersonEntity;
+import com.relayd.jpa.GenericJpaDao;
 
 import static org.mockito.Mockito.*;
 
@@ -37,7 +37,7 @@ public class PersonGatewayJPATest {
 
 	@Spy
 	private PersonGatewayJPA sut = new PersonGatewayJPA();
-
+	
 	@Test
 	public void testGetPersonMapper() {
 		PersonToEntityMapper result = sut.getPersonMapper();
@@ -125,11 +125,12 @@ public class PersonGatewayJPATest {
 		UUID someUuid = UUID.randomUUID();
 		PersonEntity personEntity = PersonEntity.newInstance(someUuid);
 
+		GenericJpaDao jpaDaoMock = mock(GenericJpaDao.class);
+		doReturn(jpaDaoMock).when(sut).getJpaDao();
 		doReturn(personEntity).when(sut).findById(someUuid);
-		doNothing().when(sut).removePersonEntity(personEntity);
 
 		sut.remove(someUuid);
-		verify(sut, times(1)).removePersonEntity(personEntity);
+		verify(jpaDaoMock, times(1)).removeEntity(personEntity);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -142,26 +143,25 @@ public class PersonGatewayJPATest {
 		Person person = getPersonToSet();
 		PersonEntity expectedPersonEntity = PersonEntity.newInstance();
 		sut.getPersonMapper().mapPersonToEntity(person, expectedPersonEntity);
-
+		
+		GenericJpaDao jpaDaoMock = mock(GenericJpaDao.class);
+		doReturn(jpaDaoMock).when(sut).getJpaDao();
 		doReturn(expectedPersonEntity).when(sut).findById(person.getUuid());
-		doNothing().when(sut).mergeEntity(expectedPersonEntity);
 
 		sut.set(person);
-		verify(sut, times(1)).mergeEntity(expectedPersonEntity);
+		verify(jpaDaoMock, times(1)).mergeEntity(expectedPersonEntity);
 	}
 
-	// TODO (Erik, Version 1.4): Been unable to stub the method call 'findById' to return 'null'. Any attempt is starting JPA ?!
-	@Ignore
 	@Test
 	public void testSet_whenPersonIsNew() {
 		Person person = getPersonToSet();
-		PersonEntity expectedPersonEntity = PersonEntity.newInstance();
-		sut.getPersonMapper().mapPersonToEntity(person, expectedPersonEntity);
 
-		doNothing().when(sut).mergeEntity(expectedPersonEntity);
+		GenericJpaDao jpaDaoMock = mock(GenericJpaDao.class);
+		doReturn(jpaDaoMock).when(sut).getJpaDao();
+		doReturn(null).when(sut).findById(person.getUuid());
 
 		sut.set(person);
-		verify(sut, times(1)).mergeEntity(expectedPersonEntity);
+		verify(jpaDaoMock, times(1)).mergeEntity(any(PersonEntity.class));
 	}
 
 	private Person getPersonToSet() {
