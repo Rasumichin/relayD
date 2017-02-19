@@ -30,4 +30,9 @@ public abstract class GatewayJPA {
 	protected EntityManager createEntityManager() {
 		return EM_FACTORY.createEntityManager();
 	}
+
+	 @Override
+	protected void finalize() throws Throwable {
+		 getJpaDao().close();
+	 }	
 }
