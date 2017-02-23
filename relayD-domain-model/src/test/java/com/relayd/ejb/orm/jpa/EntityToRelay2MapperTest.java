@@ -9,7 +9,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import com.relayd.Relay;
+import com.relayd.*;
 import com.relayd.attributes.Relayname;
 import com.relayd.entity.*;
 
@@ -57,7 +57,22 @@ public class EntityToRelay2MapperTest {
 		assertEquals("Mapping of [relayname] is not correct!", expected, actual);
 	}
 
-	@Ignore
+	@Test
+	public void testMapRelayEventEntity_whenRelayEventIsNull() {
+		RelayEvent actual = sut.mapRelayEventEntity(null);
+		
+		assertNull("Mapping of [relayEventEntity] is not correct!", actual);
+	}
+	
+	@Test
+	public void testMapRelayEventEntity_whenRelayEventIsNotNull() {
+		RelayEventEntity relayEventEntity = new RelayEventEntity.Builder("My Event").build();
+		
+		RelayEvent actual = sut.mapRelayEventEntity(relayEventEntity);
+		
+		assertNotNull("Mapping of [relayEventEntity] is not correct!", actual);
+	}
+	
 	@Test
 	public void testMapToRelay_check_relayevent() {
 		RelayEventEntity relayEventEntity = new RelayEventEntity.Builder("My Event").build();
@@ -66,7 +81,7 @@ public class EntityToRelay2MapperTest {
 		Relay relay = sut.mapToRelay(relayEntity);
 		
 		UUID expected = UUID.fromString(relayEventEntity.getId());
-		UUID actual = relay.getUuid();
+		UUID actual = relay.getRelayEvent().getUuid();
 		assertEquals("Mapping of [relayEvent] is not correct!", expected, actual);
 	}
 	
