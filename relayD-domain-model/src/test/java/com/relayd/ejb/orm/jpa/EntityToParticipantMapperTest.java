@@ -62,10 +62,6 @@ public class EntityToParticipantMapperTest {
 	@Ignore
 	@Test
 	public void testMapToParticipant_check_position() {
-		ParticipantEntity participantEntity = ParticipantEntity.newInstance();
-		participantEntity.setPosition(Integer.valueOf(1));
-
-		Participant participant = sut.mapToParticipant(participantEntity);
 		// TODO (EL, 2017-02-23): Unable to check the position since the actual Participant type do NOT hold a corresponding attribute!
 	}
 }
