@@ -5,12 +5,11 @@ import static org.junit.Assert.*;
 import java.util.UUID;
 
 import org.junit.FixMethodOrder;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import com.relayd.*;
-import com.relayd.attributes.Relayname;
+import com.relayd.attributes.*;
 import com.relayd.entity.*;
 
 /**
@@ -85,8 +84,72 @@ public class EntityToRelay2MapperTest {
 		assertEquals("Mapping of [relayEvent] is not correct!", expected, actual);
 	}
 	
-	@Ignore
 	@Test
-	public void testMapToDomain_participantOne() {
+	public void testMapToRelay_check_participant_position_one() {
+		ParticipantEntity participantEntity = getRandomParticipantEntityForPosition(Integer.valueOf(1));
+		relayEntity.addParticipantEntity(participantEntity);
+		
+		Relay relay = sut.mapToRelay(relayEntity);
+		
+		UUID expected = UUID.fromString(participantEntity.getPersonEntity().getId());
+		UUID actual = relay.getParticipantFor(Position.FIRST).getUuidPerson();
+		assertEquals("Mapping of [participant] is not correct!", expected, actual);
+	}
+	
+	@Test
+	public void testMapToRelay_check_participant_position_two() {
+		ParticipantEntity participantEntity = getRandomParticipantEntityForPosition(Integer.valueOf(1));
+		relayEntity.addParticipantEntity(participantEntity);
+		participantEntity = getRandomParticipantEntityForPosition(Integer.valueOf(2));
+		relayEntity.addParticipantEntity(participantEntity);
+		
+		Relay relay = sut.mapToRelay(relayEntity);
+		
+		UUID expected = UUID.fromString(participantEntity.getPersonEntity().getId());
+		UUID actual = relay.getParticipantFor(Position.SECOND).getUuidPerson();
+		assertEquals("Mapping of [participant] is not correct!", expected, actual);
+	}
+
+	@Test
+	public void testMapToRelay_check_participant_position_three() {
+		ParticipantEntity participantEntity = getRandomParticipantEntityForPosition(Integer.valueOf(1));
+		relayEntity.addParticipantEntity(participantEntity);
+		participantEntity = getRandomParticipantEntityForPosition(Integer.valueOf(2));
+		relayEntity.addParticipantEntity(participantEntity);
+		participantEntity = getRandomParticipantEntityForPosition(Integer.valueOf(3));
+		relayEntity.addParticipantEntity(participantEntity);
+		
+		Relay relay = sut.mapToRelay(relayEntity);
+		
+		UUID expected = UUID.fromString(participantEntity.getPersonEntity().getId());
+		UUID actual = relay.getParticipantFor(Position.THIRD).getUuidPerson();
+		assertEquals("Mapping of [participant] is not correct!", expected, actual);
+	}
+
+	@Test
+	public void testMapToRelay_check_participant_position_four() {
+		ParticipantEntity participantEntity = getRandomParticipantEntityForPosition(Integer.valueOf(1));
+		relayEntity.addParticipantEntity(participantEntity);
+		participantEntity = getRandomParticipantEntityForPosition(Integer.valueOf(2));
+		relayEntity.addParticipantEntity(participantEntity);
+		participantEntity = getRandomParticipantEntityForPosition(Integer.valueOf(3));
+		relayEntity.addParticipantEntity(participantEntity);
+		participantEntity = getRandomParticipantEntityForPosition(Integer.valueOf(4));
+		relayEntity.addParticipantEntity(participantEntity);
+		
+		Relay relay = sut.mapToRelay(relayEntity);
+		
+		UUID expected = UUID.fromString(participantEntity.getPersonEntity().getId());
+		UUID actual = relay.getParticipantFor(Position.FOURTH).getUuidPerson();
+		assertEquals("Mapping of [participant] is not correct!", expected, actual);
+	}
+
+	private ParticipantEntity getRandomParticipantEntityForPosition(Integer position) {
+		PersonEntity personEntity = PersonEntity.newInstance();
+		ParticipantEntity participantEntity = ParticipantEntity.newInstance();
+		participantEntity.setPersonEntity(personEntity);
+		participantEntity.setPosition(position);
+		
+		return participantEntity;
 	}
 }
