@@ -35,6 +35,8 @@ public class RelayGatewayJPA extends GatewayJPA implements RelayGateway {
 		Relay2Entity relayEntity = findById(relay.getUuid());
 		if (relayEntity == null) {
 			relayEntity = Relay2Entity.newInstance(relay.getUuid().toString());
+			RelayEventEntity relayEventEntity = getJpaDao().findById(RelayEventEntity.class, relay.getRelayEvent().getUuid().toString());
+			relayEntity.setRelayEventEntity(relayEventEntity);
 		}
 		
 		return relayEntity;
