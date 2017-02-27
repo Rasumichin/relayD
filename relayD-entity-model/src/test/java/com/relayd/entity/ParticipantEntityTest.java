@@ -156,4 +156,16 @@ public class ParticipantEntityTest {
 		Relay2Entity actual = sut.getRelay2Entity();
 		assertNull("[relayId] has not been set correctly!", actual);
 	}
+	
+	@Test
+	public void testGetUuidPerson() {
+		ParticipantEntity sut = ParticipantEntity.newInstance();
+		UUID expected = UUID.randomUUID();
+		PersonEntity personEntity = PersonEntity.newInstance(expected);
+		sut.setPersonEntity(personEntity);
+		
+		UUID actual = sut.getUuidPerson();
+
+		assertEquals("[personUuid] is not correct!", expected, actual);
+	}
 }

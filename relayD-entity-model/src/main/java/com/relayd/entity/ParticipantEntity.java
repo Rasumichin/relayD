@@ -76,6 +76,10 @@ public class ParticipantEntity {
 		return personEntity;
 	}
 
+	public UUID getUuidPerson() {
+		return UUID.fromString(getPersonEntity().getId());
+	}
+
 	void setRelay2Entity(Relay2Entity aRelay2Entity) {
 		relay2Entity = aRelay2Entity;
 	}
