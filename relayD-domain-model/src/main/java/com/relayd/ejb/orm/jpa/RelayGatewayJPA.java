@@ -1,10 +1,9 @@
 package com.relayd.ejb.orm.jpa;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 import com.relayd.*;
+import com.relayd.attributes.Position;
 import com.relayd.ejb.RelayGateway;
 import com.relayd.entity.*;
 
@@ -26,9 +25,10 @@ public class RelayGatewayJPA extends GatewayJPA implements RelayGateway {
 		}
 
 		Relay2Entity relayEntity = getRelayEntity(relay);
-//		getRelayMapper().mapRelayToEntity(relay, relayEntity);
-//
-//		getJpaDao().mergeEntity(relayEntity);
+		getRelayMapper().mapRelayToEntity2(relay, relayEntity);
+		mapParticipantsToEntities(relay, relayEntity);
+		
+		getJpaDao().mergeEntity(relayEntity);
 	}
 
 	private Relay2Entity getRelayEntity(Relay relay) {
@@ -54,6 +54,43 @@ public class RelayGatewayJPA extends GatewayJPA implements RelayGateway {
 
 	private RelayToEntityMapper getRelayMapper() {
 		return relayMapper;
+	}
+	
+	void mapParticipantsToEntities(Relay relay, Relay2Entity relayEntity) {
+		for (int i = 0; i < relay.getParticipants().size(); i++) {
+			Integer position = Integer.valueOf(i + 1);
+			Participant participant = relay.getParticipantFor(Position.newInstance(position));
+			Optional<ParticipantEntity> participantEntity = relayEntity.getParticipantEntityAtPosition(position);
+			if (participant.isEmpty()) {
+				if (participantEntity.isPresent()) {
+					relayEntity.removeParticipantEntity(participantEntity.get());
+				}
+			} else {
+				if (participantEntity.isPresent()) {
+					ParticipantEntity currentParticipantEntity = participantEntity.get();
+					if (!(participant.getUuidPerson().equals(currentParticipantEntity.getUuidPerson()))) {
+						PersonEntity personEntity = findPersonEntityFor(participant.getUuidPerson());
+						currentParticipantEntity.setPersonEntity(personEntity);
+					}
+				} else {
+					ParticipantEntity newParticipantEntity = ParticipantEntity.newInstance();
+					newParticipantEntity.setPosition(position);
+					PersonEntity personEntity = findPersonEntityFor(participant.getUuidPerson());
+					newParticipantEntity.setPersonEntity(personEntity);
+					relayEntity.addParticipantEntity(newParticipantEntity);
+				}
+			}
+		}
+	}
+	
+	private PersonEntity findPersonEntityFor(UUID personUuid) {
+		PersonEntity result = getJpaDao().findById(PersonEntity.class, personUuid.toString());
+		if (result == null) {
+			throw new IllegalStateException("PersonEntity with 'id=" + personUuid + "' is not stored in database. This must not happen here.");
+		}
+		
+		return result;
+		
 	}
 
 	@Override
