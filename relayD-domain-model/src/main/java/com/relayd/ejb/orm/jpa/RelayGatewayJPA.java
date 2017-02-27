@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import com.relayd.Relay;
+import com.relayd.*;
 import com.relayd.ejb.RelayGateway;
 import com.relayd.entity.*;
 
@@ -35,8 +35,7 @@ public class RelayGatewayJPA extends GatewayJPA implements RelayGateway {
 		Relay2Entity relayEntity = findById(relay.getUuid());
 		if (relayEntity == null) {
 			relayEntity = Relay2Entity.newInstance(relay.getUuid().toString());
-			RelayEventEntity relayEventEntity = getJpaDao().findById(RelayEventEntity.class, relay.getRelayEvent().getUuid().toString());
-			relayEntity.setRelayEventEntity(relayEventEntity);
+			setRelayEventEntityFor(relay.getRelayEvent(), relayEntity);
 		}
 		
 		return relayEntity;
@@ -46,6 +45,11 @@ public class RelayGatewayJPA extends GatewayJPA implements RelayGateway {
 		Relay2Entity result = getJpaDao().findById(Relay2Entity.class, uuid.toString());
 
 		return result;
+	}
+
+	void setRelayEventEntityFor(RelayEvent relayEvent, Relay2Entity relayEntity) {
+		RelayEventEntity relayEventEntity = getJpaDao().findById(RelayEventEntity.class, relayEvent.getUuid().toString());
+		relayEntity.setRelayEventEntity(relayEventEntity);
 	}
 
 	private RelayToEntityMapper getRelayMapper() {
