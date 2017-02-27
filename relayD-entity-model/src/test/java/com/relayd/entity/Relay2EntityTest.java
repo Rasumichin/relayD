@@ -242,4 +242,37 @@ public class Relay2EntityTest {
 
 		assertTrue(result);
 	}
+	
+	@Test
+	public void testGetParticipantEntityAtPosition_find_pos_one_have_pos_one() {
+		Relay2Entity sut = Relay2Entity.newInstance();
+		ParticipantEntity participantEntity = ParticipantEntity.newInstance();
+		participantEntity.setPosition(Integer.valueOf(1));
+		sut.addParticipantEntity(participantEntity);
+		
+		Optional<ParticipantEntity> actual = sut.getParticipantEntityAtPosition(Integer.valueOf(1));
+		
+		assertTrue("[participantEntity] was not searched correctly!", actual.isPresent());
+	}
+
+	@Test
+	public void testGetParticipantEntityAtPosition_find_pos_one_have_pos_two() {
+		Relay2Entity sut = Relay2Entity.newInstance();
+		ParticipantEntity participantEntity = ParticipantEntity.newInstance();
+		participantEntity.setPosition(Integer.valueOf(2));
+		sut.addParticipantEntity(participantEntity);
+		
+		Optional<ParticipantEntity> actual = sut.getParticipantEntityAtPosition(Integer.valueOf(1));
+		
+		assertFalse("[participantEntity] was not searched correctly!", actual.isPresent());
+	}
+
+	@Test
+	public void testGetParticipantEntityAtPosition_find_pos_one_have_none() {
+		Relay2Entity sut = Relay2Entity.newInstance();
+		
+		Optional<ParticipantEntity> actual = sut.getParticipantEntityAtPosition(Integer.valueOf(1));
+		
+		assertFalse("[participantEntity] was not searched correctly!", actual.isPresent());
+	}
 }

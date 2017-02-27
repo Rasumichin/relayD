@@ -102,6 +102,13 @@ public class Relay2Entity {
 		return Collections.unmodifiableList(participantEntities);
 	}
 
+	public Optional<ParticipantEntity> getParticipantEntityAtPosition(Integer aPosition) {
+		return getParticipantEntities()
+		.stream()
+		.filter(eachEntity -> eachEntity.getPosition().equals(aPosition))
+		.findFirst();
+	}
+
 	@Override
 	public String toString() {
 		return getClass().getSimpleName() + " [id=" + id + ", relayname=" + relayname + "]";
