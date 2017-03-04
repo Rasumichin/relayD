@@ -83,7 +83,7 @@ public class RelayGatewayJPA extends GatewayJPA implements RelayGateway {
 		}
 	}
 	
-	private PersonEntity findPersonEntityFor(UUID personUuid) {
+	PersonEntity findPersonEntityFor(UUID personUuid) {
 		PersonEntity result = getJpaDao().findById(PersonEntity.class, personUuid.toString());
 		if (result == null) {
 			throw new IllegalStateException("PersonEntity with 'id=" + personUuid + "' is not stored in database. This must not happen here.");
