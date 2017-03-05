@@ -62,9 +62,7 @@ public class RelayGatewayJPA extends GatewayJPA implements RelayGateway {
 			Participant participant = relay.getParticipantFor(Position.newInstance(position));
 			Optional<ParticipantEntity> participantEntity = relayEntity.getParticipantEntityAtPosition(position);
 			if (participant.isEmpty()) {
-				if (participantEntity.isPresent()) {
-					relayEntity.removeParticipantEntity(participantEntity.get());
-				}
+				relayEntity.possiblyRemoveParticipantEntity(participantEntity);
 			} else {
 				if (participantEntity.isPresent()) {
 					ParticipantEntity currentParticipantEntity = participantEntity.get();

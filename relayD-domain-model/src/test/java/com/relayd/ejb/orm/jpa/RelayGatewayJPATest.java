@@ -12,7 +12,9 @@ import com.relayd.*;
 import com.relayd.entity.*;
 
 /**
- * 
+ * Master Ninjei: If the application does not run correctly, do not blame the operating system.
+ *  - Geoffrey James (The Zen of Programming, P. 29)
+ *
  * @author  Rasumichin (Erik@relayd.de)
  * @since   04.03.2017
  *
