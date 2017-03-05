@@ -8,6 +8,8 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import com.relayd.entity.initializer.Relay2EntityInitializer;
+
 /**
  * Don't pass 'Null'.
  *  - Michael Feathers (Chapter 7 of Robert C. Martin's "Clean Code")
@@ -103,10 +105,7 @@ public class Relay2EntityTest {
 	
 	@Test
 	public void testAddParticipantEntity() {
-		Relay2Entity sut = Relay2Entity.newInstance();
-		ParticipantEntity participantEntity = ParticipantEntity.newInstance();
-		
-		sut.addParticipantEntity(participantEntity);
+		Relay2Entity sut = Relay2EntityInitializer.newRelay2EntityWithOneParticipant();
 		
 		List<ParticipantEntity> result = sut.getParticipantEntities();
 		boolean actual = (result.size() == 1);
@@ -115,12 +114,10 @@ public class Relay2EntityTest {
 	
 	@Test
 	public void testRemoveParticipantEntity_element_is_present() {
-		Relay2Entity sut = Relay2Entity.newInstance();
-		ParticipantEntity participantEntity = ParticipantEntity.newInstance();
-		sut.addParticipantEntity(participantEntity);
+		Relay2Entity sut = Relay2EntityInitializer.newRelay2EntityWithOneParticipant();
 		
 		// Create another instance with the same 'id' and let the 'sut' remove this one.
-		String uuid = participantEntity.getId();
+		String uuid = sut.getParticipantEntities().get(0).getId();
 		ParticipantEntity participantEntityToBeRemoved = ParticipantEntity.newInstance(uuid);
 		
 		sut.removeParticipantEntity(participantEntityToBeRemoved);
@@ -131,9 +128,7 @@ public class Relay2EntityTest {
 
 	@Test
 	public void testRemoveParticipantEntity_element_is_not_present() {
-		Relay2Entity sut = Relay2Entity.newInstance();
-		ParticipantEntity participantEntity = ParticipantEntity.newInstance();
-		sut.addParticipantEntity(participantEntity);
+		Relay2Entity sut = Relay2EntityInitializer.newRelay2EntityWithOneParticipant();
 		ParticipantEntity participantEntityToBeRemoved = ParticipantEntity.newInstance();
 
 		sut.removeParticipantEntity(participantEntityToBeRemoved);
@@ -274,5 +269,43 @@ public class Relay2EntityTest {
 		Optional<ParticipantEntity> actual = sut.getParticipantEntityAtPosition(Integer.valueOf(1));
 		
 		assertFalse("[participantEntity] was not searched correctly!", actual.isPresent());
+	}
+	
+	@Test
+	public void testPossiblyRemoveParticipantEntity_particpantEntityIsNotPresent() {
+		Relay2Entity sut = Relay2EntityInitializer.newRelay2EntityWithOneParticipant();
+		Optional<ParticipantEntity> isNotAParticipantEntity = Optional.ofNullable(null);
+		
+		sut.possiblyRemoveParticipantEntity(isNotAParticipantEntity);
+		
+		int expected = 1;
+		int actual = sut.getParticipantEntities().size();
+		assertEquals("Possibly removing a [participantEntity] does not work correctly!", expected, actual);
+	}
+
+	@Test
+	public void testPossiblyRemoveParticipantEntity_particpantEntityIsPresentAndContained() {
+		Relay2Entity sut = Relay2EntityInitializer.newRelay2EntityWithOneParticipant();
+		ParticipantEntity participantEntity = ParticipantEntity.newInstance(sut.getParticipantEntities().get(0).getId());
+		Optional<ParticipantEntity> isAParticipantEntity = Optional.of(participantEntity);
+		
+		sut.possiblyRemoveParticipantEntity(isAParticipantEntity);
+		
+		int expected = 0;
+		int actual = sut.getParticipantEntities().size();
+		assertEquals("Possibly removing a [participantEntity] does not work correctly!", expected, actual);
+	}
+
+	@Test
+	public void testPossiblyRemoveParticipantEntity_particpantEntityIsPresentAndNotContained() {
+		Relay2Entity sut = Relay2EntityInitializer.newRelay2EntityWithOneParticipant();
+		ParticipantEntity participantEntity = ParticipantEntity.newInstance();
+		Optional<ParticipantEntity> isAParticipantEntity = Optional.of(participantEntity);
+		
+		sut.possiblyRemoveParticipantEntity(isAParticipantEntity);
+		
+		int expected = 1;
+		int actual = sut.getParticipantEntities().size();
+		assertEquals("Possibly removing a [participantEntity] does not work correctly!", expected, actual);
 	}
 }

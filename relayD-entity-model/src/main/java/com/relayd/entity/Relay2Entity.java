@@ -109,6 +109,13 @@ public class Relay2Entity {
 		.findFirst();
 	}
 
+	public void possiblyRemoveParticipantEntity(Optional<ParticipantEntity> aParticipantEntity) {
+		if (aParticipantEntity.isPresent()) {
+			ParticipantEntity participantEntity = aParticipantEntity.get();
+			removeParticipantEntity(participantEntity);
+		}
+	}
+
 	@Override
 	public String toString() {
 		return getClass().getSimpleName() + " [id=" + id + ", relayname=" + relayname + "]";
