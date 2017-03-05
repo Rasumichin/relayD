@@ -66,7 +66,7 @@ public class RelayGatewayJPA extends GatewayJPA implements RelayGateway {
 			} else {
 				if (participantEntity.isPresent()) {
 					ParticipantEntity currentParticipantEntity = participantEntity.get();
-					if (!(participant.getUuidPerson().equals(currentParticipantEntity.getUuidPerson()))) {
+					if (!(participant.hasThatPersonIdentity(currentParticipantEntity.getUuidPerson()))) {
 						PersonEntity personEntity = findPersonEntityFor(participant.getUuidPerson());
 						currentParticipantEntity.setPersonEntity(personEntity);
 					}

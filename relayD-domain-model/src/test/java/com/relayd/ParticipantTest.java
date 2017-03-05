@@ -19,6 +19,7 @@ import com.relayd.attributes.Surename;
  *  - Johann Wolfgang von Goethe
  *
  * @author schmollc (Christian@relayd.de)
+ * @author Rasumichin (Erik@relayd.de)
  * @since 20.10.2016
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -278,5 +279,28 @@ public class ParticipantTest {
 		boolean result = sut.equals(secondSut);
 
 		assertTrue(result);
+	}
+	
+	@Test
+	public void testHasThatPersonIdentity_true() {
+		UUID someUuid = UUID.randomUUID();
+		Person person = Person.newInstance();
+		person.setUuid(someUuid);
+		Participant sut = Participant.newInstance(person);
+		
+		boolean result = sut.hasThatPersonIdentity(someUuid);
+		
+		assertTrue("UUID of person has not been checked correctly!", result);
+	}
+
+	@Test
+	public void testHasThatPersonIdentity_false() {
+		Person person = Person.newInstance();
+		person.setUuid(UUID.randomUUID());
+		Participant sut = Participant.newInstance(person);
+		
+		boolean result = sut.hasThatPersonIdentity(UUID.randomUUID());
+		
+		assertFalse("UUID of person has not been checked correctly!", result);
 	}
 }
