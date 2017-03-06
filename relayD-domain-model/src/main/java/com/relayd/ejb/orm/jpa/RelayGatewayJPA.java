@@ -67,18 +67,19 @@ public class RelayGatewayJPA extends GatewayJPA implements RelayGateway {
 				if (participantEntity.isPresent()) {
 					ParticipantEntity currentParticipantEntity = participantEntity.get();
 					if (!(participant.hasThatPersonIdentity(currentParticipantEntity.getUuidPerson()))) {
-						PersonEntity personEntity = findPersonEntityFor(participant.getUuidPerson());
-						currentParticipantEntity.setPersonEntity(personEntity);
+						setNewPersonEntityById(currentParticipantEntity, participant.getUuidPerson());
 					}
 				} else {
-					ParticipantEntity newParticipantEntity = ParticipantEntity.newInstance();
-					newParticipantEntity.setPosition(position);
-					PersonEntity personEntity = findPersonEntityFor(participant.getUuidPerson());
-					newParticipantEntity.setPersonEntity(personEntity);
+					ParticipantEntity newParticipantEntity = getNewParticipantEntity(position, participant.getUuidPerson());
 					relayEntity.addParticipantEntity(newParticipantEntity);
 				}
 			}
 		}
+	}
+	
+	void setNewPersonEntityById(ParticipantEntity participantEntity, UUID personId) {
+		PersonEntity personEntity = findPersonEntityFor(personId);
+		participantEntity.setPersonEntity(personEntity);
 	}
 	
 	PersonEntity findPersonEntityFor(UUID personUuid) {
@@ -88,7 +89,15 @@ public class RelayGatewayJPA extends GatewayJPA implements RelayGateway {
 		}
 		
 		return result;
+	}
+
+	ParticipantEntity getNewParticipantEntity(Integer position, UUID personId) {
+		ParticipantEntity participantEntity = ParticipantEntity.newInstance();
+		participantEntity.setPosition(position);
+		PersonEntity personEntity = findPersonEntityFor(personId);
+		participantEntity.setPersonEntity(personEntity);
 		
+		return participantEntity;
 	}
 
 	@Override
@@ -97,7 +106,6 @@ public class RelayGatewayJPA extends GatewayJPA implements RelayGateway {
 		List<Relay> relays = mapPersonEntityListToPersonList(relayEntities);
 
 		return relays;
-
 	}
 
 	private List<Relay> mapPersonEntityListToPersonList(List<Relay2Entity> relayEntities) {

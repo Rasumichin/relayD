@@ -111,4 +111,30 @@ public class RelayGatewayJPATest {
 		UUID actualUuid = mappedParticipantEntity.getUuidPerson();
 		assertEquals("Participant mapping is not correct!", expectedUuid, actualUuid);
 	}
+	
+	@Test
+	public void testSetNewPersonEntityById() {
+		UUID expectedUuid = UUID.randomUUID();
+		ParticipantEntity participantEntity = ParticipantEntity.newInstance();
+		participantEntity.setPersonEntity(PersonEntity.newInstance(UUID.randomUUID()));
+		doReturn(PersonEntity.newInstance(expectedUuid)).when(sutSpy).findPersonEntityFor(any());
+
+		sutSpy.setNewPersonEntityById(participantEntity, expectedUuid);
+		
+		UUID actualUuid = participantEntity.getUuidPerson();
+		assertEquals("Setting of new [personEntity] is not correct!", expectedUuid, actualUuid);
+	}
+	
+	@Test
+	public void testGetNewParticipantEntity() {
+		Integer expectedPosition = Integer.valueOf(1);
+		UUID somePersonUuid = UUID.randomUUID();
+		PersonEntity expectedPersonEntity = PersonEntity.newInstance(somePersonUuid);
+		doReturn(expectedPersonEntity).when(sutSpy).findPersonEntityFor(any());
+		
+		ParticipantEntity result = sutSpy.getNewParticipantEntity(expectedPosition, somePersonUuid);
+		
+		assertEquals("Creation of new [participantEntity] has failed. [position] is not correct!", expectedPosition, result.getPosition());
+		assertEquals("Creation of new [participantEntity] has failed. [personEntity] is not correct!", expectedPersonEntity, result.getPersonEntity());
+	}
 }
