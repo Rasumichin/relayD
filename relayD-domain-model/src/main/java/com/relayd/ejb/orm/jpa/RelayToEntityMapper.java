@@ -3,10 +3,11 @@ package com.relayd.ejb.orm.jpa;
 import com.relayd.Participant;
 import com.relayd.Relay;
 import com.relayd.attributes.Position;
-import com.relayd.entity.RelayEntity;
+import com.relayd.entity.*;
 
 /**
  * @author  schmollc (Christian@relayd.de)
+ * @author  Rasumichin (Erik@relayd.de)
  * @since   25.11.2016
  *
  */
@@ -57,5 +58,19 @@ public class RelayToEntityMapper {
 		} else {
 			relayEntity.setParticipantFour(null);
 		}
+	}
+
+	public void mapRelayToEntity2(Relay relay, Relay2Entity relayEntity) {
+		if (relay == null) {
+			throw new IllegalArgumentException("[relay] must not be 'null'!");
+		}
+		if (relayEntity == null) {
+			throw new IllegalArgumentException("[relayEntity] must not be 'null'!");
+		}
+		if (relayEntity.getRelayEventEntity() == null) {
+			throw new IllegalStateException("[relayEventEntity] must not be 'null' at this point!");
+		}
+
+		relayEntity.setRelayname(relay.getRelayname().isEmpty() ? null : relay.getRelayname().toString());
 	}
 }

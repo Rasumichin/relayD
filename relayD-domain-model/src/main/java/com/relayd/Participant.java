@@ -9,6 +9,7 @@ import com.relayd.attributes.Surename;
 
 /**
  * @author schmollc (Christian@relayd.de)
+ * @author Rasumichin (Erik@relayd.de)
  * @since 20.10.2016
  *
  */
@@ -61,6 +62,10 @@ public class Participant implements Serializable {
 		return email;
 	}
 
+	public boolean hasThatPersonIdentity(UUID uuid) {
+		return getUuidPerson().equals(uuid);
+	}
+
 	@Override
 	public String toString() {
 		return getForename() + " " + getSurename();
@@ -108,6 +113,11 @@ public class Participant implements Serializable {
 		@Override
 		public boolean isEmpty() {
 			return true;
+		}
+
+		@Override
+		public boolean hasThatPersonIdentity(UUID uuid) {
+			return false;
 		}
 
 		@Override

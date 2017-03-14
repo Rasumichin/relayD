@@ -102,6 +102,20 @@ public class Relay2Entity {
 		return Collections.unmodifiableList(participantEntities);
 	}
 
+	public Optional<ParticipantEntity> getParticipantEntityAtPosition(Integer aPosition) {
+		return getParticipantEntities()
+		.stream()
+		.filter(eachEntity -> eachEntity.getPosition().equals(aPosition))
+		.findFirst();
+	}
+
+	public void possiblyRemoveParticipantEntity(Optional<ParticipantEntity> aParticipantEntity) {
+		if (aParticipantEntity.isPresent()) {
+			ParticipantEntity participantEntity = aParticipantEntity.get();
+			removeParticipantEntity(participantEntity);
+		}
+	}
+
 	@Override
 	public String toString() {
 		return getClass().getSimpleName() + " [id=" + id + ", relayname=" + relayname + "]";

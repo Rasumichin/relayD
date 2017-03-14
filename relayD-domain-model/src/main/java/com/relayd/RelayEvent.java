@@ -162,6 +162,7 @@ public class RelayEvent implements Serializable {
 
 		RelayEventDuesseldorf() {
 			super(eventName, eventDay);
+			setUuid(UUID.fromString("5697d710-8967-4b2d-9ab2-8fc50ddc6138"));
 		}
 
 		private static RelayEventDuesseldorf instance() {
