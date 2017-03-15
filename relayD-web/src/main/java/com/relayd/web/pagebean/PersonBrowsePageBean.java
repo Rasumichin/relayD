@@ -15,6 +15,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
+import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.event.ToggleEvent;
 import org.primefaces.model.Visibility;
@@ -137,13 +138,13 @@ public class PersonBrowsePageBean implements Serializable {
 	}
 
 	public void emailExport(@SuppressWarnings("unused") ActionEvent actionEvent) {
-		String output = null;
-		if (isRowSelected()) {
+		String output;
+		if (personsSelected()) {
 			output = personBridge.getEmailList(getSelectedPersons());
 		} else {
 			output = personBridge.getEmailList(getPersons());
 		}
-		showMessage(FacesMessage.SEVERITY_INFO, "Email", output);
+		showDialog(FacesMessage.SEVERITY_INFO, "Email", output);
 	}
 
 	public void onEditClosed(@SuppressWarnings("unused") SelectEvent event) {
@@ -159,8 +160,7 @@ public class PersonBrowsePageBean implements Serializable {
 		refreshPersons();
 	}
 
-	// TODO (Christian, Version 1.4): Der Name ist schlecht! Mit Lotz absprechen!
-	private boolean isRowSelected() {
+	private boolean personsSelected() {
 		return getSelectedPersons() != null && !getSelectedPersons().isEmpty();
 	}
 
@@ -196,6 +196,11 @@ public class PersonBrowsePageBean implements Serializable {
 	void showMessage(Severity severity, String summary, String textMessage) {
 		FacesMessage message = new FacesMessage(severity, summary, textMessage);
 		FacesContext.getCurrentInstance().addMessage(null, message);
+	}
+
+	void showDialog(Severity severity, String summary, String textMessage) {
+		FacesMessage message = new FacesMessage(severity, summary, textMessage);
+		RequestContext.getCurrentInstance().showMessageInDialog(message);
 	}
 
 	public void showAll() {

@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.faces.application.FacesMessage;
+import javax.faces.application.FacesMessage.Severity;
 import javax.faces.event.ActionEvent;
 
 import org.junit.Before;
@@ -61,7 +62,9 @@ public class RelayBrowsePageBeanTest {
 
 	@Before
 	public void setUp() {
-		doNothing().when(sut).showMessage(any(FacesMessage.Severity.class), anyString(), anyString());
+		doNothing().when(sut).showMessage(any(Severity.class), anyString(), anyString());
+		doNothing().when(sut).showDialog(any(Severity.class), anyString(), anyString());
+
 	}
 
 	@Test
