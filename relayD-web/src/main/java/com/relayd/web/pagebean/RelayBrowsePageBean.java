@@ -14,6 +14,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
+import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.TreeNode;
 
@@ -164,6 +165,11 @@ public class RelayBrowsePageBean implements Serializable {
 		FacesContext.getCurrentInstance().addMessage("messages", message);
 	}
 
+	void showDialog(Severity severity, String summary, String textMessage) {
+		FacesMessage message = new FacesMessage(severity, summary, textMessage);
+		RequestContext.getCurrentInstance().showMessageInDialog(message);
+	}
+
 	public void cancelEditDialog() {
 		getRelayEditPageBean().cancel();
 	}
@@ -191,13 +197,13 @@ public class RelayBrowsePageBean implements Serializable {
 		} else {
 			output = personBridge.getEmailList(getPersons());
 		}
-		showMessage(FacesMessage.SEVERITY_INFO, "Email", output);
+		showDialog(FacesMessage.SEVERITY_INFO, "Email", output);
 	}
 
 	public void emailExportRelay(@SuppressWarnings("unused") ActionEvent actionEvent) {
 		if (isRelayRowSelected()) {
 			String output = getSelectedRelay().getEmailList();
-			showMessage(FacesMessage.SEVERITY_INFO, "Email", output);
+			showDialog(FacesMessage.SEVERITY_INFO, "Email", output);
 		} else {
 			showMessageErrorNoRowRelaySelected();
 		}

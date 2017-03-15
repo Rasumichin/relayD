@@ -21,7 +21,11 @@ import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.relayd.Person;
-import com.relayd.attributes.*;
+import com.relayd.attributes.Email;
+import com.relayd.attributes.Forename;
+import com.relayd.attributes.Shirtsize;
+import com.relayd.attributes.Surename;
+import com.relayd.attributes.YearOfBirth;
 import com.relayd.web.bridge.PersonBridge;
 
 import static org.mockito.Mockito.*;
@@ -54,6 +58,7 @@ public class PersonBrowsePageBeanTest {
 	@Before
 	public void setUp() {
 		doNothing().when(sut).showMessage(any(Severity.class), anyString(), anyString());
+		doNothing().when(sut).showDialog(any(Severity.class), anyString(), anyString());
 	}
 
 	@Test
@@ -127,7 +132,7 @@ public class PersonBrowsePageBeanTest {
 		sut.emailExport(dummyActionEvent);
 
 		verify(personBridge).getEmailList(anyList());
-		verify(sut).showMessage(any(Severity.class), anyString(), anyString());
+		verify(sut).showDialog(any(Severity.class), anyString(), anyString());
 	}
 
 	@Test
@@ -142,7 +147,7 @@ public class PersonBrowsePageBeanTest {
 		sut.emailExport(dummyActionEvent);
 
 		verify(personBridge).getEmailList(selectedPersons);
-		verify(sut).showMessage(any(Severity.class), anyString(), anyString());
+		verify(sut).showDialog(any(Severity.class), anyString(), anyString());
 	}
 
 	@Test
