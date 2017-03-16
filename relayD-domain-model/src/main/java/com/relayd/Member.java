@@ -61,6 +61,10 @@ public class Member implements Serializable {
 		return email;
 	}
 
+	public boolean hasThatPersonIdentity(UUID uuid) {
+		return getUuidPerson().equals(uuid);
+	}
+
 	@Override
 	public String toString() {
 		return getForename() + " " + getSurename();
@@ -108,6 +112,11 @@ public class Member implements Serializable {
 		@Override
 		public boolean isEmpty() {
 			return true;
+		}
+
+		@Override
+		public boolean hasThatPersonIdentity(@SuppressWarnings("unused") UUID uuid) {
+			return false;
 		}
 
 		@Override
