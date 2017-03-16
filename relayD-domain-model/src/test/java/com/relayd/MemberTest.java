@@ -69,6 +69,12 @@ public class MemberTest {
 		boolean result = sut.getClass() == MemberNullObject.class;
 
 		assertTrue("Instance is not correct!", result);
+
+		UUID dummyUuid = null;
+
+		boolean condition = sut.hasThatPersonIdentity(dummyUuid);
+
+		assertFalse("[condition] should always be false!", condition);
 	}
 
 	@Test
@@ -152,6 +158,29 @@ public class MemberTest {
 		boolean condition = sut.isEmpty();
 
 		assertFalse("[result] for isEmpty is not correct!", condition);
+	}
+
+	@Test
+	public void testHasThatPersonIdentity_true() {
+		UUID someUuid = UUID.randomUUID();
+		Person person = Person.newInstance();
+		person.setUuid(someUuid);
+		Member sut = Member.newInstance(person);
+
+		boolean result = sut.hasThatPersonIdentity(someUuid);
+
+		assertTrue("UUID of person has not been checked correctly!", result);
+	}
+
+	@Test
+	public void testHasThatPersonIdentity_false() {
+		Person person = Person.newInstance();
+		person.setUuid(UUID.randomUUID());
+		Member sut = Member.newInstance(person);
+
+		boolean result = sut.hasThatPersonIdentity(UUID.randomUUID());
+
+		assertFalse("UUID of person has not been checked correctly!", result);
 	}
 
 	@Test
