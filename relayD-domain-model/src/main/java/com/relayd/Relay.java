@@ -1,6 +1,7 @@
 package com.relayd;
 
 import java.io.Serializable;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -21,6 +22,8 @@ public class Relay implements Serializable {
 	private Relayname relayname = Relayname.newInstance();
 	private RelayEvent relayEvent = RelayEvent.duesseldorf();
 	private List<Participant> participants = new ArrayList<Participant>();
+
+	private Duration duration;
 
 	private Relay(RelayEvent aRelayEvent) {
 		uuid = UUID.randomUUID();
@@ -52,6 +55,14 @@ public class Relay implements Serializable {
 
 	public Relayname getRelayname() {
 		return relayname;
+	}
+
+	public void setDuration(Duration aDuration) {
+		duration = aDuration;
+	}
+
+	public Duration getDuration() {
+		return duration;
 	}
 
 	public UUID getUuid() {
@@ -155,5 +166,4 @@ public class Relay implements Serializable {
 	public String toString() {
 		return getRelayname() + " [" + participantCount() + "/" + RelayEvent.MAX_NUMBER_OF_TRACKS + "]";
 	}
-
 }
