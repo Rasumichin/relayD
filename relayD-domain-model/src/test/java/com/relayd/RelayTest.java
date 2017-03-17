@@ -307,13 +307,35 @@ public class RelayTest {
 
 		Relay sut = Relay.newInstance();
 
-		Duration expected = Duration.ofHours(3);
-		expected = expected.plusMinutes(33);
-		expected = expected.plusSeconds(13);
+		Duration expected = Duration.ofHours(3).plusMinutes(33).plusSeconds(13);
 
 		sut.setDuration(expected);
 
 		Duration actual = sut.getDuration();
+
+		assertEquals("[Duration] not corret!", expected, actual);
+	}
+
+	@Test
+	public void testGetDurationFormatted_ForNull() {
+		Relay sut = Relay.newInstance();
+		sut.setDuration(null);
+
+		String actual = sut.getDurationFormatted();
+		String expected = "00:00:00";
+
+		assertEquals("[Duration] not corret!", expected, actual);
+
+	}
+
+	@Test
+	public void testGetDurationFormatted_ForValue() {
+		Relay sut = Relay.newInstance();
+		Duration duration = Duration.ofHours(3).plusMinutes(33).plusSeconds(13);
+		sut.setDuration(duration);
+
+		String actual = sut.getDurationFormatted();
+		String expected = "03:33:13";
 
 		assertEquals("[Duration] not corret!", expected, actual);
 
