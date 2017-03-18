@@ -1,6 +1,7 @@
 package com.relayd.web.pagebean;
 
 import java.io.Serializable;
+import java.time.Duration;
 import java.util.Map;
 import java.util.UUID;
 
@@ -49,6 +50,14 @@ public class RelayEditPageBean implements Serializable {
 		return workingRelay.getRelayname();
 	}
 
+	public void setDuration(Duration aDuration) {
+		workingRelay.setDuration(aDuration);
+	}
+
+	public Duration getDuration() {
+		return workingRelay.getDuration();
+	}
+
 	public void openDialogForCreateRelay() {
 		prepareNewRelay();
 		openDialog();
@@ -76,7 +85,7 @@ public class RelayEditPageBean implements Serializable {
 	}
 
 	void openDialog() {
-		Map<String, Object> options = new DialogOptionsBuilder().height(100).build();
+		Map<String, Object> options = new DialogOptionsBuilder().height(140).build();
 		RequestContext.getCurrentInstance().openDialog(NavigationConstants.RELAY_EDIT_DIALOG_ID, options, null);
 	}
 

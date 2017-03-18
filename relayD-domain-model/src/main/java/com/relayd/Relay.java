@@ -134,6 +134,13 @@ public class Relay implements Serializable {
 		}
 	}
 
+	public String getDurationFormatted() {
+		if (duration == null) {
+			return "00:00:00";
+		}
+		return DurationFormatUtils.formatDuration(duration.toMillis(), "HH:mm:ss");
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -167,12 +174,5 @@ public class Relay implements Serializable {
 	@Override
 	public String toString() {
 		return getRelayname() + " [" + participantCount() + "/" + RelayEvent.MAX_NUMBER_OF_TRACKS + "]";
-	}
-
-	public String getDurationFormatted() {
-		if (duration == null) {
-			return "00:00:00";
-		}
-		return DurationFormatUtils.formatDuration(duration.toMillis(), "HH:mm:ss");
 	}
 }
