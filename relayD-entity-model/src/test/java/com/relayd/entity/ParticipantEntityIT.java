@@ -87,17 +87,17 @@ public class ParticipantEntityIT extends EntityIT {
 	}
 	
 	@Test
-	public void testRelationToRelay2Entity() {
-		RelayEntity relay2Entity = getRelayEntity();
-		String expected = relay2Entity.getId();
+	public void testRelationToRelayEntity() {
+		RelayEntity relayEntity = getRelayEntity();
+		String expected = relayEntity.getId();
 		
 		String uuid = UUID.randomUUID().toString();
 		persistEntity(getDefaultParticipantEntity(uuid));
 		ParticipantEntity result = findById(uuid);
 		
-		String actual = result.getRelay2Entity().getId();
+		String actual = result.getRelayEntity().getId();
 
-		assertEquals("Relation to 'Relay2Entity' has not been correctly resolved!", expected, actual);
+		assertEquals("Relation to 'RelayEntity' has not been correctly resolved!", expected, actual);
 	}
 	
 	@Test
@@ -133,7 +133,7 @@ public class ParticipantEntityIT extends EntityIT {
 		ParticipantEntity participantEntity = ParticipantEntity.newInstance(anId);
 		participantEntity.setPosition(Integer.valueOf(1));
 		participantEntity.setPersonEntity(getPersonEntity());
-		participantEntity.setRelay2Entity(getRelayEntity());
+		participantEntity.setRelayEntity(getRelayEntity());
 		
 		return participantEntity;
 	}

@@ -24,7 +24,7 @@ public class RelayToEntityMapperTest {
 
 	private RelayToEntityMapper sut = RelayToEntityMapper.newInstance();
 	private Relay relay;
-	private RelayEntity relay2Entity = RelayEntity.newInstance();
+	private RelayEntity relayEntity = RelayEntity.newInstance();
 
 	@Rule
 	public ExpectedException expectedException = ExpectedException.none();
@@ -33,7 +33,7 @@ public class RelayToEntityMapperTest {
 	public void setUp() {
 		relay = Relay.newInstance(RelayEvent.duesseldorf());
 		relay.setRelayname(Relayname.newInstance("Some name"));
-		relay2Entity.setRelayEventEntity(new RelayEventEntity.Builder("Some event").build());
+		relayEntity.setRelayEventEntity(new RelayEventEntity.Builder("Some event").build());
 	}
 	
 	@Test
@@ -46,7 +46,7 @@ public class RelayToEntityMapperTest {
 		expectedException.expect(IllegalArgumentException.class);
 		expectedException.expectMessage("[relay] must not be 'null'!");
 
-		sut.mapRelayToEntity2(null, relay2Entity);
+		sut.mapRelayToEntity(null, relayEntity);
 	}
 
 	@Test
@@ -54,7 +54,7 @@ public class RelayToEntityMapperTest {
 		expectedException.expect(IllegalArgumentException.class);
 		expectedException.expectMessage("[relayEntity] must not be 'null'!");
 
-		sut.mapRelayToEntity2(relay, null);
+		sut.mapRelayToEntity(relay, null);
 	}
 
 	@Test
@@ -63,7 +63,7 @@ public class RelayToEntityMapperTest {
 		relayEntity.setRelayEventEntity(new RelayEventEntity.Builder("Some event").build());
 		String expected = relay.getUuid().toString();
 
-		sut.mapRelayToEntity2(relay, relayEntity);
+		sut.mapRelayToEntity(relay, relayEntity);
 
 		String actual = relayEntity.getId();
 		assertEquals("Mapping of [uuid] is not correct!", expected, actual);
@@ -74,20 +74,20 @@ public class RelayToEntityMapperTest {
 		String expected = "Die 4 ????";
 		relay.setRelayname(Relayname.newInstance(expected));
 
-		sut.mapRelayToEntity2(relay, relay2Entity);
+		sut.mapRelayToEntity(relay, relayEntity);
 
-		String actual = relay2Entity.getRelayname();
+		String actual = relayEntity.getRelayname();
 		assertEquals("Mapping of [relayname] is not correct!", expected, actual);
 	}
 
 	@Test
 	public void testMapDomainToEntity_relayevent() {
 		String expected = RelayEvent.duesseldorf().getName().toString();
-		relay2Entity.setRelayEventEntity(new RelayEventEntity.Builder(expected).build());
+		relayEntity.setRelayEventEntity(new RelayEventEntity.Builder(expected).build());
 
-		sut.mapRelayToEntity2(relay, relay2Entity);
+		sut.mapRelayToEntity(relay, relayEntity);
 		
-		String actual = relay2Entity.getRelayEventEntity().getEventName();
+		String actual = relayEntity.getRelayEventEntity().getEventName();
 		assertEquals("Mapping of [relayevent] is not correct!", expected, actual);
 	}
 
@@ -96,11 +96,11 @@ public class RelayToEntityMapperTest {
 		expectedException.expect(IllegalStateException.class);
 		expectedException.expectMessage("[relayEventEntity] must not be 'null' at this point!");
 
-		sut.mapRelayToEntity2(relay, RelayEntity.newInstance());
+		sut.mapRelayToEntity(relay, RelayEntity.newInstance());
 	}
 
 	@Test
 	public void testMapRelayToEntity() {
-		sut.mapRelayToEntity2(relay, relay2Entity);
+		sut.mapRelayToEntity(relay, relayEntity);
 	}
 }

@@ -25,7 +25,7 @@ public class RelayGatewayJPA extends GatewayJPA implements RelayGateway {
 		}
 
 		RelayEntity relayEntity = getRelayEntity(relay);
-		getRelayMapper().mapRelayToEntity2(relay, relayEntity);
+		getRelayMapper().mapRelayToEntity(relay, relayEntity);
 		mapParticipantsToEntities(relay, relayEntity);
 		
 		getJpaDao().mergeEntity(relayEntity);
@@ -123,7 +123,7 @@ public class RelayGatewayJPA extends GatewayJPA implements RelayGateway {
 
 	List<RelayEntity> findAll() {
 		@SuppressWarnings("unchecked")
-		List<RelayEntity> result = (List<RelayEntity>) getJpaDao().performSelectQuery("SELECT p FROM Relay2Entity p");
+		List<RelayEntity> result = (List<RelayEntity>) getJpaDao().performSelectQuery("SELECT p FROM RelayEntity p");
 
 		return result;
 	}

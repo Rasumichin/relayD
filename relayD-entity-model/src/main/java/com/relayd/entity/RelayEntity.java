@@ -27,7 +27,7 @@ public class RelayEntity {
 	@ForeignKey
 	private RelayEventEntity relayEventEntity;
 
-	@OneToMany(mappedBy="relay2Entity", cascade=CascadeType.ALL, fetch=FetchType.EAGER, orphanRemoval=true)
+	@OneToMany(mappedBy="relayEntity", cascade=CascadeType.ALL, fetch=FetchType.EAGER, orphanRemoval=true)
 	private List<ParticipantEntity> participantEntities = new ArrayList<>();
 	
 	public static RelayEntity newInstance() {
@@ -86,14 +86,14 @@ public class RelayEntity {
 	public void addParticipantEntity(ParticipantEntity participantEntity) {
 		// TODO EL (2017-01-08): Discuss with CS - validation checks here (up to 4 participants, no duplicate positions)?
 		participantEntities.add(participantEntity);
-		participantEntity.setRelay2Entity(this);
+		participantEntity.setRelayEntity(this);
 	}
 
 	public void removeParticipantEntity(ParticipantEntity participantEntity) {
 		int indexInList = getParticipantEntities().indexOf(participantEntity);
 		if (indexInList >= 0) {
 			ParticipantEntity participantEntityToBeRemoved = getParticipantEntities().get(indexInList);
-			participantEntityToBeRemoved.setRelay2Entity(null);
+			participantEntityToBeRemoved.setRelayEntity(null);
 			participantEntities.remove(indexInList);
 		}
 	}

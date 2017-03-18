@@ -122,38 +122,38 @@ public class ParticipantEntityTest {
 	}
 
 	@Test
-	public void testSetRelay2Entity() {
+	public void testSetRelayEntity() {
 		ParticipantEntity sut = ParticipantEntity.newInstance();
-		RelayEntity relay2Entity = RelayEntity.newInstance();
-		String expected = relay2Entity.getId();
+		RelayEntity relayEntity = RelayEntity.newInstance();
+		String expected = relayEntity.getId();
 		
-		sut.setRelay2Entity(relay2Entity);
+		sut.setRelayEntity(relayEntity);
 		
-		String actual = sut.getRelay2Entity().getId();
+		String actual = sut.getRelayEntity().getId();
 		assertEquals("[relayId] has not been set correctly!", expected, actual);
 	}
 
 	@Test
-	public void testSetRelay2Entity_addParticipantEntity() {
+	public void testSetRelayEntity_addParticipantEntity() {
 		ParticipantEntity sut = ParticipantEntity.newInstance();
-		RelayEntity relay2Entity = RelayEntity.newInstance();
-		String expected = relay2Entity.getId();
+		RelayEntity relayEntity = RelayEntity.newInstance();
+		String expected = relayEntity.getId();
 		
-		relay2Entity.addParticipantEntity(sut);
+		relayEntity.addParticipantEntity(sut);
 		
-		String actual = sut.getRelay2Entity().getId();
+		String actual = sut.getRelayEntity().getId();
 		assertEquals("[relayId] has not been set correctly!", expected, actual);
 	}
 
 	@Test
-	public void testSetRelay2Entity_removeParticipantEntity() {
+	public void testSetRelayEntity_removeParticipantEntity() {
 		ParticipantEntity sut = ParticipantEntity.newInstance();
-		RelayEntity relay2Entity = RelayEntity.newInstance();
-		relay2Entity.addParticipantEntity(sut);
+		RelayEntity relayEntity = RelayEntity.newInstance();
+		relayEntity.addParticipantEntity(sut);
 		
-		relay2Entity.removeParticipantEntity(sut);
+		relayEntity.removeParticipantEntity(sut);
 		
-		RelayEntity actual = sut.getRelay2Entity();
+		RelayEntity actual = sut.getRelayEntity();
 		assertNull("[relayId] has not been set correctly!", actual);
 	}
 	
