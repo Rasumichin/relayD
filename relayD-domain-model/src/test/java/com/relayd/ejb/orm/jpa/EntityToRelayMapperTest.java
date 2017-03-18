@@ -19,9 +19,9 @@ import com.relayd.entity.*;
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class EntityToRelay2MapperTest {
+public class EntityToRelayMapperTest {
 	
-	private EntityToRelay2Mapper sut = EntityToRelay2Mapper.newInstance();
+	private EntityToRelayMapper sut = EntityToRelayMapper.newInstance();
 	private Relay2Entity relayEntity = Relay2Entity.newInstance();
 
 	@Test
@@ -30,7 +30,7 @@ public class EntityToRelay2MapperTest {
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testMapToRelay_whenRelay2EntityIsNull() {
+	public void testMapToRelay_whenRelayEntityIsNull() {
 		sut.mapToRelay(null);
 	}
 

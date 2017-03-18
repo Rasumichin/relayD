@@ -16,7 +16,7 @@ import com.relayd.entity.*;
  */
 public class RelayGatewayJPA extends GatewayJPA implements RelayGateway {
 	private RelayToEntityMapper relayMapper = RelayToEntityMapper.newInstance();
-	private EntityToRelay2Mapper entityMapper = EntityToRelay2Mapper.newInstance();
+	private EntityToRelayMapper entityMapper = EntityToRelayMapper.newInstance();
 
 	@Override
 	public void set(Relay relay) {
@@ -117,7 +117,7 @@ public class RelayGatewayJPA extends GatewayJPA implements RelayGateway {
 		return relays;
 	}
 
-	private EntityToRelay2Mapper getEntityMapper() {
+	private EntityToRelayMapper getEntityMapper() {
 		return entityMapper;
 	}
 
