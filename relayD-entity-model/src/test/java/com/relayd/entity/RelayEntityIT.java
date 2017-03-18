@@ -17,7 +17,7 @@ import org.junit.runners.MethodSorters;
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class Relay2EntityIT extends EntityIT {
+public class RelayEntityIT extends EntityIT {
 	private RelayEventEntity relayEventEntity;
 	private PersonEntity personEntity;
 	
