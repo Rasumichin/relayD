@@ -21,7 +21,7 @@ public class EntityToRelayMapper {
 		return new EntityToRelayMapper();
 	}
 
-	public Relay mapToRelay(Relay2Entity relayEntity) {
+	public Relay mapToRelay(RelayEntity relayEntity) {
 		if (relayEntity == null) {
 			throw new IllegalArgumentException("[relayEntity] must not be null!");
 		}

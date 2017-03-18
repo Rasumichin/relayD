@@ -23,7 +23,7 @@ public class RelayEntityTest {
 
 	@Test
 	public void testNewInstance() {
-		Relay2Entity sut = Relay2Entity.newInstance();
+		RelayEntity sut = RelayEntity.newInstance();
 
 		String result = sut.getId();
 		assertNotNull("Instance has not been created correctly!", result);
@@ -32,7 +32,7 @@ public class RelayEntityTest {
 	@Test
 	public void testNewInstance_withUuid() {
 		String expected = UUID.randomUUID().toString();
-		Relay2Entity sut = Relay2Entity.newInstance(expected);
+		RelayEntity sut = RelayEntity.newInstance(expected);
 
 		String actual = sut.getId();
 		assertEquals("[id] has not been set correctly!", expected, actual);
@@ -41,31 +41,31 @@ public class RelayEntityTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void testNewInstance_forUuidWithNullValue() {
 		@SuppressWarnings("unused")
-		Relay2Entity sut = Relay2Entity.newInstance(null);
+		RelayEntity sut = RelayEntity.newInstance(null);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testNewInstance_forIncorrectEmptyUuid() {
 		@SuppressWarnings("unused")
-		Relay2Entity sut = Relay2Entity.newInstance("");
+		RelayEntity sut = RelayEntity.newInstance("");
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testNewInstance_forIncorrectBlankUuid() {
 		@SuppressWarnings("unused")
-		Relay2Entity sut = Relay2Entity.newInstance("   ");
+		RelayEntity sut = RelayEntity.newInstance("   ");
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testNewInstance_forIncorrectFalseUuid() {
 		@SuppressWarnings("unused")
-		Relay2Entity sut = Relay2Entity.newInstance("345-acf-123");
+		RelayEntity sut = RelayEntity.newInstance("345-acf-123");
 	}
 
 	@Test
 	public void testRelayname() {
 		String relayname = "Staubwolke";
-		Relay2Entity sut = Relay2Entity.newInstance();
+		RelayEntity sut = RelayEntity.newInstance();
 
 		sut.setRelayname(relayname);
 		assertEquals("[relayname] has not been set correctly!", relayname, sut.getRelayname());
@@ -73,13 +73,13 @@ public class RelayEntityTest {
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void testRelayname_withNull() {
-		Relay2Entity sut = Relay2Entity.newInstance();
+		RelayEntity sut = RelayEntity.newInstance();
 		sut.setRelayname(null);
 	}
 	
 	@Test
 	public void testRelayEventEntity() {
-		Relay2Entity sut = Relay2Entity.newInstance();
+		RelayEntity sut = RelayEntity.newInstance();
 		RelayEventEntity expected = new RelayEventEntity.Builder("MyRelayEvent").build();
 		
 		sut.setRelayEventEntity(expected);
@@ -90,13 +90,13 @@ public class RelayEntityTest {
 
 	@Test(expected=IllegalArgumentException.class)
 	public void testRelayEventEntity_withNull() {
-		Relay2Entity sut = Relay2Entity.newInstance();
+		RelayEntity sut = RelayEntity.newInstance();
 		sut.setRelayEventEntity(null);
 	}
 	
 	@Test
 	public void testGetParticipants_initialSize() {
-		Relay2Entity sut = Relay2Entity.newInstance();
+		RelayEntity sut = RelayEntity.newInstance();
 		
 		List<ParticipantEntity> result = sut.getParticipantEntities();
 		
@@ -105,7 +105,7 @@ public class RelayEntityTest {
 	
 	@Test
 	public void testAddParticipantEntity() {
-		Relay2Entity sut = RelayEntityInitializer.newRelayEntityWithOneParticipant();
+		RelayEntity sut = RelayEntityInitializer.newRelayEntityWithOneParticipant();
 		
 		List<ParticipantEntity> result = sut.getParticipantEntities();
 		boolean actual = (result.size() == 1);
@@ -114,7 +114,7 @@ public class RelayEntityTest {
 	
 	@Test
 	public void testRemoveParticipantEntity_element_is_present() {
-		Relay2Entity sut = RelayEntityInitializer.newRelayEntityWithOneParticipant();
+		RelayEntity sut = RelayEntityInitializer.newRelayEntityWithOneParticipant();
 		
 		// Create another instance with the same 'id' and let the 'sut' remove this one.
 		String uuid = sut.getParticipantEntities().get(0).getId();
@@ -128,7 +128,7 @@ public class RelayEntityTest {
 
 	@Test
 	public void testRemoveParticipantEntity_element_is_not_present() {
-		Relay2Entity sut = RelayEntityInitializer.newRelayEntityWithOneParticipant();
+		RelayEntity sut = RelayEntityInitializer.newRelayEntityWithOneParticipant();
 		ParticipantEntity participantEntityToBeRemoved = ParticipantEntity.newInstance();
 
 		sut.removeParticipantEntity(participantEntityToBeRemoved);
@@ -140,11 +140,11 @@ public class RelayEntityTest {
 
 	@Test
 	public void testToString() {
-		Relay2Entity sut = Relay2Entity.newInstance();
+		RelayEntity sut = RelayEntity.newInstance();
 		String relayname = "Staubwolke";
 		sut.setRelayname(relayname);
 
-		String expected = "Relay2Entity [id=" + sut.getId() + ", relayname=" + relayname + "]";
+		String expected = "RelayEntity [id=" + sut.getId() + ", relayname=" + relayname + "]";
 
 		String actual = sut.toString();
 		assertEquals("String representation is not correct!", expected, actual);
@@ -152,7 +152,7 @@ public class RelayEntityTest {
 
 	@Test
 	public void testHashCode() {
-		Relay2Entity sut = Relay2Entity.newInstance();
+		RelayEntity sut = RelayEntity.newInstance();
 		sut.setId("5697d710-8967-4b2d-9ab2-8fc50ddc6138");
 
 		int hashCode = sut.hashCode();
@@ -168,7 +168,7 @@ public class RelayEntityTest {
 
 	@Test
 	public void testEquals_WithMyself() {
-		Relay2Entity sut = Relay2Entity.newInstance();
+		RelayEntity sut = RelayEntity.newInstance();
 
 		boolean result = sut.equals(sut);
 
@@ -177,7 +177,7 @@ public class RelayEntityTest {
 
 	@Test
 	public void testEquals_WithNull() {
-		Relay2Entity sut = Relay2Entity.newInstance();
+		RelayEntity sut = RelayEntity.newInstance();
 
 		boolean result = sut.equals(null);
 
@@ -186,7 +186,7 @@ public class RelayEntityTest {
 
 	@Test
 	public void testEquals_WithNotCompatibleClass() {
-		Relay2Entity sut = Relay2Entity.newInstance();
+		RelayEntity sut = RelayEntity.newInstance();
 
 		boolean result = sut.equals(new String());
 
@@ -195,8 +195,8 @@ public class RelayEntityTest {
 
 	@Test
 	public void testEquals_WithDiffrentValues() {
-		Relay2Entity sut = Relay2Entity.newInstance();
-		Relay2Entity secondSut = Relay2Entity.newInstance();
+		RelayEntity sut = RelayEntity.newInstance();
+		RelayEntity secondSut = RelayEntity.newInstance();
 
 		boolean result = sut.equals(secondSut);
 
@@ -205,8 +205,8 @@ public class RelayEntityTest {
 
 	@Test
 	public void testEquals_WithSameValues() {
-		Relay2Entity sut = Relay2Entity.newInstance();
-		Relay2Entity secondSut = Relay2Entity.newInstance();
+		RelayEntity sut = RelayEntity.newInstance();
+		RelayEntity secondSut = RelayEntity.newInstance();
 		secondSut.setId(sut.getId());
 
 		boolean result = sut.equals(secondSut);
@@ -216,9 +216,9 @@ public class RelayEntityTest {
 
 	@Test
 	public void testEquals_WithValueIsNull() {
-		Relay2Entity sut = Relay2Entity.newInstance();
+		RelayEntity sut = RelayEntity.newInstance();
 		sut.setId(null);
-		Relay2Entity secondSut = Relay2Entity.newInstance();
+		RelayEntity secondSut = RelayEntity.newInstance();
 
 		boolean result = sut.equals(secondSut);
 
@@ -227,10 +227,10 @@ public class RelayEntityTest {
 
 	@Test
 	public void testEquals_WithBothValuesAreNull() {
-		Relay2Entity sut = Relay2Entity.newInstance();
+		RelayEntity sut = RelayEntity.newInstance();
 		sut.setId(null);
 
-		Relay2Entity secondSut = Relay2Entity.newInstance();
+		RelayEntity secondSut = RelayEntity.newInstance();
 		secondSut.setId(null);
 
 		boolean result = sut.equals(secondSut);
@@ -240,7 +240,7 @@ public class RelayEntityTest {
 	
 	@Test
 	public void testGetParticipantEntityAtPosition_find_pos_one_have_pos_one() {
-		Relay2Entity sut = Relay2Entity.newInstance();
+		RelayEntity sut = RelayEntity.newInstance();
 		ParticipantEntity participantEntity = ParticipantEntity.newInstance();
 		participantEntity.setPosition(Integer.valueOf(1));
 		sut.addParticipantEntity(participantEntity);
@@ -252,7 +252,7 @@ public class RelayEntityTest {
 
 	@Test
 	public void testGetParticipantEntityAtPosition_find_pos_one_have_pos_two() {
-		Relay2Entity sut = Relay2Entity.newInstance();
+		RelayEntity sut = RelayEntity.newInstance();
 		ParticipantEntity participantEntity = ParticipantEntity.newInstance();
 		participantEntity.setPosition(Integer.valueOf(2));
 		sut.addParticipantEntity(participantEntity);
@@ -264,7 +264,7 @@ public class RelayEntityTest {
 
 	@Test
 	public void testGetParticipantEntityAtPosition_find_pos_one_have_none() {
-		Relay2Entity sut = Relay2Entity.newInstance();
+		RelayEntity sut = RelayEntity.newInstance();
 		
 		Optional<ParticipantEntity> actual = sut.getParticipantEntityAtPosition(Integer.valueOf(1));
 		
@@ -273,7 +273,7 @@ public class RelayEntityTest {
 	
 	@Test
 	public void testPossiblyRemoveParticipantEntity_particpantEntityIsNotPresent() {
-		Relay2Entity sut = RelayEntityInitializer.newRelayEntityWithOneParticipant();
+		RelayEntity sut = RelayEntityInitializer.newRelayEntityWithOneParticipant();
 		Optional<ParticipantEntity> isNotAParticipantEntity = Optional.ofNullable(null);
 		
 		sut.possiblyRemoveParticipantEntity(isNotAParticipantEntity);
@@ -285,7 +285,7 @@ public class RelayEntityTest {
 
 	@Test
 	public void testPossiblyRemoveParticipantEntity_particpantEntityIsPresentAndContained() {
-		Relay2Entity sut = RelayEntityInitializer.newRelayEntityWithOneParticipant();
+		RelayEntity sut = RelayEntityInitializer.newRelayEntityWithOneParticipant();
 		ParticipantEntity participantEntity = ParticipantEntity.newInstance(sut.getParticipantEntities().get(0).getId());
 		Optional<ParticipantEntity> isAParticipantEntity = Optional.of(participantEntity);
 		
@@ -298,7 +298,7 @@ public class RelayEntityTest {
 
 	@Test
 	public void testPossiblyRemoveParticipantEntity_particpantEntityIsPresentAndNotContained() {
-		Relay2Entity sut = RelayEntityInitializer.newRelayEntityWithOneParticipant();
+		RelayEntity sut = RelayEntityInitializer.newRelayEntityWithOneParticipant();
 		ParticipantEntity participantEntity = ParticipantEntity.newInstance();
 		Optional<ParticipantEntity> isAParticipantEntity = Optional.of(participantEntity);
 		

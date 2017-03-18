@@ -22,7 +22,7 @@ import com.relayd.entity.*;
 public class EntityToRelayMapperTest {
 	
 	private EntityToRelayMapper sut = EntityToRelayMapper.newInstance();
-	private Relay2Entity relayEntity = Relay2Entity.newInstance();
+	private RelayEntity relayEntity = RelayEntity.newInstance();
 
 	@Test
 	public void testNewInstance() {
@@ -37,7 +37,7 @@ public class EntityToRelayMapperTest {
 	@Test
 	public void testMapToRelay_check_id() {
 		UUID expected = UUID.randomUUID();
-		Relay2Entity relayEntity = Relay2Entity.newInstance(expected.toString());
+		RelayEntity relayEntity = RelayEntity.newInstance(expected.toString());
 
 		Relay relay = sut.mapToRelay(relayEntity);
 

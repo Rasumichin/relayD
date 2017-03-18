@@ -30,7 +30,7 @@ public class ParticipantEntity {
 	@ManyToOne
 	@Column(name="relay2Id", nullable=false, length=36)
 	@ForeignKey
-	private Relay2Entity relay2Entity;
+	private RelayEntity relay2Entity;
 
 	public static ParticipantEntity newInstance(String anId) {
 		// TODO EL (2017-01-07): Introduce a class to handle strings that should represent a UUID.
@@ -80,11 +80,11 @@ public class ParticipantEntity {
 		return UUID.fromString(getPersonEntity().getId());
 	}
 
-	void setRelay2Entity(Relay2Entity aRelay2Entity) {
+	void setRelay2Entity(RelayEntity aRelay2Entity) {
 		relay2Entity = aRelay2Entity;
 	}
 	
-	public Relay2Entity getRelay2Entity() {
+	public RelayEntity getRelay2Entity() {
 		return relay2Entity;
 	}
 	

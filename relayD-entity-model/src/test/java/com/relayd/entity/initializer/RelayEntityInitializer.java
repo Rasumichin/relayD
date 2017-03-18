@@ -10,8 +10,8 @@ import com.relayd.entity.*;
  */
 public class RelayEntityInitializer {
 	
-	public static Relay2Entity newRelayEntityWithOneParticipant() {
-		Relay2Entity relayEntity = Relay2Entity.newInstance();
+	public static RelayEntity newRelayEntityWithOneParticipant() {
+		RelayEntity relayEntity = RelayEntity.newInstance();
 		ParticipantEntity participantEntity = ParticipantEntity.newInstance();
 		relayEntity.addParticipantEntity(participantEntity);
 		

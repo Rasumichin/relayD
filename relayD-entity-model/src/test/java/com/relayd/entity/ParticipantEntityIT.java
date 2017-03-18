@@ -18,13 +18,13 @@ import org.junit.runners.MethodSorters;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ParticipantEntityIT extends EntityIT {
 	private PersonEntity personEntity;
-	private Relay2Entity relayEntity;
+	private RelayEntity relayEntity;
 	
 	private PersonEntity getPersonEntity() {
 		return personEntity;
 	}
 	
-	private Relay2Entity getRelayEntity() {
+	private RelayEntity getRelayEntity() {
 		return relayEntity;
 	}
 	
@@ -53,11 +53,11 @@ public class ParticipantEntityIT extends EntityIT {
 	}
 	
 	private void setUpRelayEntity(RelayEventEntity relayEventEntity) {
-		Relay2Entity relayToBeInserted = Relay2Entity.newInstance(UUID.randomUUID().toString());
+		RelayEntity relayToBeInserted = RelayEntity.newInstance(UUID.randomUUID().toString());
 		relayToBeInserted.setRelayname("Foo Relay");
 		relayToBeInserted.setRelayEventEntity(relayEventEntity);
 		persistEntity(relayToBeInserted);
-		relayEntity = getEntityManager().find(Relay2Entity.class, relayToBeInserted.getId());
+		relayEntity = getEntityManager().find(RelayEntity.class, relayToBeInserted.getId());
 	}
 
 	@Test
@@ -88,7 +88,7 @@ public class ParticipantEntityIT extends EntityIT {
 	
 	@Test
 	public void testRelationToRelay2Entity() {
-		Relay2Entity relay2Entity = getRelayEntity();
+		RelayEntity relay2Entity = getRelayEntity();
 		String expected = relay2Entity.getId();
 		
 		String uuid = UUID.randomUUID().toString();

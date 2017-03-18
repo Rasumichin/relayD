@@ -13,7 +13,7 @@ import org.apache.openjpa.persistence.jdbc.ForeignKey;
  */
 @Entity
 @Table(name = "relay2")
-public class Relay2Entity {
+public class RelayEntity {
 
 	@Id
 	@Column(length=36)
@@ -30,14 +30,14 @@ public class Relay2Entity {
 	@OneToMany(mappedBy="relay2Entity", cascade=CascadeType.ALL, fetch=FetchType.EAGER, orphanRemoval=true)
 	private List<ParticipantEntity> participantEntities = new ArrayList<>();
 	
-	public static Relay2Entity newInstance() {
-		Relay2Entity relayEntity = new Relay2Entity();
+	public static RelayEntity newInstance() {
+		RelayEntity relayEntity = new RelayEntity();
 		relayEntity.setId(UUID.randomUUID().toString());
 
 		return relayEntity;
 	}
 
-	public static Relay2Entity newInstance(String anId) {
+	public static RelayEntity newInstance(String anId) {
 		if (anId == null) {
 			throw new IllegalArgumentException("[anUuid] must not be 'null'.");
 		}
@@ -46,7 +46,7 @@ public class Relay2Entity {
 		} catch (IllegalArgumentException iAEx) {
 			throw new IllegalArgumentException("[anId] is not a valid representation of an UUID.");
 		}
-		Relay2Entity relayEntity = new Relay2Entity();
+		RelayEntity relayEntity = new RelayEntity();
 		relayEntity.setId(anId);
 
 		return relayEntity;
@@ -140,7 +140,7 @@ public class Relay2Entity {
 		if (getClass() != obj.getClass()) {
 			return false;
 		}
-		Relay2Entity other = (Relay2Entity) obj;
+		RelayEntity other = (RelayEntity) obj;
 		if (id == null) {
 			if (other.id != null) {
 				return false;

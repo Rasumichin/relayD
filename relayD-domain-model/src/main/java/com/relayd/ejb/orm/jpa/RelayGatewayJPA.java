@@ -24,30 +24,30 @@ public class RelayGatewayJPA extends GatewayJPA implements RelayGateway {
 			throw new IllegalArgumentException("[relay] must not be 'null'.");
 		}
 
-		Relay2Entity relayEntity = getRelayEntity(relay);
+		RelayEntity relayEntity = getRelayEntity(relay);
 		getRelayMapper().mapRelayToEntity2(relay, relayEntity);
 		mapParticipantsToEntities(relay, relayEntity);
 		
 		getJpaDao().mergeEntity(relayEntity);
 	}
 
-	private Relay2Entity getRelayEntity(Relay relay) {
-		Relay2Entity relayEntity = findById(relay.getUuid());
+	private RelayEntity getRelayEntity(Relay relay) {
+		RelayEntity relayEntity = findById(relay.getUuid());
 		if (relayEntity == null) {
-			relayEntity = Relay2Entity.newInstance(relay.getUuid().toString());
+			relayEntity = RelayEntity.newInstance(relay.getUuid().toString());
 			setRelayEventEntityFor(relay.getRelayEvent(), relayEntity);
 		}
 		
 		return relayEntity;
 	}
 
-	Relay2Entity findById(UUID uuid) {
-		Relay2Entity result = getJpaDao().findById(Relay2Entity.class, uuid.toString());
+	RelayEntity findById(UUID uuid) {
+		RelayEntity result = getJpaDao().findById(RelayEntity.class, uuid.toString());
 
 		return result;
 	}
 
-	void setRelayEventEntityFor(RelayEvent relayEvent, Relay2Entity relayEntity) {
+	void setRelayEventEntityFor(RelayEvent relayEvent, RelayEntity relayEntity) {
 		RelayEventEntity relayEventEntity = getJpaDao().findById(RelayEventEntity.class, relayEvent.getUuid().toString());
 		relayEntity.setRelayEventEntity(relayEventEntity);
 	}
@@ -56,7 +56,7 @@ public class RelayGatewayJPA extends GatewayJPA implements RelayGateway {
 		return relayMapper;
 	}
 	
-	void mapParticipantsToEntities(Relay relay, Relay2Entity relayEntity) {
+	void mapParticipantsToEntities(Relay relay, RelayEntity relayEntity) {
 		for (int i = 0; i < relay.getParticipants().size(); i++) {
 			Integer position = Integer.valueOf(i + 1);
 			Participant participant = relay.getParticipantFor(Position.newInstance(position));
@@ -102,15 +102,15 @@ public class RelayGatewayJPA extends GatewayJPA implements RelayGateway {
 
 	@Override
 	public List<Relay> getAll() {
-		List<Relay2Entity> relayEntities = findAll();
+		List<RelayEntity> relayEntities = findAll();
 		List<Relay> relays = mapPersonEntityListToPersonList(relayEntities);
 
 		return relays;
 	}
 
-	private List<Relay> mapPersonEntityListToPersonList(List<Relay2Entity> relayEntities) {
+	private List<Relay> mapPersonEntityListToPersonList(List<RelayEntity> relayEntities) {
 		List<Relay> relays = new ArrayList<>();
-		for (Relay2Entity eachEntity : relayEntities) {
+		for (RelayEntity eachEntity : relayEntities) {
 			relays.add(getEntityMapper().mapToRelay(eachEntity));
 		}
 		
@@ -121,9 +121,9 @@ public class RelayGatewayJPA extends GatewayJPA implements RelayGateway {
 		return entityMapper;
 	}
 
-	List<Relay2Entity> findAll() {
+	List<RelayEntity> findAll() {
 		@SuppressWarnings("unchecked")
-		List<Relay2Entity> result = (List<Relay2Entity>) getJpaDao().performSelectQuery("SELECT p FROM Relay2Entity p");
+		List<RelayEntity> result = (List<RelayEntity>) getJpaDao().performSelectQuery("SELECT p FROM Relay2Entity p");
 
 		return result;
 	}
@@ -134,7 +134,7 @@ public class RelayGatewayJPA extends GatewayJPA implements RelayGateway {
 			throw new IllegalArgumentException("[uuid] must not be 'null'.");
 		}
 
-		Relay2Entity relayEntity = findById(uuid);
+		RelayEntity relayEntity = findById(uuid);
 		Relay relay = getEntityMapper().mapToRelay(relayEntity);
 
 		return relay;

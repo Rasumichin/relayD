@@ -24,7 +24,7 @@ public class RelayToEntityMapperTest {
 
 	private RelayToEntityMapper sut = RelayToEntityMapper.newInstance();
 	private Relay relay;
-	private Relay2Entity relay2Entity = Relay2Entity.newInstance();
+	private RelayEntity relay2Entity = RelayEntity.newInstance();
 
 	@Rule
 	public ExpectedException expectedException = ExpectedException.none();
@@ -59,7 +59,7 @@ public class RelayToEntityMapperTest {
 
 	@Test
 	public void testMapDomainToEntity_id() {
-		Relay2Entity relayEntity = Relay2Entity.newInstance(relay.getUuid().toString());
+		RelayEntity relayEntity = RelayEntity.newInstance(relay.getUuid().toString());
 		relayEntity.setRelayEventEntity(new RelayEventEntity.Builder("Some event").build());
 		String expected = relay.getUuid().toString();
 
@@ -96,7 +96,7 @@ public class RelayToEntityMapperTest {
 		expectedException.expect(IllegalStateException.class);
 		expectedException.expectMessage("[relayEventEntity] must not be 'null' at this point!");
 
-		sut.mapRelayToEntity2(relay, Relay2Entity.newInstance());
+		sut.mapRelayToEntity2(relay, RelayEntity.newInstance());
 	}
 
 	@Test
