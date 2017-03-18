@@ -2,14 +2,11 @@ package com.relayd.ejb.orm.jpa;
 
 import static org.junit.Assert.*;
 
-import java.util.UUID;
-
 import org.junit.*;
 import org.junit.rules.ExpectedException;
 import org.junit.runners.MethodSorters;
 
 import com.relayd.*;
-import com.relayd.attributes.Position;
 import com.relayd.attributes.Relayname;
 import com.relayd.entity.*;
 
@@ -27,7 +24,6 @@ public class RelayToEntityMapperTest {
 
 	private RelayToEntityMapper sut = RelayToEntityMapper.newInstance();
 	private Relay relay;
-	private RelayEntity relayEntity = RelayEntity.newInstance();
 	private Relay2Entity relay2Entity = Relay2Entity.newInstance();
 
 	@Rule
@@ -103,37 +99,6 @@ public class RelayToEntityMapperTest {
 		sut.mapRelayToEntity2(relay, Relay2Entity.newInstance());
 	}
 
-	@Ignore
-	@Test
-	public void testMapDomainToEntity_participants() {
-
-		Participant participantOne = new ParticipantBuilder().withForename("Justus").withSurename("Jonas").withUUIDPerson(UUID.randomUUID()).build();
-		relay.addParticipant(participantOne, Position.FIRST);
-
-		Participant participantTwo = new ParticipantBuilder().withForename("Peter").withSurename("Shaw").withUUIDPerson(UUID.randomUUID()).build();
-		relay.addParticipant(participantTwo, Position.SECOND);
-
-		Participant participantThree = new ParticipantBuilder().withForename("Bob").withSurename("Andrews").withUUIDPerson(UUID.randomUUID()).build();
-		relay.addParticipant(participantThree, Position.THIRD);
-
-		Participant participantFour = new ParticipantBuilder().withForename("Tante").withSurename("Mathilda").withUUIDPerson(UUID.randomUUID()).build();
-		relay.addParticipant(participantFour, Position.FOURTH);
-
-		sut.mapRelayToEntity(relay, relayEntity);
-
-		UUID actualOne = relayEntity.getParticipantOne();
-		assertEquals("Mapping of [participantFirst] is not correct!", participantOne.getUuidPerson(), actualOne);
-
-		UUID actualTwo = relayEntity.getParticipantTwo();
-		assertEquals("Mapping of [participantSecond] is not correct!", participantTwo.getUuidPerson(), actualTwo);
-
-		UUID actualThree = relayEntity.getParticipantThree();
-		assertEquals("Mapping of [participantThird] is not correct!", participantThree.getUuidPerson(), actualThree);
-
-		UUID actualFour = relayEntity.getParticipantFour();
-		assertEquals("Mapping of [participantFourth] is not correct!", participantFour.getUuidPerson(), actualFour);
-	}
-	
 	@Test
 	public void testMapRelayToEntity() {
 		sut.mapRelayToEntity2(relay, relay2Entity);
