@@ -8,7 +8,7 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import com.relayd.entity.initializer.Relay2EntityInitializer;
+import com.relayd.entity.initializer.RelayEntityInitializer;
 
 /**
  * Don't pass 'Null'.
@@ -105,7 +105,7 @@ public class RelayEntityTest {
 	
 	@Test
 	public void testAddParticipantEntity() {
-		Relay2Entity sut = Relay2EntityInitializer.newRelay2EntityWithOneParticipant();
+		Relay2Entity sut = RelayEntityInitializer.newRelayEntityWithOneParticipant();
 		
 		List<ParticipantEntity> result = sut.getParticipantEntities();
 		boolean actual = (result.size() == 1);
@@ -114,7 +114,7 @@ public class RelayEntityTest {
 	
 	@Test
 	public void testRemoveParticipantEntity_element_is_present() {
-		Relay2Entity sut = Relay2EntityInitializer.newRelay2EntityWithOneParticipant();
+		Relay2Entity sut = RelayEntityInitializer.newRelayEntityWithOneParticipant();
 		
 		// Create another instance with the same 'id' and let the 'sut' remove this one.
 		String uuid = sut.getParticipantEntities().get(0).getId();
@@ -128,7 +128,7 @@ public class RelayEntityTest {
 
 	@Test
 	public void testRemoveParticipantEntity_element_is_not_present() {
-		Relay2Entity sut = Relay2EntityInitializer.newRelay2EntityWithOneParticipant();
+		Relay2Entity sut = RelayEntityInitializer.newRelayEntityWithOneParticipant();
 		ParticipantEntity participantEntityToBeRemoved = ParticipantEntity.newInstance();
 
 		sut.removeParticipantEntity(participantEntityToBeRemoved);
@@ -273,7 +273,7 @@ public class RelayEntityTest {
 	
 	@Test
 	public void testPossiblyRemoveParticipantEntity_particpantEntityIsNotPresent() {
-		Relay2Entity sut = Relay2EntityInitializer.newRelay2EntityWithOneParticipant();
+		Relay2Entity sut = RelayEntityInitializer.newRelayEntityWithOneParticipant();
 		Optional<ParticipantEntity> isNotAParticipantEntity = Optional.ofNullable(null);
 		
 		sut.possiblyRemoveParticipantEntity(isNotAParticipantEntity);
@@ -285,7 +285,7 @@ public class RelayEntityTest {
 
 	@Test
 	public void testPossiblyRemoveParticipantEntity_particpantEntityIsPresentAndContained() {
-		Relay2Entity sut = Relay2EntityInitializer.newRelay2EntityWithOneParticipant();
+		Relay2Entity sut = RelayEntityInitializer.newRelayEntityWithOneParticipant();
 		ParticipantEntity participantEntity = ParticipantEntity.newInstance(sut.getParticipantEntities().get(0).getId());
 		Optional<ParticipantEntity> isAParticipantEntity = Optional.of(participantEntity);
 		
@@ -298,7 +298,7 @@ public class RelayEntityTest {
 
 	@Test
 	public void testPossiblyRemoveParticipantEntity_particpantEntityIsPresentAndNotContained() {
-		Relay2Entity sut = Relay2EntityInitializer.newRelay2EntityWithOneParticipant();
+		Relay2Entity sut = RelayEntityInitializer.newRelayEntityWithOneParticipant();
 		ParticipantEntity participantEntity = ParticipantEntity.newInstance();
 		Optional<ParticipantEntity> isAParticipantEntity = Optional.of(participantEntity);
 		
