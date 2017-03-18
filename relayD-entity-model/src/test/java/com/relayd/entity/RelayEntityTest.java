@@ -19,7 +19,7 @@ import com.relayd.entity.initializer.Relay2EntityInitializer;
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class Relay2EntityTest {
+public class RelayEntityTest {
 
 	@Test
 	public void testNewInstance() {
