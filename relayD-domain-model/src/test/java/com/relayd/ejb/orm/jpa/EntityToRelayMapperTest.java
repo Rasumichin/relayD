@@ -19,10 +19,10 @@ import com.relayd.entity.*;
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class EntityToRelay2MapperTest {
+public class EntityToRelayMapperTest {
 	
-	private EntityToRelay2Mapper sut = EntityToRelay2Mapper.newInstance();
-	private Relay2Entity relayEntity = Relay2Entity.newInstance();
+	private EntityToRelayMapper sut = EntityToRelayMapper.newInstance();
+	private RelayEntity relayEntity = RelayEntity.newInstance();
 
 	@Test
 	public void testNewInstance() {
@@ -30,14 +30,14 @@ public class EntityToRelay2MapperTest {
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testMapToRelay_whenRelay2EntityIsNull() {
+	public void testMapToRelay_whenRelayEntityIsNull() {
 		sut.mapToRelay(null);
 	}
 
 	@Test
 	public void testMapToRelay_check_id() {
 		UUID expected = UUID.randomUUID();
-		Relay2Entity relayEntity = Relay2Entity.newInstance(expected.toString());
+		RelayEntity relayEntity = RelayEntity.newInstance(expected.toString());
 
 		Relay relay = sut.mapToRelay(relayEntity);
 

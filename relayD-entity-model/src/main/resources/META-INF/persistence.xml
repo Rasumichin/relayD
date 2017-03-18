@@ -9,7 +9,7 @@
 		<class>com.relayd.entity.ParticipantEntity</class>
 		<class>com.relayd.entity.PersonEntity</class>
 		<class>com.relayd.entity.RelayEventEntity</class>
-		<class>com.relayd.entity.Relay2Entity</class>
+		<class>com.relayd.entity.RelayEntity</class>
 		<properties>
 			<property name="openjpa.RuntimeUnenhancedClasses" value="unsupported" />
 			<property name="openjpa.DynamicEnhancementAgent" value="false" />

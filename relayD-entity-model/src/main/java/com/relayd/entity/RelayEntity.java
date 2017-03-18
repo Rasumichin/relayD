@@ -13,7 +13,7 @@ import org.apache.openjpa.persistence.jdbc.ForeignKey;
  */
 @Entity
 @Table(name = "relay2")
-public class Relay2Entity {
+public class RelayEntity {
 
 	@Id
 	@Column(length=36)
@@ -27,17 +27,17 @@ public class Relay2Entity {
 	@ForeignKey
 	private RelayEventEntity relayEventEntity;
 
-	@OneToMany(mappedBy="relay2Entity", cascade=CascadeType.ALL, fetch=FetchType.EAGER, orphanRemoval=true)
+	@OneToMany(mappedBy="relayEntity", cascade=CascadeType.ALL, fetch=FetchType.EAGER, orphanRemoval=true)
 	private List<ParticipantEntity> participantEntities = new ArrayList<>();
 	
-	public static Relay2Entity newInstance() {
-		Relay2Entity relayEntity = new Relay2Entity();
+	public static RelayEntity newInstance() {
+		RelayEntity relayEntity = new RelayEntity();
 		relayEntity.setId(UUID.randomUUID().toString());
 
 		return relayEntity;
 	}
 
-	public static Relay2Entity newInstance(String anId) {
+	public static RelayEntity newInstance(String anId) {
 		if (anId == null) {
 			throw new IllegalArgumentException("[anUuid] must not be 'null'.");
 		}
@@ -46,7 +46,7 @@ public class Relay2Entity {
 		} catch (IllegalArgumentException iAEx) {
 			throw new IllegalArgumentException("[anId] is not a valid representation of an UUID.");
 		}
-		Relay2Entity relayEntity = new Relay2Entity();
+		RelayEntity relayEntity = new RelayEntity();
 		relayEntity.setId(anId);
 
 		return relayEntity;
@@ -86,14 +86,14 @@ public class Relay2Entity {
 	public void addParticipantEntity(ParticipantEntity participantEntity) {
 		// TODO EL (2017-01-08): Discuss with CS - validation checks here (up to 4 participants, no duplicate positions)?
 		participantEntities.add(participantEntity);
-		participantEntity.setRelay2Entity(this);
+		participantEntity.setRelayEntity(this);
 	}
 
 	public void removeParticipantEntity(ParticipantEntity participantEntity) {
 		int indexInList = getParticipantEntities().indexOf(participantEntity);
 		if (indexInList >= 0) {
 			ParticipantEntity participantEntityToBeRemoved = getParticipantEntities().get(indexInList);
-			participantEntityToBeRemoved.setRelay2Entity(null);
+			participantEntityToBeRemoved.setRelayEntity(null);
 			participantEntities.remove(indexInList);
 		}
 	}
@@ -140,7 +140,7 @@ public class Relay2Entity {
 		if (getClass() != obj.getClass()) {
 			return false;
 		}
-		Relay2Entity other = (Relay2Entity) obj;
+		RelayEntity other = (RelayEntity) obj;
 		if (id == null) {
 			if (other.id != null) {
 				return false;

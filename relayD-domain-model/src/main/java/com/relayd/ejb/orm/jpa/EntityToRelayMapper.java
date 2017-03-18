@@ -12,27 +12,27 @@ import com.relayd.entity.*;
  * @since   20.02.2017
  *
  */
-public class EntityToRelay2Mapper {
+public class EntityToRelayMapper {
 
-	private EntityToRelay2Mapper() {
+	private EntityToRelayMapper() {
 	}
 	
-	public static EntityToRelay2Mapper newInstance() {
-		return new EntityToRelay2Mapper();
+	public static EntityToRelayMapper newInstance() {
+		return new EntityToRelayMapper();
 	}
 
-	public Relay mapToRelay(Relay2Entity relay2Entity) {
-		if (relay2Entity == null) {
-			throw new IllegalArgumentException("[relay2Entity] must not be null!");
+	public Relay mapToRelay(RelayEntity relayEntity) {
+		if (relayEntity == null) {
+			throw new IllegalArgumentException("[relayEntity] must not be null!");
 		}
 		
-		RelayEvent relayEvent = mapRelayEventEntity(relay2Entity.getRelayEventEntity());
+		RelayEvent relayEvent = mapRelayEventEntity(relayEntity.getRelayEventEntity());
 		Relay relay = Relay.newInstance(relayEvent);
-		relay.setUuid(UUID.fromString(relay2Entity.getId()));
-		relay.setRelayname(Relayname.newInstance(relay2Entity.getRelayname()));
+		relay.setUuid(UUID.fromString(relayEntity.getId()));
+		relay.setRelayname(Relayname.newInstance(relayEntity.getRelayname()));
 		
 		EntityToParticipantMapper participantMapper = EntityToParticipantMapper.newInstance();
-		for (ParticipantEntity eachParticipantEntity : relay2Entity.getParticipantEntities()) {
+		for (ParticipantEntity eachParticipantEntity : relayEntity.getParticipantEntities()) {
 			Participant participant = participantMapper.mapToParticipant(eachParticipantEntity);
 			Position position = Position.newInstance(eachParticipantEntity.getPosition());
 			relay.addParticipant(participant, position);

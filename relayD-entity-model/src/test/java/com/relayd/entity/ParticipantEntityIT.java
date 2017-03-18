@@ -18,13 +18,13 @@ import org.junit.runners.MethodSorters;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ParticipantEntityIT extends EntityIT {
 	private PersonEntity personEntity;
-	private Relay2Entity relayEntity;
+	private RelayEntity relayEntity;
 	
 	private PersonEntity getPersonEntity() {
 		return personEntity;
 	}
 	
-	private Relay2Entity getRelayEntity() {
+	private RelayEntity getRelayEntity() {
 		return relayEntity;
 	}
 	
@@ -53,11 +53,11 @@ public class ParticipantEntityIT extends EntityIT {
 	}
 	
 	private void setUpRelayEntity(RelayEventEntity relayEventEntity) {
-		Relay2Entity relayToBeInserted = Relay2Entity.newInstance(UUID.randomUUID().toString());
+		RelayEntity relayToBeInserted = RelayEntity.newInstance(UUID.randomUUID().toString());
 		relayToBeInserted.setRelayname("Foo Relay");
 		relayToBeInserted.setRelayEventEntity(relayEventEntity);
 		persistEntity(relayToBeInserted);
-		relayEntity = getEntityManager().find(Relay2Entity.class, relayToBeInserted.getId());
+		relayEntity = getEntityManager().find(RelayEntity.class, relayToBeInserted.getId());
 	}
 
 	@Test
@@ -87,17 +87,17 @@ public class ParticipantEntityIT extends EntityIT {
 	}
 	
 	@Test
-	public void testRelationToRelay2Entity() {
-		Relay2Entity relay2Entity = getRelayEntity();
-		String expected = relay2Entity.getId();
+	public void testRelationToRelayEntity() {
+		RelayEntity relayEntity = getRelayEntity();
+		String expected = relayEntity.getId();
 		
 		String uuid = UUID.randomUUID().toString();
 		persistEntity(getDefaultParticipantEntity(uuid));
 		ParticipantEntity result = findById(uuid);
 		
-		String actual = result.getRelay2Entity().getId();
+		String actual = result.getRelayEntity().getId();
 
-		assertEquals("Relation to 'Relay2Entity' has not been correctly resolved!", expected, actual);
+		assertEquals("Relation to 'RelayEntity' has not been correctly resolved!", expected, actual);
 	}
 	
 	@Test
@@ -133,7 +133,7 @@ public class ParticipantEntityIT extends EntityIT {
 		ParticipantEntity participantEntity = ParticipantEntity.newInstance(anId);
 		participantEntity.setPosition(Integer.valueOf(1));
 		participantEntity.setPersonEntity(getPersonEntity());
-		participantEntity.setRelay2Entity(getRelayEntity());
+		participantEntity.setRelayEntity(getRelayEntity());
 		
 		return participantEntity;
 	}

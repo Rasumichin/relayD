@@ -1,7 +1,7 @@
 package com.relayd.ejb.orm.jpa;
 
 import com.relayd.Relay;
-import com.relayd.entity.Relay2Entity;
+import com.relayd.entity.RelayEntity;
 
 /**
  * @author  schmollc (Christian@relayd.de)
@@ -18,7 +18,7 @@ public class RelayToEntityMapper {
 		return new RelayToEntityMapper();
 	}
 
-	public void mapRelayToEntity2(Relay relay, Relay2Entity relayEntity) {
+	public void mapRelayToEntity(Relay relay, RelayEntity relayEntity) {
 		if (relay == null) {
 			throw new IllegalArgumentException("[relay] must not be 'null'!");
 		}
