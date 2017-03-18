@@ -8,7 +8,6 @@
 		<class>com.relayd.entity.ParticipantEntity</class>
 		<class>com.relayd.entity.PersonEntity</class>
 		<class>com.relayd.entity.RelayEventEntity</class>
-		<class>com.relayd.entity.RelayEntity</class>
 		<class>com.relayd.entity.Relay2Entity</class>
 		<properties>
 			<property name="openjpa.ConnectionURL" value="jdbc:h2:mem:test;DB_CLOSE_DELAY=-1" />
