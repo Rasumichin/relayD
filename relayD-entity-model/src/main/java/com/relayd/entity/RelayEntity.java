@@ -1,54 +1,53 @@
 package com.relayd.entity;
 
-import java.util.UUID;
+import java.util.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+
+import org.apache.openjpa.persistence.jdbc.ForeignKey;
 
 /**
- * @author schmollc (Christian@relayd.de)
- * @since 18.11.2016
+ * @author Rasumichin (Erik@relayd.de)
+ * @since  03.01.2017
  *
  */
 @Entity
-@Table(name = "relay")
+@Table(name = "relay2")
 public class RelayEntity {
 
 	@Id
-	@Column
+	@Column(length=36)
 	private String id;
 
-	@Column
+	@Column(nullable=false, length=256)
 	private String relayname;
 
-	@Column
-	private String participantOne;
+	@ManyToOne
+	@Column(name="eventId", nullable=false, length=36)
+	@ForeignKey
+	private RelayEventEntity relayEventEntity;
 
-	@Column
-	private String participantTwo;
-
-	@Column
-	private String participantThree;
-
-	@Column
-	private String participantFour;
-
+	@OneToMany(mappedBy="relayEntity", cascade=CascadeType.ALL, fetch=FetchType.EAGER, orphanRemoval=true)
+	private List<ParticipantEntity> participantEntities = new ArrayList<>();
+	
 	public static RelayEntity newInstance() {
 		RelayEntity relayEntity = new RelayEntity();
 		relayEntity.setId(UUID.randomUUID().toString());
 
 		return relayEntity;
-
 	}
 
-	public static RelayEntity newInstance(UUID anUuid) {
-		if (anUuid == null) {
+	public static RelayEntity newInstance(String anId) {
+		if (anId == null) {
 			throw new IllegalArgumentException("[anUuid] must not be 'null'.");
 		}
+		try {
+			UUID.fromString(anId);
+		} catch (IllegalArgumentException iAEx) {
+			throw new IllegalArgumentException("[anId] is not a valid representation of an UUID.");
+		}
 		RelayEntity relayEntity = new RelayEntity();
-		relayEntity.setId(anUuid.toString());
+		relayEntity.setId(anId);
 
 		return relayEntity;
 	}
@@ -66,67 +65,54 @@ public class RelayEntity {
 	}
 
 	public void setRelayname(String aRelayname) {
+		if (aRelayname == null) {
+			throw new IllegalArgumentException("[aRelayname] must not be 'null'.");
+		}
 		relayname = aRelayname;
 	}
 
-	public UUID getParticipantOne() {
-		if (participantOne != null) {
-			return UUID.fromString(participantOne);
+	public void setRelayEventEntity(RelayEventEntity aRelayEventEntity) {
+		if (aRelayEventEntity == null) {
+			throw new IllegalArgumentException("[aRelayEventEntity] must not be 'null'.");
 		}
-		return null;
+		relayEventEntity = aRelayEventEntity;
+	}
+	
+	public RelayEventEntity getRelayEventEntity() {
+		return relayEventEntity;
+	}
+	
+	// TODO EL (2017-01-08): Discuss with CS - better remove boolean result of 'add' operation here?
+	public void addParticipantEntity(ParticipantEntity participantEntity) {
+		// TODO EL (2017-01-08): Discuss with CS - validation checks here (up to 4 participants, no duplicate positions)?
+		participantEntities.add(participantEntity);
+		participantEntity.setRelayEntity(this);
 	}
 
-	public void setParticipantOne(UUID anUUID) {
-		// TODO (Christian, Version 1.4): machen wir ein "unmap" so? Oder sollte eine remove Methode her? Eigentlich sollte add/remove her....
-		if (anUUID != null) {
-			participantOne = anUUID.toString();
-		} else {
-			participantOne = null;
-		}
-	}
-
-	public UUID getParticipantTwo() {
-		if (participantTwo != null) {
-			return UUID.fromString(participantTwo);
-		}
-		return null;
-	}
-
-	public void setParticipantTwo(UUID anUUID) {
-		if (anUUID != null) {
-			participantTwo = anUUID.toString();
-		} else {
-			participantTwo = null;
+	public void removeParticipantEntity(ParticipantEntity participantEntity) {
+		int indexInList = getParticipantEntities().indexOf(participantEntity);
+		if (indexInList >= 0) {
+			ParticipantEntity participantEntityToBeRemoved = getParticipantEntities().get(indexInList);
+			participantEntityToBeRemoved.setRelayEntity(null);
+			participantEntities.remove(indexInList);
 		}
 	}
 
-	public UUID getParticipantThree() {
-		if (participantThree != null) {
-			return UUID.fromString(participantThree);
-		}
-		return null;
+	public List<ParticipantEntity> getParticipantEntities() {
+		return Collections.unmodifiableList(participantEntities);
 	}
 
-	public void setParticipantThree(UUID anUUID) {
-		if (anUUID != null) {
-			participantThree = anUUID.toString();
-		} else {
-			participantThree = null;
-		}
+	public Optional<ParticipantEntity> getParticipantEntityAtPosition(Integer aPosition) {
+		return getParticipantEntities()
+		.stream()
+		.filter(eachEntity -> eachEntity.getPosition().equals(aPosition))
+		.findFirst();
 	}
 
-	public UUID getParticipantFour() {
-		if (participantFour != null) {
-			return UUID.fromString(participantFour);
-		}
-		return null;
-	}
-
-	public void setParticipantFour(UUID anUUID) {
-		if (anUUID != null) {
-			participantFour = anUUID.toString();
-		} else {
-			participantFour = null;
+	public void possiblyRemoveParticipantEntity(Optional<ParticipantEntity> aParticipantEntity) {
+		if (aParticipantEntity.isPresent()) {
+			ParticipantEntity participantEntity = aParticipantEntity.get();
+			removeParticipantEntity(participantEntity);
 		}
 	}
 

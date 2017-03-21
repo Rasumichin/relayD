@@ -22,7 +22,7 @@ import com.relayd.entity.*;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class RelayGatewayJPATest {
 	private Relay relay = Relay.newInstance();
-	private Relay2Entity relayEntity = Relay2Entity.newInstance();
+	private RelayEntity relayEntity = RelayEntity.newInstance();
 	private RelayGatewayJPA sutSpy = spy(RelayGatewayJPA.class);
 
 	@Test

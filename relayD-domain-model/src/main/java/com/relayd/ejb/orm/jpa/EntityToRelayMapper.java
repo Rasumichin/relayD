@@ -2,72 +2,52 @@ package com.relayd.ejb.orm.jpa;
 
 import java.util.UUID;
 
-import com.relayd.Participant;
-import com.relayd.Person;
-import com.relayd.Relay;
-import com.relayd.attributes.Position;
-import com.relayd.attributes.Relayname;
-import com.relayd.entity.RelayEntity;
+import com.relayd.*;
+import com.relayd.attributes.*;
+import com.relayd.entity.*;
 
+/**
+ * 
+ * @author  Rasumichin (Erik@relayd.de)
+ * @since   20.02.2017
+ *
+ */
 public class EntityToRelayMapper {
-
-	private PersonGatewayJPA personGateway = new PersonGatewayJPA();
 
 	private EntityToRelayMapper() {
 	}
-
+	
 	public static EntityToRelayMapper newInstance() {
 		return new EntityToRelayMapper();
 	}
 
 	public Relay mapToRelay(RelayEntity relayEntity) {
 		if (relayEntity == null) {
-			throw new IllegalArgumentException("[relayEntity] must not be 'null'.");
+			throw new IllegalArgumentException("[relayEntity] must not be null!");
 		}
-
-		Relay relay = Relay.newInstance();
-
+		
+		RelayEvent relayEvent = mapRelayEventEntity(relayEntity.getRelayEventEntity());
+		Relay relay = Relay.newInstance(relayEvent);
 		relay.setUuid(UUID.fromString(relayEntity.getId()));
-
-		// Again: Thank god for the 'NullObjectPattern'.
 		relay.setRelayname(Relayname.newInstance(relayEntity.getRelayname()));
-		Person person;
-		if (relayEntity.getParticipantOne() != null) {
-			person = personGateway.get(relayEntity.getParticipantOne());
-
-			Participant participantOne = createParticipant(person);
-
-			relay.addParticipant(participantOne, Position.FIRST);
+		
+		EntityToParticipantMapper participantMapper = EntityToParticipantMapper.newInstance();
+		for (ParticipantEntity eachParticipantEntity : relayEntity.getParticipantEntities()) {
+			Participant participant = participantMapper.mapToParticipant(eachParticipantEntity);
+			Position position = Position.newInstance(eachParticipantEntity.getPosition());
+			relay.addParticipant(participant, position);
 		}
-		if (relayEntity.getParticipantTwo() != null) {
-
-			person = personGateway.get(relayEntity.getParticipantTwo());
-
-			Participant participantTwo = createParticipant(person);
-
-			relay.addParticipant(participantTwo, Position.SECOND);
-		}
-		if (relayEntity.getParticipantThree() != null) {
-
-			person = personGateway.get(relayEntity.getParticipantThree());
-
-			Participant participantThree = createParticipant(person);
-
-			relay.addParticipant(participantThree, Position.THIRD);
-		}
-		if (relayEntity.getParticipantFour() != null) {
-
-			person = personGateway.get(relayEntity.getParticipantFour());
-
-			Participant participantFour = createParticipant(person);
-
-			relay.addParticipant(participantFour, Position.FOURTH);
-		}
+		
 		return relay;
 	}
 
-	private Participant createParticipant(Person person) {
-		Participant participant = Participant.newInstance(person);
-		return participant;
+	RelayEvent mapRelayEventEntity(RelayEventEntity relayEventEntity) {
+		if (relayEventEntity == null) {
+			return null;
+		}
+		EntityToRelayEventMapper relayEventMapper = EntityToRelayEventMapper.newInstance();
+		RelayEvent result = relayEventMapper.mapToRelayEvent(relayEventEntity);
+		
+		return result;
 	}
 }

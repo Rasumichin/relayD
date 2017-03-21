@@ -2,18 +2,20 @@ package com.relayd.entity;
 
 import static org.junit.Assert.*;
 
-import java.util.UUID;
+import java.util.*;
 
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import com.relayd.entity.initializer.RelayEntityInitializer;
+
 /**
- * Die Güte des Werkes ist nicht abhängig vom Werkzeug, sondern von demjenigen, der das Werkzeug bedient.
- *  - Unbekannt
+ * Don't pass 'Null'.
+ *  - Michael Feathers (Chapter 7 of Robert C. Martin's "Clean Code")
  *
- * @author schmollc (Christian@relayd.de)
- * @since  18.11.2016
+ * @author Rasumichin (Erik@relayd.de)
+ * @since  03.01.2017
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -29,10 +31,10 @@ public class RelayEntityTest {
 
 	@Test
 	public void testNewInstance_withUuid() {
-		UUID expected = UUID.randomUUID();
+		String expected = UUID.randomUUID().toString();
 		RelayEntity sut = RelayEntity.newInstance(expected);
 
-		UUID actual = UUID.fromString(sut.getId());
+		String actual = sut.getId();
 		assertEquals("[id] has not been set correctly!", expected, actual);
 	}
 
@@ -40,6 +42,24 @@ public class RelayEntityTest {
 	public void testNewInstance_forUuidWithNullValue() {
 		@SuppressWarnings("unused")
 		RelayEntity sut = RelayEntity.newInstance(null);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testNewInstance_forIncorrectEmptyUuid() {
+		@SuppressWarnings("unused")
+		RelayEntity sut = RelayEntity.newInstance("");
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testNewInstance_forIncorrectBlankUuid() {
+		@SuppressWarnings("unused")
+		RelayEntity sut = RelayEntity.newInstance("   ");
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testNewInstance_forIncorrectFalseUuid() {
+		@SuppressWarnings("unused")
+		RelayEntity sut = RelayEntity.newInstance("345-acf-123");
 	}
 
 	@Test
@@ -50,57 +70,72 @@ public class RelayEntityTest {
 		sut.setRelayname(relayname);
 		assertEquals("[relayname] has not been set correctly!", relayname, sut.getRelayname());
 	}
-
-	@Test
-	public void testParticipantOne() {
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testRelayname_withNull() {
 		RelayEntity sut = RelayEntity.newInstance();
+		sut.setRelayname(null);
+	}
+	
+	@Test
+	public void testRelayEventEntity() {
+		RelayEntity sut = RelayEntity.newInstance();
+		RelayEventEntity expected = new RelayEventEntity.Builder("MyRelayEvent").build();
+		
+		sut.setRelayEventEntity(expected);
+		RelayEventEntity actual = sut.getRelayEventEntity();
+		
+		assertEquals("[relayEventEntity] has not been set correctly!", expected, actual);
+	}
 
-		UUID expected = UUID.randomUUID();
-
-		sut.setParticipantOne(expected);
-
-		UUID actual = sut.getParticipantOne();
-
-		assertEquals("[participantOne] has not been set correctly!", expected, actual);
+	@Test(expected=IllegalArgumentException.class)
+	public void testRelayEventEntity_withNull() {
+		RelayEntity sut = RelayEntity.newInstance();
+		sut.setRelayEventEntity(null);
+	}
+	
+	@Test
+	public void testGetParticipants_initialSize() {
+		RelayEntity sut = RelayEntity.newInstance();
+		
+		List<ParticipantEntity> result = sut.getParticipantEntities();
+		
+		assertTrue("Initialization of [participantEntities] is not correct!", result.isEmpty());
+	}
+	
+	@Test
+	public void testAddParticipantEntity() {
+		RelayEntity sut = RelayEntityInitializer.newRelayEntityWithOneParticipant();
+		
+		List<ParticipantEntity> result = sut.getParticipantEntities();
+		boolean actual = (result.size() == 1);
+		assertTrue("Adding of a 'ParticipantEntity' was not successful!", actual);
+	}
+	
+	@Test
+	public void testRemoveParticipantEntity_element_is_present() {
+		RelayEntity sut = RelayEntityInitializer.newRelayEntityWithOneParticipant();
+		
+		// Create another instance with the same 'id' and let the 'sut' remove this one.
+		String uuid = sut.getParticipantEntities().get(0).getId();
+		ParticipantEntity participantEntityToBeRemoved = ParticipantEntity.newInstance(uuid);
+		
+		sut.removeParticipantEntity(participantEntityToBeRemoved);
+		
+		List<ParticipantEntity> result = sut.getParticipantEntities();
+		assertTrue("Removing of a 'ParticipantEntity' was not successful!", result.isEmpty());
 	}
 
 	@Test
-	public void testParticipantTwo() {
-		RelayEntity sut = RelayEntity.newInstance();
+	public void testRemoveParticipantEntity_element_is_not_present() {
+		RelayEntity sut = RelayEntityInitializer.newRelayEntityWithOneParticipant();
+		ParticipantEntity participantEntityToBeRemoved = ParticipantEntity.newInstance();
 
-		UUID expected = UUID.randomUUID();
-
-		sut.setParticipantTwo(expected);
-
-		UUID actual = sut.getParticipantTwo();
-
-		assertEquals("[participantTwo] has not been set correctly!", expected, actual);
-	}
-
-	@Test
-	public void testParticipantThree() {
-		RelayEntity sut = RelayEntity.newInstance();
-
-		UUID expected = UUID.randomUUID();
-
-		sut.setParticipantThree(expected);
-
-		UUID actual = sut.getParticipantThree();
-
-		assertEquals("[participantThree] has not been set correctly!", expected, actual);
-	}
-
-	@Test
-	public void testParticipantFour() {
-		RelayEntity sut = RelayEntity.newInstance();
-
-		UUID expected = UUID.randomUUID();
-
-		sut.setParticipantFour(expected);
-
-		UUID actual = sut.getParticipantFour();
-
-		assertEquals("[participantFour] has not been set correctly!", expected, actual);
+		sut.removeParticipantEntity(participantEntityToBeRemoved);
+		
+		List<ParticipantEntity> result = sut.getParticipantEntities();
+		boolean actual = (result.size() == 1);
+		assertTrue("Removing of a 'ParticipantEntity' was not successful!", actual);
 	}
 
 	@Test
@@ -161,7 +196,6 @@ public class RelayEntityTest {
 	@Test
 	public void testEquals_WithDiffrentValues() {
 		RelayEntity sut = RelayEntity.newInstance();
-
 		RelayEntity secondSut = RelayEntity.newInstance();
 
 		boolean result = sut.equals(secondSut);
@@ -184,13 +218,11 @@ public class RelayEntityTest {
 	public void testEquals_WithValueIsNull() {
 		RelayEntity sut = RelayEntity.newInstance();
 		sut.setId(null);
-
 		RelayEntity secondSut = RelayEntity.newInstance();
 
 		boolean result = sut.equals(secondSut);
 
 		assertFalse(result);
-
 	}
 
 	@Test
@@ -199,11 +231,81 @@ public class RelayEntityTest {
 		sut.setId(null);
 
 		RelayEntity secondSut = RelayEntity.newInstance();
-
 		secondSut.setId(null);
 
 		boolean result = sut.equals(secondSut);
 
 		assertTrue(result);
+	}
+	
+	@Test
+	public void testGetParticipantEntityAtPosition_find_pos_one_have_pos_one() {
+		RelayEntity sut = RelayEntity.newInstance();
+		ParticipantEntity participantEntity = ParticipantEntity.newInstance();
+		participantEntity.setPosition(Integer.valueOf(1));
+		sut.addParticipantEntity(participantEntity);
+		
+		Optional<ParticipantEntity> actual = sut.getParticipantEntityAtPosition(Integer.valueOf(1));
+		
+		assertTrue("[participantEntity] was not searched correctly!", actual.isPresent());
+	}
+
+	@Test
+	public void testGetParticipantEntityAtPosition_find_pos_one_have_pos_two() {
+		RelayEntity sut = RelayEntity.newInstance();
+		ParticipantEntity participantEntity = ParticipantEntity.newInstance();
+		participantEntity.setPosition(Integer.valueOf(2));
+		sut.addParticipantEntity(participantEntity);
+		
+		Optional<ParticipantEntity> actual = sut.getParticipantEntityAtPosition(Integer.valueOf(1));
+		
+		assertFalse("[participantEntity] was not searched correctly!", actual.isPresent());
+	}
+
+	@Test
+	public void testGetParticipantEntityAtPosition_find_pos_one_have_none() {
+		RelayEntity sut = RelayEntity.newInstance();
+		
+		Optional<ParticipantEntity> actual = sut.getParticipantEntityAtPosition(Integer.valueOf(1));
+		
+		assertFalse("[participantEntity] was not searched correctly!", actual.isPresent());
+	}
+	
+	@Test
+	public void testPossiblyRemoveParticipantEntity_particpantEntityIsNotPresent() {
+		RelayEntity sut = RelayEntityInitializer.newRelayEntityWithOneParticipant();
+		Optional<ParticipantEntity> isNotAParticipantEntity = Optional.ofNullable(null);
+		
+		sut.possiblyRemoveParticipantEntity(isNotAParticipantEntity);
+		
+		int expected = 1;
+		int actual = sut.getParticipantEntities().size();
+		assertEquals("Possibly removing a [participantEntity] does not work correctly!", expected, actual);
+	}
+
+	@Test
+	public void testPossiblyRemoveParticipantEntity_particpantEntityIsPresentAndContained() {
+		RelayEntity sut = RelayEntityInitializer.newRelayEntityWithOneParticipant();
+		ParticipantEntity participantEntity = ParticipantEntity.newInstance(sut.getParticipantEntities().get(0).getId());
+		Optional<ParticipantEntity> isAParticipantEntity = Optional.of(participantEntity);
+		
+		sut.possiblyRemoveParticipantEntity(isAParticipantEntity);
+		
+		int expected = 0;
+		int actual = sut.getParticipantEntities().size();
+		assertEquals("Possibly removing a [participantEntity] does not work correctly!", expected, actual);
+	}
+
+	@Test
+	public void testPossiblyRemoveParticipantEntity_particpantEntityIsPresentAndNotContained() {
+		RelayEntity sut = RelayEntityInitializer.newRelayEntityWithOneParticipant();
+		ParticipantEntity participantEntity = ParticipantEntity.newInstance();
+		Optional<ParticipantEntity> isAParticipantEntity = Optional.of(participantEntity);
+		
+		sut.possiblyRemoveParticipantEntity(isAParticipantEntity);
+		
+		int expected = 1;
+		int actual = sut.getParticipantEntities().size();
+		assertEquals("Possibly removing a [participantEntity] does not work correctly!", expected, actual);
 	}
 }

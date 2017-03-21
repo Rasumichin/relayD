@@ -10,7 +10,6 @@
 		<class>com.relayd.entity.PersonEntity</class>
 		<class>com.relayd.entity.RelayEventEntity</class>
 		<class>com.relayd.entity.RelayEntity</class>
-		<class>com.relayd.entity.Relay2Entity</class>
 		<properties>
 			<property name="openjpa.RuntimeUnenhancedClasses" value="unsupported" />
 			<property name="openjpa.DynamicEnhancementAgent" value="false" />
