@@ -2,7 +2,9 @@ package com.relayd.entity;
 
 import static org.junit.Assert.*;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -70,58 +72,69 @@ public class RelayEntityTest {
 		sut.setRelayname(relayname);
 		assertEquals("[relayname] has not been set correctly!", relayname, sut.getRelayname());
 	}
-	
-	@Test(expected=IllegalArgumentException.class)
+
+	@Test
+	public void testDuration() {
+		Long expected = 0L;
+		RelayEntity sut = RelayEntity.newInstance();
+
+		sut.setDuration(expected);
+		Long actual = sut.getDuration();
+
+		assertEquals("[duration] has not been set correctly!", expected, actual);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
 	public void testRelayname_withNull() {
 		RelayEntity sut = RelayEntity.newInstance();
 		sut.setRelayname(null);
 	}
-	
+
 	@Test
 	public void testRelayEventEntity() {
 		RelayEntity sut = RelayEntity.newInstance();
 		RelayEventEntity expected = new RelayEventEntity.Builder("MyRelayEvent").build();
-		
+
 		sut.setRelayEventEntity(expected);
 		RelayEventEntity actual = sut.getRelayEventEntity();
-		
+
 		assertEquals("[relayEventEntity] has not been set correctly!", expected, actual);
 	}
 
-	@Test(expected=IllegalArgumentException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void testRelayEventEntity_withNull() {
 		RelayEntity sut = RelayEntity.newInstance();
 		sut.setRelayEventEntity(null);
 	}
-	
+
 	@Test
 	public void testGetParticipants_initialSize() {
 		RelayEntity sut = RelayEntity.newInstance();
-		
+
 		List<ParticipantEntity> result = sut.getParticipantEntities();
-		
+
 		assertTrue("Initialization of [participantEntities] is not correct!", result.isEmpty());
 	}
-	
+
 	@Test
 	public void testAddParticipantEntity() {
 		RelayEntity sut = RelayEntityInitializer.newRelayEntityWithOneParticipant();
-		
+
 		List<ParticipantEntity> result = sut.getParticipantEntities();
 		boolean actual = (result.size() == 1);
 		assertTrue("Adding of a 'ParticipantEntity' was not successful!", actual);
 	}
-	
+
 	@Test
 	public void testRemoveParticipantEntity_element_is_present() {
 		RelayEntity sut = RelayEntityInitializer.newRelayEntityWithOneParticipant();
-		
+
 		// Create another instance with the same 'id' and let the 'sut' remove this one.
 		String uuid = sut.getParticipantEntities().get(0).getId();
 		ParticipantEntity participantEntityToBeRemoved = ParticipantEntity.newInstance(uuid);
-		
+
 		sut.removeParticipantEntity(participantEntityToBeRemoved);
-		
+
 		List<ParticipantEntity> result = sut.getParticipantEntities();
 		assertTrue("Removing of a 'ParticipantEntity' was not successful!", result.isEmpty());
 	}
@@ -132,7 +145,7 @@ public class RelayEntityTest {
 		ParticipantEntity participantEntityToBeRemoved = ParticipantEntity.newInstance();
 
 		sut.removeParticipantEntity(participantEntityToBeRemoved);
-		
+
 		List<ParticipantEntity> result = sut.getParticipantEntities();
 		boolean actual = (result.size() == 1);
 		assertTrue("Removing of a 'ParticipantEntity' was not successful!", actual);
@@ -237,16 +250,16 @@ public class RelayEntityTest {
 
 		assertTrue(result);
 	}
-	
+
 	@Test
 	public void testGetParticipantEntityAtPosition_find_pos_one_have_pos_one() {
 		RelayEntity sut = RelayEntity.newInstance();
 		ParticipantEntity participantEntity = ParticipantEntity.newInstance();
 		participantEntity.setPosition(Integer.valueOf(1));
 		sut.addParticipantEntity(participantEntity);
-		
+
 		Optional<ParticipantEntity> actual = sut.getParticipantEntityAtPosition(Integer.valueOf(1));
-		
+
 		assertTrue("[participantEntity] was not searched correctly!", actual.isPresent());
 	}
 
@@ -256,28 +269,28 @@ public class RelayEntityTest {
 		ParticipantEntity participantEntity = ParticipantEntity.newInstance();
 		participantEntity.setPosition(Integer.valueOf(2));
 		sut.addParticipantEntity(participantEntity);
-		
+
 		Optional<ParticipantEntity> actual = sut.getParticipantEntityAtPosition(Integer.valueOf(1));
-		
+
 		assertFalse("[participantEntity] was not searched correctly!", actual.isPresent());
 	}
 
 	@Test
 	public void testGetParticipantEntityAtPosition_find_pos_one_have_none() {
 		RelayEntity sut = RelayEntity.newInstance();
-		
+
 		Optional<ParticipantEntity> actual = sut.getParticipantEntityAtPosition(Integer.valueOf(1));
-		
+
 		assertFalse("[participantEntity] was not searched correctly!", actual.isPresent());
 	}
-	
+
 	@Test
 	public void testPossiblyRemoveParticipantEntity_particpantEntityIsNotPresent() {
 		RelayEntity sut = RelayEntityInitializer.newRelayEntityWithOneParticipant();
 		Optional<ParticipantEntity> isNotAParticipantEntity = Optional.ofNullable(null);
-		
+
 		sut.possiblyRemoveParticipantEntity(isNotAParticipantEntity);
-		
+
 		int expected = 1;
 		int actual = sut.getParticipantEntities().size();
 		assertEquals("Possibly removing a [participantEntity] does not work correctly!", expected, actual);
@@ -288,9 +301,9 @@ public class RelayEntityTest {
 		RelayEntity sut = RelayEntityInitializer.newRelayEntityWithOneParticipant();
 		ParticipantEntity participantEntity = ParticipantEntity.newInstance(sut.getParticipantEntities().get(0).getId());
 		Optional<ParticipantEntity> isAParticipantEntity = Optional.of(participantEntity);
-		
+
 		sut.possiblyRemoveParticipantEntity(isAParticipantEntity);
-		
+
 		int expected = 0;
 		int actual = sut.getParticipantEntities().size();
 		assertEquals("Possibly removing a [participantEntity] does not work correctly!", expected, actual);
@@ -301,9 +314,9 @@ public class RelayEntityTest {
 		RelayEntity sut = RelayEntityInitializer.newRelayEntityWithOneParticipant();
 		ParticipantEntity participantEntity = ParticipantEntity.newInstance();
 		Optional<ParticipantEntity> isAParticipantEntity = Optional.of(participantEntity);
-		
+
 		sut.possiblyRemoveParticipantEntity(isAParticipantEntity);
-		
+
 		int expected = 1;
 		int actual = sut.getParticipantEntities().size();
 		assertEquals("Possibly removing a [participantEntity] does not work correctly!", expected, actual);
