@@ -15,11 +15,11 @@ import com.relayd.ejb.GatewayType;
 public class Settings implements Serializable {
 	private static final long serialVersionUID = 6060470764587750857L;
 
-	private static final String APPLICATION_PROPERTIES = "/application.properties";
+	private static final String TO_DO = "ToDo";
+	private static final String CandA = " @ C&A";
+	private static final String CLOSING_DATE = "01.04.2017 (ToDo)";
 
 	private Properties applicationProperties;
-
-	private static final String TO_DO = "ToDo";
 
 	private String theme = "afterwork";
 
@@ -52,11 +52,11 @@ public class Settings implements Serializable {
 	}
 
 	public String getRelayAppendix() {
-		return " @ C&A";
+		return CandA;
 	}
 
 	public String getClosingDate() {
-		return "01.04.2017 (ToDo)";
+		return CLOSING_DATE;
 	}
 
 	public String getTheme() {
@@ -76,12 +76,13 @@ public class Settings implements Serializable {
 	}
 
 	public Properties getApplicationProperties() {
+		// TODO -medium- old code. clean up!
 		if (applicationProperties == null) {
 			try {
 				applicationProperties = new Properties();
-				InputStream tempResourceAsStream = Settings.class.getResourceAsStream("/application.properties");
-				applicationProperties.load(tempResourceAsStream);
-			} catch (IOException tempException) {
+				InputStream resourceAsStream = Settings.class.getResourceAsStream("/application.properties");
+				applicationProperties.load(resourceAsStream);
+			} catch (IOException exception) {
 				System.err.println("IOException: unable to read application.properties");
 			}
 		}

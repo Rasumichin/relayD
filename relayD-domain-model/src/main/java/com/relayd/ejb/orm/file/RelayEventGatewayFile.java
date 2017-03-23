@@ -70,6 +70,7 @@ public class RelayEventGatewayFile implements RelayEventGateway {
 		fileOutputStream.close();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<RelayEvent> getAll() {
 		List<RelayEvent> eventsAsList = new ArrayList<RelayEvent>();

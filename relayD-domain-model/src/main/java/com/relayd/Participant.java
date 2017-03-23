@@ -116,7 +116,7 @@ public class Participant implements Serializable {
 		}
 
 		@Override
-		public boolean hasThatPersonIdentity(UUID uuid) {
+		public boolean hasThatPersonIdentity(@SuppressWarnings("unused") UUID uuid) {
 			return false;
 		}
 

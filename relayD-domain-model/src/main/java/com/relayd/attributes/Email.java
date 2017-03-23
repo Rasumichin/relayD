@@ -44,7 +44,7 @@ public class Email implements Serializable, Cloneable {
 		if ((email == null) || (email.trim().isEmpty())) {
 			return EmailNullObject.instance();
 		}
-		
+
 		validate(email);
 		return new Email(email);
 	}
@@ -59,6 +59,7 @@ public class Email implements Serializable, Cloneable {
 		return false;
 	}
 
+	@SuppressWarnings("unused")
 	public static boolean isValidAddress(String email) {
 		if (email == null) {
 			return false;
@@ -166,21 +167,21 @@ public class Email implements Serializable, Cloneable {
 		}
 		return true;
 	}
-	
+
 	static final class EmailNullObject extends Email {
 		private static final long serialVersionUID = -2878506169503489232L;
-		
+
 		private static final EmailNullObject SINGLETON = new EmailNullObject();
-		
+
 		private static EmailNullObject instance() {
 			return SINGLETON;
 		}
-		
+
 		@Override
 		public boolean isEmpty() {
 			return true;
 		}
-		
+
 		@Override
 		public String toString() {
 			return "";

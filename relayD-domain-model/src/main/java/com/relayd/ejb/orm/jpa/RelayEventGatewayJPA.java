@@ -30,12 +30,12 @@ public class RelayEventGatewayJPA implements RelayEventGateway {
 	}
 
 	@Override
-	public void set(RelayEvent relayEvent) {
+	public void set(@SuppressWarnings("unused") RelayEvent relayEvent) {
 		throw new UnsupportedOperationException("Muss noch gecodet werden");
 	}
 
 	@Override
-	public RelayEvent get(UUID uuid) {
+	public RelayEvent get(@SuppressWarnings("unused") UUID uuid) {
 		throw new UnsupportedOperationException("Muss noch gecodet werden");
 	}
 }

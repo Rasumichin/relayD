@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import java.io.Serializable;
 
 import org.junit.FixMethodOrder;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
@@ -33,10 +32,9 @@ public class SettingsTest {
 	}
 
 	@Test
-	@Ignore
 	public void testGetVersion() {
 		String actual = sut.getVersion();
-		assertEquals("[getVersion] not correct!", "1.1 - Codename Bitburger", actual);
+		assertEquals("[getVersion] not correct!", "1.5 - Codename F", actual);
 	}
 
 	@Test
@@ -75,17 +73,13 @@ public class SettingsTest {
 		assertEquals("[getClosingDate] not correct!", "01.04.2017 (ToDo)", actual);
 	}
 
-	// TODO (Erik, Version 1.4): Diskussion: Als Dokumentation sollten beide Tests in einer Methode sein um aufzuzeigen
-	// das der Wert einen DefaultWert besitzt. So sollten auch die bisherigen getNN Tests als erstes vielleicht auf assertNull prüfen
-	// um zu zeigen das die Attribute mit null vorbelegt sind! Allerdings wollten wir doch auch das NullObjectPattern nutzen.. ach menno.
-	// Memo an mich selbst: In Maui sollte ich das auf jeden Fall nochmal überdenken!
 	@Test
 	public void testTheme_ForInitialSut() {
 		String expected = "afterwork";
 
 		String actual = sut.getTheme();
 
-		assertEquals("[getTheme] not correct!", expected, actual);
+		assertEquals("[getTheme] for initial state not correct!", expected, actual);
 	}
 
 	@Test
@@ -97,5 +91,12 @@ public class SettingsTest {
 		String actual = sut.getTheme();
 
 		assertEquals("[getTheme] not correct!", expected, actual);
+	}
+
+	@Test
+	public void testGetProperty_ForUnknownKey() {
+		String actual = sut.getProperty("Unknown Key");
+
+		assertEquals("[getProperty] not corret!", "UNKNOWN", actual);
 	}
 }
