@@ -34,6 +34,15 @@
 				style="width:180px">
 				<f:converter converterId="com.relayd.web.converter.RelaynameValueObjectConverter" />
 			</p:inputText>
+			<p:outputLabel
+				for="duration"
+				value="Duration:" />
+			<p:inputText
+				id="duration"
+				value="#{relayEditPageBean.duration}"
+				style="width:180px">
+				<f:converter converterId="com.relayd.web.converter.DurationValueObjectConverter" />
+			</p:inputText>
 		</h:panelGrid>
 
 		<p:commandButton

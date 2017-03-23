@@ -1,8 +1,19 @@
 package com.relayd.entity;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import org.apache.openjpa.persistence.jdbc.ForeignKey;
 
@@ -16,20 +27,23 @@ import org.apache.openjpa.persistence.jdbc.ForeignKey;
 public class RelayEntity {
 
 	@Id
-	@Column(length=36)
+	@Column(length = 36)
 	private String id;
 
-	@Column(nullable=false, length=256)
+	@Column(nullable = false, length = 256)
 	private String relayname;
 
+	@Column
+	private Long duration = 0L;
+
 	@ManyToOne
-	@Column(name="eventId", nullable=false, length=36)
+	@Column(name = "eventId", nullable = false, length = 36)
 	@ForeignKey
 	private RelayEventEntity relayEventEntity;
 
-	@OneToMany(mappedBy="relayEntity", cascade=CascadeType.ALL, fetch=FetchType.EAGER, orphanRemoval=true)
+	@OneToMany(mappedBy = "relayEntity", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
 	private List<ParticipantEntity> participantEntities = new ArrayList<>();
-	
+
 	public static RelayEntity newInstance() {
 		RelayEntity relayEntity = new RelayEntity();
 		relayEntity.setId(UUID.randomUUID().toString());
@@ -71,17 +85,25 @@ public class RelayEntity {
 		relayname = aRelayname;
 	}
 
+	public Long getDuration() {
+		return duration;
+	}
+
+	public void setDuration(Long aDuration) {
+		duration = aDuration;
+	}
+
 	public void setRelayEventEntity(RelayEventEntity aRelayEventEntity) {
 		if (aRelayEventEntity == null) {
 			throw new IllegalArgumentException("[aRelayEventEntity] must not be 'null'.");
 		}
 		relayEventEntity = aRelayEventEntity;
 	}
-	
+
 	public RelayEventEntity getRelayEventEntity() {
 		return relayEventEntity;
 	}
-	
+
 	// TODO EL (2017-01-08): Discuss with CS - better remove boolean result of 'add' operation here?
 	public void addParticipantEntity(ParticipantEntity participantEntity) {
 		// TODO EL (2017-01-08): Discuss with CS - validation checks here (up to 4 participants, no duplicate positions)?
@@ -104,9 +126,9 @@ public class RelayEntity {
 
 	public Optional<ParticipantEntity> getParticipantEntityAtPosition(Integer aPosition) {
 		return getParticipantEntities()
-		.stream()
-		.filter(eachEntity -> eachEntity.getPosition().equals(aPosition))
-		.findFirst();
+				.stream()
+				.filter(eachEntity -> eachEntity.getPosition().equals(aPosition))
+				.findFirst();
 	}
 
 	public void possiblyRemoveParticipantEntity(Optional<ParticipantEntity> aParticipantEntity) {

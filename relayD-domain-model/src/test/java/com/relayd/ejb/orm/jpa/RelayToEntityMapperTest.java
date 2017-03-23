@@ -2,13 +2,20 @@ package com.relayd.ejb.orm.jpa;
 
 import static org.junit.Assert.*;
 
-import org.junit.*;
+import java.time.Duration;
+
+import org.junit.Before;
+import org.junit.FixMethodOrder;
+import org.junit.Rule;
+import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runners.MethodSorters;
 
-import com.relayd.*;
+import com.relayd.Relay;
+import com.relayd.RelayEvent;
 import com.relayd.attributes.Relayname;
-import com.relayd.entity.*;
+import com.relayd.entity.RelayEntity;
+import com.relayd.entity.RelayEventEntity;
 
 /**
  * If the code and the comments disagree, then both are probably wrong.
@@ -35,7 +42,7 @@ public class RelayToEntityMapperTest {
 		relay.setRelayname(Relayname.newInstance("Some name"));
 		relayEntity.setRelayEventEntity(new RelayEventEntity.Builder("Some event").build());
 	}
-	
+
 	@Test
 	public void testNewInstance() {
 		assertNotNull("Instance creation is not correct!", sut);
@@ -81,12 +88,23 @@ public class RelayToEntityMapperTest {
 	}
 
 	@Test
+	public void testMapDomainToEntity_duration() {
+		Long expected = 3463L;
+		relay.setDuration(Duration.ofMillis(expected));
+
+		sut.mapRelayToEntity(relay, relayEntity);
+
+		Long actual = relayEntity.getDuration();
+		assertEquals("Mapping of [duration] is not correct!", expected, actual);
+	}
+
+	@Test
 	public void testMapDomainToEntity_relayevent() {
 		String expected = RelayEvent.duesseldorf().getName().toString();
 		relayEntity.setRelayEventEntity(new RelayEventEntity.Builder(expected).build());
 
 		sut.mapRelayToEntity(relay, relayEntity);
-		
+
 		String actual = relayEntity.getRelayEventEntity().getEventName();
 		assertEquals("Mapping of [relayevent] is not correct!", expected, actual);
 	}

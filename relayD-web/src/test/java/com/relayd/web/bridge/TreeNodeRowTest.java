@@ -85,6 +85,14 @@ public class TreeNodeRowTest {
 
 		String expected = "";
 		assertEquals("[getStatus] not correct!", expected, actual);
-
 	}
+
+	@Test
+	public void testGetDuration() {
+		String actual = sut.getDuration();
+
+		String expected = "";
+		assertEquals("[getDuration] not correct!", expected, actual);
+	}
+
 }

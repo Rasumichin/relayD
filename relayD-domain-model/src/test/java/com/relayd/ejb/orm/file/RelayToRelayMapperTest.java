@@ -2,6 +2,8 @@ package com.relayd.ejb.orm.file;
 
 import static org.junit.Assert.*;
 
+import java.time.Duration;
+
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
@@ -63,6 +65,18 @@ public class RelayToRelayMapperTest {
 		Relayname actual = target.getRelayname();
 
 		assertEquals("Mapping of [relayname] is not correct!", expected, actual);
+	}
+
+	@Test
+	public void testMapRelayToRelay_Duration() {
+		Duration expected = Duration.ofMillis(7892L);
+		source.setDuration(expected);
+
+		sut.mapRelayToRelay(source, target);
+
+		Duration actual = target.getDuration();
+
+		assertEquals("Mapping of [duration] is not correct!", expected, actual);
 	}
 
 	@Test

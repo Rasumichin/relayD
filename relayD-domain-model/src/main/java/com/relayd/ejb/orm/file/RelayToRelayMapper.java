@@ -24,7 +24,10 @@ public class RelayToRelayMapper {
 		if (target == null) {
 			throw new IllegalArgumentException("[target] must not be 'null'!");
 		}
+
 		target.setRelayname(source.getRelayname());
+		target.setDuration(source.getDuration());
+
 		for (Position each : Position.values()) {
 			if (Position.UNKNOWN.equals(each)) {
 				continue;

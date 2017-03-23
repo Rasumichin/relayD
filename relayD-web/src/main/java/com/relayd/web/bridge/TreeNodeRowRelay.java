@@ -33,6 +33,11 @@ public class TreeNodeRowRelay extends TreeNodeRow {
 	}
 
 	@Override
+	public String getDuration() {
+		return relay.getDurationFormatted();
+	}
+
+	@Override
 	public String getStatus() {
 		int relayMembers = relay.participantCount().intValue();
 		if (relayMembers == 0) {

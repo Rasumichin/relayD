@@ -3,6 +3,7 @@ package com.relayd.web.bridge;
 import static org.junit.Assert.*;
 
 import java.io.Serializable;
+import java.time.Duration;
 
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -67,5 +68,32 @@ public class TreeNodeRowRelayTest {
 		String actual = sut.getRelayname();
 
 		assertEquals("relayName not correct!", expected + " [0/4]", actual);
+	}
+
+	@Test
+	public void testGetDuration_ForValue() {
+		Relay relay = Relay.newInstance(RelayEvent.duesseldorf());
+		Duration duration = Duration.ofHours(3).plusMinutes(33).plusSeconds(12);
+		relay.setDuration(duration);
+
+		TreeNodeRow sut = TreeNodeRow.newInstance(relay);
+
+		String actual = sut.getDuration();
+		String expected = "03:33:12";
+
+		assertEquals("[duration] not correct!", expected, actual);
+	}
+
+	@Test
+	public void testGetDuration_ForNull() {
+		Relay relay = Relay.newInstance(RelayEvent.duesseldorf());
+		relay.setDuration(null);
+
+		TreeNodeRow sut = TreeNodeRow.newInstance(relay);
+
+		String actual = sut.getDuration();
+		String expected = "00:00:00";
+
+		assertEquals("[duration] not correct!", expected, actual);
 	}
 }

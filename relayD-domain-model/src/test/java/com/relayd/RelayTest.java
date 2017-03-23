@@ -3,6 +3,7 @@ package com.relayd;
 import static org.junit.Assert.*;
 
 import java.io.Serializable;
+import java.time.Duration;
 import java.util.List;
 import java.util.UUID;
 
@@ -299,6 +300,45 @@ public class RelayTest {
 
 		String expected = "Justus.Jonas@canda.com, Peter.Shaw@canda.com, Bob.Andrews@canda.com, Skinny.Norris@canda.com";
 		assertEquals("[getEmailList] not correct!", expected, actual);
+	}
+
+	@Test
+	public void testDuration() {
+
+		Relay sut = Relay.newInstance();
+
+		Duration expected = Duration.ofHours(3).plusMinutes(33).plusSeconds(13);
+
+		sut.setDuration(expected);
+
+		Duration actual = sut.getDuration();
+
+		assertEquals("[Duration] not corret!", expected, actual);
+	}
+
+	@Test
+	public void testGetDurationFormatted_ForNull() {
+		Relay sut = Relay.newInstance();
+		sut.setDuration(null);
+
+		String actual = sut.getDurationFormatted();
+		String expected = "00:00:00";
+
+		assertEquals("[Duration] not corret!", expected, actual);
+
+	}
+
+	@Test
+	public void testGetDurationFormatted_ForValue() {
+		Relay sut = Relay.newInstance();
+		Duration duration = Duration.ofHours(3).plusMinutes(33).plusSeconds(13);
+		sut.setDuration(duration);
+
+		String actual = sut.getDurationFormatted();
+		String expected = "03:33:13";
+
+		assertEquals("[Duration] not corret!", expected, actual);
+
 	}
 
 	@Test

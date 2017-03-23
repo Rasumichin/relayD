@@ -30,5 +30,6 @@ public class RelayToEntityMapper {
 		}
 
 		relayEntity.setRelayname(relay.getRelayname().isEmpty() ? null : relay.getRelayname().toString());
+		relayEntity.setDuration(relay.getDuration().toMillis());
 	}
 }
