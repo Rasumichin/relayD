@@ -91,12 +91,19 @@
 					<f:facet name="header">
 		            Relays
 		        	</f:facet>
-					<p:column headerText="Name">
+					
+					<p:column 
+						headerText="Name"
+						sortBy="#{relayRow.relayname}">
 						<h:outputText value="#{relayRow.relayname}" />
 					</p:column>
-					<p:column headerText="Duration">
+					
+					<p:column 
+						headerText="Duration"
+						sortBy="#{relayRow.duration}">
 						<h:outputText value="#{relayRow.duration}" />
 					</p:column>
+					
 					<p:column headerText="Participant">
 						<h:outputText value="#{relayRow.participant}" />
 						<div align="right">
