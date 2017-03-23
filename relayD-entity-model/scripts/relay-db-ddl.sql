@@ -8,9 +8,10 @@ DROP TABLE relay2;
 -- Create Table relay2
 -- ------------------------------------------------
 CREATE TABLE relay2 (
-	id								CHAR(36)		NOT NULL	COMMENT 'UUID as string representation.',
-	eventId							CHAR(36) 		NOT NULL	COMMENT 'UUID from the Event string representation.',
-	relayname						VARCHAR(256)	NOT NULL	COMMENT 'The name of the relay.',
+	id								CHAR(36)		NOT NULL			COMMENT 'UUID as string representation.',
+	eventId							CHAR(36) 		NOT NULL			COMMENT 'UUID from the Event string representation.',
+	relayname						VARCHAR(256)	NOT NULL			COMMENT 'The name of the relay.',
+	duration						BIGINT			NOT NULL DEFAULT 0 	COMMENT 'The duration for the run in milliseconds',
 	CONSTRAINT fk_relay_relay_event
 		FOREIGN KEY (eventId) REFERENCES relay_event (id)
 		ON DELETE CASCADE
