@@ -25,7 +25,7 @@ public class Relay implements Serializable {
 	private RelayEvent relayEvent = RelayEvent.duesseldorf();
 	private List<Participant> participants = new ArrayList<Participant>();
 
-	private Duration duration;
+	private Duration duration = Duration.ZERO;
 
 	private Relay(RelayEvent aRelayEvent) {
 		uuid = UUID.randomUUID();

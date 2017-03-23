@@ -34,7 +34,7 @@ public class RelayEntity {
 	private String relayname;
 
 	@Column
-	private Long duration;
+	private Long duration = 0L;
 
 	@ManyToOne
 	@Column(name = "eventId", nullable = false, length = 36)
