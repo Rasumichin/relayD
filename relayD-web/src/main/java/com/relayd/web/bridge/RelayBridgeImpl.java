@@ -20,6 +20,7 @@ import com.relayd.ejb.RelayGatewayFactory;
  */
 public class RelayBridgeImpl implements RelayBridge {
 
+	@SuppressWarnings("unused")
 	@Override
 	public TreeNode all() {
 		TreeNode root = new DefaultTreeNode();
