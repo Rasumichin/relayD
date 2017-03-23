@@ -43,7 +43,7 @@ public abstract class TreeNodeRow implements Serializable {
 		return Participant.newInstance();
 	}
 
-	public void setParticipant(Participant participant) {
+	public void setParticipant(@SuppressWarnings("unused") Participant participant) {
 		// TODO (Christian, Version 1.4): Idee ist diese abstract zu machen, so daß beim klicken auf Participant Zeile genau dort eingefügt wird,
 		// bei klicken auf RelayZeile die nächste freie stelle befüllt wird. Somit haben beide mit dieser Methode zu tun.
 	}
@@ -52,7 +52,7 @@ public abstract class TreeNodeRow implements Serializable {
 		return Position.UNKNOWN;
 	}
 
-	public void setPosition(Position position) {
+	public void setPosition(@SuppressWarnings("unused") Position position) {
 		// TODO (Christian, Version 1.4): Siehe methode setParticipant.
 	}
 
