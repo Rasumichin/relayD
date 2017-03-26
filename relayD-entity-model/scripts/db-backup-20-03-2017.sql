@@ -31,7 +31,7 @@ USE `app_relayd`;
 CREATE TABLE `participant` (
   `id` char(36) NOT NULL COMMENT 'UUID as string representation.',
   `personId` char(36) NOT NULL COMMENT 'UUID of the referenced person, string representation.',
-  `relay2Id` char(36) NOT NULL COMMENT 'UUID of the referenced relay2, string representation.',
+  `relayId` char(36) NOT NULL COMMENT 'UUID of the referenced relay, string representation.',
   `relayPosition` int(11) NOT NULL COMMENT 'The relay position the person participates in.'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='relayD - The table for the relay participant entities.';
 
@@ -39,7 +39,7 @@ CREATE TABLE `participant` (
 -- Daten fÃ¼r Tabelle `participant`
 --
 
-INSERT INTO `participant` (`id`, `personId`, `relay2Id`, `relayPosition`) VALUES
+INSERT INTO `participant` (`id`, `personId`, `relayId`, `relayPosition`) VALUES
 ('9893dbc7-3823-4e17-810b-e4a543edcbf8', '02985992-cd7e-4b70-8b0f-4244ad793881', '4b568dda-15e7-4e11-b7f9-47a9153ae17b', 4),
 ('2fd37267-734c-44e3-a872-478e935d1cda', '02b5d155-2804-4fe6-836f-6f14397c893e', 'e2e1e2fe-6224-4d08-9eb6-7d3f1ff878cb', 4),
 ('8c2349ad-70b3-46cc-957c-2ff001d63fc5', '03c062d6-b1d5-455c-8ec2-3ae2c37f9093', '4fbf6161-ad4e-40a7-8aa4-04edafc2ff49', 4),
@@ -221,20 +221,20 @@ INSERT INTO `person` (`id`, `surename`, `forename`, `yearOfBirth`, `shirtsize`, 
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur fÃ¼r Tabelle `relay2`
+-- Tabellenstruktur fÃ¼r Tabelle `relay`
 --
 
-CREATE TABLE `relay2` (
+CREATE TABLE `relay` (
   `id` char(36) NOT NULL COMMENT 'UUID as string representation.',
   `eventId` char(36) NOT NULL COMMENT 'UUID from the Event string representation.',
   `relayname` varchar(256) NOT NULL COMMENT 'The name of the relay.'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='relayD - The table for the relay entities.';
 
 --
--- Daten fÃ¼r Tabelle `relay2`
+-- Daten fÃ¼r Tabelle `relay`
 --
 
-INSERT INTO `relay2` (`id`, `eventId`, `relayname`) VALUES
+INSERT INTO `relay` (`id`, `eventId`, `relayname`) VALUES
 ('1803135f-bc38-4d92-a398-6a3c62511018', '5697d710-8967-4b2d-9ab2-8fc50ddc6138', 'Staffel 13'),
 ('1af2a1cc-b1f7-4c32-9e75-2746f62d56fc', '5697d710-8967-4b2d-9ab2-8fc50ddc6138', 'hot runners @ C&A'),
 ('2a7caa12-3a10-4e1e-8cc9-14c49d773fef', '5697d710-8967-4b2d-9ab2-8fc50ddc6138', 'I love it when a PLAN comes together @ C&A'),
@@ -283,8 +283,8 @@ INSERT INTO `relay_event` (`id`, `eventname`, `eventDay`) VALUES
 ALTER TABLE `participant`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `participant_idx` (`id`),
-  ADD UNIQUE KEY `person_relay_position_IDX` (`personId`,`relay2Id`,`relayPosition`),
-  ADD KEY `fk_participant_relay2` (`relay2Id`);
+  ADD UNIQUE KEY `person_relay_position_IDX` (`personId`,`relayId`,`relayPosition`),
+  ADD KEY `fk_participant_relay` (`relayId`);
 
 --
 -- Indizes fÃ¼r die Tabelle `person`
@@ -294,11 +294,11 @@ ALTER TABLE `person`
   ADD UNIQUE KEY `person_idx` (`id`);
 
 --
--- Indizes fÃ¼r die Tabelle `relay2`
+-- Indizes fÃ¼r die Tabelle `relay`
 --
-ALTER TABLE `relay2`
+ALTER TABLE `relay`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `relay2_idx` (`id`),
+  ADD UNIQUE KEY `relay_idx` (`id`),
   ADD KEY `fk_relay_relay_event` (`eventId`);
 
 --
@@ -317,12 +317,12 @@ ALTER TABLE `relay_event`
 --
 ALTER TABLE `participant`
   ADD CONSTRAINT `fk_participant_person` FOREIGN KEY (`personId`) REFERENCES `person` (`id`),
-  ADD CONSTRAINT `fk_participant_relay2` FOREIGN KEY (`relay2Id`) REFERENCES `relay2` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `fk_participant_relay` FOREIGN KEY (`relayId`) REFERENCES `relay` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints der Tabelle `relay2`
+-- Constraints der Tabelle `relay`
 --
-ALTER TABLE `relay2`
+ALTER TABLE `relay`
   ADD CONSTRAINT `fk_relay_relay_event` FOREIGN KEY (`eventId`) REFERENCES `relay_event` (`id`) ON DELETE CASCADE;
 --
 -- Datenbank: `test`

@@ -1,13 +1,13 @@
 -- Alternative edition of table 'relay'
 -- ------------------------------------------------
--- Drop Table relay2
+-- Drop Table relay
 -- ------------------------------------------------
-DROP TABLE relay2;
+DROP TABLE relay;
 
 -- ------------------------------------------------
--- Create Table relay2
+-- Create Table relay
 -- ------------------------------------------------
-CREATE TABLE relay2 (
+CREATE TABLE relay (
 	id								CHAR(36)		NOT NULL			COMMENT 'UUID as string representation.',
 	eventId							CHAR(36) 		NOT NULL			COMMENT 'UUID from the Event string representation.',
 	relayname						VARCHAR(256)	NOT NULL			COMMENT 'The name of the relay.',
@@ -20,26 +20,26 @@ CREATE TABLE relay2 (
 
 
 -- ------------------------------------------------
--- Create Index relay2_IDX
+-- Create Index relay_IDX
 -- ------------------------------------------------
-CREATE UNIQUE INDEX relay2_idx
-        ON relay2
+CREATE UNIQUE INDEX relay_idx
+        ON relay
         (id);
 
 -- ------------------------------------------------
 -- Create Primary Key
 -- ------------------------------------------------
-ALTER TABLE relay2 ADD PRIMARY KEY (id);
+ALTER TABLE relay ADD PRIMARY KEY (id);
 
 -- ------------------------------------------------
--- Create Index relay2_IDX_EVENT_RELAY
+-- Create Index relay_IDX_EVENT_RELAY
 -- ------------------------------------------------
--- CREATE UNIQUE INDEX relay2_IDX_EVENT_RELAY
---         ON relay2
+-- CREATE UNIQUE INDEX relay_IDX_EVENT_RELAY
+--         ON relay
 --         (eventId, relayname);
 -- Index cannot be created since the combination of both columns exceeds the maximum index bytes length.
 
 -- ------------------------------------------------
 -- Grant relay
 -- ------------------------------------------------
--- Does not work, probably due to unsufficient rights: GRANT ALL ON relay2 TO PUBLIC;
+-- Does not work, probably due to unsufficient rights: GRANT ALL ON relay TO PUBLIC;

@@ -23,7 +23,7 @@ import org.apache.openjpa.persistence.jdbc.ForeignKey;
  *
  */
 @Entity
-@Table(name = "relay2")
+@Table(name = "relay")
 public class RelayEntity {
 
 	@Id

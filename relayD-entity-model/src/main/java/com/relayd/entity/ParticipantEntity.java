@@ -2,7 +2,11 @@ package com.relayd.entity;
 
 import java.util.UUID;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import org.apache.openjpa.persistence.jdbc.ForeignKey;
 
@@ -12,23 +16,23 @@ import org.apache.openjpa.persistence.jdbc.ForeignKey;
  *
  */
 @Entity
-@Table(name="participant")
+@Table(name = "participant")
 public class ParticipantEntity {
-	
+
 	@Id
-	@Column(length=36)
+	@Column(length = 36)
 	private String id;
-	
-	@Column(name="relayPosition", nullable=false)
+
+	@Column(name = "relayPosition", nullable = false)
 	private Integer position;
 
 	@ManyToOne
-	@Column(name="personId", nullable=false, length=36)
+	@Column(name = "personId", nullable = false, length = 36)
 	@ForeignKey
 	private PersonEntity personEntity;
 
 	@ManyToOne
-	@Column(name="relay2Id", nullable=false, length=36)
+	@Column(name = "relayId", nullable = false, length = 36)
 	@ForeignKey
 	private RelayEntity relayEntity;
 
@@ -44,14 +48,14 @@ public class ParticipantEntity {
 		}
 		ParticipantEntity participantEntity = new ParticipantEntity();
 		participantEntity.setId(anId);
-		
+
 		return participantEntity;
 	}
 
 	public static ParticipantEntity newInstance() {
 		return ParticipantEntity.newInstance(UUID.randomUUID().toString());
 	}
-	
+
 	private void setId(String anId) {
 		id = anId;
 	}
@@ -67,7 +71,7 @@ public class ParticipantEntity {
 	public Integer getPosition() {
 		return position;
 	}
-	
+
 	public void setPersonEntity(PersonEntity aPersonEntity) {
 		personEntity = aPersonEntity;
 	}
@@ -83,11 +87,11 @@ public class ParticipantEntity {
 	void setRelayEntity(RelayEntity aRelayEntity) {
 		relayEntity = aRelayEntity;
 	}
-	
+
 	public RelayEntity getRelayEntity() {
 		return relayEntity;
 	}
-	
+
 	@Override
 	public String toString() {
 		return getClass().getSimpleName() + " [id=" + getId() + "]";
@@ -103,18 +107,23 @@ public class ParticipantEntity {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		ParticipantEntity other = (ParticipantEntity) obj;
 		if (id == null) {
-			if (other.id != null)
+			if (other.id != null) {
 				return false;
-		} else if (!id.equals(other.id))
+			}
+		} else if (!id.equals(other.id)) {
 			return false;
+		}
 		return true;
 	}
 }
