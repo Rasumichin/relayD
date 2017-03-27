@@ -33,10 +33,10 @@ public class RelayBridgeImpl implements RelayBridge {
 			TreeNode relayTreeNode = new DefaultTreeNode(TreeNodeRow.newInstance(relay), root);
 
 			// TODO (Christian, Erik, Version 1.4): Aus dem Primefacesbeispiel. Sollte man nochmal verifizieren.
-			new DefaultTreeNode(TreeNodeRow.newInstance(relay.getParticipantFor(Position.FIRST), Position.FIRST), relayTreeNode);
-			new DefaultTreeNode(TreeNodeRow.newInstance(relay.getParticipantFor(Position.SECOND), Position.SECOND), relayTreeNode);
-			new DefaultTreeNode(TreeNodeRow.newInstance(relay.getParticipantFor(Position.THIRD), Position.THIRD), relayTreeNode);
-			new DefaultTreeNode(TreeNodeRow.newInstance(relay.getParticipantFor(Position.FOURTH), Position.FOURTH), relayTreeNode);
+			new DefaultTreeNode(TreeNodeRow.newInstance(relay.getMemberFor(Position.FIRST), Position.FIRST), relayTreeNode);
+			new DefaultTreeNode(TreeNodeRow.newInstance(relay.getMemberFor(Position.SECOND), Position.SECOND), relayTreeNode);
+			new DefaultTreeNode(TreeNodeRow.newInstance(relay.getMemberFor(Position.THIRD), Position.THIRD), relayTreeNode);
+			new DefaultTreeNode(TreeNodeRow.newInstance(relay.getMemberFor(Position.FOURTH), Position.FOURTH), relayTreeNode);
 		}
 
 		return root;
@@ -66,19 +66,19 @@ public class RelayBridgeImpl implements RelayBridge {
 			Relay relay = relayNode.getRelay();
 			switch (participantRow.getPosition()) {
 				case FIRST:
-					relay.addParticipant(participantRow.getParticipant(), Position.FIRST);
+					relay.addMember(participantRow.getMember(), Position.FIRST);
 					break;
 				case SECOND:
-					relay.addParticipant(participantRow.getParticipant(), Position.SECOND);
+					relay.addMember(participantRow.getMember(), Position.SECOND);
 					break;
 				case THIRD:
-					relay.addParticipant(participantRow.getParticipant(), Position.THIRD);
+					relay.addMember(participantRow.getMember(), Position.THIRD);
 					break;
 				case FOURTH:
-					relay.addParticipant(participantRow.getParticipant(), Position.FOURTH);
+					relay.addMember(participantRow.getMember(), Position.FOURTH);
 					break;
 				default:
-					relay.addParticipant(participantRow.getParticipant(), Position.FIRST);
+					relay.addMember(participantRow.getMember(), Position.FIRST);
 
 			}
 			getGateway().set(relay);

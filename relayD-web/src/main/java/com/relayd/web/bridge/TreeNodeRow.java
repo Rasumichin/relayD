@@ -2,7 +2,7 @@ package com.relayd.web.bridge;
 
 import java.io.Serializable;
 
-import com.relayd.Participant;
+import com.relayd.Member;
 import com.relayd.Relay;
 import com.relayd.attributes.Position;
 
@@ -18,8 +18,8 @@ public abstract class TreeNodeRow implements Serializable {
 	TreeNodeRow() {
 	}
 
-	public static TreeNodeRow newInstance(Participant participant, Position aPosition) {
-		return new TreeNodeRowParticipant(participant, aPosition);
+	public static TreeNodeRow newInstance(Member member, Position aPosition) {
+		return new TreeNodeRowMember(member, aPosition);
 	}
 
 	public static TreeNodeRow newInstance(Relay relay) {
@@ -39,12 +39,12 @@ public abstract class TreeNodeRow implements Serializable {
 		return "";
 	}
 
-	public Participant getParticipant() {
-		return Participant.newInstance();
+	public Member getMember() {
+		return Member.newInstance();
 	}
 
-	public void setParticipant(@SuppressWarnings("unused") Participant participant) {
-		// TODO (Christian, Version 1.4): Idee ist diese abstract zu machen, so daß beim klicken auf Participant Zeile genau dort eingefügt wird,
+	public void setMember(@SuppressWarnings("unused") Member member) {
+		// TODO (Christian, Version 1.4): Idee ist diese abstract zu machen, so daß beim klicken auf Member Zeile genau dort eingefügt wird,
 		// bei klicken auf RelayZeile die nächste freie stelle befüllt wird. Somit haben beide mit dieser Methode zu tun.
 	}
 
@@ -53,7 +53,7 @@ public abstract class TreeNodeRow implements Serializable {
 	}
 
 	public void setPosition(@SuppressWarnings("unused") Position position) {
-		// TODO (Christian, Version 1.4): Siehe methode setParticipant.
+		// TODO (Christian, Version 1.4): Siehe methode setMember.
 	}
 
 	public String getStatus() {

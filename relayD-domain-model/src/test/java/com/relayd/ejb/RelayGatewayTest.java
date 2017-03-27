@@ -7,8 +7,8 @@ import java.util.UUID;
 
 import org.junit.Test;
 
-import com.relayd.Participant;
-import com.relayd.ParticipantBuilder;
+import com.relayd.Member;
+import com.relayd.MemberBuilder;
 import com.relayd.Relay;
 import com.relayd.attributes.Position;
 import com.relayd.attributes.Relayname;
@@ -38,7 +38,7 @@ public abstract class RelayGatewayTest {
 	}
 
 	@Test
-	public void testSet_ForRelayWithoutParticipants() {
+	public void testSet_ForRelayWithoutMembers() {
 		List<Relay> someRelays = getSut().getAll();
 		assertNotNull("Expect valid instance!", someRelays);
 
@@ -59,7 +59,7 @@ public abstract class RelayGatewayTest {
 	}
 
 	@Test
-	public void testSet_ForRelayWithParticipants() {
+	public void testSet_ForRelayWithMembers() {
 		// ARRANGE
 		List<Relay> someRelays = getSut().getAll();
 		assertNotNull("Expect valid instance!", someRelays);
@@ -72,11 +72,11 @@ public abstract class RelayGatewayTest {
 		Relayname relayname = Relayname.newInstance("Die 4 ????");
 		relay.setRelayname(relayname);
 
-		Participant justusJonas = new ParticipantBuilder().withForename("Justus").withSurename("Jonas").build();
-		relay.addParticipant(justusJonas, Position.FIRST);
+		Member justusJonas = new MemberBuilder().withForename("Justus").withSurename("Jonas").build();
+		relay.addMember(justusJonas, Position.FIRST);
 
-		Participant peterShaw = new ParticipantBuilder().withForename("Peter").withSurename("Shaw").build();
-		relay.addParticipant(peterShaw, Position.SECOND);
+		Member peterShaw = new MemberBuilder().withForename("Peter").withSurename("Shaw").build();
+		relay.addMember(peterShaw, Position.SECOND);
 
 		// ACT
 		getSut().set(relay);
@@ -92,10 +92,10 @@ public abstract class RelayGatewayTest {
 		Relay relayInGateway = someRelays.get(0);
 		assertEquals("[relayname] is not correct!", relayname, relayInGateway.getRelayname());
 
-		assertEquals("[participantOne] is not correct!", justusJonas, relayInGateway.getParticipantFor(Position.FIRST));
-		assertEquals("[participantTwo] is not correct!", peterShaw, relayInGateway.getParticipantFor(Position.SECOND));
-		assertTrue("[participantThree] is not correct!", relayInGateway.getParticipantFor(Position.THIRD).isEmpty());
-		assertTrue("[participantFour] is not correct!", relayInGateway.getParticipantFor(Position.FOURTH).isEmpty());
+		assertEquals("[memberOne] is not correct!", justusJonas, relayInGateway.getMemberFor(Position.FIRST));
+		assertEquals("[memberTwo] is not correct!", peterShaw, relayInGateway.getMemberFor(Position.SECOND));
+		assertTrue("[memberThree] is not correct!", relayInGateway.getMemberFor(Position.THIRD).isEmpty());
+		assertTrue("[memberFour] is not correct!", relayInGateway.getMemberFor(Position.FOURTH).isEmpty());
 	}
 
 	@Test
