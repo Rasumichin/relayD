@@ -2,6 +2,7 @@ package com.relayd.ejb.orm.jpa;
 
 import static org.junit.Assert.*;
 
+import java.sql.Date;
 import java.time.Duration;
 import java.util.UUID;
 
@@ -82,7 +83,9 @@ public class EntityToRelayMapperTest {
 
 	@Test
 	public void testMapRelayEventEntity_whenRelayEventIsNotNull() {
-		RelayEventEntity relayEventEntity = new RelayEventEntity.Builder("My Event").build();
+		RelayEventEntity relayEventEntity = RelayEventEntity.newInstance();
+		relayEventEntity.setEventName("My Event");
+		relayEventEntity.setEventDay(new Date(System.currentTimeMillis()));
 
 		RelayEvent actual = sut.mapRelayEventEntity(relayEventEntity);
 
@@ -91,7 +94,10 @@ public class EntityToRelayMapperTest {
 
 	@Test
 	public void testMapToRelay_check_relayevent() {
-		RelayEventEntity relayEventEntity = new RelayEventEntity.Builder("My Event").build();
+		RelayEventEntity relayEventEntity = RelayEventEntity.newInstance();
+		relayEventEntity.setEventName("My Event");
+		relayEventEntity.setEventDay(new Date(System.currentTimeMillis()));
+
 		relayEntity.setRelayEventEntity(relayEventEntity);
 
 		Relay relay = sut.mapToRelay(relayEntity);

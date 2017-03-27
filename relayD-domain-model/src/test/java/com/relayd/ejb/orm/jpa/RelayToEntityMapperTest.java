@@ -40,7 +40,8 @@ public class RelayToEntityMapperTest {
 	public void setUp() {
 		relay = Relay.newInstance(RelayEvent.duesseldorf());
 		relay.setRelayname(Relayname.newInstance("Some name"));
-		relayEntity.setRelayEventEntity(new RelayEventEntity.Builder("Some event").build());
+		relayEntity.setRelayEventEntity(RelayEventEntity.newInstance());
+		relayEntity.setRelayname("Some event");
 	}
 
 	@Test
@@ -67,7 +68,9 @@ public class RelayToEntityMapperTest {
 	@Test
 	public void testMapDomainToEntity_id() {
 		RelayEntity relayEntity = RelayEntity.newInstance(relay.getUuid().toString());
-		relayEntity.setRelayEventEntity(new RelayEventEntity.Builder("Some event").build());
+		RelayEventEntity relayEventEntity = RelayEventEntity.newInstance();
+		relayEventEntity.setEventName("Some event");
+		relayEntity.setRelayEventEntity(relayEventEntity);
 		String expected = relay.getUuid().toString();
 
 		sut.mapRelayToEntity(relay, relayEntity);
@@ -101,7 +104,9 @@ public class RelayToEntityMapperTest {
 	@Test
 	public void testMapDomainToEntity_relayevent() {
 		String expected = RelayEvent.duesseldorf().getName().toString();
-		relayEntity.setRelayEventEntity(new RelayEventEntity.Builder(expected).build());
+		RelayEventEntity relayEventEntity = RelayEventEntity.newInstance();
+		relayEventEntity.setEventName(expected);
+		relayEntity.setRelayEventEntity(relayEventEntity);
 
 		sut.mapRelayToEntity(relay, relayEntity);
 

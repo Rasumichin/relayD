@@ -9,9 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * JPA Entity class to represent the underlying RDBMS table which persists the 'Event' data.
- * Applies Joshua Bloch's 'Builder Pattern' to create instances programmatically.
- *
  * @author Rasumichin (Erik@relayd.de)
  * @since 22.04.2016
  *
@@ -21,7 +18,7 @@ import javax.persistence.Table;
 public class RelayEventEntity {
 
 	@Id
-	@Column
+	@Column(length = 36)
 	private String id;
 
 	@Column
@@ -30,47 +27,11 @@ public class RelayEventEntity {
 	@Column
 	private Date eventDay;
 
-	public static class Builder {
-		private String id = UUID.randomUUID().toString();
-		private final String eventName;
-		private Date eventDay = new Date(System.currentTimeMillis());
+	public static RelayEventEntity newInstance() {
+		RelayEventEntity relayEventEntity = new RelayEventEntity();
+		relayEventEntity.setId(UUID.randomUUID().toString());
 
-		public Builder(String anEventName) {
-			if (null == anEventName) {
-				throw new IllegalArgumentException("'[anEventName] must not be 'null'.");
-			}
-			eventName = anEventName;
-		}
-
-		public Builder withId(String anId) {
-			if (anId != null) {
-				id = anId;
-			}
-			return this;
-		}
-		
-		public Builder withEventDay(Date anEventDay) {
-			validateEventDay(anEventDay);
-
-			eventDay = anEventDay;
-			return this;
-		}
-
-		private void validateEventDay(Date anEventDay) {
-			if (anEventDay == null) {
-				throw new IllegalArgumentException("[anEventDay] must not be 'null'.");
-			}
-		}
-
-		public RelayEventEntity build() {
-			return new RelayEventEntity(this);
-		}
-	}
-
-	private RelayEventEntity(Builder aBuilder) {
-		id = aBuilder.id;
-		eventName = aBuilder.eventName;
-		eventDay = aBuilder.eventDay;
+		return relayEventEntity;
 	}
 
 	/**
@@ -78,19 +39,41 @@ public class RelayEventEntity {
 	 * are not declared 'final'.
 	 *
 	 */
-	protected RelayEventEntity() {
+	RelayEventEntity() {
+	}
+
+	public static RelayEventEntity newInstance(UUID anUuid) {
+		if (anUuid == null) {
+			throw new IllegalArgumentException("[anUuid] must not be 'null'.");
+		}
+		RelayEventEntity relayEventEntity = new RelayEventEntity();
+		relayEventEntity.setId(anUuid.toString());
+
+		return relayEventEntity;
 	}
 
 	public String getId() {
 		return id;
 	}
 
+	void setId(String anId) {
+		id = anId;
+	}
+
 	public String getEventName() {
 		return eventName;
 	}
 
+	public void setEventName(String anEventName) {
+		eventName = anEventName;
+	}
+
 	public Date getEventDay() {
 		return eventDay;
+	}
+
+	public void setEventDay(Date aEventDay) {
+		eventDay = aEventDay;
 	}
 
 	@Override
@@ -103,18 +86,28 @@ public class RelayEventEntity {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		RelayEventEntity other = (RelayEventEntity) obj;
 		if (id == null) {
-			if (other.id != null)
+			if (other.id != null) {
 				return false;
-		} else if (!id.equals(other.id))
+			}
+		} else if (!id.equals(other.id)) {
 			return false;
+		}
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return getClass().getSimpleName() + " [id=" + id + ", eventName=" + eventName + ", eventDay=" + eventDay + "]";
 	}
 }
