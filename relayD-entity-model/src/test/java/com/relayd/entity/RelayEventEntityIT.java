@@ -22,7 +22,8 @@ public class RelayEventEntityIT extends EntityIT {
 
 	@Test
 	public void testInsertRelayEventEntity() {
-		RelayEventEntity sut = new RelayEventEntity.Builder("title").build();
+		RelayEventEntity sut = RelayEventEntity.newInstance();
+		sut.setEventName("title");
 
 		EntityTransaction tx = getEntityManager().getTransaction();
 

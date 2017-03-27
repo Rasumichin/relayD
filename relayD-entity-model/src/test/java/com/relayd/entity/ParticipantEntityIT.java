@@ -47,7 +47,9 @@ public class ParticipantEntityIT extends EntityIT {
 	}
 
 	private RelayEventEntity setUpRelayEventEntity() {
-		RelayEventEntity relayEventEntity = new RelayEventEntity.Builder("Foo Event").build();
+		RelayEventEntity relayEventEntity = RelayEventEntity.newInstance();
+		relayEventEntity.setEventName("Foo Event");
+
 		persistEntity(relayEventEntity);
 		relayEventEntity = getEntityManager().find(RelayEventEntity.class, relayEventEntity.getId());
 

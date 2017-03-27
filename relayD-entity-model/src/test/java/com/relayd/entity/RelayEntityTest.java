@@ -93,7 +93,8 @@ public class RelayEntityTest {
 	@Test
 	public void testRelayEventEntity() {
 		RelayEntity sut = RelayEntity.newInstance();
-		RelayEventEntity expected = new RelayEventEntity.Builder("MyRelayEvent").build();
+		RelayEventEntity expected = RelayEventEntity.newInstance();
+		expected.setEventName("MyRelayEvent");
 
 		sut.setRelayEventEntity(expected);
 		RelayEventEntity actual = sut.getRelayEventEntity();

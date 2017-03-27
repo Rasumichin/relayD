@@ -43,7 +43,8 @@ public class RelayEntityIT extends EntityIT {
 	}
 
 	private void setUpRelayEventEntity() {
-		RelayEventEntity eventToBeInserted = new RelayEventEntity.Builder("Foo Event").build();
+		RelayEventEntity eventToBeInserted = RelayEventEntity.newInstance();
+		eventToBeInserted.setEventName("Foo Event");
 		persistEntity(eventToBeInserted);
 		relayEventEntity = getEntityManager().find(RelayEventEntity.class, eventToBeInserted.getId());
 	}
@@ -191,7 +192,8 @@ public class RelayEntityIT extends EntityIT {
 		insertRelayEntity(id);
 		RelayEntity relayEntity = findRelayEntityById(id);
 
-		RelayEventEntity expected = new RelayEventEntity.Builder("New Event").build();
+		RelayEventEntity expected = RelayEventEntity.newInstance();
+		expected.setEventName("New Event");
 		persistEntity(expected);
 
 		relayEntity.setRelayEventEntity(expected);
