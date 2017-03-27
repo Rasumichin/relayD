@@ -23,19 +23,19 @@ public class Relay implements Serializable {
 	UUID uuid = null;
 	private Relayname relayname = Relayname.newInstance();
 	private RelayEvent relayEvent = RelayEvent.duesseldorf();
-	private List<Participant> participants = new ArrayList<Participant>();
+	private List<Member> members = new ArrayList<Member>();
 
 	private Duration duration = Duration.ZERO;
 
 	private Relay(RelayEvent aRelayEvent) {
 		uuid = UUID.randomUUID();
 		relayEvent = aRelayEvent;
-		initParticipants();
+		initMembers();
 	}
 
-	private void initParticipants() {
+	private void initMembers() {
 		for (int i = 0; i < RelayEvent.MAX_NUMBER_OF_TRACKS; i++) {
-			participants.add(Participant.newInstance());
+			members.add(Member.newInstance());
 		}
 	}
 
@@ -75,19 +75,19 @@ public class Relay implements Serializable {
 		uuid = anUuid;
 	}
 
-	public Participant getParticipantFor(Position position) {
-		Participant person = participants.get(position.getValue() - 1);
+	public Member getMemberFor(Position position) {
+		Member person = members.get(position.getValue() - 1);
 		return person;
 	}
 
-	public void addParticipant(Participant participant, Position position) {
-		participants.set(position.getValue() - 1, participant);
+	public void addMember(Member member, Position position) {
+		members.set(position.getValue() - 1, member);
 	}
 
-	public Integer participantCount() {
+	public Integer memberCount() {
 		int count = 0;
-		for (Participant participant : participants) {
-			if (!participant.isEmpty()) {
+		for (Member member : members) {
+			if (!member.isEmpty()) {
 				count++;
 			}
 		}
@@ -95,14 +95,14 @@ public class Relay implements Serializable {
 	}
 
 	// TODO (Christian, Version 1.4): Wird durch die Lösung mit getEmailList nicht mehr gebraucht! Rückbauen
-	public List<Participant> getParticipants() {
-		return Collections.unmodifiableList(participants);
+	public List<Member> getMembers() {
+		return Collections.unmodifiableList(members);
 	}
 
 	public String getEmailList() {
 		StringBuilder builder = new StringBuilder();
 
-		for (Participant each : participants) {
+		for (Member each : members) {
 			// TODO (Christian, Version 1.4): Umstellen auf hasMail wie in Person!
 			if (!each.getEmail().isEmpty()) {
 				builder.append(", " + each.getEmail());
@@ -115,8 +115,8 @@ public class Relay implements Serializable {
 
 	}
 
-	public boolean isParticipant(Person aPerson) {
-		for (Participant each : participants) {
+	public boolean isMember(Person aPerson) {
+		for (Member each : members) {
 			if (aPerson.getUuid().equals(each.getUuidPerson())) {
 				return true;
 			}
@@ -124,11 +124,11 @@ public class Relay implements Serializable {
 		return false;
 	}
 
-	// TODO (Christian, Erik, Version 1.4): Wie reagieren wir bei einer vollen Relay und dem Versuch einen Participant hinzuzufügen?
-	public void addParticipant(Participant aParticipant) {
+	// TODO (Christian, Erik, Version 1.4): Wie reagieren wir bei einer vollen Relay und dem Versuch einen Member hinzuzufügen?
+	public void addMember(Member aMember) {
 		for (int index = 0; index < RelayEvent.MAX_NUMBER_OF_TRACKS; index++) {
-			if (participants.get(index).isEmpty()) {
-				participants.set(index, aParticipant);
+			if (members.get(index).isEmpty()) {
+				members.set(index, aMember);
 				break;
 			}
 		}
@@ -173,6 +173,6 @@ public class Relay implements Serializable {
 
 	@Override
 	public String toString() {
-		return getRelayname() + " [" + participantCount() + "/" + RelayEvent.MAX_NUMBER_OF_TRACKS + "]";
+		return getRelayname() + " [" + memberCount() + "/" + RelayEvent.MAX_NUMBER_OF_TRACKS + "]";
 	}
 }

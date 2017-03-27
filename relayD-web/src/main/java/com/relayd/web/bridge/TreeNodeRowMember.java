@@ -1,6 +1,6 @@
 package com.relayd.web.bridge;
 
-import com.relayd.Participant;
+import com.relayd.Member;
 import com.relayd.attributes.Position;
 
 /**
@@ -8,25 +8,25 @@ import com.relayd.attributes.Position;
  * @since 29.11.2016
  *
  */
-public class TreeNodeRowParticipant extends TreeNodeRow {
+public class TreeNodeRowMember extends TreeNodeRow {
 	private static final long serialVersionUID = -6690562419929394518L;
 
-	private Participant participant;
+	private Member member;
 	private Position position = Position.UNKNOWN;
 
-	public TreeNodeRowParticipant(Participant aParticipant, Position aPosition) {
-		participant = aParticipant;
+	public TreeNodeRowMember(Member aMember, Position aPosition) {
+		member = aMember;
 		position = aPosition;
 	}
 
 	@Override
-	public Participant getParticipant() {
-		return participant;
+	public Member getMember() {
+		return member;
 	}
 
 	@Override
-	public void setParticipant(Participant aParticipant) {
-		participant = aParticipant;
+	public void setMember(Member aMember) {
+		member = aMember;
 	}
 
 	@Override

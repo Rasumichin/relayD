@@ -10,8 +10,8 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runners.MethodSorters;
 
-import com.relayd.Participant;
-import com.relayd.ParticipantBuilder;
+import com.relayd.Member;
+import com.relayd.MemberBuilder;
 import com.relayd.Relay;
 import com.relayd.attributes.Position;
 import com.relayd.attributes.Relayname;
@@ -81,14 +81,14 @@ public class RelayToRelayMapperTest {
 
 	@Test
 	public void testMapRelayToRelay_ForFilledSourceAndEmptyTarget() {
-		Participant actual = new ParticipantBuilder().withForename("Justus").withSurename("Jonas").build();
-		source.addParticipant(actual, Position.SECOND);
+		Member actual = new MemberBuilder().withForename("Justus").withSurename("Jonas").build();
+		source.addMember(actual, Position.SECOND);
 
 		target.setUuid(source.getUuid());
 
 		sut.mapRelayToRelay(source, target);
 
-		Participant expected = target.getParticipantFor(Position.SECOND);
+		Member expected = target.getMemberFor(Position.SECOND);
 
 		assertEquals("[mapRelayToRelay] nicht korrekt!", expected, actual);
 	}

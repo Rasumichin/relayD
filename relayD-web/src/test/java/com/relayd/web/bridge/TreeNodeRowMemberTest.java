@@ -9,7 +9,7 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import com.relayd.Participant;
+import com.relayd.Member;
 import com.relayd.Person;
 import com.relayd.attributes.Position;
 
@@ -22,14 +22,14 @@ import com.relayd.attributes.Position;
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class TreeNodeRowParticipantTest {
+public class TreeNodeRowMemberTest {
 
 	@Test
 	public void testIsSerializable() {
 		Position dummyPosition = Position.UNKNOWN;
-		Participant dummyParticipant = Participant.newInstance();
+		Member dummyMember = Member.newInstance();
 
-		TreeNodeRow sut = TreeNodeRow.newInstance(dummyParticipant, dummyPosition);
+		TreeNodeRow sut = TreeNodeRow.newInstance(dummyMember, dummyPosition);
 
 		@SuppressWarnings("cast")
 		boolean result = sut instanceof Serializable;
@@ -38,39 +38,39 @@ public class TreeNodeRowParticipantTest {
 	}
 
 	@Test
-	public void testCreateInstance_ForParticipant() {
+	public void testCreateInstance_ForMember() {
 		UUID uuid = UUID.randomUUID();
 		Person person = Person.newInstance();
 		person.setUuid(uuid);
 
-		Participant expected = Participant.newInstance(person);
+		Member expected = Member.newInstance(person);
 
 		TreeNodeRow sut = TreeNodeRow.newInstance(expected, Position.FIRST);
 
 		assertNotNull("Expected valid instance!", sut);
 
-		Participant actual = sut.getParticipant();
+		Member actual = sut.getMember();
 
-		assertEquals("Participant not corret!", expected, actual);
+		assertEquals("Member not corret!", expected, actual);
 		assertEquals("Position not correct!", Position.FIRST, sut.getPosition());
 	}
 
 	@Test
 	public void testIsRelay() {
 		Position dummyPosition = Position.UNKNOWN;
-		Participant personRelay = Participant.newInstance();
+		Member personRelay = Member.newInstance();
 		TreeNodeRow sut = TreeNodeRow.newInstance(personRelay, dummyPosition);
 
 		boolean actual = sut.isRelay();
 
-		assertFalse("row is not a participant!", actual);
+		assertFalse("row is not a member!", actual);
 	}
 
 	@Test
-	public void testGetRelayname_ForParticipant() {
+	public void testGetRelayname_ForMember() {
 		Position dummyPosition = Position.UNKNOWN;
-		Participant dummyParticipant = Participant.newInstance();
-		TreeNodeRow sut = TreeNodeRow.newInstance(dummyParticipant, dummyPosition);
+		Member dummyMember = Member.newInstance();
+		TreeNodeRow sut = TreeNodeRow.newInstance(dummyMember, dummyPosition);
 
 		String actual = sut.getRelayname();
 		// TODO (Christian, Version 1.4): mit Erik drüber sprechen. Ohne toString interessantes Phänomen (wenn es ein Relayname Domain Objekt ist)

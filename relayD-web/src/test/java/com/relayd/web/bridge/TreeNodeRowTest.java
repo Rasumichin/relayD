@@ -8,7 +8,7 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import com.relayd.Participant;
+import com.relayd.Member;
 import com.relayd.Relay;
 import com.relayd.attributes.Position;
 
@@ -46,12 +46,12 @@ public class TreeNodeRowTest {
 	}
 
 	@Test
-	public void testNewInstance_ForTreeNodeRowParticipant() {
-		Participant participant = Participant.newInstance();
+	public void testNewInstance_ForTreeNodeRowMember() {
+		Member member = Member.newInstance();
 
-		TreeNodeRow sutForTreeNodeRowRelay = TreeNodeRow.newInstance(participant, Position.FIRST);
+		TreeNodeRow sutForTreeNodeRowRelay = TreeNodeRow.newInstance(member, Position.FIRST);
 
-		boolean condition = sutForTreeNodeRowRelay instanceof TreeNodeRowParticipant;
+		boolean condition = sutForTreeNodeRowRelay instanceof TreeNodeRowMember;
 
 		assertTrue("Class not correct instance!", condition);
 	}

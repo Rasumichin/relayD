@@ -1,14 +1,22 @@
 package com.relayd.ejb.orm.jpa;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
-import com.relayd.*;
+import com.relayd.Member;
+import com.relayd.Relay;
+import com.relayd.RelayEvent;
 import com.relayd.attributes.Position;
 import com.relayd.ejb.RelayGateway;
-import com.relayd.entity.*;
+import com.relayd.entity.ParticipantEntity;
+import com.relayd.entity.PersonEntity;
+import com.relayd.entity.RelayEntity;
+import com.relayd.entity.RelayEventEntity;
 
 /**
- * 
+ *
  * @author  schmollc (Christian@relayd.de)
  * @author  Rasumichin (Erik@relayd.de)
  * @since   19.11.2016
@@ -26,8 +34,8 @@ public class RelayGatewayJPA extends GatewayJPA implements RelayGateway {
 
 		RelayEntity relayEntity = getRelayEntity(relay);
 		getRelayMapper().mapRelayToEntity(relay, relayEntity);
-		mapParticipantsToEntities(relay, relayEntity);
-		
+		mapMembersToEntities(relay, relayEntity);
+
 		getJpaDao().mergeEntity(relayEntity);
 	}
 
@@ -37,7 +45,7 @@ public class RelayGatewayJPA extends GatewayJPA implements RelayGateway {
 			relayEntity = RelayEntity.newInstance(relay.getUuid().toString());
 			setRelayEventEntityFor(relay.getRelayEvent(), relayEntity);
 		}
-		
+
 		return relayEntity;
 	}
 
@@ -55,39 +63,39 @@ public class RelayGatewayJPA extends GatewayJPA implements RelayGateway {
 	private RelayToEntityMapper getRelayMapper() {
 		return relayMapper;
 	}
-	
-	void mapParticipantsToEntities(Relay relay, RelayEntity relayEntity) {
-		for (int i = 0; i < relay.getParticipants().size(); i++) {
+
+	void mapMembersToEntities(Relay relay, RelayEntity relayEntity) {
+		for (int i = 0; i < relay.getMembers().size(); i++) {
 			Integer position = Integer.valueOf(i + 1);
-			Participant participant = relay.getParticipantFor(Position.newInstance(position));
+			Member member = relay.getMemberFor(Position.newInstance(position));
 			Optional<ParticipantEntity> participantEntity = relayEntity.getParticipantEntityAtPosition(position);
-			if (participant.isEmpty()) {
+			if (member.isEmpty()) {
 				relayEntity.possiblyRemoveParticipantEntity(participantEntity);
 			} else {
 				if (participantEntity.isPresent()) {
 					ParticipantEntity currentParticipantEntity = participantEntity.get();
-					if (!(participant.hasThatPersonIdentity(currentParticipantEntity.getUuidPerson()))) {
-						setNewPersonEntityById(currentParticipantEntity, participant.getUuidPerson());
+					if (!(member.hasThatPersonIdentity(currentParticipantEntity.getUuidPerson()))) {
+						setNewPersonEntityById(currentParticipantEntity, member.getUuidPerson());
 					}
 				} else {
-					ParticipantEntity newParticipantEntity = getNewParticipantEntity(position, participant.getUuidPerson());
+					ParticipantEntity newParticipantEntity = getNewParticipantEntity(position, member.getUuidPerson());
 					relayEntity.addParticipantEntity(newParticipantEntity);
 				}
 			}
 		}
 	}
-	
+
 	void setNewPersonEntityById(ParticipantEntity participantEntity, UUID personId) {
 		PersonEntity personEntity = findPersonEntityFor(personId);
 		participantEntity.setPersonEntity(personEntity);
 	}
-	
+
 	PersonEntity findPersonEntityFor(UUID personUuid) {
 		PersonEntity result = getJpaDao().findById(PersonEntity.class, personUuid.toString());
 		if (result == null) {
 			throw new IllegalStateException("PersonEntity with 'id=" + personUuid + "' is not stored in database. This must not happen here.");
 		}
-		
+
 		return result;
 	}
 
@@ -96,7 +104,7 @@ public class RelayGatewayJPA extends GatewayJPA implements RelayGateway {
 		participantEntity.setPosition(position);
 		PersonEntity personEntity = findPersonEntityFor(personId);
 		participantEntity.setPersonEntity(personEntity);
-		
+
 		return participantEntity;
 	}
 
@@ -113,7 +121,7 @@ public class RelayGatewayJPA extends GatewayJPA implements RelayGateway {
 		for (RelayEntity eachEntity : relayEntities) {
 			relays.add(getEntityMapper().mapToRelay(eachEntity));
 		}
-		
+
 		return relays;
 	}
 

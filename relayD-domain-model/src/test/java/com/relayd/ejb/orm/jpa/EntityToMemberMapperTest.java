@@ -4,22 +4,25 @@ import static org.junit.Assert.*;
 
 import java.util.UUID;
 
-import org.junit.*;
+import org.junit.FixMethodOrder;
+import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import com.relayd.*;
-import com.relayd.entity.*;
+import com.relayd.Member;
+import com.relayd.entity.ParticipantEntity;
+import com.relayd.entity.PersonEntity;
 
 /**
- * 
+ *
  * @author  Rasumichin (Erik@relayd.de)
  * @since   23.02.2017
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class EntityToParticipantMapperTest {
+public class EntityToMemberMapperTest {
 
-	private EntityToParticipantMapper sut = EntityToParticipantMapper.newInstance();
+	private EntityToMemberMapper sut = EntityToMemberMapper.newInstance();
 
 	@Test
 	public void testNewInstance() {
@@ -27,41 +30,41 @@ public class EntityToParticipantMapperTest {
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testMapToParticipant_whenParticipantEntityIsNull() {
-		sut.mapToParticipant(null);
+	public void testMapToMember_whenParticipantEntityIsNull() {
+		sut.mapToMember(null);
 	}
 
 	@Test
-	public void testMapToParticipant_check_id() {
+	public void testMapToMember_check_id() {
 		UUID expected = UUID.randomUUID();
 		PersonEntity personEntity = PersonEntity.newInstance(expected);
 		ParticipantEntity participantEntity = ParticipantEntity.newInstance();
 		participantEntity.setPersonEntity(personEntity);
 
-		Participant participant = sut.mapToParticipant(participantEntity);
+		Member member = sut.mapToMember(participantEntity);
 
-		UUID actual = participant.getUuidPerson();
+		UUID actual = member.getUuidPerson();
 		assertEquals("Mapping of [id] is not correct!", expected, actual);
 	}
 
 	@Test
-	public void testMapToParticipant_check_person() {
+	public void testMapToMember_check_person() {
 		String expected = "Robert";
 		PersonEntity personEntity = PersonEntity.newInstance();
 		personEntity.setForename(expected);
-		
+
 		ParticipantEntity participantEntity = ParticipantEntity.newInstance();
 		participantEntity.setPersonEntity(personEntity);
 
-		Participant participant = sut.mapToParticipant(participantEntity);
+		Member member = sut.mapToMember(participantEntity);
 
-		String actual = participant.getForename().toString();
+		String actual = member.getForename().toString();
 		assertEquals("Mapping of [person] is not correct!", expected, actual);
 	}
 
 	@Ignore
 	@Test
-	public void testMapToParticipant_check_position() {
+	public void testMapToMember_check_position() {
 		// TODO (EL, 2017-02-23): Unable to check the position since the actual Participant type do NOT hold a corresponding attribute!
 	}
 }

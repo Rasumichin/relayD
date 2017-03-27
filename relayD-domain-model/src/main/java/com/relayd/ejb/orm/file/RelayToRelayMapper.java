@@ -32,7 +32,7 @@ public class RelayToRelayMapper {
 			if (Position.UNKNOWN.equals(each)) {
 				continue;
 			}
-			target.addParticipant(source.getParticipantFor(each), each);
+			target.addMember(source.getMemberFor(each), each);
 		}
 	}
 }

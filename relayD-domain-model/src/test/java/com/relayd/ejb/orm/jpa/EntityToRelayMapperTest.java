@@ -109,7 +109,7 @@ public class EntityToRelayMapperTest {
 		Relay relay = sut.mapToRelay(relayEntity);
 
 		UUID expected = UUID.fromString(participantEntity.getPersonEntity().getId());
-		UUID actual = relay.getParticipantFor(Position.FIRST).getUuidPerson();
+		UUID actual = relay.getMemberFor(Position.FIRST).getUuidPerson();
 		assertEquals("Mapping of [participant] is not correct!", expected, actual);
 	}
 
@@ -123,7 +123,7 @@ public class EntityToRelayMapperTest {
 		Relay relay = sut.mapToRelay(relayEntity);
 
 		UUID expected = UUID.fromString(participantEntity.getPersonEntity().getId());
-		UUID actual = relay.getParticipantFor(Position.SECOND).getUuidPerson();
+		UUID actual = relay.getMemberFor(Position.SECOND).getUuidPerson();
 		assertEquals("Mapping of [participant] is not correct!", expected, actual);
 	}
 
@@ -139,7 +139,7 @@ public class EntityToRelayMapperTest {
 		Relay relay = sut.mapToRelay(relayEntity);
 
 		UUID expected = UUID.fromString(participantEntity.getPersonEntity().getId());
-		UUID actual = relay.getParticipantFor(Position.THIRD).getUuidPerson();
+		UUID actual = relay.getMemberFor(Position.THIRD).getUuidPerson();
 		assertEquals("Mapping of [participant] is not correct!", expected, actual);
 	}
 
@@ -157,7 +157,7 @@ public class EntityToRelayMapperTest {
 		Relay relay = sut.mapToRelay(relayEntity);
 
 		UUID expected = UUID.fromString(participantEntity.getPersonEntity().getId());
-		UUID actual = relay.getParticipantFor(Position.FOURTH).getUuidPerson();
+		UUID actual = relay.getMemberFor(Position.FOURTH).getUuidPerson();
 		assertEquals("Mapping of [participant] is not correct!", expected, actual);
 	}
 

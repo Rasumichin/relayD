@@ -18,7 +18,7 @@ import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.TreeNode;
 
-import com.relayd.Participant;
+import com.relayd.Member;
 import com.relayd.Person;
 import com.relayd.Relay;
 import com.relayd.attributes.Forename;
@@ -130,15 +130,15 @@ public class RelayBrowsePageBean implements Serializable {
 		if (!isRelayTableRowSelected()) {
 			showMessage(FacesMessage.SEVERITY_ERROR, NOT_POSSIBLE, "Please select a Row!");
 		} else if (isRelayRowSelected()) {
-			showMessage(FacesMessage.SEVERITY_ERROR, NOT_POSSIBLE, "Only for Participant Row possible!");
+			showMessage(FacesMessage.SEVERITY_ERROR, NOT_POSSIBLE, "Only for Member Row possible!");
 		} else if (!isPersonRowSelected()) {
 			showMessage(FacesMessage.SEVERITY_ERROR, NOT_POSSIBLE, "Please select a Person!");
 		} else if (!isOnlyOnePersonRowSelected()) {
 			showMessage(FacesMessage.SEVERITY_ERROR, NOT_POSSIBLE, "Please select a single Person!");
 		} else {
 			TreeNodeRow selectedRelayNode = (TreeNodeRow) selectedTreeNode.getData();
-			Participant newRelayParticipant = Participant.newInstance(getSelectedPerson());
-			selectedRelayNode.setParticipant(newRelayParticipant);
+			Member newRelayMember = Member.newInstance(getSelectedPerson());
+			selectedRelayNode.setMember(newRelayMember);
 			// TODO (Christian, Version 1.4): REMOVE!!!!! ONLY FOR TESTING THE SERVER VERSION!!
 			relayBridge.set(selectedTreeNode);
 		}
@@ -148,12 +148,12 @@ public class RelayBrowsePageBean implements Serializable {
 		if (!isRelayTableRowSelected()) {
 			showMessage(FacesMessage.SEVERITY_ERROR, NOT_POSSIBLE, "Please select a Row!");
 		} else if (isRelayRowSelected()) {
-			showMessage(FacesMessage.SEVERITY_ERROR, NOT_POSSIBLE, "Only for Participant Row possible!");
+			showMessage(FacesMessage.SEVERITY_ERROR, NOT_POSSIBLE, "Only for Member Row possible!");
 		} else {
 			TreeNodeRow selectedRelayNode = (TreeNodeRow) selectedTreeNode.getData();
-			if (!selectedRelayNode.getParticipant().isEmpty()) {
+			if (!selectedRelayNode.getMember().isEmpty()) {
 				// TODO (Christian, Erik Version 1.4): ein remove im Fachobjekt TreeNodeRow einführen
-				selectedRelayNode.setParticipant(Participant.newInstance());
+				selectedRelayNode.setMember(Member.newInstance());
 				// TODO (Christian, Version 1.4): REMOVE!!!!! ONLY FOR TESTING THE SERVER VERSION!!
 				relayBridge.set(selectedTreeNode);
 			}
@@ -344,14 +344,14 @@ public class RelayBrowsePageBean implements Serializable {
 			TreeNodeRow relayNode = (TreeNodeRow) treeNode.getData();
 			if (relayNode.isRelay()) {
 				Relay relay = ((TreeNodeRowRelay) relayNode).getRelay();
-				for (Participant participant : relay.getParticipants()) {
+				for (Member participant : relay.getMembers()) {
 					if (aPerson.getUuid().equals(participant.getUuidPerson())) {
 						relayCount++;
 					}
 				}
 			} else {
-				if (relayNode.getParticipant() != null) {
-					if (aPerson.getUuid().equals(relayNode.getParticipant().getUuidPerson())) {
+				if (relayNode.getMember() != null) {
+					if (aPerson.getUuid().equals(relayNode.getMember().getUuidPerson())) {
 						relayCount++;
 					}
 				}

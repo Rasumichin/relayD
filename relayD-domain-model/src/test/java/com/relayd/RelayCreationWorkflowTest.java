@@ -40,25 +40,25 @@ public class RelayCreationWorkflowTest {
 		// Nun kann schon ein persistieren erfolgen?
 		// Oder sollte jede Relay immer min. eine Person besitzen?
 
-		Participant justusJonas = Participant.newInstance(createPersonFor(Forename.newInstance("Justus"), Surename.newInstance("Jonas"), UUID.randomUUID()));
+		Member justusJonas = Member.newInstance(createPersonFor(Forename.newInstance("Justus"), Surename.newInstance("Jonas"), UUID.randomUUID()));
 
-		staubwolke.addParticipant(justusJonas, Position.FIRST);
+		staubwolke.addMember(justusJonas, Position.FIRST);
 
 		// Prüfungen
-		Participant peterShaw = Participant.newInstance(createPersonFor(Forename.newInstance("Peter"), Surename.newInstance("Shaw"), UUID.randomUUID()));
+		Member peterShaw = Member.newInstance(createPersonFor(Forename.newInstance("Peter"), Surename.newInstance("Shaw"), UUID.randomUUID()));
 
 		// Sollte ein Fehler verursachen, da Position 1 schon vergeben!
-		staubwolke.addParticipant(peterShaw, Position.FIRST);
+		staubwolke.addMember(peterShaw, Position.FIRST);
 
 		Relay dieVierFragezeichen = Relay.newInstance(duesseldorf);
 		dieVierFragezeichen.setRelayname(Relayname.newInstance("Die 4 ????"));
 
 		// KEIN Fehler! Aber vielleicht eine Warnung?
 		// (Theoretisch kann EINE Person ALLE 4 Strecken für ALLE Staffeln laufen! -> Shirtsize XXL!)
-		dieVierFragezeichen.addParticipant(justusJonas, Position.FIRST);
+		dieVierFragezeichen.addMember(justusJonas, Position.FIRST);
 
 		// Bedenkliche Konstellation
-		Participant bobAndrews = Participant.newInstance(createPersonFor(Forename.newInstance("Bob"), Surename.newInstance("Andrews"), UUID.randomUUID()));
+		Member bobAndrews = Member.newInstance(createPersonFor(Forename.newInstance("Bob"), Surename.newInstance("Andrews"), UUID.randomUUID()));
 
 		// Bob springt ein in Staffel Staubwolke die 1. Strecke mit z.B. 56:33min
 		// und möchte in Staffel 4???? die zweite Strecke laufen.
@@ -67,8 +67,8 @@ public class RelayCreationWorkflowTest {
 		// Bei untigem Code sollte dann ggf eine Warnung erscheinen?
 		// Die Konstellation würde nur "sicher" sein wenn Bob auch die ERSTE Position in
 		// der Staffel 4???? ist.
-		staubwolke.addParticipant(bobAndrews, Position.FIRST);
-		dieVierFragezeichen.addParticipant(bobAndrews, Position.SECOND);
+		staubwolke.addMember(bobAndrews, Position.FIRST);
+		dieVierFragezeichen.addMember(bobAndrews, Position.SECOND);
 
 		// Justus jonas fällt aus
 		//		staubwolke.remove(Position.FIRST);
