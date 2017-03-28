@@ -70,8 +70,8 @@ public class RelayEventTest {
 		RelayEvent sutEmpty = RelayEvent.newInstance();
 
 		assertNotNull("[Uuid] not correct!", sutEmpty.getUuid());
-		assertNull("[Name] not correct!", sutEmpty.getName());
-		assertNull("[EventDay] not correct!", sutEmpty.getEventDay());
+		assertNotNull("[Name] not correct!", sutEmpty.getName());
+		assertNotNull("[EventDay] not correct!", sutEmpty.getEventDay());
 	}
 
 	@Test
