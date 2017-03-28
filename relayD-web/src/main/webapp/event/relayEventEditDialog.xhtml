@@ -31,7 +31,7 @@
 			<p:inputText
 				id="eventDay"
 				value="#{relayEventEditPageBean.eventDay}"
-				style="width:140px">
+				style="width:180px">
 				<f:converter converterId="com.relayd.web.converter.EventDayValueObjectConverter" />
 			</p:inputText>
 			<p:outputLabel
@@ -43,7 +43,19 @@
 				style="width:140px">
 				<f:converter converterId="com.relayd.web.converter.EventNameValueObjectConverter" />
 			</p:inputText>
-
+			<p:outputLabel
+				for="numberOfRelays"
+				value="Number of Relays:" />
+			<p:outputLabel
+				id="numberOfRelays"
+				value="18" />
+			<p:outputLabel
+				for="participants"
+				value="Participants:" />
+			<p:outputLabel
+				id="participants"
+				value="ToDo tabelle mit Teilnehmermapping" />
+		
 		</h:panelGrid>
 
 		<p:commandButton

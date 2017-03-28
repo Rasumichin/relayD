@@ -59,7 +59,7 @@ public class RelayEventEditPageBean implements Serializable {
 	}
 
 	void openDialog() {
-		Map<String, Object> options = new DialogOptionsBuilder().height(150).build();
+		Map<String, Object> options = new DialogOptionsBuilder().width(500).height(250).build();
 		RequestContext.getCurrentInstance().openDialog(NavigationConstants.RELAY_EVENT_EDIT_DIALOG_ID, options, null);
 	}
 
