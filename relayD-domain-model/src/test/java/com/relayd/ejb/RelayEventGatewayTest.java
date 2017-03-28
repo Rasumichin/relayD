@@ -99,13 +99,17 @@ public abstract class RelayEventGatewayTest {
 	}
 
 	private RelayEvent createDuesseldorfMarathon() {
-		return RelayEvent.duesseldorf();
+		Eventname eventname = Eventname.newInstance("Metro Group Marathon Düsseldorf");
+		EventDay eventDay = EventDay.newInstance(LocalDate.of(2017, Month.APRIL, 30));
+		RelayEvent duesseldorfMarathon = RelayEvent.newInstance(eventname, eventDay);
+
+		return duesseldorfMarathon;
 	}
 
 	private RelayEvent createRundUmEnnepetal() {
-		Eventname expectedEventname = Eventname.newInstance("Rund um Ennepetal");
-		EventDay expectedEventDay = EventDay.newInstance(LocalDate.of(2017, Month.AUGUST, 28));
-		RelayEvent rundUmEnnepetal = RelayEvent.newInstance(expectedEventname, expectedEventDay);
+		Eventname eventname = Eventname.newInstance("Rund um Ennepetal");
+		EventDay eventDay = EventDay.newInstance(LocalDate.of(2017, Month.AUGUST, 28));
+		RelayEvent rundUmEnnepetal = RelayEvent.newInstance(eventname, eventDay);
 		return rundUmEnnepetal;
 	}
 

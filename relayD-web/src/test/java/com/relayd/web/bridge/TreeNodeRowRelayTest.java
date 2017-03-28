@@ -26,7 +26,7 @@ public class TreeNodeRowRelayTest {
 
 	@Test
 	public void testIsSerializable() {
-		Relay dummyRelay = Relay.newInstance(RelayEvent.duesseldorf());
+		Relay dummyRelay = Relay.newInstance(RelayEvent.newInstance());
 
 		TreeNodeRow sut = TreeNodeRow.newInstance(dummyRelay);
 
@@ -38,7 +38,7 @@ public class TreeNodeRowRelayTest {
 
 	@Test
 	public void testCreateInstance_ForParameterRelay() {
-		Relay expected = Relay.newInstance(RelayEvent.duesseldorf());
+		Relay expected = Relay.newInstance(RelayEvent.newInstance());
 		TreeNodeRow sut = TreeNodeRow.newInstance(expected);
 
 		assertNotNull("Expected valid instance!", sut);
@@ -50,7 +50,7 @@ public class TreeNodeRowRelayTest {
 
 	@Test
 	public void testIsRelay() {
-		Relay expected = Relay.newInstance(RelayEvent.duesseldorf());
+		Relay expected = Relay.newInstance(RelayEvent.newInstance());
 		TreeNodeRow sut = TreeNodeRow.newInstance(expected);
 
 		boolean actual = sut.isRelay();
@@ -60,7 +60,7 @@ public class TreeNodeRowRelayTest {
 
 	@Test
 	public void testGetRelayName() {
-		Relay relay = Relay.newInstance(RelayEvent.duesseldorf());
+		Relay relay = Relay.newInstance(RelayEvent.newInstance());
 		Relayname expected = Relayname.newInstance("Staubwolke");
 		relay.setRelayname(expected);
 		TreeNodeRow sut = TreeNodeRow.newInstance(relay);
@@ -72,7 +72,7 @@ public class TreeNodeRowRelayTest {
 
 	@Test
 	public void testGetDuration_ForValue() {
-		Relay relay = Relay.newInstance(RelayEvent.duesseldorf());
+		Relay relay = Relay.newInstance(RelayEvent.newInstance());
 		Duration duration = Duration.ofHours(3).plusMinutes(33).plusSeconds(12);
 		relay.setDuration(duration);
 
@@ -86,7 +86,7 @@ public class TreeNodeRowRelayTest {
 
 	@Test
 	public void testGetDuration_ForNull() {
-		Relay relay = Relay.newInstance(RelayEvent.duesseldorf());
+		Relay relay = Relay.newInstance(RelayEvent.newInstance());
 		relay.setDuration(null);
 
 		TreeNodeRow sut = TreeNodeRow.newInstance(relay);

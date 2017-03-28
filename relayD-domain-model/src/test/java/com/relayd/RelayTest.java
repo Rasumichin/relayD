@@ -47,7 +47,7 @@ public class RelayTest {
 
 	@Test
 	public void testConstructor_ForParameterRelayEvent() {
-		RelayEvent expected = RelayEvent.duesseldorf();
+		RelayEvent expected = RelayEvent.newInstance();
 
 		Relay sut = Relay.newInstance(expected);
 
@@ -73,7 +73,7 @@ public class RelayTest {
 	@Test
 	public void testAddPerson_ForPositionFirst() {
 
-		Relay sut = Relay.newInstance(RelayEvent.duesseldorf());
+		Relay sut = Relay.newInstance();
 
 		Person person = new PersonBuilder().withForename("Justus").withSurename("Jonas").build();
 		Member expected = Member.newInstance(person);
@@ -91,7 +91,7 @@ public class RelayTest {
 
 	@Test
 	public void testAddPerson_ForPositionSecond() {
-		Relay sut = Relay.newInstance(RelayEvent.duesseldorf());
+		Relay sut = Relay.newInstance();
 
 		Person person = new PersonBuilder().withForename("Justus").withSurename("Jonas").build();
 		Member expected = Member.newInstance(person);
@@ -108,7 +108,7 @@ public class RelayTest {
 
 	@Test
 	public void testAddPerson_ForPositionThird() {
-		Relay sut = Relay.newInstance(RelayEvent.duesseldorf());
+		Relay sut = Relay.newInstance();
 
 		Person person = new PersonBuilder().withForename("Justus").withSurename("Jonas").build();
 		Member expected = Member.newInstance(person);
@@ -125,7 +125,7 @@ public class RelayTest {
 
 	@Test
 	public void testAddPerson_ForPositionFourth() {
-		Relay sut = Relay.newInstance(RelayEvent.duesseldorf());
+		Relay sut = Relay.newInstance();
 
 		Person person = new PersonBuilder().withForename("Justus").withSurename("Jonas").build();
 		Member expected = Member.newInstance(person);
@@ -142,7 +142,7 @@ public class RelayTest {
 
 	@Test
 	public void testAddMember_WithoutPositionForEmptyRelay() {
-		Relay sut = Relay.newInstance(RelayEvent.duesseldorf());
+		Relay sut = Relay.newInstance();
 
 		Person person = new PersonBuilder().withForename("Justus").withSurename("Jonas").build();
 		Member expected = Member.newInstance(person);
@@ -160,7 +160,7 @@ public class RelayTest {
 
 	@Test
 	public void testAddMember_WithoutPositionForRelayWithEntryOnFirstPosition() {
-		Relay sut = Relay.newInstance(RelayEvent.duesseldorf());
+		Relay sut = Relay.newInstance();
 
 		Person justusJonas = new PersonBuilder().withForename("Justus").withSurename("Jonas").build();
 		Member firstMember = Member.newInstance(justusJonas);
@@ -183,7 +183,7 @@ public class RelayTest {
 
 	@Test
 	public void testAddMember_WithoutPositionForRelayWithSpaceOnPositionThree() {
-		Relay sut = Relay.newInstance(RelayEvent.duesseldorf());
+		Relay sut = Relay.newInstance();
 
 		Person justusJonas = new PersonBuilder().withForename("Justus").withSurename("Jonas").build();
 		Member firstMember = Member.newInstance(justusJonas);

@@ -12,7 +12,6 @@ import org.junit.rules.ExpectedException;
 import org.junit.runners.MethodSorters;
 
 import com.relayd.Relay;
-import com.relayd.RelayEvent;
 import com.relayd.attributes.Relayname;
 import com.relayd.entity.RelayEntity;
 import com.relayd.entity.RelayEventEntity;
@@ -38,7 +37,7 @@ public class RelayToEntityMapperTest {
 
 	@Before
 	public void setUp() {
-		relay = Relay.newInstance(RelayEvent.duesseldorf());
+		relay = Relay.newInstance();
 		relay.setRelayname(Relayname.newInstance("Some name"));
 		relayEntity.setRelayEventEntity(RelayEventEntity.newInstance());
 		relayEntity.setRelayname("Some event");
@@ -103,7 +102,7 @@ public class RelayToEntityMapperTest {
 
 	@Test
 	public void testMapDomainToEntity_relayevent() {
-		String expected = RelayEvent.duesseldorf().getName().toString();
+		String expected = "Metro Group Marathon Düsseldorf";
 		RelayEventEntity relayEventEntity = RelayEventEntity.newInstance();
 		relayEventEntity.setEventName(expected);
 		relayEntity.setRelayEventEntity(relayEventEntity);

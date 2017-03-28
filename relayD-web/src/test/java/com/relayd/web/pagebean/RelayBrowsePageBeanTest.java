@@ -29,7 +29,6 @@ import org.primefaces.model.TreeNode;
 import com.relayd.Member;
 import com.relayd.Person;
 import com.relayd.Relay;
-import com.relayd.RelayEvent;
 import com.relayd.attributes.Forename;
 import com.relayd.attributes.Position;
 import com.relayd.attributes.Surename;
@@ -180,7 +179,7 @@ public class RelayBrowsePageBeanTest {
 	@Test
 	public void testRemovePersonFromRelay_ForRelayRowIsSelected() {
 		ActionEvent dummyActionEvent = null;
-		Relay relay = Relay.newInstance(RelayEvent.duesseldorf());
+		Relay relay = Relay.newInstance();
 		TreeNode relayTreeNode = new DefaultTreeNode(TreeNodeRow.newInstance(relay), null);
 		sut.setSelectedNode(relayTreeNode);
 
