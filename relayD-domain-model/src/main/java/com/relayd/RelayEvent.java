@@ -30,8 +30,8 @@ public class RelayEvent implements Serializable {
 	static Integer MAX_NUMBER_OF_TRACKS = 4;
 
 	private UUID uuid;
-	private Eventname name;
-	private EventDay eventDay;
+	private Eventname name = Eventname.newInstance();
+	private EventDay eventDay = EventDay.today();
 	private Set<Relay> relays = new HashSet<>(MAX_NUMBER_OF_RELAYS);
 	private List<Track> tracks = new ArrayList<>(MAX_NUMBER_OF_TRACKS);
 

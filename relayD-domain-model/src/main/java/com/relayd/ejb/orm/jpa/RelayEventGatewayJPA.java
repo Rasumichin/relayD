@@ -6,36 +6,80 @@ import java.util.UUID;
 
 import com.relayd.RelayEvent;
 import com.relayd.ejb.RelayEventGateway;
+import com.relayd.entity.RelayEventEntity;
 
 /**
  * @author  schmollc (Christian@relayd.de)
  * @since   04.10.2016
  *
  */
-public class RelayEventGatewayJPA implements RelayEventGateway {
+public class RelayEventGatewayJPA extends GatewayJPA implements RelayEventGateway {
+	private EntityToRelayEventMapper relayEventEntityMapper = EntityToRelayEventMapper.newInstance();
+	private RelayEventToEntityMapper relayEventMapper = RelayEventToEntityMapper.newInstance();
 
-	// TODO (Christian, Version 1.4): Hier muss auf JPA umgestellt werden!!!!
+	private EntityToRelayEventMapper getRelayEventEntityMapper() {
+		return relayEventEntityMapper;
+	}
+
+	private RelayEventToEntityMapper getRelayEventMapper() {
+		return relayEventMapper;
+	}
+
 	@Override
 	public List<RelayEvent> getAll() {
-		ArrayList<RelayEvent> eventsAsList = new ArrayList<RelayEvent>();
-
-		eventsAsList.add(createEventForDuesseldorfMarathon());
+		List<RelayEventEntity> relayEventEntities = findAll();
+		List<RelayEvent> eventsAsList = mapPersonEntityListToPersonList(relayEventEntities);
 
 		return eventsAsList;
 	}
 
-	private RelayEvent createEventForDuesseldorfMarathon() {
-		RelayEvent relayEvent = RelayEvent.duesseldorf();
+	List<RelayEvent> mapPersonEntityListToPersonList(List<RelayEventEntity> personEntities) {
+		List<RelayEvent> relayEvents = new ArrayList<>();
+		for (RelayEventEntity eachEntity : personEntities) {
+			relayEvents.add(getRelayEventEntityMapper().mapToRelayEvent(eachEntity));
+		}
+
+		return relayEvents;
+	}
+
+	List<RelayEventEntity> findAll() {
+		@SuppressWarnings("unchecked")
+		List<RelayEventEntity> result = (List<RelayEventEntity>) getJpaDao().performSelectQuery("SELECT p FROM RelayEventEntity p");
+
+		return result;
+	}
+
+	@Override
+	public void set(RelayEvent relayEvent) {
+		if (relayEvent == null) {
+			throw new IllegalArgumentException("[relayEvent] must not be 'null'.");
+		}
+
+		RelayEventEntity relayEventEntity = findById(relayEvent.getUuid());
+		if (relayEventEntity == null) {
+			relayEventEntity = RelayEventEntity.newInstance(relayEvent.getUuid());
+		}
+		getRelayEventMapper().mapRelayEventToEntity(relayEvent, relayEventEntity);
+
+		getJpaDao().mergeEntity(relayEventEntity);
+	}
+
+	RelayEventEntity findById(UUID uuid) {
+		RelayEventEntity result = getJpaDao().findById(RelayEventEntity.class, uuid.toString());
+
+		return result;
+	}
+
+	@Override
+	public RelayEvent get(UUID uuid) {
+		if (uuid == null) {
+			throw new IllegalArgumentException("[uuid] must not be 'null'.");
+		}
+
+		RelayEventEntity relayEventEntity = findById(uuid);
+		RelayEvent relayEvent = getRelayEventEntityMapper().mapToRelayEvent(relayEventEntity);
+
 		return relayEvent;
-	}
 
-	@Override
-	public void set(@SuppressWarnings("unused") RelayEvent relayEvent) {
-		throw new UnsupportedOperationException("Muss noch gecodet werden");
-	}
-
-	@Override
-	public RelayEvent get(@SuppressWarnings("unused") UUID uuid) {
-		throw new UnsupportedOperationException("Muss noch gecodet werden");
 	}
 }
