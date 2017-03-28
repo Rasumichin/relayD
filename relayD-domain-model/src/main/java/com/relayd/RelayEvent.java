@@ -52,6 +52,7 @@ public class RelayEvent implements Serializable {
 
 	}
 
+	@Deprecated
 	public static RelayEvent duesseldorf() {
 		return RelayEventDuesseldorf.instance();
 	}

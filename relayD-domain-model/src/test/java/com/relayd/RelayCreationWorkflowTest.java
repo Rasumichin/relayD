@@ -25,7 +25,7 @@ public class RelayCreationWorkflowTest {
 	@Test
 	public void testCreateRelayAndAddToEvent() {
 		// Event wird "angelegt" bzw ist vorhanden.
-		RelayEvent duesseldorf = RelayEvent.duesseldorf();
+		RelayEvent duesseldorf = RelayEvent.newInstance();
 
 		// Macht das Anlegen einer Relay ohne ein Event überhaupt Sinn?
 		// Sollte die newInstance nicht als Parameter ein Event besitzen?

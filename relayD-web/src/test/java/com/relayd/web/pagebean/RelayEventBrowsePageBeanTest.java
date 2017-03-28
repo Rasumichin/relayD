@@ -23,7 +23,7 @@ public class RelayEventBrowsePageBeanTest {
 
 	@Test
 	public void testSelectedRelayEvent() {
-		RelayEvent expected = RelayEvent.duesseldorf();
+		RelayEvent expected = RelayEvent.newInstance();
 
 		sut.setSelectedRelayEvent(expected);
 
