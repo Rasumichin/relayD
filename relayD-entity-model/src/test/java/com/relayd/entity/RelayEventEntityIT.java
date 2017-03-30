@@ -2,6 +2,8 @@ package com.relayd.entity;
 
 import static org.junit.Assert.*;
 
+import java.sql.Date;
+
 import javax.persistence.EntityTransaction;
 
 import org.junit.FixMethodOrder;
@@ -24,6 +26,7 @@ public class RelayEventEntityIT extends EntityIT {
 	public void testInsertRelayEventEntity() {
 		RelayEventEntity sut = RelayEventEntity.newInstance();
 		sut.setEventName("title");
+		sut.setEventDay(new Date(System.currentTimeMillis()));
 
 		EntityTransaction tx = getEntityManager().getTransaction();
 

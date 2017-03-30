@@ -21,25 +21,14 @@ public class RelayEventEntity {
 	@Column(length = 36)
 	private String id;
 
-	@Column
+	@Column(length = 256, nullable = false)
 	private String eventName;
 
-	@Column
+	@Column(nullable = false)
 	private Date eventDay;
 
 	public static RelayEventEntity newInstance() {
-		RelayEventEntity relayEventEntity = new RelayEventEntity();
-		relayEventEntity.setId(UUID.randomUUID().toString());
-
-		return relayEventEntity;
-	}
-
-	/**
-	 * Provided empty constructor to conform to the JPA spec. For that reason the entity property fields
-	 * are not declared 'final'.
-	 *
-	 */
-	RelayEventEntity() {
+		return RelayEventEntity.newInstance(UUID.randomUUID());
 	}
 
 	public static RelayEventEntity newInstance(UUID anUuid) {
@@ -72,8 +61,13 @@ public class RelayEventEntity {
 		return eventDay;
 	}
 
-	public void setEventDay(Date aEventDay) {
-		eventDay = aEventDay;
+	public void setEventDay(Date anEventDay) {
+		eventDay = anEventDay;
+	}
+	
+	@Override
+	public String toString() {
+		return getClass().getSimpleName() + " [id=" + id + ", eventName=" + eventName + ", eventDay=" + eventDay + "]";
 	}
 
 	@Override
@@ -104,10 +98,5 @@ public class RelayEventEntity {
 			return false;
 		}
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		return getClass().getSimpleName() + " [id=" + id + ", eventName=" + eventName + ", eventDay=" + eventDay + "]";
 	}
 }
