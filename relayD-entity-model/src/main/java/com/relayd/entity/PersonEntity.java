@@ -43,15 +43,6 @@ public class PersonEntity {
 		return personEntity;
 	}
 
-	/**
-	 * Provided empty constructor to conform to the JPA spec. For that reason the entity property fields
-	 * are not declared 'final'.
-	 *
-	 */
-	PersonEntity() {
-		super();
-	}
-
 	public static PersonEntity newInstance(UUID anUuid) {
 		if (anUuid == null) {
 			throw new IllegalArgumentException("[anUuid] must not be 'null'.");

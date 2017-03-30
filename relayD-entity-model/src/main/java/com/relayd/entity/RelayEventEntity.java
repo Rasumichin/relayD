@@ -34,14 +34,6 @@ public class RelayEventEntity {
 		return relayEventEntity;
 	}
 
-	/**
-	 * Provided empty constructor to conform to the JPA spec. For that reason the entity property fields
-	 * are not declared 'final'.
-	 *
-	 */
-	RelayEventEntity() {
-	}
-
 	public static RelayEventEntity newInstance(UUID anUuid) {
 		if (anUuid == null) {
 			throw new IllegalArgumentException("[anUuid] must not be 'null'.");
