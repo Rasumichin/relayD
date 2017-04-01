@@ -36,6 +36,10 @@ public class ParticipantEntity {
 	@ForeignKey
 	private RelayEntity relayEntity;
 
+	public static ParticipantEntity newInstance() {
+		return ParticipantEntity.newInstance(UUID.randomUUID().toString());
+	}
+	
 	public static ParticipantEntity newInstance(String anId) {
 		// TODO EL (2017-01-07): Introduce a class to handle strings that should represent a UUID.
 		if (anId == null) {
@@ -52,10 +56,6 @@ public class ParticipantEntity {
 		return participantEntity;
 	}
 
-	public static ParticipantEntity newInstance() {
-		return ParticipantEntity.newInstance(UUID.randomUUID().toString());
-	}
-
 	private void setId(String anId) {
 		id = anId;
 	}
@@ -65,6 +65,9 @@ public class ParticipantEntity {
 	}
 
 	public void setPosition(Integer aPosition) {
+		if (aPosition == null) {
+			throw new IllegalArgumentException("[aPosition] must not be 'null'.");
+		}
 		position = aPosition;
 	}
 
@@ -73,6 +76,9 @@ public class ParticipantEntity {
 	}
 
 	public void setPersonEntity(PersonEntity aPersonEntity) {
+		if (aPersonEntity == null) {
+			throw new IllegalArgumentException("[aPersonEntity] must not be 'null'.");
+		}
 		personEntity = aPersonEntity;
 	}
 
