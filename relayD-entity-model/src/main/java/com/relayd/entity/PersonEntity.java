@@ -15,13 +15,13 @@ import javax.persistence.*;
 public class PersonEntity {
 
 	@Id
-	@Column
+	@Column(length = 36)
 	private String id;
 
-	@Column
+	@Column(length = 256)
 	private String surename;
 
-	@Column
+	@Column(length = 256)
 	private String forename;
 
 	@Column
@@ -30,17 +30,14 @@ public class PersonEntity {
 	@Column
 	private Integer shirtsize;
 
-	@Column
+	@Column(length = 256)
 	private String email;
 
-	@Column(name = "info")
+	@Column(name = "info", length = 1024)
 	private String comment;
 
 	public static PersonEntity newInstance() {
-		PersonEntity personEntity = new PersonEntity();
-		personEntity.setId(UUID.randomUUID().toString());
-		
-		return personEntity;
+		return PersonEntity.newInstance(UUID.randomUUID());
 	}
 
 	public static PersonEntity newInstance(UUID anUuid) {

@@ -109,6 +109,13 @@ public class ParticipantEntityTest {
 		Integer actual = sut.getPosition();
 		assertEquals("[position] has not been set correctly!", expected, actual);
 	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testSetPosition_withNull() {
+		ParticipantEntity sut = ParticipantEntity.newInstance();
+		
+		sut.setPosition(null);
+	}
 
 	@Test
 	public void testSetPersonEntity() {
@@ -119,6 +126,13 @@ public class ParticipantEntityTest {
 		
 		PersonEntity actual = sut.getPersonEntity();
 		assertEquals("[personEntity] has not been set correctly!", expected, actual);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testSetPersonEntity_withNull() {
+		ParticipantEntity sut = ParticipantEntity.newInstance();
+		
+		sut.setPersonEntity(null);
 	}
 
 	@Test
