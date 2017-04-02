@@ -2,6 +2,7 @@ package com.relayd.entity;
 
 import static org.junit.Assert.*;
 
+import java.sql.Date;
 import java.util.UUID;
 
 import org.junit.Before;
@@ -49,6 +50,7 @@ public class ParticipantEntityIT extends EntityIT {
 	private RelayEventEntity setUpRelayEventEntity() {
 		RelayEventEntity relayEventEntity = RelayEventEntity.newInstance();
 		relayEventEntity.setEventName("Foo Event");
+		relayEventEntity.setEventDay(new Date(System.currentTimeMillis()));
 
 		persistEntity(relayEventEntity);
 		relayEventEntity = getEntityManager().find(RelayEventEntity.class, relayEventEntity.getId());

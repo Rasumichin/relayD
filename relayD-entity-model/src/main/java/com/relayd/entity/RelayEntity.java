@@ -33,7 +33,7 @@ public class RelayEntity {
 	@Column(nullable = false, length = 256)
 	private String relayname;
 
-	@Column
+	@Column(nullable = false)
 	private Long duration = 0L;
 
 	@ManyToOne
@@ -45,10 +45,7 @@ public class RelayEntity {
 	private List<ParticipantEntity> participantEntities = new ArrayList<>();
 
 	public static RelayEntity newInstance() {
-		RelayEntity relayEntity = new RelayEntity();
-		relayEntity.setId(UUID.randomUUID().toString());
-
-		return relayEntity;
+		return RelayEntity.newInstance(UUID.randomUUID().toString());
 	}
 
 	public static RelayEntity newInstance(String anId) {
@@ -90,6 +87,9 @@ public class RelayEntity {
 	}
 
 	public void setDuration(Long aDuration) {
+		if (aDuration == null) {
+			throw new IllegalArgumentException("[aDuration] must not be 'null'.");
+		}
 		duration = aDuration;
 	}
 

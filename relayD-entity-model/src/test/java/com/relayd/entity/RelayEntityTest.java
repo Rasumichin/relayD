@@ -73,23 +73,30 @@ public class RelayEntityTest {
 		assertEquals("[relayname] has not been set correctly!", relayname, sut.getRelayname());
 	}
 
-	@Test
-	public void testDuration() {
-		Long expected = 0L;
-		RelayEntity sut = RelayEntity.newInstance();
-
-		sut.setDuration(expected);
-		Long actual = sut.getDuration();
-
-		assertEquals("[duration] has not been set correctly!", expected, actual);
-	}
-
 	@Test(expected = IllegalArgumentException.class)
 	public void testRelayname_withNull() {
 		RelayEntity sut = RelayEntity.newInstance();
 		sut.setRelayname(null);
 	}
 
+	@Test
+	public void testDuration() {
+		Long expected = 0L;
+		RelayEntity sut = RelayEntity.newInstance();
+		
+		sut.setDuration(expected);
+		Long actual = sut.getDuration();
+		
+		assertEquals("[duration] has not been set correctly!", expected, actual);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testDuration_withNull() {
+		RelayEntity sut = RelayEntity.newInstance();
+		
+		sut.setDuration(null);
+	}
+	
 	@Test
 	public void testRelayEventEntity() {
 		RelayEntity sut = RelayEntity.newInstance();
