@@ -23,7 +23,7 @@ public class VersionNameTest {
 	public void testCount() {
 		VersionName[] values = VersionName.values();
 
-		assertEquals("Wrong count for Enum entries!", 8, values.length);
+		assertEquals("Wrong count for Enum entries!", 10, values.length);
 	}
 
 	@Test
@@ -97,4 +97,23 @@ public class VersionNameTest {
 		assertEquals("[codename] not correct!", "Geiles Augustiner", sut.getDescription());
 		assertEquals("[version] not correct!", "1.6", sut.getValue());
 	}
+
+	@Test
+	public void testNewInstance_ForH() {
+		VersionName sut = VersionName.newInstance(VersionName.H.getValue());
+
+		assertSame("Not H enum", VersionName.H, sut);
+		assertEquals("[codename] not correct!", "Helles Augustiner", sut.getDescription());
+		assertEquals("[version] not correct!", "1.7", sut.getValue());
+	}
+
+	@Test
+	public void testNewInstance_ForI() {
+		VersionName sut = VersionName.newInstance(VersionName.I.getValue());
+
+		assertSame("Not I enum", VersionName.I, sut);
+		assertEquals("[codename] not correct!", "Intrinsisches Augustiner", sut.getDescription());
+		assertEquals("[version] not correct!", "1.8", sut.getValue());
+	}
+
 }
