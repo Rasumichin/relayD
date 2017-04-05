@@ -19,8 +19,7 @@
 		<p:growl
 			id="growl"
 			showDetail="true" />
-		<p:focus/>
-
+		<p:focus />
 		<h:panelGrid
 			columns="2"
 			id="inputgrid"
@@ -31,7 +30,7 @@
 			<p:inputText
 				id="eventDay"
 				value="#{relayEventEditPageBean.eventDay}"
-				style="width:180px">
+				style="width:280px">
 				<f:converter converterId="com.relayd.web.converter.EventDayValueObjectConverter" />
 			</p:inputText>
 			<p:outputLabel
@@ -40,7 +39,7 @@
 			<p:inputText
 				id="eventname"
 				value="#{relayEventEditPageBean.eventname}"
-				style="width:140px">
+				style="width:280px">
 				<f:converter converterId="com.relayd.web.converter.EventNameValueObjectConverter" />
 			</p:inputText>
 			<p:outputLabel
@@ -49,14 +48,35 @@
 			<p:outputLabel
 				id="numberOfRelays"
 				value="#{relayEventEditPageBean.numberOfRelays}" />
-			<p:outputLabel
-				for="participants"
-				value="Participants:" />
-			<p:outputLabel
-				id="participants"
-				value="ToDo tabelle mit Teilnehmermapping" />
-		
 		</h:panelGrid>
+		<p:dataTable
+			var="person"
+			widgetVar="personTable"
+			filteredValue="#{personBrowsePageBean.filteredPersons}"
+			id="personTable"
+			value="#{personBrowsePageBean.persons}"
+			scrollable="true"
+			scrollHeight="100"
+			sortBy="#{person.surename.toString()}"
+			rowKey="#{person.uuid}"
+			resizableColumns="true">
+
+			<p:column
+				headerText="Forename"
+				sortBy="#{person.forename}"
+				sortFunction="#{personBrowsePageBean.sortByForename}"
+				width="140">
+				<h:outputText value="#{person.forename}" />
+			</p:column>
+
+			<p:column
+				headerText="Surename"
+				sortBy="#{person.surename}"
+				sortFunction="#{personBrowsePageBean.sortBySurename}"
+				width="140">
+				<h:outputText value="#{person.surename}" />
+			</p:column>
+		</p:dataTable>
 
 		<p:commandButton
 			actionListener="#{relayEventEditPageBean.cancel}"
