@@ -28,6 +28,7 @@ import com.relayd.attributes.Surename;
 import com.relayd.attributes.YearOfBirth;
 import com.relayd.web.bridge.PersonBridge;
 import com.relayd.web.bridge.PersonBridgeImpl;
+import com.relayd.web.local.I18N;
 
 /**
  * @author schmollc (Christian@relayd.de)
@@ -39,10 +40,6 @@ import com.relayd.web.bridge.PersonBridgeImpl;
 @SessionScoped
 public class PersonBrowsePageBean implements Serializable {
 	private static final long serialVersionUID = -7684007777613912395L;
-
-	// Should be I18N
-	private static final String PLEASE_SELECT_A_ROW = "Please select one row!";
-	private static final String NOT_POSSIBLE = "Not Possible!";
 
 	private List<Boolean> visibleColumns;
 
@@ -130,7 +127,7 @@ public class PersonBrowsePageBean implements Serializable {
 	public void remove(@SuppressWarnings("unused") ActionEvent actionEvent) {
 		if (isRowSelectedForOneRow()) {
 			personBridge.remove(getSelectedPerson());
-			showMessage(FacesMessage.SEVERITY_INFO, "Success", "Remove" + getSelectedPerson().toString());
+			showMessage(FacesMessage.SEVERITY_INFO, I18N.SUCCESS, I18N.REMOVE + getSelectedPerson().toString());
 			refreshPersons();
 		} else {
 			showMessageErrorNoRowSelected();
@@ -144,17 +141,17 @@ public class PersonBrowsePageBean implements Serializable {
 		} else {
 			output = personBridge.getEmailList(getPersons());
 		}
-		showDialog(FacesMessage.SEVERITY_INFO, "Email", output);
+		showDialog(FacesMessage.SEVERITY_INFO, I18N.EMAIL, output);
 	}
 
 	public void onEditClosed(@SuppressWarnings("unused") SelectEvent event) {
 		if (canceled) {
-			showMessage(FacesMessage.SEVERITY_INFO, "Canceled!", "");
+			showMessage(FacesMessage.SEVERITY_INFO, I18N.CANCELED, "");
 			canceled = false;
 		} else if (isRowSelectedForOneRow()) {
-			showMessage(FacesMessage.SEVERITY_INFO, "Saved!", getSelectedPerson().toString());
+			showMessage(FacesMessage.SEVERITY_INFO, I18N.SAVED, getSelectedPerson().toString());
 		} else {
-			showMessage(FacesMessage.SEVERITY_INFO, "Added!", "");
+			showMessage(FacesMessage.SEVERITY_INFO, I18N.ADDED, "");
 		}
 
 		refreshPersons();
@@ -190,7 +187,7 @@ public class PersonBrowsePageBean implements Serializable {
 	}
 
 	void showMessageErrorNoRowSelected() {
-		showMessage(FacesMessage.SEVERITY_ERROR, NOT_POSSIBLE, PLEASE_SELECT_A_ROW);
+		showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, I18N.SELECT_A_ROW);
 	}
 
 	void showMessage(Severity severity, String summary, String textMessage) {
@@ -216,6 +213,6 @@ public class PersonBrowsePageBean implements Serializable {
 	}
 
 	public void info(@SuppressWarnings("unused") ActionEvent actionEvent) {
-		showMessage(FacesMessage.SEVERITY_INFO, "Used Gateway:", "" + personBridge.getGatewayType());
+		showMessage(FacesMessage.SEVERITY_INFO, I18N.USED_GATEWAY, "" + personBridge.getGatewayType());
 	}
 }
