@@ -6,7 +6,7 @@ package com.relayd;
  * @since   01.12.2016
  *
  */
-public enum VersionName {
+public enum Version {
 	//@formatter:off
 	UNKNOWN		("UNKNOWN", "Unknown Description"),
 	AUGUSTINER	("1.0", 	"Augustiner"),
@@ -24,7 +24,7 @@ public enum VersionName {
 	private String value;
 	private String description;
 
-	private VersionName(String aVersion, String aCodename) {
+	private Version(String aVersion, String aCodename) {
 		value = aVersion;
 		description = aCodename;
 	}
@@ -37,8 +37,8 @@ public enum VersionName {
 		return description;
 	}
 
-	public static VersionName newInstance(String aVersion) {
-		for (VersionName versionName : values()) {
+	public static Version newInstance(String aVersion) {
+		for (Version versionName : values()) {
 			if (versionName.getValue().equals(aVersion)) {
 				return versionName;
 			}

@@ -14,104 +14,103 @@ import org.junit.runners.MethodSorters;
  * @author           (Dirk@relayd.com)
  * @since   01.12.2016
  *
- * TODO (Dirk, Version 1.4): Umbennen auf Version, da dieses Enum Namen UND Nummer enthält.
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class VersionNameTest {
+public class VersionTest {
 
 	@Test
 	public void testCount() {
-		VersionName[] values = VersionName.values();
+		Version[] values = Version.values();
 
 		assertEquals("Wrong count for Enum entries!", 10, values.length);
 	}
 
 	@Test
 	public void testNewInstance_ForUnknown() {
-		VersionName sut = VersionName.newInstance("Dummy");
+		Version sut = Version.newInstance("Dummy");
 
-		assertSame("Not Unknwon enum", VersionName.UNKNOWN, sut);
+		assertSame("Not Unknwon enum", Version.UNKNOWN, sut);
 		assertEquals("[codename] not correct!", "Unknown Description", sut.getDescription());
 		assertEquals("[version] not correct!", "UNKNOWN", sut.getValue());
 	}
 
 	@Test
 	public void testNewInstance_ForAugustiner() {
-		VersionName sut = VersionName.newInstance(VersionName.AUGUSTINER.getValue());
+		Version sut = Version.newInstance(Version.AUGUSTINER.getValue());
 
-		assertSame("Not Augustiner enum", VersionName.AUGUSTINER, sut);
+		assertSame("Not Augustiner enum", Version.AUGUSTINER, sut);
 		assertEquals("[codename] not correct!", "Augustiner", sut.getDescription());
 		assertEquals("[version] not correct!", "1.0", sut.getValue());
 	}
 
 	@Test
 	public void testNewInstance_ForBitburger() {
-		VersionName sut = VersionName.newInstance(VersionName.BITBURGER.getValue());
+		Version sut = Version.newInstance(Version.BITBURGER.getValue());
 
-		assertSame("Not Bitburger enum", VersionName.BITBURGER, sut);
+		assertSame("Not Bitburger enum", Version.BITBURGER, sut);
 		assertEquals("[codename] not correct!", "Bitburger", sut.getDescription());
 		assertEquals("[version] not correct!", "1.1", sut.getValue());
 	}
 
 	@Test
 	public void testNewInstance_ForCoellner() {
-		VersionName sut = VersionName.newInstance(VersionName.COELLNER.getValue());
+		Version sut = Version.newInstance(Version.COELLNER.getValue());
 
-		assertSame("Not Coellner enum", VersionName.COELLNER, sut);
+		assertSame("Not Coellner enum", Version.COELLNER, sut);
 		assertEquals("[codename] not correct!", "Cöllner Hofbräu Früh", sut.getDescription());
 		assertEquals("[version] not correct!", "1.2", sut.getValue());
 	}
 
 	@Test
 	public void testNewInstance_ForDuckstein() {
-		VersionName sut = VersionName.newInstance(VersionName.DUCKSTEIN.getValue());
+		Version sut = Version.newInstance(Version.DUCKSTEIN.getValue());
 
-		assertSame("Not Duckstein enum", VersionName.DUCKSTEIN, sut);
+		assertSame("Not Duckstein enum", Version.DUCKSTEIN, sut);
 		assertEquals("[codename] not correct!", "Duckstein", sut.getDescription());
 		assertEquals("[version] not correct!", "1.3", sut.getValue());
 	}
 
 	@Test
 	public void testNewInstance_ForEngel() {
-		VersionName sut = VersionName.newInstance(VersionName.ENGEL.getValue());
+		Version sut = Version.newInstance(Version.ENGEL.getValue());
 
-		assertSame("Not Engelenum", VersionName.ENGEL, sut);
+		assertSame("Not Engelenum", Version.ENGEL, sut);
 		assertEquals("[codename] not correct!", "Engel", sut.getDescription());
 		assertEquals("[version] not correct!", "1.4", sut.getValue());
 	}
 
 	@Test
 	public void testNewInstance_ForF() {
-		VersionName sut = VersionName.newInstance(VersionName.F.getValue());
+		Version sut = Version.newInstance(Version.F.getValue());
 
-		assertSame("Not F enum", VersionName.F, sut);
+		assertSame("Not F enum", Version.F, sut);
 		assertEquals("[codename] not correct!", "Frisches Augustiner", sut.getDescription());
 		assertEquals("[version] not correct!", "1.5", sut.getValue());
 	}
 
 	@Test
 	public void testNewInstance_ForG() {
-		VersionName sut = VersionName.newInstance(VersionName.G.getValue());
+		Version sut = Version.newInstance(Version.G.getValue());
 
-		assertSame("Not G enum", VersionName.G, sut);
+		assertSame("Not G enum", Version.G, sut);
 		assertEquals("[codename] not correct!", "Geiles Augustiner", sut.getDescription());
 		assertEquals("[version] not correct!", "1.6", sut.getValue());
 	}
 
 	@Test
 	public void testNewInstance_ForH() {
-		VersionName sut = VersionName.newInstance(VersionName.H.getValue());
+		Version sut = Version.newInstance(Version.H.getValue());
 
-		assertSame("Not H enum", VersionName.H, sut);
+		assertSame("Not H enum", Version.H, sut);
 		assertEquals("[codename] not correct!", "Helles Augustiner", sut.getDescription());
 		assertEquals("[version] not correct!", "1.7", sut.getValue());
 	}
 
 	@Test
 	public void testNewInstance_ForI() {
-		VersionName sut = VersionName.newInstance(VersionName.I.getValue());
+		Version sut = Version.newInstance(Version.I.getValue());
 
-		assertSame("Not I enum", VersionName.I, sut);
+		assertSame("Not I enum", Version.I, sut);
 		assertEquals("[codename] not correct!", "Intrinsisches Augustiner", sut.getDescription());
 		assertEquals("[version] not correct!", "1.8", sut.getValue());
 	}
