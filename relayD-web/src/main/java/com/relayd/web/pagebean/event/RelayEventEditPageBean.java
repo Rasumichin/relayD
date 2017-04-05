@@ -101,6 +101,10 @@ public class RelayEventEditPageBean implements Serializable {
 		workingRelayEvent.setName(anEventname);
 	}
 
+	public Integer getNumberOfRelays() {
+		return workingRelayEvent.getMaxNumberOfRelays();
+	}
+
 	void persistRelayEvent() {
 		getBridge().set(workingRelayEvent);
 	}
