@@ -14,7 +14,11 @@ public enum VersionName {
 	COELLNER	("1.2", 	"Cöllner Hofbräu Früh"),
 	DUCKSTEIN	("1.3", 	"Duckstein"),
 	ENGEL		("1.4", 	"Engel"),
-	F			("1.5", 	"F");
+	F			("1.5", 	"Frisches Augustiner"),
+	G			("1.6", 	"Geiles Augustiner"),
+	H			("1.7", 	"Helles Augustiner"),
+	I			("1.8", 	"Intrinsisches Augustiner");
+
 	//@formatter:on
 
 	private String value;
