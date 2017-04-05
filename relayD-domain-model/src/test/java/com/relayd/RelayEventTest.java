@@ -97,6 +97,41 @@ public class RelayEventTest {
 	}
 
 	@Test
+	public void testAddParticipant() {
+		Participant participant = new ParticipantBuilder().withForename("Justus").withSurename("Jonas").build();
+
+		sut.addParticipant(participant);
+
+		List<Participant> actual = sut.getParticipants();
+
+		assertNotNull("instance of [participants] not correct!", actual);
+		assertEquals("[participants] size not correct!", 1, actual.size());
+		Participant actualParticipant = actual.get(0);
+
+		assertEquals("inserted participant not correct!", participant, actualParticipant);
+	}
+
+	@Test
+	public void testRemoveParticipant() {
+		Participant participant = new ParticipantBuilder().withForename("Justus").withSurename("Jonas").build();
+		sut.addParticipant(participant);
+
+		sut.removeParticipant(participant);
+
+		List<Participant> actual = sut.getParticipants();
+
+		assertNotNull("instance of [participants] not correct!", actual);
+		boolean condition = actual.isEmpty();
+		assertTrue("[participants] size not correct!", condition);
+	}
+
+	@Test(expected = UnsupportedOperationException.class)
+	public void testGetParticipant_ForUnmodifiable() {
+		List<Participant> participants = sut.getParticipants();
+		participants.add(Participant.newInstance());
+	}
+
+	@Test
 	public void testUuid() {
 
 		assertNotNull("Expected valid instance.", sut.getUuid());
