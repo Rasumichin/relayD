@@ -49,32 +49,39 @@
 				id="numberOfRelays"
 				value="#{relayEventEditPageBean.numberOfRelays}" />
 		</h:panelGrid>
+				<p:commandButton
+					icon="ui-icon-plus"
+					update="form"
+					actionListener="#{relayEventEditPageBean.add}">
+				</p:commandButton>
+				<p:commandButton
+					icon="ui-icon-trash"
+					update="form"
+					actionListener="#{relayEventEditPageBean.remove}" />
+				<p:commandButton
+					icon="ui-icon-mail-closed"
+					update="form"
+					actionListener="#{relayEventEditPageBean.emailExport}" />
 		<p:dataTable
-			var="person"
-			widgetVar="personTable"
-			filteredValue="#{personBrowsePageBean.filteredPersons}"
-			id="personTable"
-			value="#{personBrowsePageBean.persons}"
+			var="participant"
+			widgetVar="participantTable"
+			id="participantTable"
+			value="#{relayEventEditPageBean.participants}"
 			scrollable="true"
-			scrollHeight="100"
-			sortBy="#{person.surename.toString()}"
-			rowKey="#{person.uuid}"
+			scrollHeight="150"
+			rowKey="#{participant.uuidPerson}"
 			resizableColumns="true">
 
 			<p:column
 				headerText="Forename"
-				sortBy="#{person.forename}"
-				sortFunction="#{personBrowsePageBean.sortByForename}"
 				width="140">
-				<h:outputText value="#{person.forename}" />
+				<h:outputText value="#{participant.forename}" />
 			</p:column>
 
 			<p:column
 				headerText="Surename"
-				sortBy="#{person.surename}"
-				sortFunction="#{personBrowsePageBean.sortBySurename}"
 				width="140">
-				<h:outputText value="#{person.surename}" />
+				<h:outputText value="#{participant.surename}" />
 			</p:column>
 		</p:dataTable>
 

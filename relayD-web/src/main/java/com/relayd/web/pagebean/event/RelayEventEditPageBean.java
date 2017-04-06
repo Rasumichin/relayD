@@ -1,6 +1,7 @@
 package com.relayd.web.pagebean.event;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -9,9 +10,11 @@ import javax.faces.application.FacesMessage.Severity;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 
 import org.primefaces.context.RequestContext;
 
+import com.relayd.Participant;
 import com.relayd.RelayEvent;
 import com.relayd.attributes.EventDay;
 import com.relayd.attributes.Eventname;
@@ -59,7 +62,7 @@ public class RelayEventEditPageBean implements Serializable {
 	}
 
 	void openDialog() {
-		Map<String, Object> options = new DialogOptionsBuilder().width(500).height(300).build();
+		Map<String, Object> options = new DialogOptionsBuilder().width(500).height(400).build();
 		RequestContext.getCurrentInstance().openDialog(NavigationConstants.RELAY_EVENT_EDIT_DIALOG_ID, options, null);
 	}
 
@@ -101,6 +104,10 @@ public class RelayEventEditPageBean implements Serializable {
 		workingRelayEvent.setName(anEventname);
 	}
 
+	public List<Participant> getParticipants() {
+		return workingRelayEvent.getParticipants();
+	}
+
 	public Integer getNumberOfRelays() {
 		return workingRelayEvent.getMaxNumberOfRelays();
 	}
@@ -112,4 +119,17 @@ public class RelayEventEditPageBean implements Serializable {
 	private RelayEventBridge getBridge() {
 		return relayEventBridge;
 	}
+
+	public void add(@SuppressWarnings("unused") ActionEvent actionEvent) {
+		showMessageNotImplementedYet();
+	}
+
+	public void remove(@SuppressWarnings("unused") ActionEvent actionEvent) {
+		showMessageNotImplementedYet();
+	}
+
+	public void emailExport(@SuppressWarnings("unused") ActionEvent actionEvent) {
+		showMessageNotImplementedYet();
+	}
+
 }

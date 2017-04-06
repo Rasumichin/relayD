@@ -8,10 +8,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import com.relayd.ParticipantBuilder;
+import com.relayd.Participant;
+import com.relayd.Person;
 import com.relayd.RelayEvent;
 import com.relayd.attributes.EventDay;
 import com.relayd.attributes.Eventname;
+import com.relayd.attributes.Forename;
+import com.relayd.attributes.Surename;
 import com.relayd.ejb.RelayEventGateway;
 
 /**
@@ -23,11 +26,14 @@ public class RelayEventGatewayMemory implements RelayEventGateway {
 
 	static Map<UUID, RelayEvent> events = new HashMap<UUID, RelayEvent>();
 
+	public RelayEventGatewayMemory() {
+		set(createEventForDuesseldorfMarathon());
+	}
+
 	@Override
 	public List<RelayEvent> getAll() {
 		List<RelayEvent> eventsAsList = new ArrayList<RelayEvent>();
 
-		eventsAsList.add(createEventForDuesseldorfMarathon());
 		eventsAsList.addAll(events.values());
 
 		return eventsAsList;
@@ -38,10 +44,21 @@ public class RelayEventGatewayMemory implements RelayEventGateway {
 		EventDay eventDay = EventDay.newInstance(LocalDate.of(2017, Month.APRIL, 30));
 
 		RelayEvent relayEvent = RelayEvent.newInstance(eventName, eventDay);
+		relayEvent.setUuid(UUID.fromString("5697d710-8967-4b2d-9ab2-8fc50ddc6138"));
+		// Max stand 2017
+		for (int i = 0; i < 36; i++) {
+			Person firstPerson = Person.newInstance();
+			firstPerson.setForename(Forename.newInstance("Justus"));
+			firstPerson.setSurename(Surename.newInstance("Jonas"));
+			Participant firstParticipant = Participant.newInstance(firstPerson);
+			relayEvent.addParticipant(firstParticipant);
 
-		relayEvent.addParticipant(new ParticipantBuilder().withForename("Justus").withSurename("Jonas").build());
-		relayEvent.addParticipant(new ParticipantBuilder().withForename("Peter").withSurename("Shaw").build());
-
+			Person secondPerson = Person.newInstance();
+			secondPerson.setForename(Forename.newInstance("Peter"));
+			secondPerson.setSurename(Surename.newInstance("Shaw"));
+			Participant secondParticipant = Participant.newInstance(secondPerson);
+			relayEvent.addParticipant(secondParticipant);
+		}
 		return relayEvent;
 	}
 
