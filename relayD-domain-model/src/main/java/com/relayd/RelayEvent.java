@@ -34,6 +34,7 @@ public class RelayEvent implements Serializable {
 	private EventDay eventDay = EventDay.today();
 	private Set<Relay> relays = new HashSet<>(MAX_NUMBER_OF_RELAYS);
 	private List<Track> tracks = new ArrayList<>(MAX_NUMBER_OF_TRACKS);
+	private List<Participant> participants = new ArrayList<>();
 
 	private RelayEvent() {
 		uuid = UUID.randomUUID();
@@ -122,6 +123,18 @@ public class RelayEvent implements Serializable {
 
 	public Set<Relay> getRelays() {
 		return Collections.unmodifiableSet(relays);
+	}
+
+	public void addParticipant(Participant aParticipant) {
+		participants.add(aParticipant);
+	}
+
+	public void removeParticipant(Participant aParticipant) {
+		participants.remove(aParticipant);
+	}
+
+	public List<Participant> getParticipants() {
+		return Collections.unmodifiableList(participants);
 	}
 
 	@Override

@@ -19,8 +19,7 @@
 		<p:growl
 			id="growl"
 			showDetail="true" />
-		<p:focus/>
-
+		<p:focus />
 		<h:panelGrid
 			columns="2"
 			id="inputgrid"
@@ -31,7 +30,7 @@
 			<p:inputText
 				id="eventDay"
 				value="#{relayEventEditPageBean.eventDay}"
-				style="width:140px">
+				style="width:280px">
 				<f:converter converterId="com.relayd.web.converter.EventDayValueObjectConverter" />
 			</p:inputText>
 			<p:outputLabel
@@ -40,11 +39,51 @@
 			<p:inputText
 				id="eventname"
 				value="#{relayEventEditPageBean.eventname}"
-				style="width:140px">
+				style="width:280px">
 				<f:converter converterId="com.relayd.web.converter.EventNameValueObjectConverter" />
 			</p:inputText>
-
+			<p:outputLabel
+				for="numberOfRelays"
+				value="Number of Relays:" />
+			<p:outputLabel
+				id="numberOfRelays"
+				value="#{relayEventEditPageBean.numberOfRelays}" />
 		</h:panelGrid>
+				<p:commandButton
+					icon="ui-icon-plus"
+					update="form"
+					actionListener="#{relayEventEditPageBean.add}">
+				</p:commandButton>
+				<p:commandButton
+					icon="ui-icon-trash"
+					update="form"
+					actionListener="#{relayEventEditPageBean.remove}" />
+				<p:commandButton
+					icon="ui-icon-mail-closed"
+					update="form"
+					actionListener="#{relayEventEditPageBean.emailExport}" />
+		<p:dataTable
+			var="participant"
+			widgetVar="participantTable"
+			id="participantTable"
+			value="#{relayEventEditPageBean.participants}"
+			scrollable="true"
+			scrollHeight="150"
+			rowKey="#{participant.uuidPerson}"
+			resizableColumns="true">
+
+			<p:column
+				headerText="Forename"
+				width="140">
+				<h:outputText value="#{participant.forename}" />
+			</p:column>
+
+			<p:column
+				headerText="Surename"
+				width="140">
+				<h:outputText value="#{participant.surename}" />
+			</p:column>
+		</p:dataTable>
 
 		<p:commandButton
 			actionListener="#{relayEventEditPageBean.cancel}"
