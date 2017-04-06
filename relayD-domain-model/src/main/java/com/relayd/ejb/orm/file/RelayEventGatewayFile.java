@@ -75,7 +75,6 @@ public class RelayEventGatewayFile implements RelayEventGateway {
 	public List<RelayEvent> getAll() {
 		List<RelayEvent> eventsAsList = new ArrayList<RelayEvent>();
 
-		eventsAsList.add(RelayEvent.duesseldorf());
 		FileInputStream fileInputStream;
 		try {
 			fileInputStream = new FileInputStream(getFileName());
@@ -93,7 +92,6 @@ public class RelayEventGatewayFile implements RelayEventGateway {
 	public void set(RelayEvent updateRelayEvent) {
 		List<RelayEvent> someRelayEvents = getAll();
 
-		someRelayEvents.remove(RelayEvent.duesseldorf());
 		if (someRelayEvents.contains(updateRelayEvent)) {
 			for (RelayEvent eachRelayEvent : someRelayEvents) {
 				if (updateRelayEvent.equals(eachRelayEvent)) {

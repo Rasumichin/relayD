@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.UUID;
 
 import org.junit.FixMethodOrder;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
@@ -27,54 +26,40 @@ import com.relayd.attributes.Eventname;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public abstract class RelayEventGatewayTest {
 
-	private static final String DUESSELDORF_MARATHON = "Metro Group Marathon Düsseldorf";
-	private static final EventDay DUESSELDORF_DAY = EventDay.newInstance(LocalDate.of(2017, Month.APRIL, 30));
-
 	public abstract RelayEventGateway getSut();
 
 	@Test
-	@Ignore("Muessen eine Lösung bzgl Event<->Relays finden")
 	public void testGetAll() {
-		List<RelayEvent> resultRelayEventList = getSut().getAll();
+		Eventname expectedEventname = Eventname.newInstance("Rund um Ennepetal");
+		EventDay expectedEventDay = EventDay.newInstance(LocalDate.of(2017, Month.AUGUST, 28));
+		RelayEvent rundUmEnnepetal = RelayEvent.newInstance(expectedEventname, expectedEventDay);
+		getSut().set(rundUmEnnepetal);
 
-		assertEquals("resultSize not correct!", 1, resultRelayEventList.size());
+		List<RelayEvent> actualRelayEventList = getSut().getAll();
 
-		RelayEvent resultRelayEvent = resultRelayEventList.get(0);
-		RelayEvent expectedRelayEvent = createEventForDuesseldorfMarathon();
+		assertEquals("resultSize not correct!", 1, actualRelayEventList.size());
 
-		assertEquals("[name] not correct!", expectedRelayEvent.getName(), resultRelayEvent.getName());
-		assertEquals("[eventDay] not correct!", expectedRelayEvent.getEventDay(), resultRelayEvent.getEventDay());
-	}
+		RelayEvent actualRelayEvent = actualRelayEventList.get(0);
 
-	private RelayEvent createEventForDuesseldorfMarathon() {
-		Eventname eventName = Eventname.newInstance(DUESSELDORF_MARATHON);
-		EventDay eventDay = DUESSELDORF_DAY;
-		RelayEvent relayEvent = RelayEvent.newInstance(eventName, eventDay);
-		return relayEvent;
+		assertEquals("[name] not correct!", expectedEventname, actualRelayEvent.getName());
+		assertEquals("[eventDay] not correct!", expectedEventDay, actualRelayEvent.getEventDay());
 	}
 
 	@Test
-	@Ignore("Muessen eine Lösung bzgl Event<->Relays finden")
 	public void testSet() {
 		Eventname expectedEventname = Eventname.newInstance("Rund um Ennepetal");
 		EventDay expectedEventDay = EventDay.newInstance(LocalDate.of(2017, Month.AUGUST, 28));
 		RelayEvent rundUmEnnepetal = RelayEvent.newInstance(expectedEventname, expectedEventDay);
 
 		getSut().set(rundUmEnnepetal);
-		List<RelayEvent> resultRelayEventList = getSut().getAll();
+		List<RelayEvent> actualRelayEventList = getSut().getAll();
 
-		assertEquals("resultSize not correct!", 2, resultRelayEventList.size());
+		assertEquals("resultSize not correct!", 1, actualRelayEventList.size());
 
-		RelayEvent resultRelayEventDuesseldorf = resultRelayEventList.get(0);
-		RelayEvent expectedRelayEventDuesseldorf = createEventForDuesseldorfMarathon();
+		RelayEvent actualRelayEventRundUmEnnepetal = actualRelayEventList.get(0);
 
-		assertEquals("[name] for Duesseldorf not correct!", expectedRelayEventDuesseldorf.getName(), resultRelayEventDuesseldorf.getName());
-		assertEquals("[eventDay] for Duesseldorf not correct!", expectedRelayEventDuesseldorf.getEventDay(), resultRelayEventDuesseldorf.getEventDay());
-
-		RelayEvent resultRelayEventRundUmEnnepetal = resultRelayEventList.get(1);
-
-		assertEquals("[name] for Rund um Ennepetal not correct!", expectedEventname, resultRelayEventRundUmEnnepetal.getName());
-		assertEquals("[eventDay] for Rund um Ennepetal not correct!", expectedEventDay, resultRelayEventRundUmEnnepetal.getEventDay());
+		assertEquals("[name] for Rund um Ennepetal not correct!", expectedEventname, actualRelayEventRundUmEnnepetal.getName());
+		assertEquals("[eventDay] for Rund um Ennepetal not correct!", expectedEventDay, actualRelayEventRundUmEnnepetal.getEventDay());
 
 	}
 
@@ -115,5 +100,4 @@ public abstract class RelayEventGatewayTest {
 		RelayEvent rundUmEnnepetal = RelayEvent.newInstance(eventname, eventDay);
 		return rundUmEnnepetal;
 	}
-
 }
