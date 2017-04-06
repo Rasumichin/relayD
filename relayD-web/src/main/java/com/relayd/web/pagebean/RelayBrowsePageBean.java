@@ -41,8 +41,6 @@ import com.relayd.web.local.I18N;
 @SessionScoped
 public class RelayBrowsePageBean implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private static final String PLEASE_SELECT_A_ROW_PERSON = "Please select one person row!";
-	private static final String PLEASE_SELECT_A_ROW_RELAY = "Please select one relay row!";
 
 	private TreeNode root;
 
@@ -292,11 +290,11 @@ public class RelayBrowsePageBean implements Serializable {
 	}
 
 	void showMessageErrorNoRowPersonSelected() {
-		showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, PLEASE_SELECT_A_ROW_PERSON);
+		showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, I18N.SELECT_A_ROW_PERSON);
 	}
 
 	void showMessageErrorNoRowRelaySelected() {
-		showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, PLEASE_SELECT_A_ROW_RELAY);
+		showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, I18N.SELECT_A_ROW_RELAY);
 	}
 
 	public void openAllRelays(@SuppressWarnings("unused") ActionEvent actionEvent) {
