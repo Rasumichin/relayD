@@ -29,6 +29,7 @@ import com.relayd.web.bridge.RelayBridge;
 import com.relayd.web.bridge.RelayBridgeImpl;
 import com.relayd.web.bridge.TreeNodeRow;
 import com.relayd.web.bridge.TreeNodeRowRelay;
+import com.relayd.web.local.I18N;
 
 /**
  * @author schmollc (Christian@relayd.de)
@@ -40,7 +41,6 @@ import com.relayd.web.bridge.TreeNodeRowRelay;
 @SessionScoped
 public class RelayBrowsePageBean implements Serializable {
 	private static final long serialVersionUID = 1L;
-	static final String NOT_POSSIBLE = "Not Possible!";
 	private static final String PLEASE_SELECT_A_ROW_PERSON = "Please select one person row!";
 	private static final String PLEASE_SELECT_A_ROW_RELAY = "Please select one relay row!";
 
@@ -128,33 +128,31 @@ public class RelayBrowsePageBean implements Serializable {
 
 	public void addPersonToRelay(@SuppressWarnings("unused") ActionEvent actionEvent) {
 		if (!isRelayTableRowSelected()) {
-			showMessage(FacesMessage.SEVERITY_ERROR, NOT_POSSIBLE, "Please select a Row!");
+			showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, "Please select a Row!");
 		} else if (isRelayRowSelected()) {
-			showMessage(FacesMessage.SEVERITY_ERROR, NOT_POSSIBLE, "Only for Member Row possible!");
+			showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, "Only for Member Row possible!");
 		} else if (!isPersonRowSelected()) {
-			showMessage(FacesMessage.SEVERITY_ERROR, NOT_POSSIBLE, "Please select a Person!");
+			showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, "Please select a Person!");
 		} else if (!isOnlyOnePersonRowSelected()) {
-			showMessage(FacesMessage.SEVERITY_ERROR, NOT_POSSIBLE, "Please select a single Person!");
+			showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, "Please select a single Person!");
 		} else {
 			TreeNodeRow selectedRelayNode = (TreeNodeRow) selectedTreeNode.getData();
 			Member newRelayMember = Member.newInstance(getSelectedPerson());
 			selectedRelayNode.setMember(newRelayMember);
-			// TODO (Christian, Version 1.4): REMOVE!!!!! ONLY FOR TESTING THE SERVER VERSION!!
 			relayBridge.set(selectedTreeNode);
 		}
 	}
 
 	public void removePersonFromRelay(@SuppressWarnings("unused") ActionEvent actionEvent) {
 		if (!isRelayTableRowSelected()) {
-			showMessage(FacesMessage.SEVERITY_ERROR, NOT_POSSIBLE, "Please select a Row!");
+			showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, "Please select a Row!");
 		} else if (isRelayRowSelected()) {
-			showMessage(FacesMessage.SEVERITY_ERROR, NOT_POSSIBLE, "Only for Member Row possible!");
+			showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, "Only for Member Row possible!");
 		} else {
 			TreeNodeRow selectedRelayNode = (TreeNodeRow) selectedTreeNode.getData();
 			if (!selectedRelayNode.getMember().isEmpty()) {
 				// TODO (Christian, Erik Version 1.4): ein remove im Fachobjekt TreeNodeRow einführen
 				selectedRelayNode.setMember(Member.newInstance());
-				// TODO (Christian, Version 1.4): REMOVE!!!!! ONLY FOR TESTING THE SERVER VERSION!!
 				relayBridge.set(selectedTreeNode);
 			}
 		}
@@ -187,7 +185,7 @@ public class RelayBrowsePageBean implements Serializable {
 	}
 
 	public void showAllWithoutRelay() {
-		showMessage(FacesMessage.SEVERITY_ERROR, NOT_POSSIBLE, "Not implemented yet!");
+		showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, "Not implemented yet!");
 	}
 
 	public void emailExportPerson(@SuppressWarnings("unused") ActionEvent actionEvent) {
@@ -294,11 +292,11 @@ public class RelayBrowsePageBean implements Serializable {
 	}
 
 	void showMessageErrorNoRowPersonSelected() {
-		showMessage(FacesMessage.SEVERITY_ERROR, NOT_POSSIBLE, PLEASE_SELECT_A_ROW_PERSON);
+		showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, PLEASE_SELECT_A_ROW_PERSON);
 	}
 
 	void showMessageErrorNoRowRelaySelected() {
-		showMessage(FacesMessage.SEVERITY_ERROR, NOT_POSSIBLE, PLEASE_SELECT_A_ROW_RELAY);
+		showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, PLEASE_SELECT_A_ROW_RELAY);
 	}
 
 	public void openAllRelays(@SuppressWarnings("unused") ActionEvent actionEvent) {
