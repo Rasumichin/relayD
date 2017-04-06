@@ -21,6 +21,7 @@ import com.relayd.attributes.YearOfBirth;
 import com.relayd.web.bridge.PersonBridge;
 import com.relayd.web.bridge.PersonBridgeImpl;
 import com.relayd.web.bridge.ValidationResult;
+import com.relayd.web.local.I18N;
 
 /**
  * @author schmollc (Christian@relayd.de)
@@ -93,7 +94,7 @@ public class PersonEditPageBean implements Serializable {
 
 	void showError() {
 		// TODO (Christian, Version 1.4): wie im ObjectConverter sollte die Nachricht aus dem ValidationResult Object kommen!
-		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Email not uniqe!", null);
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, I18N.EMAIL_NOT_UNIQUE, null);
 		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
 

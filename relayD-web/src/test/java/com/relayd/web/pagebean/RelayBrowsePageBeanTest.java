@@ -34,6 +34,7 @@ import com.relayd.attributes.Position;
 import com.relayd.attributes.Surename;
 import com.relayd.web.bridge.RelayBridge;
 import com.relayd.web.bridge.TreeNodeRow;
+import com.relayd.web.local.I18N;
 
 import static org.mockito.Mockito.*;
 
@@ -87,7 +88,7 @@ public class RelayBrowsePageBeanTest {
 
 		sut.addPersonToRelay(dummyActionEvent);
 
-		verify(sut).showMessage(FacesMessage.SEVERITY_ERROR, RelayBrowsePageBean.NOT_POSSIBLE, "Please select a Person!");
+		verify(sut).showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, "Please select a Person!");
 	}
 
 	@Test
@@ -110,7 +111,7 @@ public class RelayBrowsePageBeanTest {
 
 		sut.addPersonToRelay(dummyActionEvent);
 
-		verify(sut).showMessage(FacesMessage.SEVERITY_ERROR, RelayBrowsePageBean.NOT_POSSIBLE, "Please select a single Person!");
+		verify(sut).showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, "Please select a single Person!");
 	}
 
 	@Test
@@ -120,7 +121,7 @@ public class RelayBrowsePageBeanTest {
 		sut.addPersonToRelay(dummyActionEvent);
 
 		verify(relayBridge, never()).set(any(TreeNode.class));
-		verify(sut).showMessage(FacesMessage.SEVERITY_ERROR, RelayBrowsePageBean.NOT_POSSIBLE, "Please select a Row!");
+		verify(sut).showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, "Please select a Row!");
 	}
 
 	@Test
@@ -163,7 +164,7 @@ public class RelayBrowsePageBeanTest {
 		sut.addPersonToRelay(dummyActionEvent);
 
 		verify(relayBridge, never()).set(any(TreeNode.class));
-		verify(sut).showMessage(FacesMessage.SEVERITY_ERROR, RelayBrowsePageBean.NOT_POSSIBLE, "Only for Member Row possible!");
+		verify(sut).showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, "Only for Member Row possible!");
 	}
 
 	@Test
@@ -172,7 +173,7 @@ public class RelayBrowsePageBeanTest {
 
 		sut.removePersonFromRelay(dummyActionEvent);
 
-		verify(sut).showMessage(FacesMessage.SEVERITY_ERROR, RelayBrowsePageBean.NOT_POSSIBLE, "Please select a Row!");
+		verify(sut).showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, "Please select a Row!");
 		verify(relayBridge, never()).set(any(TreeNode.class));
 	}
 
@@ -185,7 +186,7 @@ public class RelayBrowsePageBeanTest {
 
 		sut.removePersonFromRelay(dummyActionEvent);
 
-		verify(sut).showMessage(FacesMessage.SEVERITY_ERROR, RelayBrowsePageBean.NOT_POSSIBLE, "Only for Member Row possible!");
+		verify(sut).showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, "Only for Member Row possible!");
 		verify(relayBridge, never()).set(any(TreeNode.class));
 	}
 
@@ -338,6 +339,6 @@ public class RelayBrowsePageBeanTest {
 	@Test
 	public void testShowAllWithoutRelay() {
 		sut.showAllWithoutRelay();
-		verify(sut).showMessage(FacesMessage.SEVERITY_ERROR, RelayBrowsePageBean.NOT_POSSIBLE, "Not implemented yet!");
+		verify(sut).showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, "Not implemented yet!");
 	}
 }
