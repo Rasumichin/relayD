@@ -30,8 +30,6 @@ import com.relayd.web.pagebean.event.RelayEventEditPageBean;
 @SessionScoped
 public class RelayEventBrowsePageBean implements Serializable {
 	private static final long serialVersionUID = 1L;
-	// TODO -medium- Put String in an I18N class! (or minimal on one position for avoid WET!)
-	static final String NOT_POSSIBLE = "Not Possible!";
 
 	private RelayEventBridge relayEventBridge;
 
@@ -78,10 +76,6 @@ public class RelayEventBrowsePageBean implements Serializable {
 	public void edit(@SuppressWarnings("unused") ActionEvent actionEvent) {
 		RelayEvent selectedEvent = getSelectedRelayEvent();
 		getRelayEventEditPageBean().openDialogFor(selectedEvent.getUuid());
-	}
-
-	void showMessageNotImplementedYet() {
-		showMessage(FacesMessage.SEVERITY_ERROR, NOT_POSSIBLE, "Not implemented yet!");
 	}
 
 	void showMessage(Severity severityInfo, String summary, String textMessage) {

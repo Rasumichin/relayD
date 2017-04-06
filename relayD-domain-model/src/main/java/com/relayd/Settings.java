@@ -35,7 +35,7 @@ public class Settings implements Serializable {
 
 	public String getVersion() {
 		String version = getProperty("application.version");
-		VersionName versionName = VersionName.newInstance(version.substring(0, 3));
+		Version versionName = Version.newInstance(version.substring(0, 3));
 		return versionName.getValue() + " - Codename " + versionName.getDescription();
 	}
 
