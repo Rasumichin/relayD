@@ -88,8 +88,15 @@
 
 					<p:column
 						headerText="Event"
-						width="58%">
+						width="48%">
 						<h:outputText value="#{relayEvent.name}" />
+					</p:column>
+					<p:column
+						headerText="Participants"
+						width="10%">
+						<h:outputText
+							value="#{relayEvent.numberOfParticipants}"
+							style="float:right" />
 					</p:column>
 
 					<p:column

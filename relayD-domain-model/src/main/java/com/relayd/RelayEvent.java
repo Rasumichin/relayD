@@ -101,6 +101,10 @@ public class RelayEvent implements Serializable {
 		return relays.size();
 	}
 
+	public Integer getNumberOfParticipants() {
+		return participants.size();
+	}
+
 	public List<Track> getTracks() {
 		return Collections.unmodifiableList(tracks);
 	}

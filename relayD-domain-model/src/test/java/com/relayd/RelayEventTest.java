@@ -202,6 +202,22 @@ public class RelayEventTest {
 	}
 
 	@Test
+	public void testGetNumberOfParticipants_ForEmptyParticipantList() {
+		Integer actual = sut.getNumberOfParticipants();
+
+		assertEquals(Integer.valueOf(0), actual);
+	}
+
+	@Test
+	public void testGetNumberOfParticipants_ForListWithOneEntry() {
+		sut.addParticipant(Participant.newInstance());
+
+		Integer actual = sut.getNumberOfParticipants();
+
+		assertEquals(Integer.valueOf(1), actual);
+	}
+
+	@Test
 	public void testGetTrackForPosition_ForPositionOne() {
 		Track track = sut.getTrackForPosition(Position.FIRST);
 
