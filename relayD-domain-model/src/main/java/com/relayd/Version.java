@@ -17,7 +17,10 @@ public enum Version {
 	F			("1.5", 	"Frisches Augustiner"),
 	G			("1.6", 	"Geiles Augustiner"),
 	H			("1.7", 	"Helles Augustiner"),
-	I			("1.8", 	"Intrinsisches Augustiner");
+	I			("1.8", 	"Intrinsisches Augustiner"),
+	J			("1.9", 	"Jungfräuliches Augustiner"),
+	K			("1.10", 	"Kühles Augustiner"),
+	L 			("1.11", 	"Luftiges Augustiner");
 
 	//@formatter:on
 
