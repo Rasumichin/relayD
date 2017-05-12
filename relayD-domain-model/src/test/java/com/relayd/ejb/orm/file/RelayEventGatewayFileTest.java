@@ -18,7 +18,7 @@ import com.relayd.ejb.RelayEventGatewayTest;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class RelayEventGatewayFileTest extends RelayEventGatewayTest {
 
-	private RelayEventGatewayFile sut = new RelayEventGatewayFile("relayEventTest.relayD");
+	private RelayEventGatewayFile sut = new RelayEventGatewayFile("bigDataTest.relayD");
 
 	@Before
 	public void setUp() {
