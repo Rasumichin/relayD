@@ -3,9 +3,7 @@ package com.relayd.ejb.orm.memory;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 import com.relayd.Participant;
@@ -24,17 +22,15 @@ import com.relayd.ejb.RelayEventGateway;
  */
 public class RelayEventGatewayMemory implements RelayEventGateway {
 
-	static Map<UUID, RelayEvent> events = new HashMap<UUID, RelayEvent>();
-
 	public RelayEventGatewayMemory() {
-		set(createEventForDuesseldorfMarathon());
+		//		set(createEventForDuesseldorfMarathon());
 	}
 
 	@Override
 	public List<RelayEvent> getAll() {
 		List<RelayEvent> eventsAsList = new ArrayList<RelayEvent>();
 
-		eventsAsList.addAll(events.values());
+		eventsAsList.addAll(MemorySingleton.getInstance().getEvents().values());
 
 		return eventsAsList;
 	}
@@ -64,11 +60,11 @@ public class RelayEventGatewayMemory implements RelayEventGateway {
 
 	@Override
 	public void set(RelayEvent relayEvent) {
-		events.put(relayEvent.getUuid(), relayEvent);
+		MemorySingleton.getInstance().getEvents().put(relayEvent.getUuid(), relayEvent);
 	}
 
 	@Override
 	public RelayEvent get(UUID uuid) {
-		return events.get(uuid);
+		return MemorySingleton.getInstance().getEvents().get(uuid);
 	}
 }

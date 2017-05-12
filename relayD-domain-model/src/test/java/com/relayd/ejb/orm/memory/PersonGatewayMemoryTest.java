@@ -19,7 +19,7 @@ public class PersonGatewayMemoryTest extends PersonGatewayTest {
 
 	@Before
 	public void setUp() {
-		PersonGatewayMemory.persons.clear();
+		MemorySingleton.getInstance().getPersons().clear();
 	}
 
 	@Override

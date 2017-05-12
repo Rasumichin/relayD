@@ -1,9 +1,7 @@
 package com.relayd.ejb.orm.memory;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 import com.relayd.Relay;
@@ -16,21 +14,19 @@ import com.relayd.ejb.RelayGateway;
  */
 public class RelayGatewayMemory implements RelayGateway {
 
-	static Map<UUID, Relay> relays = new HashMap<UUID, Relay>();
-
 	@Override
 	public void set(Relay relay) {
-		relays.put(relay.getUuid(), relay);
+		MemorySingleton.getInstance().getRelays().put(relay.getUuid(), relay);
 	}
 
 	@Override
 	public List<Relay> getAll() {
-		ArrayList<Relay> relaysAsList = new ArrayList<Relay>(relays.values());
+		ArrayList<Relay> relaysAsList = new ArrayList<Relay>(MemorySingleton.getInstance().getRelays().values());
 		return relaysAsList;
 	}
 
 	@Override
 	public Relay get(UUID uuid) {
-		return relays.get(uuid);
+		return MemorySingleton.getInstance().getRelays().get(uuid);
 	}
 }
