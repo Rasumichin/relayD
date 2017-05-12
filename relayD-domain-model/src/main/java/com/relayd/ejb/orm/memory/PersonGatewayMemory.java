@@ -1,9 +1,7 @@
 package com.relayd.ejb.orm.memory;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 import com.relayd.Person;
@@ -16,26 +14,24 @@ import com.relayd.ejb.PersonGateway;
  */
 public class PersonGatewayMemory implements PersonGateway {
 
-	static Map<UUID, Person> persons = new HashMap<UUID, Person>();
-
 	@Override
 	public Person get(UUID uuid) {
-		return persons.get(uuid);
+		return MemorySingleton.getInstance().getPersons().get(uuid);
 	}
 
 	@Override
 	public void set(Person person) {
-		persons.put(person.getUuid(), person);
+		MemorySingleton.getInstance().getPersons().put(person.getUuid(), person);
 	}
 
 	@Override
 	public void remove(UUID uuid) {
-		persons.remove(uuid);
+		MemorySingleton.getInstance().getPersons().remove(uuid);
 	}
 
 	@Override
 	public List<Person> getAll() {
-		ArrayList<Person> personsAsList = new ArrayList<Person>(persons.values());
+		ArrayList<Person> personsAsList = new ArrayList<Person>(MemorySingleton.getInstance().getPersons().values());
 		return personsAsList;
 	}
 }

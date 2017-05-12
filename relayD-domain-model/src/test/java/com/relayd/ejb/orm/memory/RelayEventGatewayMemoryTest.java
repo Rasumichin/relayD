@@ -21,7 +21,7 @@ public class RelayEventGatewayMemoryTest extends RelayEventGatewayTest {
 
 	@Before
 	public void setUp() {
-		RelayEventGatewayMemory.events.clear();
+		MemorySingleton.getInstance().getEvents().clear();
 	}
 
 	@Override

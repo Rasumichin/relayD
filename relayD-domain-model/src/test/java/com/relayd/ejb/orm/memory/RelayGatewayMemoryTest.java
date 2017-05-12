@@ -22,7 +22,7 @@ public class RelayGatewayMemoryTest extends RelayGatewayTest {
 
 	@Before
 	public void setUp() {
-		RelayGatewayMemory.relays.clear();
+		MemorySingleton.getInstance().getRelays().clear();
 	}
 
 	@Override
