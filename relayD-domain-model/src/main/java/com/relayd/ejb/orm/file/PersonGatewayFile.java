@@ -1,16 +1,7 @@
 package com.relayd.ejb.orm.file;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
-import org.apache.commons.lang3.SerializationUtils;
 
 import com.relayd.Person;
 import com.relayd.ejb.PersonGateway;
@@ -23,44 +14,13 @@ import com.relayd.ejb.PersonGateway;
  */
 public class PersonGatewayFile implements PersonGateway {
 
-	private String fileName = "person.relayD";
-
 	private PersonToPersonMapper personToPersonMapper = PersonToPersonMapper.newInstance();
 
 	public PersonGatewayFile() {
-		initFile();
 	}
 
 	PersonGatewayFile(String aFileName) {
-		setFileName(aFileName);
-		initFile();
-	}
-
-	private void initFile() {
-		File file = new File(getFileName());
-		if (!file.exists()) {
-			List<Person> persons = new ArrayList<>();
-			try {
-				put(persons);
-			} catch (IOException e) {
-				throw new RuntimeException("Error", e);
-			}
-		}
-	}
-
-	public void clear() {
-		try {
-			put(new ArrayList<>());
-		} catch (IOException e) {
-			throw new RuntimeException("Error", e);
-		}
-	}
-
-	private void put(List<Person> somePersons) throws IOException {
-		FileOutputStream fileOutputStream;
-		fileOutputStream = new FileOutputStream(getFileName());
-		SerializationUtils.serialize((Serializable) somePersons, fileOutputStream);
-		fileOutputStream.close();
+		FileSingleton.getInstance().setFileName(aFileName);
 	}
 
 	@Override
@@ -87,12 +47,7 @@ public class PersonGatewayFile implements PersonGateway {
 		} else {
 			somePersons.add(updatePerson);
 		}
-
-		try {
-			put(somePersons);
-		} catch (IOException e) {
-			throw new RuntimeException("Error - IOException ", e);
-		}
+		FileSingleton.getInstance().setPersons(somePersons);
 	}
 
 	@Override
@@ -101,36 +56,13 @@ public class PersonGatewayFile implements PersonGateway {
 		dummyRelayEvent.setUuid(uuid);
 		List<Person> all = getAll();
 		all.remove(dummyRelayEvent);
-		try {
-			put(all);
-		} catch (IOException e) {
-			throw new RuntimeException("Error", e);
-		}
+		FileSingleton.getInstance().setPersons(all);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Person> getAll() {
-		FileInputStream fileInputStream;
-		List<Person> somePersons = new ArrayList<>();
-		try {
-			fileInputStream = new FileInputStream(getFileName());
-			somePersons = (ArrayList<Person>) SerializationUtils.deserialize(fileInputStream);
-			fileInputStream.close();
-		} catch (FileNotFoundException e) {
-			throw new RuntimeException("Error - FileNotFoundException", e);
-		} catch (IOException e) {
-			throw new RuntimeException("Error - IOException", e);
-		}
-		return somePersons;
-	}
+		return FileSingleton.getInstance().getPersons();
 
-	public String getFileName() {
-		return fileName;
-	}
-
-	public void setFileName(String aFileName) {
-		fileName = aFileName;
 	}
 
 	private PersonToPersonMapper getPersonToPersonMapper() {

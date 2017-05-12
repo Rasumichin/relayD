@@ -4,12 +4,14 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.relayd.Person;
 import com.relayd.RelayEvent;
 
 public class BigData implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private List<RelayEvent> relayEvents = new ArrayList<>();
+	private List<Person> persons = new ArrayList<>();
 
 	private BigData() {
 	}
@@ -24,5 +26,13 @@ public class BigData implements Serializable {
 
 	public void setRelayEvents(List<RelayEvent> aRelayEvents) {
 		relayEvents = aRelayEvents;
+	}
+
+	public List<Person> getPersons() {
+		return persons;
+	}
+
+	public void setPersons(List<Person> aPersons) {
+		persons = aPersons;
 	}
 }

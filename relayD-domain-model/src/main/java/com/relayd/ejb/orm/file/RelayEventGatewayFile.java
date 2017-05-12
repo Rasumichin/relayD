@@ -22,10 +22,9 @@ public class RelayEventGatewayFile implements RelayEventGateway {
 		FileSingleton.getInstance().setFileName(aFilename);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<RelayEvent> getAll() {
-		return FileSingleton.getInstance().get();
+		return FileSingleton.getInstance().getRelays();
 	}
 
 	@Override
@@ -43,7 +42,7 @@ public class RelayEventGatewayFile implements RelayEventGateway {
 			someRelayEvents.add(updateRelayEvent);
 		}
 
-		FileSingleton.getInstance().put(someRelayEvents);
+		FileSingleton.getInstance().setRelayEvents(someRelayEvents);
 	}
 
 	private RelayEventToRelayEventMapper getRelayEventToRelayEventMapper() {

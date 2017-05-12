@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.SerializationUtils;
 
+import com.relayd.Person;
 import com.relayd.RelayEvent;
 
 /**
@@ -45,15 +46,15 @@ public class FileSingleton {
 			BigData bigData = BigData.newInstance();
 			List<RelayEvent> relayEvents = new ArrayList<>();
 			bigData.setRelayEvents(relayEvents);
-			put(bigData);
+			set(bigData);
 		}
 	}
 
 	void clear() {
-		put(BigData.newInstance());
+		set(BigData.newInstance());
 	}
 
-	private void put(BigData aBigData) {
+	private void set(BigData aBigData) {
 		try {
 			FileOutputStream fileOutputStream;
 			fileOutputStream = new FileOutputStream(getFileName());
@@ -65,10 +66,28 @@ public class FileSingleton {
 
 	}
 
-	public void put(List<RelayEvent> someRelayEvents) {
+	public List<RelayEvent> getRelays() {
+		List<RelayEvent> eventsAsList = new ArrayList<RelayEvent>();
+		eventsAsList.addAll(getBigData().getRelayEvents());
+		return eventsAsList;
+	}
+
+	public void setRelayEvents(List<RelayEvent> someRelayEvents) {
 		BigData bigData = getBigData();
 		bigData.setRelayEvents(someRelayEvents);
-		put(bigData);
+		set(bigData);
+	}
+
+	public List<Person> getPersons() {
+		List<Person> personsAsList = new ArrayList<Person>();
+		personsAsList.addAll(getBigData().getPersons());
+		return personsAsList;
+	}
+
+	public void setPersons(List<Person> somePersons) {
+		BigData bigData = getBigData();
+		bigData.setPersons(somePersons);
+		set(bigData);
 	}
 
 	private BigData getBigData() {
@@ -84,11 +103,5 @@ public class FileSingleton {
 			throw new RuntimeException("Error - IOException", e);
 		}
 		return bigData;
-	}
-
-	public List<RelayEvent> get() {
-		List<RelayEvent> eventsAsList = new ArrayList<RelayEvent>();
-		eventsAsList.addAll(getBigData().getRelayEvents());
-		return eventsAsList;
 	}
 }
