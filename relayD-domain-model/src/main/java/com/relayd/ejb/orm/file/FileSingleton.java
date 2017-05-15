@@ -11,7 +11,6 @@ import java.util.List;
 import org.apache.commons.lang3.SerializationUtils;
 
 import com.relayd.Person;
-import com.relayd.Relay;
 import com.relayd.RelayEvent;
 
 /**
@@ -68,7 +67,7 @@ public class FileSingleton {
 	}
 
 	public List<RelayEvent> getRelayEvents() {
-		List<RelayEvent> eventsAsList = new ArrayList<RelayEvent>();
+		List<RelayEvent> eventsAsList = new ArrayList<>();
 		eventsAsList.addAll(getBigData().getRelayEvents());
 		return eventsAsList;
 	}
@@ -80,7 +79,7 @@ public class FileSingleton {
 	}
 
 	public List<Person> getPersons() {
-		List<Person> personsAsList = new ArrayList<Person>();
+		List<Person> personsAsList = new ArrayList<>();
 		personsAsList.addAll(getBigData().getPersons());
 		return personsAsList;
 	}
@@ -88,18 +87,6 @@ public class FileSingleton {
 	public void setPersons(List<Person> somePersons) {
 		BigData bigData = getBigData();
 		bigData.setPersons(somePersons);
-		set(bigData);
-	}
-
-	public List<Relay> getRelays() {
-		List<Relay> relayAsList = new ArrayList<Relay>();
-		relayAsList.addAll(getBigData().getRelays());
-		return relayAsList;
-	}
-
-	public void setRelays(List<Relay> someRelays) {
-		BigData bigData = getBigData();
-		bigData.setRelays(someRelays);
 		set(bigData);
 	}
 
