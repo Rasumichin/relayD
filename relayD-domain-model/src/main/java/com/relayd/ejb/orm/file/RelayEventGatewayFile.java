@@ -24,7 +24,7 @@ public class RelayEventGatewayFile implements RelayEventGateway {
 
 	@Override
 	public List<RelayEvent> getAll() {
-		return FileSingleton.getInstance().getRelays();
+		return FileSingleton.getInstance().getRelayEvents();
 	}
 
 	@Override

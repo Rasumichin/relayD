@@ -66,7 +66,7 @@ public class FileSingleton {
 
 	}
 
-	public List<RelayEvent> getRelays() {
+	public List<RelayEvent> getRelayEvents() {
 		List<RelayEvent> eventsAsList = new ArrayList<RelayEvent>();
 		eventsAsList.addAll(getBigData().getRelayEvents());
 		return eventsAsList;
