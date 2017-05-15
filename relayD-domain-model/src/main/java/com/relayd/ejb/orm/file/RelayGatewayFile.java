@@ -1,16 +1,7 @@
 package com.relayd.ejb.orm.file;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
-import org.apache.commons.lang3.SerializationUtils;
 
 import com.relayd.Relay;
 import com.relayd.ejb.RelayGateway;
@@ -22,69 +13,19 @@ import com.relayd.ejb.RelayGateway;
  */
 public class RelayGatewayFile implements RelayGateway {
 
-	private String fileName = "relay.relayD";
-
 	private RelayToRelayMapper relayToRelayMapper = RelayToRelayMapper.newInstance();
 
 	public RelayGatewayFile() {
-		initFile();
 	}
 
 	RelayGatewayFile(String aFileName) {
-		setFileName(aFileName);
-		initFile();
-	}
-
-	private void initFile() {
-		File file = new File(getFileName());
-		if (!file.exists()) {
-			List<Relay> relays = new ArrayList<>();
-			try {
-				put(relays);
-			} catch (IOException e) {
-				throw new RuntimeException("Error", e);
-			}
-		}
-	}
-
-	void clear() {
-		try {
-			put(new ArrayList<>());
-		} catch (IOException e) {
-			throw new RuntimeException("Error", e);
-		}
-	}
-
-	private void put(List<Relay> someRelays) throws IOException {
-		FileOutputStream fileOutputStream;
-		fileOutputStream = new FileOutputStream(getFileName());
-		SerializationUtils.serialize((Serializable) someRelays, fileOutputStream);
-		fileOutputStream.close();
-	}
-
-	private String getFileName() {
-		return fileName;
-	}
-
-	private void setFileName(String aFileName) {
-		fileName = aFileName;
+		FileSingleton.getInstance().setFileName(aFileName);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Relay> getAll() {
-		FileInputStream fileInputStream;
-		List<Relay> relays = new ArrayList<>();
-		try {
-			fileInputStream = new FileInputStream(getFileName());
-			relays = (ArrayList<Relay>) SerializationUtils.deserialize(fileInputStream);
-			fileInputStream.close();
-		} catch (FileNotFoundException e) {
-			throw new RuntimeException("Error - FileNotFoundException", e);
-		} catch (IOException e) {
-			throw new RuntimeException("Error - IOException", e);
-		}
-		return relays;
+		return FileSingleton.getInstance().getRelays();
 	}
 
 	@Override
@@ -101,12 +42,8 @@ public class RelayGatewayFile implements RelayGateway {
 		} else {
 			someRelays.add(updateRelay);
 		}
+		FileSingleton.getInstance().setRelays(someRelays);
 
-		try {
-			put(someRelays);
-		} catch (IOException e) {
-			throw new RuntimeException("Error - IOException ", e);
-		}
 	}
 
 	@Override

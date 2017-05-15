@@ -1,16 +1,7 @@
 package com.relayd.ejb.orm.file;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
-import org.apache.commons.lang3.SerializationUtils;
 
 import com.relayd.RelayEvent;
 import com.relayd.ejb.RelayEventGateway;
@@ -22,70 +13,18 @@ import com.relayd.ejb.RelayEventGateway;
  */
 public class RelayEventGatewayFile implements RelayEventGateway {
 
-	private String fileName = "relayEvent.relayD";
-
 	private RelayEventToRelayEventMapper relayEventToRelayEventMapper = RelayEventToRelayEventMapper.newInstance();
 
 	public RelayEventGatewayFile() {
-		initFile();
 	}
 
-	RelayEventGatewayFile(String aFileName) {
-		setFileName(aFileName);
-		initFile();
+	public RelayEventGatewayFile(String aFilename) {
+		FileSingleton.getInstance().setFileName(aFilename);
 	}
 
-	private String getFileName() {
-		return fileName;
-	}
-
-	private void setFileName(String aFileName) {
-		fileName = aFileName;
-	}
-
-	private void initFile() {
-		File file = new File(getFileName());
-		if (!file.exists()) {
-			List<RelayEvent> relayEvents = new ArrayList<>();
-			try {
-				put(relayEvents);
-			} catch (IOException e) {
-				throw new RuntimeException("Error", e);
-			}
-		}
-	}
-
-	void clear() {
-		try {
-			put(new ArrayList<>());
-		} catch (IOException e) {
-			throw new RuntimeException("Error", e);
-		}
-	}
-
-	private void put(List<RelayEvent> someRelayEvents) throws IOException {
-		FileOutputStream fileOutputStream;
-		fileOutputStream = new FileOutputStream(getFileName());
-		SerializationUtils.serialize((Serializable) someRelayEvents, fileOutputStream);
-		fileOutputStream.close();
-	}
-
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<RelayEvent> getAll() {
-		List<RelayEvent> eventsAsList = new ArrayList<RelayEvent>();
-
-		FileInputStream fileInputStream;
-		try {
-			fileInputStream = new FileInputStream(getFileName());
-			eventsAsList.addAll((ArrayList<RelayEvent>) SerializationUtils.deserialize(fileInputStream));
-			fileInputStream.close();
-		} catch (FileNotFoundException e) {
-			throw new RuntimeException("Error - FileNotFoundException", e);
-		} catch (IOException e) {
-			throw new RuntimeException("Error - IOException", e);
-		}
-		return eventsAsList;
+		return FileSingleton.getInstance().getRelayEvents();
 	}
 
 	@Override
@@ -103,11 +42,7 @@ public class RelayEventGatewayFile implements RelayEventGateway {
 			someRelayEvents.add(updateRelayEvent);
 		}
 
-		try {
-			put(someRelayEvents);
-		} catch (IOException e) {
-			throw new RuntimeException("Error - IOException ", e);
-		}
+		FileSingleton.getInstance().setRelayEvents(someRelayEvents);
 	}
 
 	private RelayEventToRelayEventMapper getRelayEventToRelayEventMapper() {
@@ -122,5 +57,9 @@ public class RelayEventGatewayFile implements RelayEventGateway {
 			}
 		}
 		return null;
+	}
+
+	void clear() {
+		FileSingleton.getInstance().clear();
 	}
 }

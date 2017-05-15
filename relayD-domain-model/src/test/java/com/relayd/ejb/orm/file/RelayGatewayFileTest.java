@@ -18,11 +18,11 @@ import com.relayd.ejb.RelayGatewayTest;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class RelayGatewayFileTest extends RelayGatewayTest {
 
-	private RelayGatewayFile sut = new RelayGatewayFile("relayTest.relayD");
+	private RelayGatewayFile sut = new RelayGatewayFile("bigDataTest.relayD");
 
 	@Before
 	public void setUp() {
-		sut.clear();
+		FileSingleton.getInstance().clear();
 	}
 
 	@Override

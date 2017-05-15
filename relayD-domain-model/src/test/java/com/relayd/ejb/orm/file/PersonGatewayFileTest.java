@@ -18,11 +18,11 @@ import com.relayd.ejb.PersonGatewayTest;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class PersonGatewayFileTest extends PersonGatewayTest {
 
-	private PersonGatewayFile sut = new PersonGatewayFile("personTest.relayD");
+	private PersonGatewayFile sut = new PersonGatewayFile("bigDataTest.relayD");
 
 	@Before
 	public void setUp() {
-		sut.clear();
+		FileSingleton.getInstance().clear();
 	}
 
 	@Override
