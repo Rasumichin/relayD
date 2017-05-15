@@ -1,9 +1,13 @@
 package com.relayd.ejb.orm.file;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.runners.MethodSorters;
 
+import com.relayd.RelayEvent;
 import com.relayd.ejb.RelayGateway;
 import com.relayd.ejb.RelayGatewayTest;
 
@@ -23,6 +27,10 @@ public class RelayGatewayFileTest extends RelayGatewayTest {
 	@Before
 	public void setUp() {
 		FileSingleton.getInstance().clear();
+		List<RelayEvent> someRelayEvents = new ArrayList<>();
+		someRelayEvents.add(metroMarathon);
+
+		FileSingleton.getInstance().setRelayEvents(someRelayEvents);
 	}
 
 	@Override

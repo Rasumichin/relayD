@@ -2,6 +2,8 @@ package com.relayd.web.pagebean;
 
 import static org.junit.Assert.*;
 
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.UUID;
 
 import org.junit.Before;
@@ -15,6 +17,9 @@ import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.relayd.Relay;
+import com.relayd.RelayEvent;
+import com.relayd.attributes.EventDay;
+import com.relayd.attributes.Eventname;
 import com.relayd.web.bridge.RelayBridge;
 
 import static org.mockito.Mockito.*;
@@ -45,16 +50,21 @@ public class RelayEditPageBeanTest {
 
 	@Test
 	public void testOpenDialogForCreateRelay() {
-		sut.openDialogForCreateRelay();
+		RelayEvent metroMarathon = RelayEvent.newInstance(Eventname.newInstance("Metro Marathon"), EventDay.newInstance(LocalDate.of(2017, Month.APRIL, 30)));
 
-		verify(sut).prepareNewRelay();
+		sut.openDialogForCreateRelay(metroMarathon);
+
+		verify(sut).createNewRelay(metroMarathon);
 		verify(sut).openDialog();
 	}
 
 	@Test
 	public void testCreateNewRelay() {
-		Relay actual = sut.createNewRelay();
+		RelayEvent metroMarathon = RelayEvent.newInstance(Eventname.newInstance("Metro Marathon"), EventDay.newInstance(LocalDate.of(2017, Month.APRIL, 30)));
+
+		Relay actual = sut.createNewRelay(metroMarathon);
 		assertNotNull("Relay is not initialized.", actual);
+		assertEquals("[getRelayEvent] not correct!", metroMarathon, actual.getRelayEvent());
 	}
 
 	@Test

@@ -34,12 +34,26 @@ public class RelayEditPageBean implements Serializable {
 		relayBridge = new RelayBridgeImpl();
 	}
 
-	void closeDialog() {
-		RequestContext.getCurrentInstance().closeDialog(workingRelay);
+	public void openDialogForCreateRelay(RelayEvent activeRelayEvent) {
+		workingRelay = createNewRelay(activeRelayEvent);
+		openDialog();
 	}
 
-	public void cancel() {
-		closeDialog();
+	Relay createNewRelay(RelayEvent relayEvent) {
+		Relay relay = Relay.newInstance(relayEvent);
+		// TODO REL-261 - Wie bekommt man die Verknüpfung besser hin?
+		relayEvent.addRelay(relay);
+		return relay;
+	}
+
+	void openDialog() {
+		Map<String, Object> options = new DialogOptionsBuilder().height(140).build();
+		RequestContext.getCurrentInstance().openDialog(NavigationConstants.RELAY_EDIT_DIALOG_ID, options, null);
+	}
+
+	public void openDialogFor(UUID uuid) {
+		workingRelay = getRelay(uuid);
+		openDialog();
 	}
 
 	public void setRelayname(Relayname aRelayname) {
@@ -58,51 +72,28 @@ public class RelayEditPageBean implements Serializable {
 		return workingRelay.getDuration();
 	}
 
-	public void openDialogForCreateRelay() {
-		prepareNewRelay();
-		openDialog();
+	Relay getRelay(UUID uuid) {
+		return getBridge().get(uuid);
 	}
 
-	void prepareNewRelay() {
-		workingRelay = createNewRelay();
-	}
-
-	Relay createNewRelay() {
-		//TODO (Christian, Version 1.4): darf nicht nur düsseldorf sein - sollte auswählbar sein?
-		Relay relay = Relay.newInstance(RelayEvent.duesseldorf());
-		return relay;
+	private RelayBridge getBridge() {
+		return relayBridge;
 	}
 
 	public void save() {
-		addRelayToSelectedEvent();
 		persistRelay();
 		closeDialog();
-	}
-
-	private void addRelayToSelectedEvent() {
-		RelayEvent relayEvent = RelayEvent.duesseldorf();
-		relayEvent.addRelay(workingRelay);
-	}
-
-	void openDialog() {
-		Map<String, Object> options = new DialogOptionsBuilder().height(140).build();
-		RequestContext.getCurrentInstance().openDialog(NavigationConstants.RELAY_EDIT_DIALOG_ID, options, null);
-	}
-
-	public void openDialogFor(UUID uuid) {
-		workingRelay = getRelay(uuid);
-		openDialog();
-	}
-
-	Relay getRelay(UUID uuid) {
-		return getBridge().get(uuid);
 	}
 
 	void persistRelay() {
 		getBridge().set(workingRelay);
 	}
 
-	private RelayBridge getBridge() {
-		return relayBridge;
+	public void cancel() {
+		closeDialog();
+	}
+
+	void closeDialog() {
+		RequestContext.getCurrentInstance().closeDialog(workingRelay);
 	}
 }

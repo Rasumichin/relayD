@@ -21,12 +21,15 @@ import org.primefaces.model.TreeNode;
 import com.relayd.Member;
 import com.relayd.Person;
 import com.relayd.Relay;
+import com.relayd.RelayEvent;
 import com.relayd.attributes.Forename;
 import com.relayd.attributes.Surename;
 import com.relayd.web.bridge.PersonBridge;
 import com.relayd.web.bridge.PersonBridgeImpl;
 import com.relayd.web.bridge.RelayBridge;
 import com.relayd.web.bridge.RelayBridgeImpl;
+import com.relayd.web.bridge.RelayEventBridge;
+import com.relayd.web.bridge.RelayEventBridgeImpl;
 import com.relayd.web.bridge.TreeNodeRow;
 import com.relayd.web.bridge.TreeNodeRowRelay;
 import com.relayd.web.local.I18N;
@@ -46,14 +49,17 @@ public class RelayBrowsePageBean implements Serializable {
 
 	private TreeNode selectedTreeNode;
 
-	private RelayBridge relayBridge = null;
-	private PersonBridge personBridge = null;
+	private RelayBridge relayBridge;
+	private PersonBridge personBridge;
+	private RelayEventBridge relayEventBridge;
 
 	private PersonSort personSort = new PersonSort();
 	private List<Person> searchResult = new ArrayList<Person>();
 	private List<Person> filteredPersons;
 
 	private List<Person> selectedPersons;
+
+	private RelayEvent activeRelayEvent;
 
 	@ManagedProperty(value = "#{personEditPageBean}")
 	private PersonEditPageBean personEditPageBean;
@@ -64,6 +70,9 @@ public class RelayBrowsePageBean implements Serializable {
 	@PostConstruct
 	public void init() {
 		relayBridge = new RelayBridgeImpl();
+		relayEventBridge = new RelayEventBridgeImpl();
+		// TODO REL-193 Es wird Defaultmaessig erstmal immer der erste (und einzige) genommen
+		activeRelayEvent = relayEventBridge.all().get(0);
 		refreshRelays();
 		refreshPersons();
 	}
@@ -97,7 +106,7 @@ public class RelayBrowsePageBean implements Serializable {
 	}
 
 	public void addRelay(@SuppressWarnings("unused") ActionEvent actionEvent) {
-		getRelayEditPageBean().openDialogForCreateRelay();
+		getRelayEditPageBean().openDialogForCreateRelay(activeRelayEvent);
 	}
 
 	public void editRelay(@SuppressWarnings("unused") ActionEvent actionEvent) {
