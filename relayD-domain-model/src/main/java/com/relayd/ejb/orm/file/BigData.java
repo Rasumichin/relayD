@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.relayd.Person;
+import com.relayd.Relay;
 import com.relayd.RelayEvent;
 
 public class BigData implements Serializable {
@@ -12,6 +13,7 @@ public class BigData implements Serializable {
 
 	private List<RelayEvent> relayEvents = new ArrayList<>();
 	private List<Person> persons = new ArrayList<>();
+	private List<Relay> relays = new ArrayList<>();
 
 	private BigData() {
 	}
@@ -34,5 +36,16 @@ public class BigData implements Serializable {
 
 	public void setPersons(List<Person> aPersons) {
 		persons = aPersons;
+	}
+
+	public List<Relay> getRelays() {
+		if (relays == null) {
+			relays = new ArrayList<>();
+		}
+		return relays;
+	}
+
+	public void setRelays(List<Relay> aRelays) {
+		relays = aRelays;
 	}
 }
