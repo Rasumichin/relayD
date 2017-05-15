@@ -263,6 +263,14 @@ public class RelayEventTest {
 	}
 
 	@Test
+	public void testToString() {
+		String actual = sut.toString();
+		String expected = "Metro Group Marathon Düsseldorf, 2017-04-30";
+
+		assertEquals("[toString] not correct!", expected, actual);
+	}
+
+	@Test
 	public void testGetHashCode() {
 		UUID uuid = UUID.fromString("53a27b33-a5cb-4997-8eaf-dcf8bd1cb2d2");
 		sut.setUuid(uuid);

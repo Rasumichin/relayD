@@ -171,6 +171,11 @@ public class RelayEvent implements Serializable {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return name + ", " + eventDay;
+	}
+
 	static final class RelayEventDuesseldorf extends RelayEvent {
 		private static final long serialVersionUID = -3419762542997706672L;
 		private static final Eventname eventName = Eventname.newInstance("Metro Group Marathon Düsseldorf");
