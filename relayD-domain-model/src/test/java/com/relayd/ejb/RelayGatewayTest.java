@@ -2,6 +2,8 @@ package com.relayd.ejb;
 
 import static org.junit.Assert.*;
 
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.List;
 import java.util.UUID;
 
@@ -10,6 +12,9 @@ import org.junit.Test;
 import com.relayd.Member;
 import com.relayd.MemberBuilder;
 import com.relayd.Relay;
+import com.relayd.RelayEvent;
+import com.relayd.attributes.EventDay;
+import com.relayd.attributes.Eventname;
 import com.relayd.attributes.Position;
 import com.relayd.attributes.Relayname;
 
@@ -24,6 +29,8 @@ import com.relayd.attributes.Relayname;
  *
  */
 public abstract class RelayGatewayTest {
+
+	protected RelayEvent metroMarathon = RelayEvent.newInstance(Eventname.newInstance("Metro Marathon"), EventDay.newInstance(LocalDate.of(2017, Month.APRIL, 30)));
 
 	public abstract RelayGateway getSut();
 
@@ -46,7 +53,7 @@ public abstract class RelayGatewayTest {
 
 		assertTrue("The List of relays must be empty!", actual);
 
-		Relay relay = Relay.newInstance();
+		Relay relay = Relay.newInstance(metroMarathon);
 
 		getSut().set(relay);
 
@@ -68,7 +75,7 @@ public abstract class RelayGatewayTest {
 
 		assertTrue("The List of relays must be empty!", isEmpty);
 
-		Relay relay = Relay.newInstance();
+		Relay relay = Relay.newInstance(metroMarathon);
 		Relayname relayname = Relayname.newInstance("Die 4 ????");
 		relay.setRelayname(relayname);
 
@@ -101,7 +108,7 @@ public abstract class RelayGatewayTest {
 	@Test
 	public void testSet_ForExistingRelay() {
 		// ARRANGE
-		Relay firstRelay = Relay.newInstance();
+		Relay firstRelay = Relay.newInstance(metroMarathon);
 		firstRelay.setRelayname(Relayname.newInstance("Staffel 1"));
 		UUID uuidFromFirstMember = firstRelay.getUuid();
 
@@ -123,15 +130,14 @@ public abstract class RelayGatewayTest {
 	}
 
 	private Relay createRelayStaubwolke() {
-		Relay relay = Relay.newInstance();
+		Relay relay = Relay.newInstance(metroMarathon);
 		relay.setRelayname(Relayname.newInstance("Staubwolke"));
 		return relay;
 	}
 
 	private Relay createHotRunners() {
-		Relay relay = Relay.newInstance();
+		Relay relay = Relay.newInstance(metroMarathon);
 		relay.setRelayname(Relayname.newInstance("HotRunners"));
 		return relay;
 	}
-
 }
