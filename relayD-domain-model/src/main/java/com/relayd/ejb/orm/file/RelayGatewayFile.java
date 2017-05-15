@@ -1,9 +1,12 @@
 package com.relayd.ejb.orm.file;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import com.relayd.Relay;
+import com.relayd.RelayEvent;
 import com.relayd.ejb.RelayGateway;
 
 /**
@@ -22,16 +25,20 @@ public class RelayGatewayFile implements RelayGateway {
 		FileSingleton.getInstance().setFileName(aFileName);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Relay> getAll() {
-		return FileSingleton.getInstance().getRelays();
+		List<RelayEvent> someRelayEvents = FileSingleton.getInstance().getRelayEvents();
+		RelayEvent relayEvent = someRelayEvents.get(0);
+		List<Relay> someRelays = new ArrayList<>();
+		someRelays.addAll(relayEvent.getRelays());
+		return someRelays;
 	}
 
 	@Override
 	public void set(Relay updateRelay) {
-		List<Relay> someRelays = getAll();
-
+		List<RelayEvent> someRelayEvents = FileSingleton.getInstance().getRelayEvents();
+		RelayEvent relayEvent = someRelayEvents.get(0);
+		Set<Relay> someRelays = relayEvent.getRelays();
 		if (someRelays.contains(updateRelay)) {
 			for (Relay eachRelay : someRelays) {
 				if (updateRelay.equals(eachRelay)) {
@@ -40,10 +47,9 @@ public class RelayGatewayFile implements RelayGateway {
 				}
 			}
 		} else {
-			someRelays.add(updateRelay);
+			relayEvent.addRelay(updateRelay);
 		}
-		FileSingleton.getInstance().setRelays(someRelays);
-
+		FileSingleton.getInstance().setRelayEvents(someRelayEvents);
 	}
 
 	@Override
