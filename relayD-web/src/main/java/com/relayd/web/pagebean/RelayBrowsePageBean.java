@@ -13,7 +13,9 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.faces.event.AjaxBehaviorEvent;
 
+import org.primefaces.component.selectonemenu.SelectOneMenu;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.TreeNode;
@@ -60,6 +62,8 @@ public class RelayBrowsePageBean implements Serializable {
 	private List<Person> selectedPersons;
 
 	private RelayEvent activeRelayEvent;
+
+	private String relayEvent;
 
 	@ManagedProperty(value = "#{personEditPageBean}")
 	private PersonEditPageBean personEditPageBean;
@@ -364,5 +368,29 @@ public class RelayBrowsePageBean implements Serializable {
 			}
 		}
 		return relayCount;
+	}
+
+	public String getRelayEvent() {
+		return relayEvent;
+	}
+
+	public void setRelayEvent(String aRelayEvent) {
+		relayEvent = aRelayEvent;
+	}
+
+	public List<String> getRelayEvents() {
+		List<String> relayEvents = new ArrayList<>();
+		relayEvents.add("2017");
+		relayEvents.add("2018 - not supported");
+		return relayEvents;
+
+	}
+
+	public void switchRelayEvent(AjaxBehaviorEvent ajax) {
+		SelectOneMenu selectOneMenu = (SelectOneMenu) ajax.getSource();
+		String selectedRelayEvent = (String) selectOneMenu.getValue();
+		//		Settings.setGatewayType(selectedGatewayType);
+
+		System.out.println("RelayEvent -> " + selectedRelayEvent);
 	}
 }

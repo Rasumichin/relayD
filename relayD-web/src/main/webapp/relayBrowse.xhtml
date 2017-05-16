@@ -134,6 +134,23 @@
 					icon="ui-icon-circle-triangle-e"
 					actionListener="#{relayBrowsePageBean.removePersonFromRelay}">
 				</p:commandButton>
+				<p:selectOneMenu
+					id="relayEvent"
+					style="width:70%"
+					value="#{relayBrowsePageBean.relayEvent}"
+					var="entry"
+					>
+					<f:selectItems
+						value="#{relayBrowsePageBean.relayEvents}"
+						var="relayEvent"
+						itemValue="#{relayEvent}" />
+					<p:column>
+					#{entry}
+					</p:column>
+						<p:ajax
+						global="false"
+						listener="#{relayBrowsePageBean.switchRelayEvent}" />
+				</p:selectOneMenu>
 
 			</p:layoutUnit>
 
