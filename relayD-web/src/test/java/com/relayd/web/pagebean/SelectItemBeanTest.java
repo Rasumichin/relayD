@@ -26,24 +26,29 @@ public class SelectItemBeanTest {
 
 	@Test
 	public void testGetGatewayTypes() {
-		List<GatewayType> result = sut.getGatewayTypes();
+		List<GatewayType> actual = sut.getGatewayTypes();
 
-		assertNotNull("[result] not correct!", result);
+		assertNotNull("[actual] not correct!", actual);
 
-		int size = result.size();
+		int size = actual.size();
 
-		assertEquals("[result] size not correct!", 3, size);
+		assertEquals("[actual] size not correct!", 3, size);
+	}
+
+	@Test(expected = UnsupportedOperationException.class)
+	public void testModifyGatewayTypes() {
+		sut.getGatewayTypes().add(GatewayType.FILE);
 	}
 
 	@Test
 	public void testGetShirtsizes() {
-		List<Shirtsize> result = sut.getShirtsizes();
+		List<Shirtsize> actual = sut.getShirtsizes();
 
-		assertNotNull("[result] not correct!", result);
+		assertNotNull("[actual] not correct!", actual);
 
-		int size = result.size();
+		int size = actual.size();
 
-		assertEquals("[result] size not correct!", 11, size);
+		assertEquals("[actual] size not correct!", 11, size);
 	}
 
 	@Test(expected = UnsupportedOperationException.class)
@@ -53,17 +58,33 @@ public class SelectItemBeanTest {
 
 	@Test
 	public void testGetPositions() {
-		List<Position> result = sut.getPositions();
+		List<Position> actual = sut.getPositions();
 
-		assertNotNull("[result] not correct!", result);
+		assertNotNull("[actual] not correct!", actual);
 
-		int size = result.size();
+		int size = actual.size();
 
-		assertEquals("[result] size not correct!", 5, size);
+		assertEquals("[actual] size not correct!", 5, size);
 	}
 
 	@Test(expected = UnsupportedOperationException.class)
-	public void testPositionsModify() {
+	public void testModifyPositions() {
 		sut.getPositions().add(Position.FIRST);
+	}
+
+	@Test
+	public void testGetEventYears() {
+		List<EventYear> actual = sut.getEventYears();
+
+		assertNotNull("[actual] not correct!", actual);
+
+		int size = actual.size();
+
+		assertEquals("[actual] size not correct!", 3, size);
+	}
+
+	@Test(expected = UnsupportedOperationException.class)
+	public void testModifyEventYears() {
+		sut.getEventYears().add(EventYear.YEAR_2016);
 	}
 }
