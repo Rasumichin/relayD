@@ -60,10 +60,7 @@ public class RelayBrowsePageBean implements Serializable {
 	private List<Person> filteredPersons;
 
 	private List<Person> selectedPersons;
-
-	private RelayEvent activeRelayEvent;
-
-	private String relayEvent;
+	private EventYear eventYear;
 
 	@ManagedProperty(value = "#{personEditPageBean}")
 	private PersonEditPageBean personEditPageBean;
@@ -75,8 +72,6 @@ public class RelayBrowsePageBean implements Serializable {
 	public void init() {
 		relayBridge = new RelayBridgeImpl();
 		relayEventBridge = new RelayEventBridgeImpl();
-		// TODO REL-193 Es wird Defaultmaessig erstmal immer der erste (und einzige) genommen
-		activeRelayEvent = relayEventBridge.all().get(0);
 		refreshRelays();
 		refreshPersons();
 	}
@@ -86,7 +81,10 @@ public class RelayBrowsePageBean implements Serializable {
 	}
 
 	private void refreshRelays() {
-		root = relayBridge.all();
+		// TODO REL-193 Es wird Defaultmaessig erstmal immer der erste (und einzige) genommen
+		relayEvents = relayEventBridge.all();
+		relayEvent = relayEvents.get(0);
+		root = relayBridge.convertToTreeNode(relayEvent.getRelays());
 	}
 
 	public RelayEditPageBean getRelayEditPageBean() {
@@ -110,7 +108,7 @@ public class RelayBrowsePageBean implements Serializable {
 	}
 
 	public void addRelay(@SuppressWarnings("unused") ActionEvent actionEvent) {
-		getRelayEditPageBean().openDialogForCreateRelay(activeRelayEvent);
+		getRelayEditPageBean().openDialogForCreateRelay(relayEvent);
 	}
 
 	public void editRelay(@SuppressWarnings("unused") ActionEvent actionEvent) {
@@ -364,33 +362,44 @@ public class RelayBrowsePageBean implements Serializable {
 						relayCount++;
 					}
 				}
-
 			}
 		}
 		return relayCount;
 	}
 
-	public String getRelayEvent() {
+	public EventYear getEventYear() {
+		return eventYear;
+	}
+
+	public void setEventYear(EventYear aEventYear) {
+		eventYear = aEventYear;
+	}
+
+	public void switchEventYear(AjaxBehaviorEvent ajax) {
+		SelectOneMenu selectOneMenu = (SelectOneMenu) ajax.getSource();
+		EventYear selectedEventYear = (EventYear) selectOneMenu.getValue();
+	}
+
+	// ***********************************************************************************
+	// TODO - REL-  - Mit dem Domain Objekt funktioniert die Combobox seltsamerweise nicht.
+	private List<RelayEvent> relayEvents;
+	private RelayEvent relayEvent;
+
+	public RelayEvent getRelayEvent() {
 		return relayEvent;
 	}
 
-	public void setRelayEvent(String aRelayEvent) {
-		relayEvent = aRelayEvent;
+	public void setRelayEvent(RelayEvent aRelayEvent) {
+		//		relayEvent = aRelayEvent;
 	}
 
-	public List<String> getRelayEvents() {
-		List<String> relayEvents = new ArrayList<>();
-		relayEvents.add("2017");
-		relayEvents.add("2018 - not supported");
+	public List<RelayEvent> getRelayEvents() {
 		return relayEvents;
-
 	}
 
 	public void switchRelayEvent(AjaxBehaviorEvent ajax) {
 		SelectOneMenu selectOneMenu = (SelectOneMenu) ajax.getSource();
-		String selectedRelayEvent = (String) selectOneMenu.getValue();
-		//		Settings.setGatewayType(selectedGatewayType);
-
-		System.out.println("RelayEvent -> " + selectedRelayEvent);
+		RelayEvent selectedRelayEvent = (RelayEvent) selectOneMenu.getValue();
+		//		converter="com.relayd.web.converter.RelayEventValueObjectConverter"
 	}
 }

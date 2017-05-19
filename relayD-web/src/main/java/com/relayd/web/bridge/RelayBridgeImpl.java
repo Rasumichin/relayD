@@ -1,6 +1,8 @@
 package com.relayd.web.bridge;
 
-import java.util.List;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 import org.primefaces.model.DefaultTreeNode;
@@ -23,10 +25,14 @@ public class RelayBridgeImpl implements RelayBridge {
 	@SuppressWarnings("unused")
 	@Override
 	public TreeNode all() {
+		Collection<Relay> all = getGateway().getAll();
+		Set<Relay> relayAsSet = new HashSet(all);
+		return convertToTreeNode(relayAsSet);
+	}
+
+	@Override
+	public TreeNode convertToTreeNode(Set<Relay> all) {
 		TreeNode root = new DefaultTreeNode();
-
-		List<Relay> all = getGateway().getAll();
-
 		for (Relay relay : all) {
 
 			// Methodik übernommen aus dem Primefaces-Beispiel.
