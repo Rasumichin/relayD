@@ -37,7 +37,9 @@ public class RelayGatewayFile implements RelayGateway {
 	@Override
 	public void set(Relay updateRelay) {
 		List<RelayEvent> someRelayEvents = FileSingleton.getInstance().getRelayEvents();
-		RelayEvent relayEvent = someRelayEvents.get(0);
+
+		RelayEvent relayEvent = getRelayEventFotRelay(someRelayEvents, updateRelay.getRelayEvent());
+
 		Set<Relay> someRelays = relayEvent.getRelays();
 		if (someRelays.contains(updateRelay)) {
 			for (Relay eachRelay : someRelays) {
@@ -50,6 +52,15 @@ public class RelayGatewayFile implements RelayGateway {
 			relayEvent.addRelay(updateRelay);
 		}
 		FileSingleton.getInstance().setRelayEvents(someRelayEvents);
+	}
+
+	private RelayEvent getRelayEventFotRelay(List<RelayEvent> someRelayEvents, RelayEvent relayEvent) {
+		for (RelayEvent eachRelayEvent : someRelayEvents) {
+			if (eachRelayEvent.equals(relayEvent)) {
+				return eachRelayEvent;
+			}
+		}
+		throw new IllegalArgumentException("[relayEvent] Parameter must be element of [someRelayEvents] parameter");
 	}
 
 	@Override

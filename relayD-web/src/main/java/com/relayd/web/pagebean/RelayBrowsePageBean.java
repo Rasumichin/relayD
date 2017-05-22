@@ -72,7 +72,7 @@ public class RelayBrowsePageBean implements Serializable {
 	public void init() {
 		relayBridge = new RelayBridgeImpl();
 		relayEventBridge = new RelayEventBridgeImpl();
-		refreshRelays();
+		intiRelays();
 		refreshPersons();
 	}
 
@@ -80,10 +80,13 @@ public class RelayBrowsePageBean implements Serializable {
 		personBridge = new PersonBridgeImpl();
 	}
 
+	private void intiRelays() {
+		List<RelayEvent> someRelayEvents = relayEventBridge.all();
+		relayEvent = someRelayEvents.get(0);
+		root = relayBridge.convertToTreeNode(relayEvent.getRelays());
+	}
+
 	private void refreshRelays() {
-		// TODO REL-193 Es wird Defaultmaessig erstmal immer der erste (und einzige) genommen
-		relayEvents = relayEventBridge.all();
-		relayEvent = relayEvents.get(0);
 		root = relayBridge.convertToTreeNode(relayEvent.getRelays());
 	}
 
@@ -378,6 +381,12 @@ public class RelayBrowsePageBean implements Serializable {
 	public void switchEventYear(AjaxBehaviorEvent ajax) {
 		SelectOneMenu selectOneMenu = (SelectOneMenu) ajax.getSource();
 		EventYear selectedEventYear = (EventYear) selectOneMenu.getValue();
+		for (RelayEvent eachRelayEvent : relayEventBridge.all()) {
+			if (eachRelayEvent.getEventDay().toString().contains(selectedEventYear.getDescription())) {
+				setRelayEvent(eachRelayEvent);
+			}
+		}
+		refreshRelays();
 	}
 
 	// ***********************************************************************************
@@ -390,7 +399,7 @@ public class RelayBrowsePageBean implements Serializable {
 	}
 
 	public void setRelayEvent(RelayEvent aRelayEvent) {
-		//		relayEvent = aRelayEvent;
+		relayEvent = aRelayEvent;
 	}
 
 	public List<RelayEvent> getRelayEvents() {
@@ -402,4 +411,27 @@ public class RelayBrowsePageBean implements Serializable {
 		RelayEvent selectedRelayEvent = (RelayEvent) selectOneMenu.getValue();
 		//		converter="com.relayd.web.converter.RelayEventValueObjectConverter"
 	}
+	/**
+		<p:selectOneMenu
+			id="relayEvent"
+			value="#{relayBrowsePageBean.relayEvent}"
+			var="entry"
+			converter="com.relayd.web.converter.RelayEventValueObjectConverter"
+			style="width:70%">
+			<f:selectItem
+				itemLabel="RelayEvent"
+				itemValue="" />
+			<f:selectItems
+				value="#{relayBrowsePageBean.relayEvents}"
+				var="relayEvent"
+				itemLabel="#{relayEvent.eventDay}"
+				itemValue="#{relayEvent.uuid}" />
+			<p:column>
+				#{entry}
+			</p:column>
+			<p:ajax
+				global="false"
+				listener="#{relayBrowsePageBean.switchRelayEvent}" />
+		</p:selectOneMenu>
+	 */
 }
