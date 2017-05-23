@@ -32,4 +32,30 @@
     <welcome-file-list>
         <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
+    
+      <!-- Define a Security Constraint on this Application -->
+	  <security-constraint>
+	    <web-resource-collection>
+	      <web-resource-name>RelayD resources</web-resource-name>
+	      <url-pattern>/*</url-pattern>
+	    </web-resource-collection>
+	    <auth-constraint>
+	       <!-- NOTE:  This role is not present in the default users file -->
+	       <role-name>relayd</role-name>
+	    </auth-constraint>
+	  </security-constraint>
+	<!-- Define the Login Configuration for this Application -->
+	  <login-config>
+	    <auth-method>BASIC</auth-method>
+	    <realm-name>RelayD Group</realm-name>
+	  </login-config>
+  
+	<!-- Security roles referenced by this web application -->
+	  <security-role>
+	    <description>
+	      The role that is required to log in
+	    </description>
+	    <role-name>relayd</role-name>
+	  </security-role>
+	
 </web-app>
