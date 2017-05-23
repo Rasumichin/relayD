@@ -13,7 +13,9 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.faces.event.AjaxBehaviorEvent;
 
+import org.primefaces.component.selectonemenu.SelectOneMenu;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.TreeNode;
@@ -58,8 +60,7 @@ public class RelayBrowsePageBean implements Serializable {
 	private List<Person> filteredPersons;
 
 	private List<Person> selectedPersons;
-
-	private RelayEvent activeRelayEvent;
+	private EventYear eventYear;
 
 	@ManagedProperty(value = "#{personEditPageBean}")
 	private PersonEditPageBean personEditPageBean;
@@ -71,9 +72,7 @@ public class RelayBrowsePageBean implements Serializable {
 	public void init() {
 		relayBridge = new RelayBridgeImpl();
 		relayEventBridge = new RelayEventBridgeImpl();
-		// TODO REL-193 Es wird Defaultmaessig erstmal immer der erste (und einzige) genommen
-		activeRelayEvent = relayEventBridge.all().get(0);
-		refreshRelays();
+		intiRelays();
 		refreshPersons();
 	}
 
@@ -81,8 +80,14 @@ public class RelayBrowsePageBean implements Serializable {
 		personBridge = new PersonBridgeImpl();
 	}
 
+	private void intiRelays() {
+		List<RelayEvent> someRelayEvents = relayEventBridge.all();
+		relayEvent = someRelayEvents.get(0);
+		root = relayBridge.convertToTreeNode(relayEvent.getRelays());
+	}
+
 	private void refreshRelays() {
-		root = relayBridge.all();
+		root = relayBridge.convertToTreeNode(relayEvent.getRelays());
 	}
 
 	public RelayEditPageBean getRelayEditPageBean() {
@@ -106,7 +111,7 @@ public class RelayBrowsePageBean implements Serializable {
 	}
 
 	public void addRelay(@SuppressWarnings("unused") ActionEvent actionEvent) {
-		getRelayEditPageBean().openDialogForCreateRelay(activeRelayEvent);
+		getRelayEditPageBean().openDialogForCreateRelay(relayEvent);
 	}
 
 	public void editRelay(@SuppressWarnings("unused") ActionEvent actionEvent) {
@@ -360,9 +365,73 @@ public class RelayBrowsePageBean implements Serializable {
 						relayCount++;
 					}
 				}
-
 			}
 		}
 		return relayCount;
 	}
+
+	public EventYear getEventYear() {
+		return eventYear;
+	}
+
+	public void setEventYear(EventYear aEventYear) {
+		eventYear = aEventYear;
+	}
+
+	public void switchEventYear(AjaxBehaviorEvent ajax) {
+		SelectOneMenu selectOneMenu = (SelectOneMenu) ajax.getSource();
+		EventYear selectedEventYear = (EventYear) selectOneMenu.getValue();
+		for (RelayEvent eachRelayEvent : relayEventBridge.all()) {
+			if (eachRelayEvent.getEventDay().toString().contains(selectedEventYear.getDescription())) {
+				setRelayEvent(eachRelayEvent);
+			}
+		}
+		refreshRelays();
+	}
+
+	// ***********************************************************************************
+	// TODO - REL-  - Mit dem Domain Objekt funktioniert die Combobox seltsamerweise nicht.
+	private List<RelayEvent> relayEvents;
+	private RelayEvent relayEvent;
+
+	public RelayEvent getRelayEvent() {
+		return relayEvent;
+	}
+
+	public void setRelayEvent(RelayEvent aRelayEvent) {
+		relayEvent = aRelayEvent;
+	}
+
+	public List<RelayEvent> getRelayEvents() {
+		return relayEvents;
+	}
+
+	public void switchRelayEvent(AjaxBehaviorEvent ajax) {
+		SelectOneMenu selectOneMenu = (SelectOneMenu) ajax.getSource();
+		RelayEvent selectedRelayEvent = (RelayEvent) selectOneMenu.getValue();
+		//		converter="com.relayd.web.converter.RelayEventValueObjectConverter"
+	}
+	/**
+		<p:selectOneMenu
+			id="relayEvent"
+			value="#{relayBrowsePageBean.relayEvent}"
+			var="entry"
+			converter="com.relayd.web.converter.RelayEventValueObjectConverter"
+			style="width:70%">
+			<f:selectItem
+				itemLabel="RelayEvent"
+				itemValue="" />
+			<f:selectItems
+				value="#{relayBrowsePageBean.relayEvents}"
+				var="relayEvent"
+				itemLabel="#{relayEvent.eventDay}"
+				itemValue="#{relayEvent.uuid}" />
+			<p:column>
+				#{entry}
+			</p:column>
+			<p:ajax
+				global="false"
+				listener="#{relayBrowsePageBean.switchRelayEvent}" />
+		</p:selectOneMenu>
+	 */
 }

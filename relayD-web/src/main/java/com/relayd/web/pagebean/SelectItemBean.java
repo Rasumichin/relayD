@@ -27,19 +27,13 @@ public class SelectItemBean implements Serializable {
 	private List<Shirtsize> shirtsizes;
 	private List<Position> positions;
 	private List<GatewayType> gateways;
+	private List<EventYear> eventYears;
 
 	public SelectItemBean() {
 		initShirtsizes();
 		initPositions();
 		initGateways();
-	}
-
-	private void initGateways() {
-		gateways = new ArrayList<GatewayType>();
-
-		for (GatewayType eachGatewayType : GatewayType.values()) {
-			gateways.add(eachGatewayType);
-		}
+		initEventYears();
 	}
 
 	private void initShirtsizes() {
@@ -58,6 +52,22 @@ public class SelectItemBean implements Serializable {
 		}
 	}
 
+	private void initGateways() {
+		gateways = new ArrayList<GatewayType>();
+
+		for (GatewayType eachGatewayType : GatewayType.values()) {
+			gateways.add(eachGatewayType);
+		}
+	}
+
+	private void initEventYears() {
+		eventYears = new ArrayList<EventYear>();
+
+		for (EventYear eachEventYearType : EventYear.values()) {
+			eventYears.add(eachEventYearType);
+		}
+	}
+
 	public List<Shirtsize> getShirtsizes() {
 		return Collections.unmodifiableList(shirtsizes);
 	}
@@ -68,5 +78,9 @@ public class SelectItemBean implements Serializable {
 
 	public List<GatewayType> getGatewayTypes() {
 		return Collections.unmodifiableList(gateways);
+	}
+
+	public List<EventYear> getEventYears() {
+		return Collections.unmodifiableList(eventYears);
 	}
 }

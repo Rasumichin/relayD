@@ -1,5 +1,6 @@
 package com.relayd.web.bridge;
 
+import java.util.Set;
 import java.util.UUID;
 
 import org.primefaces.model.TreeNode;
@@ -23,4 +24,6 @@ public interface RelayBridge {
 	GatewayType getGatewayType();
 
 	Relay get(UUID uuid);
+
+	TreeNode convertToTreeNode(Set<Relay> aRelays);
 }
