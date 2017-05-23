@@ -134,10 +134,10 @@
 					icon="ui-icon-circle-triangle-e"
 					actionListener="#{relayBrowsePageBean.removePersonFromRelay}">
 				</p:commandButton>
+				
 				<p:selectOneMenu
 					id="eventYear"
 					value="#{relayBrowsePageBean.eventYear}"
-					update="relayTable"
 					var="entry"
 					style="width:70%">
 					<f:selectItems
@@ -149,7 +149,9 @@
 					</p:column>
 					<p:ajax
 						global="false"
-						listener="#{relayBrowsePageBean.switchEventYear}" />
+						listener="#{relayBrowsePageBean.switchEventYear}" 
+						update="relayTable"
+						/>
 				</p:selectOneMenu>
 
 			</p:layoutUnit>
