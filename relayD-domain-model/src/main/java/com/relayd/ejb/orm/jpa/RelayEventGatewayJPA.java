@@ -28,21 +28,21 @@ public class RelayEventGatewayJPA extends GatewayJPA implements RelayEventGatewa
 	@Override
 	public List<RelayEvent> getAll() {
 		List<RelayEventEntity> relayEventEntities = findAll();
-		List<RelayEvent> eventsAsList = mapPersonEntityListToPersonList(relayEventEntities);
+		List<RelayEvent> eventsAsList = mapRelayEventEntityListToRelayEventList(relayEventEntities);
 
 		return eventsAsList;
 	}
 
-	List<RelayEvent> mapPersonEntityListToPersonList(List<RelayEventEntity> personEntities) {
+	private List<RelayEvent> mapRelayEventEntityListToRelayEventList(List<RelayEventEntity> relayEventEntities) {
 		List<RelayEvent> relayEvents = new ArrayList<>();
-		for (RelayEventEntity eachEntity : personEntities) {
+		for (RelayEventEntity eachEntity : relayEventEntities) {
 			relayEvents.add(getRelayEventEntityMapper().mapToRelayEvent(eachEntity));
 		}
 
 		return relayEvents;
 	}
 
-	List<RelayEventEntity> findAll() {
+	private List<RelayEventEntity> findAll() {
 		@SuppressWarnings("unchecked")
 		List<RelayEventEntity> result = (List<RelayEventEntity>) getJpaDao().performSelectQuery("SELECT p FROM RelayEventEntity p");
 

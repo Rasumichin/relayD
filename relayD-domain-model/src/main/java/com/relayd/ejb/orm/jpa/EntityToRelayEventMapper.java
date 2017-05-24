@@ -3,11 +3,14 @@ package com.relayd.ejb.orm.jpa;
 import java.time.Duration;
 import java.util.UUID;
 
+import com.relayd.Member;
 import com.relayd.Relay;
 import com.relayd.RelayEvent;
 import com.relayd.attributes.EventDay;
 import com.relayd.attributes.Eventname;
+import com.relayd.attributes.Position;
 import com.relayd.attributes.Relayname;
+import com.relayd.entity.ParticipantEntity;
 import com.relayd.entity.RelayEntity;
 import com.relayd.entity.RelayEventEntity;
 
@@ -50,6 +53,13 @@ public class EntityToRelayEventMapper {
 		relay.setUuid(UUID.fromString(relayEntity.getId()));
 		relay.setRelayname(Relayname.newInstance(relayEntity.getRelayname()));
 		relay.setDuration(Duration.ofMillis(relayEntity.getDuration()));
+
+		EntityToMemberMapper memberMapper = EntityToMemberMapper.newInstance();
+		for (ParticipantEntity eachParticipantEntity : relayEntity.getParticipantEntities()) {
+			Member member = memberMapper.mapToMember(eachParticipantEntity);
+			Position position = Position.newInstance(eachParticipantEntity.getPosition());
+			relay.addMember(member, position);
+		}
 
 		return relay;
 	}
