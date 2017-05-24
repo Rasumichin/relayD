@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.sql.Date;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.UUID;
 
 import org.junit.FixMethodOrder;
@@ -104,6 +105,20 @@ public class RelayEventEntityTest {
 	}
 
 	@Test
+	public void testAddRelayEntity() {
+		RelayEntity expected = RelayEntity.newInstance(UUID.randomUUID().toString());
+		RelayEventEntity sut = new RelayEventEntity();
+
+		sut.addRelay(expected);
+
+		List<RelayEntity> someRelayEntities = sut.getRelayEntities();
+		assertFalse("[RelayEntities] are empty!", someRelayEntities.isEmpty());
+
+		RelayEntity actual = someRelayEntities.get(0);
+		assertEquals("[RelayEntity] is not equals!", expected, actual);
+	}
+
+	@Test
 	public void testToString() {
 		RelayEventEntity sut = RelayEventEntity.newInstance();
 		String eventName = "Metro Marathon";
@@ -116,5 +131,98 @@ public class RelayEventEntityTest {
 
 		String actualResult = sut.toString();
 		assertEquals("String representation is not correct!", expectedResult, actualResult);
+	}
+
+	@Test
+	public void testHashCode() {
+		RelayEventEntity sut = RelayEventEntity.newInstance();
+		sut.setId("5697d710-8967-4b2d-9ab2-8fc50ddc6138");
+
+		int hashCode = sut.hashCode();
+
+		assertEquals(2031501961, hashCode);
+
+		sut.setId(null);
+
+		hashCode = sut.hashCode();
+
+		assertEquals(31, hashCode);
+	}
+
+	@Test
+	public void testEqualsWithMyself() {
+		RelayEventEntity sut = RelayEventEntity.newInstance();
+
+		boolean condition = sut.equals(sut);
+
+		assertTrue(condition);
+	}
+
+	@Test
+	public void testEqualsWithNull() {
+		RelayEventEntity sut = RelayEventEntity.newInstance();
+
+		boolean condition = sut.equals(null);
+
+		assertFalse(condition);
+	}
+
+	@Test
+	public void testEqualsWithNotCompatibleClass() {
+		RelayEventEntity sut = RelayEventEntity.newInstance();
+
+		boolean condition = sut.equals(new String());
+
+		assertFalse(condition);
+	}
+
+	@Test
+	public void testEqualsWithIdIsNull() {
+		RelayEventEntity sut = RelayEventEntity.newInstance();
+
+		sut.setId(null);
+
+		RelayEventEntity secondSut = RelayEventEntity.newInstance();
+		secondSut.setId(UUID.randomUUID().toString());
+
+		boolean condition = sut.equals(secondSut);
+
+		assertFalse(condition);
+	}
+
+	@Test
+	public void testEqualsWithBothIdsAreNull() {
+		RelayEventEntity sut = RelayEventEntity.newInstance();
+
+		sut.setId(null);
+
+		RelayEventEntity secondSut = RelayEventEntity.newInstance();
+		secondSut.setId(null);
+
+		boolean condition = sut.equals(secondSut);
+
+		assertTrue(condition);
+	}
+
+	@Test
+	public void testEqualsWithTwoDiffrentIds() {
+		RelayEventEntity sut = RelayEventEntity.newInstance();
+
+		RelayEventEntity secondSut = RelayEventEntity.newInstance();
+
+		boolean condition = sut.equals(secondSut);
+
+		assertFalse(condition);
+	}
+
+	@Test
+	public void testEqualsWithSameIds() {
+		UUID id = UUID.randomUUID();
+		RelayEventEntity sut = RelayEventEntity.newInstance(id);
+		RelayEventEntity secondSut = RelayEventEntity.newInstance(id);
+
+		boolean condition = sut.equals(secondSut);
+
+		assertTrue(condition);
 	}
 }

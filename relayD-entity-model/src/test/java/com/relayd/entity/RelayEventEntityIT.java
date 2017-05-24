@@ -38,4 +38,28 @@ public class RelayEventEntityIT extends EntityIT {
 		RelayEventEntity result = getEntityManager().find(RelayEventEntity.class, sut.getId());
 		assertEquals("RelayEventEntity could not be found with 'id=" + sut.getId() + "'.", sut.getId(), result.getId());
 	}
+
+	@Test
+	public void testInsertRelayEventEntity_WithRelay() {
+		RelayEventEntity sut = RelayEventEntity.newInstance();
+		sut.setEventName("title");
+		sut.setEventDay(new Date(System.currentTimeMillis()));
+
+		RelayEntity relayEntity = RelayEntity.newInstance();
+		relayEntity.setRelayname("Foo Relay");
+
+		sut.addRelay(relayEntity);
+
+		EntityTransaction tx = getEntityManager().getTransaction();
+
+		tx.begin();
+		getEntityManager().persist(sut);
+		tx.commit();
+
+		getEntityManager().clear();
+		RelayEventEntity result = getEntityManager().find(RelayEventEntity.class, sut.getId());
+		assertEquals("RelayEventEntity could not be found with 'id=" + sut.getId() + "'.", sut.getId(), result.getId());
+		assertFalse("RelayEntites List contains no element!", result.getRelayEntities().isEmpty());
+	}
+
 }

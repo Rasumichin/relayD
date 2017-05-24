@@ -1,11 +1,17 @@
 package com.relayd.entity;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -26,6 +32,9 @@ public class RelayEventEntity {
 
 	@Column(nullable = false)
 	private Date eventDay;
+
+	@OneToMany(mappedBy = "relayEventEntity", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+	private List<RelayEntity> relayEntities = new ArrayList<>();
 
 	public static RelayEventEntity newInstance() {
 		return RelayEventEntity.newInstance(UUID.randomUUID());
@@ -64,7 +73,16 @@ public class RelayEventEntity {
 	public void setEventDay(Date anEventDay) {
 		eventDay = anEventDay;
 	}
-	
+
+	public void addRelay(RelayEntity relayEntity) {
+		relayEntities.add(relayEntity);
+		relayEntity.setRelayEventEntity(this);
+	}
+
+	public List<RelayEntity> getRelayEntities() {
+		return Collections.unmodifiableList(relayEntities);
+	}
+
 	@Override
 	public String toString() {
 		return getClass().getSimpleName() + " [id=" + id + ", eventName=" + eventName + ", eventDay=" + eventDay + "]";
