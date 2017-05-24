@@ -120,7 +120,7 @@ public class RelayEvent implements Serializable {
 		// Wenn man irgendwann einen Fehler einbaut und es wären aus irgendwelchen Gründen 19 Relays
 		// in der Liste würde diese Methode dann nicht mehr motzen, da ja "nur" bei size == 18 eine Exception fliegt!
 		if (MAX_NUMBER_OF_RELAYS <= relays.size()) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Max Number [" + MAX_NUMBER_OF_RELAYS + "] of Relays reached");
 		}
 		relays.add(relay);
 	}
