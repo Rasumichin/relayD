@@ -82,15 +82,13 @@
 				</p:toolbar>
 				<p:treeTable
 					id="relayTable"
-					selection="#{relayBrowsePageBean.selectedNode}"
-					selectionMode="single"
-					scrollable="true"
-					scrollHeight="92%"
 					value="#{relayBrowsePageBean.root}"
 					var="relayRow"
-					resizableColumns="true">
+					resizableColumns="true"
+					selectionMode="single"
+					selection="#{relayBrowsePageBean.selectedNode}">
 					<f:facet name="header">
-		            Relays
+		            	Relays
 		        	</f:facet>
 					
 					<p:column 
