@@ -58,9 +58,9 @@ public class RelayBrowsePageBean implements Serializable {
 	private PersonSort personSort = new PersonSort();
 	private List<Person> searchResult = new ArrayList<Person>();
 	private List<Person> filteredPersons;
-
 	private List<Person> selectedPersons;
-	private EventYear eventYear;
+
+	private EventYear eventYear = EventYear.YEAR_2017;
 
 	@ManagedProperty(value = "#{personEditPageBean}")
 	private PersonEditPageBean personEditPageBean;
