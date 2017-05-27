@@ -2,8 +2,6 @@ package com.relayd;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.time.Month;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -51,11 +49,6 @@ public class RelayEvent implements Serializable {
 		tracks.add(Track.newInstance(Distance.kilometers(new BigDecimal("8.6")), Comment.newInstance("Pempelfort - Wechselzone: ")));
 		tracks.add(Track.newInstance(Distance.kilometers(new BigDecimal("9.2")), Comment.newInstance("Carlstadt - Wechselzone: ")));
 
-	}
-
-	@Deprecated
-	public static RelayEvent duesseldorf() {
-		return RelayEventDuesseldorf.instance();
 	}
 
 	public static RelayEvent newInstance() {
@@ -174,22 +167,5 @@ public class RelayEvent implements Serializable {
 	@Override
 	public String toString() {
 		return name + ", " + eventDay;
-	}
-
-	static final class RelayEventDuesseldorf extends RelayEvent {
-		private static final long serialVersionUID = -3419762542997706672L;
-		private static final Eventname eventName = Eventname.newInstance("Metro Group Marathon Düsseldorf");
-		private static final EventDay eventDay = EventDay.newInstance(LocalDate.of(2017, Month.APRIL, 30));
-
-		private static final RelayEventDuesseldorf SINGLETON = new RelayEventDuesseldorf();
-
-		RelayEventDuesseldorf() {
-			super(eventName, eventDay);
-			setUuid(UUID.fromString("5697d710-8967-4b2d-9ab2-8fc50ddc6138"));
-		}
-
-		private static RelayEventDuesseldorf instance() {
-			return SINGLETON;
-		}
 	}
 }

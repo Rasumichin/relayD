@@ -22,7 +22,7 @@ public class Relay implements Serializable {
 
 	UUID uuid = null;
 	private Relayname relayname = Relayname.newInstance();
-	private RelayEvent relayEvent = RelayEvent.duesseldorf();
+	private RelayEvent relayEvent = RelayEvent.newInstance();
 	private List<Member> members = new ArrayList<Member>();
 
 	private Duration duration = Duration.ZERO;
