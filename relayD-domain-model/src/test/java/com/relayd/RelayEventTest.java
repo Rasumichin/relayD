@@ -45,17 +45,6 @@ public class RelayEventTest {
 	}
 
 	@Test
-	public void testCreateDuesseldorf() {
-		RelayEvent sutForDuesseldorf = RelayEvent.duesseldorf();
-
-		Eventname actualName = sutForDuesseldorf.getName();
-		EventDay actualEventDay = sutForDuesseldorf.getEventDay();
-
-		assertEquals("[Name] not correct.", eventName, actualName);
-		assertEquals("[EventDay] not correct.", eventDay, actualEventDay);
-	}
-
-	@Test
 	public void testCreateValidInstance() {
 
 		Eventname actualName = sut.getName();
