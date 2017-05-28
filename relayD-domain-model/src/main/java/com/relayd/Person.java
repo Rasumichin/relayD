@@ -19,7 +19,7 @@ import com.relayd.attributes.YearOfBirth;
 public class Person implements Serializable {
 	private static final long serialVersionUID = -7937105233874151745L;
 
-	private UUID uuid;
+	UUID uuid;
 	private Surename surename = Surename.newInstance();
 	private Forename forename = Forename.newInstance();
 	private YearOfBirth yearOfBirth = YearOfBirth.newInstance();
