@@ -8,7 +8,12 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import com.relayd.attributes.*;
+import com.relayd.attributes.Comment;
+import com.relayd.attributes.Email;
+import com.relayd.attributes.Forename;
+import com.relayd.attributes.Shirtsize;
+import com.relayd.attributes.Surename;
+import com.relayd.attributes.YearOfBirth;
 
 /**
  * Discipline is the best tool.
@@ -433,5 +438,92 @@ public class PersonTest {
 
 		Email result = sut.lastCalculatedEmail;
 		assertEquals("Recalculation of [lastCalculatedEmail] is not correct!", expected, result);
+	}
+
+	@Test
+	public void testHashCode() {
+		Person sut = Person.newInstance();
+		sut.uuid = UUID.fromString("2697d710-8967-4b2d-9ab2-8fc50ddc6138");
+
+		int hashCode = sut.hashCode();
+
+		assertEquals(949908191, hashCode);
+
+		sut.uuid = null;
+
+		hashCode = sut.hashCode();
+
+		assertEquals(31, hashCode);
+	}
+
+	@Test
+	public void testEqualsWithMyself() {
+		Person sut = Person.newInstance();
+
+		boolean actual = sut.equals(sut);
+
+		assertTrue(actual);
+	}
+
+	@Test
+	public void testEqualsWithNull() {
+		Person sut = Person.newInstance();
+
+		boolean actual = sut.equals(null);
+
+		assertFalse(actual);
+	}
+
+	@Test
+	public void testEqualsWithNotCompatibleClass() {
+		Person sut = Person.newInstance();
+
+		boolean actual = sut.equals(new String());
+
+		assertFalse(actual);
+	}
+
+	@Test
+	public void testEqualsWithValueIsNull() {
+		Person sut = Person.newInstance();
+		sut.uuid = null;
+		Person secondSut = Person.newInstance();
+
+		boolean actual = sut.equals(secondSut);
+
+		assertFalse(actual);
+	}
+
+	@Test
+	public void testEqualsWithBothValuesAreNull() {
+		Person sut = Person.newInstance();
+		sut.uuid = null;
+		Person secondSut = Person.newInstance();
+		secondSut.uuid = null;
+
+		boolean actual = sut.equals(secondSut);
+
+		assertTrue(actual);
+	}
+
+	@Test
+	public void testEqualsWithTwoDiffrentValues() {
+		Person sut = Person.newInstance();
+		Person secondSut = Person.newInstance();
+
+		boolean actual = sut.equals(secondSut);
+
+		assertFalse(actual);
+	}
+
+	@Test
+	public void testEqualsWithSameValues() {
+		Person sut = Person.newInstance();
+		Person secondSut = Person.newInstance();
+		sut.uuid = secondSut.uuid;
+
+		boolean actual = sut.equals(secondSut);
+
+		assertTrue(actual);
 	}
 }
