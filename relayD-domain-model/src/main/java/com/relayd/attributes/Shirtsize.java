@@ -44,11 +44,6 @@ public enum Shirtsize {
 	}
 
 	public static Integer encode(Shirtsize param) {
-		for (Shirtsize shirtsize : values()) {
-			if (shirtsize.equals(param)) {
-				return shirtsize.getSize();
-			}
-		}
 		return param.getSize();
 	}
 
@@ -61,12 +56,12 @@ public enum Shirtsize {
 		return UNKNOWN;
 	}
 
+	public boolean isEmpty() {
+		return this == UNKNOWN;
+	}
+
 	@Override
 	public String toString() {
 		return getDescription();
-	}
-
-	public boolean isEmpty() {
-		return this == UNKNOWN;
 	}
 }
