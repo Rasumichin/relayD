@@ -33,9 +33,9 @@ public class RelayTest {
 		Relay sut = Relay.newInstance();
 
 		@SuppressWarnings("cast")
-		boolean actual = sut instanceof Serializable;
+		boolean condition = sut instanceof Serializable;
 
-		assertTrue("Class not Serializable!", actual);
+		assertTrue("Class not Serializable!", condition);
 	}
 
 	@Test
@@ -67,7 +67,7 @@ public class RelayTest {
 
 		Relayname actual = sut.getRelayname();
 
-		assertEquals("[Relayname] not corret!", expected, actual);
+		assertEquals("[relayname] not corret!", expected, actual);
 	}
 
 	@Test
@@ -84,9 +84,9 @@ public class RelayTest {
 
 		assertEquals("Person on first position is wrong!", expected, actual);
 
-		assertTrue("second position not empty!", sut.getMemberFor(Position.SECOND).isEmpty());
-		assertTrue("third position not empty!", sut.getMemberFor(Position.THIRD).isEmpty());
-		assertTrue("fourth position not empty!", sut.getMemberFor(Position.FOURTH).isEmpty());
+		assertTrue("Second position not empty!", sut.getMemberFor(Position.SECOND).isEmpty());
+		assertTrue("Third position not empty!", sut.getMemberFor(Position.THIRD).isEmpty());
+		assertTrue("Fourth position not empty!", sut.getMemberFor(Position.FOURTH).isEmpty());
 	}
 
 	@Test
@@ -100,10 +100,10 @@ public class RelayTest {
 
 		Member actual = sut.getMemberFor(Position.SECOND);
 
-		assertTrue("first position not empty!", sut.getMemberFor(Position.FIRST).isEmpty());
+		assertTrue("First position not empty!", sut.getMemberFor(Position.FIRST).isEmpty());
 		assertEquals("Person on second position is wrong!", expected, actual);
-		assertTrue("third position not empty!", sut.getMemberFor(Position.THIRD).isEmpty());
-		assertTrue("fourth position not empty!", sut.getMemberFor(Position.FOURTH).isEmpty());
+		assertTrue("Third position not empty!", sut.getMemberFor(Position.THIRD).isEmpty());
+		assertTrue("Fourth position not empty!", sut.getMemberFor(Position.FOURTH).isEmpty());
 	}
 
 	@Test
@@ -117,10 +117,10 @@ public class RelayTest {
 
 		Member actual = sut.getMemberFor(Position.THIRD);
 
-		assertTrue("first position not empty!", sut.getMemberFor(Position.FIRST).isEmpty());
-		assertTrue("second position not empty!", sut.getMemberFor(Position.SECOND).isEmpty());
+		assertTrue("First position not empty!", sut.getMemberFor(Position.FIRST).isEmpty());
+		assertTrue("Second position not empty!", sut.getMemberFor(Position.SECOND).isEmpty());
 		assertEquals("Person on third position is wrong!", expected, actual);
-		assertTrue("fourth position not empty!", sut.getMemberFor(Position.FOURTH).isEmpty());
+		assertTrue("Fourth position not empty!", sut.getMemberFor(Position.FOURTH).isEmpty());
 	}
 
 	@Test
@@ -134,9 +134,9 @@ public class RelayTest {
 
 		Member actual = sut.getMemberFor(Position.FOURTH);
 
-		assertTrue("first position not empty!", sut.getMemberFor(Position.FIRST).isEmpty());
-		assertTrue("second position not empty!", sut.getMemberFor(Position.SECOND).isEmpty());
-		assertTrue("third position not empty!", sut.getMemberFor(Position.THIRD).isEmpty());
+		assertTrue("First position not empty!", sut.getMemberFor(Position.FIRST).isEmpty());
+		assertTrue("Second position not empty!", sut.getMemberFor(Position.SECOND).isEmpty());
+		assertTrue("Third position not empty!", sut.getMemberFor(Position.THIRD).isEmpty());
 		assertEquals("Person on fourth position is wrong!", expected, actual);
 	}
 
@@ -152,9 +152,9 @@ public class RelayTest {
 		Member actual = sut.getMemberFor(Position.FIRST);
 
 		assertEquals("Person on first position is wrong!", expected, actual);
-		assertTrue("second position not empty!", sut.getMemberFor(Position.SECOND).isEmpty());
-		assertTrue("third position not empty!", sut.getMemberFor(Position.THIRD).isEmpty());
-		assertTrue("fourth position not empty!", sut.getMemberFor(Position.FOURTH).isEmpty());
+		assertTrue("Second position not empty!", sut.getMemberFor(Position.SECOND).isEmpty());
+		assertTrue("Third position not empty!", sut.getMemberFor(Position.THIRD).isEmpty());
+		assertTrue("Fourth position not empty!", sut.getMemberFor(Position.FOURTH).isEmpty());
 
 	}
 
@@ -174,10 +174,10 @@ public class RelayTest {
 
 		Member actual = sut.getMemberFor(Position.SECOND);
 
-		assertEquals("Perosn on first position is wrong!", firstMember, sut.getMemberFor(Position.FIRST));
+		assertEquals("Person on first position is wrong!", firstMember, sut.getMemberFor(Position.FIRST));
 		assertEquals("Person on second position is wrong!", expected, actual);
-		assertTrue("third position not empty!", sut.getMemberFor(Position.THIRD).isEmpty());
-		assertTrue("fourth position not empty!", sut.getMemberFor(Position.FOURTH).isEmpty());
+		assertTrue("Third position not empty!", sut.getMemberFor(Position.THIRD).isEmpty());
+		assertTrue("Fourth position not empty!", sut.getMemberFor(Position.FOURTH).isEmpty());
 
 	}
 
@@ -217,7 +217,7 @@ public class RelayTest {
 
 		Integer actual = sut.memberCount();
 
-		assertEquals("count not correct for empty members!", Integer.valueOf(0), actual);
+		assertEquals("Count not correct for empty members!", Integer.valueOf(0), actual);
 	}
 
 	@Test
@@ -228,7 +228,7 @@ public class RelayTest {
 
 		Integer actual = sut.memberCount();
 
-		assertEquals("count not correct for empty members!", Integer.valueOf(2), actual);
+		assertEquals("Count not correct for empty members!", Integer.valueOf(2), actual);
 	}
 
 	@Test
@@ -241,8 +241,8 @@ public class RelayTest {
 
 		List<Member> actual = sut.getMembers();
 
-		assertNotNull("instance not correct!", actual);
-		assertEquals("size of List not correct!", 4, actual.size());
+		assertNotNull("Instance not correct!", actual);
+		assertEquals("Size of List not correct!", 4, actual.size());
 		assertEquals("Member at position 0 not correct!", firstMember, actual.get(0));
 		assertEquals("Member at position 1 not correct!", secondMember, actual.get(1));
 	}
@@ -313,7 +313,7 @@ public class RelayTest {
 
 		Duration actual = sut.getDuration();
 
-		assertEquals("[Duration] not corret!", expected, actual);
+		assertEquals("[duration] not corret!", expected, actual);
 	}
 
 	@Test
@@ -324,7 +324,7 @@ public class RelayTest {
 		String actual = sut.getDurationFormatted();
 		String expected = "00:00:00";
 
-		assertEquals("[Duration] not corret!", expected, actual);
+		assertEquals("[duration] not corret!", expected, actual);
 
 	}
 
@@ -337,7 +337,7 @@ public class RelayTest {
 		String actual = sut.getDurationFormatted();
 		String expected = "03:33:13";
 
-		assertEquals("[Duration] not corret!", expected, actual);
+		assertEquals("[duration] not corret!", expected, actual);
 
 	}
 
@@ -385,27 +385,27 @@ public class RelayTest {
 	public void testEqualsWithMyself() {
 		Relay sut = Relay.newInstance();
 
-		boolean actual = sut.equals(sut);
+		boolean condition = sut.equals(sut);
 
-		assertTrue(actual);
+		assertTrue(condition);
 	}
 
 	@Test
 	public void testEqualsWithNull() {
 		Relay sut = Relay.newInstance();
 
-		boolean actual = sut.equals(null);
+		boolean condition = sut.equals(null);
 
-		assertFalse(actual);
+		assertFalse(condition);
 	}
 
 	@Test
 	public void testEqualsWithNotCompatibleClass() {
 		Relay sut = Relay.newInstance();
 
-		boolean actual = sut.equals(new String());
+		boolean condition = sut.equals(new String());
 
-		assertFalse(actual);
+		assertFalse(condition);
 	}
 
 	@Test
@@ -414,9 +414,9 @@ public class RelayTest {
 		sut.uuid = null;
 		Relay secondSut = Relay.newInstance();
 
-		boolean actual = sut.equals(secondSut);
+		boolean condition = sut.equals(secondSut);
 
-		assertFalse(actual);
+		assertFalse(condition);
 	}
 
 	@Test
@@ -426,9 +426,9 @@ public class RelayTest {
 		Relay secondSut = Relay.newInstance();
 		secondSut.uuid = null;
 
-		boolean actual = sut.equals(secondSut);
+		boolean condition = sut.equals(secondSut);
 
-		assertTrue(actual);
+		assertTrue(condition);
 	}
 
 	@Test
@@ -436,9 +436,9 @@ public class RelayTest {
 		Relay sut = Relay.newInstance();
 		Relay secondSut = Relay.newInstance();
 
-		boolean actual = sut.equals(secondSut);
+		boolean condition = sut.equals(secondSut);
 
-		assertFalse(actual);
+		assertFalse(condition);
 	}
 
 	@Test
@@ -447,9 +447,9 @@ public class RelayTest {
 		Relay secondSut = Relay.newInstance();
 		sut.uuid = secondSut.uuid;
 
-		boolean actual = sut.equals(secondSut);
+		boolean condition = sut.equals(secondSut);
 
-		assertTrue(actual);
+		assertTrue(condition);
 	}
 
 	@Test
