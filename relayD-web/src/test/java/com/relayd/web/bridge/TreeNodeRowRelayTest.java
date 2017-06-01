@@ -31,9 +31,9 @@ public class TreeNodeRowRelayTest {
 		TreeNodeRow sut = TreeNodeRow.newInstance(dummyRelay);
 
 		@SuppressWarnings("cast")
-		boolean result = sut instanceof Serializable;
+		boolean condition = sut instanceof Serializable;
 
-		assertTrue("Class not Serializable!", result);
+		assertTrue("Class not Serializable!", condition);
 	}
 
 	@Test

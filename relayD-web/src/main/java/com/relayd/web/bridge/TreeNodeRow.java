@@ -60,7 +60,5 @@ public abstract class TreeNodeRow implements Serializable {
 		return "";
 	}
 
-	public String getDuration() {
-		return "";
-	}
+	public abstract String getDuration();
 }

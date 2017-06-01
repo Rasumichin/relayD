@@ -3,6 +3,7 @@ package com.relayd.web.bridge;
 import static org.junit.Assert.*;
 
 import java.io.Serializable;
+import java.time.Duration;
 import java.util.UUID;
 
 import org.junit.FixMethodOrder;
@@ -32,9 +33,9 @@ public class TreeNodeRowMemberTest {
 		TreeNodeRow sut = TreeNodeRow.newInstance(dummyMember, dummyPosition);
 
 		@SuppressWarnings("cast")
-		boolean result = sut instanceof Serializable;
+		boolean condition = sut instanceof Serializable;
 
-		assertTrue("Class not Serializable!", result);
+		assertTrue("Class not Serializable!", condition);
 	}
 
 	@Test
@@ -75,5 +76,32 @@ public class TreeNodeRowMemberTest {
 		String actual = sut.getRelayname();
 		// TODO (Christian, Version 1.4): mit Erik drüber sprechen. Ohne toString interessantes Phänomen (wenn es ein Relayname Domain Objekt ist)
 		assertEquals("relayName not correct!", "", actual.toString());
+	}
+
+	@Test
+	public void testGetDuration_ForValue() {
+		Member member = Member.newInstance();
+		Duration duration = Duration.ofHours(3).plusMinutes(33).plusSeconds(12);
+		member.setDuration(duration);
+
+		TreeNodeRow sut = TreeNodeRow.newInstance(member, Position.FIRST);
+
+		String actual = sut.getDuration();
+		String expected = "03:33:12";
+
+		assertEquals("[duration] not correct!", expected, actual);
+	}
+
+	@Test
+	public void testGetDuration_ForNull() {
+		Member relay = Member.newInstance();
+		relay.setDuration(null);
+
+		TreeNodeRow sut = TreeNodeRow.newInstance(relay, Position.FIRST);
+
+		String actual = sut.getDuration();
+		String expected = "00:00:00";
+
+		assertEquals("[duration] not correct!", expected, actual);
 	}
 }

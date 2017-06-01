@@ -24,6 +24,11 @@ import com.relayd.attributes.Position;
 public class TreeNodeRowTest {
 	private TreeNodeRow sut = new TreeNodeRow() {
 		private static final long serialVersionUID = 1L;
+
+		@Override
+		public String getDuration() {
+			return "";
+		}
 	};
 
 	@Test
@@ -86,13 +91,4 @@ public class TreeNodeRowTest {
 		String expected = "";
 		assertEquals("[getStatus] not correct!", expected, actual);
 	}
-
-	@Test
-	public void testGetDuration() {
-		String actual = sut.getDuration();
-
-		String expected = "";
-		assertEquals("[getDuration] not correct!", expected, actual);
-	}
-
 }
