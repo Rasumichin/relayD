@@ -1,7 +1,10 @@
 package com.relayd;
 
 import java.io.Serializable;
+import java.time.Duration;
 import java.util.UUID;
+
+import org.apache.commons.lang3.time.DurationFormatUtils;
 
 import com.relayd.attributes.Email;
 import com.relayd.attributes.Forename;
@@ -19,6 +22,8 @@ public class Member implements Serializable {
 	private Forename forename = Forename.newInstance();
 	private Surename surename = Surename.newInstance();
 	private Email email = Email.newInstance();
+
+	private Duration duration;
 
 	private Member() {
 	}
@@ -59,6 +64,21 @@ public class Member implements Serializable {
 
 	public Email getEmail() {
 		return email;
+	}
+
+	public void setDuration(Duration aDuration) {
+		duration = aDuration;
+	}
+
+	public Duration getDuration() {
+		return duration;
+	}
+
+	public String getDurationFormatted() {
+		if (duration == null) {
+			return "00:00:00";
+		}
+		return DurationFormatUtils.formatDuration(duration.toMillis(), "HH:mm:ss");
 	}
 
 	public boolean hasThatPersonIdentity(UUID uuid) {
