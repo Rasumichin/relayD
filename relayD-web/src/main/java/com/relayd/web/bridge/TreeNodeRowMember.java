@@ -38,4 +38,9 @@ public class TreeNodeRowMember extends TreeNodeRow {
 	public void setPosition(Position aPosition) {
 		position = aPosition;
 	}
+
+	@Override
+	public String getDuration() {
+		return member.getDurationFormatted();
+	}
 }
