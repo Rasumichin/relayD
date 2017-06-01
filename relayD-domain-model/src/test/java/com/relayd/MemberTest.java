@@ -3,6 +3,7 @@ package com.relayd;
 import static org.junit.Assert.*;
 
 import java.io.Serializable;
+import java.time.Duration;
 import java.util.UUID;
 
 import org.junit.FixMethodOrder;
@@ -30,9 +31,9 @@ public class MemberTest {
 		Member sut = Member.newInstance();
 
 		@SuppressWarnings("cast")
-		boolean result = sut instanceof Serializable;
+		boolean condition = sut instanceof Serializable;
 
-		assertTrue("Class not Serializable!", result);
+		assertTrue("Class not Serializable!", condition);
 	}
 
 	@Test
@@ -41,9 +42,9 @@ public class MemberTest {
 
 		assertNotNull("Not a valid instance!", sut);
 
-		boolean result = sut.getClass() == MemberNullObject.class;
+		boolean condition = sut.getClass() == MemberNullObject.class;
 
-		assertTrue("Instance is not correct!", result);
+		assertTrue("Instance is not correct!", condition);
 
 	}
 
@@ -55,9 +56,9 @@ public class MemberTest {
 
 		assertNotNull("Not a valid instance!", sut);
 
-		boolean result = sut.getClass() == Member.class;
+		boolean condition = sut.getClass() == Member.class;
 
-		assertTrue("Instance is not correct!", result);
+		assertTrue("Instance is not correct!", condition);
 	}
 
 	@Test
@@ -66,13 +67,13 @@ public class MemberTest {
 
 		assertNotNull("Not a valid instance!", sut);
 
-		boolean result = sut.getClass() == MemberNullObject.class;
+		boolean condition = sut.getClass() == MemberNullObject.class;
 
-		assertTrue("Instance is not correct!", result);
+		assertTrue("Instance is not correct!", condition);
 
 		UUID dummyUuid = null;
 
-		boolean condition = sut.hasThatPersonIdentity(dummyUuid);
+		condition = sut.hasThatPersonIdentity(dummyUuid);
 
 		assertFalse("[condition] should always be false!", condition);
 	}
@@ -137,6 +138,43 @@ public class MemberTest {
 	}
 
 	@Test
+	public void testDuration() {
+		Member sut = Member.newInstance();
+
+		Duration expected = Duration.ofHours(3).plusMinutes(33).plusSeconds(13);
+
+		sut.setDuration(expected);
+
+		Duration actual = sut.getDuration();
+
+		assertEquals("[duration] not corret!", expected, actual);
+	}
+
+	@Test
+	public void testGetDurationFormatted_ForNull() {
+		Member sut = Member.newInstance();
+		sut.setDuration(null);
+
+		String actual = sut.getDurationFormatted();
+		String expected = "00:00:00";
+
+		assertEquals("[duration] not corret!", expected, actual);
+
+	}
+
+	@Test
+	public void testGetDurationFormatted_ForValue() {
+		Member sut = Member.newInstance();
+		Duration duration = Duration.ofHours(3).plusMinutes(33).plusSeconds(13);
+		sut.setDuration(duration);
+
+		String actual = sut.getDurationFormatted();
+		String expected = "03:33:13";
+
+		assertEquals("[duration] not corret!", expected, actual);
+	}
+
+	@Test
 	public void testIsEmpty_ForValueEmpty() {
 		Member sut = Member.newInstance();
 
@@ -157,7 +195,7 @@ public class MemberTest {
 
 		boolean condition = sut.isEmpty();
 
-		assertFalse("[result] for isEmpty is not correct!", condition);
+		assertFalse("[condition] for isEmpty is not correct!", condition);
 	}
 
 	@Test
@@ -167,9 +205,9 @@ public class MemberTest {
 		person.setUuid(someUuid);
 		Member sut = Member.newInstance(person);
 
-		boolean result = sut.hasThatPersonIdentity(someUuid);
+		boolean condition = sut.hasThatPersonIdentity(someUuid);
 
-		assertTrue("UUID of person has not been checked correctly!", result);
+		assertTrue("UUID of person has not been checked correctly!", condition);
 	}
 
 	@Test
@@ -178,9 +216,9 @@ public class MemberTest {
 		person.setUuid(UUID.randomUUID());
 		Member sut = Member.newInstance(person);
 
-		boolean result = sut.hasThatPersonIdentity(UUID.randomUUID());
+		boolean condition = sut.hasThatPersonIdentity(UUID.randomUUID());
 
-		assertFalse("UUID of person has not been checked correctly!", result);
+		assertFalse("UUID of person has not been checked correctly!", condition);
 	}
 
 	@Test
@@ -228,27 +266,27 @@ public class MemberTest {
 	public void testEquals_ForMyself() {
 		Member sut = Member.newInstance();
 
-		boolean result = sut.equals(sut);
+		boolean condition = sut.equals(sut);
 
-		assertTrue(result);
+		assertTrue(condition);
 	}
 
 	@Test
 	public void testEquals_ForNull() {
 		Member sut = Member.newInstance();
 
-		boolean result = sut.equals(null);
+		boolean condition = sut.equals(null);
 
-		assertFalse(result);
+		assertFalse(condition);
 	}
 
 	@Test
 	public void testEquals_ForNotCompatibleClass() {
 		Member sut = Member.newInstance();
 
-		boolean result = sut.equals(new String());
+		boolean condition = sut.equals(new String());
 
-		assertFalse(result);
+		assertFalse(condition);
 	}
 
 	@Test
@@ -262,9 +300,9 @@ public class MemberTest {
 		dummyPerson.setUuid(uuidForSecondSut);
 		Member secondSut = Member.newInstance(dummyPerson);
 
-		boolean result = sut.equals(secondSut);
+		boolean condition = sut.equals(secondSut);
 
-		assertFalse(result);
+		assertFalse(condition);
 	}
 
 	@Test
@@ -275,9 +313,9 @@ public class MemberTest {
 		Member sut = Member.newInstance(dummyPerson);
 		Member secondSut = Member.newInstance(dummyPerson);
 
-		boolean result = sut.equals(secondSut);
+		boolean condition = sut.equals(secondSut);
 
-		assertTrue(result);
+		assertTrue(condition);
 	}
 
 	@Test
@@ -292,9 +330,9 @@ public class MemberTest {
 		dummyPerson.setUuid(uuidForSecondSut);
 		Member secondSut = Member.newInstance(dummyPerson);
 
-		boolean result = sut.equals(secondSut);
+		boolean condition = sut.equals(secondSut);
 
-		assertFalse(result);
+		assertFalse(condition);
 	}
 
 	@Test
@@ -305,8 +343,8 @@ public class MemberTest {
 		Member sut = Member.newInstance(dummyPerson);
 		Member secondSut = Member.newInstance(dummyPerson);
 
-		boolean result = sut.equals(secondSut);
+		boolean condition = sut.equals(secondSut);
 
-		assertTrue(result);
+		assertTrue(condition);
 	}
 }
