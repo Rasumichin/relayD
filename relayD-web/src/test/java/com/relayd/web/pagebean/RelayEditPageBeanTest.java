@@ -2,6 +2,7 @@ package com.relayd.web.pagebean;
 
 import static org.junit.Assert.*;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.UUID;
@@ -20,6 +21,7 @@ import com.relayd.Relay;
 import com.relayd.RelayEvent;
 import com.relayd.attributes.EventDay;
 import com.relayd.attributes.Eventname;
+import com.relayd.attributes.Relayname;
 import com.relayd.web.bridge.RelayBridge;
 
 import static org.mockito.Mockito.*;
@@ -45,7 +47,14 @@ public class RelayEditPageBeanTest {
 	public void setUp() {
 		doNothing().when(sut).openDialog();
 		doNothing().when(sut).closeDialog();
+	}
 
+	@Test
+	public void testIsSerializable() {
+		@SuppressWarnings("cast")
+		boolean condition = sut instanceof Serializable;
+
+		assertTrue("Klasse nicht Serializable!", condition);
 	}
 
 	@Test
@@ -89,5 +98,17 @@ public class RelayEditPageBeanTest {
 		verify(sut).persistRelay();
 		verify(sut).closeDialog();
 
+	}
+
+	@Test
+	public void testGetName() {
+		Relay relay = Relay.newInstance();
+		Relayname expected = Relayname.newInstance("Die 4 ????");
+		relay.setRelayname(expected);
+		sut.workingRelay = relay;
+
+		Relayname actual = sut.getRelayname();
+
+		assertEquals("[getRelayname] not correct!", expected, actual);
 	}
 }
