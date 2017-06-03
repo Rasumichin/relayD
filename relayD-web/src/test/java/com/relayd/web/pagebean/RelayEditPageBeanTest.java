@@ -116,9 +116,10 @@ public class RelayEditPageBeanTest {
 
 	@Test
 	public void testDuration() {
-		Relay relayMock = Mockito.mock(Relay.class);
-		sut.workingRelay = relayMock;
 		Duration expected = Duration.ZERO;
+		Relay relayMock = Mockito.mock(Relay.class);
+		doReturn(expected).when(relayMock).getDuration();
+		sut.workingRelay = relayMock;
 
 		sut.setDuration(expected);
 		verify(relayMock).setDuration(expected);

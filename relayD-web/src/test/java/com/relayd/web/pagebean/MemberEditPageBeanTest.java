@@ -3,6 +3,7 @@ package com.relayd.web.pagebean;
 import static org.junit.Assert.*;
 
 import java.io.Serializable;
+import java.time.Duration;
 import java.util.UUID;
 
 import org.junit.Before;
@@ -12,6 +13,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
 
@@ -97,5 +99,20 @@ public class MemberEditPageBeanTest {
 		String expected = "Justus Jonas";
 
 		assertEquals("[getName] not correct!", expected, actual);
+	}
+
+	@Test
+	public void testDuration() {
+		Duration expected = Duration.ZERO;
+		Member memberMock = Mockito.mock(Member.class);
+		doReturn(expected).when(memberMock).getDuration();
+		sut.workingMember = memberMock;
+
+		sut.setDuration(expected);
+		verify(memberMock).setDuration(expected);
+
+		Duration actual = sut.getDuration();
+		verify(memberMock).getDuration();
+		assertEquals("[duration] not correct!", expected, actual);
 	}
 }

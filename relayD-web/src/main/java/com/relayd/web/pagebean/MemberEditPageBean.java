@@ -1,6 +1,7 @@
 package com.relayd.web.pagebean;
 
 import java.io.Serializable;
+import java.time.Duration;
 import java.util.Map;
 import java.util.UUID;
 
@@ -67,8 +68,16 @@ public class MemberEditPageBean implements Serializable {
 	public String getName() {
 		return workingMember.getForename() + " " + workingMember.getSurename();
 	}
+	//
+	//	public void setName(String string) {
+	//		// Brauch ich das?
+	//	}
 
-	public void setName(String string) {
+	public void setDuration(Duration aDuration) {
+		workingMember.setDuration(aDuration);
+	}
 
+	public Duration getDuration() {
+		return workingMember.getDuration();
 	}
 }
