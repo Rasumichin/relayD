@@ -3,6 +3,7 @@ package com.relayd.web.pagebean;
 import static org.junit.Assert.*;
 
 import java.io.Serializable;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.UUID;
@@ -14,6 +15,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
 
@@ -111,4 +113,18 @@ public class RelayEditPageBeanTest {
 
 		assertEquals("[getRelayname] not correct!", expected, actual);
 	}
+
+	@Test
+	public void testDuration() {
+		Relay relayMock = Mockito.mock(Relay.class);
+		sut.workingRelay = relayMock;
+		Duration expected = Duration.ZERO;
+
+		sut.setDuration(expected);
+		verify(relayMock).setDuration(expected);
+
+		Duration actual = sut.getDuration();
+		verify(relayMock).getDuration();
+	}
+
 }
