@@ -68,6 +68,9 @@ public class RelayBrowsePageBean implements Serializable {
 	@ManagedProperty(value = "#{relayEditPageBean}")
 	private RelayEditPageBean relayEditPageBean;
 
+	@ManagedProperty(value = "#{memberEditPageBean}")
+	private MemberEditPageBean memberEditPageBean;
+
 	@PostConstruct
 	public void init() {
 		relayBridge = new RelayBridgeImpl();
@@ -119,7 +122,8 @@ public class RelayBrowsePageBean implements Serializable {
 			UUID uuid = getSelectedRelay().getUuid();
 			getRelayEditPageBean().openDialogFor(uuid);
 		} else {
-			showMessageErrorNoRowRelaySelected();
+			getMemberEditPageBean().openDialogFor(null);
+			//			showMessageErrorNoRowRelaySelected();
 		}
 	}
 
@@ -178,10 +182,6 @@ public class RelayBrowsePageBean implements Serializable {
 	void showDialog(Severity severity, String summary, String textMessage) {
 		FacesMessage message = new FacesMessage(severity, summary, textMessage);
 		RequestContext.getCurrentInstance().showMessageInDialog(message);
-	}
-
-	public void cancelEditDialog() {
-		getRelayEditPageBean().cancel();
 	}
 
 	public void onRelayEditClosed(@SuppressWarnings("unused") SelectEvent event) {
@@ -434,4 +434,12 @@ public class RelayBrowsePageBean implements Serializable {
 				listener="#{relayBrowsePageBean.switchRelayEvent}" />
 		</p:selectOneMenu>
 	 */
+
+	public MemberEditPageBean getMemberEditPageBean() {
+		return memberEditPageBean;
+	}
+
+	public void setMemberEditPageBean(MemberEditPageBean aMemberEditPageBean) {
+		memberEditPageBean = aMemberEditPageBean;
+	}
 }
