@@ -45,38 +45,39 @@
 							update="relayTable">
 						</p:commandButton>
 						<p:commandButton
-							update="relayTable"
 							icon="ui-icon-plus"
-							actionListener="#{relayBrowsePageBean.addRelay}">
+							actionListener="#{relayBrowsePageBean.addRelay}"
+							update="relayTable">
 							<p:ajax
 								event="dialogReturn"
-								update="relayTable"
-								listener="#{relayBrowsePageBean.onRelayEditClosed}" />
+								listener="#{relayBrowsePageBean.onRelayEditClosed}" 
+								update="relayTable"/>
 						</p:commandButton>
 						<p:commandButton
 							icon="ui-icon-pencil"
-							actionListener="#{relayBrowsePageBean.editRelay}">
+							actionListener="#{relayBrowsePageBean.editRelay}"
+							update="messages">
 							<p:ajax
 								event="dialogReturn"
-								update="relayTable"
-								listener="#{relayBrowsePageBean.onRelayEditClosed}" />
+								listener="#{relayBrowsePageBean.onRelayEditClosed}" 
+								update="relayTable"/>
 						</p:commandButton>
 						<p:commandButton
 							value="export"
 							icon="ui-icon-mail-closed"
-							update="messages"
-							actionListener="#{relayBrowsePageBean.emailExportRelay}" />
+							actionListener="#{relayBrowsePageBean.emailExportRelay}" 
+							update="messages"/>
 					</f:facet>
 					<f:facet name="right">
 						<p:commandButton
 							actionListener="#{relayBrowsePageBean.openAllRelays}"
-							update="relayTable"
-							icon="ui-icon-zoomin">
+							icon="ui-icon-zoomin"
+							update="relayTable">
 						</p:commandButton>
 						<p:commandButton
 							actionListener="#{relayBrowsePageBean.closeAllRelays}"
-							update="relayTable"
-							icon="ui-icon-zoomout">
+							icon="ui-icon-zoomout"
+							update="relayTable">
 						</p:commandButton>
 					</f:facet>
 				</p:toolbar>
