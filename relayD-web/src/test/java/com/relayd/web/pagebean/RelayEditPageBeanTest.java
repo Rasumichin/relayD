@@ -125,6 +125,6 @@ public class RelayEditPageBeanTest {
 
 		Duration actual = sut.getDuration();
 		verify(relayMock).getDuration();
+		assertEquals("[duration] not correct!", expected, actual);
 	}
-
 }
