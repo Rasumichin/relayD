@@ -3,6 +3,7 @@ package com.relayd.web.pagebean;
 import java.util.UUID;
 
 import com.relayd.Member;
+import com.relayd.ejb.GatewayType;
 
 public class MemberBridgeFake implements MemberBridge {
 
@@ -16,5 +17,10 @@ public class MemberBridgeFake implements MemberBridge {
 	@Override
 	public void set(Member aWorkingMember) {
 		member = aWorkingMember;
+	}
+
+	@Override
+	public GatewayType getGatewayType() {
+		return null;
 	}
 }

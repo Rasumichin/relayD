@@ -11,6 +11,9 @@ import com.relayd.ejb.orm.jpa.PersonGatewayJPA;
 import com.relayd.ejb.orm.memory.PersonGatewayMemory;
 
 /**
+ * An alle Programmierer, die noch um Mitternacht arbeiten: Es ist spät. Legt Euch schlafen.
+ *  - Philip Toshio Sudo
+ *
  * @author  schmollc (Christian@relayd.de)
  * @since   23.06.2016
  *

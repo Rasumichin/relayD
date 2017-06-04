@@ -3,6 +3,7 @@ package com.relayd.web.pagebean;
 import java.util.UUID;
 
 import com.relayd.Member;
+import com.relayd.ejb.GatewayType;
 
 /**
  * @author schmollc (Christian@relayd.de)
@@ -10,6 +11,8 @@ import com.relayd.Member;
  *
  */
 public interface MemberBridge {
+	GatewayType getGatewayType();
+
 	Member get(UUID uuid);
 
 	void set(Member member);

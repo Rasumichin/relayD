@@ -26,7 +26,7 @@ public class RelayBridgeImpl implements RelayBridge {
 	@Override
 	public TreeNode all() {
 		Collection<Relay> all = getGateway().getAll();
-		Set<Relay> relayAsSet = new HashSet(all);
+		Set<Relay> relayAsSet = new HashSet<>(all);
 		return convertToTreeNode(relayAsSet);
 	}
 
@@ -96,7 +96,7 @@ public class RelayBridgeImpl implements RelayBridge {
 		return getGateway().get(uuid);
 	}
 
-	public RelayGateway getGateway() {
+	private RelayGateway getGateway() {
 		return RelayGatewayFactory.get(getGatewayType());
 	}
 }
