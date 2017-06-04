@@ -7,7 +7,9 @@ import java.time.Month;
 import java.util.List;
 import java.util.UUID;
 
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import com.relayd.Member;
 import com.relayd.MemberBuilder;
@@ -28,6 +30,7 @@ import com.relayd.attributes.Relayname;
  * @since   14.10.2016
  *
  */
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public abstract class RelayGatewayTest {
 
 	protected RelayEvent metroMarathon = RelayEvent.newInstance(Eventname.newInstance("Metro Marathon"), EventDay.newInstance(LocalDate.of(2017, Month.APRIL, 30)));
@@ -35,7 +38,7 @@ public abstract class RelayGatewayTest {
 	public abstract RelayGateway getSut();
 
 	@Test
-	public void testGetForNonExistingEntry() {
+	public void testGet_ForNonExistingEntry() {
 		getSut().set(createRelayStaubwolke());
 		getSut().set(createHotRunners());
 

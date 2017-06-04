@@ -1,5 +1,7 @@
 package com.relayd.ejb;
 
+import com.relayd.ejb.orm.memory.MemberGatewayMemory;
+
 /**
  * @author  schmollc (Christian@relayd.de)
  * @since   04.06.2017

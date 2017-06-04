@@ -6,6 +6,8 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import com.relayd.ejb.orm.memory.MemberGatewayMemory;
+
 /**
  * Wischen Sie Staub, bevor Sie Staub sehen.
  * Denken Sie nicht "Es ist ja schon sauber", sondern vielmehr: "Halte es sauber"
