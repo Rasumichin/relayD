@@ -70,10 +70,6 @@ public class MemberEditPageBean implements Serializable {
 	public String getName() {
 		return workingMember.getForename() + " " + workingMember.getSurename();
 	}
-	//
-	//	public void setName(String string) {
-	//		// Brauch ich das?
-	//	}
 
 	public void setDuration(Duration aDuration) {
 		workingMember.setDuration(aDuration);
