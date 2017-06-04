@@ -5,7 +5,8 @@ import java.util.UUID;
 import com.relayd.Member;
 import com.relayd.Settings;
 import com.relayd.ejb.GatewayType;
-import com.relayd.web.pagebean.MemberBridge;
+import com.relayd.ejb.MemberGateway;
+import com.relayd.ejb.MemberGatewayFactory;
 
 /**
  * @author schmollc (Christian@relayd.de)
@@ -21,16 +22,15 @@ public class MemberBridgeImpl implements MemberBridge {
 
 	@Override
 	public Member get(UUID uuid) {
-		return null;
+		return getGateway().get(uuid);
 	}
 
 	@Override
 	public void set(Member member) {
+		getGateway().set(member);
 	}
 
-	//
-	//	private MemberGateway getGateway() {
-	//		return MemberGatewayFactory.get(getGatewayType());
-	//	}
-
+	private MemberGateway getGateway() {
+		return MemberGatewayFactory.get(getGatewayType());
+	}
 }

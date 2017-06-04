@@ -47,31 +47,15 @@ public class MemorySingleton {
 		return bigData.get(RELAY_EVENT);
 	}
 
-	public void setEvents(Map<UUID, RelayEvent> aEvents) {
-		bigData.put(RELAY_EVENT, aEvents);
-	}
-
 	public Map<UUID, Person> getPersons() {
 		return bigData.get(PERSON);
-	}
-
-	public void setPersons(Map<UUID, Person> aPersons) {
-		bigData.put(PERSON, aPersons);
 	}
 
 	public Map<UUID, Relay> getRelays() {
 		return bigData.get(RELAY);
 	}
 
-	public void setRelays(Map<UUID, Relay> aRelays) {
-		bigData.put(RELAY, aRelays);
-	}
-
 	public Map<UUID, Member> getMembers() {
 		return bigData.get(MEMBER);
-	}
-
-	public void setMembers(Map<UUID, Member> aMembers) {
-		bigData.put(MEMBER, aMembers);
 	}
 }

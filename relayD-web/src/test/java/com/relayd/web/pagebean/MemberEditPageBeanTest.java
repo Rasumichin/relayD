@@ -21,6 +21,7 @@ import com.relayd.Member;
 import com.relayd.Person;
 import com.relayd.attributes.Forename;
 import com.relayd.attributes.Surename;
+import com.relayd.web.bridge.MemberBridge;
 
 import static org.mockito.Mockito.*;
 

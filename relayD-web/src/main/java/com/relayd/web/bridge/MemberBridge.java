@@ -1,4 +1,4 @@
-package com.relayd.web.pagebean;
+package com.relayd.web.bridge;
 
 import java.util.UUID;
 

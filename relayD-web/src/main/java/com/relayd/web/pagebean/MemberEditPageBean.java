@@ -11,6 +11,8 @@ import javax.faces.bean.SessionScoped;
 import org.primefaces.context.RequestContext;
 
 import com.relayd.Member;
+import com.relayd.web.bridge.MemberBridge;
+import com.relayd.web.bridge.MemberBridgeImpl;
 
 /**
  * @author schmollc (Christian@relayd.de)
@@ -27,7 +29,7 @@ public class MemberEditPageBean implements Serializable {
 	private MemberBridge memberBridge;
 
 	public MemberEditPageBean() {
-		memberBridge = new MemberBridgeFake();
+		memberBridge = new MemberBridgeImpl();
 	}
 
 	public void openDialog() {
