@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import com.relayd.Member;
 import com.relayd.Person;
 import com.relayd.Relay;
 import com.relayd.RelayEvent;
@@ -15,6 +16,7 @@ public class MemorySingleton {
 	private static final String RELAY_EVENT = "RelayEvent";
 	private static final String PERSON = "Person";
 	private static final String RELAY = "Relay";
+	private static final String MEMBER = "Member";
 
 	private Map<String, Map> bigData = new HashMap<String, Map>();
 
@@ -31,6 +33,10 @@ public class MemorySingleton {
 
 		Map<UUID, Relay> relays = new HashMap<UUID, Relay>();
 		bigData.put(RELAY, relays);
+
+		Map<UUID, Member> members = new HashMap<UUID, Member>();
+		bigData.put(MEMBER, members);
+
 	}
 
 	public static MemorySingleton getInstance() {
@@ -41,23 +47,15 @@ public class MemorySingleton {
 		return bigData.get(RELAY_EVENT);
 	}
 
-	public void setEvents(Map<UUID, RelayEvent> aEvents) {
-		bigData.put(RELAY_EVENT, aEvents);
-	}
-
 	public Map<UUID, Person> getPersons() {
 		return bigData.get(PERSON);
-	}
-
-	public void setPersons(Map<UUID, Person> aPersons) {
-		bigData.put(PERSON, aPersons);
 	}
 
 	public Map<UUID, Relay> getRelays() {
 		return bigData.get(RELAY);
 	}
 
-	public void setRelays(Map<UUID, Relay> aRelays) {
-		bigData.put(RELAY, aRelays);
+	public Map<UUID, Member> getMembers() {
+		return bigData.get(MEMBER);
 	}
 }

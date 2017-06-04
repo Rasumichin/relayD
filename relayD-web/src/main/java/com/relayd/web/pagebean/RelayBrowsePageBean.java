@@ -68,6 +68,9 @@ public class RelayBrowsePageBean implements Serializable {
 	@ManagedProperty(value = "#{relayEditPageBean}")
 	private RelayEditPageBean relayEditPageBean;
 
+	@ManagedProperty(value = "#{memberEditPageBean}")
+	private MemberEditPageBean memberEditPageBean;
+
 	@PostConstruct
 	public void init() {
 		relayBridge = new RelayBridgeImpl();
@@ -115,11 +118,14 @@ public class RelayBrowsePageBean implements Serializable {
 	}
 
 	public void editRelay(@SuppressWarnings("unused") ActionEvent actionEvent) {
-		if (isRelayRowSelected()) {
+		if (!isRelayTableRowSelected()) {
+			showMessageErrorNoRowRelaySelected();
+		} else if (isRelayRowSelected()) {
 			UUID uuid = getSelectedRelay().getUuid();
 			getRelayEditPageBean().openDialogFor(uuid);
 		} else {
-			showMessageErrorNoRowRelaySelected();
+			UUID uuid = getSelectedMember().getUuid();
+			getMemberEditPageBean().openDialogFor(uuid);
 		}
 	}
 
@@ -178,10 +184,6 @@ public class RelayBrowsePageBean implements Serializable {
 	void showDialog(Severity severity, String summary, String textMessage) {
 		FacesMessage message = new FacesMessage(severity, summary, textMessage);
 		RequestContext.getCurrentInstance().showMessageInDialog(message);
-	}
-
-	public void cancelEditDialog() {
-		getRelayEditPageBean().cancel();
 	}
 
 	public void onRelayEditClosed(@SuppressWarnings("unused") SelectEvent event) {
@@ -270,6 +272,11 @@ public class RelayBrowsePageBean implements Serializable {
 	private Relay getSelectedRelay() {
 		TreeNodeRow selectedRelayNode = (TreeNodeRow) selectedTreeNode.getData();
 		return selectedRelayNode.getRelay();
+	}
+
+	private Member getSelectedMember() {
+		TreeNodeRow selectedMemberNode = (TreeNodeRow) selectedTreeNode.getData();
+		return selectedMemberNode.getMember();
 	}
 
 	public void addPerson(@SuppressWarnings("unused") ActionEvent actionEvent) {
@@ -411,6 +418,7 @@ public class RelayBrowsePageBean implements Serializable {
 		RelayEvent selectedRelayEvent = (RelayEvent) selectOneMenu.getValue();
 		//		converter="com.relayd.web.converter.RelayEventValueObjectConverter"
 	}
+
 	/**
 		<p:selectOneMenu
 			id="relayEvent"
@@ -434,4 +442,12 @@ public class RelayBrowsePageBean implements Serializable {
 				listener="#{relayBrowsePageBean.switchRelayEvent}" />
 		</p:selectOneMenu>
 	 */
+
+	public MemberEditPageBean getMemberEditPageBean() {
+		return memberEditPageBean;
+	}
+
+	public void setMemberEditPageBean(MemberEditPageBean aMemberEditPageBean) {
+		memberEditPageBean = aMemberEditPageBean;
+	}
 }

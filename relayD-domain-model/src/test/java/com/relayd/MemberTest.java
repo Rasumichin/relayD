@@ -79,7 +79,17 @@ public class MemberTest {
 	}
 
 	@Test
-	public void testGetUuidMember() {
+	public void testGetUuid() {
+		Member sut = Member.newInstance(Person.newInstance());
+		UUID expected = UUID.randomUUID();
+		sut.uuid = expected;
+
+		UUID actual = sut.getUuid();
+		assertEquals("[getUuid] not correct!", expected, actual);
+	}
+
+	@Test
+	public void testGetUuidPerson() {
 		UUID expected = UUID.randomUUID();
 
 		Person person = Person.newInstance();
@@ -247,17 +257,16 @@ public class MemberTest {
 
 	@Test
 	public void testHashCode() {
-		Person person = Person.newInstance();
-		person.setUuid(UUID.fromString("5697d710-8967-4b2d-9ab2-8fc50ddc6138"));
+		Member sut = Member.newInstance(Person.newInstance());
+		sut.uuid = UUID.fromString("5697d710-8967-4b2d-9ab2-8fc50ddc6138");
 
-		Member sut = Member.newInstance(person);
 		int hashCode = sut.hashCode();
 
 		assertEquals(1218343647, hashCode);
 
-		Member sutWithoutUUID = Member.newInstance();
+		sut.uuid = null;
 
-		hashCode = sutWithoutUUID.hashCode();
+		hashCode = sut.hashCode();
 
 		assertEquals(31, hashCode);
 	}
@@ -291,14 +300,11 @@ public class MemberTest {
 
 	@Test
 	public void testEquals_ForIdIsNull() {
-		Person dummyPerson = Person.newInstance();
-		dummyPerson.setUuid(null);
+		Member sut = Member.newInstance(Person.newInstance());
+		sut.uuid = null;
 
-		Member sut = Member.newInstance(dummyPerson);
-
-		UUID uuidForSecondSut = UUID.randomUUID();
-		dummyPerson.setUuid(uuidForSecondSut);
-		Member secondSut = Member.newInstance(dummyPerson);
+		Member secondSut = Member.newInstance(Person.newInstance());
+		secondSut.uuid = UUID.randomUUID();
 
 		boolean condition = sut.equals(secondSut);
 
@@ -307,11 +313,10 @@ public class MemberTest {
 
 	@Test
 	public void testEquals_ForBothIdsAreNull() {
-		Person dummyPerson = Person.newInstance();
-		dummyPerson.setUuid(null);
-
-		Member sut = Member.newInstance(dummyPerson);
-		Member secondSut = Member.newInstance(dummyPerson);
+		Member sut = Member.newInstance(Person.newInstance());
+		sut.uuid = null;
+		Member secondSut = Member.newInstance(Person.newInstance());
+		secondSut.uuid = null;
 
 		boolean condition = sut.equals(secondSut);
 
@@ -320,15 +325,10 @@ public class MemberTest {
 
 	@Test
 	public void testEquals_ForTwoDiffrentIds() {
-		UUID uuidForSut = UUID.randomUUID();
-		Person dummyPerson = Person.newInstance();
-		dummyPerson.setUuid(uuidForSut);
-
-		Member sut = Member.newInstance(dummyPerson);
-
-		UUID uuidForSecondSut = UUID.randomUUID();
-		dummyPerson.setUuid(uuidForSecondSut);
-		Member secondSut = Member.newInstance(dummyPerson);
+		Member sut = Member.newInstance(Person.newInstance());
+		sut.uuid = UUID.randomUUID();
+		Member secondSut = Member.newInstance(Person.newInstance());
+		secondSut.uuid = UUID.randomUUID();
 
 		boolean condition = sut.equals(secondSut);
 
@@ -337,11 +337,12 @@ public class MemberTest {
 
 	@Test
 	public void testEquals_ForSameIds() {
-		Person dummyPerson = Person.newInstance();
-		dummyPerson.setUuid(UUID.randomUUID());
+		UUID uuid = UUID.randomUUID();
 
-		Member sut = Member.newInstance(dummyPerson);
-		Member secondSut = Member.newInstance(dummyPerson);
+		Member sut = Member.newInstance(Person.newInstance());
+		sut.uuid = uuid;
+		Member secondSut = Member.newInstance(Person.newInstance());
+		secondSut.uuid = uuid;
 
 		boolean condition = sut.equals(secondSut);
 

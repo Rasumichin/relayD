@@ -6,7 +6,7 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 
 <h:head>
-	<title>Relay</title>
+	<title>Member</title>
 	<style type="text/css">
 .ui-widget {
 	font-size: 90%;
@@ -22,36 +22,34 @@
 		<p:focus/>
 
 		<h:panelGrid
-			columns="2"
 			id="inputgrid"
+			columns="2"
 			cellpadding="5">
 			<p:outputLabel
-				for="relayname"
-				value="Relayname:" />
-			<p:inputText
-				id="relayname"
-				value="#{relayEditPageBean.relayname}"
-				style="width:180px">
-				<f:converter converterId="com.relayd.web.converter.RelaynameValueObjectConverter" />
-			</p:inputText>
+				id="nameLabel"
+				value="Name" />
+			<p:outputLabel
+				id="name"
+				value="#{memberEditPageBean.name}" />
 			<p:outputLabel
 				for="duration"
 				value="Duration:" />
 			<p:inputText
 				id="duration"
-				value="#{relayEditPageBean.duration}"
+				value="#{memberEditPageBean.duration}"
 				style="width:180px">
 				<f:converter converterId="com.relayd.web.converter.DurationValueObjectConverter" />
 			</p:inputText>
+
 		</h:panelGrid>
 
 		<p:commandButton
-			actionListener="#{relayEditPageBean.cancel}"
+			actionListener="#{memberEditPageBean.cancel}"
 			icon="ui-icon-close"
 			style="float:left;" />
 		<p:commandButton
 			update="form"
-			actionListener="#{relayEditPageBean.save}"
+			actionListener="#{memberEditPageBean.save}"
 			icon="ui-icon-check"
 			style="float:right;" />
 	</h:form>
