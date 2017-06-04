@@ -118,12 +118,14 @@ public class RelayBrowsePageBean implements Serializable {
 	}
 
 	public void editRelay(@SuppressWarnings("unused") ActionEvent actionEvent) {
-		if (isRelayRowSelected()) {
+		if (!isRelayTableRowSelected()) {
+			showMessageErrorNoRowRelaySelected();
+		} else if (isRelayRowSelected()) {
 			UUID uuid = getSelectedRelay().getUuid();
 			getRelayEditPageBean().openDialogFor(uuid);
 		} else {
-			getMemberEditPageBean().openDialogFor(null);
-			//			showMessageErrorNoRowRelaySelected();
+			UUID uuid = getSelectedRelay().getUuid();
+			getMemberEditPageBean().openDialogFor(uuid);
 		}
 	}
 
@@ -411,6 +413,7 @@ public class RelayBrowsePageBean implements Serializable {
 		RelayEvent selectedRelayEvent = (RelayEvent) selectOneMenu.getValue();
 		//		converter="com.relayd.web.converter.RelayEventValueObjectConverter"
 	}
+
 	/**
 		<p:selectOneMenu
 			id="relayEvent"

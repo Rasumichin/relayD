@@ -15,7 +15,6 @@ import javax.faces.event.ActionEvent;
 
 import org.junit.Before;
 import org.junit.FixMethodOrder;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
@@ -57,6 +56,9 @@ public class RelayBrowsePageBeanTest {
 
 	@Mock
 	private RelayEditPageBean relayEditPageBean;
+
+	@Mock
+	private MemberEditPageBean memberEditPageBean;
 
 	@Mock
 	private RelayBridge relayBridge;
@@ -279,7 +281,6 @@ public class RelayBrowsePageBeanTest {
 	}
 
 	@Test
-	@Ignore("Wieder einbauen wenn der Member Dialog läuft")
 	public void testEditRow_ForNonSelectedRow() {
 		ActionEvent dummyActionEvent = null;
 
@@ -290,7 +291,6 @@ public class RelayBrowsePageBeanTest {
 	}
 
 	@Test
-	@Ignore("Wieder einbauen wenn der Member Dialog wieder läuft")
 	public void testEditRow_ForSelectedRowMember() {
 		TreeNode selectedTreeNode = new DefaultTreeNode(TreeNodeRow.newInstance(Member.newInstance(), Position.FIRST));
 		sut.setSelectedNode(selectedTreeNode);
@@ -298,8 +298,10 @@ public class RelayBrowsePageBeanTest {
 
 		sut.editRelay(dummyActionEvent);
 
+		verify(memberEditPageBean).openDialogFor(any(UUID.class));
+
 		verify(relayEditPageBean, never()).openDialogFor(any(UUID.class));
-		verify(sut).showMessageErrorNoRowRelaySelected();
+		verify(sut, never()).showMessageErrorNoRowRelaySelected();
 	}
 
 	@Test
@@ -311,6 +313,8 @@ public class RelayBrowsePageBeanTest {
 		sut.editRelay(dummyActionEvent);
 
 		verify(relayEditPageBean).openDialogFor(any(UUID.class));
+
+		verify(memberEditPageBean, never()).openDialogFor(any(UUID.class));
 		verify(sut, never()).showMessageErrorNoRowRelaySelected();
 	}
 
