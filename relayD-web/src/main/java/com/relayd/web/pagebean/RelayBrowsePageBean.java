@@ -124,8 +124,7 @@ public class RelayBrowsePageBean implements Serializable {
 			UUID uuid = getSelectedRelay().getUuid();
 			getRelayEditPageBean().openDialogFor(uuid);
 		} else {
-			// TODO -REL-273- Hier muss ein getSelectedMember hin. Jedoch besitzt der Member noch keine eigene UUID um diese Mechanismus zu nutzen.
-			UUID uuid = getSelectedRelay().getUuid();
+			UUID uuid = getSelectedMember().getUuid();
 			getMemberEditPageBean().openDialogFor(uuid);
 		}
 	}
@@ -273,6 +272,11 @@ public class RelayBrowsePageBean implements Serializable {
 	private Relay getSelectedRelay() {
 		TreeNodeRow selectedRelayNode = (TreeNodeRow) selectedTreeNode.getData();
 		return selectedRelayNode.getRelay();
+	}
+
+	private Member getSelectedMember() {
+		TreeNodeRow selectedMemberNode = (TreeNodeRow) selectedTreeNode.getData();
+		return selectedMemberNode.getMember();
 	}
 
 	public void addPerson(@SuppressWarnings("unused") ActionEvent actionEvent) {
