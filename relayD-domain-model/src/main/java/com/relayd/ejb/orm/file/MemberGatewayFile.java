@@ -1,8 +1,9 @@
-package com.relayd.ejb;
+package com.relayd.ejb.orm.file;
 
 import java.util.UUID;
 
 import com.relayd.Member;
+import com.relayd.ejb.MemberGateway;
 
 /**
  * @author  schmollc (Christian@relayd.de)

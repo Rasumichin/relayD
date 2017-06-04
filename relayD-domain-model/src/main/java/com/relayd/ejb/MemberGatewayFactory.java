@@ -1,5 +1,6 @@
 package com.relayd.ejb;
 
+import com.relayd.ejb.orm.file.MemberGatewayFile;
 import com.relayd.ejb.orm.memory.MemberGatewayMemory;
 
 /**
