@@ -124,6 +124,7 @@ public class RelayBrowsePageBean implements Serializable {
 			UUID uuid = getSelectedRelay().getUuid();
 			getRelayEditPageBean().openDialogFor(uuid);
 		} else {
+			// TODO -REL-273- Hier muss ein getSelectedMember hin. Jedoch besitzt der Member noch keine eigene UUID um diese Mechanismus zu nutzen.
 			UUID uuid = getSelectedRelay().getUuid();
 			getMemberEditPageBean().openDialogFor(uuid);
 		}
