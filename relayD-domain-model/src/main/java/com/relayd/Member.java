@@ -18,6 +18,8 @@ import com.relayd.attributes.Surename;
 public class Member implements Serializable {
 	private static final long serialVersionUID = -1657222726828950264L;
 
+	UUID uuid;
+
 	private UUID uuidPerson;
 	private Forename forename = Forename.newInstance();
 	private Surename surename = Surename.newInstance();
@@ -26,9 +28,11 @@ public class Member implements Serializable {
 	private Duration duration;
 
 	private Member() {
+		uuid = UUID.randomUUID();
 	}
 
 	private Member(Forename aForename, Surename aSurename, Email anEmail, UUID anUuid) {
+		uuid = UUID.randomUUID();
 		forename = aForename;
 		surename = aSurename;
 		email = anEmail;
@@ -48,6 +52,10 @@ public class Member implements Serializable {
 
 	public boolean isEmpty() {
 		return false;
+	}
+
+	public UUID getUuid() {
+		return uuid;
 	}
 
 	public UUID getUuidPerson() {
@@ -81,8 +89,8 @@ public class Member implements Serializable {
 		return DurationFormatUtils.formatDuration(duration.toMillis(), "HH:mm:ss");
 	}
 
-	public boolean hasThatPersonIdentity(UUID uuid) {
-		return getUuidPerson().equals(uuid);
+	public boolean hasThatPersonIdentity(UUID anUuid) {
+		return getUuidPerson().equals(anUuid);
 	}
 
 	@Override
@@ -94,7 +102,7 @@ public class Member implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((uuidPerson == null) ? 0 : uuidPerson.hashCode());
+		result = prime * result + ((uuid == null) ? 0 : uuid.hashCode());
 		return result;
 	}
 
@@ -110,11 +118,11 @@ public class Member implements Serializable {
 			return false;
 		}
 		Member other = (Member) obj;
-		if (uuidPerson == null) {
-			if (other.uuidPerson != null) {
+		if (uuid == null) {
+			if (other.uuid != null) {
 				return false;
 			}
-		} else if (!uuidPerson.equals(other.uuidPerson)) {
+		} else if (!uuid.equals(other.uuid)) {
 			return false;
 		}
 		return true;
@@ -135,7 +143,7 @@ public class Member implements Serializable {
 		}
 
 		@Override
-		public boolean hasThatPersonIdentity(@SuppressWarnings("unused") UUID uuid) {
+		public boolean hasThatPersonIdentity(@SuppressWarnings("unused") UUID anUuid) {
 			return false;
 		}
 
