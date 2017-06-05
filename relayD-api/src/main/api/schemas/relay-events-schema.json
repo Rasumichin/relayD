@@ -1,0 +1,32 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "RelayEvents",
+    "description": "An array of RelayEvent resources.",
+    "items": {
+        "properties": {
+            "eventDay": {
+                "maxLength": 10,
+                "minLength": 10,
+                "pattern": "yyyy-mm-dd",
+                "type": "string"
+            },
+            "id": {
+                "maxLength": 36,
+                "minLength": 36,
+                "type": "string"
+            },
+            "name": {
+                "maxLength": 256,
+                "minLength": 1,
+                "type": "string"
+            }
+        },
+        "required": [
+            "id",
+            "eventDay",
+            "name"
+        ],
+        "type": "object"
+    },
+    "type": "array"
+}

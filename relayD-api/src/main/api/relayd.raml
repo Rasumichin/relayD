@@ -1,5 +1,7 @@
 #%RAML 1.0
 title: relayD API
 version: v1
-baseUri: http://cloud.lichternte.koeln:8080/relayD-api/
+baseUri: http://cloud.lichternte.koeln:8080/relayD-api/resources
 mediaType:  application/json
+types:
+  RelayEvents: !include schemas/relay-events-schema.json
