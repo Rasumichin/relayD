@@ -7,7 +7,6 @@
             "eventDay": {
                 "maxLength": 10,
                 "minLength": 10,
-                "pattern": "yyyy-mm-dd",
                 "type": "string"
             },
             "id": {

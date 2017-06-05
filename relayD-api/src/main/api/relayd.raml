@@ -5,3 +5,13 @@ baseUri: http://cloud.lichternte.koeln:8080/relayD-api/resources
 mediaType:  application/json
 types:
   RelayEvents: !include schemas/relay-events-schema.json
+/events:
+  description: Calling this URI causes reading data from DB2/ESV000.
+  get:
+    description: Answers a collection of all available RelayEvents (might be empty) with their basic attributes.
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include examples/events.json
+            type: RelayEvents
