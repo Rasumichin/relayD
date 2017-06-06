@@ -2,6 +2,7 @@ package com.relayd.ejb;
 
 import static org.junit.Assert.*;
 
+import java.time.Duration;
 import java.util.UUID;
 
 import org.junit.FixMethodOrder;
@@ -11,7 +12,6 @@ import org.junit.runners.MethodSorters;
 import com.relayd.Member;
 import com.relayd.Person;
 import com.relayd.attributes.Forename;
-import com.relayd.attributes.Surename;
 
 /**
  * Die kürzeste Antwort auf etwas ist es einfach zu tun.
@@ -28,39 +28,37 @@ public abstract class MemberGatewayTest {
 
 	@Test
 	public void testGet_ForExistingEntry() {
-		Member firstMember = createJustusJonas();
+		Member firstMember = createMemberOne();
 		getSut().set(firstMember);
-		getSut().set(createPeterShaw());
+		getSut().set(createMemberTwo());
 
-		Member result = getSut().get(firstMember.getUuidPerson());
+		Member result = getSut().get(firstMember.getUuid());
 
-		assertEquals("[Forename] not correct.", firstMember.getForename(), result.getForename());
-		assertEquals("[Surename] not correct.", firstMember.getSurename(), result.getSurename());
+		assertEquals("[duration] not correct.", firstMember.getDuration(), result.getDuration());
 	}
 
 	@Test
 	public void testGet_ForNonExistingEntry() {
-		getSut().set(createJustusJonas());
-		//		getSut().set(createHotRunners());
+		getSut().set(createMemberOne());
 
 		Member result = getSut().get(UUID.randomUUID());
 
 		assertNull("[result] must be null!", result);
 	}
 
-	private Member createJustusJonas() {
-		Person justusJonas = Person.newInstance();
-		justusJonas.setForename(Forename.newInstance("Justus"));
-		justusJonas.setSurename(Surename.newInstance("Jonas"));
-		Member member = Member.newInstance(justusJonas);
+	private Member createMemberOne() {
+		Person justus = Person.newInstance();
+		justus.setForename(Forename.newInstance("Justus"));
+		Member member = Member.newInstance(justus);
+		member.setDuration(Duration.ofMinutes(15));
 		return member;
 	}
 
-	private Member createPeterShaw() {
-		Person peterShaw = Person.newInstance();
-		peterShaw.setForename(Forename.newInstance("Peter"));
-		peterShaw.setSurename(Surename.newInstance("Shaw"));
-		Member member = Member.newInstance(peterShaw);
+	private Member createMemberTwo() {
+		Person peter = Person.newInstance();
+		peter.setForename(Forename.newInstance("Peter"));
+		Member member = Member.newInstance(peter);
+		member.setDuration(Duration.ofMinutes(17));
 		return member;
 	}
 }
