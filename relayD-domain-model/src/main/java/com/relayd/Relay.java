@@ -76,6 +76,9 @@ public class Relay implements Serializable {
 	}
 
 	public Member getMemberFor(Position position) {
+		if (Position.UNKNOWN.equals(position)) {
+			return Member.newInstance();
+		}
 		Member person = members.get(position.getValue() - 1);
 		return person;
 	}
