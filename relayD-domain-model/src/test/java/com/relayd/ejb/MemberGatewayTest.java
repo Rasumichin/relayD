@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.time.Duration;
 import java.util.UUID;
 
+import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
@@ -24,17 +25,29 @@ import com.relayd.attributes.Forename;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public abstract class MemberGatewayTest {
 
+	/**
+	 *
+	 */
+	private static final Duration OF_MINUTES = Duration.ofMinutes(15);
+
 	public abstract MemberGateway getSut();
+
+	public UUID firstMemberUUID = null;
+
+	@Before
+	public void setUp() {
+		Member firstMember = createMemberOne();
+		firstMemberUUID = firstMember.getUuid();
+		getSut().set(firstMember);
+		getSut().set(createMemberTwo());
+	}
 
 	@Test
 	public void testGet_ForExistingEntry() {
-		Member firstMember = createMemberOne();
-		getSut().set(firstMember);
-		getSut().set(createMemberTwo());
 
-		Member result = getSut().get(firstMember.getUuid());
+		Member result = getSut().get(firstMemberUUID);
 
-		assertEquals("[duration] not correct.", firstMember.getDuration(), result.getDuration());
+		assertEquals("[duration] not correct.", OF_MINUTES, result.getDuration());
 	}
 
 	@Test
@@ -46,15 +59,15 @@ public abstract class MemberGatewayTest {
 		assertNull("[result] must be null!", result);
 	}
 
-	private Member createMemberOne() {
+	protected Member createMemberOne() {
 		Person justus = Person.newInstance();
 		justus.setForename(Forename.newInstance("Justus"));
 		Member member = Member.newInstance(justus);
-		member.setDuration(Duration.ofMinutes(15));
+		member.setDuration(OF_MINUTES);
 		return member;
 	}
 
-	private Member createMemberTwo() {
+	protected Member createMemberTwo() {
 		Person peter = Person.newInstance();
 		peter.setForename(Forename.newInstance("Peter"));
 		Member member = Member.newInstance(peter);

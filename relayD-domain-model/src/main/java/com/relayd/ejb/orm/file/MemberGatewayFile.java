@@ -44,7 +44,6 @@ public class MemberGatewayFile implements MemberGateway {
 		List<RelayEvent> someRelayEvents = FileSingleton.getInstance().getRelayEvents();
 
 		RelayEvent relayEvent = someRelayEvents.get(0);
-		boolean found = false;
 		for (Relay eachRelay : relayEvent.getRelays()) {
 			if (eachRelay.getMembers().contains(aMember)) {
 				for (Position eachPosition : Position.values()) {
@@ -52,13 +51,8 @@ public class MemberGatewayFile implements MemberGateway {
 					if (aMember.equals(member)) {
 						mapMemberToMember(member, aMember);
 						eachRelay.addMember(aMember, eachPosition);
-						found = true;
 					}
 				}
-			}
-			if (found == false) {
-				Relay relay = relayEvent.getRelays().iterator().next();
-				relay.addMember(aMember);
 			}
 		}
 		FileSingleton.getInstance().setRelayEvents(someRelayEvents);
