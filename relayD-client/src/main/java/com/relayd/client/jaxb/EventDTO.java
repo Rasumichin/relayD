@@ -3,7 +3,6 @@ package com.relayd.client.jaxb;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 import java.util.UUID;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -17,9 +16,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "event")
 public class EventDTO {
 	private String id;
-	private String title;
+	private String name;
 	private Integer year;
-	private Integer numberOfParticipants;
 
 	public EventDTO() {
 	}
@@ -29,22 +27,20 @@ public class EventDTO {
 	}
 
 	/**
-	 * Creates always three instances with three static titles, each with a
-	 * random id, a static year (2017) and a random number of particants
-	 * (0, 4, 8 or 12).
+	 * Creates always three instances with three static names, each with a
+	 * random id, a static year (2017).
 	 *
 	 * @return A list of three elements.
 	 *
 	 */
 	public static List<EventDTO> getRandomEvents() {
 		List<EventDTO> result = new ArrayList<>();
-		String[] titles = { "Metro Duesseldorf Marathon", "Schmolleks Ennepetal Staffel Hulli Gulli", "Boston Marathon Relay Event" };
+		String[] names = { "Metro Duesseldorf Marathon", "Schmolleks Ennepetal Staffel Hulli Gulli", "Boston Marathon Relay Event" };
 
-		for (String eachTitle : Arrays.asList(titles)) {
+		for (String eachName : Arrays.asList(names)) {
 			EventDTO event = new EventDTO(UUID.randomUUID().toString());
-			event.setTitle(eachTitle);
+			event.setName(eachName);
 			event.setYear(2017);
-			event.setNumberOfParticipants(new Random().nextInt(4) * 4);
 			result.add(event);
 		}
 
@@ -75,12 +71,12 @@ public class EventDTO {
 	}
 
 	@XmlElement
-	public String getTitle() {
-		return title;
+	public String getName() {
+		return name;
 	}
 
-	public void setTitle(String aTitle) {
-		title = aTitle;
+	public void setName(String aName) {
+		name = aName;
 	}
 
 	@XmlElement
@@ -92,20 +88,36 @@ public class EventDTO {
 		year = aYear;
 	}
 
-	@XmlElement
-	public Integer getNumberOfParticipants() {
-		return numberOfParticipants;
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
 	}
 
-	public void setNumberOfParticipants(Integer participants) {
-		numberOfParticipants = participants;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		EventDTO other = (EventDTO) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
 	}
 
 	@Override
 	public String toString() {
 		return getClass().getSimpleName() + " {"
 				+ "id=" + id
-				+ ", title=" + title
+				+ ", name=" + name
 				+ ", year=" + year + "}";
 	}
 }
