@@ -1,5 +1,6 @@
 package com.relayd.client.jaxb;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.UUID;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  * @author Rasumichin (Erik@relayd.de)
@@ -17,7 +19,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class EventDTO {
 	private String id;
 	private String name;
-	private Integer year;
+	private LocalDate eventDay;
 
 	public EventDTO() {
 	}
@@ -28,9 +30,9 @@ public class EventDTO {
 
 	/**
 	 * Creates always three instances with three static names, each with a
-	 * random id, a static year (2017).
+	 * random id and a static event day (2017-04-30).
 	 *
-	 * @return A list of three elements.
+	 * @return A list with three elements.
 	 *
 	 */
 	public static List<EventDTO> getRandomEvents() {
@@ -40,7 +42,7 @@ public class EventDTO {
 		for (String eachName : Arrays.asList(names)) {
 			EventDTO event = new EventDTO(UUID.randomUUID().toString());
 			event.setName(eachName);
-			event.setYear(2017);
+			event.setEventDay(LocalDate.of(2017, 4, 30));
 			result.add(event);
 		}
 
@@ -48,15 +50,14 @@ public class EventDTO {
 	}
 
 	/**
-	 * Fake the check whether a corresponding instance is existing for the
-	 * given 'id'.
+	 * Fake the check whether a corresponding instance is existing for the given 'id'.
 	 *
-	 * @param anEventId will not be considered for the algorythm
-	 * @return true or false with a 50 percent probability for each case
+	 * @param	anEventId		The hash code of this value is part of building the fake value.
+	 * @return	true or false	with a 50 percent probability for each case
 	 *
 	 */
-	public static boolean isEventExistingFor(@SuppressWarnings("unused") String anEventId) {
-		long randomValue = System.currentTimeMillis();
+	public static boolean isEventExistingFor(String anEventId) {
+		long randomValue = System.currentTimeMillis() + anEventId.hashCode();
 
 		return (randomValue % 2) == 0;
 	}
@@ -79,13 +80,14 @@ public class EventDTO {
 		name = aName;
 	}
 
-	@XmlElement
-	public Integer getYear() {
-		return year;
+	@XmlElement()
+	@XmlJavaTypeAdapter(value = LocalDateAdapter.class)
+	public LocalDate getEventDay() {
+		return eventDay;
 	}
 
-	public void setYear(Integer aYear) {
-		year = aYear;
+	public void setEventDay(LocalDate dayOfEvent) {
+		eventDay = dayOfEvent;
 	}
 
 	@Override
@@ -115,9 +117,6 @@ public class EventDTO {
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + " {"
-				+ "id=" + id
-				+ ", name=" + name
-				+ ", year=" + year + "}";
+		return getClass().getSimpleName() + " {" + "id=" + id + ", name=" + name + ", eventDay=" + eventDay + "}";
 	}
 }
