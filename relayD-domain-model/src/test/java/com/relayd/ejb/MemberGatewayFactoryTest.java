@@ -6,6 +6,7 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import com.relayd.ejb.orm.file.MemberGatewayFile;
 import com.relayd.ejb.orm.memory.MemberGatewayMemory;
 
 /**

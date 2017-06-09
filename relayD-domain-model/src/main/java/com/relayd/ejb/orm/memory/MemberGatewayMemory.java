@@ -27,6 +27,6 @@ public class MemberGatewayMemory implements MemberGateway {
 
 	@Override
 	public void set(Member member) {
-		MemorySingleton.getInstance().getMembers().put(member.getUuidPerson(), member);
+		MemorySingleton.getInstance().getMembers().put(member.getUuid(), member);
 	}
 }

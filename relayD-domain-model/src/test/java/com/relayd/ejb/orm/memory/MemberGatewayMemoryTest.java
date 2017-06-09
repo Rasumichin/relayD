@@ -20,9 +20,11 @@ public class MemberGatewayMemoryTest extends MemberGatewayTest {
 
 	private MemberGatewayMemory sut = new MemberGatewayMemory();
 
+	@Override
 	@Before
 	public void setUp() {
 		MemorySingleton.getInstance().getMembers().clear();
+		super.setUp();
 	}
 
 	@Override
