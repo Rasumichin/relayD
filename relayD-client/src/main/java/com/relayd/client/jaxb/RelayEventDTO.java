@@ -24,8 +24,19 @@ public class RelayEventDTO {
 	public RelayEventDTO() {
 	}
 
-	public RelayEventDTO(String anId) {
-		id = anId;
+	public static RelayEventDTO newInstance() {
+		return RelayEventDTO.newInstance(UUID.randomUUID());
+	}
+
+	public static RelayEventDTO newInstance(UUID anId) {
+		if (anId == null) {
+			throw new IllegalArgumentException("[anId] must not be 'null'.");
+		}
+		
+		RelayEventDTO result = new RelayEventDTO();
+		result.setId(anId.toString());
+		
+		return result;
 	}
 
 	/**
@@ -40,7 +51,7 @@ public class RelayEventDTO {
 		String[] names = { "Metro Duesseldorf Marathon", "Schmolleks Ennepetal Staffel Hulli Gulli", "Boston Marathon Relay Event" };
 
 		for (String eachName : Arrays.asList(names)) {
-			RelayEventDTO event = new RelayEventDTO(UUID.randomUUID().toString());
+			RelayEventDTO event = RelayEventDTO.newInstance(UUID.randomUUID());
 			event.setName(eachName);
 			event.setEventDay(LocalDate.of(2017, 4, 30));
 			result.add(event);
