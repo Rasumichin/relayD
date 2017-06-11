@@ -16,15 +16,15 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *
  */
 @XmlRootElement(name = "event")
-public class EventDTO {
+public class RelayEventDTO {
 	private String id;
 	private String name;
 	private LocalDate eventDay;
 
-	public EventDTO() {
+	public RelayEventDTO() {
 	}
 
-	public EventDTO(String anId) {
+	public RelayEventDTO(String anId) {
 		id = anId;
 	}
 
@@ -35,12 +35,12 @@ public class EventDTO {
 	 * @return A list with three elements.
 	 *
 	 */
-	public static List<EventDTO> getRandomEvents() {
-		List<EventDTO> result = new ArrayList<>();
+	public static List<RelayEventDTO> getRandomEvents() {
+		List<RelayEventDTO> result = new ArrayList<>();
 		String[] names = { "Metro Duesseldorf Marathon", "Schmolleks Ennepetal Staffel Hulli Gulli", "Boston Marathon Relay Event" };
 
 		for (String eachName : Arrays.asList(names)) {
-			EventDTO event = new EventDTO(UUID.randomUUID().toString());
+			RelayEventDTO event = new RelayEventDTO(UUID.randomUUID().toString());
 			event.setName(eachName);
 			event.setEventDay(LocalDate.of(2017, 4, 30));
 			result.add(event);
@@ -106,7 +106,7 @@ public class EventDTO {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		EventDTO other = (EventDTO) obj;
+		RelayEventDTO other = (RelayEventDTO) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

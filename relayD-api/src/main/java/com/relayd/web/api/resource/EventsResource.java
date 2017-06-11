@@ -18,7 +18,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-import com.relayd.client.jaxb.EventDTO;
+import com.relayd.client.jaxb.RelayEventDTO;
 
 /**
  * @author Rasumichin (Erik@relayd.de)
@@ -30,15 +30,15 @@ public class EventsResource {
 
 	@GET
 	@Produces("application/json")
-	public List<EventDTO> getEvents() {
+	public List<RelayEventDTO> getEvents() {
 		// Action here:
 		// Retrieve all resources and return.
-		return EventDTO.getRandomEvents();
+		return RelayEventDTO.getRandomEvents();
 	}
 
 	@POST
 	@Consumes("application/json")
-	public Response addEvent(EventDTO anEvent, @Context UriInfo uriInfo) {
+	public Response addEvent(RelayEventDTO anEvent, @Context UriInfo uriInfo) {
 		// Action here:
 		// Validate and persist new resource.
 
@@ -59,7 +59,7 @@ public class EventsResource {
 	@Path("{id}")
 	@PUT
 	@Consumes("application/json")
-	public Response updateEvent(@PathParam("id") String id, EventDTO anEvent) {
+	public Response updateEvent(@PathParam("id") String id, RelayEventDTO anEvent) {
 		// Action here:
 		// Determine existing resource and persist new state of resource.
 
@@ -79,10 +79,10 @@ public class EventsResource {
 	@Path("{id}")
 	@GET
 	@Produces("application/json")
-	public EventDTO getEvent(@PathParam("id") String id) {
+	public RelayEventDTO getEvent(@PathParam("id") String id) {
 		// Action here:
 		// Obtain corresponding resource ('id') and return.
-		EventDTO event = EventDTO.getRandomEvents().get(0);
+		RelayEventDTO event = RelayEventDTO.getRandomEvents().get(0);
 		event.setId(id);
 
 		return event;
@@ -94,7 +94,7 @@ public class EventsResource {
 		// Action here:
 		// Determine whether 'id' exists and delete the corresponding resource.
 		Response.ResponseBuilder responseBuilder;
-		if (EventDTO.isEventExistingFor(id)) {
+		if (RelayEventDTO.isEventExistingFor(id)) {
 			responseBuilder = Response.status(204);
 		} else {
 			responseBuilder = Response.status(404);
