@@ -19,21 +19,27 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 import com.relayd.client.jaxb.RelayEventDTO;
+import com.relayd.web.api.bridge.*;
 
 /**
  * @author Rasumichin (Erik@relayd.de)
- * @since 27.03.2016
+ * @since  27.03.2016
  *
  */
 @Path("events")
 public class EventsResource {
+	private RelayEventDTOBridge relayEventDTOBridge = new RelayEventDTOBridgeImpl();
+
+	public RelayEventDTOBridge getRelayEventDTOBridge() {
+		return relayEventDTOBridge;
+	}
 
 	@GET
 	@Produces("application/json")
 	public List<RelayEventDTO> getEvents() {
-		// Action here:
-		// Retrieve all resources and return.
-		return RelayEventDTO.getRandomEvents();
+		List<RelayEventDTO> result = getRelayEventDTOBridge().all();
+
+		return result;
 	}
 
 	@POST
