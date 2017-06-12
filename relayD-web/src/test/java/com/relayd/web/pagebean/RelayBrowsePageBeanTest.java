@@ -58,6 +58,9 @@ public class RelayBrowsePageBeanTest {
 	private RelayEditPageBean relayEditPageBean;
 
 	@Mock
+	private MemberEditPageBean memberEditPageBean;
+
+	@Mock
 	private RelayBridge relayBridge;
 
 	@Before
@@ -295,8 +298,10 @@ public class RelayBrowsePageBeanTest {
 
 		sut.editRelay(dummyActionEvent);
 
+		verify(memberEditPageBean).openDialogFor(any(UUID.class));
+
 		verify(relayEditPageBean, never()).openDialogFor(any(UUID.class));
-		verify(sut).showMessageErrorNoRowRelaySelected();
+		verify(sut, never()).showMessageErrorNoRowRelaySelected();
 	}
 
 	@Test
@@ -308,6 +313,8 @@ public class RelayBrowsePageBeanTest {
 		sut.editRelay(dummyActionEvent);
 
 		verify(relayEditPageBean).openDialogFor(any(UUID.class));
+
+		verify(memberEditPageBean, never()).openDialogFor(any(UUID.class));
 		verify(sut, never()).showMessageErrorNoRowRelaySelected();
 	}
 

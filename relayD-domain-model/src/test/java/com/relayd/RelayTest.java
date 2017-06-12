@@ -257,6 +257,30 @@ public class RelayTest {
 	}
 
 	@Test
+	public void testGetMemberFor() {
+		Relay sut = Relay.newInstance();
+		Person person = new PersonBuilder().withForename("Bob").withSurename("Andrews").build();
+		Member bobAndrews = Member.newInstance(person);
+		sut.addMember(bobAndrews, Position.SECOND);
+
+		Member actual = sut.getMemberFor(Position.UNKNOWN);
+		assertNotEquals("[getMemberFor] Position.UNKNOWN not correct!", bobAndrews, actual);
+
+		actual = sut.getMemberFor(Position.FIRST);
+		assertNotEquals("[getMemberFor] Position.FIRST not correct!", bobAndrews, actual);
+
+		actual = sut.getMemberFor(Position.SECOND);
+		assertEquals("[getMemberFor] Position.SECOND not correct!", bobAndrews, actual);
+
+		actual = sut.getMemberFor(Position.THIRD);
+		assertNotEquals("[getMemberFor] Position.THIRD not correct!", bobAndrews, actual);
+
+		actual = sut.getMemberFor(Position.FOURTH);
+		assertNotEquals("[getMemberFor] Position.FOURTH not correct!", bobAndrews, actual);
+
+	}
+
+	@Test
 	public void testGetEmails_ForEmptyMemberList() {
 		Relay sut = Relay.newInstance();
 

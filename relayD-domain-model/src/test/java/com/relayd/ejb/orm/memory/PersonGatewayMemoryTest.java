@@ -8,6 +8,9 @@ import com.relayd.ejb.PersonGateway;
 import com.relayd.ejb.PersonGatewayTest;
 
 /**
+ * Konventionen sind eines der intellektuellen Werkzeuge, die Ihnen im Kampf gegen die Komplexität von Software zur Verfügung stehen.
+ *  - Steve McConnell - Code Complete Seite 889
+ *
  * @author schmollc (Christian@relayD.de)
  * @since 20.06.2016
  *
