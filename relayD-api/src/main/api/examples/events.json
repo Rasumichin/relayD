@@ -2,11 +2,13 @@
   {
     "id": "8de64f41-b51d-4cf8-92a0-26e6a160cd3c",
     "name": "Metro Duesseldorf Marathon",
-    "eventDay": "2017-04-30"
+    "eventDay": "2017-04-30",
+    "numberOfRelays": 18
   },
   {
     "id": "5f27caa6-cf98-4242-90f1-6917fc68cbfc",
     "name": "Schmolleks Ennepetal Staffel Hulli Gulli",
-    "eventDay": "2017-09-04"
+    "eventDay": "2017-09-04",
+    "numberOfRelays": 24
   }
 ]

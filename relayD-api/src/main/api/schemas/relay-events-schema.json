@@ -18,12 +18,16 @@
                 "maxLength": 256,
                 "minLength": 1,
                 "type": "string"
+            },
+            "numberOfRelays": {
+                "type": "integer"
             }
         },
         "required": [
             "id",
             "eventDay",
-            "name"
+            "name",
+            "numberOfRelays"
         ],
         "type": "object"
     },
