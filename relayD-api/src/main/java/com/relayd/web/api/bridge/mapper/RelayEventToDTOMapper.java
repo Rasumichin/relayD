@@ -28,5 +28,6 @@ public class RelayEventToDTOMapper {
 		relayEventDTO.setId(relayEvent.getUuid().toString());
 		relayEventDTO.setName(relayEvent.getName().toString());
 		relayEventDTO.setEventDay(relayEvent.getEventDay().getValue());
+		relayEventDTO.setNumberOfRelays(relayEvent.getRelays().size());
 	}
 }

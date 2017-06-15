@@ -20,6 +20,7 @@ public class RelayEventDTO {
 	private String id;
 	private String name;
 	private LocalDate eventDay;
+	private Integer numberOfRelays;
 
 	public RelayEventDTO() {
 	}
@@ -101,6 +102,15 @@ public class RelayEventDTO {
 		eventDay = dayOfEvent;
 	}
 
+	@XmlElement
+	public Integer getNumberOfRelays() {
+		return numberOfRelays;
+	}
+	
+	public void setNumberOfRelays(Integer aNumberOfRelays) {
+		numberOfRelays = aNumberOfRelays;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

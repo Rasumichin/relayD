@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 import org.junit.Test;
 
-import com.relayd.RelayEvent;
+import com.relayd.*;
 import com.relayd.attributes.*;
 import com.relayd.client.jaxb.RelayEventDTO;
 
@@ -79,5 +79,19 @@ public class RelayEventToDTOMapperTest {
 
 		LocalDate actual = relayEventDTO.getEventDay();
 		assertEquals("Mapping of [eventDay] is not correct!", expected, actual);
+	}
+
+	@Test
+	public void testMapRelayEventToDTO_numberOfRelays() {
+		RelayEvent relayEvent = RelayEvent.newInstance();
+		Relay relay = Relay.newInstance(relayEvent);
+		relayEvent.addRelay(relay);
+		Integer expected = Integer.valueOf(1);
+		RelayEventDTO relayEventDTO = RelayEventDTO.newInstance();
+
+		sut.mapRelayEventToDTO(relayEvent, relayEventDTO);
+
+		Integer actual = relayEventDTO.getNumberOfRelays();
+		assertEquals("Mapping of [numberOfRelays] is not correct!", expected, actual);
 	}
 }
