@@ -30,6 +30,10 @@ import com.relayd.web.api.bridge.*;
 public class EventsResource {
 	private RelayEventDTOBridge relayEventDTOBridge = new RelayEventDTOBridgeImpl();
 
+	public static EventsResource newInstance() {
+		return new EventsResource();
+	}
+
 	public RelayEventDTOBridge getRelayEventDTOBridge() {
 		return relayEventDTOBridge;
 	}
@@ -51,7 +55,7 @@ public class EventsResource {
 		// TODO (Erik, Version 1.4): discuss the level of input validation here
 		URI newEventUri = null;
 		try {
-			// TODO (Erik, Version 1.4): Find out whether there is away to explicitely avoid the path separator.
+			// TODO (Erik, Version 1.4): Find out whether there is away to explicitly avoid the path separator.
 			newEventUri = new URI(uriInfo.getAbsolutePath().toString() + "/" + anEvent.getId());
 		} catch (URISyntaxException ex) {
 			Logger.getLogger(EventsResource.class.getName()).log(Level.SEVERE, null, ex);
