@@ -18,6 +18,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+import com.relayd.Settings;
 import com.relayd.client.jaxb.RelayEventDTO;
 import com.relayd.ejb.*;
 import com.relayd.web.api.bridge.*;
@@ -48,8 +49,8 @@ public class EventsResource {
 
 	public RelayEventDTOBridge getRelayEventDTOBridge() {
 		if (relayEventDTOBridge == null) {
-			// TODO (Erik Lotz): Answer gateway based on Settings.
-			relayEventDTOBridge = RelayEventDTOBridgeImpl.newInstance(RelayEventGatewayFactory.get(GatewayType.JPA));
+			GatewayType gatewayType = Settings.getGatewayType();
+			relayEventDTOBridge = RelayEventDTOBridgeImpl.newInstance(RelayEventGatewayFactory.get(gatewayType));
 		}
 		
 		return relayEventDTOBridge;
