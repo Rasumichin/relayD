@@ -29,14 +29,29 @@ import com.relayd.web.api.bridge.*;
  */
 @Path("events")
 public class EventsResource {
-	// TODO (Erik Lotz): Answer gateway based on Settings.
-	private RelayEventDTOBridge relayEventDTOBridge = RelayEventDTOBridgeImpl.newInstance(RelayEventGatewayFactory.get(GatewayType.JPA));
+	private RelayEventDTOBridge relayEventDTOBridge;
 
-	public static EventsResource newInstance() {
-		return new EventsResource();
+	// Public constructor is required for JAX-RS.
+	public EventsResource() {
+	}
+
+	private EventsResource(RelayEventDTOBridge bridge) {
+		relayEventDTOBridge = bridge;
+	}
+	
+	public static EventsResource newInstance(RelayEventDTOBridge bridge) {
+		if (bridge == null) {
+			throw new IllegalArgumentException("[bridge] must not be 'null'.");
+		}
+		return new EventsResource(bridge);
 	}
 
 	public RelayEventDTOBridge getRelayEventDTOBridge() {
+		if (relayEventDTOBridge == null) {
+			// TODO (Erik Lotz): Answer gateway based on Settings.
+			relayEventDTOBridge = RelayEventDTOBridgeImpl.newInstance(RelayEventGatewayFactory.get(GatewayType.JPA));
+		}
+		
 		return relayEventDTOBridge;
 	}
 

@@ -21,7 +21,18 @@ import com.relayd.web.api.bridge.RelayEventDTOBridge;
  *
  */
 public class EventsResourceTest {
-	private EventsResource sut = EventsResource.newInstance();
+	private RelayEventDTOBridge eventDTOBridgeMock = mock(RelayEventDTOBridge.class);
+	private EventsResource sut = EventsResource.newInstance(eventDTOBridgeMock);
+	
+	@Test
+	public void testNewInstance() {
+		assertNotNull("Intance creation is not correct!", sut);
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testNewInstance_with_null() {
+		EventsResource.newInstance(null);
+	}
 	
 	@Test
 	public void testGetRelayEventDTOBridge() {
@@ -32,12 +43,9 @@ public class EventsResourceTest {
 
 	@Test
 	public void testGetEvents() {
-		RelayEventDTOBridge eventDTOBridgeMock = mock(RelayEventDTOBridge.class);
 		when(eventDTOBridgeMock.all()).thenReturn(new ArrayList<RelayEventDTO>());
-		EventsResource sutSpy = spy(EventsResource.class);
-		when(sutSpy.getRelayEventDTOBridge()).thenReturn(eventDTOBridgeMock);
 		
-		List<RelayEventDTO> actual = sutSpy.getEvents();
+		List<RelayEventDTO> actual = sut.getEvents();
 		
 		assertTrue("Response from 'getEvents' is not correct!", actual.isEmpty());
 	}
