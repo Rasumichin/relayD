@@ -18,34 +18,62 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-import com.relayd.client.jaxb.EventDTO;
+import com.relayd.Settings;
+import com.relayd.client.jaxb.RelayEventDTO;
+import com.relayd.ejb.*;
+import com.relayd.web.api.bridge.*;
 
 /**
  * @author Rasumichin (Erik@relayd.de)
- * @since 27.03.2016
+ * @since  27.03.2016
  *
  */
 @Path("events")
 public class EventsResource {
+	private RelayEventDTOBridge relayEventDTOBridge;
+
+	// Public constructor is required for JAX-RS.
+	public EventsResource() {
+	}
+
+	private EventsResource(RelayEventDTOBridge bridge) {
+		relayEventDTOBridge = bridge;
+	}
+	
+	public static EventsResource newInstance(RelayEventDTOBridge bridge) {
+		if (bridge == null) {
+			throw new IllegalArgumentException("[bridge] must not be 'null'.");
+		}
+		return new EventsResource(bridge);
+	}
+
+	public RelayEventDTOBridge getRelayEventDTOBridge() {
+		if (relayEventDTOBridge == null) {
+			GatewayType gatewayType = Settings.getGatewayType();
+			relayEventDTOBridge = RelayEventDTOBridgeImpl.newInstance(RelayEventGatewayFactory.get(gatewayType));
+		}
+		
+		return relayEventDTOBridge;
+	}
 
 	@GET
 	@Produces("application/json")
-	public List<EventDTO> getEvents() {
-		// Action here:
-		// Retrieve all resources and return.
-		return EventDTO.getRandomEvents();
+	public List<RelayEventDTO> getEvents() {
+		List<RelayEventDTO> result = getRelayEventDTOBridge().all();
+
+		return result;
 	}
 
 	@POST
 	@Consumes("application/json")
-	public Response addEvent(EventDTO anEvent, @Context UriInfo uriInfo) {
+	public Response addEvent(RelayEventDTO anEvent, @Context UriInfo uriInfo) {
 		// Action here:
 		// Validate and persist new resource.
 
 		// TODO (Erik, Version 1.4): discuss the level of input validation here
 		URI newEventUri = null;
 		try {
-			// TODO (Erik, Version 1.4): Find out whether there is away to explicitely avoid the path separator.
+			// TODO (Erik, Version 1.4): Find out whether there is away to explicitly avoid the path separator.
 			newEventUri = new URI(uriInfo.getAbsolutePath().toString() + "/" + anEvent.getId());
 		} catch (URISyntaxException ex) {
 			Logger.getLogger(EventsResource.class.getName()).log(Level.SEVERE, null, ex);
@@ -59,7 +87,7 @@ public class EventsResource {
 	@Path("{id}")
 	@PUT
 	@Consumes("application/json")
-	public Response updateEvent(@PathParam("id") String id, EventDTO anEvent) {
+	public Response updateEvent(@PathParam("id") String id, RelayEventDTO anEvent) {
 		// Action here:
 		// Determine existing resource and persist new state of resource.
 
@@ -79,10 +107,10 @@ public class EventsResource {
 	@Path("{id}")
 	@GET
 	@Produces("application/json")
-	public EventDTO getEvent(@PathParam("id") String id) {
+	public RelayEventDTO getEvent(@PathParam("id") String id) {
 		// Action here:
 		// Obtain corresponding resource ('id') and return.
-		EventDTO event = EventDTO.getRandomEvents().get(0);
+		RelayEventDTO event = RelayEventDTO.getRandomEvents().get(0);
 		event.setId(id);
 
 		return event;
@@ -94,7 +122,7 @@ public class EventsResource {
 		// Action here:
 		// Determine whether 'id' exists and delete the corresponding resource.
 		Response.ResponseBuilder responseBuilder;
-		if (EventDTO.isEventExistingFor(id)) {
+		if (RelayEventDTO.isEventExistingFor(id)) {
 			responseBuilder = Response.status(204);
 		} else {
 			responseBuilder = Response.status(404);

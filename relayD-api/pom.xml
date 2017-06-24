@@ -49,10 +49,9 @@
         	<version>1.6-SNAPSHOT</version>
         </dependency>
         
-        <!-- EL: Include this only for migration purposes -->
 		<dependency>
 			<groupId>com.relayd</groupId>
-			<artifactId>relayD-entity-model</artifactId>
+			<artifactId>relayD-domain-model</artifactId>
 			<version>1.6-SNAPSHOT</version>
 		</dependency>
     </dependencies>
