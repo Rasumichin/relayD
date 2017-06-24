@@ -13,15 +13,27 @@ import com.relayd.web.api.bridge.mapper.RelayEventToDTOMapper;
  *
  */
 public class RelayEventDTOBridgeImpl implements RelayEventDTOBridge {
+	RelayEventGateway relayEventGateway;
 	
-	RelayEventGateway getGateway() {
-		// TODO (Erik Lotz): Answer gateway based on Settings.
-		return RelayEventGatewayFactory.get(GatewayType.JPA);
+	private RelayEventDTOBridgeImpl(RelayEventGateway gateway) {
+		relayEventGateway = gateway;
+	}
+
+	public static RelayEventDTOBridge newInstance(RelayEventGateway gateway) {
+		if (gateway == null) {
+			throw new IllegalArgumentException("[gateway] must not be 'null'.");
+		}
+		
+		return new RelayEventDTOBridgeImpl(gateway);
+	}
+
+	RelayEventGateway getRelayEventGateway() {
+		return relayEventGateway;
 	}
 
 	@Override
 	public List<RelayEventDTO> all() {
-		List<RelayEvent> relayEvents = getGateway().getAll();
+		List<RelayEvent> relayEvents = getRelayEventGateway().getAll();
 		RelayEventToDTOMapper mapper = RelayEventToDTOMapper.newInstance();
 		List<RelayEventDTO> result = new ArrayList<>();
 		
