@@ -1,0 +1,22 @@
+{
+	"variables": [],
+	"info": {
+		"name": "relayD",
+		"_postman_id": "ae887fb9-f83e-2293-657b-94bb20075d43",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get all events",
+			"request": {
+				"url": "http://{{host}}:{{tomcatPort}}/relayD-api/resources/events",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
