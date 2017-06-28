@@ -2,6 +2,7 @@ package com.relayd.ejb.orm.jpa;
 
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
+import java.util.UUID;
 
 import com.relayd.Member;
 import com.relayd.Person;
@@ -30,8 +31,8 @@ public class EntityToMemberMapper {
 		EntityToPersonMapper personMapper = EntityToPersonMapper.newInstance();
 		Person person = personMapper.mapToPerson(participantEntity.getPersonEntity());
 		Member member = Member.newInstance(person);
+		member.setUuid(UUID.fromString(participantEntity.getId()));
 		member.setDuration(Duration.of(participantEntity.getDuration(), ChronoUnit.MILLIS));
-
 		return member;
 	}
 }

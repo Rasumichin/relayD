@@ -43,15 +43,19 @@ public class EntityToMemberMapperTest {
 
 	@Test
 	public void testMapToMember_check_id() {
-		UUID expected = UUID.randomUUID();
-		PersonEntity personEntity = PersonEntity.newInstance(expected);
+		UUID expectedPerson = UUID.randomUUID();
+		PersonEntity personEntity = PersonEntity.newInstance(expectedPerson);
 		ParticipantEntity participantEntity = ParticipantEntity.newInstance();
 		participantEntity.setPersonEntity(personEntity);
 
 		Member member = sut.mapToMember(participantEntity);
 
-		UUID actual = member.getUuidPerson();
-		assertEquals("Mapping of [id] is not correct!", expected, actual);
+		UUID actualPerson = member.getUuidPerson();
+		assertEquals("Mapping of [uuidPerson] is not correct!", expectedPerson, actualPerson);
+
+		UUID participantUUID = member.getUuid();
+		String actualParticipant = participantUUID.toString();
+		assertEquals("Mapping of [uuidPerson] is not correct!", participantEntity.getId(), actualParticipant);
 	}
 
 	@Test
