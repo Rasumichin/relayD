@@ -26,6 +26,9 @@ public class ParticipantEntity {
 	@Column(name = "relayPosition", nullable = false)
 	private Integer position;
 
+	@Column(nullable = false)
+	private Long duration = 0L;
+
 	@ManyToOne
 	@Column(name = "personId", nullable = false, length = 36)
 	@ForeignKey
@@ -39,7 +42,7 @@ public class ParticipantEntity {
 	public static ParticipantEntity newInstance() {
 		return ParticipantEntity.newInstance(UUID.randomUUID().toString());
 	}
-	
+
 	public static ParticipantEntity newInstance(String anId) {
 		// TODO EL (2017-01-07): Introduce a class to handle strings that should represent a UUID.
 		if (anId == null) {
@@ -73,6 +76,18 @@ public class ParticipantEntity {
 
 	public Integer getPosition() {
 		return position;
+	}
+
+	public void setDuration(Long aDuration) {
+		if (aDuration == null) {
+			throw new IllegalArgumentException("[aDuration] must not be 'null'.");
+		}
+		duration = aDuration;
+
+	}
+
+	public Long getDuration() {
+		return duration;
 	}
 
 	public void setPersonEntity(PersonEntity aPersonEntity) {

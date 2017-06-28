@@ -58,6 +58,10 @@ public class Member implements Serializable {
 		return uuid;
 	}
 
+	public void setUuid(UUID anUuid) {
+		uuid = anUuid;
+	}
+
 	public UUID getUuidPerson() {
 		return uuidPerson;
 	}

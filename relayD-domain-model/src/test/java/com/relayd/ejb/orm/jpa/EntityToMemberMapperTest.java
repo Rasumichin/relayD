@@ -2,11 +2,13 @@ package com.relayd.ejb.orm.jpa;
 
 import static org.junit.Assert.*;
 
+import java.time.Duration;
 import java.util.UUID;
 
 import org.junit.FixMethodOrder;
-import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runners.MethodSorters;
 
 import com.relayd.Member;
@@ -21,6 +23,8 @@ import com.relayd.entity.PersonEntity;
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class EntityToMemberMapperTest {
+	@Rule
+	public ExpectedException expectedException = ExpectedException.none();
 
 	private EntityToMemberMapper sut = EntityToMemberMapper.newInstance();
 
@@ -29,22 +33,29 @@ public class EntityToMemberMapperTest {
 		assertNotNull("Instance creation is not correct!", sut);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	public void testMapToMember_whenParticipantEntityIsNull() {
+		expectedException.expect(IllegalArgumentException.class);
+		expectedException.expectMessage("[participantEntity] must not be 'null'.");
+
 		sut.mapToMember(null);
 	}
 
 	@Test
 	public void testMapToMember_check_id() {
-		UUID expected = UUID.randomUUID();
-		PersonEntity personEntity = PersonEntity.newInstance(expected);
+		UUID expectedPerson = UUID.randomUUID();
+		PersonEntity personEntity = PersonEntity.newInstance(expectedPerson);
 		ParticipantEntity participantEntity = ParticipantEntity.newInstance();
 		participantEntity.setPersonEntity(personEntity);
 
 		Member member = sut.mapToMember(participantEntity);
 
-		UUID actual = member.getUuidPerson();
-		assertEquals("Mapping of [id] is not correct!", expected, actual);
+		UUID actualPerson = member.getUuidPerson();
+		assertEquals("Mapping of [uuidPerson] is not correct!", expectedPerson, actualPerson);
+
+		UUID participantUUID = member.getUuid();
+		String actualParticipant = participantUUID.toString();
+		assertEquals("Mapping of [uuidPerson] is not correct!", participantEntity.getId(), actualParticipant);
 	}
 
 	@Test
@@ -62,9 +73,19 @@ public class EntityToMemberMapperTest {
 		assertEquals("Mapping of [person] is not correct!", expected, actual);
 	}
 
-	@Ignore
 	@Test
-	public void testMapToMember_check_position() {
-		// TODO (EL, 2017-02-23): Unable to check the position since the actual Participant type do NOT hold a corresponding attribute!
+	public void testMapToMember_check_duration() {
+		ParticipantEntity participantEntity = ParticipantEntity.newInstance();
+		PersonEntity dummyEntity = PersonEntity.newInstance();
+		participantEntity.setPersonEntity(dummyEntity);
+		Long oneSecond = 1000L;
+		participantEntity.setDuration(oneSecond * 15);
+
+		Member member = sut.mapToMember(participantEntity);
+
+		Duration actual = member.getDuration();
+		Duration expected = Duration.ofSeconds(15);
+
+		assertEquals("Mapping of [duration] is not corret!", expected, actual);
 	}
 }

@@ -60,18 +60,6 @@ public class RelayEventToEntityMapperTest {
 	}
 
 	@Test
-	public void testMapRelayEventToEntity_id() {
-		RelayEvent relayEvent = RelayEvent.newInstance();
-		String expected = relayEvent.getUuid().toString();
-		RelayEventEntity relayEventEntity = RelayEventEntity.newInstance(relayEvent.getUuid());
-
-		sut.mapRelayEventToEntity(relayEvent, relayEventEntity);
-
-		String actual = relayEventEntity.getId();
-		assertEquals("Mapping of [uuid] is not correct!", expected, actual);
-	}
-
-	@Test
 	public void testMapRelayEventToEntity_eventname() {
 		String expected = "Metro Group Marathon";
 		RelayEvent relayEvent = RelayEvent.newInstance();

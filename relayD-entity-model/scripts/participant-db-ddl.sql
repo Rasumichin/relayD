@@ -7,10 +7,11 @@ DROP TABLE participant;
 -- Create Table participant
 -- ------------------------------------------------
 CREATE TABLE participant (
-	id								CHAR(36)		NOT NULL	COMMENT 'UUID as string representation.',
-	personId						CHAR(36)		NOT NULL	COMMENT 'UUID of the referenced person, string representation.',
-	relayId				 			CHAR(36) 		NOT NULL	COMMENT 'UUID of the referenced relay, string representation.',
-	relayPosition					INTEGER			NOT NULL	COMMENT 'The relay position the person participates in.',
+	id								CHAR(36)		NOT NULL			COMMENT 'UUID as string representation.',
+	personId						CHAR(36)		NOT NULL			COMMENT 'UUID of the referenced person, string representation.',
+	relayId				 			CHAR(36) 		NOT NULL			COMMENT 'UUID of the referenced relay, string representation.',
+	relayPosition					INTEGER			NOT NULL			COMMENT 'The relay position the person participates in.',
+	duration						BIGINT			NOT NULL DEFAULT 0 	COMMENT 'The duration for the run in milliseconds',
 	CONSTRAINT fk_participant_person
 		FOREIGN KEY (personId) REFERENCES person (id)
 		ON DELETE RESTRICT
