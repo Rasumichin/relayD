@@ -18,14 +18,12 @@ import com.relayd.attributes.Surename;
 public class Member implements Serializable {
 	private static final long serialVersionUID = -1657222726828950264L;
 
-	UUID uuid;
-
+	private UUID uuid;
 	private UUID uuidPerson;
 	private Forename forename = Forename.newInstance();
 	private Surename surename = Surename.newInstance();
 	private Email email = Email.newInstance();
-
-	private Duration duration;
+	private Duration duration = Duration.ZERO;
 
 	private Member() {
 		uuid = UUID.randomUUID();
