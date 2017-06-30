@@ -9,9 +9,12 @@ import com.relayd.entity.ParticipantEntity;
 /**
  * @author  schmollc (Christian@relayd.de)
  * @since   04.06.2017
- * TODO -small- Tests schreiben. Leider keine da zu lange nix gemacht und nun die DB Änderungen schon durch sind! Mein Fehler!!
+ *
  */
 public class MemberGatewayJPA extends GatewayJPA implements MemberGateway {
+
+	private EntityToMemberMapper entityToMemberMapper = EntityToMemberMapper.newInstance();
+	private MemberToEntityMapper memberToEntityMapper = MemberToEntityMapper.newInstance();
 
 	@Override
 	public Member get(UUID uuid) {
@@ -19,11 +22,11 @@ public class MemberGatewayJPA extends GatewayJPA implements MemberGateway {
 			throw new IllegalArgumentException("[uuid] must not be 'null'.");
 		}
 		ParticipantEntity participantEntity = findById(uuid);
-		Member member = EntityToMemberMapper.newInstance().mapToMember(participantEntity);
+		Member member = getEntityToMemberMapper().mapToMember(participantEntity);
 		return member;
 	}
 
-	private ParticipantEntity findById(UUID uuid) {
+	ParticipantEntity findById(UUID uuid) {
 		ParticipantEntity result = getJpaDao().findById(ParticipantEntity.class, uuid.toString());
 		return result;
 	}
@@ -35,8 +38,16 @@ public class MemberGatewayJPA extends GatewayJPA implements MemberGateway {
 		}
 		ParticipantEntity participantEntity = findById(member.getUuid());
 
-		MemberToEntityMapper.newInstance().mapMemberToEntity(member, participantEntity);
+		getMemberToEntityMapper().mapMemberToEntity(member, participantEntity);
 
 		getJpaDao().mergeEntity(participantEntity);
+	}
+
+	EntityToMemberMapper getEntityToMemberMapper() {
+		return entityToMemberMapper;
+	}
+
+	MemberToEntityMapper getMemberToEntityMapper() {
+		return memberToEntityMapper;
 	}
 }
