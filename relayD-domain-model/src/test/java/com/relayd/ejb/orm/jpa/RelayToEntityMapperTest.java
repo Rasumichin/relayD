@@ -66,7 +66,7 @@ public class RelayToEntityMapperTest {
 
 	@Test
 	public void testMapDomainToEntity_id() {
-		RelayEntity relayEntity = RelayEntity.newInstance(relay.getUuid().toString());
+		RelayEntity relayEntity = RelayEntity.newInstance(relay.getUuid());
 		RelayEventEntity relayEventEntity = RelayEventEntity.newInstance();
 		relayEventEntity.setEventName("Some event");
 		relayEntity.setRelayEventEntity(relayEventEntity);

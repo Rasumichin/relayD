@@ -106,7 +106,7 @@ public class RelayEventEntityTest {
 
 	@Test
 	public void testAddRelayEntity() {
-		RelayEntity expected = RelayEntity.newInstance(UUID.randomUUID().toString());
+		RelayEntity expected = RelayEntity.newInstance(UUID.randomUUID());
 		RelayEventEntity sut = new RelayEventEntity();
 
 		sut.addRelay(expected);

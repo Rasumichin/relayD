@@ -33,10 +33,10 @@ public class RelayEntityTest {
 
 	@Test
 	public void testNewInstance_withUuid() {
-		String expected = UUID.randomUUID().toString();
+		UUID expected = UUID.randomUUID();
 		RelayEntity sut = RelayEntity.newInstance(expected);
 
-		String actual = sut.getId();
+		UUID actual = UUID.fromString(sut.getId());
 		assertEquals("[id] has not been set correctly!", expected, actual);
 	}
 
@@ -44,24 +44,6 @@ public class RelayEntityTest {
 	public void testNewInstance_forUuidWithNullValue() {
 		@SuppressWarnings("unused")
 		RelayEntity sut = RelayEntity.newInstance(null);
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void testNewInstance_forIncorrectEmptyUuid() {
-		@SuppressWarnings("unused")
-		RelayEntity sut = RelayEntity.newInstance("");
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void testNewInstance_forIncorrectBlankUuid() {
-		@SuppressWarnings("unused")
-		RelayEntity sut = RelayEntity.newInstance("   ");
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void testNewInstance_forIncorrectFalseUuid() {
-		@SuppressWarnings("unused")
-		RelayEntity sut = RelayEntity.newInstance("345-acf-123");
 	}
 
 	@Test
@@ -83,20 +65,20 @@ public class RelayEntityTest {
 	public void testDuration() {
 		Long expected = 0L;
 		RelayEntity sut = RelayEntity.newInstance();
-		
+
 		sut.setDuration(expected);
 		Long actual = sut.getDuration();
-		
+
 		assertEquals("[duration] has not been set correctly!", expected, actual);
 	}
-	
+
 	@Test(expected = IllegalArgumentException.class)
 	public void testDuration_withNull() {
 		RelayEntity sut = RelayEntity.newInstance();
-		
+
 		sut.setDuration(null);
 	}
-	
+
 	@Test
 	public void testRelayEventEntity() {
 		RelayEntity sut = RelayEntity.newInstance();
