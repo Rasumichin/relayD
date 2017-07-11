@@ -59,7 +59,7 @@ public class ParticipantEntityIT extends EntityIT {
 	}
 
 	private void setUpRelayEntity(RelayEventEntity relayEventEntity) {
-		RelayEntity relayToBeInserted = RelayEntity.newInstance(UUID.randomUUID().toString());
+		RelayEntity relayToBeInserted = RelayEntity.newInstance(UUID.randomUUID());
 		relayToBeInserted.setRelayname("Foo Relay");
 		relayToBeInserted.setRelayEventEntity(relayEventEntity);
 		persistEntity(relayToBeInserted);

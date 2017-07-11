@@ -255,7 +255,7 @@ public class RelayEntityIT extends EntityIT {
 	}
 
 	private RelayEntity getDefaultRelayEntity(String anId) {
-		RelayEntity relayEntity = RelayEntity.newInstance(anId);
+		RelayEntity relayEntity = RelayEntity.newInstance(UUID.fromString(anId));
 		relayEntity.setRelayname("Four Star Runners");
 		relayEntity.setRelayEventEntity(getRelayEventEntity());
 		relayEntity.setDuration(Duration.ofSeconds(17).toMillis());

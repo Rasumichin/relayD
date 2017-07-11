@@ -42,7 +42,7 @@ public class RelayGatewayJPA extends GatewayJPA implements RelayGateway {
 	private RelayEntity getRelayEntity(Relay relay) {
 		RelayEntity relayEntity = findById(relay.getUuid());
 		if (relayEntity == null) {
-			relayEntity = RelayEntity.newInstance(relay.getUuid().toString());
+			relayEntity = RelayEntity.newInstance(relay.getUuid());
 			setRelayEventEntityFor(relay.getRelayEvent(), relayEntity);
 		}
 

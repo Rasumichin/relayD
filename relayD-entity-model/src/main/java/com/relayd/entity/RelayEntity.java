@@ -45,20 +45,15 @@ public class RelayEntity {
 	private List<ParticipantEntity> participantEntities = new ArrayList<>();
 
 	public static RelayEntity newInstance() {
-		return RelayEntity.newInstance(UUID.randomUUID().toString());
+		return RelayEntity.newInstance(UUID.randomUUID());
 	}
 
-	public static RelayEntity newInstance(String anId) {
+	public static RelayEntity newInstance(UUID anId) {
 		if (anId == null) {
 			throw new IllegalArgumentException("[anUuid] must not be 'null'.");
 		}
-		try {
-			UUID.fromString(anId);
-		} catch (IllegalArgumentException iAEx) {
-			throw new IllegalArgumentException("[anId] is not a valid representation of an UUID.");
-		}
 		RelayEntity relayEntity = new RelayEntity();
-		relayEntity.setId(anId);
+		relayEntity.setId(anId.toString());
 
 		return relayEntity;
 	}

@@ -44,7 +44,7 @@ public class EntityToRelayMapperTest {
 	@Test
 	public void testMapToRelay_check_id() {
 		UUID expected = UUID.randomUUID();
-		RelayEntity relayEntity = RelayEntity.newInstance(expected.toString());
+		RelayEntity relayEntity = RelayEntity.newInstance(expected);
 
 		Relay relay = sut.mapToRelay(relayEntity);
 
