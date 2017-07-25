@@ -99,9 +99,9 @@ public class RelayEntity {
 		return relayEventEntity;
 	}
 
-	// TODO EL (2017-01-08): Discuss with CS - better remove boolean result of 'add' operation here?
+	// TODO - REL-286 - Discuss with CS - better remove boolean result of 'add' operation here?
 	public void addParticipantEntity(ParticipantEntity participantEntity) {
-		// TODO EL (2017-01-08): Discuss with CS - validation checks here (up to 4 participants, no duplicate positions)?
+		// TODO - REL-285 - Discuss with CS - validation checks here (up to 4 participants, no duplicate positions)?
 		participantEntities.add(participantEntity);
 		participantEntity.setRelayEntity(this);
 	}
