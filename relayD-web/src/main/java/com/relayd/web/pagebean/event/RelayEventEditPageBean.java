@@ -20,6 +20,7 @@ import com.relayd.attributes.EventDay;
 import com.relayd.attributes.Eventname;
 import com.relayd.web.bridge.RelayEventBridge;
 import com.relayd.web.bridge.RelayEventBridgeImpl;
+import com.relayd.web.local.I18N;
 import com.relayd.web.pagebean.DialogOptionsBuilder;
 import com.relayd.web.pagebean.NavigationConstants;
 
@@ -32,8 +33,6 @@ import com.relayd.web.pagebean.NavigationConstants;
 @SessionScoped
 public class RelayEventEditPageBean implements Serializable {
 	private static final long serialVersionUID = 453304395884163605L;
-	// TODO - REL-279 - Put String in an I18N class! (or minimal on one position for avoid WET!)
-	static final String NOT_POSSIBLE = "Not Possible!";
 
 	private RelayEventBridge relayEventBridge;
 
@@ -80,7 +79,7 @@ public class RelayEventEditPageBean implements Serializable {
 	}
 
 	void showMessageNotImplementedYet() {
-		showMessage(FacesMessage.SEVERITY_ERROR, NOT_POSSIBLE, "Not implemented yet!");
+		showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, I18N.NOT_IMPLEMENTD_YET);
 	}
 
 	void showMessage(Severity severityInfo, String summary, String textMessage) {
@@ -131,5 +130,4 @@ public class RelayEventEditPageBean implements Serializable {
 	public void emailExport(@SuppressWarnings("unused") ActionEvent actionEvent) {
 		showMessageNotImplementedYet();
 	}
-
 }

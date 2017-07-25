@@ -146,13 +146,13 @@ public class RelayBrowsePageBean implements Serializable {
 
 	public void addPersonToRelay(@SuppressWarnings("unused") ActionEvent actionEvent) {
 		if (!isRelayTableRowSelected()) {
-			showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, "Please select a Row!");
+			showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, I18N.SELECT_A_ROW_2);
 		} else if (isRelayRowSelected()) {
-			showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, "Only for Member Row possible!");
+			showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, I18N.ONLY_FOR_MEMBER_ROW_POSSIBLE);
 		} else if (!isPersonRowSelected()) {
-			showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, "Please select a Person!");
+			showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, I18N.SELECT_A_PERSON);
 		} else if (!isOnlyOnePersonRowSelected()) {
-			showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, "Please select a single Person!");
+			showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, I18N.SELECT_A_SINGLE_PERSON);
 		} else {
 			TreeNodeRow selectedRelayNode = (TreeNodeRow) selectedTreeNode.getData();
 			Member newRelayMember = Member.newInstance(getSelectedPerson());
@@ -163,9 +163,9 @@ public class RelayBrowsePageBean implements Serializable {
 
 	public void removePersonFromRelay(@SuppressWarnings("unused") ActionEvent actionEvent) {
 		if (!isRelayTableRowSelected()) {
-			showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, "Please select a Row!");
+			showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, I18N.SELECT_A_ROW_2);
 		} else if (isRelayRowSelected()) {
-			showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, "Only for Member Row possible!");
+			showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, I18N.ONLY_FOR_MEMBER_ROW_POSSIBLE);
 		} else {
 			TreeNodeRow selectedRelayNode = (TreeNodeRow) selectedTreeNode.getData();
 			if (!selectedRelayNode.getMember().isEmpty()) {
@@ -199,7 +199,7 @@ public class RelayBrowsePageBean implements Serializable {
 	}
 
 	public void showAllWithoutRelay() {
-		showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, "Not implemented yet!");
+		showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, I18N.NOT_IMPLEMENTD_YET);
 	}
 
 	public void emailExportPerson(@SuppressWarnings("unused") ActionEvent actionEvent) {
@@ -209,13 +209,13 @@ public class RelayBrowsePageBean implements Serializable {
 		} else {
 			output = personBridge.getEmailList(getPersons());
 		}
-		showDialog(FacesMessage.SEVERITY_INFO, "Email", output);
+		showDialog(FacesMessage.SEVERITY_INFO, I18N.EMAIL, output);
 	}
 
 	public void emailExportRelay(@SuppressWarnings("unused") ActionEvent actionEvent) {
 		if (isRelayRowSelected()) {
 			String output = getSelectedRelay().getEmailList();
-			showDialog(FacesMessage.SEVERITY_INFO, "Email", output);
+			showDialog(FacesMessage.SEVERITY_INFO, I18N.EMAIL, output);
 		} else {
 			showMessageErrorNoRowRelaySelected();
 		}
