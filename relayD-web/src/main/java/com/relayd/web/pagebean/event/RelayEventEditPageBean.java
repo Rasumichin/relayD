@@ -32,7 +32,7 @@ import com.relayd.web.pagebean.NavigationConstants;
 @SessionScoped
 public class RelayEventEditPageBean implements Serializable {
 	private static final long serialVersionUID = 453304395884163605L;
-	// TODO -medium- Put String in an I18N class! (or minimal on one position for avoid WET!)
+	// TODO - REL-279 - Put String in an I18N class! (or minimal on one position for avoid WET!)
 	static final String NOT_POSSIBLE = "Not Possible!";
 
 	private RelayEventBridge relayEventBridge;

@@ -41,7 +41,7 @@ public class RelayEditPageBean implements Serializable {
 
 	Relay createNewRelay(RelayEvent relayEvent) {
 		Relay relay = Relay.newInstance(relayEvent);
-		// TODO REL-261 - Wie bekommt man die Verknüpfung besser hin?
+		// TODO - REL-261 - Wie bekommt man die Verknüpfung besser hin?
 		relayEvent.addRelay(relay);
 		return relay;
 	}

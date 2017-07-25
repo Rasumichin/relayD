@@ -10,7 +10,7 @@ import com.relayd.Relay;
 public class TreeNodeRowRelay extends TreeNodeRow {
 	private static final long serialVersionUID = -222411690063227304L;
 
-	private Relay relay; // TODO (Christian, Version 1.4): mit Erik sprechen. Eine Relay hat auch ein NOP?
+	private Relay relay; // TODO - REL-280 - Mit Erik sprechen. Eine Relay hat auch ein NOP?
 
 	TreeNodeRowRelay(Relay aRelay) {
 		relay = aRelay;
@@ -26,7 +26,7 @@ public class TreeNodeRowRelay extends TreeNodeRow {
 		return true;
 	}
 
-	// TODO (Christian, Version 1.4): Im Zuge der GUI Darstellung auf String umgestellt. Sollte eher ein Domain/GUI Objekt werden/sein?
+	// TODO - REL-281 - Im Zuge der GUI Darstellung auf String umgestellt. Sollte eher ein Domain/GUI Objekt werden/sein?
 	@Override
 	public String getRelayname() {
 		return relay.toString();

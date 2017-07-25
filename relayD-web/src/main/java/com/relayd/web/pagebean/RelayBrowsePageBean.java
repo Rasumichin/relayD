@@ -169,7 +169,7 @@ public class RelayBrowsePageBean implements Serializable {
 		} else {
 			TreeNodeRow selectedRelayNode = (TreeNodeRow) selectedTreeNode.getData();
 			if (!selectedRelayNode.getMember().isEmpty()) {
-				// TODO (Christian, Erik Version 1.4): ein remove im Fachobjekt TreeNodeRow einführen
+				// TODO - REL-277 - Ein remove im Fachobjekt TreeNodeRow einführen
 				selectedRelayNode.setMember(Member.newInstance());
 				relayBridge.set(selectedTreeNode);
 			}
@@ -397,7 +397,7 @@ public class RelayBrowsePageBean implements Serializable {
 	}
 
 	// ***********************************************************************************
-	// TODO - REL-  - Mit dem Domain Objekt funktioniert die Combobox seltsamerweise nicht.
+	// TODO - REL-278 - Mit dem Domain Objekt funktioniert die Combobox seltsamerweise nicht.
 	private List<RelayEvent> relayEvents;
 	private RelayEvent relayEvent;
 
