@@ -154,4 +154,8 @@ public class Member implements Serializable {
 			return "";
 		}
 	}
+
+	public boolean hasMail() {
+		return !getEmail().isEmpty();
+	}
 }

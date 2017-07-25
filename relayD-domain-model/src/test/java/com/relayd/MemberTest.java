@@ -148,6 +148,47 @@ public class MemberTest {
 	}
 
 	@Test
+	public void testHasMail_ForEmptyMailAdress() {
+		Person person = Person.newInstance();
+		person.setUuid(UUID.randomUUID());
+		person.setEmail(null);
+
+		Member sut = Member.newInstance(person);
+
+		boolean condition = sut.hasMail();
+
+		assertFalse("[hasMail] not correct!", condition);
+	}
+
+	@Test
+	public void testHasMail_ForMailAdressAsNOP() {
+		Person person = Person.newInstance();
+		person.setUuid(UUID.randomUUID());
+		Email email = Email.newInstance();
+		person.setEmail(email);
+
+		Member sut = Member.newInstance(person);
+
+		boolean condition = sut.hasMail();
+
+		assertFalse("[hasMail] not correct!", condition);
+	}
+
+	@Test
+	public void testHasMail_ForExistingMailAdress() {
+		Person person = Person.newInstance();
+		person.setUuid(UUID.randomUUID());
+		Email email = Email.newInstance("Justus.Jonas@canda.com");
+		person.setEmail(email);
+
+		Member sut = Member.newInstance(person);
+
+		boolean condition = sut.hasMail();
+
+		assertTrue("[hasMail] not correct!", condition);
+	}
+
+	@Test
 	public void testDuration() {
 		Member sut = Member.newInstance();
 
