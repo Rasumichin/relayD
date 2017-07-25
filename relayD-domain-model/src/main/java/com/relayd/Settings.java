@@ -76,7 +76,7 @@ public class Settings implements Serializable {
 	}
 
 	public Properties getApplicationProperties() {
-		// TODO -medium- old code. clean up!
+		// TODO - REL-287 - Old code. clean up!
 		if (applicationProperties == null) {
 			try {
 				applicationProperties = new Properties();
