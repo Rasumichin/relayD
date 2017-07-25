@@ -36,7 +36,7 @@ public class RelayEvent implements Serializable {
 
 	private RelayEvent() {
 		uuid = UUID.randomUUID();
-		// TODO -medium- NOP für Eventname & Eventday?
+		// TODO - REL-288 - NOP für Eventname & Eventday?
 	}
 
 	private RelayEvent(Eventname anEventName, EventDay anEventDay) {
