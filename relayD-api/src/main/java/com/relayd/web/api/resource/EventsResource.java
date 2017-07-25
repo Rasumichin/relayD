@@ -20,8 +20,10 @@ import javax.ws.rs.core.UriInfo;
 
 import com.relayd.Settings;
 import com.relayd.client.jaxb.RelayEventDTO;
-import com.relayd.ejb.*;
-import com.relayd.web.api.bridge.*;
+import com.relayd.ejb.GatewayType;
+import com.relayd.ejb.RelayEventGatewayFactory;
+import com.relayd.web.api.bridge.RelayEventDTOBridge;
+import com.relayd.web.api.bridge.RelayEventDTOBridgeImpl;
 
 /**
  * @author Rasumichin (Erik@relayd.de)
@@ -39,7 +41,7 @@ public class EventsResource {
 	private EventsResource(RelayEventDTOBridge bridge) {
 		relayEventDTOBridge = bridge;
 	}
-	
+
 	public static EventsResource newInstance(RelayEventDTOBridge bridge) {
 		if (bridge == null) {
 			throw new IllegalArgumentException("[bridge] must not be 'null'.");
@@ -52,7 +54,7 @@ public class EventsResource {
 			GatewayType gatewayType = Settings.getGatewayType();
 			relayEventDTOBridge = RelayEventDTOBridgeImpl.newInstance(RelayEventGatewayFactory.get(gatewayType));
 		}
-		
+
 		return relayEventDTOBridge;
 	}
 
@@ -73,7 +75,7 @@ public class EventsResource {
 		// TODO (Erik, Version 1.4): discuss the level of input validation here
 		URI newEventUri = null;
 		try {
-			// TODO (Erik, Version 1.4): Find out whether there is away to explicitly avoid the path separator.
+			// TODO - REL-284 - Find out whether there is away to explicitly avoid the path separator.
 			newEventUri = new URI(uriInfo.getAbsolutePath().toString() + "/" + anEvent.getId());
 		} catch (URISyntaxException ex) {
 			Logger.getLogger(EventsResource.class.getName()).log(Level.SEVERE, null, ex);
