@@ -44,7 +44,7 @@ public class ParticipantEntity {
 	}
 
 	public static ParticipantEntity newInstance(String anId) {
-		// TODO EL (2017-01-07): Introduce a class to handle strings that should represent a UUID.
+		// TODO - REL-282 - Introduce a class to handle strings that should represent a UUID.
 		if (anId == null) {
 			throw new IllegalArgumentException("[uuid] must not be 'null'.");
 		}

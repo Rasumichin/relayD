@@ -106,7 +106,7 @@ public class Relay implements Serializable {
 		StringBuilder builder = new StringBuilder();
 
 		for (Member each : members) {
-			// TODO (Christian, Version 1.4): Umstellen auf hasMail wie in Person!
+			// TODO - REL-283 - Umstellen auf hasMail wie in Person!
 			if (!each.getEmail().isEmpty()) {
 				builder.append(", " + each.getEmail());
 			}
