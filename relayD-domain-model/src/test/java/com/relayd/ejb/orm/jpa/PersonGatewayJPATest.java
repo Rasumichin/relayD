@@ -1,6 +1,7 @@
 package com.relayd.ejb.orm.jpa;
 
 import static org.junit.Assert.*;
+import static org.mockito.Matchers.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +13,7 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
-import org.mockito.*;
+import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.relayd.Person;
@@ -37,7 +38,7 @@ public class PersonGatewayJPATest {
 
 	@Spy
 	private PersonGatewayJPA sut = new PersonGatewayJPA();
-	
+
 	@Test
 	public void testGetPersonMapper() {
 		PersonToEntityMapper result = sut.getPersonMapper();
@@ -110,7 +111,7 @@ public class PersonGatewayJPATest {
 		assertTrue("Restult list is not correct.", result.isEmpty());
 	}
 
-	// TODO (Erik, Version 1.4): Discuss with CS: Do we need further tests here for the other cases for 'getAll' (one element, many elements)?
+	// TODO - REL-269 - Discuss with CS: Do we need further tests here for the other cases for 'getAll' (one element, many elements)?
 
 	@Test(expected = EntityNotFoundException.class)
 	public void testRemoveWhenPersonDoesNotExistForUuid() {
@@ -143,7 +144,7 @@ public class PersonGatewayJPATest {
 		Person person = getPersonToSet();
 		PersonEntity expectedPersonEntity = PersonEntity.newInstance();
 		sut.getPersonMapper().mapPersonToEntity(person, expectedPersonEntity);
-		
+
 		GenericJpaDao jpaDaoMock = mock(GenericJpaDao.class);
 		doReturn(jpaDaoMock).when(sut).getJpaDao();
 		doReturn(expectedPersonEntity).when(sut).findById(person.getUuid());
