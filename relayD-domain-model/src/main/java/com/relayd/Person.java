@@ -29,7 +29,7 @@ public class Person implements Serializable {
 	Email lastCalculatedEmail;
 
 	private Person() {
-		// TODO (Erik, Version 1.4): Discuss. When do we do initialization here and when directly on field declaration level (see above)?
+		// TODO - REL-293 - Discuss. When do we do initialization here and when directly on field declaration level (see above)?
 		uuid = UUID.randomUUID();
 		email = getDefaultEmail();
 		lastCalculatedEmail = email.clone();
@@ -155,7 +155,7 @@ public class Person implements Serializable {
 	}
 
 	public void nameValueChanged() {
-		// TODO (Erik, Version 1.4): Mit CS abstimmen, ob die Methode ihm so eher verständlich erscheint.
+		// TODO - REL-292 - Mit CS abstimmen, ob die Methode ihm so eher verständlich erscheint.
 		if (currentEmailHasBeenCalculated()) {
 			recalculateEmail();
 		}
