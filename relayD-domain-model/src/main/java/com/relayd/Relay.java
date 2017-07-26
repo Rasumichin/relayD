@@ -97,7 +97,7 @@ public class Relay implements Serializable {
 		return count;
 	}
 
-	// TODO (Christian, Version 1.4): Wird durch die Lösung mit getEmailList nicht mehr gebraucht! Rückbauen
+	// TODO - REL-295 - Wird durch die Lösung mit getEmailList nicht mehr gebraucht! Rückbauen
 	public List<Member> getMembers() {
 		return Collections.unmodifiableList(members);
 	}
@@ -126,7 +126,7 @@ public class Relay implements Serializable {
 		return false;
 	}
 
-	// TODO (Christian, Erik, Version 1.4): Wie reagieren wir bei einer vollen Relay und dem Versuch einen Member hinzuzufügen?
+	// TODO - REL-294 - Wie reagieren wir bei einer vollen Relay und dem Versuch einen Member hinzuzufügen?
 	public void addMember(Member aMember) {
 		for (int index = 0; index < RelayEvent.MAX_NUMBER_OF_TRACKS; index++) {
 			if (members.get(index).isEmpty()) {
