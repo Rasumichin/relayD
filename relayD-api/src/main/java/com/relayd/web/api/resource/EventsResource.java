@@ -72,7 +72,7 @@ public class EventsResource {
 		// Action here:
 		// Validate and persist new resource.
 
-		// TODO (Erik, Version 1.4): discuss the level of input validation here
+		// TODO - REL-297 - discuss the level of input validation here
 		URI newEventUri = null;
 		try {
 			// TODO - REL-284 - Find out whether there is away to explicitly avoid the path separator.
