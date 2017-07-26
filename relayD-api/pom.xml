@@ -48,7 +48,7 @@
         	<artifactId>relayD-client</artifactId>
         	<version>1.7-SNAPSHOT</version>
         </dependency>
-        
+
 		<dependency>
 			<groupId>com.relayd</groupId>
 			<artifactId>relayD-domain-model</artifactId>
@@ -62,7 +62,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-war-plugin</artifactId>
-                    <!-- TODO (Dirk, Version 1.4): actual version seems to be 2.6 - migration? -->
+                    <!-- TODO - REL-298 - Actual version seems to be 2.6 - migration? -->
                     <version>2.3</version>
                 </plugin>
             </plugins>
