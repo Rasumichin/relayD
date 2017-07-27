@@ -1,7 +1,6 @@
 package com.relayd.web.pagebean.event;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -11,6 +10,8 @@ import javax.faces.bean.SessionScoped;
 import org.primefaces.context.RequestContext;
 
 import com.relayd.Person;
+import com.relayd.web.bridge.PersonBridge;
+import com.relayd.web.bridge.PersonBridgeImpl;
 import com.relayd.web.pagebean.DialogOptionsBuilder;
 import com.relayd.web.pagebean.NavigationConstants;
 
@@ -22,8 +23,13 @@ import com.relayd.web.pagebean.NavigationConstants;
 @ManagedBean(name = "relayEventEditAddPersonPageBean")
 @SessionScoped
 public class RelayEventEditAddPersonPageBean implements Serializable {
-
 	private static final long serialVersionUID = -4345665229617327788L;
+
+	private PersonBridge personBridge;
+
+	public RelayEventEditAddPersonPageBean() {
+		personBridge = new PersonBridgeImpl();
+	}
 
 	public void openDialog() {
 		Map<String, Object> options = new DialogOptionsBuilder().width(500).height(400).build();
@@ -44,6 +50,6 @@ public class RelayEventEditAddPersonPageBean implements Serializable {
 	}
 
 	public List<Person> getPersons() {
-		return new ArrayList<>();
+		return personBridge.all();
 	}
 }
