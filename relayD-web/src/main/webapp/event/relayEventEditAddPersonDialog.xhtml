@@ -6,7 +6,7 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 
 <h:head>
-	<title>Relay Event Add Person</title>
+	<title>Relay Event Add Persons</title>
 	<style type="text/css">
 .ui-widget {
 	font-size: 90%;
@@ -27,11 +27,38 @@
 			<p:outputLabel
 				value="Persons" />
 		</h:panelGrid>
+		<p:dataTable
+			var="person"
+			widgetVar="personTable"
+			id="personTable"
+			value="#{relayEventEditAddPersonPageBean.persons}"
+			scrollable="true"
+			scrollHeight="270"
+			rowKey="#{person.uuid}"
+			resizableColumns="true">
+
+			<p:column
+				headerText="Forename"
+				width="140">
+				<h:outputText value="#{person.forename}" />
+			</p:column>
+
+			<p:column
+				headerText="Surename"
+				width="140">
+				<h:outputText value="#{person.surename}" />
+			</p:column>
+		</p:dataTable>
+
 	<p:commandButton
 			actionListener="#{relayEventEditAddPersonPageBean.cancel}"
 			icon="ui-icon-close"
 			style="float:left;" />
-	
+		<p:commandButton
+			update="form"
+			actionListener="#{relayEventEditAddPersonPageBean.save}"
+			icon="ui-icon-check"
+			style="float:right;" />
 	</h:form>
 </h:body>
 </html>
