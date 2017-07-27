@@ -8,6 +8,7 @@ import java.util.UUID;
 import javax.faces.application.FacesMessage;
 import javax.faces.application.FacesMessage.Severity;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
@@ -37,6 +38,9 @@ public class RelayEventEditPageBean implements Serializable {
 	private RelayEventBridge relayEventBridge;
 
 	RelayEvent workingRelayEvent = null;
+
+	@ManagedProperty(value = "#{relayEventEditAddPersonPageBean}")
+	private RelayEventEditAddPersonPageBean relayEventEditAddPersonPageBean;
 
 	public RelayEventEditPageBean() {
 		relayEventBridge = new RelayEventBridgeImpl();
@@ -120,7 +124,7 @@ public class RelayEventEditPageBean implements Serializable {
 	}
 
 	public void add(@SuppressWarnings("unused") ActionEvent actionEvent) {
-		showMessageNotImplementedYet();
+		getRelayEventEditAddPersonPageBean().openDialog();
 	}
 
 	public void remove(@SuppressWarnings("unused") ActionEvent actionEvent) {
@@ -129,5 +133,13 @@ public class RelayEventEditPageBean implements Serializable {
 
 	public void emailExport(@SuppressWarnings("unused") ActionEvent actionEvent) {
 		showMessageNotImplementedYet();
+	}
+
+	public RelayEventEditAddPersonPageBean getRelayEventEditAddPersonPageBean() {
+		return relayEventEditAddPersonPageBean;
+	}
+
+	public void setRelayEventEditAddPersonPageBean(RelayEventEditAddPersonPageBean aRelayEventEditAddPersonPageBean) {
+		relayEventEditAddPersonPageBean = aRelayEventEditAddPersonPageBean;
 	}
 }

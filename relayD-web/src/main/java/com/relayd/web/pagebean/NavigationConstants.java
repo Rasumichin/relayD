@@ -21,4 +21,5 @@ public final class NavigationConstants {
 
 	public static final String RELAY_EVENT_EDIT_DIALOG_ID = "event/relayEventEditDialog";
 
+	public static final String RELAY_EVENT_EDIT_ADD_PERSON_DIALOG_ID = "relayEventEditAddPersonDialog";
 }
