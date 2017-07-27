@@ -19,7 +19,8 @@
 		<module>relayD-entity-model</module>
 		<module>relayD-web</module>
 		<module>relayD-client</module>
-	</modules>
+		<module>relayD-persistence-adapter</module>
+  </modules>
 
 	<build>
 		<pluginManagement>
