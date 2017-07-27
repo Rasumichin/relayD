@@ -1,6 +1,8 @@
 package com.relayd.web.pagebean.event;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.faces.bean.ManagedBean;
@@ -8,6 +10,7 @@ import javax.faces.bean.SessionScoped;
 
 import org.primefaces.context.RequestContext;
 
+import com.relayd.Person;
 import com.relayd.web.pagebean.DialogOptionsBuilder;
 import com.relayd.web.pagebean.NavigationConstants;
 
@@ -27,11 +30,20 @@ public class RelayEventEditAddPersonPageBean implements Serializable {
 		RequestContext.getCurrentInstance().openDialog(NavigationConstants.RELAY_EVENT_EDIT_ADD_PERSON_DIALOG_ID, options, null);
 	}
 
+	public void save() {
+		// persistWhatever();
+		closeDialog();
+	}
+
 	public void cancel() {
 		closeDialog();
 	}
 
 	void closeDialog() {
 		RequestContext.getCurrentInstance().closeDialog(null);
+	}
+
+	public List<Person> getPersons() {
+		return new ArrayList<>();
 	}
 }
