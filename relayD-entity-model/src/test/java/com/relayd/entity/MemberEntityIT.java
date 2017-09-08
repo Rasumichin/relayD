@@ -19,7 +19,7 @@ import org.junit.runners.MethodSorters;
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class ParticipantEntityIT extends EntityIT {
+public class MemberEntityIT extends EntityIT {
 	private PersonEntity personEntity;
 	private RelayEntity relayEntity;
 
@@ -67,15 +67,15 @@ public class ParticipantEntityIT extends EntityIT {
 	}
 
 	@Test
-	public void testInsertParticipantEntity() {
+	public void testInsertMemberEntity() {
 		String expectedId = UUID.randomUUID().toString();
-		persistEntity(getDefaultParticipantEntity(expectedId));
+		persistEntity(getDefaultMemberEntity(expectedId));
 
-		ParticipantEntity result = findById(expectedId);
-		assertNotNull("ParticipantEntity could not be found with 'id=" + expectedId + "'!", result);
+		MemberEntity result = findById(expectedId);
+		assertNotNull("MemberEntity could not be found with 'id=" + expectedId + "'!", result);
 
 		String resultId = result.getId();
-		assertEquals("ParticipantEntity could not be found with 'id=" + expectedId + "'!", expectedId, resultId);
+		assertEquals("MemberEntity could not be found with 'id=" + expectedId + "'!", expectedId, resultId);
 	}
 
 	@Test
@@ -84,8 +84,8 @@ public class ParticipantEntityIT extends EntityIT {
 		String expected = personEntity.getId();
 
 		String uuid = UUID.randomUUID().toString();
-		persistEntity(getDefaultParticipantEntity(uuid));
-		ParticipantEntity result = findById(uuid);
+		persistEntity(getDefaultMemberEntity(uuid));
+		MemberEntity result = findById(uuid);
 
 		String actual = result.getPersonEntity().getId();
 
@@ -98,8 +98,8 @@ public class ParticipantEntityIT extends EntityIT {
 		String expected = relayEntity.getId();
 
 		String uuid = UUID.randomUUID().toString();
-		persistEntity(getDefaultParticipantEntity(uuid));
-		ParticipantEntity result = findById(uuid);
+		persistEntity(getDefaultMemberEntity(uuid));
+		MemberEntity result = findById(uuid);
 
 		String actual = result.getRelayEntity().getId();
 
@@ -107,44 +107,44 @@ public class ParticipantEntityIT extends EntityIT {
 	}
 
 	@Test
-	public void testUpdateParticipantEntity_Set_Position() {
+	public void testUpdateMemberEntity_Set_Position() {
 		String id = UUID.randomUUID().toString();
-		ParticipantEntity participantEntity = getDefaultParticipantEntity(id);
-		persistEntity(participantEntity);
-		ParticipantEntity sut = findById(id);
+		MemberEntity memberEntity = getDefaultMemberEntity(id);
+		persistEntity(memberEntity);
+		MemberEntity sut = findById(id);
 
 		Integer expected = Integer.valueOf(4);
 		sut.setPosition(expected);
 
-		ParticipantEntity result = mergeEntity(sut);
+		MemberEntity result = mergeEntity(sut);
 
 		Integer actual = result.getPosition();
 		assertEquals("[position] has not been updated correctly!", expected, actual);
 	}
 
 	@Test
-	public void testDeleteParticipantEntity() {
+	public void testDeleteMemberEntity() {
 		String id = UUID.randomUUID().toString();
-		ParticipantEntity participantEntity = getDefaultParticipantEntity(id);
-		persistEntity(participantEntity);
-		ParticipantEntity sut = findById(id);
+		MemberEntity memberEntity = getDefaultMemberEntity(id);
+		persistEntity(memberEntity);
+		MemberEntity sut = findById(id);
 
 		removeEntity(sut);
 
-		ParticipantEntity result = findById(id);
-		assertNull("ParticipantEntity has not been deleted correctly!", result);
+		MemberEntity result = findById(id);
+		assertNull("MemberEntity has not been deleted correctly!", result);
 	}
 
-	private ParticipantEntity getDefaultParticipantEntity(String anId) {
-		ParticipantEntity participantEntity = ParticipantEntity.newInstance(anId);
-		participantEntity.setPosition(Integer.valueOf(1));
-		participantEntity.setPersonEntity(getPersonEntity());
-		participantEntity.setRelayEntity(getRelayEntity());
+	private MemberEntity getDefaultMemberEntity(String anId) {
+		MemberEntity memberEntity = MemberEntity.newInstance(anId);
+		memberEntity.setPosition(Integer.valueOf(1));
+		memberEntity.setPersonEntity(getPersonEntity());
+		memberEntity.setRelayEntity(getRelayEntity());
 
-		return participantEntity;
+		return memberEntity;
 	}
 
-	private ParticipantEntity findById(String anId) {
-		return getEntityManager().find(ParticipantEntity.class, anId);
+	private MemberEntity findById(String anId) {
+		return getEntityManager().find(MemberEntity.class, anId);
 	}
 }

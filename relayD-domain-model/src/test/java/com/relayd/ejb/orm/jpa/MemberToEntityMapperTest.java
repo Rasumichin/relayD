@@ -12,7 +12,7 @@ import org.junit.rules.ExpectedException;
 import org.junit.runners.MethodSorters;
 
 import com.relayd.Member;
-import com.relayd.entity.ParticipantEntity;
+import com.relayd.entity.MemberEntity;
 
 /**
  * Die Güte des Werkes ist nicht abhängig vom Werkzeug, sondern von demjenigen, der das Werkzeug bedient.
@@ -39,7 +39,7 @@ public class MemberToEntityMapperTest {
 		expectedException.expect(IllegalArgumentException.class);
 		expectedException.expectMessage("[source] must not be 'null'!");
 
-		ParticipantEntity dummyParticipantEntity = null;
+		MemberEntity dummyParticipantEntity = null;
 
 		sut.mapMemberToEntity(null, dummyParticipantEntity);
 	}
@@ -60,7 +60,7 @@ public class MemberToEntityMapperTest {
 		Long expected = 15000L;
 		member.setDuration(Duration.of(expected, ChronoUnit.MILLIS));
 
-		ParticipantEntity participantEntity = ParticipantEntity.newInstance();
+		MemberEntity participantEntity = MemberEntity.newInstance();
 
 		sut.mapMemberToEntity(member, participantEntity);
 

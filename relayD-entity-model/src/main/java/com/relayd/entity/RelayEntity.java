@@ -42,7 +42,7 @@ public class RelayEntity {
 	private RelayEventEntity relayEventEntity;
 
 	@OneToMany(mappedBy = "relayEntity", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-	private List<ParticipantEntity> participantEntities = new ArrayList<>();
+	private List<MemberEntity> memberEntities = new ArrayList<>();
 
 	public static RelayEntity newInstance() {
 		return RelayEntity.newInstance(UUID.randomUUID());
@@ -100,36 +100,36 @@ public class RelayEntity {
 	}
 
 	// TODO - REL-286 - Discuss with CS - better remove boolean result of 'add' operation here?
-	public void addParticipantEntity(ParticipantEntity participantEntity) {
-		// TODO - REL-285 - Discuss with CS - validation checks here (up to 4 participants, no duplicate positions)?
-		participantEntities.add(participantEntity);
-		participantEntity.setRelayEntity(this);
+	public void addMemberEntity(MemberEntity memberEntity) {
+		// TODO - REL-285 - Discuss with CS - validation checks here (up to 4 members, no duplicate positions)?
+		memberEntities.add(memberEntity);
+		memberEntity.setRelayEntity(this);
 	}
 
-	public void removeParticipantEntity(ParticipantEntity participantEntity) {
-		int indexInList = getParticipantEntities().indexOf(participantEntity);
+	public void removeMemberEntity(MemberEntity memberEntity) {
+		int indexInList = getMemberEntities().indexOf(memberEntity);
 		if (indexInList >= 0) {
-			ParticipantEntity participantEntityToBeRemoved = getParticipantEntities().get(indexInList);
-			participantEntityToBeRemoved.setRelayEntity(null);
-			participantEntities.remove(indexInList);
+			MemberEntity memberEntityToBeRemoved = getMemberEntities().get(indexInList);
+			memberEntityToBeRemoved.setRelayEntity(null);
+			memberEntities.remove(indexInList);
 		}
 	}
 
-	public List<ParticipantEntity> getParticipantEntities() {
-		return Collections.unmodifiableList(participantEntities);
+	public List<MemberEntity> getMemberEntities() {
+		return Collections.unmodifiableList(memberEntities);
 	}
 
-	public Optional<ParticipantEntity> getParticipantEntityAtPosition(Integer aPosition) {
-		return getParticipantEntities()
+	public Optional<MemberEntity> getMemberEntityAtPosition(Integer aPosition) {
+		return getMemberEntities()
 				.stream()
 				.filter(eachEntity -> eachEntity.getPosition().equals(aPosition))
 				.findFirst();
 	}
 
-	public void possiblyRemoveParticipantEntity(Optional<ParticipantEntity> aParticipantEntity) {
-		if (aParticipantEntity.isPresent()) {
-			ParticipantEntity participantEntity = aParticipantEntity.get();
-			removeParticipantEntity(participantEntity);
+	public void possiblyRemoveMemberEntity(Optional<MemberEntity> aMemberEntity) {
+		if (aMemberEntity.isPresent()) {
+			MemberEntity memberEntity = aMemberEntity.get();
+			removeMemberEntity(memberEntity);
 		}
 	}
 

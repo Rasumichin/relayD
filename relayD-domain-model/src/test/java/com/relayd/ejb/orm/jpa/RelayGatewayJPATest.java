@@ -12,7 +12,7 @@ import org.junit.runners.MethodSorters;
 import com.relayd.Member;
 import com.relayd.Person;
 import com.relayd.Relay;
-import com.relayd.entity.ParticipantEntity;
+import com.relayd.entity.MemberEntity;
 import com.relayd.entity.PersonEntity;
 import com.relayd.entity.RelayEntity;
 
@@ -38,21 +38,21 @@ public class RelayGatewayJPATest {
 
 		sutSpy.mapMembersToEntities(relay, relayEntity);
 
-		Integer actual = Integer.valueOf(relayEntity.getParticipantEntities().size());
-		assertEquals("Participant mapping is not correct!", expected, actual);
+		Integer actual = Integer.valueOf(relayEntity.getMemberEntities().size());
+		assertEquals("Member mapping is not correct!", expected, actual);
 	}
 
 	@Test
 	public void testMapMembersToEntities_no_participants_one_participant_entity() {
 		Integer expected = relay.memberCount();
-		ParticipantEntity participantEntity = ParticipantEntity.newInstance();
+		MemberEntity participantEntity = MemberEntity.newInstance();
 		participantEntity.setPosition(Integer.valueOf(1));
-		relayEntity.addParticipantEntity(participantEntity);
+		relayEntity.addMemberEntity(participantEntity);
 
 		sutSpy.mapMembersToEntities(relay, relayEntity);
 
-		Integer actual = Integer.valueOf(relayEntity.getParticipantEntities().size());
-		assertEquals("Participant mapping is not correct!", expected, actual);
+		Integer actual = Integer.valueOf(relayEntity.getMemberEntities().size());
+		assertEquals("Member mapping is not correct!", expected, actual);
 	}
 
 	@Test
@@ -63,8 +63,8 @@ public class RelayGatewayJPATest {
 
 		sutSpy.mapMembersToEntities(relay, relayEntity);
 
-		Integer actual = Integer.valueOf(relayEntity.getParticipantEntities().size());
-		assertEquals("Participant mapping is not correct!", expected, actual);
+		Integer actual = Integer.valueOf(relayEntity.getMemberEntities().size());
+		assertEquals("Member mapping is not correct!", expected, actual);
 	}
 
 	@Test
@@ -75,21 +75,21 @@ public class RelayGatewayJPATest {
 		UUID expectedUuid = member.getUuidPerson();
 		Integer expected = relay.memberCount();
 
-		ParticipantEntity participantEntity = ParticipantEntity.newInstance();
+		MemberEntity participantEntity = MemberEntity.newInstance();
 		participantEntity.setPosition(Integer.valueOf(1));
 		participantEntity.setPersonEntity(PersonEntity.newInstance(expectedUuid));
-		relayEntity.addParticipantEntity(participantEntity);
+		relayEntity.addMemberEntity(participantEntity);
 
 		// Act
 		sutSpy.mapMembersToEntities(relay, relayEntity);
 
 		// Assert
-		Integer actual = Integer.valueOf(relayEntity.getParticipantEntities().size());
-		assertEquals("Participant mapping is not correct!", expected, actual);
+		Integer actual = Integer.valueOf(relayEntity.getMemberEntities().size());
+		assertEquals("Member mapping is not correct!", expected, actual);
 
-		ParticipantEntity mappedParticipantEntity = relayEntity.getParticipantEntityAtPosition(Integer.valueOf(1)).get();
-		UUID actualUuid = mappedParticipantEntity.getUuidPerson();
-		assertEquals("Participant mapping is not correct!", expectedUuid, actualUuid);
+		MemberEntity mappedMemberEntity = relayEntity.getMemberEntityAtPosition(Integer.valueOf(1)).get();
+		UUID actualUuid = mappedMemberEntity.getUuidPerson();
+		assertEquals("Member mapping is not correct!", expectedUuid, actualUuid);
 	}
 
 	@Test
@@ -102,27 +102,27 @@ public class RelayGatewayJPATest {
 
 		doReturn(PersonEntity.newInstance(expectedUuid)).when(sutSpy).findPersonEntityFor(any());
 
-		ParticipantEntity participantEntity = ParticipantEntity.newInstance();
+		MemberEntity participantEntity = MemberEntity.newInstance();
 		participantEntity.setPosition(Integer.valueOf(1));
 		participantEntity.setPersonEntity(PersonEntity.newInstance(UUID.randomUUID()));
-		relayEntity.addParticipantEntity(participantEntity);
+		relayEntity.addMemberEntity(participantEntity);
 
 		// Act
 		sutSpy.mapMembersToEntities(relay, relayEntity);
 
 		// Assert
-		Integer actual = Integer.valueOf(relayEntity.getParticipantEntities().size());
-		assertEquals("Participant mapping is not correct!", expected, actual);
+		Integer actual = Integer.valueOf(relayEntity.getMemberEntities().size());
+		assertEquals("Member mapping is not correct!", expected, actual);
 
-		ParticipantEntity mappedParticipantEntity = relayEntity.getParticipantEntityAtPosition(Integer.valueOf(1)).get();
-		UUID actualUuid = mappedParticipantEntity.getUuidPerson();
-		assertEquals("Participant mapping is not correct!", expectedUuid, actualUuid);
+		MemberEntity mappedMemberEntity = relayEntity.getMemberEntityAtPosition(Integer.valueOf(1)).get();
+		UUID actualUuid = mappedMemberEntity.getUuidPerson();
+		assertEquals("Member mapping is not correct!", expectedUuid, actualUuid);
 	}
 
 	@Test
 	public void testSetNewPersonEntityById() {
 		UUID expectedUuid = UUID.randomUUID();
-		ParticipantEntity participantEntity = ParticipantEntity.newInstance();
+		MemberEntity participantEntity = MemberEntity.newInstance();
 		participantEntity.setPersonEntity(PersonEntity.newInstance(UUID.randomUUID()));
 		doReturn(PersonEntity.newInstance(expectedUuid)).when(sutSpy).findPersonEntityFor(any());
 
@@ -133,13 +133,13 @@ public class RelayGatewayJPATest {
 	}
 
 	@Test
-	public void testGetNewParticipantEntity() {
+	public void testGetNewMemberEntity() {
 		Integer expectedPosition = Integer.valueOf(1);
 		UUID somePersonUuid = UUID.randomUUID();
 		PersonEntity expectedPersonEntity = PersonEntity.newInstance(somePersonUuid);
 		doReturn(expectedPersonEntity).when(sutSpy).findPersonEntityFor(any());
 
-		ParticipantEntity result = sutSpy.getNewParticipantEntity(expectedPosition, somePersonUuid);
+		MemberEntity result = sutSpy.getNewMemberEntity(expectedPosition, somePersonUuid);
 
 		assertEquals("Creation of new [participantEntity] has failed. [position] is not correct!", expectedPosition, result.getPosition());
 		assertEquals("Creation of new [participantEntity] has failed. [personEntity] is not correct!", expectedPersonEntity, result.getPersonEntity());

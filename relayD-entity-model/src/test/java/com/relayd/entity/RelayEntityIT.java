@@ -82,33 +82,33 @@ public class RelayEntityIT extends EntityIT {
 	}
 
 	@Test
-	public void testInsertRelayEntity_with_one_new_participant() {
+	public void testInsertRelayEntity_with_one_new_member() {
 		int expected = 1;
-		RelayEntity sut = getRelayEntityWithParticipants(Integer.valueOf(expected));
-		String expectedId = sut.getParticipantEntities().get(0).getId();
+		RelayEntity sut = getRelayEntityWithMembers(Integer.valueOf(expected));
+		String expectedId = sut.getMemberEntities().get(0).getId();
 
 		persistEntity(sut);
 
 		RelayEntity result = findRelayEntityById(sut.getId());
-		List<ParticipantEntity> participants = result.getParticipantEntities();
-		int actual = participants.size();
-		assertEquals("Relation to 'ParticipantEntity' has not been inserted correctly!", expected, actual);
+		List<MemberEntity> members = result.getMemberEntities();
+		int actual = members.size();
+		assertEquals("Relation to 'MemberEntity' has not been inserted correctly!", expected, actual);
 
-		String actualId = participants.get(0).getId();
-		assertEquals("Relation to 'ParticipantEntity' has not been inserted correctly!", expectedId, actualId);
+		String actualId = members.get(0).getId();
+		assertEquals("Relation to 'MemberEntity' has not been inserted correctly!", expectedId, actualId);
 	}
 
 	@Test
-	public void testInsertRelayEntity_with_multiple_new_participants() {
+	public void testInsertRelayEntity_with_multiple_new_members() {
 		int expected = 3;
-		RelayEntity sut = getRelayEntityWithParticipants(Integer.valueOf(expected));
+		RelayEntity sut = getRelayEntityWithMembers(Integer.valueOf(expected));
 
 		persistEntity(sut);
 
 		RelayEntity result = findRelayEntityById(sut.getId());
-		List<ParticipantEntity> participants = result.getParticipantEntities();
-		int actual = participants.size();
-		assertEquals("Relation to 'ParticipantEntity' has not been inserted correctly!", expected, actual);
+		List<MemberEntity> members = result.getMemberEntities();
+		int actual = members.size();
+		assertEquals("Relation to 'MemberEntity' has not been inserted correctly!", expected, actual);
 	}
 
 	@Test
@@ -127,65 +127,65 @@ public class RelayEntityIT extends EntityIT {
 	}
 
 	@Test
-	public void testUpdateRelayEntity_Add_Participant() {
+	public void testUpdateRelayEntity_Add_Member() {
 		String id = UUID.randomUUID().toString();
 		insertRelayEntity(id);
 		RelayEntity relayEntity = findRelayEntityById(id);
 
-		assertTrue("Relation to 'ParticipantEntity' has not been updated correctly!", relayEntity.getParticipantEntities().isEmpty());
+		assertTrue("Relation to 'MemberEntity' has not been updated correctly!", relayEntity.getMemberEntities().isEmpty());
 
-		ParticipantEntity participantEntity = getDefaultParticipantEntity(UUID.randomUUID().toString());
-		relayEntity.addParticipantEntity(participantEntity);
+		MemberEntity memberEntity = getDefaultMemberEntity(UUID.randomUUID().toString());
+		relayEntity.addMemberEntity(memberEntity);
 
 		RelayEntity result = mergeEntity(relayEntity);
 
-		List<ParticipantEntity> participants = result.getParticipantEntities();
+		List<MemberEntity> members = result.getMemberEntities();
 		int expected = 1;
-		int actual = participants.size();
-		assertEquals("Relation to 'ParticipantEntity' has not been updated correctly!", expected, actual);
+		int actual = members.size();
+		assertEquals("Relation to 'MemberEntity' has not been updated correctly!", expected, actual);
 	}
 
 	@Test
-	public void testUpdateRelayEntity_Remove_Participant() {
-		int initialParticipants = 3;
-		RelayEntity sut = getRelayEntityWithParticipants(Integer.valueOf(initialParticipants));
+	public void testUpdateRelayEntity_Remove_Member() {
+		int initialMembers = 3;
+		RelayEntity sut = getRelayEntityWithMembers(Integer.valueOf(initialMembers));
 		persistEntity(sut);
 
 		sut = findRelayEntityById(sut.getId());
-		ParticipantEntity participantToBeRemoved = sut.getParticipantEntities().get(0);
-		sut.removeParticipantEntity(participantToBeRemoved);
+		MemberEntity memberToBeRemoved = sut.getMemberEntities().get(0);
+		sut.removeMemberEntity(memberToBeRemoved);
 
 		RelayEntity result = mergeEntity(sut);
 
-		List<ParticipantEntity> participants = result.getParticipantEntities();
+		List<MemberEntity> members = result.getMemberEntities();
 		int expected = 2;
-		int actual = participants.size();
-		assertEquals("Relation to 'ParticipantEntity' has not been removed correctly!", expected, actual);
+		int actual = members.size();
+		assertEquals("Relation to 'MemberEntity' has not been removed correctly!", expected, actual);
 
-		String removedId = participantToBeRemoved.getId();
-		participants = result.getParticipantEntities()
+		String removedId = memberToBeRemoved.getId();
+		members = result.getMemberEntities()
 				.stream()
-				.filter(eachParticipant -> eachParticipant.getId().equals(removedId))
+				.filter(eachMember -> eachMember.getId().equals(removedId))
 				.collect(Collectors.toList());
-		assertTrue("Relation to 'ParticipantEntity' has not been removed correctly!", participants.isEmpty());
+		assertTrue("Relation to 'MemberEntity' has not been removed correctly!", members.isEmpty());
 	}
 
 	@Test
-	public void testUpdateRelayEntity_Update_Participant() {
-		int initialParticipants = 1;
-		RelayEntity sut = getRelayEntityWithParticipants(Integer.valueOf(initialParticipants));
+	public void testUpdateRelayEntity_Update_Member() {
+		int initialMembers = 1;
+		RelayEntity sut = getRelayEntityWithMembers(Integer.valueOf(initialMembers));
 		persistEntity(sut);
 
 		sut = findRelayEntityById(sut.getId());
-		ParticipantEntity participantEntity = sut.getParticipantEntities().get(0);
+		MemberEntity memberEntity = sut.getMemberEntities().get(0);
 		int expected = 4;
-		participantEntity.setPosition(Integer.valueOf(expected));
+		memberEntity.setPosition(Integer.valueOf(expected));
 
 		RelayEntity result = mergeEntity(sut);
 
-		participantEntity = result.getParticipantEntities().get(0);
-		int actual = participantEntity.getPosition().intValue();
-		assertEquals("Relation to 'ParticipantEntity' has not been updated correctly!", expected, actual);
+		memberEntity = result.getMemberEntities().get(0);
+		int actual = memberEntity.getPosition().intValue();
+		assertEquals("Relation to 'MemberEntity' has not been updated correctly!", expected, actual);
 	}
 
 	@Test
@@ -219,18 +219,18 @@ public class RelayEntityIT extends EntityIT {
 	}
 
 	@Test
-	public void testDeleteRelayEntity_with_one_participant() {
-		int initialParticipants = 1;
-		RelayEntity sut = getRelayEntityWithParticipants(Integer.valueOf(initialParticipants));
+	public void testDeleteRelayEntity_with_one_member() {
+		int initialMembers = 1;
+		RelayEntity sut = getRelayEntityWithMembers(Integer.valueOf(initialMembers));
 		persistEntity(sut);
 
 		sut = findRelayEntityById(sut.getId());
-		ParticipantEntity participantEntity = sut.getParticipantEntities().get(0);
-		String participantIdNotToBeFound = participantEntity.getId();
+		MemberEntity memberEntity = sut.getMemberEntities().get(0);
+		String memberIdNotToBeFound = memberEntity.getId();
 
 		removeEntity(sut);
 
-		ParticipantEntity result = getEntityManager().find(ParticipantEntity.class, participantIdNotToBeFound);
+		MemberEntity result = getEntityManager().find(MemberEntity.class, memberIdNotToBeFound);
 		assertNull("RelayEntity has not been deleted correctly!", result);
 	}
 
@@ -267,21 +267,21 @@ public class RelayEntityIT extends EntityIT {
 		return getEntityManager().find(RelayEntity.class, anId);
 	}
 
-	private ParticipantEntity getDefaultParticipantEntity(String anId) {
-		ParticipantEntity participantEntity = ParticipantEntity.newInstance(anId);
-		participantEntity.setPosition(Integer.valueOf(1));
-		participantEntity.setPersonEntity(getPersonEntity());
+	private MemberEntity getDefaultMemberEntity(String anId) {
+		MemberEntity memberEntity = MemberEntity.newInstance(anId);
+		memberEntity.setPosition(Integer.valueOf(1));
+		memberEntity.setPersonEntity(getPersonEntity());
 
-		return participantEntity;
+		return memberEntity;
 	}
 
-	private RelayEntity getRelayEntityWithParticipants(Integer numberOfParticipants) {
+	private RelayEntity getRelayEntityWithMembers(Integer numberOfMembers) {
 		RelayEntity relayEntity = getDefaultRelayEntity(UUID.randomUUID().toString());
 
-		for (int i = 0; i < numberOfParticipants.intValue(); i++) {
-			ParticipantEntity participantEntity = getDefaultParticipantEntity(UUID.randomUUID().toString());
-			participantEntity.setPosition(Integer.valueOf(i + 1));
-			relayEntity.addParticipantEntity(participantEntity);
+		for (int i = 0; i < numberOfMembers.intValue(); i++) {
+			MemberEntity memberEntity = getDefaultMemberEntity(UUID.randomUUID().toString());
+			memberEntity.setPosition(Integer.valueOf(i + 1));
+			relayEntity.addMemberEntity(memberEntity);
 		}
 
 		return relayEntity;

@@ -1,7 +1,7 @@
 package com.relayd.ejb.orm.jpa;
 
 import com.relayd.Member;
-import com.relayd.entity.ParticipantEntity;
+import com.relayd.entity.MemberEntity;
 
 /**
  * @author  schmollc (Christian@relayd.de)
@@ -17,7 +17,7 @@ public class MemberToEntityMapper {
 		return new MemberToEntityMapper();
 	}
 
-	public void mapMemberToEntity(Member source, ParticipantEntity target) {
+	public void mapMemberToEntity(Member source, MemberEntity target) {
 		if (source == null) {
 			throw new IllegalArgumentException("[source] must not be 'null'!");
 		}
