@@ -14,7 +14,7 @@ import com.relayd.Relay;
 import com.relayd.RelayEvent;
 import com.relayd.attributes.Position;
 import com.relayd.attributes.Relayname;
-import com.relayd.entity.ParticipantEntity;
+import com.relayd.entity.MemberEntity;
 import com.relayd.entity.PersonEntity;
 import com.relayd.entity.RelayEntity;
 import com.relayd.entity.RelayEventEntity;
@@ -109,8 +109,8 @@ public class EntityToRelayMapperTest {
 
 	@Test
 	public void testMapToRelay_check_participant_position_one() {
-		ParticipantEntity participantEntity = getRandomParticipantEntityForPosition(Integer.valueOf(1));
-		relayEntity.addParticipantEntity(participantEntity);
+		MemberEntity participantEntity = getRandomMemberEntityForPosition(Integer.valueOf(1));
+		relayEntity.addMemberEntity(participantEntity);
 
 		Relay relay = sut.mapToRelay(relayEntity);
 
@@ -121,10 +121,10 @@ public class EntityToRelayMapperTest {
 
 	@Test
 	public void testMapToRelay_check_participant_position_two() {
-		ParticipantEntity participantEntity = getRandomParticipantEntityForPosition(Integer.valueOf(1));
-		relayEntity.addParticipantEntity(participantEntity);
-		participantEntity = getRandomParticipantEntityForPosition(Integer.valueOf(2));
-		relayEntity.addParticipantEntity(participantEntity);
+		MemberEntity participantEntity = getRandomMemberEntityForPosition(Integer.valueOf(1));
+		relayEntity.addMemberEntity(participantEntity);
+		participantEntity = getRandomMemberEntityForPosition(Integer.valueOf(2));
+		relayEntity.addMemberEntity(participantEntity);
 
 		Relay relay = sut.mapToRelay(relayEntity);
 
@@ -135,12 +135,12 @@ public class EntityToRelayMapperTest {
 
 	@Test
 	public void testMapToRelay_check_participant_position_three() {
-		ParticipantEntity participantEntity = getRandomParticipantEntityForPosition(Integer.valueOf(1));
-		relayEntity.addParticipantEntity(participantEntity);
-		participantEntity = getRandomParticipantEntityForPosition(Integer.valueOf(2));
-		relayEntity.addParticipantEntity(participantEntity);
-		participantEntity = getRandomParticipantEntityForPosition(Integer.valueOf(3));
-		relayEntity.addParticipantEntity(participantEntity);
+		MemberEntity participantEntity = getRandomMemberEntityForPosition(Integer.valueOf(1));
+		relayEntity.addMemberEntity(participantEntity);
+		participantEntity = getRandomMemberEntityForPosition(Integer.valueOf(2));
+		relayEntity.addMemberEntity(participantEntity);
+		participantEntity = getRandomMemberEntityForPosition(Integer.valueOf(3));
+		relayEntity.addMemberEntity(participantEntity);
 
 		Relay relay = sut.mapToRelay(relayEntity);
 
@@ -151,14 +151,14 @@ public class EntityToRelayMapperTest {
 
 	@Test
 	public void testMapToRelay_check_participant_position_four() {
-		ParticipantEntity participantEntity = getRandomParticipantEntityForPosition(Integer.valueOf(1));
-		relayEntity.addParticipantEntity(participantEntity);
-		participantEntity = getRandomParticipantEntityForPosition(Integer.valueOf(2));
-		relayEntity.addParticipantEntity(participantEntity);
-		participantEntity = getRandomParticipantEntityForPosition(Integer.valueOf(3));
-		relayEntity.addParticipantEntity(participantEntity);
-		participantEntity = getRandomParticipantEntityForPosition(Integer.valueOf(4));
-		relayEntity.addParticipantEntity(participantEntity);
+		MemberEntity participantEntity = getRandomMemberEntityForPosition(Integer.valueOf(1));
+		relayEntity.addMemberEntity(participantEntity);
+		participantEntity = getRandomMemberEntityForPosition(Integer.valueOf(2));
+		relayEntity.addMemberEntity(participantEntity);
+		participantEntity = getRandomMemberEntityForPosition(Integer.valueOf(3));
+		relayEntity.addMemberEntity(participantEntity);
+		participantEntity = getRandomMemberEntityForPosition(Integer.valueOf(4));
+		relayEntity.addMemberEntity(participantEntity);
 
 		Relay relay = sut.mapToRelay(relayEntity);
 
@@ -167,9 +167,9 @@ public class EntityToRelayMapperTest {
 		assertEquals("Mapping of [participant] is not correct!", expected, actual);
 	}
 
-	private ParticipantEntity getRandomParticipantEntityForPosition(Integer position) {
+	private MemberEntity getRandomMemberEntityForPosition(Integer position) {
 		PersonEntity personEntity = PersonEntity.newInstance();
-		ParticipantEntity participantEntity = ParticipantEntity.newInstance();
+		MemberEntity participantEntity = MemberEntity.newInstance();
 		participantEntity.setPersonEntity(personEntity);
 		participantEntity.setPosition(position);
 

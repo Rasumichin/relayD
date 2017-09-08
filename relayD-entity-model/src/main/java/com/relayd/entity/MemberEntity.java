@@ -16,8 +16,8 @@ import org.apache.openjpa.persistence.jdbc.ForeignKey;
  *
  */
 @Entity
-@Table(name = "participant")
-public class ParticipantEntity {
+@Table(name = "member")
+public class MemberEntity {
 
 	@Id
 	@Column(length = 36)
@@ -39,11 +39,11 @@ public class ParticipantEntity {
 	@ForeignKey
 	private RelayEntity relayEntity;
 
-	public static ParticipantEntity newInstance() {
-		return ParticipantEntity.newInstance(UUID.randomUUID().toString());
+	public static MemberEntity newInstance() {
+		return MemberEntity.newInstance(UUID.randomUUID().toString());
 	}
 
-	public static ParticipantEntity newInstance(String anId) {
+	public static MemberEntity newInstance(String anId) {
 		// TODO - REL-282 - Introduce a class to handle strings that should represent a UUID.
 		if (anId == null) {
 			throw new IllegalArgumentException("[uuid] must not be 'null'.");
@@ -53,10 +53,10 @@ public class ParticipantEntity {
 		} catch (IllegalArgumentException iAEx) {
 			throw new IllegalArgumentException("[anId] is not a valid representation of an UUID.");
 		}
-		ParticipantEntity participantEntity = new ParticipantEntity();
-		participantEntity.setId(anId);
+		MemberEntity memberEntity = new MemberEntity();
+		memberEntity.setId(anId);
 
-		return participantEntity;
+		return memberEntity;
 	}
 
 	private void setId(String anId) {
@@ -137,7 +137,7 @@ public class ParticipantEntity {
 		if (getClass() != obj.getClass()) {
 			return false;
 		}
-		ParticipantEntity other = (ParticipantEntity) obj;
+		MemberEntity other = (MemberEntity) obj;
 		if (id == null) {
 			if (other.id != null) {
 				return false;

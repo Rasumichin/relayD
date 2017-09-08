@@ -14,7 +14,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import com.relayd.Member;
 import com.relayd.Person;
-import com.relayd.entity.ParticipantEntity;
+import com.relayd.entity.MemberEntity;
 import com.relayd.entity.PersonEntity;
 import com.relayd.jpa.GenericJpaDao;
 
@@ -55,7 +55,7 @@ public class MemberGatewayJPATest {
 		PersonEntity personEntity = PersonEntity.newInstance(expectedUuidPerson);
 
 		UUID expectedUuidParticipant = UUID.randomUUID();
-		ParticipantEntity participantEntity = ParticipantEntity.newInstance(expectedUuidParticipant.toString());
+		MemberEntity participantEntity = MemberEntity.newInstance(expectedUuidParticipant.toString());
 		participantEntity.setPersonEntity(personEntity);
 		doReturn(participantEntity).when(sut).findById(expectedUuidParticipant);
 
@@ -77,7 +77,7 @@ public class MemberGatewayJPATest {
 	@Test
 	public void testSet() {
 
-		ParticipantEntity expectedParticipantEntity = ParticipantEntity.newInstance();
+		MemberEntity expectedParticipantEntity = MemberEntity.newInstance();
 		Person person = Person.newInstance();
 		Member member = Member.newInstance(person);
 		GenericJpaDao jpaDaoMock = mock(GenericJpaDao.class);
@@ -91,12 +91,12 @@ public class MemberGatewayJPATest {
 
 	@Test
 	public void testFindById() {
-		ParticipantEntity expected = ParticipantEntity.newInstance();
+		MemberEntity expected = MemberEntity.newInstance();
 		GenericJpaDao genericJpaDaoMock = Mockito.mock(GenericJpaDao.class);
-		doReturn(expected).when(genericJpaDaoMock).findById(ParticipantEntity.class, expected.getId());
+		doReturn(expected).when(genericJpaDaoMock).findById(MemberEntity.class, expected.getId());
 		doReturn(genericJpaDaoMock).when(sut).getJpaDao();
 
-		ParticipantEntity actual = sut.findById(UUID.fromString(expected.getId()));
+		MemberEntity actual = sut.findById(UUID.fromString(expected.getId()));
 
 		assertEquals("[findById] not correct!", expected, actual);
 	}

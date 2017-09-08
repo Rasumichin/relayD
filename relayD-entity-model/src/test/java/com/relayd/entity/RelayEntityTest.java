@@ -98,47 +98,47 @@ public class RelayEntityTest {
 	}
 
 	@Test
-	public void testGetParticipants_initialSize() {
+	public void testGetMembers_initialSize() {
 		RelayEntity sut = RelayEntity.newInstance();
 
-		List<ParticipantEntity> result = sut.getParticipantEntities();
+		List<MemberEntity> result = sut.getMemberEntities();
 
-		assertTrue("Initialization of [participantEntities] is not correct!", result.isEmpty());
+		assertTrue("Initialization of [memberEntities] is not correct!", result.isEmpty());
 	}
 
 	@Test
-	public void testAddParticipantEntity() {
-		RelayEntity sut = RelayEntityInitializer.newRelayEntityWithOneParticipant();
+	public void testAddMemberEntity() {
+		RelayEntity sut = RelayEntityInitializer.newRelayEntityWithOneMember();
 
-		List<ParticipantEntity> result = sut.getParticipantEntities();
+		List<MemberEntity> result = sut.getMemberEntities();
 		boolean actual = (result.size() == 1);
-		assertTrue("Adding of a 'ParticipantEntity' was not successful!", actual);
+		assertTrue("Adding of a 'MemberEntity' was not successful!", actual);
 	}
 
 	@Test
-	public void testRemoveParticipantEntity_element_is_present() {
-		RelayEntity sut = RelayEntityInitializer.newRelayEntityWithOneParticipant();
+	public void testRemoveMemberEntity_element_is_present() {
+		RelayEntity sut = RelayEntityInitializer.newRelayEntityWithOneMember();
 
 		// Create another instance with the same 'id' and let the 'sut' remove this one.
-		String uuid = sut.getParticipantEntities().get(0).getId();
-		ParticipantEntity participantEntityToBeRemoved = ParticipantEntity.newInstance(uuid);
+		String uuid = sut.getMemberEntities().get(0).getId();
+		MemberEntity memberEntityToBeRemoved = MemberEntity.newInstance(uuid);
 
-		sut.removeParticipantEntity(participantEntityToBeRemoved);
+		sut.removeMemberEntity(memberEntityToBeRemoved);
 
-		List<ParticipantEntity> result = sut.getParticipantEntities();
-		assertTrue("Removing of a 'ParticipantEntity' was not successful!", result.isEmpty());
+		List<MemberEntity> result = sut.getMemberEntities();
+		assertTrue("Removing of a 'MemberEntity' was not successful!", result.isEmpty());
 	}
 
 	@Test
-	public void testRemoveParticipantEntity_element_is_not_present() {
-		RelayEntity sut = RelayEntityInitializer.newRelayEntityWithOneParticipant();
-		ParticipantEntity participantEntityToBeRemoved = ParticipantEntity.newInstance();
+	public void testRemoveMemberEntity_element_is_not_present() {
+		RelayEntity sut = RelayEntityInitializer.newRelayEntityWithOneMember();
+		MemberEntity memberEntityToBeRemoved = MemberEntity.newInstance();
 
-		sut.removeParticipantEntity(participantEntityToBeRemoved);
+		sut.removeMemberEntity(memberEntityToBeRemoved);
 
-		List<ParticipantEntity> result = sut.getParticipantEntities();
+		List<MemberEntity> result = sut.getMemberEntities();
 		boolean actual = (result.size() == 1);
-		assertTrue("Removing of a 'ParticipantEntity' was not successful!", actual);
+		assertTrue("Removing of a 'MemberEntity' was not successful!", actual);
 	}
 
 	@Test
@@ -242,73 +242,73 @@ public class RelayEntityTest {
 	}
 
 	@Test
-	public void testGetParticipantEntityAtPosition_find_pos_one_have_pos_one() {
+	public void testGetMemberEntityAtPosition_find_pos_one_have_pos_one() {
 		RelayEntity sut = RelayEntity.newInstance();
-		ParticipantEntity participantEntity = ParticipantEntity.newInstance();
-		participantEntity.setPosition(Integer.valueOf(1));
-		sut.addParticipantEntity(participantEntity);
+		MemberEntity memberEntity = MemberEntity.newInstance();
+		memberEntity.setPosition(Integer.valueOf(1));
+		sut.addMemberEntity(memberEntity);
 
-		Optional<ParticipantEntity> actual = sut.getParticipantEntityAtPosition(Integer.valueOf(1));
+		Optional<MemberEntity> actual = sut.getMemberEntityAtPosition(Integer.valueOf(1));
 
-		assertTrue("[participantEntity] was not searched correctly!", actual.isPresent());
+		assertTrue("[memberEntity] was not searched correctly!", actual.isPresent());
 	}
 
 	@Test
-	public void testGetParticipantEntityAtPosition_find_pos_one_have_pos_two() {
+	public void testGetMemberEntityAtPosition_find_pos_one_have_pos_two() {
 		RelayEntity sut = RelayEntity.newInstance();
-		ParticipantEntity participantEntity = ParticipantEntity.newInstance();
-		participantEntity.setPosition(Integer.valueOf(2));
-		sut.addParticipantEntity(participantEntity);
+		MemberEntity memberEntity = MemberEntity.newInstance();
+		memberEntity.setPosition(Integer.valueOf(2));
+		sut.addMemberEntity(memberEntity);
 
-		Optional<ParticipantEntity> actual = sut.getParticipantEntityAtPosition(Integer.valueOf(1));
+		Optional<MemberEntity> actual = sut.getMemberEntityAtPosition(Integer.valueOf(1));
 
-		assertFalse("[participantEntity] was not searched correctly!", actual.isPresent());
+		assertFalse("[memberEntity] was not searched correctly!", actual.isPresent());
 	}
 
 	@Test
-	public void testGetParticipantEntityAtPosition_find_pos_one_have_none() {
+	public void testGetMemberEntityAtPosition_find_pos_one_have_none() {
 		RelayEntity sut = RelayEntity.newInstance();
 
-		Optional<ParticipantEntity> actual = sut.getParticipantEntityAtPosition(Integer.valueOf(1));
+		Optional<MemberEntity> actual = sut.getMemberEntityAtPosition(Integer.valueOf(1));
 
-		assertFalse("[participantEntity] was not searched correctly!", actual.isPresent());
+		assertFalse("[memberEntity] was not searched correctly!", actual.isPresent());
 	}
 
 	@Test
-	public void testPossiblyRemoveParticipantEntity_particpantEntityIsNotPresent() {
-		RelayEntity sut = RelayEntityInitializer.newRelayEntityWithOneParticipant();
-		Optional<ParticipantEntity> isNotAParticipantEntity = Optional.ofNullable(null);
+	public void testPossiblyRemoveMemberEntity_particpantEntityIsNotPresent() {
+		RelayEntity sut = RelayEntityInitializer.newRelayEntityWithOneMember();
+		Optional<MemberEntity> isNotAMemberEntity = Optional.ofNullable(null);
 
-		sut.possiblyRemoveParticipantEntity(isNotAParticipantEntity);
+		sut.possiblyRemoveMemberEntity(isNotAMemberEntity);
 
 		int expected = 1;
-		int actual = sut.getParticipantEntities().size();
-		assertEquals("Possibly removing a [participantEntity] does not work correctly!", expected, actual);
+		int actual = sut.getMemberEntities().size();
+		assertEquals("Possibly removing a [memberEntity] does not work correctly!", expected, actual);
 	}
 
 	@Test
-	public void testPossiblyRemoveParticipantEntity_particpantEntityIsPresentAndContained() {
-		RelayEntity sut = RelayEntityInitializer.newRelayEntityWithOneParticipant();
-		ParticipantEntity participantEntity = ParticipantEntity.newInstance(sut.getParticipantEntities().get(0).getId());
-		Optional<ParticipantEntity> isAParticipantEntity = Optional.of(participantEntity);
+	public void testPossiblyRemoveMemberEntity_particpantEntityIsPresentAndContained() {
+		RelayEntity sut = RelayEntityInitializer.newRelayEntityWithOneMember();
+		MemberEntity memberEntity = MemberEntity.newInstance(sut.getMemberEntities().get(0).getId());
+		Optional<MemberEntity> isAMemberEntity = Optional.of(memberEntity);
 
-		sut.possiblyRemoveParticipantEntity(isAParticipantEntity);
+		sut.possiblyRemoveMemberEntity(isAMemberEntity);
 
 		int expected = 0;
-		int actual = sut.getParticipantEntities().size();
-		assertEquals("Possibly removing a [participantEntity] does not work correctly!", expected, actual);
+		int actual = sut.getMemberEntities().size();
+		assertEquals("Possibly removing a [memberEntity] does not work correctly!", expected, actual);
 	}
 
 	@Test
-	public void testPossiblyRemoveParticipantEntity_particpantEntityIsPresentAndNotContained() {
-		RelayEntity sut = RelayEntityInitializer.newRelayEntityWithOneParticipant();
-		ParticipantEntity participantEntity = ParticipantEntity.newInstance();
-		Optional<ParticipantEntity> isAParticipantEntity = Optional.of(participantEntity);
+	public void testPossiblyRemoveMemberEntity_particpantEntityIsPresentAndNotContained() {
+		RelayEntity sut = RelayEntityInitializer.newRelayEntityWithOneMember();
+		MemberEntity memberEntity = MemberEntity.newInstance();
+		Optional<MemberEntity> isAMemberEntity = Optional.of(memberEntity);
 
-		sut.possiblyRemoveParticipantEntity(isAParticipantEntity);
+		sut.possiblyRemoveMemberEntity(isAMemberEntity);
 
 		int expected = 1;
-		int actual = sut.getParticipantEntities().size();
-		assertEquals("Possibly removing a [participantEntity] does not work correctly!", expected, actual);
+		int actual = sut.getMemberEntities().size();
+		assertEquals("Possibly removing a [memberEntity] does not work correctly!", expected, actual);
 	}
 }

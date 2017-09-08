@@ -4,7 +4,7 @@ import java.util.UUID;
 
 import com.relayd.Member;
 import com.relayd.ejb.MemberGateway;
-import com.relayd.entity.ParticipantEntity;
+import com.relayd.entity.MemberEntity;
 
 /**
  * @author  schmollc (Christian@relayd.de)
@@ -21,13 +21,13 @@ public class MemberGatewayJPA extends GatewayJPA implements MemberGateway {
 		if (uuid == null) {
 			throw new IllegalArgumentException("[uuid] must not be 'null'.");
 		}
-		ParticipantEntity participantEntity = findById(uuid);
-		Member member = getEntityToMemberMapper().mapToMember(participantEntity);
+		MemberEntity memberEntity = findById(uuid);
+		Member member = getEntityToMemberMapper().mapToMember(memberEntity);
 		return member;
 	}
 
-	ParticipantEntity findById(UUID uuid) {
-		ParticipantEntity result = getJpaDao().findById(ParticipantEntity.class, uuid.toString());
+	MemberEntity findById(UUID uuid) {
+		MemberEntity result = getJpaDao().findById(MemberEntity.class, uuid.toString());
 		return result;
 	}
 
@@ -36,11 +36,11 @@ public class MemberGatewayJPA extends GatewayJPA implements MemberGateway {
 		if (member == null) {
 			throw new IllegalArgumentException("[member] must not be 'null'.");
 		}
-		ParticipantEntity participantEntity = findById(member.getUuid());
+		MemberEntity memberEntity = findById(member.getUuid());
 
-		getMemberToEntityMapper().mapMemberToEntity(member, participantEntity);
+		getMemberToEntityMapper().mapMemberToEntity(member, memberEntity);
 
-		getJpaDao().mergeEntity(participantEntity);
+		getJpaDao().mergeEntity(memberEntity);
 	}
 
 	EntityToMemberMapper getEntityToMemberMapper() {

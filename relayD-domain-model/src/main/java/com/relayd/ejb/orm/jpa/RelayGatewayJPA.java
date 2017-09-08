@@ -10,7 +10,7 @@ import com.relayd.Relay;
 import com.relayd.RelayEvent;
 import com.relayd.attributes.Position;
 import com.relayd.ejb.RelayGateway;
-import com.relayd.entity.ParticipantEntity;
+import com.relayd.entity.MemberEntity;
 import com.relayd.entity.PersonEntity;
 import com.relayd.entity.RelayEntity;
 import com.relayd.entity.RelayEventEntity;
@@ -68,26 +68,26 @@ public class RelayGatewayJPA extends GatewayJPA implements RelayGateway {
 		for (int i = 0; i < relay.getMembers().size(); i++) {
 			Integer position = Integer.valueOf(i + 1);
 			Member member = relay.getMemberFor(Position.newInstance(position));
-			Optional<ParticipantEntity> participantEntity = relayEntity.getParticipantEntityAtPosition(position);
+			Optional<MemberEntity> memberEntity = relayEntity.getMemberEntityAtPosition(position);
 			if (member.isEmpty()) {
-				relayEntity.possiblyRemoveParticipantEntity(participantEntity);
+				relayEntity.possiblyRemoveMemberEntity(memberEntity);
 			} else {
-				if (participantEntity.isPresent()) {
-					ParticipantEntity currentParticipantEntity = participantEntity.get();
-					if (!(member.hasThatPersonIdentity(currentParticipantEntity.getUuidPerson()))) {
-						setNewPersonEntityById(currentParticipantEntity, member.getUuidPerson());
+				if (memberEntity.isPresent()) {
+					MemberEntity currentMemberEntity = memberEntity.get();
+					if (!(member.hasThatPersonIdentity(currentMemberEntity.getUuidPerson()))) {
+						setNewPersonEntityById(currentMemberEntity, member.getUuidPerson());
 					}
 				} else {
-					ParticipantEntity newParticipantEntity = getNewParticipantEntity(position, member.getUuidPerson());
-					relayEntity.addParticipantEntity(newParticipantEntity);
+					MemberEntity newMemberEntity = getNewMemberEntity(position, member.getUuidPerson());
+					relayEntity.addMemberEntity(newMemberEntity);
 				}
 			}
 		}
 	}
 
-	void setNewPersonEntityById(ParticipantEntity participantEntity, UUID personId) {
+	void setNewPersonEntityById(MemberEntity memberEntity, UUID personId) {
 		PersonEntity personEntity = findPersonEntityFor(personId);
-		participantEntity.setPersonEntity(personEntity);
+		memberEntity.setPersonEntity(personEntity);
 	}
 
 	PersonEntity findPersonEntityFor(UUID personUuid) {
@@ -99,13 +99,13 @@ public class RelayGatewayJPA extends GatewayJPA implements RelayGateway {
 		return result;
 	}
 
-	ParticipantEntity getNewParticipantEntity(Integer position, UUID personId) {
-		ParticipantEntity participantEntity = ParticipantEntity.newInstance();
-		participantEntity.setPosition(position);
+	MemberEntity getNewMemberEntity(Integer position, UUID personId) {
+		MemberEntity memberEntity = MemberEntity.newInstance();
+		memberEntity.setPosition(position);
 		PersonEntity personEntity = findPersonEntityFor(personId);
-		participantEntity.setPersonEntity(personEntity);
+		memberEntity.setPersonEntity(personEntity);
 
-		return participantEntity;
+		return memberEntity;
 	}
 
 	@Override

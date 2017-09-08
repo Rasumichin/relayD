@@ -1,6 +1,7 @@
 package com.relayd.entity.initializer;
 
-import com.relayd.entity.*;
+import com.relayd.entity.MemberEntity;
+import com.relayd.entity.RelayEntity;
 
 /**
  *
@@ -9,12 +10,12 @@ import com.relayd.entity.*;
  *
  */
 public class RelayEntityInitializer {
-	
-	public static RelayEntity newRelayEntityWithOneParticipant() {
+
+	public static RelayEntity newRelayEntityWithOneMember() {
 		RelayEntity relayEntity = RelayEntity.newInstance();
-		ParticipantEntity participantEntity = ParticipantEntity.newInstance();
-		relayEntity.addParticipantEntity(participantEntity);
-		
+		MemberEntity memberEntity = MemberEntity.newInstance();
+		relayEntity.addMemberEntity(memberEntity);
+
 		return relayEntity;
 	}
 }

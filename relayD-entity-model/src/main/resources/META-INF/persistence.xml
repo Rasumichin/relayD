@@ -6,10 +6,10 @@
 	<persistence-unit name="dataSource" transaction-type="RESOURCE_LOCAL">
 		<provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
 		<non-jta-data-source>java:comp/env/res/jdbc/dataSource</non-jta-data-source>
-		<class>com.relayd.entity.ParticipantEntity</class>
+		<class>com.relayd.entity.MemberEntity</class>
 		<class>com.relayd.entity.PersonEntity</class>
-		<class>com.relayd.entity.RelayEventEntity</class>
 		<class>com.relayd.entity.RelayEntity</class>
+		<class>com.relayd.entity.RelayEventEntity</class>
 		<properties>
 			<property name="openjpa.RuntimeUnenhancedClasses" value="unsupported" />
 			<property name="openjpa.DynamicEnhancementAgent" value="false" />
