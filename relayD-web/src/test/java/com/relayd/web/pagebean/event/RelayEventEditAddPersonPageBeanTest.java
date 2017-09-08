@@ -3,6 +3,8 @@ package com.relayd.web.pagebean.event;
 import static org.junit.Assert.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -31,13 +33,13 @@ public class RelayEventEditAddPersonPageBeanTest {
 	}
 
 	@Test
-	public void testSelectedPerson() {
-		Person expected = Person.newInstance();
+	public void testSelectedPersons() {
+		List<Person> expected = new ArrayList<>();
 
-		sut.setSelectedPerson(expected);
+		sut.setSelectedPersons(expected);
 
-		Person actual = sut.getSelectedPerson();
+		List<Person> actual = sut.getSelectedPersons();
 
-		assertEquals("[selectedPerson] nicht korrekt!", expected, actual);
+		assertEquals("[selectedPersons] nicht korrekt!", expected, actual);
 	}
 }
