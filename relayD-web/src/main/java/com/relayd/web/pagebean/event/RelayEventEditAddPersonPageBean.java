@@ -25,6 +25,8 @@ import com.relayd.web.pagebean.NavigationConstants;
 public class RelayEventEditAddPersonPageBean implements Serializable {
 	private static final long serialVersionUID = -4345665229617327788L;
 
+	private List<Person> selectedPersons = null;
+
 	private PersonBridge personBridge;
 
 	public RelayEventEditAddPersonPageBean() {
@@ -51,5 +53,13 @@ public class RelayEventEditAddPersonPageBean implements Serializable {
 
 	public List<Person> getPersons() {
 		return personBridge.all();
+	}
+
+	public List<Person> getSelectedPersons() {
+		return selectedPersons;
+	}
+
+	public void setSelectedPersons(List<Person> somePersons) {
+		selectedPersons = somePersons;
 	}
 }

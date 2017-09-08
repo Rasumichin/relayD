@@ -3,10 +3,14 @@ package com.relayd.web.pagebean.event;
 import static org.junit.Assert.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
+
+import com.relayd.Person;
 
 /**
  * Ein guter Diener aber ein schlechter Meister
@@ -26,5 +30,16 @@ public class RelayEventEditAddPersonPageBeanTest {
 		boolean condition = sut instanceof Serializable;
 
 		assertTrue("Klasse nicht Serializable!", condition);
+	}
+
+	@Test
+	public void testSelectedPersons() {
+		List<Person> expected = new ArrayList<>();
+
+		sut.setSelectedPersons(expected);
+
+		List<Person> actual = sut.getSelectedPersons();
+
+		assertEquals("[selectedPersons] nicht korrekt!", expected, actual);
 	}
 }
