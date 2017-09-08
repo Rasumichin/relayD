@@ -8,6 +8,8 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import com.relayd.Person;
+
 /**
  * Ein guter Diener aber ein schlechter Meister
  *  - Alan Watts
@@ -26,5 +28,16 @@ public class RelayEventEditAddPersonPageBeanTest {
 		boolean condition = sut instanceof Serializable;
 
 		assertTrue("Klasse nicht Serializable!", condition);
+	}
+
+	@Test
+	public void testSelectedPerson() {
+		Person expected = Person.newInstance();
+
+		sut.setSelectedPerson(expected);
+
+		Person actual = sut.getSelectedPerson();
+
+		assertEquals("[selectedPerson] nicht korrekt!", expected, actual);
 	}
 }
