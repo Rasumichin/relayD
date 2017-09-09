@@ -62,9 +62,6 @@ public class RelayBrowsePageBean implements Serializable {
 
 	private EventYear eventYear = EventYear.YEAR_2017;
 
-	@ManagedProperty(value = "#{personEditPageBean}")
-	private PersonEditPageBean personEditPageBean;
-
 	@ManagedProperty(value = "#{relayEditPageBean}")
 	private RelayEditPageBean relayEditPageBean;
 
@@ -221,10 +218,6 @@ public class RelayBrowsePageBean implements Serializable {
 		}
 	}
 
-	public void onPersonEditClosed(@SuppressWarnings("unused") SelectEvent event) {
-		refreshPersons();
-	}
-
 	public List<Person> getFilteredPersons() {
 		return filteredPersons;
 	}
@@ -277,37 +270,6 @@ public class RelayBrowsePageBean implements Serializable {
 	private Member getSelectedMember() {
 		TreeNodeRow selectedMemberNode = (TreeNodeRow) selectedTreeNode.getData();
 		return selectedMemberNode.getMember();
-	}
-
-	public void addPerson(@SuppressWarnings("unused") ActionEvent actionEvent) {
-		getPersonEditPageBean().openDialogForCreatePerson();
-	}
-
-	public void editPerson(@SuppressWarnings("unused") ActionEvent actionEvent) {
-		if (isOnlyOnePersonRowSelected()) {
-			UUID uuid = getSelectedPerson().getUuid();
-			getPersonEditPageBean().openDialogFor(uuid);
-		} else {
-			showMessageErrorNoRowPersonSelected();
-		}
-	}
-
-	public void removePerson(@SuppressWarnings("unused") ActionEvent actionEvent) {
-		if (isOnlyOnePersonRowSelected()) {
-			personBridge.remove(getSelectedPerson());
-			showMessage(FacesMessage.SEVERITY_INFO, "Success", "Remove" + getSelectedPerson().toString());
-			refreshPersons();
-		} else {
-			showMessageErrorNoRowPersonSelected();
-		}
-	}
-
-	public PersonEditPageBean getPersonEditPageBean() {
-		return personEditPageBean;
-	}
-
-	public void setPersonEditPageBean(PersonEditPageBean aPersonEditPageBean) {
-		personEditPageBean = aPersonEditPageBean;
 	}
 
 	void showMessageErrorNoRowPersonSelected() {

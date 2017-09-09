@@ -166,27 +166,6 @@
 							update="personTable">
 						</p:commandButton>
 						<p:commandButton
-							icon="ui-icon-plus"
-							actionListener="#{relayBrowsePageBean.addPerson}">
-							<p:ajax
-								event="dialogReturn"
-								listener="#{relayBrowsePageBean.onPersonEditClosed}"
-								update="personTable" />
-						</p:commandButton>
-						<p:commandButton
-							icon="ui-icon-trash"
-							update="personTable messages"
-							actionListener="#{relayBrowsePageBean.removePerson}" />
-						<p:commandButton
-							icon="ui-icon-pencil"
-							update="messages"
-							actionListener="#{relayBrowsePageBean.editPerson}">
-							<p:ajax
-								event="dialogReturn"
-								update="personTable"
-								listener="#{relayBrowsePageBean.onPersonEditClosed}" />
-						</p:commandButton>
-						<p:commandButton
 							value="export"
 							icon="ui-icon-mail-closed"
 							update="personTable messages"
