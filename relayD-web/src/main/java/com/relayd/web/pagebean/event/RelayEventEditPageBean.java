@@ -124,7 +124,7 @@ public class RelayEventEditPageBean implements Serializable {
 	}
 
 	public void add(@SuppressWarnings("unused") ActionEvent actionEvent) {
-		getRelayEventEditAddPersonPageBean().openDialog();
+		getRelayEventEditAddPersonPageBean().openDialogFor(workingRelayEvent);
 	}
 
 	public void remove(@SuppressWarnings("unused") ActionEvent actionEvent) {
