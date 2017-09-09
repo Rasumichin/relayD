@@ -228,13 +228,6 @@
 						visible="true"
 						toggleable="false"
 						width="2%">
-						<p:rowToggler />
-					</p:column>
-					
-					<p:column
-						visible="true"
-						toggleable="false"
-						width="2%">
 						<div align="right">
 							<h:outputText styleClass="#{relayBrowsePageBean.statusOf(person)}" />
 						</div>
@@ -271,22 +264,6 @@
 						width="53%">
 						<h:outputText value="#{person.comment}" />
 					</p:column>
-
-					<p:rowExpansion>
-						<p:panelGrid
-							columns="2"
-							columnClasses="label,value">
-
-							<h:outputText value="Year of Birth" />
-							<h:outputText value="#{person.yearOfBirth}" />
-
-							<h:outputText value="Shirtsize" />
-							<h:outputText value="#{person.shirtsize.toString()}" />
-
-							<h:outputText value="Email" />
-							<h:outputText value="#{person.email}" />
-						</p:panelGrid>
-					</p:rowExpansion>
 
 				</p:dataTable>
 			</p:layoutUnit>
