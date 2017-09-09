@@ -32,6 +32,7 @@ public class RelayEvent implements Serializable {
 	private EventDay eventDay = EventDay.today();
 	private Set<Relay> relays = new HashSet<>(MAX_NUMBER_OF_RELAYS);
 	private List<Track> tracks = new ArrayList<>(MAX_NUMBER_OF_TRACKS);
+	// TODO -REL-299 - Sollte ein SET sein!
 	private List<Participant> participants = new ArrayList<>();
 
 	private RelayEvent() {
