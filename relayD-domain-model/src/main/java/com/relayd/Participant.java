@@ -3,6 +3,7 @@ package com.relayd;
 import java.io.Serializable;
 import java.util.UUID;
 
+import com.relayd.attributes.Comment;
 import com.relayd.attributes.Email;
 import com.relayd.attributes.Forename;
 import com.relayd.attributes.Surename;
@@ -20,6 +21,7 @@ public class Participant implements Serializable {
 	private Forename forename = Forename.newInstance();
 	private Surename surename = Surename.newInstance();
 	private Email email = Email.newInstance();
+	private Comment comment = Comment.newInstance();
 
 	private Participant() {
 	}
@@ -60,6 +62,18 @@ public class Participant implements Serializable {
 
 	public Email getEmail() {
 		return email;
+	}
+
+	public Comment getComment() {
+		return comment;
+	}
+
+	public void setComment(Comment aComment) {
+		if (aComment == null) {
+			comment = Comment.newInstance();
+		} else {
+			comment = aComment;
+		}
 	}
 
 	public boolean hasThatPersonIdentity(UUID uuid) {

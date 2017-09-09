@@ -9,7 +9,9 @@ import javax.faces.bean.SessionScoped;
 
 import org.primefaces.context.RequestContext;
 
+import com.relayd.Participant;
 import com.relayd.Person;
+import com.relayd.RelayEvent;
 import com.relayd.web.bridge.PersonBridge;
 import com.relayd.web.bridge.PersonBridgeImpl;
 import com.relayd.web.pagebean.DialogOptionsBuilder;
@@ -27,10 +29,17 @@ public class RelayEventEditAddPersonPageBean implements Serializable {
 
 	private List<Person> selectedPersons = null;
 
-	private PersonBridge personBridge;
+	private RelayEvent workingRelayEvent = null;
+
+	private PersonBridge personBridge = null;
 
 	public RelayEventEditAddPersonPageBean() {
 		personBridge = new PersonBridgeImpl();
+	}
+
+	public void openDialogFor(RelayEvent relayEvent) {
+		workingRelayEvent = relayEvent;
+		openDialog();
 	}
 
 	public void openDialog() {
@@ -39,7 +48,10 @@ public class RelayEventEditAddPersonPageBean implements Serializable {
 	}
 
 	public void save() {
-		// persistWhatever();
+		for (Person each : selectedPersons) {
+			Participant participant = Participant.newInstance(each);
+			workingRelayEvent.addParticipant(participant);
+		}
 		closeDialog();
 	}
 

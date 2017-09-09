@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import com.relayd.Participant.ParticipantNullObject;
+import com.relayd.attributes.Comment;
 import com.relayd.attributes.Email;
 import com.relayd.attributes.Forename;
 import com.relayd.attributes.Surename;
@@ -128,6 +129,33 @@ public class ParticipantTest {
 		Email actual = sut.getEmail();
 
 		assertEquals("[email] not correct!", expected, actual);
+	}
+
+	@Test
+	public void testComment_ForValue() {
+		Person person = Person.newInstance();
+		Participant sut = Participant.newInstance(person);
+		Comment expected = Comment.newInstance("What a runner!");
+
+		sut.setComment(expected);
+
+		Comment actual = sut.getComment();
+		assertEquals("[comment] not correct!", expected, actual);
+	}
+
+	@Test
+	public void testComment_ForNull() {
+		Person person = Person.newInstance();
+		Participant sut = Participant.newInstance(person);
+		Comment comment = null;
+
+		sut.setComment(comment);
+
+		Comment actual = sut.getComment();
+		assertNotNull("[comment] should not be null!", actual);
+
+		boolean condition = actual.isEmpty();
+		assertTrue("[condition] should be emtpy!", condition);
 	}
 
 	@Test

@@ -1,5 +1,6 @@
 package com.relayd.ejb.orm.file;
 
+import com.relayd.Participant;
 import com.relayd.RelayEvent;
 
 /**
@@ -26,5 +27,9 @@ public class RelayEventToRelayEventMapper {
 
 		target.setEventDay(source.getEventDay());
 		target.setName(source.getName());
+
+		for (Participant each : source.getParticipants()) {
+			target.addParticipant(each);
+		}
 	}
 }
