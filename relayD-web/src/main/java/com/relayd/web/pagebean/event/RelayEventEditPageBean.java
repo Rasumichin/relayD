@@ -35,6 +35,8 @@ import com.relayd.web.pagebean.NavigationConstants;
 public class RelayEventEditPageBean implements Serializable {
 	private static final long serialVersionUID = 453304395884163605L;
 
+	private List<Participant> selectedParticipants = null;
+
 	private RelayEventBridge relayEventBridge;
 
 	RelayEvent workingRelayEvent = null;
@@ -111,6 +113,14 @@ public class RelayEventEditPageBean implements Serializable {
 		return workingRelayEvent.getParticipants();
 	}
 
+	public List<Participant> getSelectedParticipants() {
+		return selectedParticipants;
+	}
+
+	public void setSelectedParticipants(List<Participant> someParticipants) {
+		selectedParticipants = someParticipants;
+	}
+
 	public Integer getNumberOfRelays() {
 		return workingRelayEvent.getMaxNumberOfRelays();
 	}
@@ -128,7 +138,9 @@ public class RelayEventEditPageBean implements Serializable {
 	}
 
 	public void remove(@SuppressWarnings("unused") ActionEvent actionEvent) {
-		showMessageNotImplementedYet();
+		for (Participant each : selectedParticipants) {
+			workingRelayEvent.removeParticipant(each);
+		}
 	}
 
 	public void emailExport(@SuppressWarnings("unused") ActionEvent actionEvent) {
