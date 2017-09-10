@@ -1,7 +1,7 @@
 package com.relayd.web.pagebean.event;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import java.util.Map;
 import java.util.UUID;
 
@@ -107,7 +107,7 @@ public class RelayEventEditPageBean implements Serializable {
 		workingRelayEvent.setName(anEventname);
 	}
 
-	public List<Participant> getParticipants() {
+	public Collection<Participant> getParticipants() {
 		return workingRelayEvent.getParticipants();
 	}
 

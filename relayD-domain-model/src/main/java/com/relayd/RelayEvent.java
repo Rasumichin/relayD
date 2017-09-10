@@ -3,6 +3,7 @@ package com.relayd;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -32,8 +33,7 @@ public class RelayEvent implements Serializable {
 	private EventDay eventDay = EventDay.today();
 	private Set<Relay> relays = new HashSet<>(MAX_NUMBER_OF_RELAYS);
 	private List<Track> tracks = new ArrayList<>(MAX_NUMBER_OF_TRACKS);
-	// TODO -REL-299 - Sollte ein SET sein!
-	private List<Participant> participants = new ArrayList<>();
+	private Collection<Participant> participants = new HashSet<>();
 
 	private RelayEvent() {
 		uuid = UUID.randomUUID();
@@ -131,8 +131,8 @@ public class RelayEvent implements Serializable {
 		participants.remove(aParticipant);
 	}
 
-	public List<Participant> getParticipants() {
-		return Collections.unmodifiableList(participants);
+	public Collection<Participant> getParticipants() {
+		return Collections.unmodifiableCollection(participants);
 	}
 
 	@Override

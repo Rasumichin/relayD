@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -91,11 +92,27 @@ public class RelayEventTest {
 
 		sut.addParticipant(participant);
 
-		List<Participant> actual = sut.getParticipants();
+		Collection<Participant> actual = sut.getParticipants();
 
 		assertNotNull("instance of [participants] not correct!", actual);
 		assertEquals("[participants] size not correct!", 1, actual.size());
-		Participant actualParticipant = actual.get(0);
+		Participant actualParticipant = actual.iterator().next();
+
+		assertEquals("inserted participant not correct!", participant, actualParticipant);
+	}
+
+	@Test
+	public void testAddParticipant_ForSameParticipant() {
+		Participant participant = new ParticipantBuilder().withForename("Justus").withSurename("Jonas").build();
+
+		sut.addParticipant(participant);
+		sut.addParticipant(participant);
+
+		Collection<Participant> actual = sut.getParticipants();
+
+		assertNotNull("instance of [participants] not correct!", actual);
+		assertEquals("[participants] size not correct!", 1, actual.size());
+		Participant actualParticipant = actual.iterator().next();
 
 		assertEquals("inserted participant not correct!", participant, actualParticipant);
 	}
@@ -107,7 +124,7 @@ public class RelayEventTest {
 
 		sut.removeParticipant(participant);
 
-		List<Participant> actual = sut.getParticipants();
+		Collection<Participant> actual = sut.getParticipants();
 
 		assertNotNull("instance of [participants] not correct!", actual);
 		boolean condition = actual.isEmpty();
@@ -116,7 +133,7 @@ public class RelayEventTest {
 
 	@Test(expected = UnsupportedOperationException.class)
 	public void testGetParticipant_ForUnmodifiable() {
-		List<Participant> participants = sut.getParticipants();
+		Collection<Participant> participants = sut.getParticipants();
 		participants.add(Participant.newInstance());
 	}
 
