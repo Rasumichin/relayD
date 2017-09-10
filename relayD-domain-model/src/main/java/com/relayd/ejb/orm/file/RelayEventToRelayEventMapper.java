@@ -1,5 +1,8 @@
 package com.relayd.ejb.orm.file;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.relayd.Participant;
 import com.relayd.RelayEvent;
 
@@ -27,6 +30,16 @@ public class RelayEventToRelayEventMapper {
 
 		target.setEventDay(source.getEventDay());
 		target.setName(source.getName());
+
+		List<Participant> allParticipant = new ArrayList<>();
+
+		for (Participant each : target.getParticipants()) {
+			allParticipant.add(each);
+		}
+
+		for (Participant each : allParticipant) {
+			target.removeParticipant(each);
+		}
 
 		for (Participant each : source.getParticipants()) {
 			target.addParticipant(each);

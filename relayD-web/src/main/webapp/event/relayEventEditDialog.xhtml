@@ -67,6 +67,8 @@
 			widgetVar="participantTable"
 			id="participantTable"
 			value="#{relayEventEditPageBean.participants}"
+			selection="#{relayEventEditPageBean.selectedParticipants}"
+			selectionMode="multiple"
 			scrollable="true"
 			scrollHeight="150"
 			rowKey="#{participant.uuidPerson}"
