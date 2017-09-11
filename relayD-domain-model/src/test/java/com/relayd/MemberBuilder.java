@@ -47,8 +47,9 @@ public class MemberBuilder {
 		person.setUuid(uuidPerson);
 		person.setForename(forename);
 		person.setSurename(surename);
+		Participant participant = Participant.newInstance(person);
 
-		Member member = Member.newInstance(person);
+		Member member = Member.newInstance(participant);
 		return member;
 	}
 }

@@ -141,22 +141,21 @@ public class RelayBrowsePageBean implements Serializable {
 		return false;
 	}
 
-	public void addPersonToRelay(@SuppressWarnings("unused") ActionEvent actionEvent) {
-		// TODO implementieren
-		//		if (!isRelayTableRowSelected()) {
-		//			showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, I18N.SELECT_A_ROW_2);
-		//		} else if (isRelayRowSelected()) {
-		//			showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, I18N.ONLY_FOR_MEMBER_ROW_POSSIBLE);
-		//		} else if (!isPersonRowSelected()) {
-		//			showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, I18N.SELECT_A_PERSON);
-		//		} else if (!isOnlyOnePersonRowSelected()) {
-		//			showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, I18N.SELECT_A_SINGLE_PERSON);
-		//		} else {
-		//			TreeNodeRow selectedRelayNode = (TreeNodeRow) selectedTreeNode.getData();
-		//			Member newRelayMember = Member.newInstance(getSelectedPerson());
-		//			selectedRelayNode.setMember(newRelayMember);
-		//			relayBridge.set(selectedTreeNode);
-		//		}
+	public void addParticipantToRelay(@SuppressWarnings("unused") ActionEvent actionEvent) {
+		if (!isRelayTableRowSelected()) {
+			showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, I18N.SELECT_A_ROW_2);
+		} else if (isRelayRowSelected()) {
+			showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, I18N.ONLY_FOR_MEMBER_ROW_POSSIBLE);
+		} else if (!isPersonRowSelected()) {
+			showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, I18N.SELECT_A_PERSON);
+		} else if (!isOnlyOnePersonRowSelected()) {
+			showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, I18N.SELECT_A_SINGLE_PERSON);
+		} else {
+			TreeNodeRow selectedRelayNode = (TreeNodeRow) selectedTreeNode.getData();
+			Member newRelayMember = Member.newInstance(getSelectedPerson());
+			selectedRelayNode.setMember(newRelayMember);
+			relayBridge.set(selectedTreeNode);
+		}
 	}
 
 	public void removePersonFromRelay(@SuppressWarnings("unused") ActionEvent actionEvent) {

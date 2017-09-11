@@ -2,6 +2,7 @@ package com.relayd;
 
 import java.util.UUID;
 
+import com.relayd.attributes.Email;
 import com.relayd.attributes.Forename;
 import com.relayd.attributes.Surename;
 
@@ -15,6 +16,7 @@ public class ParticipantBuilder {
 	private UUID uuidPerson = UUID.fromString("89d7134b-2326-4f52-7bd7-901e71723f31");
 	private Surename surename = Surename.newInstance("Surename");
 	private Forename forename = Forename.newInstance("Forename");
+	private Email email = Email.newInstance();
 
 	public ParticipantBuilder withSurename(Surename aSurename) {
 		surename = aSurename;
@@ -41,12 +43,18 @@ public class ParticipantBuilder {
 		return this;
 	}
 
+	public ParticipantBuilder withEmail(String aEmail) {
+		email = Email.newInstance(aEmail);
+		return this;
+	}
+
 	public Participant build() {
 		Person person = Person.newInstance();
 
 		person.setUuid(uuidPerson);
 		person.setForename(forename);
 		person.setSurename(surename);
+		person.setEmail(email);
 
 		Participant participant = Participant.newInstance(person);
 		return participant;

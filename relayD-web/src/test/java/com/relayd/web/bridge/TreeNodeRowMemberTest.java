@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import com.relayd.Member;
+import com.relayd.Participant;
 import com.relayd.Person;
 import com.relayd.attributes.Position;
 
@@ -43,8 +44,9 @@ public class TreeNodeRowMemberTest {
 		UUID uuid = UUID.randomUUID();
 		Person person = Person.newInstance();
 		person.setUuid(uuid);
+		Participant participant = Participant.newInstance(person);
 
-		Member expected = Member.newInstance(person);
+		Member expected = Member.newInstance(participant);
 
 		TreeNodeRow sut = TreeNodeRow.newInstance(expected, Position.FIRST);
 

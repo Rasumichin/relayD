@@ -13,7 +13,7 @@ import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.relayd.Member;
-import com.relayd.Person;
+import com.relayd.Participant;
 import com.relayd.entity.MemberEntity;
 import com.relayd.entity.PersonEntity;
 import com.relayd.jpa.GenericJpaDao;
@@ -78,8 +78,7 @@ public class MemberGatewayJPATest {
 	public void testSet() {
 
 		MemberEntity expectedParticipantEntity = MemberEntity.newInstance();
-		Person person = Person.newInstance();
-		Member member = Member.newInstance(person);
+		Member member = Member.newInstance(Participant.newInstance());
 		GenericJpaDao jpaDaoMock = mock(GenericJpaDao.class);
 		doReturn(jpaDaoMock).when(sut).getJpaDao();
 		doReturn(expectedParticipantEntity).when(sut).findById(member.getUuid());

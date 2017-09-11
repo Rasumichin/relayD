@@ -18,6 +18,7 @@ import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.relayd.Member;
+import com.relayd.Participant;
 import com.relayd.Person;
 import com.relayd.attributes.Forename;
 import com.relayd.attributes.Surename;
@@ -93,7 +94,8 @@ public class MemberEditPageBeanTest {
 		Person person = Person.newInstance();
 		person.setForename(Forename.newInstance("Justus"));
 		person.setSurename(Surename.newInstance("Jonas"));
-		Member member = Member.newInstance(person);
+		Participant participant = Participant.newInstance(person);
+		Member member = Member.newInstance(participant);
 		sut.workingMember = member;
 
 		String actual = sut.getName();

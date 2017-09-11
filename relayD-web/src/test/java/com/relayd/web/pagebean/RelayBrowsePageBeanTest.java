@@ -81,7 +81,7 @@ public class RelayBrowsePageBeanTest {
 	}
 
 	@Test
-	public void testAddPersonToRelay_ForMemberIsSelectedAndNoPersonIsSelected() {
+	public void testAddParticipantToRelay_ForMemberIsSelectedAndNoPersonIsSelected() {
 		ActionEvent dummyActionEvent = null;
 
 		Member member = Member.newInstance();
@@ -90,13 +90,13 @@ public class RelayBrowsePageBeanTest {
 
 		sut.setSelectedPersons(null);
 
-		sut.addPersonToRelay(dummyActionEvent);
+		sut.addParticipantToRelay(dummyActionEvent);
 
 		verify(sut).showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, "Please select a Person!");
 	}
 
 	@Test
-	public void testAddPersonToRelay_ForMemberIsSelectedAndTwoPersonsAreSelected() {
+	public void testAddParticipantToRelay_ForMemberIsSelectedAndTwoPersonsAreSelected() {
 		ActionEvent dummyActionEvent = null;
 
 		Member member = Member.newInstance();
@@ -114,23 +114,24 @@ public class RelayBrowsePageBeanTest {
 		Participant participantPeterShaw = Participant.newInstance(peterShaw);
 		sut.setSelectedPersons(createListFor(participantJustusJonas, participantPeterShaw));
 
-		sut.addPersonToRelay(dummyActionEvent);
+		sut.addParticipantToRelay(dummyActionEvent);
 
 		verify(sut).showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, "Please select a single Person!");
 	}
 
 	@Test
-	public void testAddPersonToRelay_ForNoSelection() {
+	public void testAddParticipantToRelay_ForNoSelection() {
 		ActionEvent dummyActionEvent = null;
 
-		sut.addPersonToRelay(dummyActionEvent);
+		sut.addParticipantToRelay(dummyActionEvent);
 
 		verify(relayBridge, never()).set(any(TreeNode.class));
 		verify(sut).showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, "Please select a Row!");
 	}
 
 	@Test
-	public void testAddPersonToRelay_ForMemberIsSelected() {
+	// TODO umbennen
+	public void testAddParticipantToRelay_ForMemberIsSelected() {
 		ActionEvent dummyActionEvent = null;
 
 		Member member = Member.newInstance();
@@ -143,7 +144,7 @@ public class RelayBrowsePageBeanTest {
 		Participant participant = Participant.newInstance(justusJonas);
 		sut.setSelectedPersons(createListFor(participant));
 
-		sut.addPersonToRelay(dummyActionEvent);
+		sut.addParticipantToRelay(dummyActionEvent);
 
 		TreeNodeRow selectedRelayNode = (TreeNodeRow) relayTreeNode.getData();
 		Member actual = selectedRelayNode.getMember();
@@ -160,14 +161,14 @@ public class RelayBrowsePageBeanTest {
 	}
 
 	@Test
-	public void testAddPersonToRelay_ForRelayIsSelected() {
+	public void testAddParticipantToRelay_ForRelayIsSelected() {
 		ActionEvent dummyActionEvent = null;
 
 		Relay relay = Relay.newInstance();
 		TreeNode relayTreeNode = new DefaultTreeNode(TreeNodeRow.newInstance(relay));
 		sut.setSelectedNode(relayTreeNode);
 
-		sut.addPersonToRelay(dummyActionEvent);
+		sut.addParticipantToRelay(dummyActionEvent);
 
 		verify(relayBridge, never()).set(any(TreeNode.class));
 		verify(sut).showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, "Only for Member Row possible!");
@@ -203,8 +204,10 @@ public class RelayBrowsePageBeanTest {
 		person.setUuid(UUID.randomUUID());
 		person.setForename(Forename.newInstance("Justus"));
 		person.setSurename(Surename.newInstance("Jonas"));
+		Participant participant = Participant.newInstance(person);
 
-		Member personRelay = Member.newInstance(person);
+		Member personRelay = Member.newInstance(participant);
+
 		TreeNode relayTreeNode = new DefaultTreeNode(TreeNodeRow.newInstance(personRelay, Position.FIRST), null);
 		sut.setSelectedNode(relayTreeNode);
 

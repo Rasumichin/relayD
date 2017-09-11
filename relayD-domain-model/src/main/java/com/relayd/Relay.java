@@ -117,9 +117,9 @@ public class Relay implements Serializable {
 
 	}
 
-	public boolean isMember(Person aPerson) {
+	public boolean isMember(Participant aParticipant) {
 		for (Member each : members) {
-			if (aPerson.getUuid().equals(each.getUuidPerson())) {
+			if (aParticipant.getUuidPerson().equals(each.getUuidPerson())) {
 				return true;
 			}
 		}
