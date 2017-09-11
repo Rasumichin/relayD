@@ -5,6 +5,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.UUID;
 
 import com.relayd.Member;
+import com.relayd.Participant;
 import com.relayd.Person;
 import com.relayd.entity.MemberEntity;
 
@@ -30,7 +31,8 @@ public class EntityToMemberMapper {
 
 		EntityToPersonMapper personMapper = EntityToPersonMapper.newInstance();
 		Person person = personMapper.mapToPerson(memberEntity.getPersonEntity());
-		Member member = Member.newInstance(person);
+		Participant participant = Participant.newInstance(person);
+		Member member = Member.newInstance(participant);
 		member.setUuid(UUID.fromString(memberEntity.getId()));
 		member.setDuration(Duration.of(memberEntity.getDuration(), ChronoUnit.MILLIS));
 		return member;
