@@ -193,15 +193,14 @@ public class RelayBrowsePageBean implements Serializable {
 	}
 
 	public void emailExportParticipant(@SuppressWarnings("unused") ActionEvent actionEvent) {
-		// TODO implementieren
+		showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, I18N.NOT_IMPLEMENTD_YET);
 		//		String output;
-		//		if (isPersonRowSelected()) {
+		//		if (isParticipantRowSelected()) {
 		//			output = personBridge.getEmailList(getSelectedPersons());
 		//		} else {
 		//			output = personBridge.getEmailList(getPersons());
 		//		}
 		//		showDialog(FacesMessage.SEVERITY_INFO, I18N.EMAIL, output);
-
 	}
 
 	public void emailExportRelay(@SuppressWarnings("unused") ActionEvent actionEvent) {
