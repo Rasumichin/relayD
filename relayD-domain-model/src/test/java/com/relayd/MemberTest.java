@@ -49,10 +49,10 @@ public class MemberTest {
 	}
 
 	@Test
-	public void testCreateInstance_ForParameterPerson() {
-		Person dummyPerson = Person.newInstance();
+	public void testCreateInstance_ForParameterParticipant() {
+		Participant dummyParticipant = Participant.newInstance();
 
-		Member sut = Member.newInstance(dummyPerson);
+		Member sut = Member.newInstance(dummyParticipant);
 
 		assertNotNull("Not a valid instance!", sut);
 
@@ -80,7 +80,7 @@ public class MemberTest {
 
 	@Test
 	public void testUuid() {
-		Member sut = Member.newInstance(Person.newInstance());
+		Member sut = Member.newInstance(Participant.newInstance());
 		UUID expected = UUID.randomUUID();
 		sut.setUuid(expected);
 
@@ -94,8 +94,8 @@ public class MemberTest {
 
 		Person person = Person.newInstance();
 		person.setUuid(expected);
-
-		Member sut = Member.newInstance(person);
+		Participant participant = Participant.newInstance(person);
+		Member sut = Member.newInstance(participant);
 
 		UUID actual = sut.getUuidPerson();
 
@@ -109,8 +109,8 @@ public class MemberTest {
 		Person person = Person.newInstance();
 		person.setUuid(UUID.randomUUID());
 		person.setForename(expected);
-
-		Member sut = Member.newInstance(person);
+		Participant participant = Participant.newInstance(person);
+		Member sut = Member.newInstance(participant);
 
 		Forename actual = sut.getForename();
 
@@ -124,8 +124,8 @@ public class MemberTest {
 		Person person = Person.newInstance();
 		person.setUuid(UUID.randomUUID());
 		person.setSurename(expected);
-
-		Member sut = Member.newInstance(person);
+		Participant participant = Participant.newInstance(person);
+		Member sut = Member.newInstance(participant);
 
 		Surename actual = sut.getSurename();
 
@@ -139,8 +139,8 @@ public class MemberTest {
 		Person person = Person.newInstance();
 		person.setUuid(UUID.randomUUID());
 		person.setEmail(expected);
-
-		Member sut = Member.newInstance(person);
+		Participant participant = Participant.newInstance(person);
+		Member sut = Member.newInstance(participant);
 
 		Email actual = sut.getEmail();
 
@@ -152,8 +152,8 @@ public class MemberTest {
 		Person person = Person.newInstance();
 		person.setUuid(UUID.randomUUID());
 		person.setEmail(null);
-
-		Member sut = Member.newInstance(person);
+		Participant participant = Participant.newInstance(person);
+		Member sut = Member.newInstance(participant);
 
 		boolean condition = sut.hasMail();
 
@@ -166,8 +166,8 @@ public class MemberTest {
 		person.setUuid(UUID.randomUUID());
 		Email email = Email.newInstance();
 		person.setEmail(email);
-
-		Member sut = Member.newInstance(person);
+		Participant participant = Participant.newInstance(person);
+		Member sut = Member.newInstance(participant);
 
 		boolean condition = sut.hasMail();
 
@@ -180,8 +180,8 @@ public class MemberTest {
 		person.setUuid(UUID.randomUUID());
 		Email email = Email.newInstance("Justus.Jonas@canda.com");
 		person.setEmail(email);
-
-		Member sut = Member.newInstance(person);
+		Participant participant = Participant.newInstance(person);
+		Member sut = Member.newInstance(participant);
 
 		boolean condition = sut.hasMail();
 
@@ -204,7 +204,8 @@ public class MemberTest {
 	@Test
 	public void testGetDuration_ForDefault() {
 		Person person = Person.newInstance();
-		Member sut = Member.newInstance(person);
+		Participant participant = Participant.newInstance(person);
+		Member sut = Member.newInstance(participant);
 
 		Duration actual = sut.getDuration();
 
@@ -246,13 +247,13 @@ public class MemberTest {
 
 	@Test
 	public void testIsEmpty_ForValueFilled() {
-		Person dummyPerson = Person.newInstance();
-		dummyPerson.setUuid(UUID.randomUUID());
-		dummyPerson.setForename(Forename.newInstance("Justus"));
-		dummyPerson.setSurename(Surename.newInstance("Jonas"));
-		dummyPerson.setEmail(Email.newInstance("Justus.Jonas@canda.com"));
-
-		Member sut = Member.newInstance(dummyPerson);
+		Person person = Person.newInstance();
+		person.setUuid(UUID.randomUUID());
+		person.setForename(Forename.newInstance("Justus"));
+		person.setSurename(Surename.newInstance("Jonas"));
+		person.setEmail(Email.newInstance("Justus.Jonas@canda.com"));
+		Participant participant = Participant.newInstance(person);
+		Member sut = Member.newInstance(participant);
 
 		boolean condition = sut.isEmpty();
 
@@ -264,7 +265,8 @@ public class MemberTest {
 		UUID someUuid = UUID.randomUUID();
 		Person person = Person.newInstance();
 		person.setUuid(someUuid);
-		Member sut = Member.newInstance(person);
+		Participant participant = Participant.newInstance(person);
+		Member sut = Member.newInstance(participant);
 
 		boolean condition = sut.hasThatPersonIdentity(someUuid);
 
@@ -275,7 +277,8 @@ public class MemberTest {
 	public void testHasThatPersonIdentity_false() {
 		Person person = Person.newInstance();
 		person.setUuid(UUID.randomUUID());
-		Member sut = Member.newInstance(person);
+		Participant participant = Participant.newInstance(person);
+		Member sut = Member.newInstance(participant);
 
 		boolean condition = sut.hasThatPersonIdentity(UUID.randomUUID());
 
@@ -298,8 +301,8 @@ public class MemberTest {
 		person.setForename(Forename.newInstance("Justus"));
 		person.setSurename(Surename.newInstance("Jonas"));
 		person.setEmail(Email.newInstance("Justus.Jonas@canda.com"));
-
-		Member sut = Member.newInstance(person);
+		Participant participant = Participant.newInstance(person);
+		Member sut = Member.newInstance(participant);
 
 		String actual = sut.toString();
 
@@ -308,7 +311,7 @@ public class MemberTest {
 
 	@Test
 	public void testHashCode() {
-		Member sut = Member.newInstance(Person.newInstance());
+		Member sut = Member.newInstance(Participant.newInstance());
 		sut.setUuid(UUID.fromString("5697d710-8967-4b2d-9ab2-8fc50ddc6138"));
 
 		int hashCode = sut.hashCode();
@@ -351,10 +354,10 @@ public class MemberTest {
 
 	@Test
 	public void testEquals_ForIdIsNull() {
-		Member sut = Member.newInstance(Person.newInstance());
+		Member sut = Member.newInstance(Participant.newInstance());
 		sut.setUuid(null);
 
-		Member secondSut = Member.newInstance(Person.newInstance());
+		Member secondSut = Member.newInstance(Participant.newInstance());
 		secondSut.setUuid(UUID.randomUUID());
 
 		boolean condition = sut.equals(secondSut);
@@ -364,9 +367,9 @@ public class MemberTest {
 
 	@Test
 	public void testEquals_ForBothIdsAreNull() {
-		Member sut = Member.newInstance(Person.newInstance());
+		Member sut = Member.newInstance(Participant.newInstance());
 		sut.setUuid(null);
-		Member secondSut = Member.newInstance(Person.newInstance());
+		Member secondSut = Member.newInstance(Participant.newInstance());
 		secondSut.setUuid(null);
 
 		boolean condition = sut.equals(secondSut);
@@ -376,9 +379,9 @@ public class MemberTest {
 
 	@Test
 	public void testEquals_ForTwoDiffrentIds() {
-		Member sut = Member.newInstance(Person.newInstance());
+		Member sut = Member.newInstance(Participant.newInstance());
 		sut.setUuid(UUID.randomUUID());
-		Member secondSut = Member.newInstance(Person.newInstance());
+		Member secondSut = Member.newInstance(Participant.newInstance());
 		secondSut.setUuid(UUID.randomUUID());
 
 		boolean condition = sut.equals(secondSut);
@@ -390,9 +393,9 @@ public class MemberTest {
 	public void testEquals_ForSameIds() {
 		UUID uuid = UUID.randomUUID();
 
-		Member sut = Member.newInstance(Person.newInstance());
+		Member sut = Member.newInstance(Participant.newInstance());
 		sut.setUuid(uuid);
-		Member secondSut = Member.newInstance(Person.newInstance());
+		Member secondSut = Member.newInstance(Participant.newInstance());
 		secondSut.setUuid(uuid);
 
 		boolean condition = sut.equals(secondSut);

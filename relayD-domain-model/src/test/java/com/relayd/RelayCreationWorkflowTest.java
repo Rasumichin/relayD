@@ -40,12 +40,12 @@ public class RelayCreationWorkflowTest {
 		// Nun kann schon ein persistieren erfolgen?
 		// Oder sollte jede Relay immer min. eine Person besitzen?
 
-		Member justusJonas = Member.newInstance(createPersonFor(Forename.newInstance("Justus"), Surename.newInstance("Jonas"), UUID.randomUUID()));
+		Member justusJonas = Member.newInstance(createParticipantFor(Forename.newInstance("Justus"), Surename.newInstance("Jonas"), UUID.randomUUID()));
 
 		staubwolke.addMember(justusJonas, Position.FIRST);
 
 		// Prüfungen
-		Member peterShaw = Member.newInstance(createPersonFor(Forename.newInstance("Peter"), Surename.newInstance("Shaw"), UUID.randomUUID()));
+		Member peterShaw = Member.newInstance(createParticipantFor(Forename.newInstance("Peter"), Surename.newInstance("Shaw"), UUID.randomUUID()));
 
 		// Sollte ein Fehler verursachen, da Position 1 schon vergeben!
 		staubwolke.addMember(peterShaw, Position.FIRST);
@@ -58,7 +58,7 @@ public class RelayCreationWorkflowTest {
 		dieVierFragezeichen.addMember(justusJonas, Position.FIRST);
 
 		// Bedenkliche Konstellation
-		Member bobAndrews = Member.newInstance(createPersonFor(Forename.newInstance("Bob"), Surename.newInstance("Andrews"), UUID.randomUUID()));
+		Member bobAndrews = Member.newInstance(createParticipantFor(Forename.newInstance("Bob"), Surename.newInstance("Andrews"), UUID.randomUUID()));
 
 		// Bob springt ein in Staffel Staubwolke die 1. Strecke mit z.B. 56:33min
 		// und möchte in Staffel 4???? die zweite Strecke laufen.
@@ -97,11 +97,12 @@ public class RelayCreationWorkflowTest {
 
 	}
 
-	private Person createPersonFor(Forename aForename, Surename aSurename, UUID anUuid) {
+	private Participant createParticipantFor(Forename aForename, Surename aSurename, UUID anUuid) {
 		Person person = Person.newInstance();
 		person.setUuid(anUuid);
 		person.setForename(aForename);
 		person.setSurename(aSurename);
-		return person;
+		Participant participant = Participant.newInstance(person);
+		return participant;
 	}
 }

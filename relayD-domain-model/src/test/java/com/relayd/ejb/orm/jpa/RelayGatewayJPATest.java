@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import com.relayd.Member;
+import com.relayd.Participant;
 import com.relayd.Person;
 import com.relayd.Relay;
 import com.relayd.entity.MemberEntity;
@@ -58,7 +59,7 @@ public class RelayGatewayJPATest {
 	@Test
 	public void testMapMembersToEntities_one_participant_no_participant_entities() {
 		doReturn(PersonEntity.newInstance()).when(sutSpy).findPersonEntityFor(any());
-		relay.addMember(Member.newInstance(Person.newInstance()));
+		relay.addMember(Member.newInstance(Participant.newInstance()));
 		Integer expected = relay.memberCount();
 
 		sutSpy.mapMembersToEntities(relay, relayEntity);
@@ -70,7 +71,8 @@ public class RelayGatewayJPATest {
 	@Test
 	public void testMapMembersToEntities_one_participant_one_participant_entity_no_changes() {
 		// Arrange
-		Member member = Member.newInstance(Person.newInstance());
+		Person person = Person.newInstance();
+		Member member = Member.newInstance(Participant.newInstance(person));
 		relay.addMember(member);
 		UUID expectedUuid = member.getUuidPerson();
 		Integer expected = relay.memberCount();
@@ -95,7 +97,8 @@ public class RelayGatewayJPATest {
 	@Test
 	public void testMapMembersToEntities_one_participant_one_participant_entity_changes() {
 		// Arrange
-		Member member = Member.newInstance(Person.newInstance());
+		Person person = Person.newInstance();
+		Member member = Member.newInstance(Participant.newInstance(person));
 		relay.addMember(member);
 		UUID expectedUuid = member.getUuidPerson();
 		Integer expected = relay.memberCount();

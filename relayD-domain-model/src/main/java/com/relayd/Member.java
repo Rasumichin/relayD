@@ -41,11 +41,11 @@ public class Member implements Serializable {
 		return MemberNullObject.instance();
 	}
 
-	public static Member newInstance(Person person) {
-		if (person == null) {
+	public static Member newInstance(Participant participant) {
+		if (participant == null) {
 			return MemberNullObject.instance();
 		}
-		return new Member(person.getForename(), person.getSurename(), person.getEmail(), person.getUuid());
+		return new Member(participant.getForename(), participant.getSurename(), participant.getEmail(), participant.getUuidPerson());
 	}
 
 	public boolean isEmpty() {

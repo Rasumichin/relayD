@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import com.relayd.Member;
+import com.relayd.Participant;
 import com.relayd.Person;
 import com.relayd.attributes.Forename;
 
@@ -62,7 +63,8 @@ public abstract class MemberGatewayTest {
 	protected Member createMemberOne() {
 		Person justus = Person.newInstance();
 		justus.setForename(Forename.newInstance("Justus"));
-		Member member = Member.newInstance(justus);
+		Participant participant = Participant.newInstance(justus);
+		Member member = Member.newInstance(participant);
 		member.setDuration(OF_MINUTES);
 		return member;
 	}
@@ -70,7 +72,8 @@ public abstract class MemberGatewayTest {
 	protected Member createMemberTwo() {
 		Person peter = Person.newInstance();
 		peter.setForename(Forename.newInstance("Peter"));
-		Member member = Member.newInstance(peter);
+		Participant participant = Participant.newInstance(peter);
+		Member member = Member.newInstance(participant);
 		member.setDuration(Duration.ofMinutes(17));
 		return member;
 	}
