@@ -27,6 +27,7 @@ import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.TreeNode;
 
 import com.relayd.Member;
+import com.relayd.Participant;
 import com.relayd.Person;
 import com.relayd.Relay;
 import com.relayd.attributes.Forename;
@@ -105,12 +106,13 @@ public class RelayBrowsePageBeanTest {
 		Person justusJonas = Person.newInstance();
 		justusJonas.setForename(Forename.newInstance("Justus"));
 		justusJonas.setSurename(Surename.newInstance("Jonas"));
+		Participant participantJustusJonas = Participant.newInstance(justusJonas);
 
 		Person peterShaw = Person.newInstance();
 		peterShaw.setForename(Forename.newInstance("Peter"));
 		peterShaw.setSurename(Surename.newInstance("Shaw"));
-
-		sut.setSelectedPersons(createListFor(justusJonas, peterShaw));
+		Participant participantPeterShaw = Participant.newInstance(peterShaw);
+		sut.setSelectedPersons(createListFor(participantJustusJonas, participantPeterShaw));
 
 		sut.addPersonToRelay(dummyActionEvent);
 
@@ -138,7 +140,8 @@ public class RelayBrowsePageBeanTest {
 		Person justusJonas = Person.newInstance();
 		justusJonas.setForename(Forename.newInstance("Justus"));
 		justusJonas.setSurename(Surename.newInstance("Jonas"));
-		sut.setSelectedPersons(createListFor(justusJonas));
+		Participant participant = Participant.newInstance(justusJonas);
+		sut.setSelectedPersons(createListFor(participant));
 
 		sut.addPersonToRelay(dummyActionEvent);
 
@@ -150,10 +153,10 @@ public class RelayBrowsePageBeanTest {
 		verify(sut, never()).showMessage(any(FacesMessage.Severity.class), anyString(), anyString());
 	}
 
-	private List<Person> createListFor(Person... person) {
-		List<Person> somePersons = new ArrayList<Person>();
-		somePersons.addAll(Arrays.asList(person));
-		return somePersons;
+	private List<Participant> createListFor(Participant... participant) {
+		List<Participant> someParticipants = new ArrayList<Participant>();
+		someParticipants.addAll(Arrays.asList(participant));
+		return someParticipants;
 	}
 
 	@Test

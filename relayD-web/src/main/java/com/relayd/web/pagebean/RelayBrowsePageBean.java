@@ -21,7 +21,7 @@ import org.primefaces.event.SelectEvent;
 import org.primefaces.model.TreeNode;
 
 import com.relayd.Member;
-import com.relayd.Person;
+import com.relayd.Participant;
 import com.relayd.Relay;
 import com.relayd.RelayEvent;
 import com.relayd.attributes.Forename;
@@ -56,9 +56,9 @@ public class RelayBrowsePageBean implements Serializable {
 	private RelayEventBridge relayEventBridge;
 
 	private PersonSort personSort = new PersonSort();
-	private List<Person> searchResult = new ArrayList<Person>();
-	private List<Person> filteredPersons;
-	private List<Person> selectedPersons;
+	private List<Participant> searchResult = new ArrayList<>();
+	private List<Participant> filteredPersons;
+	private List<Participant> selectedPersons;
 
 	private EventYear eventYear = EventYear.YEAR_2017;
 
@@ -142,20 +142,21 @@ public class RelayBrowsePageBean implements Serializable {
 	}
 
 	public void addPersonToRelay(@SuppressWarnings("unused") ActionEvent actionEvent) {
-		if (!isRelayTableRowSelected()) {
-			showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, I18N.SELECT_A_ROW_2);
-		} else if (isRelayRowSelected()) {
-			showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, I18N.ONLY_FOR_MEMBER_ROW_POSSIBLE);
-		} else if (!isPersonRowSelected()) {
-			showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, I18N.SELECT_A_PERSON);
-		} else if (!isOnlyOnePersonRowSelected()) {
-			showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, I18N.SELECT_A_SINGLE_PERSON);
-		} else {
-			TreeNodeRow selectedRelayNode = (TreeNodeRow) selectedTreeNode.getData();
-			Member newRelayMember = Member.newInstance(getSelectedPerson());
-			selectedRelayNode.setMember(newRelayMember);
-			relayBridge.set(selectedTreeNode);
-		}
+		// TODO implementieren
+		//		if (!isRelayTableRowSelected()) {
+		//			showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, I18N.SELECT_A_ROW_2);
+		//		} else if (isRelayRowSelected()) {
+		//			showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, I18N.ONLY_FOR_MEMBER_ROW_POSSIBLE);
+		//		} else if (!isPersonRowSelected()) {
+		//			showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, I18N.SELECT_A_PERSON);
+		//		} else if (!isOnlyOnePersonRowSelected()) {
+		//			showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, I18N.SELECT_A_SINGLE_PERSON);
+		//		} else {
+		//			TreeNodeRow selectedRelayNode = (TreeNodeRow) selectedTreeNode.getData();
+		//			Member newRelayMember = Member.newInstance(getSelectedPerson());
+		//			selectedRelayNode.setMember(newRelayMember);
+		//			relayBridge.set(selectedTreeNode);
+		//		}
 	}
 
 	public void removePersonFromRelay(@SuppressWarnings("unused") ActionEvent actionEvent) {
@@ -200,13 +201,15 @@ public class RelayBrowsePageBean implements Serializable {
 	}
 
 	public void emailExportPerson(@SuppressWarnings("unused") ActionEvent actionEvent) {
-		String output;
-		if (isPersonRowSelected()) {
-			output = personBridge.getEmailList(getSelectedPersons());
-		} else {
-			output = personBridge.getEmailList(getPersons());
-		}
-		showDialog(FacesMessage.SEVERITY_INFO, I18N.EMAIL, output);
+		// TODO implementieren
+		//		String output;
+		//		if (isPersonRowSelected()) {
+		//			output = personBridge.getEmailList(getSelectedPersons());
+		//		} else {
+		//			output = personBridge.getEmailList(getPersons());
+		//		}
+		//		showDialog(FacesMessage.SEVERITY_INFO, I18N.EMAIL, output);
+
 	}
 
 	public void emailExportRelay(@SuppressWarnings("unused") ActionEvent actionEvent) {
@@ -218,23 +221,23 @@ public class RelayBrowsePageBean implements Serializable {
 		}
 	}
 
-	public List<Person> getFilteredPersons() {
+	public List<Participant> getFilteredPersons() {
 		return filteredPersons;
 	}
 
-	public void setFilteredPersons(List<Person> someFilteredPersons) {
+	public void setFilteredPersons(List<Participant> someFilteredPersons) {
 		filteredPersons = someFilteredPersons;
 	}
 
-	public List<Person> getPersons() {
+	public List<Participant> getPersons() {
 		return searchResult;
 	}
 
-	public List<Person> getSelectedPersons() {
+	public List<Participant> getSelectedPersons() {
 		return selectedPersons;
 	}
 
-	public void setSelectedPersons(List<Person> someSelectedPersons) {
+	public void setSelectedPersons(List<Participant> someSelectedPersons) {
 		selectedPersons = someSelectedPersons;
 	}
 
@@ -247,14 +250,15 @@ public class RelayBrowsePageBean implements Serializable {
 	}
 
 	void refreshPersons() {
-		searchResult = personBridge.all();
+		//		searchResult = personBridge.all();
+		searchResult = new ArrayList(relayEvent.getParticipants());
 	}
 
 	private boolean isOnlyOnePersonRowSelected() {
 		return getSelectedPersons() != null && getSelectedPersons().size() == 1;
 	}
 
-	private Person getSelectedPerson() {
+	private Participant getSelectedPerson() {
 		return selectedPersons.get(0);
 	}
 
@@ -302,13 +306,13 @@ public class RelayBrowsePageBean implements Serializable {
 		}
 	}
 
-	public String relayCountOf(Person aPerson) {
-		int relayCount = belongsToRelay(aPerson);
+	public String relayCountOf(Participant aParticipant) {
+		int relayCount = belongsToRelay(aParticipant);
 		return "(" + relayCount + ")";
 	}
 
-	public String statusOf(Person aPerson) {
-		int relayCount = belongsToRelay(aPerson);
+	public String statusOf(Participant aParticipant) {
+		int relayCount = belongsToRelay(aParticipant);
 		if (relayCount > 0) {
 			return "ui-icon ui-icon-check";
 		} else {
@@ -316,7 +320,7 @@ public class RelayBrowsePageBean implements Serializable {
 		}
 	}
 
-	private int belongsToRelay(Person aPerson) {
+	private int belongsToRelay(Participant aParticipant) {
 		int relayCount = 0;
 		List<TreeNode> tempList = root.getChildren();
 		for (TreeNode treeNode : tempList) {
@@ -324,13 +328,13 @@ public class RelayBrowsePageBean implements Serializable {
 			if (relayNode.isRelay()) {
 				Relay relay = ((TreeNodeRowRelay) relayNode).getRelay();
 				for (Member participant : relay.getMembers()) {
-					if (aPerson.getUuid().equals(participant.getUuidPerson())) {
+					if (aParticipant.getUuidPerson().equals(participant.getUuidPerson())) {
 						relayCount++;
 					}
 				}
 			} else {
 				if (relayNode.getMember() != null) {
-					if (aPerson.getUuid().equals(relayNode.getMember().getUuidPerson())) {
+					if (aParticipant.getUuidPerson().equals(relayNode.getMember().getUuidPerson())) {
 						relayCount++;
 					}
 				}
