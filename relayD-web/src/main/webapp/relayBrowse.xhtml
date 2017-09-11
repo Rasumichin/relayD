@@ -121,7 +121,7 @@
 				<p:commandButton
 					value="add"
 					style="width:95%"
-					update="relayTable personTable messages"
+					update="relayTable participantTable messages"
 					icon="ui-icon-circle-triangle-w"
 					actionListener="#{relayBrowsePageBean.addParticipantToRelay}">
 				</p:commandButton>
@@ -129,9 +129,9 @@
 				<p:commandButton
 					value="remove"
 					style="width:95%"
-					update="relayTable personTable messages"
+					update="relayTable participantTable messages"
 					icon="ui-icon-circle-triangle-e"
-					actionListener="#{relayBrowsePageBean.removePersonFromRelay}">
+					actionListener="#{relayBrowsePageBean.removeParticipantFromRelay}">
 				</p:commandButton>
 				
 				<p:selectOneMenu
@@ -149,7 +149,7 @@
 					<p:ajax
 						global="false"
 						listener="#{relayBrowsePageBean.switchEventYear}" 
-						update="relayTable personTable"/>
+						update="relayTable participantTable"/>
 				</p:selectOneMenu>
 
 			</p:layoutUnit>
@@ -161,25 +161,25 @@
 				<p:toolbar>
 					<f:facet name="right">
 						<p:commandButton
-							actionListener="#{relayBrowsePageBean.showAllPersons}"
+							actionListener="#{relayBrowsePageBean.showAllParticipants}"
 							icon="ui-icon-arrowrefresh-1-w"
-							update="personTable">
+							update="participantTable">
 						</p:commandButton>
 						<p:commandButton
 							value="export"
 							icon="ui-icon-mail-closed"
-							update="personTable messages"
-							actionListener="#{relayBrowsePageBean.emailExportPerson}" />
+							update="participantTable messages"
+							actionListener="#{relayBrowsePageBean.emailExportParticipant}" />
 						<p:menuButton value="Filter">
 							<p:menuitem
 								value="All"
-								update="personTable"
+								update="participantTable"
 								icon="ui-icon-disk"
 								actionListener="#{relayBrowsePageBean.showAll}" />
 							<p:separator />
 							<p:menuitem
 								value="All without relay"
-								update="personTable messages"
+								update="participantTable messages"
 								icon="ui-icon-person"
 								actionListener="#{relayBrowsePageBean.showAllWithoutRelay}" />
 						</p:menuButton>
@@ -187,20 +187,20 @@
 				</p:toolbar>
 
 				<p:dataTable
-					id="personTable"
-					var="person"
-					widgetVar="personTable"
-					filteredValue="#{relayBrowsePageBean.filteredPersons}"
+					id="participantTable"
+					var="participant"
+					widgetVar="participantTable"
+					filteredValue="#{relayBrowsePageBean.filteredParticipants}"
 					selectionMode="multiple"
-					value="#{relayBrowsePageBean.persons}"
-					selection="#{relayBrowsePageBean.selectedPersons}"
+					value="#{relayBrowsePageBean.participants}"
+					selection="#{relayBrowsePageBean.selectedParticipants}"
 					scrollable="true"
 					scrollHeight="92%"
-					sortBy="#{person.surename.toString()}"
-					rowKey="#{person.uuidPerson}"
+					sortBy="#{participant.surename.toString()}"
+					rowKey="#{participant.uuidPerson}"
 					resizableColumns="true">
 					<f:facet name="header">
-			     		List of Persons
+			     		List of Participants
 					</f:facet>
 
 					<p:column
@@ -208,7 +208,7 @@
 						toggleable="false"
 						width="2%">
 						<div align="right">
-							<h:outputText styleClass="#{relayBrowsePageBean.statusOf(person)}" />
+							<h:outputText styleClass="#{relayBrowsePageBean.statusOf(participant)}" />
 						</div>
 					</p:column>
 					
@@ -217,31 +217,31 @@
 						toggleable="false"
 						width="2%">
 						<div align="left">
-							<h:outputText value="#{relayBrowsePageBean.relayCountOf(person)}"/>
+							<h:outputText value="#{relayBrowsePageBean.relayCountOf(participant)}"/>
 						</div>
 					</p:column>
 
 					<p:column
 						headerText="Forename"
-						sortBy="#{person.forename}"
+						sortBy="#{participant.forename}"
 						sortFunction="#{relayBrowsePageBean.sortByForename}"
 						width="18%">
-						<h:outputText value="#{person.forename}" />
+						<h:outputText value="#{participant.forename}" />
 					</p:column>
 
 					<p:column
 						headerText="Surename"
 						filterMatchMode="contains"
-						sortBy="#{person.surename}"
+						sortBy="#{participant.surename}"
 						sortFunction="#{relayBrowsePageBean.sortBySurename}"
 						width="23%">
-						<h:outputText value="#{person.surename}" />
+						<h:outputText value="#{participant.surename}" />
 					</p:column>
 
 					<p:column
 						headerText="Comment"
 						width="53%">
-						<h:outputText value="#{person.comment}" />
+						<h:outputText value="#{participant.comment}" />
 					</p:column>
 
 				</p:dataTable>

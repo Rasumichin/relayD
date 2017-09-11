@@ -26,8 +26,6 @@ import com.relayd.Relay;
 import com.relayd.RelayEvent;
 import com.relayd.attributes.Forename;
 import com.relayd.attributes.Surename;
-import com.relayd.web.bridge.PersonBridge;
-import com.relayd.web.bridge.PersonBridgeImpl;
 import com.relayd.web.bridge.RelayBridge;
 import com.relayd.web.bridge.RelayBridgeImpl;
 import com.relayd.web.bridge.RelayEventBridge;
@@ -52,13 +50,12 @@ public class RelayBrowsePageBean implements Serializable {
 	private TreeNode selectedTreeNode;
 
 	private RelayBridge relayBridge;
-	private PersonBridge personBridge;
 	private RelayEventBridge relayEventBridge;
 
 	private PersonSort personSort = new PersonSort();
 	private List<Participant> searchResult = new ArrayList<>();
-	private List<Participant> filteredPersons;
-	private List<Participant> selectedPersons;
+	private List<Participant> filteredParticipants;
+	private List<Participant> selectedParticipants;
 
 	private EventYear eventYear = EventYear.YEAR_2017;
 
@@ -73,11 +70,7 @@ public class RelayBrowsePageBean implements Serializable {
 		relayBridge = new RelayBridgeImpl();
 		relayEventBridge = new RelayEventBridgeImpl();
 		intiRelays();
-		refreshPersons();
-	}
-
-	public RelayBrowsePageBean() {
-		personBridge = new PersonBridgeImpl();
+		refreshParticipants();
 	}
 
 	private void intiRelays() {
@@ -146,19 +139,19 @@ public class RelayBrowsePageBean implements Serializable {
 			showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, I18N.SELECT_A_ROW_2);
 		} else if (isRelayRowSelected()) {
 			showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, I18N.ONLY_FOR_MEMBER_ROW_POSSIBLE);
-		} else if (!isPersonRowSelected()) {
+		} else if (!isParticipantRowSelected()) {
 			showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, I18N.SELECT_A_PERSON);
-		} else if (!isOnlyOnePersonRowSelected()) {
+		} else if (!isOnlyOneParticipantRowSelected()) {
 			showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, I18N.SELECT_A_SINGLE_PERSON);
 		} else {
 			TreeNodeRow selectedRelayNode = (TreeNodeRow) selectedTreeNode.getData();
-			Member newRelayMember = Member.newInstance(getSelectedPerson());
+			Member newRelayMember = Member.newInstance(getSelectedParticipant());
 			selectedRelayNode.setMember(newRelayMember);
 			relayBridge.set(selectedTreeNode);
 		}
 	}
 
-	public void removePersonFromRelay(@SuppressWarnings("unused") ActionEvent actionEvent) {
+	public void removeParticipantFromRelay(@SuppressWarnings("unused") ActionEvent actionEvent) {
 		if (!isRelayTableRowSelected()) {
 			showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, I18N.SELECT_A_ROW_2);
 		} else if (isRelayRowSelected()) {
@@ -191,15 +184,15 @@ public class RelayBrowsePageBean implements Serializable {
 		refreshRelays();
 	}
 
-	public void showAllPersons() {
-		refreshPersons();
+	public void showAllParticipants() {
+		refreshParticipants();
 	}
 
 	public void showAllWithoutRelay() {
 		showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, I18N.NOT_IMPLEMENTD_YET);
 	}
 
-	public void emailExportPerson(@SuppressWarnings("unused") ActionEvent actionEvent) {
+	public void emailExportParticipant(@SuppressWarnings("unused") ActionEvent actionEvent) {
 		// TODO implementieren
 		//		String output;
 		//		if (isPersonRowSelected()) {
@@ -220,24 +213,24 @@ public class RelayBrowsePageBean implements Serializable {
 		}
 	}
 
-	public List<Participant> getFilteredPersons() {
-		return filteredPersons;
+	public List<Participant> getFilteredParticipants() {
+		return filteredParticipants;
 	}
 
-	public void setFilteredPersons(List<Participant> someFilteredPersons) {
-		filteredPersons = someFilteredPersons;
+	public void setFilteredParticipants(List<Participant> someFilteredParticipants) {
+		filteredParticipants = someFilteredParticipants;
 	}
 
-	public List<Participant> getPersons() {
+	public List<Participant> getParticipants() {
 		return searchResult;
 	}
 
-	public List<Participant> getSelectedPersons() {
-		return selectedPersons;
+	public List<Participant> getSelectedParticipants() {
+		return selectedParticipants;
 	}
 
-	public void setSelectedPersons(List<Participant> someSelectedPersons) {
-		selectedPersons = someSelectedPersons;
+	public void setSelectedParticipants(List<Participant> someSelectedParticipants) {
+		selectedParticipants = someSelectedParticipants;
 	}
 
 	public int sortByForename(Forename name1, Forename name2) {
@@ -248,21 +241,20 @@ public class RelayBrowsePageBean implements Serializable {
 		return personSort.sortBySurename(name1, name2);
 	}
 
-	void refreshPersons() {
-		//		searchResult = personBridge.all();
-		searchResult = new ArrayList(relayEvent.getParticipants());
+	void refreshParticipants() {
+		searchResult = new ArrayList<>(relayEvent.getParticipants());
 	}
 
-	private boolean isOnlyOnePersonRowSelected() {
-		return getSelectedPersons() != null && getSelectedPersons().size() == 1;
+	private boolean isOnlyOneParticipantRowSelected() {
+		return getSelectedParticipants() != null && getSelectedParticipants().size() == 1;
 	}
 
-	private Participant getSelectedPerson() {
-		return selectedPersons.get(0);
+	private Participant getSelectedParticipant() {
+		return selectedParticipants.get(0);
 	}
 
-	private boolean isPersonRowSelected() {
-		return getSelectedPersons() != null && !getSelectedPersons().isEmpty();
+	private boolean isParticipantRowSelected() {
+		return getSelectedParticipants() != null && !getSelectedParticipants().isEmpty();
 	}
 
 	private Relay getSelectedRelay() {
@@ -275,7 +267,7 @@ public class RelayBrowsePageBean implements Serializable {
 		return selectedMemberNode.getMember();
 	}
 
-	void showMessageErrorNoRowPersonSelected() {
+	void showMessageErrorNoRowParticipantSelected() {
 		showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, I18N.SELECT_A_ROW_PERSON);
 	}
 
@@ -353,12 +345,14 @@ public class RelayBrowsePageBean implements Serializable {
 	public void switchEventYear(AjaxBehaviorEvent ajax) {
 		SelectOneMenu selectOneMenu = (SelectOneMenu) ajax.getSource();
 		EventYear selectedEventYear = (EventYear) selectOneMenu.getValue();
+		setRelayEvent(RelayEvent.newInstance());
 		for (RelayEvent eachRelayEvent : relayEventBridge.all()) {
 			if (eachRelayEvent.getEventDay().toString().contains(selectedEventYear.getDescription())) {
 				setRelayEvent(eachRelayEvent);
 			}
 		}
 		refreshRelays();
+		refreshParticipants();
 	}
 
 	// ***********************************************************************************
