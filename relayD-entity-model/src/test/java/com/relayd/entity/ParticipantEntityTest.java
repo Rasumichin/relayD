@@ -62,4 +62,77 @@ public class ParticipantEntityTest {
 		ParticipantEntity.newInstance("987-345-aw3-123");
 	}
 
+	@Test
+	public void testEquals_true() {
+		String someId = UUID.randomUUID().toString();
+		ParticipantEntity bruce = ParticipantEntity.newInstance(someId);
+		ParticipantEntity wayne = ParticipantEntity.newInstance(someId);
+
+		assertEquals("Equality has not been tested correctly!", bruce, wayne);
+		assertEquals("Equality has not been tested correctly!", bruce, bruce);
+
+		ParticipantEntity sut1 = new ParticipantEntity();
+		ParticipantEntity sut2 = new ParticipantEntity();
+		assertEquals("Equality has not been tested correctly!", sut1, sut2);
+	}
+
+	@Test
+	public void testEquals_false() {
+		ParticipantEntity bruce = ParticipantEntity.newInstance();
+		ParticipantEntity wayne = ParticipantEntity.newInstance();
+
+		assertNotEquals("Equality has not been tested correctly!", bruce, wayne);
+		assertNotEquals("Equality has not been tested correctly!", bruce, null);
+		assertNotEquals("Equality has not been tested correctly!", bruce, Integer.valueOf(42));
+
+		ParticipantEntity sut = new ParticipantEntity();
+		assertNotEquals("Equality has not been tested correctly!", sut, bruce);
+	}
+
+	@Test
+	public void testToString() {
+		String someId = UUID.randomUUID().toString();
+		ParticipantEntity sut = ParticipantEntity.newInstance(someId);
+
+		String actual = sut.toString();
+
+		String expected = ParticipantEntity.class.getSimpleName() + " [id=" + someId.toString() + "]";
+		assertEquals("String representation is not correct!", expected, actual);
+	}
+
+	@Test
+	public void testSetPersonEntity() {
+		ParticipantEntity sut = ParticipantEntity.newInstance();
+		PersonEntity expected = PersonEntity.newInstance(UUID.randomUUID());
+
+		sut.setPersonEntity(expected);
+
+		PersonEntity actual = sut.getPersonEntity();
+		assertEquals("[personEntity] has not been set correctly!", expected, actual);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testSetPersonEntity_withNull() {
+		ParticipantEntity sut = ParticipantEntity.newInstance();
+
+		sut.setPersonEntity(null);
+	}
+
+	@Test
+	public void testSetRelayEventEntity() {
+		ParticipantEntity sut = ParticipantEntity.newInstance();
+		RelayEventEntity expected = RelayEventEntity.newInstance(UUID.randomUUID());
+
+		sut.setRelayEventEntity(expected);
+
+		RelayEventEntity actual = sut.getRelayEventEntity();
+		assertEquals("[relayEventEntity] has not been set correctly!", expected, actual);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testSetRelayEventEntity_withNull() {
+		ParticipantEntity sut = ParticipantEntity.newInstance();
+
+		sut.setRelayEventEntity(null);
+	}
 }
