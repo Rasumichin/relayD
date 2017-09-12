@@ -24,7 +24,7 @@ COMMENT on COLUMN person.yearOfBirth is 'The Year Of Birth of a Person.';
 COMMENT on COLUMN person.shirtsize is 'TODO - Is this not a ref to a table?';
 COMMENT on COLUMN person.position is 'TODO - A workaround-should be an own entity.';
 COMMENT on COLUMN person.email is 'The Email of a Person.';
-COMMENT on COLUMN person.comment is 'A comment for a Person.';
+COMMENT on COLUMN person.info is 'A comment for a Person.';
 
 --------------------------------------------------
 -- Create Index person_IDX
