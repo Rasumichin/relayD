@@ -10,6 +10,7 @@ CREATE TABLE participant (
 	id								CHAR(36)		NOT NULL			COMMENT 'UUID as string representation.',
 	personId						CHAR(36)		NOT NULL			COMMENT 'UUID of the referenced person, string representation.',
 	relayEventId		 			CHAR(36) 		NOT NULL			COMMENT 'UUID of the referenced relayEvent, string representation.',
+	info							VARCHAR(1024) 						COMMENT on COLUMN participant.info is 'A comment for a Participant.' -- COMMENT geht nicht
 	CONSTRAINT fk_participant_person
 		FOREIGN KEY (personId) REFERENCES person (id)
 		ON DELETE RESTRICT

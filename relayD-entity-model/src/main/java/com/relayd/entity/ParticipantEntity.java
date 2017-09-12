@@ -23,6 +23,9 @@ public class ParticipantEntity {
 	@Column(length = 36)
 	private String id;
 
+	@Column(name = "info", length = 1024)
+	private String comment;
+
 	@ManyToOne
 	@Column(name = "personId", nullable = false, length = 36)
 	@ForeignKey
@@ -32,8 +35,6 @@ public class ParticipantEntity {
 	@Column(name = "eventId", nullable = false, length = 36)
 	@ForeignKey
 	private RelayEventEntity relayEventEntity;
-
-	private RelayEventEntity relayEvent;
 
 	public static ParticipantEntity newInstance() {
 		return ParticipantEntity.newInstance(UUID.randomUUID().toString());
@@ -63,6 +64,14 @@ public class ParticipantEntity {
 		return id;
 	}
 
+	public void setComment(String aComment) {
+		comment = aComment;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
 	public void setPersonEntity(PersonEntity aPersonEntity) {
 		if (aPersonEntity == null) {
 			throw new IllegalArgumentException("[aPersonEntity] must not be 'null'.");
@@ -75,16 +84,16 @@ public class ParticipantEntity {
 		return personEntity;
 	}
 
-	public void setRelayEventEntity(RelayEventEntity aRelayEvent) {
-		if (aRelayEvent == null) {
+	public void setRelayEventEntity(RelayEventEntity aRelayEventEntity) {
+		if (aRelayEventEntity == null) {
 			throw new IllegalArgumentException("[aRelayEvent] must not be 'null'.");
 		}
 
-		relayEvent = aRelayEvent;
+		relayEventEntity = aRelayEventEntity;
 	}
 
 	public RelayEventEntity getRelayEventEntity() {
-		return relayEvent;
+		return relayEventEntity;
 	}
 
 	@Override

@@ -23,6 +23,7 @@ public class ParticipantEntityTest {
 	public void testConstructor() {
 		ParticipantEntity sut = new ParticipantEntity();
 		assertNull("[id] not correct!", sut.getId());
+		assertNull("[comment] not correct!", sut.getComment());
 	}
 
 	@Test
@@ -60,6 +61,18 @@ public class ParticipantEntityTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void testNewInstance_forIncorrectFalseUuid() {
 		ParticipantEntity.newInstance("987-345-aw3-123");
+	}
+
+	@Test
+	public void testSetComment() {
+		String expected = "a info";
+		ParticipantEntity sut = ParticipantEntity.newInstance();
+
+		sut.setComment(expected);
+
+		String actual = sut.getComment();
+
+		assertEquals("[comment] has not been set correctly!", expected, actual);
 	}
 
 	@Test
