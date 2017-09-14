@@ -6,6 +6,7 @@ import java.sql.Date;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.junit.FixMethodOrder;
@@ -116,6 +117,81 @@ public class RelayEventEntityTest {
 
 		RelayEntity actual = someRelayEntities.get(0);
 		assertEquals("[RelayEntity] is not equals!", expected, actual);
+	}
+
+	@Test
+	public void testAddParticipantEntity() {
+		ParticipantEntity expected = ParticipantEntity.newInstance(UUID.randomUUID().toString());
+		RelayEventEntity sut = new RelayEventEntity();
+
+		sut.addParticipant(expected);
+
+		List<ParticipantEntity> someParticipantEntities = sut.getParticipantEntities();
+		assertFalse("[ParticipantEntities] are empty!", someParticipantEntities.isEmpty());
+
+		ParticipantEntity actual = someParticipantEntities.get(0);
+		assertEquals("[ParticipantEntity] is not equals!", expected, actual);
+	}
+
+	@Test
+	public void testRemoveParticipantEntity() {
+		RelayEventEntity sut = new RelayEventEntity();
+		ParticipantEntity participantEntityToRemove = ParticipantEntity.newInstance(UUID.randomUUID().toString());
+		ParticipantEntity participantEntity = ParticipantEntity.newInstance(UUID.randomUUID().toString());
+
+		sut.addParticipant(participantEntityToRemove);
+		sut.addParticipant(participantEntity);
+
+		sut.removeParticipant(participantEntityToRemove);
+
+		List<ParticipantEntity> someParticipantEntities = sut.getParticipantEntities();
+		assertFalse("[ParticipantEntities] are empty!", someParticipantEntities.isEmpty());
+
+		ParticipantEntity actual = someParticipantEntities.get(0);
+		assertEquals("[ParticipantEntity] is not equals!", participantEntity, actual);
+
+	}
+
+	@Test
+	public void testGetParticipantEntity_ForExistingParticipant() {
+		RelayEventEntity sut = new RelayEventEntity();
+		ParticipantEntity expected = ParticipantEntity.newInstance(UUID.randomUUID().toString());
+		sut.addParticipant(expected);
+
+		Optional<ParticipantEntity> actual = sut.getParticipantEntity(UUID.fromString(expected.getId()));
+
+		assertTrue("[ParticipantEntity] not Present!", actual.isPresent());
+		assertEquals("[ParticipantEntity] is not equals!", expected, actual.get());
+
+	}
+
+	@Test
+	public void testGetParticipantEntity_ForNotExistingParticipant() {
+		RelayEventEntity sut = new RelayEventEntity();
+		ParticipantEntity participantEntity = ParticipantEntity.newInstance(UUID.randomUUID().toString());
+		sut.addParticipant(participantEntity);
+
+		Optional<ParticipantEntity> actual = sut.getParticipantEntity(UUID.randomUUID());
+
+		assertFalse("[ParticipantEntity] Present!", actual.isPresent());
+
+	}
+
+	@Test
+	public void testRemoveParticipantEntity_ForNonExistentParticipant() {
+		RelayEventEntity sut = new RelayEventEntity();
+		ParticipantEntity participantEntityToRemove = ParticipantEntity.newInstance(UUID.randomUUID().toString());
+		ParticipantEntity participantEntity = ParticipantEntity.newInstance(UUID.randomUUID().toString());
+
+		sut.addParticipant(participantEntity);
+
+		sut.removeParticipant(participantEntityToRemove);
+
+		List<ParticipantEntity> someParticipantEntities = sut.getParticipantEntities();
+		assertFalse("[ParticipantEntities] are empty!", someParticipantEntities.isEmpty());
+
+		ParticipantEntity actual = someParticipantEntities.get(0);
+		assertEquals("[ParticipantEntity] is not equals!", participantEntity, actual);
 	}
 
 	@Test

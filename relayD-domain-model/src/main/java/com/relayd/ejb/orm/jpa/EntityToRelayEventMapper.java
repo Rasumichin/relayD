@@ -4,6 +4,8 @@ import java.time.Duration;
 import java.util.UUID;
 
 import com.relayd.Member;
+import com.relayd.Participant;
+import com.relayd.Person;
 import com.relayd.Relay;
 import com.relayd.RelayEvent;
 import com.relayd.attributes.EventDay;
@@ -11,6 +13,8 @@ import com.relayd.attributes.Eventname;
 import com.relayd.attributes.Position;
 import com.relayd.attributes.Relayname;
 import com.relayd.entity.MemberEntity;
+import com.relayd.entity.ParticipantEntity;
+import com.relayd.entity.PersonEntity;
 import com.relayd.entity.RelayEntity;
 import com.relayd.entity.RelayEventEntity;
 
@@ -42,6 +46,16 @@ public class EntityToRelayEventMapper {
 		for (RelayEntity eachRelayEntity : relayEventEntity.getRelayEntities()) {
 			Relay relay = mapToRelay(eachRelayEntity, relayEvent);
 			relayEvent.addRelay(relay);
+		}
+
+		EntityToPersonMapper entityToPersonMapper = EntityToPersonMapper.newInstance();
+		for (ParticipantEntity eachParticipantEntity : relayEventEntity.getParticipantEntities()) {
+			PersonEntity personEntity = eachParticipantEntity.getPersonEntity();
+
+			Person person = entityToPersonMapper.mapToPerson(personEntity);
+
+			Participant participant = Participant.newInstance(person);
+			relayEvent.addParticipant(participant);
 		}
 
 		return relayEvent;
