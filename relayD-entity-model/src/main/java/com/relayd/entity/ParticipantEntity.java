@@ -32,7 +32,7 @@ public class ParticipantEntity {
 	private PersonEntity personEntity;
 
 	@ManyToOne
-	@Column(name = "eventId", nullable = false, length = 36)
+	@Column(name = "relayEventId", nullable = false, length = 36)
 	@ForeignKey
 	private RelayEventEntity relayEventEntity;
 
