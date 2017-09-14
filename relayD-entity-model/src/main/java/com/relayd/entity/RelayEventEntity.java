@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import javax.persistence.CascadeType;
@@ -35,6 +36,13 @@ public class RelayEventEntity {
 
 	@OneToMany(mappedBy = "relayEventEntity", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
 	private List<RelayEntity> relayEntities = new ArrayList<>();
+
+	@OneToMany(mappedBy = "relayEventEntity", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+	private List<ParticipantEntity> participantEntities = new ArrayList<>();
+
+	public List<ParticipantEntity> getParticipantEntities() {
+		return Collections.unmodifiableList(participantEntities);
+	}
 
 	public static RelayEventEntity newInstance() {
 		return RelayEventEntity.newInstance(UUID.randomUUID());
@@ -77,6 +85,27 @@ public class RelayEventEntity {
 	public void addRelay(RelayEntity relayEntity) {
 		relayEntities.add(relayEntity);
 		relayEntity.setRelayEventEntity(this);
+	}
+
+	public Optional<ParticipantEntity> getParticipantEntity(UUID uuid) {
+		for (ParticipantEntity each : participantEntities) {
+			if (each.getId().equals(uuid.toString())) {
+				return Optional.of(each);
+			}
+		}
+		return Optional.empty();
+	}
+
+	public void addParticipant(ParticipantEntity participantEntitiy) {
+		participantEntities.add(participantEntitiy);
+		participantEntitiy.setRelayEventEntity(this);
+	}
+
+	public void removeParticipant(ParticipantEntity participantEntity) {
+		int indexInList = getParticipantEntities().indexOf(participantEntity);
+		if (indexInList >= 0) {
+			participantEntities.remove(indexInList);
+		}
 	}
 
 	public List<RelayEntity> getRelayEntities() {
