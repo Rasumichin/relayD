@@ -73,7 +73,17 @@ public class ParticipantTest {
 	}
 
 	@Test
-	public void testGetUuidParticipant() {
+	public void testUuid() {
+		Participant sut = Participant.newInstance(Person.newInstance());
+		UUID expected = UUID.randomUUID();
+		sut.setUuid(expected);
+
+		UUID actual = sut.getUuid();
+		assertEquals("[uuid] not correct!", expected, actual);
+	}
+
+	@Test
+	public void testGetUuidPerson() {
 		UUID expected = UUID.randomUUID();
 
 		Person person = Person.newInstance();
@@ -307,37 +317,5 @@ public class ParticipantTest {
 		boolean result = sut.equals(secondSut);
 
 		assertTrue(result);
-	}
-
-	@Test
-	public void testHasThatPersonIdentity_true() {
-		UUID someUuid = UUID.randomUUID();
-		Person person = Person.newInstance();
-		person.setUuid(someUuid);
-		Participant sut = Participant.newInstance(person);
-
-		boolean result = sut.hasThatPersonIdentity(someUuid);
-
-		assertTrue("UUID of person has not been checked correctly!", result);
-	}
-
-	@Test
-	public void testHasThatPersonIdentity_false() {
-		Person person = Person.newInstance();
-		person.setUuid(UUID.randomUUID());
-		Participant sut = Participant.newInstance(person);
-
-		boolean result = sut.hasThatPersonIdentity(UUID.randomUUID());
-
-		assertFalse("UUID of person has not been checked correctly!", result);
-	}
-
-	@Test
-	public void testHasThatPersonIdentity_ForParticipantNullObject() {
-		Participant sut = Participant.newInstance();
-
-		boolean result = sut.hasThatPersonIdentity(UUID.randomUUID());
-
-		assertFalse("UUID could not be true for NOP (NullObjectPattern)!", result);
 	}
 }

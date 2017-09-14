@@ -17,6 +17,7 @@ import com.relayd.attributes.Surename;
 public class Participant implements Serializable {
 	private static final long serialVersionUID = -2300361519146795905L;
 
+	private UUID uuid;
 	private UUID uuidPerson;
 	private Forename forename = Forename.newInstance();
 	private Surename surename = Surename.newInstance();
@@ -27,6 +28,7 @@ public class Participant implements Serializable {
 	}
 
 	private Participant(Forename aForename, Surename aSurename, Email anEmail, UUID anUuid) {
+		uuid = UUID.randomUUID();
 		forename = aForename;
 		surename = aSurename;
 		email = anEmail;
@@ -46,6 +48,14 @@ public class Participant implements Serializable {
 
 	public boolean isEmpty() {
 		return false;
+	}
+
+	public UUID getUuid() {
+		return uuid;
+	}
+
+	public void setUuid(UUID anUuid) {
+		uuid = anUuid;
 	}
 
 	public UUID getUuidPerson() {
@@ -74,10 +84,6 @@ public class Participant implements Serializable {
 		} else {
 			comment = aComment;
 		}
-	}
-
-	public boolean hasThatPersonIdentity(UUID uuid) {
-		return getUuidPerson().equals(uuid);
 	}
 
 	@Override
@@ -127,11 +133,6 @@ public class Participant implements Serializable {
 		@Override
 		public boolean isEmpty() {
 			return true;
-		}
-
-		@Override
-		public boolean hasThatPersonIdentity(@SuppressWarnings("unused") UUID uuid) {
-			return false;
 		}
 
 		@Override
