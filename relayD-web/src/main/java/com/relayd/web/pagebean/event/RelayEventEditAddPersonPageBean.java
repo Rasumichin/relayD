@@ -14,6 +14,8 @@ import com.relayd.Person;
 import com.relayd.RelayEvent;
 import com.relayd.web.bridge.PersonBridge;
 import com.relayd.web.bridge.PersonBridgeImpl;
+import com.relayd.web.bridge.RelayEventBridge;
+import com.relayd.web.bridge.RelayEventBridgeImpl;
 import com.relayd.web.pagebean.DialogOptionsBuilder;
 import com.relayd.web.pagebean.NavigationConstants;
 
@@ -33,8 +35,11 @@ public class RelayEventEditAddPersonPageBean implements Serializable {
 
 	private PersonBridge personBridge = null;
 
+	private RelayEventBridge relayEventBridge = null;
+
 	public RelayEventEditAddPersonPageBean() {
 		personBridge = new PersonBridgeImpl();
+		relayEventBridge = new RelayEventBridgeImpl();
 	}
 
 	public void openDialogFor(RelayEvent relayEvent) {
@@ -52,7 +57,12 @@ public class RelayEventEditAddPersonPageBean implements Serializable {
 			Participant participant = Participant.newInstance(each);
 			workingRelayEvent.addParticipant(participant);
 		}
+		persistRelayEvent();
 		closeDialog();
+	}
+
+	void persistRelayEvent() {
+		getRelayEventBridge().set(workingRelayEvent);
 	}
 
 	public void cancel() {
@@ -60,11 +70,11 @@ public class RelayEventEditAddPersonPageBean implements Serializable {
 	}
 
 	void closeDialog() {
-		RequestContext.getCurrentInstance().closeDialog(null);
+		RequestContext.getCurrentInstance().closeDialog(workingRelayEvent);
 	}
 
 	public List<Person> getPersons() {
-		return personBridge.all();
+		return getPersonBridge().all();
 	}
 
 	public List<Person> getSelectedPersons() {
@@ -73,5 +83,13 @@ public class RelayEventEditAddPersonPageBean implements Serializable {
 
 	public void setSelectedPersons(List<Person> somePersons) {
 		selectedPersons = somePersons;
+	}
+
+	private PersonBridge getPersonBridge() {
+		return personBridge;
+	}
+
+	private RelayEventBridge getRelayEventBridge() {
+		return relayEventBridge;
 	}
 }
