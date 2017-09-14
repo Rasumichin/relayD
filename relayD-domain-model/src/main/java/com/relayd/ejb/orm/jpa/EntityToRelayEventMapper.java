@@ -48,11 +48,11 @@ public class EntityToRelayEventMapper {
 			relayEvent.addRelay(relay);
 		}
 
-		EntityToPersonMapper entityToPersonmapper = EntityToPersonMapper.newInstance();
+		EntityToPersonMapper entityToPersonMapper = EntityToPersonMapper.newInstance();
 		for (ParticipantEntity eachParticipantEntity : relayEventEntity.getParticipantEntities()) {
 			PersonEntity personEntity = eachParticipantEntity.getPersonEntity();
 
-			Person person = entityToPersonmapper.mapToPerson(personEntity);
+			Person person = entityToPersonMapper.mapToPerson(personEntity);
 
 			Participant participant = Participant.newInstance(person);
 			relayEvent.addParticipant(participant);
