@@ -16,7 +16,7 @@ CREATE TABLE participant (
 		ON DELETE RESTRICT
 		ON UPDATE RESTRICT,
 	CONSTRAINT fk_participant_relay
-		FOREIGN KEY (relayEventId) REFERENCES relay_Event (id)
+		FOREIGN KEY (relayEventId) REFERENCES relay_event (id)
 		ON DELETE CASCADE
 		ON UPDATE RESTRICT
 ) COMMENT 'relayD - The table for the relay participant entities.';
