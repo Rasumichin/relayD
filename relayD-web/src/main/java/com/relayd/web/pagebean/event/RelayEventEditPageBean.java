@@ -15,6 +15,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
 import org.primefaces.context.RequestContext;
+import org.primefaces.event.SelectEvent;
 
 import com.relayd.Participant;
 import com.relayd.RelayEvent;
@@ -154,5 +155,13 @@ public class RelayEventEditPageBean implements Serializable {
 
 	public void setRelayEventEditAddPersonPageBean(RelayEventEditAddPersonPageBean aRelayEventEditAddPersonPageBean) {
 		relayEventEditAddPersonPageBean = aRelayEventEditAddPersonPageBean;
+	}
+
+	public void onEditClosed(@SuppressWarnings("unused") SelectEvent event) {
+		refreshGui();
+	}
+
+	private void refreshGui() {
+		workingRelayEvent = getRelayEvent(workingRelayEvent.getUuid());
 	}
 }
