@@ -52,7 +52,6 @@ public class RelayBrowsePageBean implements Serializable {
 	private RelayBridge relayBridge;
 	private RelayEventBridge relayEventBridge;
 
-	private PersonSort personSort = new PersonSort();
 	private List<Participant> searchResult = new ArrayList<>();
 	private List<Participant> filteredParticipants;
 	private List<Participant> selectedParticipants;
@@ -233,11 +232,11 @@ public class RelayBrowsePageBean implements Serializable {
 	}
 
 	public int sortByForename(Forename name1, Forename name2) {
-		return personSort.sortByForename(name1, name2);
+		return Forename.sortByForename(name1, name2);
 	}
 
 	public int sortBySurename(Surename name1, Surename name2) {
-		return personSort.sortBySurename(name1, name2);
+		return Surename.sortBySurename(name1, name2);
 	}
 
 	void refreshParticipants() {
