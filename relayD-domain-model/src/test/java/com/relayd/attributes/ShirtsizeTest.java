@@ -241,6 +241,16 @@ public class ShirtsizeTest {
 	}
 
 	@Test
+	public void testSortByShirtsize() {
+		Shirtsize size1 = Shirtsize.DamenL;
+		Shirtsize size2 = Shirtsize.HerrenM;
+
+		int position = Shirtsize.sortByShirtsize(size1, size2);
+
+		assertEquals("[position] not correct!", -4, position);
+	}
+
+	@Test
 	public void testToString() {
 		Shirtsize shirtsize = Shirtsize.DamenM;
 

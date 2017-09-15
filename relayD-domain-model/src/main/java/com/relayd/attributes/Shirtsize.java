@@ -30,7 +30,7 @@ public enum Shirtsize {
 	private final Integer size;
 	private final String description;
 
-	Shirtsize(Integer aSize, String aDescription) {
+	private Shirtsize(Integer aSize, String aDescription) {
 		size = aSize;
 		description = aDescription;
 	}
@@ -58,6 +58,10 @@ public enum Shirtsize {
 
 	public boolean isEmpty() {
 		return this == UNKNOWN;
+	}
+
+	public static int sortByShirtsize(Shirtsize size1, Shirtsize size2) {
+		return size1.toString().compareTo(size2.toString());
 	}
 
 	@Override
