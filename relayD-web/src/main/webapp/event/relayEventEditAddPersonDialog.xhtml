@@ -28,9 +28,9 @@
 				value="Persons" />
 		</h:panelGrid>
 		<p:dataTable
+			id="personTable"
 			var="person"
 			widgetVar="personTable"
-			id="personTable"
 			value="#{relayEventEditAddPersonPageBean.persons}"
 			selection="#{relayEventEditAddPersonPageBean.selectedPersons}"
 			selectionMode="multiple"
@@ -41,12 +41,16 @@
 
 			<p:column
 				headerText="Forename"
+				sortBy="#{person.forename}"
+				sortFunction="#{relayEventEditAddPersonPageBean.sortByForename}"
 				width="140">
 				<h:outputText value="#{person.forename}" />
 			</p:column>
 
 			<p:column
 				headerText="Surename"
+				sortBy="#{person.surename}"
+				sortFunction="#{relayEventEditAddPersonPageBean.sortBySurename}"
 				width="140">
 				<h:outputText value="#{person.surename}" />
 			</p:column>
