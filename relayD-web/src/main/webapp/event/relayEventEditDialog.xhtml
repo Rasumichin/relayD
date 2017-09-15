@@ -67,9 +67,9 @@
 					update="form"
 					actionListener="#{relayEventEditPageBean.emailExport}" />
 		<p:dataTable
+			id="participantTable"
 			var="participant"
 			widgetVar="participantTable"
-			id="participantTable"
 			value="#{relayEventEditPageBean.participants}"
 			selection="#{relayEventEditPageBean.selectedParticipants}"
 			selectionMode="multiple"
@@ -80,12 +80,16 @@
 
 			<p:column
 				headerText="Forename"
+				sortBy="#{participant.forename}"
+				sortFunction="#{relayEventEditPageBean.sortByForename}"
 				width="140">
 				<h:outputText value="#{participant.forename}" />
 			</p:column>
 
 			<p:column
 				headerText="Surename"
+				sortBy="#{participant.surename}"
+				sortFunction="#{relayEventEditPageBean.sortBySurename}"
 				width="140">
 				<h:outputText value="#{participant.surename}" />
 			</p:column>
