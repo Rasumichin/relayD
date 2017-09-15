@@ -31,7 +31,7 @@ public class SurenameTest {
 		boolean result = sut instanceof Serializable;
 		assertTrue("Class not Serializable!", result);
 	}
-	
+
 	@Test
 	public void testNewInstance() {
 		Surename sut = Surename.newInstance();
@@ -97,6 +97,16 @@ public class SurenameTest {
 		boolean result = sut.isEmpty();
 
 		assertTrue("[result] for isEmpty is not correct!", result);
+	}
+
+	@Test
+	public void testSortBySurename() {
+		Surename name1 = Surename.newInstance("Jonas");
+		Surename name2 = Surename.newInstance("Shaw");
+
+		int position = Surename.sortBySurename(name1, name2);
+
+		assertEquals("[position] not correct!", -9, position);
 	}
 
 	@Test

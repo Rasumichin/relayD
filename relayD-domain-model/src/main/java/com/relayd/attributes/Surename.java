@@ -15,7 +15,7 @@ public class Surename implements Serializable {
 
 	private Surename() {
 	}
-	
+
 	private Surename(String surename) {
 		super();
 		value = surename;
@@ -32,12 +32,16 @@ public class Surename implements Serializable {
 		if (surename == null || surename.trim().isEmpty()) {
 			return SurenameNullObject.instance();
 		}
-		
+
 		return new Surename(surename);
 	}
 
 	public boolean isEmpty() {
 		return false;
+	}
+
+	public static int sortBySurename(Surename name1, Surename name2) {
+		return name1.toString().compareTo(name2.toString());
 	}
 
 	@Override
