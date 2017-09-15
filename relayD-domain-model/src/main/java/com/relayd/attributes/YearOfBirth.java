@@ -6,13 +6,13 @@ import java.io.Serializable;
  * @author schmollc (Christian@relayd.de)
  * @author Rasumichin (Erik@relayd.de)
  * @since  18.09.2016
- * 
+ *
  */
 public class YearOfBirth implements Serializable {
 	private static final long serialVersionUID = 6134749998574531013L;
 
 	Integer value;
-	
+
 	private YearOfBirth() {
 	}
 
@@ -24,20 +24,24 @@ public class YearOfBirth implements Serializable {
 		if (year == null) {
 			return YearOfBirthNullObject.instance();
 		}
-		
+
 		return new YearOfBirth(year);
 	}
 
 	private YearOfBirth(Integer aYear) {
 		value = aYear;
 	}
-	
+
 	public Integer getValue() {
 		return value;
 	}
 
 	public boolean isEmpty() {
 		return false;
+	}
+
+	public static int sortByYearOfBirth(YearOfBirth yearOfBirth1, YearOfBirth yearOfBirth2) {
+		return yearOfBirth1.toString().compareTo(yearOfBirth2.toString());
 	}
 
 	@Override
@@ -74,21 +78,21 @@ public class YearOfBirth implements Serializable {
 		}
 		return true;
 	}
-	
+
 	static final class YearOfBirthNullObject extends YearOfBirth {
 		private static final long serialVersionUID = -3383338875493013809L;
-		
+
 		private static final YearOfBirthNullObject SINGLETON = new YearOfBirthNullObject();
-		
+
 		private static YearOfBirthNullObject instance() {
 			return SINGLETON;
 		}
-		
+
 		@Override
 		public boolean isEmpty() {
 			return true;
 		}
-		
+
 		@Override
 		public String toString() {
 			return "";
