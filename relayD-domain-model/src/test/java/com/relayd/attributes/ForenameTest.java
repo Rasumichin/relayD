@@ -91,6 +91,16 @@ public class ForenameTest {
 	}
 
 	@Test
+	public void testSortByForename() {
+		Forename name1 = Forename.newInstance("Justus");
+		Forename name2 = Forename.newInstance("Peter");
+
+		int position = Forename.sortByForename(name1, name2);
+
+		assertEquals("[position] not correct!", -6, position);
+	}
+
+	@Test
 	public void testToString() {
 		String expectedResult = "Marty";
 		Forename sut = Forename.newInstance(expectedResult);

@@ -43,6 +43,10 @@ public class Forename implements Serializable {
 		return false;
 	}
 
+	public static int sortByForename(Forename name1, Forename name2) {
+		return name1.toString().compareTo(name2.toString());
+	}
+
 	@Override
 	public String toString() {
 		return value;
