@@ -53,10 +53,20 @@ public class YearOfBirthTest {
 	public void testCreateInstance_ForNullValue() {
 		YearOfBirth sut = YearOfBirth.newInstance(null);
 		assertNotNull("Instance creation was not correct!", sut);
-		
+
 		Class expected = YearOfBirthNullObject.class;
 		Class actual = sut.getClass();
 		assertEquals("Instance creation was not correct!", expected, actual);
+	}
+
+	@Test
+	public void testSortByYearOfBirth() {
+		YearOfBirth yearOfBirth1 = YearOfBirth.newInstance(1971);
+		YearOfBirth yearOfBirth2 = YearOfBirth.newInstance(1973);
+
+		int position = YearOfBirth.sortByYearOfBirth(yearOfBirth1, yearOfBirth2);
+
+		assertEquals("[yearOfBirth] not correct!", -2, position);
 	}
 
 	@Test
@@ -173,19 +183,19 @@ public class YearOfBirthTest {
 		Integer actual = sut.getValue();
 		assertEquals("[value] is not correct.", expected, actual);
 	}
-	
+
 	@Test
 	public void testIsEmpty_ForValueFilled() {
 		YearOfBirth sut = YearOfBirth.newInstance(2001);
-		
+
 		boolean result = sut.isEmpty();
 		assertFalse("[result] for isEmpty is not correct!", result);
 	}
-	
+
 	@Test
 	public void testIsEmpty_ForValueNull() {
 		YearOfBirth sut = YearOfBirth.newInstance(null);
-		
+
 		boolean result = sut.isEmpty();
 		assertTrue("[result] for isEmpty is not correct!", result);
 	}

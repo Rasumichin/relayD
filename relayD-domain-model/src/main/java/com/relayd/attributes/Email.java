@@ -133,6 +133,10 @@ public class Email implements Serializable, Cloneable {
 		}
 	}
 
+	public static int sortByEmail(Email email1, Email email2) {
+		return email1.toString().compareTo(email2.toString());
+	}
+
 	@Override
 	public String toString() {
 		return value.getAddress();

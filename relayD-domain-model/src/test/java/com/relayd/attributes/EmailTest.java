@@ -11,6 +11,8 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runners.MethodSorters;
 
+import com.relayd.attributes.Email.EmailNullObject;
+
 /**
  * But isn’t some code hard to test?
  * Yes, but only because that code has been designed to be hard to test.
@@ -97,7 +99,7 @@ public class EmailTest {
 		Class actual = sut.getClass();
 		assertEquals("Instance creation was not correct!", expected, actual);
 	}
-	
+
 	@Test
 	public void testCreateInstanceWithValidEmailAdress() {
 		String value = VALID_MAIL_OF_JUSTUS_JONAS;
@@ -132,10 +134,21 @@ public class EmailTest {
 	@Test
 	public void testCreateInstance_ForEmptyString() {
 		Email sut = Email.newInstance("");
-		
+
 		boolean actual = sut.isEmpty();
 		assertTrue("Instance creation was not correct!", actual);
 	}
+
+	@Test
+	public void testSortByEmail() {
+		Email email1 = Email.newInstance("Justus.Jonas@RockyBeach.com");
+		Email email2 = Email.newInstance("Peter.Shaw@RockyBeach.com");
+
+		int position = Email.sortByEmail(email1, email2);
+
+		assertEquals("[position] not correct!", -6, position);
+	}
+
 	@Test
 	public void testHashCode() {
 		Email sut = Email.newInstance(VALID_MAIL_OF_JUSTUS_JONAS);
@@ -298,26 +311,26 @@ public class EmailTest {
 	@Test
 	public void testIsEmpty_ForValueFilled() {
 		Email sut = Email.newInstance(VALID_MAIL_OF_JUSTUS_JONAS);
-		
+
 		boolean result = sut.isEmpty();
 		assertFalse("[result] for isEmpty is not correct!", result);
 	}
-	
+
 	@Test
 	public void testIsEmpty_ForValueNull() {
 		Email sut = Email.newInstance(null);
-		
+
 		boolean result = sut.isEmpty();
 		assertTrue("[result] for isEmpty is not correct!", result);
 	}
-	
+
 	@Test
 	public void testToString_ForNullValue() {
 		Email sut = Email.newInstance();
 		String expected = "";
-		
+
 		String actual = sut.toString();
-		
+
 		assertEquals("String representation not correct!", expected, actual);
 	}
 }
