@@ -45,8 +45,6 @@ public class PersonBrowsePageBean implements Serializable {
 
 	private PersonBridge personBridge = null;
 
-	private PersonSort personSort = new PersonSort();
-
 	@ManagedProperty(value = "#{personEditPageBean}")
 	private PersonEditPageBean personEditPageBean;
 
@@ -88,23 +86,23 @@ public class PersonBrowsePageBean implements Serializable {
 	}
 
 	public int sortByForename(Forename name1, Forename name2) {
-		return personSort.sortByForename(name1, name2);
+		return Forename.sortByForename(name1, name2);
 	}
 
 	public int sortBySurename(Surename name1, Surename name2) {
-		return personSort.sortBySurename(name1, name2);
+		return Surename.sortBySurename(name1, name2);
 	}
 
 	public int sortByYearOfBirth(YearOfBirth yearOfBirth1, YearOfBirth yearOfBirth2) {
-		return personSort.sortByYearOfBirth(yearOfBirth1, yearOfBirth2);
+		return YearOfBirth.sortByYearOfBirth(yearOfBirth1, yearOfBirth2);
 	}
 
 	public int sortByShirtsize(Shirtsize size1, Shirtsize size2) {
-		return personSort.sortByShirtsize(size1, size2);
+		return Shirtsize.sortByShirtsize(size1, size2);
 	}
 
 	public int sortByEmail(Email email1, Email email2) {
-		return personSort.sortByEmail(email1, email2);
+		return Email.sortByEmail(email1, email2);
 	}
 
 	public Integer getNumberOfResults() {

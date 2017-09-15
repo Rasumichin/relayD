@@ -52,9 +52,6 @@ public class PersonBrowsePageBeanTest {
 	@Mock
 	private PersonEditPageBean personEditPageBean;
 
-	@Mock
-	private PersonSort personSort;
-
 	@Before
 	public void setUp() {
 		doNothing().when(sut).showMessage(any(Severity.class), anyString(), anyString());
@@ -242,10 +239,9 @@ public class PersonBrowsePageBeanTest {
 		YearOfBirth yearOfBirth1 = YearOfBirth.newInstance(1971);
 		YearOfBirth yearOfBirth2 = YearOfBirth.newInstance(1973);
 
-		@SuppressWarnings("unused")
-		int resultForDocumentation = sut.sortByYearOfBirth(yearOfBirth1, yearOfBirth2);
+		int actual = sut.sortByYearOfBirth(yearOfBirth1, yearOfBirth2);
 
-		verify(personSort).sortByYearOfBirth(yearOfBirth1, yearOfBirth2);
+		assertEquals("[sortByYearOfBirth] not correct!", -2, actual);
 	}
 
 	@Test
@@ -253,10 +249,9 @@ public class PersonBrowsePageBeanTest {
 		Email email1 = Email.newInstance("Justus.Jonas@RockyBeach.com");
 		Email email2 = Email.newInstance("Peter.Shaw@RockyBeach.com");
 
-		@SuppressWarnings("unused")
-		int resultForDocumentation = sut.sortByEmail(email1, email2);
+		int actual = sut.sortByEmail(email1, email2);
 
-		verify(personSort).sortByEmail(email1, email2);
+		assertEquals("[sortByEmail] not correct!", -6, actual);
 	}
 
 	@Test
@@ -264,10 +259,9 @@ public class PersonBrowsePageBeanTest {
 		Forename name1 = Forename.newInstance("Justus");
 		Forename name2 = Forename.newInstance("Peter");
 
-		@SuppressWarnings("unused")
-		int resultForDocumentation = sut.sortByForename(name1, name2);
+		int actual = sut.sortByForename(name1, name2);
 
-		verify(personSort).sortByForename(name1, name2);
+		assertEquals("[sortByForename] not correct!", -6, actual);
 	}
 
 	@Test
@@ -275,20 +269,18 @@ public class PersonBrowsePageBeanTest {
 		Surename name1 = Surename.newInstance("Jonas");
 		Surename name2 = Surename.newInstance("Shaw");
 
-		@SuppressWarnings("unused")
-		int resultForDocumentation = sut.sortBySurename(name1, name2);
+		int actual = sut.sortBySurename(name1, name2);
 
-		verify(personSort).sortBySurename(name1, name2);
+		assertEquals("[sortBySurename] not correct!", -9, actual);
 	}
 
 	@Test
-	public void testSortByshirtsize() {
+	public void testSortByShirtsize() {
 		Shirtsize size1 = Shirtsize.DamenL;
 		Shirtsize size2 = Shirtsize.HerrenM;
 
-		@SuppressWarnings("unused")
-		int resultForDocumentation = sut.sortByShirtsize(size1, size2);
+		int actual = sut.sortByShirtsize(size1, size2);
 
-		verify(personSort).sortByShirtsize(size1, size2);
+		assertEquals("[sortByShirtsize] not correct!", -4, actual);
 	}
 }
