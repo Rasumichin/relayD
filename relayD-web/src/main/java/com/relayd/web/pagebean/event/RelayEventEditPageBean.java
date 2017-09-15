@@ -21,6 +21,8 @@ import com.relayd.Participant;
 import com.relayd.RelayEvent;
 import com.relayd.attributes.EventDay;
 import com.relayd.attributes.Eventname;
+import com.relayd.attributes.Forename;
+import com.relayd.attributes.Surename;
 import com.relayd.web.bridge.RelayEventBridge;
 import com.relayd.web.bridge.RelayEventBridgeImpl;
 import com.relayd.web.local.I18N;
@@ -163,5 +165,13 @@ public class RelayEventEditPageBean implements Serializable {
 
 	private void refreshGui() {
 		workingRelayEvent = getRelayEvent(workingRelayEvent.getUuid());
+	}
+
+	public int sortByForename(Forename name1, Forename name2) {
+		return Forename.sortByForename(name1, name2);
+	}
+
+	public int sortBySurename(Surename name1, Surename name2) {
+		return Surename.sortBySurename(name1, name2);
 	}
 }
