@@ -1,5 +1,6 @@
 package com.relayd.web.bridge;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -20,7 +21,8 @@ import com.relayd.web.browse.PersonBrowse;
  * @since 20.06.2016
  *
  */
-public class PersonBridgeImpl implements PersonBridge {
+public class PersonBridgeImpl implements Serializable, PersonBridge {
+	private static final long serialVersionUID = -8162456781686939266L;
 
 	@Override
 	public List<Person> all() {

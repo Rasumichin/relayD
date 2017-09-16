@@ -2,6 +2,7 @@ package com.relayd.web.bridge;
 
 import static org.junit.Assert.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -48,6 +49,14 @@ public class PersonBridgeImplTest {
 
 	@Spy
 	private PersonBridgeImpl sut = new PersonBridgeImpl();
+
+	@Test
+	public void testIsSerializable() {
+		@SuppressWarnings("cast")
+		boolean condition = sut instanceof Serializable;
+
+		assertTrue("Klasse nicht Serializable!", condition);
+	}
 
 	@Test
 	public void testValidateEMail_ForNewPersonWithSameEMail() {

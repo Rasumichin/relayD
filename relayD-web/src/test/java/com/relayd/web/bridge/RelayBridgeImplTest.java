@@ -2,6 +2,8 @@ package com.relayd.web.bridge;
 
 import static org.junit.Assert.*;
 
+import java.io.Serializable;
+
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
@@ -21,6 +23,14 @@ import com.relayd.ejb.GatewayType;
 public class RelayBridgeImplTest {
 
 	private RelayBridgeImpl sut = new RelayBridgeImpl();
+
+	@Test
+	public void testIsSerializable() {
+		@SuppressWarnings("cast")
+		boolean condition = sut instanceof Serializable;
+
+		assertTrue("Klasse nicht Serializable!", condition);
+	}
 
 	@Test
 	public void testGatewayType() {
