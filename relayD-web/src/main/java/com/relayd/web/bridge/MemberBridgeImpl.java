@@ -1,5 +1,6 @@
 package com.relayd.web.bridge;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 import com.relayd.Member;
@@ -13,7 +14,8 @@ import com.relayd.ejb.MemberGatewayFactory;
  * @since 03.06.2017
  *
  */
-public class MemberBridgeImpl implements MemberBridge {
+public class MemberBridgeImpl implements Serializable, MemberBridge {
+	private static final long serialVersionUID = -7550855022539662917L;
 
 	@Override
 	public GatewayType getGatewayType() {

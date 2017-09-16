@@ -1,5 +1,6 @@
 package com.relayd.web.theme;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +15,8 @@ import javax.faces.bean.ManagedBean;
  */
 @ManagedBean(name = "themeService", eager = true)
 @ApplicationScoped
-public class ThemeService {
+public class ThemeService implements Serializable {
+	private static final long serialVersionUID = -4729168980482158387L;
 
 	private List<Theme> themes;
 

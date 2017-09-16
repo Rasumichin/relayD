@@ -1,5 +1,6 @@
 package com.relayd.web.bridge;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -20,7 +21,8 @@ import com.relayd.ejb.RelayGatewayFactory;
  * @since 14.10.2016
  *
  */
-public class RelayBridgeImpl implements RelayBridge {
+public class RelayBridgeImpl implements Serializable, RelayBridge {
+	private static final long serialVersionUID = 1436811809418403317L;
 
 	@SuppressWarnings("unused")
 	@Override
