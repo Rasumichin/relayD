@@ -218,17 +218,16 @@ public class ParticipantTest {
 
 	@Test
 	public void testHashCode() {
-		Person person = Person.newInstance();
-		person.setUuid(UUID.fromString("5697d710-8967-4b2d-9ab2-8fc50ddc6138"));
+		Participant sut = Participant.newInstance();
+		sut.setUuid(UUID.fromString("5697d710-8967-4b2d-9ab2-8fc50ddc6138"));
 
-		Participant sut = Participant.newInstance(person);
 		int hashCode = sut.hashCode();
 
 		assertEquals(1218343647, hashCode);
 
-		Participant sutWithoutUUID = Participant.newInstance();
+		sut.setUuid(null);
 
-		hashCode = sutWithoutUUID.hashCode();
+		hashCode = sut.hashCode();
 
 		assertEquals(31, hashCode);
 	}
@@ -263,13 +262,12 @@ public class ParticipantTest {
 	@Test
 	public void testEqualsWithValueIsNull() {
 		Person dummyPerson = Person.newInstance();
-		dummyPerson.setUuid(null);
-
 		Participant sut = Participant.newInstance(dummyPerson);
+		sut.setUuid(null);
 
 		UUID uuidForSecondSut = UUID.randomUUID();
-		dummyPerson.setUuid(uuidForSecondSut);
 		Participant secondSut = Participant.newInstance(dummyPerson);
+		secondSut.setUuid(uuidForSecondSut);
 
 		boolean result = sut.equals(secondSut);
 
@@ -279,10 +277,10 @@ public class ParticipantTest {
 	@Test
 	public void testEqualsWithBothValuesAreNull() {
 		Person dummyPerson = Person.newInstance();
-		dummyPerson.setUuid(null);
-
 		Participant sut = Participant.newInstance(dummyPerson);
+		sut.setUuid(null);
 		Participant secondSut = Participant.newInstance(dummyPerson);
+		secondSut.setUuid(null);
 
 		boolean result = sut.equals(secondSut);
 
@@ -291,15 +289,14 @@ public class ParticipantTest {
 
 	@Test
 	public void testEqualsWithTwoDiffrentValues() {
-		UUID uuidForSut = UUID.randomUUID();
 		Person dummyPerson = Person.newInstance();
-		dummyPerson.setUuid(uuidForSut);
-
 		Participant sut = Participant.newInstance(dummyPerson);
+		UUID uuid = UUID.randomUUID();
+		sut.setUuid(uuid);
 
-		UUID uuidForSecondSut = UUID.randomUUID();
-		dummyPerson.setUuid(uuidForSecondSut);
 		Participant secondSut = Participant.newInstance(dummyPerson);
+		UUID uuidForSecondSut = UUID.randomUUID();
+		secondSut.setUuid(uuidForSecondSut);
 
 		boolean result = sut.equals(secondSut);
 
@@ -308,11 +305,14 @@ public class ParticipantTest {
 
 	@Test
 	public void testEqualsWithSameValues() {
+
 		Person dummyPerson = Person.newInstance();
-		dummyPerson.setUuid(UUID.randomUUID());
+		UUID uuid = UUID.randomUUID();
 
 		Participant sut = Participant.newInstance(dummyPerson);
+		sut.setUuid(uuid);
 		Participant secondSut = Participant.newInstance(dummyPerson);
+		secondSut.setUuid(uuid);
 
 		boolean result = sut.equals(secondSut);
 

@@ -8,6 +8,7 @@ import com.relayd.Participant;
 import com.relayd.Person;
 import com.relayd.Relay;
 import com.relayd.RelayEvent;
+import com.relayd.attributes.Comment;
 import com.relayd.attributes.EventDay;
 import com.relayd.attributes.Eventname;
 import com.relayd.attributes.Position;
@@ -43,11 +44,21 @@ public class EntityToRelayEventMapper {
 		relayEvent.setName(Eventname.newInstance(relayEventEntity.getEventName()));
 		relayEvent.setEventDay(EventDay.newInstance(relayEventEntity.getEventDay().toLocalDate()));
 
+		mapRelays(relayEventEntity, relayEvent);
+
+		mapParticipants(relayEventEntity, relayEvent);
+
+		return relayEvent;
+	}
+
+	private void mapRelays(RelayEventEntity relayEventEntity, RelayEvent relayEvent) {
 		for (RelayEntity eachRelayEntity : relayEventEntity.getRelayEntities()) {
 			Relay relay = mapToRelay(eachRelayEntity, relayEvent);
 			relayEvent.addRelay(relay);
 		}
+	}
 
+	private void mapParticipants(RelayEventEntity relayEventEntity, RelayEvent relayEvent) {
 		EntityToPersonMapper entityToPersonMapper = EntityToPersonMapper.newInstance();
 		for (ParticipantEntity eachParticipantEntity : relayEventEntity.getParticipantEntities()) {
 			PersonEntity personEntity = eachParticipantEntity.getPersonEntity();
@@ -55,10 +66,11 @@ public class EntityToRelayEventMapper {
 			Person person = entityToPersonMapper.mapToPerson(personEntity);
 
 			Participant participant = Participant.newInstance(person);
+			participant.setUuid(UUID.fromString(eachParticipantEntity.getId()));
+			participant.setComment(Comment.newInstance(eachParticipantEntity.getComment()));
+
 			relayEvent.addParticipant(participant);
 		}
-
-		return relayEvent;
 	}
 
 	private Relay mapToRelay(RelayEntity relayEntity, RelayEvent relayEvent) {

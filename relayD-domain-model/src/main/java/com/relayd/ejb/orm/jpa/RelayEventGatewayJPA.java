@@ -2,7 +2,6 @@ package com.relayd.ejb.orm.jpa;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 import com.relayd.Participant;
@@ -72,20 +71,21 @@ public class RelayEventGatewayJPA extends GatewayJPA implements RelayEventGatewa
 
 	private void mapParticipants(RelayEvent relayEvent, RelayEventEntity relayEventEntity) {
 
+		relayEventEntity.resetParticipantEnteties();
 		for (Participant each : relayEvent.getParticipants()) {
-
-			Optional<ParticipantEntity> participantEntity = relayEventEntity.getParticipantEntity(each.getUuid());
-			if (participantEntity.isPresent()) {
-				ParticipantEntity currentParticipantEntity = participantEntity.get();
-				currentParticipantEntity.setComment(each.getComment().isEmpty() ? null : each.getComment().toString());
-			} else {
-				ParticipantEntity newParticipantEntity = ParticipantEntity.newInstance();
-				PersonEntity personEntity = findPersonEntityById(each.getUuidPerson());
-				newParticipantEntity.setPersonEntity(personEntity);
-				newParticipantEntity.setRelayEventEntity(relayEventEntity);
-				newParticipantEntity.setComment(each.getComment().isEmpty() ? null : each.getComment().toString());
-				relayEventEntity.addParticipant(newParticipantEntity);
-			}
+			//
+			//			Optional<ParticipantEntity> participantEntity = relayEventEntity.getParticipantEntity(each.getUuid());
+			//			if (participantEntity.isPresent()) {
+			//				ParticipantEntity currentParticipantEntity = participantEntity.get();
+			//				currentParticipantEntity.setComment(each.getComment().isEmpty() ? null : each.getComment().toString());
+			//			} else {
+			ParticipantEntity newParticipantEntity = ParticipantEntity.newInstance();
+			PersonEntity personEntity = findPersonEntityById(each.getUuidPerson());
+			newParticipantEntity.setPersonEntity(personEntity);
+			newParticipantEntity.setRelayEventEntity(relayEventEntity);
+			newParticipantEntity.setComment(each.getComment().isEmpty() ? null : each.getComment().toString());
+			relayEventEntity.addParticipant(newParticipantEntity);
+			//			}
 		}
 
 	}

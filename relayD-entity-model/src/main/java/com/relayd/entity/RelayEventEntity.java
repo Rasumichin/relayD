@@ -112,6 +112,10 @@ public class RelayEventEntity {
 		return Collections.unmodifiableList(relayEntities);
 	}
 
+	public void resetParticipantEnteties() {
+		participantEntities.clear();
+	}
+
 	@Override
 	public String toString() {
 		return getClass().getSimpleName() + " [id=" + id + ", eventName=" + eventName + ", eventDay=" + eventDay + "]";
