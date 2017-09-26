@@ -40,7 +40,7 @@ public class RelayBridgeImpl implements Serializable, RelayBridge {
 			// Methodik übernommen aus dem Primefaces-Beispiel.
 			TreeNode relayTreeNode = new DefaultTreeNode(TreeNodeRow.newInstance(relay), root);
 
-			// TODO (Christian, Erik, Version 1.4): Aus dem Primefacesbeispiel. Sollte man nochmal verifizieren.
+			// TODO - REL-306 - Aus dem Primefacesbeispiel. Sollte man nochmal verifizieren.
 			new DefaultTreeNode(TreeNodeRow.newInstance(relay.getMemberFor(Position.FIRST), Position.FIRST), relayTreeNode);
 			new DefaultTreeNode(TreeNodeRow.newInstance(relay.getMemberFor(Position.SECOND), Position.SECOND), relayTreeNode);
 			new DefaultTreeNode(TreeNodeRow.newInstance(relay.getMemberFor(Position.THIRD), Position.THIRD), relayTreeNode);

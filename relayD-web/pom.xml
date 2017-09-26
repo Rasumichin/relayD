@@ -79,7 +79,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-war-plugin</artifactId>
-					<!-- TODO (Dirk, Version 1.4): actual version seems to be 2.6 - migration? -->
+					<!-- TODO - REL-316 - actual version seems to be 2.6 - migration? -->
 					<version>2.3</version>
 				</plugin>
 			</plugins>

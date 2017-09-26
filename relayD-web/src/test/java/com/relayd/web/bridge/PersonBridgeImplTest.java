@@ -35,7 +35,7 @@ import static org.mockito.Mockito.*;
  * @since   20.06.2016
  *
  */
-// TODO (Erik, Version 1.4): This test produces console output saying a JPA runtime could not be started. Check mocks.
+// TODO - REL-314 - This test produces console output saying a JPA runtime could not be started. Check mocks.
 
 @RunWith(MockitoJUnitRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)

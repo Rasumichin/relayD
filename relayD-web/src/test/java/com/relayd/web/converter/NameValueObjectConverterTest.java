@@ -20,7 +20,7 @@ public abstract class NameValueObjectConverterTest {
 
 	@Test
 	@Ignore
-	// TODO (Erik, Version 1.4): Check whether we should test this case with regardo to JSF spec.
+	// TODO - REL-315 - Check whether we should test this case with regardo to JSF spec.
 	public void testGetAsObject_ForNullValue() {
 		String nullValue = null;
 		Object result = getSut().getAsObject(null, null, nullValue);

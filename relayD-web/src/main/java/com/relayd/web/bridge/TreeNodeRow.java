@@ -44,7 +44,7 @@ public abstract class TreeNodeRow implements Serializable {
 	}
 
 	public void setMember(@SuppressWarnings("unused") Member member) {
-		// TODO (Christian, Version 1.4): Idee ist diese abstract zu machen, so daß beim klicken auf Member Zeile genau dort eingefügt wird,
+		// TODO - REL-307 - Idee ist diese abstract zu machen, so daß beim klicken auf Member Zeile genau dort eingefügt wird,
 		// bei klicken auf RelayZeile die nächste freie stelle befüllt wird. Somit haben beide mit dieser Methode zu tun.
 	}
 
@@ -53,7 +53,7 @@ public abstract class TreeNodeRow implements Serializable {
 	}
 
 	public void setPosition(@SuppressWarnings("unused") Position position) {
-		// TODO (Christian, Version 1.4): Siehe methode setMember.
+		// TODO - REL-308 - Siehe methode setMember.
 	}
 
 	public String getStatus() {
