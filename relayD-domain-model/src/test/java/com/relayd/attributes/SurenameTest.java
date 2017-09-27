@@ -110,6 +110,16 @@ public class SurenameTest {
 	}
 
 	@Test
+	public void testSortBySurename_ForSameNames() {
+		Surename name1 = Surename.newInstance("Jonas");
+		Surename name2 = Surename.newInstance("jonas");
+
+		int position = Surename.sortBySurename(name1, name2);
+
+		assertEquals("[position] not correct!", 0, position);
+	}
+
+	@Test
 	public void testToString_ForValidValue() {
 		String expected = "Jonas";
 		Surename surename = Surename.newInstance(expected);

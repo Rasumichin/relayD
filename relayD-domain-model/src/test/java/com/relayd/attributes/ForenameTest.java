@@ -101,6 +101,16 @@ public class ForenameTest {
 	}
 
 	@Test
+	public void testSortByForename_ForSameNames() {
+		Forename name1 = Forename.newInstance("Justus");
+		Forename name2 = Forename.newInstance("justus");
+
+		int position = Forename.sortByForename(name1, name2);
+
+		assertEquals("[position] not correct!", 0, position);
+	}
+
+	@Test
 	public void testToString() {
 		String expectedResult = "Marty";
 		Forename sut = Forename.newInstance(expectedResult);

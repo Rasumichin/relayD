@@ -28,7 +28,7 @@ public class Surename implements Serializable {
 	/**
 	 * Bloch, Joshua, Effective Java, 2nd Edition, Item 1, p. 5
 	 */
-	static public Surename newInstance(String surename) {
+	public static Surename newInstance(String surename) {
 		if (surename == null || surename.trim().isEmpty()) {
 			return SurenameNullObject.instance();
 		}
@@ -41,7 +41,7 @@ public class Surename implements Serializable {
 	}
 
 	public static int sortBySurename(Surename name1, Surename name2) {
-		return name1.toString().compareTo(name2.toString());
+		return name1.toString().toUpperCase().compareTo(name2.toString().toUpperCase());
 	}
 
 	@Override
