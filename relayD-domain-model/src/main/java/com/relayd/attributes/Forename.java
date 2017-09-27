@@ -24,14 +24,14 @@ public class Forename implements Serializable {
 	/**
 	 * Bloch, Joshua, Effective Java, 2nd Edition, Item 1, p. 5
 	 */
-	static public Forename newInstance() {
+	public static Forename newInstance() {
 		return ForenameNullObject.instance();
 	}
 
 	/**
 	 * Bloch, Joshua, Effective Java, 2nd Edition, Item 1, p. 5
 	 */
-	static public Forename newInstance(String forename) {
+	public static Forename newInstance(String forename) {
 		if (forename == null || forename.trim().isEmpty()) {
 			return ForenameNullObject.instance();
 		}
@@ -44,7 +44,7 @@ public class Forename implements Serializable {
 	}
 
 	public static int sortByForename(Forename name1, Forename name2) {
-		return name1.toString().compareTo(name2.toString());
+		return name1.toString().toUpperCase().compareTo(name2.toString().toUpperCase());
 	}
 
 	@Override
