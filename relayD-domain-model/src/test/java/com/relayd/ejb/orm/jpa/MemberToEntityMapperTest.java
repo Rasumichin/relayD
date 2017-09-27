@@ -39,9 +39,9 @@ public class MemberToEntityMapperTest {
 		expectedException.expect(IllegalArgumentException.class);
 		expectedException.expectMessage("[source] must not be 'null'!");
 
-		MemberEntity dummyParticipantEntity = null;
+		MemberEntity dummyMemberEntity = null;
 
-		sut.mapMemberToEntity(null, dummyParticipantEntity);
+		sut.mapMemberToEntity(null, dummyMemberEntity);
 	}
 
 	@Test
@@ -60,11 +60,11 @@ public class MemberToEntityMapperTest {
 		Long expected = 15000L;
 		member.setDuration(Duration.of(expected, ChronoUnit.MILLIS));
 
-		MemberEntity participantEntity = MemberEntity.newInstance();
+		MemberEntity memberEntity = MemberEntity.newInstance();
 
-		sut.mapMemberToEntity(member, participantEntity);
+		sut.mapMemberToEntity(member, memberEntity);
 
-		Long actual = participantEntity.getDuration();
+		Long actual = memberEntity.getDuration();
 
 		assertEquals("Mapping of [duration] is not correct!", expected, actual);
 	}
