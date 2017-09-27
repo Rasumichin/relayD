@@ -54,16 +54,16 @@ public class MemberGatewayJPATest {
 		UUID expectedUuidPerson = UUID.randomUUID();
 		PersonEntity personEntity = PersonEntity.newInstance(expectedUuidPerson);
 
-		UUID expectedUuidParticipant = UUID.randomUUID();
-		MemberEntity participantEntity = MemberEntity.newInstance(expectedUuidParticipant.toString());
-		participantEntity.setPersonEntity(personEntity);
-		doReturn(participantEntity).when(sut).findById(expectedUuidParticipant);
+		UUID expectedUuidMember = UUID.randomUUID();
+		MemberEntity memberEntity = MemberEntity.newInstance(expectedUuidMember.toString());
+		memberEntity.setPersonEntity(personEntity);
+		doReturn(memberEntity).when(sut).findById(expectedUuidMember);
 
-		Member actual = sut.get(expectedUuidParticipant);
+		Member actual = sut.get(expectedUuidMember);
 		assertNotNull("Actual [Member] must not be 'null'!", actual);
 
-		UUID actualUuidParticipant = actual.getUuid();
-		assertEquals("Mapping from ParticipantEntity to Member was not correct.", expectedUuidParticipant, actualUuidParticipant);
+		UUID actualUuidMember = actual.getUuid();
+		assertEquals("Mapping from ParticipantEntity to Member was not correct.", expectedUuidMember, actualUuidMember);
 
 		UUID actualUuidPerson = actual.getUuidPerson();
 		assertEquals("Mapping from PersonEntity to Person was not correct.", expectedUuidPerson, actualUuidPerson);
@@ -77,15 +77,15 @@ public class MemberGatewayJPATest {
 	@Test
 	public void testSet() {
 
-		MemberEntity expectedParticipantEntity = MemberEntity.newInstance();
+		MemberEntity expectedMemberEntity = MemberEntity.newInstance();
 		Member member = Member.newInstance(Participant.newInstance());
 		GenericJpaDao jpaDaoMock = mock(GenericJpaDao.class);
 		doReturn(jpaDaoMock).when(sut).getJpaDao();
-		doReturn(expectedParticipantEntity).when(sut).findById(member.getUuid());
+		doReturn(expectedMemberEntity).when(sut).findById(member.getUuid());
 
 		sut.set(member);
 
-		verify(jpaDaoMock).mergeEntity(expectedParticipantEntity);
+		verify(jpaDaoMock).mergeEntity(expectedMemberEntity);
 	}
 
 	@Test
