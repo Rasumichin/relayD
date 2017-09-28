@@ -145,6 +145,7 @@ public class RelayEventEditPageBean implements Serializable {
 		for (Participant each : selectedParticipants) {
 			workingRelayEvent.removeParticipant(each);
 		}
+		persistRelayEvent();
 	}
 
 	public void emailExport(@SuppressWarnings("unused") ActionEvent actionEvent) {
