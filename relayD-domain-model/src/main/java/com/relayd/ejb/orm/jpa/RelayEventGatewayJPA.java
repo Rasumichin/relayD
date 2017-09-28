@@ -2,6 +2,7 @@ package com.relayd.ejb.orm.jpa;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import com.relayd.Participant;
@@ -19,6 +20,7 @@ import com.relayd.entity.RelayEventEntity;
 public class RelayEventGatewayJPA extends GatewayJPA implements RelayEventGateway {
 	private EntityToRelayEventMapper relayEventEntityMapper = EntityToRelayEventMapper.newInstance();
 	private RelayEventToEntityMapper relayEventMapper = RelayEventToEntityMapper.newInstance();
+	private ParticipantToEntityMapper participantMapper = ParticipantToEntityMapper.newInstance();
 
 	private EntityToRelayEventMapper getRelayEventEntityMapper() {
 		return relayEventEntityMapper;
@@ -26,6 +28,10 @@ public class RelayEventGatewayJPA extends GatewayJPA implements RelayEventGatewa
 
 	private RelayEventToEntityMapper getRelayEventMapper() {
 		return relayEventMapper;
+	}
+
+	private ParticipantToEntityMapper getParticipantMapper() {
+		return participantMapper;
 	}
 
 	@Override
@@ -66,39 +72,57 @@ public class RelayEventGatewayJPA extends GatewayJPA implements RelayEventGatewa
 
 		mapParticipants(relayEvent, relayEventEntity);
 
+		mergeEntity(relayEventEntity);
+	}
+
+	void mergeEntity(RelayEventEntity relayEventEntity) {
 		getJpaDao().mergeEntity(relayEventEntity);
 	}
 
 	private void mapParticipants(RelayEvent relayEvent, RelayEventEntity relayEventEntity) {
 
-		//		for (Participant each : relayEvent.getParticipants()) {
-		//			Optional<ParticipantEntity> participantEntity = relayEventEntity.getParticipantEntity(each.getUuid());
-		//			if (participantEntity.isPresent()) {
-		//				ParticipantEntity currentParticipantEntity = participantEntity.get();
-		//				currentParticipantEntity.setComment(each.getComment().isEmpty() ? null : each.getComment().toString());
-		//			} else {
-		//				ParticipantEntity newParticipantEntity = ParticipantEntity.newInstance();
-		//				PersonEntity personEntity = findPersonEntityById(each.getUuidPerson());
-		//				newParticipantEntity.setPersonEntity(personEntity);
-		//				newParticipantEntity.setRelayEventEntity(relayEventEntity);
-		//				newParticipantEntity.setComment(each.getComment().isEmpty() ? null : each.getComment().toString());
-		//				relayEventEntity.addParticipant(newParticipantEntity);
-		//			}
-		//		}
+		checkForExistingEntites(relayEvent, relayEventEntity);
 
-		relayEventEntity.resetParticipantEnteties();
-		for (Participant each : relayEvent.getParticipants()) {
-			ParticipantEntity newParticipantEntity = ParticipantEntity.newInstance();
-			PersonEntity personEntity = findPersonEntityById(each.getUuidPerson());
-			newParticipantEntity.setPersonEntity(personEntity);
-			newParticipantEntity.setRelayEventEntity(relayEventEntity);
-			newParticipantEntity.setComment(each.getComment().isEmpty() ? null : each.getComment().toString());
-			relayEventEntity.addParticipant(newParticipantEntity);
-		}
-
+		removeEntites(relayEvent, relayEventEntity);
 	}
 
-	private PersonEntity findPersonEntityById(UUID uuid) {
+	private void checkForExistingEntites(RelayEvent relayEvent, RelayEventEntity relayEventEntity) {
+		for (Participant each : relayEvent.getParticipants()) {
+			Optional<ParticipantEntity> participantEntity = relayEventEntity.getParticipantEntity(each.getUuid());
+			if (participantEntity.isPresent()) {
+				ParticipantEntity currentParticipantEntity = participantEntity.get();
+				getParticipantMapper().mapParticipantToEntity(each, currentParticipantEntity);
+			} else {
+				ParticipantEntity newParticipantEntity = ParticipantEntity.newInstance(each.getUuid().toString());
+				PersonEntity personEntity = findPersonEntityById(each.getUuidPerson());
+				newParticipantEntity.setPersonEntity(personEntity);
+				newParticipantEntity.setRelayEventEntity(relayEventEntity);
+				getParticipantMapper().mapParticipantToEntity(each, newParticipantEntity);
+				relayEventEntity.addParticipant(newParticipantEntity);
+			}
+		}
+	}
+
+	private void removeEntites(RelayEvent relayEvent, RelayEventEntity relayEventEntity) {
+		List<ParticipantEntity> entitesToRemove = new ArrayList<>();
+		for (ParticipantEntity eachParticipantEntity : relayEventEntity.getParticipantEntities()) {
+			boolean exist = false;
+			for (Participant eachParticipant : relayEvent.getParticipants()) {
+				if (eachParticipant.getUuid().toString().equals(eachParticipantEntity.getId())) {
+					exist = true;
+					break;
+				}
+			}
+			if (!exist) {
+				entitesToRemove.add(eachParticipantEntity);
+			}
+		}
+		for (ParticipantEntity eachParticipantEntity : entitesToRemove) {
+			relayEventEntity.removeParticipant(eachParticipantEntity);
+		}
+	}
+
+	PersonEntity findPersonEntityById(UUID uuid) {
 		PersonEntity result = getJpaDao().findById(PersonEntity.class, uuid.toString());
 
 		return result;
