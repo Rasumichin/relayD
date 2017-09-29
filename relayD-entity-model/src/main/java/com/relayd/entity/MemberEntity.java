@@ -40,21 +40,15 @@ public class MemberEntity {
 	private RelayEntity relayEntity;
 
 	public static MemberEntity newInstance() {
-		return MemberEntity.newInstance(UUID.randomUUID().toString());
+		return MemberEntity.newInstance(UUID.randomUUID());
 	}
 
-	public static MemberEntity newInstance(String anId) {
-		// TODO - REL-282 - Introduce a class to handle strings that should represent a UUID.
-		if (anId == null) {
+	public static MemberEntity newInstance(UUID anUuid) {
+		if (anUuid == null) {
 			throw new IllegalArgumentException("[uuid] must not be 'null'.");
 		}
-		try {
-			UUID.fromString(anId);
-		} catch (IllegalArgumentException iAEx) {
-			throw new IllegalArgumentException("[anId] is not a valid representation of an UUID.");
-		}
 		MemberEntity memberEntity = new MemberEntity();
-		memberEntity.setId(anId);
+		memberEntity.setId(anUuid.toString());
 
 		return memberEntity;
 	}

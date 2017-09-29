@@ -55,7 +55,7 @@ public class MemberGatewayJPATest {
 		PersonEntity personEntity = PersonEntity.newInstance(expectedUuidPerson);
 
 		UUID expectedUuidMember = UUID.randomUUID();
-		MemberEntity memberEntity = MemberEntity.newInstance(expectedUuidMember.toString());
+		MemberEntity memberEntity = MemberEntity.newInstance(expectedUuidMember);
 		memberEntity.setPersonEntity(personEntity);
 		doReturn(memberEntity).when(sut).findById(expectedUuidMember);
 

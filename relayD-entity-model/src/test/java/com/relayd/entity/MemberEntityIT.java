@@ -136,7 +136,7 @@ public class MemberEntityIT extends EntityIT {
 	}
 
 	private MemberEntity getDefaultMemberEntity(String anId) {
-		MemberEntity memberEntity = MemberEntity.newInstance(anId);
+		MemberEntity memberEntity = MemberEntity.newInstance(UUID.fromString(anId));
 		memberEntity.setPosition(Integer.valueOf(1));
 		memberEntity.setPersonEntity(getPersonEntity());
 		memberEntity.setRelayEntity(getRelayEntity());

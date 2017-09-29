@@ -121,7 +121,7 @@ public class RelayEventEntityTest {
 
 	@Test
 	public void testAddParticipantEntity() {
-		ParticipantEntity expected = ParticipantEntity.newInstance(UUID.randomUUID().toString());
+		ParticipantEntity expected = ParticipantEntity.newInstance(UUID.randomUUID());
 		RelayEventEntity sut = new RelayEventEntity();
 
 		sut.addParticipant(expected);
@@ -136,8 +136,8 @@ public class RelayEventEntityTest {
 	@Test
 	public void testRemoveParticipantEntity() {
 		RelayEventEntity sut = new RelayEventEntity();
-		ParticipantEntity participantEntityToRemove = ParticipantEntity.newInstance(UUID.randomUUID().toString());
-		ParticipantEntity participantEntity = ParticipantEntity.newInstance(UUID.randomUUID().toString());
+		ParticipantEntity participantEntityToRemove = ParticipantEntity.newInstance(UUID.randomUUID());
+		ParticipantEntity participantEntity = ParticipantEntity.newInstance(UUID.randomUUID());
 
 		sut.addParticipant(participantEntityToRemove);
 		sut.addParticipant(participantEntity);
@@ -155,7 +155,7 @@ public class RelayEventEntityTest {
 	@Test
 	public void testGetParticipantEntity_ForExistingParticipant() {
 		RelayEventEntity sut = new RelayEventEntity();
-		ParticipantEntity expected = ParticipantEntity.newInstance(UUID.randomUUID().toString());
+		ParticipantEntity expected = ParticipantEntity.newInstance(UUID.randomUUID());
 		sut.addParticipant(expected);
 
 		Optional<ParticipantEntity> actual = sut.getParticipantEntity(UUID.fromString(expected.getId()));
@@ -168,7 +168,7 @@ public class RelayEventEntityTest {
 	@Test
 	public void testGetParticipantEntity_ForNotExistingParticipant() {
 		RelayEventEntity sut = new RelayEventEntity();
-		ParticipantEntity participantEntity = ParticipantEntity.newInstance(UUID.randomUUID().toString());
+		ParticipantEntity participantEntity = ParticipantEntity.newInstance(UUID.randomUUID());
 		sut.addParticipant(participantEntity);
 
 		Optional<ParticipantEntity> actual = sut.getParticipantEntity(UUID.randomUUID());
@@ -180,8 +180,8 @@ public class RelayEventEntityTest {
 	@Test
 	public void testRemoveParticipantEntity_ForNonExistentParticipant() {
 		RelayEventEntity sut = new RelayEventEntity();
-		ParticipantEntity participantEntityToRemove = ParticipantEntity.newInstance(UUID.randomUUID().toString());
-		ParticipantEntity participantEntity = ParticipantEntity.newInstance(UUID.randomUUID().toString());
+		ParticipantEntity participantEntityToRemove = ParticipantEntity.newInstance(UUID.randomUUID());
+		ParticipantEntity participantEntity = ParticipantEntity.newInstance(UUID.randomUUID());
 
 		sut.addParticipant(participantEntity);
 

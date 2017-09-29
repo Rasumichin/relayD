@@ -37,21 +37,16 @@ public class ParticipantEntity {
 	private RelayEventEntity relayEventEntity;
 
 	public static ParticipantEntity newInstance() {
-		return ParticipantEntity.newInstance(UUID.randomUUID().toString());
+		return ParticipantEntity.newInstance(UUID.randomUUID());
 	}
 
-	public static ParticipantEntity newInstance(String anId) {
-		// TODO - REL-282 - Introduce a class to handle strings that should represent a UUID.
-		if (anId == null) {
+	public static ParticipantEntity newInstance(UUID anUuid) {
+		if (anUuid == null) {
 			throw new IllegalArgumentException("[uuid] must not be 'null'.");
 		}
-		try {
-			UUID.fromString(anId);
-		} catch (IllegalArgumentException iAEx) {
-			throw new IllegalArgumentException("[anId] is not a valid representation of an UUID.");
-		}
+
 		ParticipantEntity participantEntity = new ParticipantEntity();
-		participantEntity.setId(anId);
+		participantEntity.setId(anUuid.toString());
 
 		return participantEntity;
 	}
