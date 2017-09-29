@@ -93,7 +93,7 @@ public class RelayEventGatewayJPA extends GatewayJPA implements RelayEventGatewa
 				ParticipantEntity currentParticipantEntity = participantEntity.get();
 				getParticipantMapper().mapParticipantToEntity(each, currentParticipantEntity);
 			} else {
-				ParticipantEntity newParticipantEntity = ParticipantEntity.newInstance(each.getUuid().toString());
+				ParticipantEntity newParticipantEntity = ParticipantEntity.newInstance(each.getUuid());
 				PersonEntity personEntity = findPersonEntityById(each.getUuidPerson());
 				newParticipantEntity.setPersonEntity(personEntity);
 				newParticipantEntity.setRelayEventEntity(relayEventEntity);
