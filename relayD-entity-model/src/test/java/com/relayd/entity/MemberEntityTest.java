@@ -35,10 +35,11 @@ public class MemberEntityTest {
 
 	@Test
 	public void testNewInstance_withUuid() {
-		String expected = UUID.randomUUID().toString();
-		MemberEntity sut = MemberEntity.newInstance(expected);
+		UUID uuid = UUID.randomUUID();
+		MemberEntity sut = MemberEntity.newInstance(uuid);
 
 		String actual = sut.getId();
+		String expected = uuid.toString();
 		assertEquals("[id] has not been set correctly!", expected, actual);
 	}
 
@@ -47,24 +48,9 @@ public class MemberEntityTest {
 		MemberEntity.newInstance(null);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
-	public void testNewInstance_forIncorrectEmptyUuid() {
-		MemberEntity.newInstance("");
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void testNewInstance_forIncorrectBlankUuid() {
-		MemberEntity.newInstance("   ");
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void testNewInstance_forIncorrectFalseUuid() {
-		MemberEntity.newInstance("987-345-aw3-123");
-	}
-
 	@Test
 	public void testEquals_true() {
-		String someId = UUID.randomUUID().toString();
+		UUID someId = UUID.randomUUID();
 		MemberEntity bruce = MemberEntity.newInstance(someId);
 		MemberEntity wayne = MemberEntity.newInstance(someId);
 
@@ -91,7 +77,7 @@ public class MemberEntityTest {
 
 	@Test
 	public void testToString() {
-		String someId = UUID.randomUUID().toString();
+		UUID someId = UUID.randomUUID();
 		MemberEntity sut = MemberEntity.newInstance(someId);
 
 		String actual = sut.toString();

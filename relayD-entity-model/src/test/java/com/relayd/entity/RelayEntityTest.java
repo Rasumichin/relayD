@@ -121,7 +121,7 @@ public class RelayEntityTest {
 
 		// Create another instance with the same 'id' and let the 'sut' remove this one.
 		String uuid = sut.getMemberEntities().get(0).getId();
-		MemberEntity memberEntityToBeRemoved = MemberEntity.newInstance(uuid);
+		MemberEntity memberEntityToBeRemoved = MemberEntity.newInstance(UUID.fromString(uuid));
 
 		sut.removeMemberEntity(memberEntityToBeRemoved);
 
@@ -289,7 +289,8 @@ public class RelayEntityTest {
 	@Test
 	public void testPossiblyRemoveMemberEntity_particpantEntityIsPresentAndContained() {
 		RelayEntity sut = RelayEntityInitializer.newRelayEntityWithOneMember();
-		MemberEntity memberEntity = MemberEntity.newInstance(sut.getMemberEntities().get(0).getId());
+		String idFromFirstMember = sut.getMemberEntities().get(0).getId();
+		MemberEntity memberEntity = MemberEntity.newInstance(UUID.fromString(idFromFirstMember));
 		Optional<MemberEntity> isAMemberEntity = Optional.of(memberEntity);
 
 		sut.possiblyRemoveMemberEntity(isAMemberEntity);
