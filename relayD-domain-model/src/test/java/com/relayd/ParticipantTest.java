@@ -193,6 +193,29 @@ public class ParticipantTest {
 	}
 
 	@Test
+	public void testHasEmail_ForParticipantWithEmail() {
+		Person person = Person.newInstance();
+		person.setEmail(Email.newInstance("Justus.Jonas@RockyBeach.com"));
+
+		Participant sut = Participant.newInstance(person);
+
+		boolean condition = sut.hasEmail();
+
+		assertTrue("Person should have an Email!", condition);
+	}
+
+	@Test
+	public void testHasEmail_ForParticipantWithNoEmail() {
+		Person person = Person.newInstance();
+		person.setEmail(null);
+		Participant sut = Participant.newInstance(person);
+
+		boolean condition = sut.hasEmail();
+
+		assertFalse("Person should have no Email!", condition);
+	}
+
+	@Test
 	public void testToString_ForEmptyForeAndSurename() {
 		Participant sut = Participant.newInstance();
 

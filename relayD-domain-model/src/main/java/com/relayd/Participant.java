@@ -86,6 +86,10 @@ public class Participant implements Serializable {
 		}
 	}
 
+	public boolean hasEmail() {
+		return !(getEmail().isEmpty());
+	}
+
 	@Override
 	public String toString() {
 		return getForename() + " " + getSurename();
