@@ -26,6 +26,8 @@ import com.relayd.Relay;
 import com.relayd.RelayEvent;
 import com.relayd.attributes.Forename;
 import com.relayd.attributes.Surename;
+import com.relayd.web.bridge.ParticipantBridge;
+import com.relayd.web.bridge.ParticipantBridgeImpl;
 import com.relayd.web.bridge.RelayBridge;
 import com.relayd.web.bridge.RelayBridgeImpl;
 import com.relayd.web.bridge.RelayEventBridge;
@@ -51,6 +53,7 @@ public class RelayBrowsePageBean implements Serializable {
 
 	private RelayBridge relayBridge;
 	private RelayEventBridge relayEventBridge;
+	private ParticipantBridge participantBridge;
 
 	private List<Participant> searchResult = new ArrayList<>();
 	private List<Participant> filteredParticipants;
@@ -68,6 +71,8 @@ public class RelayBrowsePageBean implements Serializable {
 	public void init() {
 		relayBridge = new RelayBridgeImpl();
 		relayEventBridge = new RelayEventBridgeImpl();
+		participantBridge = new ParticipantBridgeImpl();
+
 		intiRelays();
 		refreshParticipants();
 	}
@@ -193,13 +198,13 @@ public class RelayBrowsePageBean implements Serializable {
 
 	public void emailExportParticipant(@SuppressWarnings("unused") ActionEvent actionEvent) {
 		showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, I18N.NOT_IMPLEMENTD_YET);
-		//		String output;
-		//		if (isParticipantRowSelected()) {
-		//			output = personBridge.getEmailList(getSelectedPersons());
-		//		} else {
-		//			output = personBridge.getEmailList(getPersons());
-		//		}
-		//		showDialog(FacesMessage.SEVERITY_INFO, I18N.EMAIL, output);
+		String output;
+		if (isParticipantRowSelected()) {
+			output = participantBridge.getEmailList(getSelectedParticipants());
+		} else {
+			output = participantBridge.getEmailList(getParticipants());
+		}
+		showDialog(FacesMessage.SEVERITY_INFO, I18N.EMAIL, output);
 	}
 
 	public void emailExportRelay(@SuppressWarnings("unused") ActionEvent actionEvent) {
