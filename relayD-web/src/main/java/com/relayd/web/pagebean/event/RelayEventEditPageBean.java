@@ -148,10 +148,6 @@ public class RelayEventEditPageBean implements Serializable {
 		persistRelayEvent();
 	}
 
-	public void emailExport(@SuppressWarnings("unused") ActionEvent actionEvent) {
-		showMessageNotImplementedYet();
-	}
-
 	public RelayEventEditAddPersonPageBean getRelayEventEditAddPersonPageBean() {
 		return relayEventEditAddPersonPageBean;
 	}

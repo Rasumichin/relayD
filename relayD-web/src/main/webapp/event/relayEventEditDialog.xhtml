@@ -61,11 +61,8 @@
 				<p:commandButton
 					icon="ui-icon-trash"
 					update="form"
-					actionListener="#{relayEventEditPageBean.remove}" />
-				<p:commandButton
-					icon="ui-icon-mail-closed"
-					update="form"
-					actionListener="#{relayEventEditPageBean.emailExport}" />
+					actionListener="#{relayEventEditPageBean.remove}">
+				</p:commandButton>
 		<p:dataTable
 			id="participantTable"
 			var="participant"
