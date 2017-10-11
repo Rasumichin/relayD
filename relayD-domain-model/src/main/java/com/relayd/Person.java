@@ -190,6 +190,10 @@ public class Person implements Serializable {
 		return currentLocalPart;
 	}
 
+	public boolean isExternal() {
+		return email.isExternal();
+	}
+
 	@Override
 	public String toString() {
 		return getForename() + " "

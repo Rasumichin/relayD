@@ -103,6 +103,40 @@ public class PersonTest {
 	}
 
 	@Test
+	public void testIsExternal_ForInternalPerson() {
+		Person sut = Person.newInstance();
+		Email email = Email.newInstance("Dirk.Aderhold@canda.com");
+
+		sut.setEmail(email);
+
+		boolean condition = sut.isExternal();
+
+		assertFalse("[isExtern] not corret!", condition);
+	}
+
+	@Test
+	public void testIsExternal_ForExternalPerson() {
+		Person sut = Person.newInstance();
+		Email email = Email.newInstance("Justus.Jonas@rockybeach.com");
+
+		sut.setEmail(email);
+
+		boolean condition = sut.isExternal();
+
+		assertTrue("[isExtern] not corret!", condition);
+	}
+
+	@Test
+	public void testIsExternal_ForPersonHasNoEMail() {
+		Person sut = Person.newInstance();
+		sut.setEmail(null);
+
+		boolean condition = sut.isExternal();
+
+		assertTrue("[isExtern] not corret!", condition);
+	}
+
+	@Test
 	public void testShirtsize() {
 		Person sut = Person.newInstance();
 		Shirtsize defaultShirtsize = sut.getShirtsize();
