@@ -137,6 +137,10 @@ public class Email implements Serializable, Cloneable {
 		return email1.toString().compareTo(email2.toString());
 	}
 
+	public boolean isExternal() {
+		return !toString().contains("canda.com");
+	}
+
 	@Override
 	public String toString() {
 		return value.getAddress();

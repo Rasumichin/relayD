@@ -150,6 +150,33 @@ public class EmailTest {
 	}
 
 	@Test
+	public void testIsExternal_ForInternal() {
+		Email sut = Email.newInstance("Forename.Surename@canda.com");
+
+		boolean condition = sut.isExternal();
+
+		assertFalse("[isExternal] not correct!", condition);
+	}
+
+	@Test
+	public void testIsExternal_ForExternal() {
+		Email sut = Email.newInstance("Forename.Surename@rockyBeach.com");
+
+		boolean condition = sut.isExternal();
+
+		assertTrue("[isExternal] not correct!", condition);
+	}
+
+	@Test
+	public void testIsExternal_ForNullObjectPattern() {
+		Email sut = Email.newInstance();
+
+		boolean condition = sut.isExternal();
+
+		assertTrue("[isExternal] not correct!", condition);
+	}
+
+	@Test
 	public void testHashCode() {
 		Email sut = Email.newInstance(VALID_MAIL_OF_JUSTUS_JONAS);
 
