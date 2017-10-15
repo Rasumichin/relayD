@@ -166,6 +166,10 @@
 							update="participantTable">
 						</p:commandButton>
 						<p:commandButton
+							icon="ui-icon-pencil"
+							update="participantTable messages"
+							actionListener="#{relayBrowsePageBean.editParticipant}" />
+						<p:commandButton
 							value="export"
 							icon="ui-icon-mail-closed"
 							update="participantTable messages"

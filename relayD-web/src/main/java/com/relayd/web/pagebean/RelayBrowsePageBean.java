@@ -412,4 +412,8 @@ public class RelayBrowsePageBean implements Serializable {
 	public void setMemberEditPageBean(MemberEditPageBean aMemberEditPageBean) {
 		memberEditPageBean = aMemberEditPageBean;
 	}
+
+	public void editParticipant() {
+		showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, I18N.NOT_IMPLEMENTD_YET);
+	}
 }
