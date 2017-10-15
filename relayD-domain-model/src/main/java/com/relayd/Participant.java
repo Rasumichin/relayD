@@ -90,6 +90,14 @@ public class Participant implements Serializable {
 		return !(getEmail().isEmpty());
 	}
 
+	public String isExternal() {
+		boolean isExternal = email.isExternal();
+		if (isExternal) {
+			return "ui-icon ui-icon-check";
+		}
+		return "";
+	}
+
 	@Override
 	public String toString() {
 		return getForename() + " " + getSurename();

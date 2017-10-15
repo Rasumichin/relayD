@@ -222,6 +222,16 @@
 					</p:column>
 
 					<p:column
+						headerText="Ex"
+						visible="true"
+						toggleable="false"
+						width="2%">
+						<div align="right">
+							<h:outputText styleClass="#{participant.isExternal()}" />
+						</div>
+					</p:column>
+
+					<p:column
 						headerText="Forename"
 						sortBy="#{participant.forename}"
 						sortFunction="#{relayBrowsePageBean.sortByForename}"
