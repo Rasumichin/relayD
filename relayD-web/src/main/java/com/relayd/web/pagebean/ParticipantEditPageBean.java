@@ -1,0 +1,67 @@
+package com.relayd.web.pagebean;
+
+import java.io.Serializable;
+import java.util.Map;
+import java.util.UUID;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+
+import org.primefaces.context.RequestContext;
+
+import com.relayd.Participant;
+import com.relayd.attributes.Comment;
+
+/**
+ * @author schmollc (Christian@relayd.de)
+ * @since 15.10.2017
+ *
+ */
+@ManagedBean(name = "participantEditPageBean")
+@SessionScoped
+public class ParticipantEditPageBean implements Serializable {
+	private static final long serialVersionUID = -8750740596662373383L;
+
+	private Participant workingParticipant;
+
+	void openDialogFor(UUID uuid) {
+		workingParticipant = getParticipant(uuid);
+		openDialog();
+	}
+
+	private Participant getParticipant(UUID uuid) {
+		//		return getBridge().get(uuid);
+		return Participant.newInstance();
+	}
+
+	public void openDialog() {
+		Map<String, Object> options = new DialogOptionsBuilder().height(140).build();
+		RequestContext.getCurrentInstance().openDialog(NavigationConstants.PARTICIPANT_EDIT_DIALOG_ID, options, null);
+	}
+
+	void closeDialog() {
+		RequestContext.getCurrentInstance().closeDialog(workingParticipant);
+	}
+
+	public void save() {
+		//		persistParticipant();
+		closeDialog();
+	}
+
+	public void cancel() {
+		closeDialog();
+	}
+
+	public String getName() {
+		return workingParticipant.getForename() + " " + workingParticipant.getSurename();
+	}
+
+	public void setComment(Comment comment) {
+		workingParticipant.setComment(comment);
+	}
+
+	public Comment getComment() {
+		return workingParticipant.getComment();
+	}
+
+}

@@ -67,6 +67,9 @@ public class RelayBrowsePageBean implements Serializable {
 	@ManagedProperty(value = "#{memberEditPageBean}")
 	private MemberEditPageBean memberEditPageBean;
 
+	@ManagedProperty(value = "#{participantEditPageBean}")
+	private ParticipantEditPageBean participantEditPageBean;
+
 	@PostConstruct
 	public void init() {
 		relayBridge = new RelayBridgeImpl();
@@ -121,6 +124,10 @@ public class RelayBrowsePageBean implements Serializable {
 			UUID uuid = getSelectedMember().getUuid();
 			getMemberEditPageBean().openDialogFor(uuid);
 		}
+	}
+
+	public void editParticipant(@SuppressWarnings("unused") ActionEvent actionEvent) {
+		getParticipantEditPageBean().openDialogFor(null);
 	}
 
 	boolean isRelayRowSelected() {
@@ -413,7 +420,11 @@ public class RelayBrowsePageBean implements Serializable {
 		memberEditPageBean = aMemberEditPageBean;
 	}
 
-	public void editParticipant() {
-		showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, I18N.NOT_IMPLEMENTD_YET);
+	public ParticipantEditPageBean getParticipantEditPageBean() {
+		return participantEditPageBean;
+	}
+
+	public void setParticipantEditPageBean(ParticipantEditPageBean aParticipantEditPageBean) {
+		participantEditPageBean = aParticipantEditPageBean;
 	}
 }
