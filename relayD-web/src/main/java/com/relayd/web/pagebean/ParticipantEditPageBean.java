@@ -11,6 +11,8 @@ import org.primefaces.context.RequestContext;
 
 import com.relayd.Participant;
 import com.relayd.attributes.Comment;
+import com.relayd.web.bridge.ParticipantBridge;
+import com.relayd.web.bridge.ParticipantBridgeImpl;
 
 /**
  * @author schmollc (Christian@relayd.de)
@@ -24,14 +26,19 @@ public class ParticipantEditPageBean implements Serializable {
 
 	private Participant workingParticipant;
 
+	private ParticipantBridge participantBridge;
+
+	public ParticipantEditPageBean() {
+		participantBridge = new ParticipantBridgeImpl();
+	}
+
 	void openDialogFor(UUID uuid) {
 		workingParticipant = getParticipant(uuid);
 		openDialog();
 	}
 
 	private Participant getParticipant(UUID uuid) {
-		//		return getBridge().get(uuid);
-		return Participant.newInstance();
+		return getBridge().get(uuid);
 	}
 
 	public void openDialog() {
@@ -44,8 +51,12 @@ public class ParticipantEditPageBean implements Serializable {
 	}
 
 	public void save() {
-		//		persistParticipant();
+		persistParticipant();
 		closeDialog();
+	}
+
+	void persistParticipant() {
+		getBridge().set(workingParticipant);
 	}
 
 	public void cancel() {
@@ -64,4 +75,7 @@ public class ParticipantEditPageBean implements Serializable {
 		return workingParticipant.getComment();
 	}
 
+	private ParticipantBridge getBridge() {
+		return participantBridge;
+	}
 }

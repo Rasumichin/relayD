@@ -1,6 +1,8 @@
 package com.relayd.web.bridge;
 
+import java.io.Serializable;
 import java.util.List;
+import java.util.UUID;
 
 import com.relayd.Participant;
 
@@ -9,7 +11,9 @@ import com.relayd.Participant;
  * @since 01.10.2017
  *
  */
-public class ParticipantBridgeImpl implements ParticipantBridge {
+public class ParticipantBridgeImpl implements Serializable, ParticipantBridge {
+
+	private static final long serialVersionUID = 1496586084568676473L;
 
 	@Override
 	public String getEmailList(List<Participant> someParticipants) {
@@ -26,4 +30,12 @@ public class ParticipantBridgeImpl implements ParticipantBridge {
 
 	}
 
+	@Override
+	public Participant get(UUID uuid) {
+		return null;
+	}
+
+	@Override
+	public void set(Participant participant) {
+	}
 }
