@@ -1,8 +1,10 @@
 package com.relayd.web.bridge;
 
 import java.util.List;
+import java.util.UUID;
 
 import com.relayd.Participant;
+import com.relayd.ejb.GatewayType;
 
 /**
  * @author schmollc (Christian@relayD.de)
@@ -11,4 +13,10 @@ import com.relayd.Participant;
  */
 public interface ParticipantBridge {
 	String getEmailList(List<Participant> someParticipants);
+
+	Participant get(UUID aUuid);
+
+	void set(Participant aWorkingParticipant);
+
+	GatewayType getGatewayType();
 }

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title>Participant</title>
+	<style type="text/css">
+.ui-widget {
+	font-size: 90%;
+}
+</style>
+</h:head>
+
+<h:body>
+	<h:form id="form">
+		<p:growl
+			id="growl"
+			showDetail="true" />
+		<p:focus/>
+
+		<h:panelGrid
+			id="inputgrid"
+			columns="2"
+			cellpadding="5">
+			<p:outputLabel
+				id="nameLabel"
+				value="Name" />
+			<p:outputLabel
+				id="name"
+				value="#{participantEditPageBean.name}" />
+			<p:outputLabel
+				for="comment"
+				value="Comment:" />
+			<p:inputTextarea
+				id="comment"
+				value="#{participantEditPageBean.comment}"
+				rows="3"
+				cols="20"
+				counter="display"
+				maxlength="#{participantEditPageBean.maxLengthForComment}"
+				counterTemplate="{0} characters remaining."
+				autoResize="false" 
+				style="width:180px">
+				<f:converter converterId="com.relayd.web.converter.CommentValueObjectConverter" />
+			</p:inputTextarea>
+			<p:outputLabel
+				for="display"
+				value="" />
+			<h:outputText id="display" />
+
+		</h:panelGrid>
+
+		<p:commandButton
+			actionListener="#{participantEditPageBean.cancel}"
+			icon="ui-icon-close"
+			style="float:left;" />
+		<p:commandButton
+			update="form"
+			actionListener="#{participantEditPageBean.save}"
+			icon="ui-icon-check"
+			style="float:right;" />
+	</h:form>
+</h:body>
+</html>

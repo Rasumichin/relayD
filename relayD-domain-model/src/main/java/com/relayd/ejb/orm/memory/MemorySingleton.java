@@ -18,7 +18,7 @@ public class MemorySingleton {
 	private static final String RELAY = "Relay";
 	private static final String MEMBER = "Member";
 
-	private Map<String, Map> bigData = new HashMap<String, Map>();
+	private Map<String, Map> bigData = new HashMap<>();
 
 	private static final class InstanceHolder {
 		static final MemorySingleton INSTANCE = new MemorySingleton();
