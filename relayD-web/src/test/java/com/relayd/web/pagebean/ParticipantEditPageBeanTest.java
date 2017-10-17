@@ -8,6 +8,8 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import com.relayd.attributes.Comment;
+
 /**
  * Tue nichts, das nutzlos ist.
  *  - Miyamoto Musashi
@@ -27,5 +29,12 @@ public class ParticipantEditPageBeanTest {
 		boolean condition = sut instanceof Serializable;
 
 		assertTrue("Klasse nicht Serializable!", condition);
+	}
+
+	@Test
+	public void testGetMaxLengthForComment() {
+		Integer expected = sut.getMaxLengthForComment();
+
+		assertEquals("[maxLengthForComment] not correct!", Comment.MAX_LENGTH, expected);
 	}
 }

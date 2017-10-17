@@ -5,6 +5,10 @@ import java.util.List;
 import java.util.UUID;
 
 import com.relayd.Participant;
+import com.relayd.Settings;
+import com.relayd.ejb.GatewayType;
+import com.relayd.ejb.ParticipantGateway;
+import com.relayd.ejb.ParticipantGatewayFactory;
 
 /**
  * @author schmollc (Christian@relayD.de)
@@ -14,6 +18,11 @@ import com.relayd.Participant;
 public class ParticipantBridgeImpl implements Serializable, ParticipantBridge {
 
 	private static final long serialVersionUID = 1496586084568676473L;
+
+	@Override
+	public GatewayType getGatewayType() {
+		return Settings.getGatewayType();
+	}
 
 	@Override
 	public String getEmailList(List<Participant> someParticipants) {
@@ -32,10 +41,15 @@ public class ParticipantBridgeImpl implements Serializable, ParticipantBridge {
 
 	@Override
 	public Participant get(UUID uuid) {
-		return null;
+		return getGateway().get(uuid);
 	}
 
 	@Override
 	public void set(Participant participant) {
+		getGateway().set(participant);
+	}
+
+	private ParticipantGateway getGateway() {
+		return ParticipantGatewayFactory.get(getGatewayType());
 	}
 }

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import com.relayd.Participant;
+import com.relayd.ejb.GatewayType;
 
 /**
  * @author schmollc (Christian@relayD.de)
@@ -16,4 +17,6 @@ public interface ParticipantBridge {
 	Participant get(UUID aUuid);
 
 	void set(Participant aWorkingParticipant);
+
+	GatewayType getGatewayType();
 }

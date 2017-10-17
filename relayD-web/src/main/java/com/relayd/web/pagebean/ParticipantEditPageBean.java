@@ -42,12 +42,8 @@ public class ParticipantEditPageBean implements Serializable {
 	}
 
 	public void openDialog() {
-		Map<String, Object> options = new DialogOptionsBuilder().height(140).build();
+		Map<String, Object> options = new DialogOptionsBuilder().height(240).build();
 		RequestContext.getCurrentInstance().openDialog(NavigationConstants.PARTICIPANT_EDIT_DIALOG_ID, options, null);
-	}
-
-	void closeDialog() {
-		RequestContext.getCurrentInstance().closeDialog(workingParticipant);
 	}
 
 	public void save() {
@@ -61,6 +57,10 @@ public class ParticipantEditPageBean implements Serializable {
 
 	public void cancel() {
 		closeDialog();
+	}
+
+	void closeDialog() {
+		RequestContext.getCurrentInstance().closeDialog(workingParticipant);
 	}
 
 	public String getName() {
@@ -78,4 +78,9 @@ public class ParticipantEditPageBean implements Serializable {
 	private ParticipantBridge getBridge() {
 		return participantBridge;
 	}
+
+	public Integer getMaxLengthForComment() {
+		return Comment.MAX_LENGTH;
+	}
+
 }
