@@ -10,7 +10,6 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import com.relayd.Participant;
-import com.relayd.ParticipantBuilder;
 import com.relayd.attributes.Forename;
 
 /**
