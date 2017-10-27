@@ -76,13 +76,16 @@ public class RelayBrowsePageBean implements Serializable {
 		relayEventBridge = new RelayEventBridgeImpl();
 		participantBridge = new ParticipantBridgeImpl();
 
-		intiRelays();
+		initRelays();
 		refreshParticipants();
 	}
 
-	private void intiRelays() {
-		List<RelayEvent> someRelayEvents = relayEventBridge.all();
-		relayEvent = someRelayEvents.get(0);
+	private void initRelays() {
+		for (RelayEvent eachRelayEvent : relayEventBridge.all()) {
+			if (eachRelayEvent.getEventDay().toString().contains("2017")) {
+				setRelayEvent(eachRelayEvent);
+			}
+		}
 		root = relayBridge.convertToTreeNode(relayEvent.getRelays());
 	}
 
