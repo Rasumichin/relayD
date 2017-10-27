@@ -59,7 +59,8 @@ public class RelayBrowsePageBean implements Serializable {
 	private List<Participant> filteredParticipants;
 	private List<Participant> selectedParticipants;
 
-	private EventYear eventYear = EventYear.YEAR_2017;
+	private RelayEvent selectedRelayEvent;
+	private RelayEventDisplay relayEventDisplay;
 
 	@ManagedProperty(value = "#{relayEditPageBean}")
 	private RelayEditPageBean relayEditPageBean;
@@ -83,14 +84,24 @@ public class RelayBrowsePageBean implements Serializable {
 	private void initRelays() {
 		for (RelayEvent eachRelayEvent : relayEventBridge.all()) {
 			if (eachRelayEvent.getEventDay().toString().contains("2017")) {
-				setRelayEvent(eachRelayEvent);
+				setSelectedRelayEvent(eachRelayEvent);
+				RelayEventDisplay relayEventDisplayInit = RelayEventDisplay.newInstance(eachRelayEvent.getUuid(), eachRelayEvent.toString());
+				setRelayEventDisplay(relayEventDisplayInit);
 			}
 		}
-		root = relayBridge.convertToTreeNode(relayEvent.getRelays());
+		root = relayBridge.convertToTreeNode(getSelectedRelayEvent().getRelays());
 	}
 
 	private void refreshRelays() {
-		root = relayBridge.convertToTreeNode(relayEvent.getRelays());
+		root = relayBridge.convertToTreeNode(getSelectedRelayEvent().getRelays());
+	}
+
+	private RelayEvent getSelectedRelayEvent() {
+		return selectedRelayEvent;
+	}
+
+	private void setSelectedRelayEvent(RelayEvent aSelectedRelayEvent) {
+		selectedRelayEvent = aSelectedRelayEvent;
 	}
 
 	public RelayEditPageBean getRelayEditPageBean() {
@@ -114,7 +125,7 @@ public class RelayBrowsePageBean implements Serializable {
 	}
 
 	public void addRelay(@SuppressWarnings("unused") ActionEvent actionEvent) {
-		getRelayEditPageBean().openDialogForCreateRelay(relayEvent);
+		getRelayEditPageBean().openDialogForCreateRelay(getSelectedRelayEvent());
 	}
 
 	public void editRelay(@SuppressWarnings("unused") ActionEvent actionEvent) {
@@ -266,7 +277,7 @@ public class RelayBrowsePageBean implements Serializable {
 	}
 
 	void refreshParticipants() {
-		searchResult = new ArrayList<>(relayEvent.getParticipants());
+		searchResult = new ArrayList<>(getSelectedRelayEvent().getParticipants());
 	}
 
 	private boolean isOnlyOneParticipantRowSelected() {
@@ -358,73 +369,35 @@ public class RelayBrowsePageBean implements Serializable {
 		return relayCount;
 	}
 
-	public EventYear getEventYear() {
-		return eventYear;
+	public RelayEventDisplay getRelayEventDisplay() {
+		return relayEventDisplay;
 	}
 
-	public void setEventYear(EventYear aEventYear) {
-		eventYear = aEventYear;
+	public void setRelayEventDisplay(RelayEventDisplay aRelayEventDisplay) {
+		relayEventDisplay = aRelayEventDisplay;
 	}
 
-	public void switchEventYear(AjaxBehaviorEvent ajax) {
-		SelectOneMenu selectOneMenu = (SelectOneMenu) ajax.getSource();
-		EventYear selectedEventYear = (EventYear) selectOneMenu.getValue();
-		setRelayEvent(RelayEvent.newInstance());
+	public List<RelayEventDisplay> getRelayEventDisplays() {
+		List<RelayEventDisplay> someDisplays = new ArrayList<>();
 		for (RelayEvent eachRelayEvent : relayEventBridge.all()) {
-			if (eachRelayEvent.getEventDay().toString().contains(selectedEventYear.getDescription())) {
-				setRelayEvent(eachRelayEvent);
+			RelayEventDisplay display = RelayEventDisplay.newInstance(eachRelayEvent.getUuid(), eachRelayEvent.toString());
+			someDisplays.add(display);
+		}
+		return someDisplays;
+
+	}
+
+	public void switchRelayEventDisplay(AjaxBehaviorEvent ajax) {
+		SelectOneMenu selectOneMenu = (SelectOneMenu) ajax.getSource();
+		RelayEventDisplay selectedRelayEventDisplay = (RelayEventDisplay) selectOneMenu.getValue();
+		for (RelayEvent eachRelayEvent : relayEventBridge.all()) {
+			if (eachRelayEvent.getUuid().equals(selectedRelayEventDisplay.getUuid())) {
+				setSelectedRelayEvent(eachRelayEvent);
 			}
 		}
 		refreshRelays();
 		refreshParticipants();
 	}
-
-	// ***********************************************************************************
-	// TODO - REL-278 - Mit dem Domain Objekt funktioniert die Combobox seltsamerweise nicht.
-	private List<RelayEvent> relayEvents;
-	private RelayEvent relayEvent;
-
-	public RelayEvent getRelayEvent() {
-		return relayEvent;
-	}
-
-	public void setRelayEvent(RelayEvent aRelayEvent) {
-		relayEvent = aRelayEvent;
-	}
-
-	public List<RelayEvent> getRelayEvents() {
-		return relayEvents;
-	}
-
-	public void switchRelayEvent(AjaxBehaviorEvent ajax) {
-		SelectOneMenu selectOneMenu = (SelectOneMenu) ajax.getSource();
-		RelayEvent selectedRelayEvent = (RelayEvent) selectOneMenu.getValue();
-		//		converter="com.relayd.web.converter.RelayEventValueObjectConverter"
-	}
-
-	/**
-	    <p:selectOneMenu
-	        id="relayEvent"
-	        value="#{relayBrowsePageBean.relayEvent}"
-	        var="entry"
-	        converter="com.relayd.web.converter.RelayEventValueObjectConverter"
-	        style="width:70%">
-	        <f:selectItem
-	            itemLabel="RelayEvent"
-	            itemValue="" />
-	        <f:selectItems
-	            value="#{relayBrowsePageBean.relayEvents}"
-	            var="relayEvent"
-	            itemLabel="#{relayEvent.eventDay}"
-	            itemValue="#{relayEvent.uuid}" />
-	        <p:column>
-	            #{entry}
-	        </p:column>
-	        <p:ajax
-	            global="false"
-	            listener="#{relayBrowsePageBean.switchRelayEvent}" />
-	    </p:selectOneMenu>
-	 */
 
 	public MemberEditPageBean getMemberEditPageBean() {
 		return memberEditPageBean;

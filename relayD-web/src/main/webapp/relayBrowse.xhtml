@@ -134,23 +134,24 @@
 					actionListener="#{relayBrowsePageBean.removeParticipantFromRelay}">
 				</p:commandButton>
 				
-				<p:selectOneMenu
-					id="eventYear"
-					value="#{relayBrowsePageBean.eventYear}"
-					var="entry"
-					style="width:70%">
-					<f:selectItems
-						value="#{selectItemBean.eventYears}"
-						var="eventYear"
-						itemLabel="#{eventYear.description}" />
-					<p:column>
-						#{entry.description}
-					</p:column>
-					<p:ajax
-						global="false"
-						listener="#{relayBrowsePageBean.switchEventYear}" 
+			    <p:selectOneMenu
+			        id="relayEventDisplay"
+			        value="#{relayBrowsePageBean.relayEventDisplay}"
+			        var="entry"
+		        	converter="com.relayd.web.converter.RelayEventDisplayValueObjectConverter"
+			        style="width:70%">
+			        <f:selectItems
+			            value="#{relayBrowsePageBean.relayEventDisplays}"
+			            var="relayEventDisplay"
+			            itemLabel="#{relayEventDisplay.name}"/>
+			        <p:column>
+			            #{entry.name}
+			        </p:column>
+			        <p:ajax
+			            global="false"
+			            listener="#{relayBrowsePageBean.switchRelayEventDisplay}" 
 						update="relayTable participantTable"/>
-				</p:selectOneMenu>
+			    </p:selectOneMenu>
 
 			</p:layoutUnit>
 
