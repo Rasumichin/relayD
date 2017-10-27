@@ -1,14 +1,7 @@
 package com.relayd.ejb.orm.jpa;
 
-import java.time.Duration;
-import java.util.UUID;
-
-import com.relayd.Member;
 import com.relayd.Relay;
 import com.relayd.RelayEvent;
-import com.relayd.attributes.Position;
-import com.relayd.attributes.Relayname;
-import com.relayd.entity.MemberEntity;
 import com.relayd.entity.RelayEntity;
 import com.relayd.entity.RelayEventEntity;
 
@@ -19,6 +12,8 @@ import com.relayd.entity.RelayEventEntity;
  *
  */
 public class EntityToRelayMapper {
+
+	private RelayCreator relayCreator = RelayCreator.newInstance();
 
 	private EntityToRelayMapper() {
 	}
@@ -33,17 +28,7 @@ public class EntityToRelayMapper {
 		}
 
 		RelayEvent relayEvent = mapRelayEventEntity(relayEntity.getRelayEventEntity());
-		Relay relay = Relay.newInstance(relayEvent);
-		relay.setUuid(UUID.fromString(relayEntity.getId()));
-		relay.setRelayname(Relayname.newInstance(relayEntity.getRelayname()));
-		relay.setDuration(Duration.ofMillis(relayEntity.getDuration()));
-
-		EntityToMemberMapper memberMapper = EntityToMemberMapper.newInstance();
-		for (MemberEntity eachMemberEntity : relayEntity.getMemberEntities()) {
-			Member member = memberMapper.mapToMember(eachMemberEntity);
-			Position position = Position.newInstance(eachMemberEntity.getPosition());
-			relay.addMember(member, position);
-		}
+		Relay relay = relayCreator.createFrom(relayEntity, relayEvent);
 
 		return relay;
 	}
