@@ -1,9 +1,7 @@
 package com.relayd.ejb.orm.jpa;
 
-import java.time.Duration;
 import java.util.UUID;
 
-import com.relayd.Member;
 import com.relayd.Participant;
 import com.relayd.Person;
 import com.relayd.Relay;
@@ -11,9 +9,6 @@ import com.relayd.RelayEvent;
 import com.relayd.attributes.Comment;
 import com.relayd.attributes.EventDay;
 import com.relayd.attributes.Eventname;
-import com.relayd.attributes.Position;
-import com.relayd.attributes.Relayname;
-import com.relayd.entity.MemberEntity;
 import com.relayd.entity.ParticipantEntity;
 import com.relayd.entity.PersonEntity;
 import com.relayd.entity.RelayEntity;
@@ -26,6 +21,8 @@ import com.relayd.entity.RelayEventEntity;
  *
  */
 public class EntityToRelayEventMapper {
+
+	private RelayCreator relayCreator = RelayCreator.newInstance();
 
 	private EntityToRelayEventMapper() {
 	}
@@ -53,7 +50,7 @@ public class EntityToRelayEventMapper {
 
 	private void mapRelays(RelayEventEntity relayEventEntity, RelayEvent relayEvent) {
 		for (RelayEntity eachRelayEntity : relayEventEntity.getRelayEntities()) {
-			Relay relay = mapToRelay(eachRelayEntity, relayEvent);
+			Relay relay = relayCreator.createFrom(eachRelayEntity, relayEvent);
 			relayEvent.addRelay(relay);
 		}
 	}
@@ -71,22 +68,5 @@ public class EntityToRelayEventMapper {
 
 			relayEvent.addParticipant(participant);
 		}
-	}
-
-	private Relay mapToRelay(RelayEntity relayEntity, RelayEvent relayEvent) {
-		// TODO - REL-264 - Doppelter Code
-		Relay relay = Relay.newInstance(relayEvent);
-		relay.setUuid(UUID.fromString(relayEntity.getId()));
-		relay.setRelayname(Relayname.newInstance(relayEntity.getRelayname()));
-		relay.setDuration(Duration.ofMillis(relayEntity.getDuration()));
-
-		EntityToMemberMapper memberMapper = EntityToMemberMapper.newInstance();
-		for (MemberEntity eachMemberEntity : relayEntity.getMemberEntities()) {
-			Member member = memberMapper.mapToMember(eachMemberEntity);
-			Position position = Position.newInstance(eachMemberEntity.getPosition());
-			relay.addMember(member, position);
-		}
-
-		return relay;
 	}
 }
