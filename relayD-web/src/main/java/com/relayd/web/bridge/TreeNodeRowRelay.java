@@ -26,7 +26,6 @@ public class TreeNodeRowRelay extends TreeNodeRow {
 		return true;
 	}
 
-	// TODO - REL-281 - Im Zuge der GUI Darstellung auf String umgestellt. Sollte eher ein Domain/GUI Objekt werden/sein?
 	@Override
 	public String getRelayname() {
 		return relay.toString();

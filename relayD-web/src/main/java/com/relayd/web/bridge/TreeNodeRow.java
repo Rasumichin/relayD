@@ -34,7 +34,6 @@ public abstract class TreeNodeRow implements Serializable {
 		return false;
 	}
 
-	// TODO - REL-281 - Im Zuge der GUI Darstellung auf String umgestellt. Sollte eher ein Domain/GUI Objekt werden/sein?
 	public String getRelayname() {
 		return "";
 	}
