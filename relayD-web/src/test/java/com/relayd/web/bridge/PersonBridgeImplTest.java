@@ -35,8 +35,6 @@ import static org.mockito.Mockito.*;
  * @since   20.06.2016
  *
  */
-// TODO - REL-314 - This test produces console output saying a JPA runtime could not be started. Check mocks.
-
 @RunWith(MockitoJUnitRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class PersonBridgeImplTest {
@@ -55,7 +53,7 @@ public class PersonBridgeImplTest {
 		@SuppressWarnings("cast")
 		boolean condition = sut instanceof Serializable;
 
-		assertTrue("Klasse nicht Serializable!", condition);
+		assertTrue("Class not Serializable!", condition);
 	}
 
 	@Test
@@ -64,9 +62,9 @@ public class PersonBridgeImplTest {
 		Person newPerson = Person.newInstance();
 		newPerson.setEmail(Email.newInstance(EMAIL_JUSTUS));
 
-		ValidationResult result = sut.validateEMail(newPerson);
+		ValidationResult actual = sut.validateEMail(newPerson);
 
-		assertEquals("[result] not correct!", "EMail does exist!", result.getMessage());
+		assertEquals("[actual] not correct!", "EMail does exist!", actual.getMessage());
 	}
 
 	@Test
@@ -75,9 +73,9 @@ public class PersonBridgeImplTest {
 		Person newPerson = Person.newInstance();
 		newPerson.setEmail(Email.newInstance(EMAIL_BOB));
 
-		ValidationResult result = sut.validateEMail(newPerson);
+		ValidationResult actual = sut.validateEMail(newPerson);
 
-		assertTrue("[result] not correct!", result.getMessage().isEmpty());
+		assertTrue("[actual] not correct!", actual.getMessage().isEmpty());
 	}
 
 	@Test
@@ -88,20 +86,20 @@ public class PersonBridgeImplTest {
 		int positionFomrPeterShaw = 2;
 		Person person = somePersons.get(positionFomrPeterShaw);
 
-		ValidationResult result = sut.validateEMail(person);
+		ValidationResult actual = sut.validateEMail(person);
 
-		assertTrue("[result] not correct!", result.getMessage().isEmpty());
+		assertTrue("[actual] not correct!", actual.getMessage().isEmpty());
 	}
 
 	@Test
 	public void testGetEmailList() {
 		List<Person> somePersons = listWithPersons();
 
-		String result = sut.getEmailList(somePersons);
+		String actual = sut.getEmailList(somePersons);
 
-		assertNotNull("[result] invalid!", result);
-		assertFalse("[result] has not be empty!", result.isEmpty());
-		assertEquals("[result] not correct!", "Peter.Shaw@RockyBeach.com, Justus.Jonas@RockyBeach.com", result);
+		assertNotNull("[actual] invalid!", actual);
+		assertFalse("[actual] has not be empty!", actual.isEmpty());
+		assertEquals("[actual] not correct!", "Peter.Shaw@RockyBeach.com, Justus.Jonas@RockyBeach.com", actual);
 	}
 
 	private List<Person> listWithPersons() {
@@ -139,9 +137,9 @@ public class PersonBridgeImplTest {
 
 	@Test
 	public void testGatewayType() {
-		GatewayType result = sut.getGatewayType();
+		GatewayType actual = sut.getGatewayType();
 
-		assertEquals("[gatewayType] not correct!", GatewayType.JPA, result);
+		assertEquals("[gatewayType] not correct!", GatewayType.JPA, actual);
 	}
 
 	@Test
@@ -150,10 +148,10 @@ public class PersonBridgeImplTest {
 
 		List<PersonBrowse> actual = sut.allPersonBrowse();
 
-		assertNotNull("[resultList] not a valid instance!", actual);
+		assertNotNull("[actual] not a valid instance!", actual);
 
 		int size = actual.size();
-		assertEquals("[size] of resultList not correct!", 8, size);
+		assertEquals("[size] of list not correct!", 8, size);
 	}
 
 	@Test
