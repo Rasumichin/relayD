@@ -97,7 +97,6 @@ public class Relay implements Serializable {
 		return count;
 	}
 
-	// TODO - REL-295 - Wird durch die Lösung mit getEmailList nicht mehr gebraucht! Rückbauen
 	public List<Member> getMembers() {
 		return Collections.unmodifiableList(members);
 	}
