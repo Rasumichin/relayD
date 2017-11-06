@@ -9,8 +9,10 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import com.relayd.Member;
 import com.relayd.Relay;
 import com.relayd.RelayEvent;
+import com.relayd.attributes.Position;
 import com.relayd.attributes.Relayname;
 
 /**
@@ -96,4 +98,47 @@ public class TreeNodeRowRelayTest {
 
 		assertEquals("[duration] not correct!", expected, actual);
 	}
+
+	@Test
+	public void testGetStatus_ForRelayIsEmpty() {
+		Relay relay = Relay.newInstance(RelayEvent.newInstance());
+
+		TreeNodeRow sut = TreeNodeRow.newInstance(relay);
+
+		String actual = sut.getStatus();
+		String expected = "ui-icon ui-icon-help";
+
+		assertEquals("[getStatus] nicht korrekt!", expected, actual);
+	}
+
+	@Test
+	public void testGetStatus_ForRelayWith2Members() {
+		Relay relay = Relay.newInstance(RelayEvent.newInstance());
+		relay.addMember(Member.newInstance(new ParticipantBuilder().build()), Position.FIRST);
+		relay.addMember(Member.newInstance(new ParticipantBuilder().build()), Position.SECOND);
+
+		TreeNodeRow sut = TreeNodeRow.newInstance(relay);
+
+		String actual = sut.getStatus();
+		String expected = "ui-icon ui-icon-notice";
+
+		assertEquals("[getStatus] nicht korrekt!", expected, actual);
+	}
+
+	@Test
+	public void testGetStatus_ForRelayFilledWithMembers() {
+		Relay relay = Relay.newInstance(RelayEvent.newInstance());
+		relay.addMember(Member.newInstance(new ParticipantBuilder().build()), Position.FIRST);
+		relay.addMember(Member.newInstance(new ParticipantBuilder().build()), Position.SECOND);
+		relay.addMember(Member.newInstance(new ParticipantBuilder().build()), Position.THIRD);
+		relay.addMember(Member.newInstance(new ParticipantBuilder().build()), Position.FOURTH);
+
+		TreeNodeRow sut = TreeNodeRow.newInstance(relay);
+
+		String actual = sut.getStatus();
+		String expected = "ui-icon ui-icon-check";
+
+		assertEquals("[getStatus] nicht korrekt!", expected, actual);
+	}
+
 }
