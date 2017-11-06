@@ -143,12 +143,10 @@ public class Relay implements Serializable {
 	}
 
 	public boolean isEmpty() {
-		for (Member eachMember : members) {
-			if (!eachMember.isEmpty()) {
-				return false;
-			}
+		if (memberCount() == 0) {
+			return true;
 		}
-		return true;
+		return false;
 	}
 
 	@Override
