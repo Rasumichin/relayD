@@ -366,6 +366,25 @@ public class RelayTest {
 	}
 
 	@Test
+	public void testIsEmpty_ForEmptyWithoutMembers() {
+		Relay sut = Relay.newInstance();
+
+		boolean condition = sut.isEmpty();
+
+		assertTrue("[isEmpty] not correct!", condition);
+	}
+
+	@Test
+	public void testIsEmpty_ForRelayWithMembers() {
+		Relay sut = Relay.newInstance();
+		sut.addMember(Member.newInstance(new ParticipantBuilder().build()), Position.FIRST);
+
+		boolean condition = sut.isEmpty();
+
+		assertFalse("[isEmpty] not correct!", condition);
+	}
+
+	@Test
 	public void testToString_ForRelayWithoutMember() {
 		Relay sut = Relay.newInstance();
 

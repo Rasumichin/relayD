@@ -142,6 +142,15 @@ public class Relay implements Serializable {
 		return DurationFormatUtils.formatDuration(duration.toMillis(), "HH:mm:ss");
 	}
 
+	public boolean isEmpty() {
+		for (Member eachMember : members) {
+			if (!eachMember.isEmpty()) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
