@@ -169,7 +169,7 @@ public class RelayEventTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testAddRelay_ForMaximumBorder() {
-		for (int i = 0; i < RelayEvent.MAX_NUMBER_OF_RELAYS; i++) {
+		for (int i = 0; i < sut.getMaxNumberOfRelays(); i++) {
 			sut.addRelay(Relay.newInstance());
 		}
 		Relay dieVierFragezeichen = Relay.newInstance();
@@ -185,10 +185,21 @@ public class RelayEventTest {
 	}
 
 	@Test
-	public void testGetMaxNumberOfRelays() {
+	public void testGetMaxNumberOfRelays_Default() {
 		Integer actual = sut.getMaxNumberOfRelays();
 
 		assertEquals(Integer.valueOf(18), actual);
+	}
+
+	@Test
+	public void testMaxNumberOfRelays() {
+		Integer expected = 10;
+
+		sut.setMaxNumberOfRelays(expected);
+
+		Integer actual = sut.getMaxNumberOfRelays();
+
+		assertEquals(expected, actual);
 	}
 
 	@Test
