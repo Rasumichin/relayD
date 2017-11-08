@@ -140,6 +140,16 @@ public class RelayEvent implements Serializable {
 		return Collections.unmodifiableCollection(participants);
 	}
 
+	public Integer completeRelays() {
+		Integer completeRelays = 0;
+		for (Relay eachRelay : relays) {
+			if (eachRelay.isFilled()) {
+				completeRelays++;
+			}
+		}
+		return completeRelays;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

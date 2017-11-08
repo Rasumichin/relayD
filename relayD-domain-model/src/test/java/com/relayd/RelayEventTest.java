@@ -280,6 +280,29 @@ public class RelayEventTest {
 	}
 
 	@Test
+	public void testCompleteRelays() {
+		Relay dieVierFragezeichen = Relay.newInstance();
+		dieVierFragezeichen.addMember(Member.newInstance(Participant.newInstance(new PersonBuilder().build())));
+		dieVierFragezeichen.addMember(Member.newInstance(Participant.newInstance(new PersonBuilder().build())));
+		dieVierFragezeichen.addMember(Member.newInstance(Participant.newInstance(new PersonBuilder().build())));
+		dieVierFragezeichen.addMember(Member.newInstance(Participant.newInstance(new PersonBuilder().build())));
+
+		sut.addRelay(dieVierFragezeichen);
+
+		Relay staubwolke = Relay.newInstance();
+		staubwolke.addMember(Member.newInstance());
+		staubwolke.addMember(Member.newInstance());
+
+		sut.addRelay(staubwolke);
+
+		Integer actual = sut.completeRelays();
+
+		Integer expected = 1;
+
+		assertEquals("[completeRelays] not corret!", expected, actual);
+	}
+
+	@Test
 	public void testToString() {
 		String actual = sut.toString();
 		String expected = "Metro Group Marathon Düsseldorf, 2017-04-30";
