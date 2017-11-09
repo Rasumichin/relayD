@@ -15,6 +15,7 @@ import com.relayd.attributes.Distance;
 import com.relayd.attributes.EventDay;
 import com.relayd.attributes.Eventname;
 import com.relayd.attributes.Position;
+import com.relayd.attributes.RelayCount;
 
 /**
  * @author schmollc (Christian@relayd.de)
@@ -27,12 +28,12 @@ public class RelayEvent implements Serializable {
 
 	static Integer MAX_NUMBER_OF_TRACKS = 4;
 
-	private Integer maxNumberOfRelays = 18;
+	private RelayCount maxNumberOfRelays = RelayCount.newInstance(18);
 
 	private UUID uuid;
 	private Eventname name = Eventname.newInstance();
 	private EventDay eventDay = EventDay.today();
-	private Set<Relay> relays = new HashSet<>(maxNumberOfRelays);
+	private Set<Relay> relays = new HashSet<>(maxNumberOfRelays.intValue());
 	private List<Track> tracks = new ArrayList<>(MAX_NUMBER_OF_TRACKS);
 	private Collection<Participant> participants = new HashSet<>();
 
@@ -88,11 +89,11 @@ public class RelayEvent implements Serializable {
 		eventDay = day;
 	}
 
-	public void setMaxNumberOfRelays(Integer aMaxNumberOfRelays) {
+	public void setMaxNumberOfRelays(RelayCount aMaxNumberOfRelays) {
 		maxNumberOfRelays = aMaxNumberOfRelays;
 	}
 
-	public Integer getMaxNumberOfRelays() {
+	public RelayCount getMaxNumberOfRelays() {
 		return maxNumberOfRelays;
 	}
 
@@ -118,7 +119,7 @@ public class RelayEvent implements Serializable {
 		// Warum "<=" und nicht "==" ?
 		// Wenn man irgendwann einen Fehler einbaut und es wären aus irgendwelchen Gründen 19 Relays
 		// in der Liste würde diese Methode dann nicht mehr motzen, da ja "nur" bei size == 18 eine Exception fliegt!
-		if (maxNumberOfRelays <= relays.size()) {
+		if (maxNumberOfRelays.intValue() <= relays.size()) {
 			throw new IllegalArgumentException("Max Number [" + maxNumberOfRelays + "] of Relays reached");
 		}
 		relays.add(relay);

@@ -126,7 +126,8 @@ public class RelayEventEditPageBean implements Serializable {
 	}
 
 	public Integer getNumberOfRelays() {
-		return workingRelayEvent.getMaxNumberOfRelays();
+		// TODO
+		return workingRelayEvent.getMaxNumberOfRelays().intValue();
 	}
 
 	void persistRelayEvent() {

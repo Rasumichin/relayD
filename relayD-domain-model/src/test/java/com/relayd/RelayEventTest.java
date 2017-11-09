@@ -18,6 +18,7 @@ import com.relayd.attributes.Distance;
 import com.relayd.attributes.EventDay;
 import com.relayd.attributes.Eventname;
 import com.relayd.attributes.Position;
+import com.relayd.attributes.RelayCount;
 import com.relayd.attributes.Relayname;
 
 /**
@@ -169,7 +170,7 @@ public class RelayEventTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testAddRelay_ForMaximumBorder() {
-		for (int i = 0; i < sut.getMaxNumberOfRelays(); i++) {
+		for (int i = 0; i < sut.getMaxNumberOfRelays().intValue(); i++) {
 			sut.addRelay(Relay.newInstance());
 		}
 		Relay dieVierFragezeichen = Relay.newInstance();
@@ -186,20 +187,21 @@ public class RelayEventTest {
 
 	@Test
 	public void testGetMaxNumberOfRelays_Default() {
-		Integer actual = sut.getMaxNumberOfRelays();
+		RelayCount expected = RelayCount.newInstance(18);
+		RelayCount actual = sut.getMaxNumberOfRelays();
 
-		assertEquals(Integer.valueOf(18), actual);
+		assertEquals("[getMaxNumberOfRelays] not correct!", expected, actual);
 	}
 
 	@Test
 	public void testMaxNumberOfRelays() {
-		Integer expected = 10;
+		RelayCount expected = RelayCount.newInstance(10);
 
 		sut.setMaxNumberOfRelays(expected);
 
-		Integer actual = sut.getMaxNumberOfRelays();
+		RelayCount actual = sut.getMaxNumberOfRelays();
 
-		assertEquals(expected, actual);
+		assertEquals("[maxNumberOfRelays] not correct!", expected, actual);
 	}
 
 	@Test
