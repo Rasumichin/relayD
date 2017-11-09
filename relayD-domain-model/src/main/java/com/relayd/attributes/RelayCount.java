@@ -29,6 +29,10 @@ public class RelayCount implements Serializable {
 		return false;
 	}
 
+	public int intValue() {
+		return value;
+	}
+
 	@Override
 	public String toString() {
 		return value.toString();

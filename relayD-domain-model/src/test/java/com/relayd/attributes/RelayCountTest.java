@@ -88,6 +88,27 @@ public class RelayCountTest {
 	}
 
 	@Test
+	public void testIntValue() {
+		int expected = 10;
+		RelayCount sut = RelayCount.newInstance(expected);
+
+		int actual = sut.intValue();
+
+		assertEquals("[intValue] not correct!", expected, actual);
+	}
+
+	@Test
+	public void testIntValue_ForNOP() {
+		RelayCount sut = RelayCount.newInstance();
+
+		int actual = sut.intValue();
+
+		int expected = 0;
+
+		assertEquals("[intValue] not correct!", expected, actual);
+	}
+
+	@Test
 	public void testToString() {
 		Integer numberOfRelays = 10;
 		RelayCount sut = RelayCount.newInstance(numberOfRelays);
