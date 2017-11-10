@@ -34,6 +34,8 @@ public class RelayEventEntity {
 	@Column(nullable = false)
 	private Date eventDay;
 
+	private Integer maxNumberOfRelays;
+
 	@OneToMany(mappedBy = "relayEventEntity", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
 	private List<RelayEntity> relayEntities = new ArrayList<>();
 
@@ -80,6 +82,14 @@ public class RelayEventEntity {
 
 	public void setEventDay(Date anEventDay) {
 		eventDay = anEventDay;
+	}
+
+	public Integer getMaxNumberOfRelays() {
+		return maxNumberOfRelays;
+	}
+
+	public void setMaxNumberOfRelays(Integer aMaxNumberOfRelays) {
+		maxNumberOfRelays = aMaxNumberOfRelays;
 	}
 
 	public void addRelay(RelayEntity relayEntity) {

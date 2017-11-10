@@ -14,6 +14,7 @@ import org.junit.runners.MethodSorters;
 import com.relayd.RelayEvent;
 import com.relayd.attributes.EventDay;
 import com.relayd.attributes.Eventname;
+import com.relayd.attributes.RelayCount;
 import com.relayd.entity.RelayEventEntity;
 
 /**
@@ -84,6 +85,32 @@ public class RelayEventToEntityMapperTest {
 
 		Date actual = relayEventEntity.getEventDay();
 		assertEquals("Mapping of [eventDay] is not correct!", expected.toString(), actual.toString());
+	}
+
+	@Test
+	public void testMapRelayEventToEntity_maxNumberOfRelays() {
+		Integer expected = 13;
+		RelayEvent relayEvent = RelayEvent.newInstance();
+		relayEvent.setMaxNumberOfRelays(RelayCount.newInstance(expected));
+
+		RelayEventEntity relayEventEntity = RelayEventEntity.newInstance();
+		sut.mapRelayEventToEntity(relayEvent, relayEventEntity);
+
+		Integer actual = relayEventEntity.getMaxNumberOfRelays();
+		assertEquals("Mapping of [maxNumberOfRelays] is not correct!", expected, actual);
+	}
+
+	@Test
+	public void testMapRelayEventToEntity_maxNumberOfRelays_IsNull() {
+		Integer expected = null;
+		RelayEvent relayEvent = RelayEvent.newInstance();
+		relayEvent.setMaxNumberOfRelays(RelayCount.newInstance(expected));
+
+		RelayEventEntity relayEventEntity = RelayEventEntity.newInstance();
+		sut.mapRelayEventToEntity(relayEvent, relayEventEntity);
+
+		Integer actual = relayEventEntity.getMaxNumberOfRelays();
+		assertEquals("Mapping of [maxNumberOfRelays] is not correct!", expected, actual);
 	}
 
 }

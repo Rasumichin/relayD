@@ -11,6 +11,7 @@ import org.junit.runners.MethodSorters;
 import com.relayd.RelayEvent;
 import com.relayd.attributes.EventDay;
 import com.relayd.attributes.Eventname;
+import com.relayd.attributes.RelayCount;
 
 /**
  *  1. Testen beginnt mit Respekt und endet mit Respekt.
@@ -71,6 +72,17 @@ public class RelayEventToRelayEventMapperTest {
 
 		Eventname actual = target.getName();
 		assertEquals("Mapping of [name] is not correct!", expected, actual);
+	}
+
+	@Test
+	public void testMapRelayEventToRelayEvent_ForMaxNumberOfRelays() {
+		RelayCount expected = RelayCount.newInstance(12);
+		source.setMaxNumberOfRelays(expected);
+
+		sut.mapRelayEventToRelayEvent(source, target);
+
+		RelayCount actual = target.getMaxNumberOfRelays();
+		assertEquals("Mapping of [maxNumberOfRelays] is not correct!", expected, actual);
 	}
 
 }

@@ -83,11 +83,10 @@ public class RelayBrowsePageBean implements Serializable {
 
 	private void initRelays() {
 		for (RelayEvent eachRelayEvent : relayEventBridge.all()) {
-			if (eachRelayEvent.getEventDay().toString().contains("2017")) {
-				setSelectedRelayEvent(eachRelayEvent);
-				RelayEventDisplay relayEventDisplayInit = RelayEventDisplay.newInstance(eachRelayEvent.getUuid(), eachRelayEvent.toString());
-				setRelayEventDisplay(relayEventDisplayInit);
-			}
+			setSelectedRelayEvent(eachRelayEvent);
+			RelayEventDisplay relayEventDisplayInit = RelayEventDisplay.newInstance(eachRelayEvent.getUuid(), eachRelayEvent.toString());
+			setRelayEventDisplay(relayEventDisplayInit);
+			break;
 		}
 		root = relayBridge.convertToTreeNode(getSelectedRelayEvent().getRelays());
 	}
@@ -126,6 +125,13 @@ public class RelayBrowsePageBean implements Serializable {
 
 	public void addRelay(@SuppressWarnings("unused") ActionEvent actionEvent) {
 		getRelayEditPageBean().openDialogForCreateRelay(getSelectedRelayEvent());
+	}
+
+	public boolean addRelayPossible() {
+		if (selectedRelayEvent.getMaxNumberOfRelays().intValue() == selectedRelayEvent.getNumberOfRelays()) {
+			return true;
+		}
+		return false;
 	}
 
 	public void editRelay(@SuppressWarnings("unused") ActionEvent actionEvent) {

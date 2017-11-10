@@ -27,6 +27,7 @@ public class RelayEventEntityIT extends EntityIT {
 		RelayEventEntity sut = RelayEventEntity.newInstance();
 		sut.setEventName("title");
 		sut.setEventDay(new Date(System.currentTimeMillis()));
+		sut.setMaxNumberOfRelays(13);
 
 		EntityTransaction tx = getEntityManager().getTransaction();
 
@@ -44,6 +45,7 @@ public class RelayEventEntityIT extends EntityIT {
 		RelayEventEntity sut = RelayEventEntity.newInstance();
 		sut.setEventName("title");
 		sut.setEventDay(new Date(System.currentTimeMillis()));
+		sut.setMaxNumberOfRelays(13);
 
 		RelayEntity relayEntity = RelayEntity.newInstance();
 		relayEntity.setRelayname("Foo Relay");

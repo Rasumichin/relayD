@@ -45,9 +45,12 @@
 			<p:outputLabel
 				for="numberOfRelays"
 				value="Number of Relays:" />
-			<p:outputLabel
+			<p:inputText
 				id="numberOfRelays"
-				value="#{relayEventEditPageBean.numberOfRelays}" />
+				value="#{relayEventEditPageBean.numberOfRelays}"
+				style="width:280px">
+				<f:converter converterId="com.relayd.web.converter.RelayCountValueObjectConverter" />
+			</p:inputText>
 		</h:panelGrid>
 				<p:commandButton
 					icon="ui-icon-plus"

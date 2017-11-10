@@ -22,6 +22,7 @@ import com.relayd.RelayEvent;
 import com.relayd.attributes.EventDay;
 import com.relayd.attributes.Eventname;
 import com.relayd.attributes.Forename;
+import com.relayd.attributes.RelayCount;
 import com.relayd.attributes.Surename;
 import com.relayd.web.bridge.RelayEventBridge;
 import com.relayd.web.bridge.RelayEventBridgeImpl;
@@ -125,8 +126,12 @@ public class RelayEventEditPageBean implements Serializable {
 		selectedParticipants = someParticipants;
 	}
 
-	public Integer getNumberOfRelays() {
+	public RelayCount getNumberOfRelays() {
 		return workingRelayEvent.getMaxNumberOfRelays();
+	}
+
+	public void setNumberOfRelays(RelayCount relayCount) {
+		workingRelayEvent.setMaxNumberOfRelays(relayCount);
 	}
 
 	void persistRelayEvent() {

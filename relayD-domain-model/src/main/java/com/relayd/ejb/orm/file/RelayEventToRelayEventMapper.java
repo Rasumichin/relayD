@@ -30,6 +30,7 @@ public class RelayEventToRelayEventMapper {
 
 		target.setEventDay(source.getEventDay());
 		target.setName(source.getName());
+		target.setMaxNumberOfRelays(source.getMaxNumberOfRelays());
 
 		List<Participant> allParticipant = new ArrayList<>();
 

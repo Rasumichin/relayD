@@ -18,6 +18,7 @@ import com.relayd.attributes.Distance;
 import com.relayd.attributes.EventDay;
 import com.relayd.attributes.Eventname;
 import com.relayd.attributes.Position;
+import com.relayd.attributes.RelayCount;
 import com.relayd.attributes.Relayname;
 
 /**
@@ -169,7 +170,7 @@ public class RelayEventTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testAddRelay_ForMaximumBorder() {
-		for (int i = 0; i < RelayEvent.MAX_NUMBER_OF_RELAYS; i++) {
+		for (int i = 0; i < sut.getMaxNumberOfRelays().intValue(); i++) {
 			sut.addRelay(Relay.newInstance());
 		}
 		Relay dieVierFragezeichen = Relay.newInstance();
@@ -185,10 +186,22 @@ public class RelayEventTest {
 	}
 
 	@Test
-	public void testGetMaxNumberOfRelays() {
-		Integer actual = sut.getMaxNumberOfRelays();
+	public void testGetMaxNumberOfRelays_Default() {
+		RelayCount expected = RelayCount.newInstance(18);
+		RelayCount actual = sut.getMaxNumberOfRelays();
 
-		assertEquals(Integer.valueOf(18), actual);
+		assertEquals("[getMaxNumberOfRelays] not correct!", expected, actual);
+	}
+
+	@Test
+	public void testMaxNumberOfRelays() {
+		RelayCount expected = RelayCount.newInstance(10);
+
+		sut.setMaxNumberOfRelays(expected);
+
+		RelayCount actual = sut.getMaxNumberOfRelays();
+
+		assertEquals("[maxNumberOfRelays] not correct!", expected, actual);
 	}
 
 	@Test
@@ -266,6 +279,29 @@ public class RelayEventTest {
 		List<Track> actual = sut.getTracks();
 
 		actual.add(Track.newInstance(Distance.newInstance()));
+	}
+
+	@Test
+	public void testCompleteRelays() {
+		Relay dieVierFragezeichen = Relay.newInstance();
+		dieVierFragezeichen.addMember(Member.newInstance(Participant.newInstance(new PersonBuilder().build())));
+		dieVierFragezeichen.addMember(Member.newInstance(Participant.newInstance(new PersonBuilder().build())));
+		dieVierFragezeichen.addMember(Member.newInstance(Participant.newInstance(new PersonBuilder().build())));
+		dieVierFragezeichen.addMember(Member.newInstance(Participant.newInstance(new PersonBuilder().build())));
+
+		sut.addRelay(dieVierFragezeichen);
+
+		Relay staubwolke = Relay.newInstance();
+		staubwolke.addMember(Member.newInstance());
+		staubwolke.addMember(Member.newInstance());
+
+		sut.addRelay(staubwolke);
+
+		Integer actual = sut.completeRelays();
+
+		Integer expected = 1;
+
+		assertEquals("[completeRelays] not corret!", expected, actual);
 	}
 
 	@Test

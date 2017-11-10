@@ -23,7 +23,7 @@ public class Relay implements Serializable {
 	UUID uuid = null;
 	private Relayname relayname = Relayname.newInstance();
 	private RelayEvent relayEvent = RelayEvent.newInstance();
-	private List<Member> members = new ArrayList<Member>();
+	private List<Member> members = new ArrayList<>();
 
 	private Duration duration = Duration.ZERO;
 
@@ -140,6 +140,21 @@ public class Relay implements Serializable {
 			return "00:00:00";
 		}
 		return DurationFormatUtils.formatDuration(duration.toMillis(), "HH:mm:ss");
+	}
+
+	public boolean isEmpty() {
+		if (memberCount() == 0) {
+			return true;
+		}
+		return false;
+
+	}
+
+	public boolean isFilled() {
+		if (memberCount() == RelayEvent.MAX_NUMBER_OF_TRACKS) {
+			return true;
+		}
+		return false;
 	}
 
 	@Override

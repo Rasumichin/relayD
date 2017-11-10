@@ -38,10 +38,9 @@ public class TreeNodeRowRelay extends TreeNodeRow {
 
 	@Override
 	public String getStatus() {
-		int relayMembers = relay.memberCount().intValue();
-		if (relayMembers == 0) {
+		if (relay.isEmpty()) {
 			return "ui-icon ui-icon-help";
-		} else if (relayMembers == 4) {
+		} else if (relay.isFilled()) {
 			return "ui-icon ui-icon-check";
 		}
 		return "ui-icon ui-icon-notice";

@@ -366,6 +366,58 @@ public class RelayTest {
 	}
 
 	@Test
+	public void testIsEmpty_ForRelayWithoutMembers() {
+		Relay sut = Relay.newInstance();
+
+		boolean condition = sut.isEmpty();
+
+		assertTrue("[isEmpty] not correct!", condition);
+	}
+
+	@Test
+	public void testIsEmpty_ForRelayWithMembers() {
+		Relay sut = Relay.newInstance();
+		sut.addMember(Member.newInstance(new ParticipantBuilder().build()), Position.FIRST);
+
+		boolean condition = sut.isEmpty();
+
+		assertFalse("[isEmpty] not correct!", condition);
+	}
+
+	@Test
+	public void testIsFilled_ForRelayWithoutMembers() {
+		Relay sut = Relay.newInstance();
+
+		boolean condition = sut.isFilled();
+
+		assertFalse("[isFilled] not correct!", condition);
+	}
+
+	@Test
+	public void testIsFilled_ForRelayWith2Members() {
+		Relay sut = Relay.newInstance();
+		sut.addMember(Member.newInstance(new ParticipantBuilder().build()), Position.FIRST);
+		sut.addMember(Member.newInstance(new ParticipantBuilder().build()), Position.SECOND);
+
+		boolean condition = sut.isFilled();
+
+		assertFalse("[isFilled] not correct!", condition);
+	}
+
+	@Test
+	public void testIsFilled_ForRelayWith4Members() {
+		Relay sut = Relay.newInstance();
+		sut.addMember(Member.newInstance(new ParticipantBuilder().build()), Position.FIRST);
+		sut.addMember(Member.newInstance(new ParticipantBuilder().build()), Position.SECOND);
+		sut.addMember(Member.newInstance(new ParticipantBuilder().build()), Position.THIRD);
+		sut.addMember(Member.newInstance(new ParticipantBuilder().build()), Position.FOURTH);
+
+		boolean condition = sut.isFilled();
+
+		assertTrue("[isFilled] not correct!", condition);
+	}
+
+	@Test
 	public void testToString_ForRelayWithoutMember() {
 		Relay sut = Relay.newInstance();
 

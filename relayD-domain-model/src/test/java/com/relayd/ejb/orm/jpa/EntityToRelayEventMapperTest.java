@@ -19,6 +19,7 @@ import com.relayd.attributes.Comment;
 import com.relayd.attributes.EventDay;
 import com.relayd.attributes.Eventname;
 import com.relayd.attributes.Forename;
+import com.relayd.attributes.RelayCount;
 import com.relayd.entity.ParticipantEntity;
 import com.relayd.entity.PersonEntity;
 import com.relayd.entity.RelayEntity;
@@ -54,6 +55,7 @@ public class EntityToRelayEventMapperTest {
 		RelayEventEntity relayEventEntity = RelayEventEntity.newInstance(expected);
 		relayEventEntity.setEventName("My Event");
 		relayEventEntity.setEventDay(new Date(System.currentTimeMillis()));
+		relayEventEntity.setMaxNumberOfRelays(13);
 
 		RelayEvent relayEvent = sut.mapToRelayEvent(relayEventEntity);
 
@@ -67,6 +69,7 @@ public class EntityToRelayEventMapperTest {
 		RelayEventEntity relayEventEntity = RelayEventEntity.newInstance();
 		relayEventEntity.setEventName(expected.toString());
 		relayEventEntity.setEventDay(new Date(System.currentTimeMillis()));
+		relayEventEntity.setMaxNumberOfRelays(13);
 
 		RelayEvent relayEvent = sut.mapToRelayEvent(relayEventEntity);
 
@@ -80,6 +83,7 @@ public class EntityToRelayEventMapperTest {
 		RelayEventEntity relayEventEntity = RelayEventEntity.newInstance();
 		relayEventEntity.setEventName("My Event");
 		relayEventEntity.setEventDay(today);
+		relayEventEntity.setMaxNumberOfRelays(13);
 
 		RelayEvent relayEvent = sut.mapToRelayEvent(relayEventEntity);
 
@@ -90,11 +94,26 @@ public class EntityToRelayEventMapperTest {
 	}
 
 	@Test
+	public void testMapToRelayEvent_check_maxNumberOfRelays() {
+		RelayCount expected = RelayCount.newInstance(13);
+		RelayEventEntity relayEventEntity = RelayEventEntity.newInstance();
+		relayEventEntity.setEventName("My Event");
+		relayEventEntity.setEventDay(new Date(System.currentTimeMillis()));
+		relayEventEntity.setMaxNumberOfRelays(expected.intValue());
+
+		RelayEvent relayEvent = sut.mapToRelayEvent(relayEventEntity);
+
+		RelayCount actual = relayEvent.getMaxNumberOfRelays();
+		assertEquals("Mapping of [maxNumberOfRelays] is not correct!", expected, actual);
+	}
+
+	@Test
 	public void testMapToRelayEvent_check_Relays() {
 		// Arrange
 		RelayEventEntity relayEventEntity = RelayEventEntity.newInstance();
 		relayEventEntity.setEventName("My Event");
 		relayEventEntity.setEventDay(new Date(System.currentTimeMillis()));
+		relayEventEntity.setMaxNumberOfRelays(13);
 
 		RelayEntity relayEntity = RelayEntity.newInstance();
 		relayEventEntity.addRelay(relayEntity);
@@ -120,6 +139,7 @@ public class EntityToRelayEventMapperTest {
 		RelayEventEntity relayEventEntity = RelayEventEntity.newInstance();
 		relayEventEntity.setEventName("My Event");
 		relayEventEntity.setEventDay(new Date(System.currentTimeMillis()));
+		relayEventEntity.setMaxNumberOfRelays(13);
 
 		ParticipantEntity participantEntity = ParticipantEntity.newInstance();
 		String expectedComment = "A comment";

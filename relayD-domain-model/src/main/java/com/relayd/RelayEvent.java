@@ -15,6 +15,7 @@ import com.relayd.attributes.Distance;
 import com.relayd.attributes.EventDay;
 import com.relayd.attributes.Eventname;
 import com.relayd.attributes.Position;
+import com.relayd.attributes.RelayCount;
 
 /**
  * @author schmollc (Christian@relayd.de)
@@ -25,13 +26,14 @@ import com.relayd.attributes.Position;
 public class RelayEvent implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	static Integer MAX_NUMBER_OF_RELAYS = 18;
 	static Integer MAX_NUMBER_OF_TRACKS = 4;
+
+	private RelayCount maxNumberOfRelays = RelayCount.newInstance(18);
 
 	private UUID uuid;
 	private Eventname name = Eventname.newInstance();
 	private EventDay eventDay = EventDay.today();
-	private Set<Relay> relays = new HashSet<>(MAX_NUMBER_OF_RELAYS);
+	private Set<Relay> relays = new HashSet<>(maxNumberOfRelays.intValue());
 	private List<Track> tracks = new ArrayList<>(MAX_NUMBER_OF_TRACKS);
 	private Collection<Participant> participants = new HashSet<>();
 
@@ -87,8 +89,12 @@ public class RelayEvent implements Serializable {
 		eventDay = day;
 	}
 
-	public Integer getMaxNumberOfRelays() {
-		return MAX_NUMBER_OF_RELAYS;
+	public void setMaxNumberOfRelays(RelayCount aMaxNumberOfRelays) {
+		maxNumberOfRelays = aMaxNumberOfRelays;
+	}
+
+	public RelayCount getMaxNumberOfRelays() {
+		return maxNumberOfRelays;
 	}
 
 	public Integer getNumberOfRelays() {
@@ -113,8 +119,8 @@ public class RelayEvent implements Serializable {
 		// Warum "<=" und nicht "==" ?
 		// Wenn man irgendwann einen Fehler einbaut und es wären aus irgendwelchen Gründen 19 Relays
 		// in der Liste würde diese Methode dann nicht mehr motzen, da ja "nur" bei size == 18 eine Exception fliegt!
-		if (MAX_NUMBER_OF_RELAYS <= relays.size()) {
-			throw new IllegalArgumentException("Max Number [" + MAX_NUMBER_OF_RELAYS + "] of Relays reached");
+		if (maxNumberOfRelays.intValue() <= relays.size()) {
+			throw new IllegalArgumentException("Max Number [" + maxNumberOfRelays + "] of Relays reached");
 		}
 		relays.add(relay);
 	}
@@ -133,6 +139,17 @@ public class RelayEvent implements Serializable {
 
 	public Collection<Participant> getParticipants() {
 		return Collections.unmodifiableCollection(participants);
+	}
+
+	//TODO getCompleteRelays!
+	public Integer completeRelays() {
+		Integer completeRelays = 0;
+		for (Relay eachRelay : relays) {
+			if (eachRelay.isFilled()) {
+				completeRelays++;
+			}
+		}
+		return completeRelays;
 	}
 
 	@Override
