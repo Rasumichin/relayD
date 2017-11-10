@@ -37,7 +37,8 @@
 				position="west"
 				resizable="false"
 				size="45%">
-				<p:toolbar>
+				<p:toolbar 		
+					id="toolbarWest">
 					<f:facet name="left">
 						<p:commandButton
 							actionListener="#{relayBrowsePageBean.showAllRelays}"
@@ -45,6 +46,7 @@
 							update="relayTable">
 						</p:commandButton>
 						<p:commandButton
+							disabled="#{relayBrowsePageBean.addRelayPossible()}"
 							icon="ui-icon-plus"
 							actionListener="#{relayBrowsePageBean.addRelay}"
 							update="relayTable">
@@ -150,7 +152,7 @@
 			        <p:ajax
 			            global="false"
 			            listener="#{relayBrowsePageBean.switchRelayEventDisplay}" 
-						update="relayTable participantTable"/>
+						update="relayTable toolbarWest participantTable"/>
 			    </p:selectOneMenu>
 
 			</p:layoutUnit>

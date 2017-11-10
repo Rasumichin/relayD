@@ -127,6 +127,13 @@ public class RelayBrowsePageBean implements Serializable {
 		getRelayEditPageBean().openDialogForCreateRelay(getSelectedRelayEvent());
 	}
 
+	public boolean addRelayPossible() {
+		if (selectedRelayEvent.getMaxNumberOfRelays().intValue() == selectedRelayEvent.getNumberOfRelays()) {
+			return true;
+		}
+		return false;
+	}
+
 	public void editRelay(@SuppressWarnings("unused") ActionEvent actionEvent) {
 		if (!isRelayTableRowSelected()) {
 			showMessageErrorNoRowRelaySelected();
