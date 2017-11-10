@@ -91,6 +91,7 @@
 						width="48%">
 						<h:outputText value="#{relayEvent.name}" />
 					</p:column>
+
 					<p:column
 						headerText="Participants"
 						width="10%">
@@ -100,10 +101,10 @@
 					</p:column>
 
 					<p:column
-						headerText="Relays complete"
+						headerText="Max Relays"
 						width="10%">
 						<h:outputText
-							value="#{relayEvent.completeRelays()}"
+							value="#{relayEvent.maxNumberOfRelays}"
 							style="float:right" />
 					</p:column>
 
@@ -112,6 +113,14 @@
 						width="10%">
 						<h:outputText
 							value="#{relayEvent.numberOfRelays}"
+							style="float:right" />
+					</p:column>
+
+					<p:column
+						headerText="Relays complete"
+						width="10%">
+						<h:outputText
+							value="#{relayEvent.completeRelays()}"
 							style="float:right" />
 					</p:column>
 
