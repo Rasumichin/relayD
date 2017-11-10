@@ -7,9 +7,10 @@ DROP TABLE relay_event;
 -- Create Table relay_event
 --------------------------------------------------
 CREATE TABLE relay_event(
-  id 			CHAR(36) 		NOT NULL,
-  eventname 	VARCHAR(256)	NOT NULL,
-  eventDay 		DATE 			NOT NULL
+  id 					CHAR(36) 		NOT NULL,
+  eventname 			VARCHAR(256)	NOT NULL,
+  eventDay 				DATE 			NOT NULL,
+  maxNumberOfRelays		INTEGER
 );
 
 --------------------------------------------------
