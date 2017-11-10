@@ -31,6 +31,7 @@ public class RelayEventEntityTest {
 		assertNull("[id] not correct!", sut.getId());
 		assertNull("[eventDay] not correct!", sut.getEventDay());
 		assertNull("[eventName] not correct!", sut.getEventName());
+		assertNull("[maxNumberOfRelays] not correct!", sut.getMaxNumberOfRelays());
 	}
 
 	@Test
@@ -53,6 +54,7 @@ public class RelayEventEntityTest {
 		assertNotNull("Id of RelayEventEntity must not be 'null' after creation!", sut.getId());
 		assertNull("[eventName] not correct!", sut.getEventName());
 		assertNull("[eventDay] not correct!", sut.getEventDay());
+		assertNull("[maxNumberOfRelays] not correct!", sut.getMaxNumberOfRelays());
 	}
 
 	@Test
@@ -103,6 +105,15 @@ public class RelayEventEntityTest {
 
 		sut.setEventDay(eventDay);
 		assertEquals("[eventDay] has not been set correctly!", eventDay, sut.getEventDay());
+	}
+
+	@Test
+	public void testSetMaxNumberOfRelays() {
+		Integer maxNumberOfRelays = 14;
+		RelayEventEntity sut = RelayEventEntity.newInstance();
+
+		sut.setMaxNumberOfRelays(maxNumberOfRelays);
+		assertEquals("[maxNumberOfRelays] has not been set correctly!", maxNumberOfRelays, sut.getMaxNumberOfRelays());
 	}
 
 	@Test

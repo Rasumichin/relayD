@@ -31,5 +31,7 @@ public class RelayEventToEntityMapper {
 
 		Date date = source.getEventDay().isEmpty() ? null : Date.valueOf(source.getEventDay().getValue());
 		target.setEventDay(date);
+
+		target.setMaxNumberOfRelays(source.getMaxNumberOfRelays().isEmpty() ? null : source.getMaxNumberOfRelays().intValue());
 	}
 }

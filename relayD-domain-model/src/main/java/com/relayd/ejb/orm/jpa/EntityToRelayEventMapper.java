@@ -9,6 +9,7 @@ import com.relayd.RelayEvent;
 import com.relayd.attributes.Comment;
 import com.relayd.attributes.EventDay;
 import com.relayd.attributes.Eventname;
+import com.relayd.attributes.RelayCount;
 import com.relayd.entity.ParticipantEntity;
 import com.relayd.entity.PersonEntity;
 import com.relayd.entity.RelayEntity;
@@ -40,6 +41,7 @@ public class EntityToRelayEventMapper {
 		relayEvent.setUuid(UUID.fromString(relayEventEntity.getId()));
 		relayEvent.setName(Eventname.newInstance(relayEventEntity.getEventName()));
 		relayEvent.setEventDay(EventDay.newInstance(relayEventEntity.getEventDay().toLocalDate()));
+		relayEvent.setMaxNumberOfRelays(RelayCount.newInstance(relayEventEntity.getMaxNumberOfRelays()));
 
 		mapRelays(relayEventEntity, relayEvent);
 
