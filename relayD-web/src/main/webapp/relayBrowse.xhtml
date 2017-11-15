@@ -91,7 +91,7 @@
 					selectionMode="single"
 					selection="#{relayBrowsePageBean.selectedNode}">
 					<f:facet name="header">
-		            	Relays
+		            	Relays (Total #{relayBrowsePageBean.getRelaysSum()})
 		        	</f:facet>
 					
 					<p:column 
@@ -212,7 +212,7 @@
 					rowKey="#{participant.uuidPerson}"
 					resizableColumns="true">
 					<f:facet name="header">
-			     		List of Participants
+			     		List of Participants (Total #{relayBrowsePageBean.getParticipantSum()})
 					</f:facet>
 
 					<p:column

@@ -420,4 +420,12 @@ public class RelayBrowsePageBean implements Serializable {
 	public void setParticipantEditPageBean(ParticipantEditPageBean aParticipantEditPageBean) {
 		participantEditPageBean = aParticipantEditPageBean;
 	}
+
+	public Integer getParticipantSum() {
+		return selectedRelayEvent.getNumberOfParticipants();
+	}
+
+	public Integer getRelaysSum() {
+		return selectedRelayEvent.getNumberOfRelays();
+	}
 }
