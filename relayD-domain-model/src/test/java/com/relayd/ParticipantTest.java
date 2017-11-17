@@ -13,6 +13,7 @@ import com.relayd.Participant.ParticipantNullObject;
 import com.relayd.attributes.Comment;
 import com.relayd.attributes.Email;
 import com.relayd.attributes.Forename;
+import com.relayd.attributes.Shirtsize;
 import com.relayd.attributes.Surename;
 
 /**
@@ -166,6 +167,24 @@ public class ParticipantTest {
 
 		boolean condition = actual.isEmpty();
 		assertTrue("[condition] should be emtpy!", condition);
+	}
+
+	@Test
+	public void testShirtsize() {
+		Person person = Person.newInstance();
+		person.setShirtsize(Shirtsize.HerrenM);
+		Participant sut = Participant.newInstance(person);
+
+		Shirtsize shirtsizeFromPerson = sut.getShirtsize();
+
+		assertEquals("[shirtsize] for default is not correct!", Shirtsize.HerrenM, shirtsizeFromPerson);
+
+		Shirtsize expected = Shirtsize.HerrenXXL;
+
+		sut.setShirtsize(expected);
+
+		Shirtsize actual = sut.getShirtsize();
+		assertEquals("[shirtsize] not correct!", expected, actual);
 	}
 
 	@Test
