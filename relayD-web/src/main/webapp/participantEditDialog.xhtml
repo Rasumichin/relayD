@@ -31,6 +31,28 @@
 			<p:outputLabel
 				id="name"
 				value="#{participantEditPageBean.name}" />
+
+			<p:outputLabel
+				for="shirtsize"
+				value="Shirtsize:" />
+			<p:selectOneMenu
+				id="shirtsize"
+				value="#{participantEditPageBean.shirtsize}"
+				var="entry"
+				style="width:160px">
+				<f:selectItem
+					itemLabel="Select Shirtsize"
+					itemValue="" />
+				<f:selectItems
+					value="#{selectItemBean.shirtsizes}"
+					var="shirtsize"
+					itemLabel="#{shirtsize.description}"
+					itemValue="#{shirtsize}" />
+				<p:column>
+					#{entry.description}
+				</p:column>
+			</p:selectOneMenu>
+
 			<p:outputLabel
 				for="comment"
 				value="Comment:" />

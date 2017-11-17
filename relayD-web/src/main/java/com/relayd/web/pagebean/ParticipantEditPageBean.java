@@ -11,6 +11,7 @@ import org.primefaces.context.RequestContext;
 
 import com.relayd.Participant;
 import com.relayd.attributes.Comment;
+import com.relayd.attributes.Shirtsize;
 import com.relayd.web.bridge.ParticipantBridge;
 import com.relayd.web.bridge.ParticipantBridgeImpl;
 
@@ -42,7 +43,7 @@ public class ParticipantEditPageBean implements Serializable {
 	}
 
 	public void openDialog() {
-		Map<String, Object> options = new DialogOptionsBuilder().height(240).build();
+		Map<String, Object> options = new DialogOptionsBuilder().height(280).build();
 		RequestContext.getCurrentInstance().openDialog(NavigationConstants.PARTICIPANT_EDIT_DIALOG_ID, options, null);
 	}
 
@@ -73,6 +74,14 @@ public class ParticipantEditPageBean implements Serializable {
 
 	public Comment getComment() {
 		return workingParticipant.getComment();
+	}
+
+	public Shirtsize getShirtsize() {
+		return workingParticipant.getShirtsize();
+	}
+
+	public void setShirtsize(Shirtsize aShirtsize) {
+		workingParticipant.setShirtsize(aShirtsize);
 	}
 
 	private ParticipantBridge getBridge() {
