@@ -51,6 +51,6 @@ public class ParticipantGatewayFile implements ParticipantGateway {
 
 	private void mapParticipantToParticipant(Participant target, Participant source) {
 		target.setComment(source.getComment());
+		target.setShirtsize(source.getShirtsize());
 	}
-
 }
