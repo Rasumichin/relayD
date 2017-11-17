@@ -12,6 +12,7 @@ import org.junit.runners.MethodSorters;
 
 import com.relayd.Participant;
 import com.relayd.attributes.Comment;
+import com.relayd.attributes.Shirtsize;
 import com.relayd.entity.ParticipantEntity;
 import com.relayd.entity.PersonEntity;
 
@@ -88,6 +89,22 @@ public class EntityToParticipantMapperTest {
 		Comment expected = Comment.newInstance(comment);
 
 		assertEquals("Mapping of [comment] is not corret!", expected, actual);
+	}
+
+	@Test
+	public void testMapToParticipant_check_shirtsize() {
+		ParticipantEntity participantEntity = ParticipantEntity.newInstance();
+		PersonEntity dummyEntity = PersonEntity.newInstance();
+		participantEntity.setPersonEntity(dummyEntity);
+		Integer shirtsize = 7;
+		participantEntity.setShirtsize(shirtsize);
+
+		Participant participant = sut.mapToParticipant(participantEntity);
+
+		Shirtsize actual = participant.getShirtsize();
+		Shirtsize expected = Shirtsize.newInstance(shirtsize);
+
+		assertEquals("Mapping of [shirtsize] is not corret!", expected, actual);
 	}
 
 }
