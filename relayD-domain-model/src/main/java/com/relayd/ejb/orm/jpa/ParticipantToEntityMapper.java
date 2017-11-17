@@ -26,5 +26,6 @@ public class ParticipantToEntityMapper {
 			throw new IllegalArgumentException("[target] must not be 'null'!");
 		}
 		target.setComment(source.getComment().isEmpty() ? null : source.getComment().toString());
+		target.setShirtsize(source.getShirtsize().getSize());
 	}
 }
