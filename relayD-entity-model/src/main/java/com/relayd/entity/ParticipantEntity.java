@@ -26,6 +26,9 @@ public class ParticipantEntity {
 	@Column(name = "info", length = 1024)
 	private String comment;
 
+	@Column
+	private Integer shirtsize;
+
 	@ManyToOne
 	@Column(name = "personId", nullable = false, length = 36)
 	@ForeignKey
@@ -65,6 +68,14 @@ public class ParticipantEntity {
 
 	public String getComment() {
 		return comment;
+	}
+
+	public Integer getShirtsize() {
+		return shirtsize;
+	}
+
+	public void setShirtsize(Integer aShirtsize) {
+		shirtsize = aShirtsize;
 	}
 
 	public void setPersonEntity(PersonEntity aPersonEntity) {
