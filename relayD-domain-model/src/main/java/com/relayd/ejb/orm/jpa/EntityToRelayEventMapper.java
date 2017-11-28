@@ -3,15 +3,12 @@ package com.relayd.ejb.orm.jpa;
 import java.util.UUID;
 
 import com.relayd.Participant;
-import com.relayd.Person;
 import com.relayd.Relay;
 import com.relayd.RelayEvent;
-import com.relayd.attributes.Comment;
 import com.relayd.attributes.EventDay;
 import com.relayd.attributes.Eventname;
 import com.relayd.attributes.RelayCount;
 import com.relayd.entity.ParticipantEntity;
-import com.relayd.entity.PersonEntity;
 import com.relayd.entity.RelayEntity;
 import com.relayd.entity.RelayEventEntity;
 
@@ -58,16 +55,10 @@ public class EntityToRelayEventMapper {
 	}
 
 	private void mapParticipants(RelayEventEntity relayEventEntity, RelayEvent relayEvent) {
-		EntityToPersonMapper entityToPersonMapper = EntityToPersonMapper.newInstance();
+		EntityToParticipantMapper entityToParticipantMapper = EntityToParticipantMapper.newInstance();
+
 		for (ParticipantEntity eachParticipantEntity : relayEventEntity.getParticipantEntities()) {
-			PersonEntity personEntity = eachParticipantEntity.getPersonEntity();
-
-			Person person = entityToPersonMapper.mapToPerson(personEntity);
-
-			Participant participant = Participant.newInstance(person);
-			participant.setUuid(UUID.fromString(eachParticipantEntity.getId()));
-			participant.setComment(Comment.newInstance(eachParticipantEntity.getComment()));
-
+			Participant participant = entityToParticipantMapper.mapToParticipant(eachParticipantEntity);
 			relayEvent.addParticipant(participant);
 		}
 	}
