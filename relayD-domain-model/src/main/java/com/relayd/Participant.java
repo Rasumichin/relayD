@@ -6,6 +6,7 @@ import java.util.UUID;
 import com.relayd.attributes.Comment;
 import com.relayd.attributes.Email;
 import com.relayd.attributes.Forename;
+import com.relayd.attributes.Shirtsize;
 import com.relayd.attributes.Surename;
 
 /**
@@ -23,15 +24,17 @@ public class Participant implements Serializable {
 	private Surename surename = Surename.newInstance();
 	private Email email = Email.newInstance();
 	private Comment comment = Comment.newInstance();
+	private Shirtsize shirtsize = Shirtsize.UNKNOWN;
 
 	private Participant() {
 	}
 
-	private Participant(Forename aForename, Surename aSurename, Email anEmail, UUID anUuid) {
+	private Participant(Forename aForename, Surename aSurename, Email anEmail, Shirtsize aShirtsize, UUID anUuid) {
 		uuid = UUID.randomUUID();
 		forename = aForename;
 		surename = aSurename;
 		email = anEmail;
+		shirtsize = aShirtsize;
 		uuidPerson = anUuid;
 	}
 
@@ -43,7 +46,7 @@ public class Participant implements Serializable {
 		if (person == null) {
 			return ParticipantNullObject.instance();
 		}
-		return new Participant(person.getForename(), person.getSurename(), person.getEmail(), person.getUuid());
+		return new Participant(person.getForename(), person.getSurename(), person.getEmail(), person.getShirtsize(), person.getUuid());
 	}
 
 	public boolean isEmpty() {
@@ -84,6 +87,14 @@ public class Participant implements Serializable {
 		} else {
 			comment = aComment;
 		}
+	}
+
+	public Shirtsize getShirtsize() {
+		return shirtsize;
+	}
+
+	public void setShirtsize(Shirtsize aShirtsize) {
+		shirtsize = aShirtsize;
 	}
 
 	public boolean hasEmail() {

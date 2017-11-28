@@ -11,6 +11,7 @@ CREATE TABLE participant (
 	personId					CHAR(36)		NOT NULL			COMMENT 'UUID of the referenced person, string representation.',
 	relayEventId		 		CHAR(36) 		NOT NULL			COMMENT 'UUID of the referenced relayEvent, string representation.',
 	info						VARCHAR(1024) 						COMMENT 'A comment for a Participant.', -- COMMENT geht nicht
+    shirtsize					INTEGER,
 	CONSTRAINT fk_participant_person
 		FOREIGN KEY (personId) REFERENCES person (id)
 		ON DELETE RESTRICT

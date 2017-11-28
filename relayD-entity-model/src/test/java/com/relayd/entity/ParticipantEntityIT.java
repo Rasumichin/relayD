@@ -53,6 +53,7 @@ public class ParticipantEntityIT extends EntityIT {
 	public void testInsertParticipantEntity() {
 		ParticipantEntity sut = ParticipantEntity.newInstance();
 		sut.setComment("a Comment");
+		sut.setShirtsize(7);
 		sut.setRelayEventEntity(relayEventEntity);
 		sut.setPersonEntity(personEntity);
 

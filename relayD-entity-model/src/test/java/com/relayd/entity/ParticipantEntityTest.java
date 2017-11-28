@@ -24,6 +24,7 @@ public class ParticipantEntityTest {
 		ParticipantEntity sut = new ParticipantEntity();
 		assertNull("[id] not correct!", sut.getId());
 		assertNull("[comment] not correct!", sut.getComment());
+		assertNull("[shirtsize] not correct!", sut.getShirtsize());
 	}
 
 	@Test
@@ -50,7 +51,7 @@ public class ParticipantEntityTest {
 	}
 
 	@Test
-	public void testSetComment() {
+	public void testComment() {
 		String expected = "a info";
 		ParticipantEntity sut = ParticipantEntity.newInstance();
 
@@ -59,6 +60,19 @@ public class ParticipantEntityTest {
 		String actual = sut.getComment();
 
 		assertEquals("[comment] has not been set correctly!", expected, actual);
+	}
+
+	@Test
+	public void testShirtsize() {
+		ParticipantEntity sut = ParticipantEntity.newInstance();
+
+		Integer expected = 1;
+
+		sut.setShirtsize(expected);
+
+		Integer actual = sut.getShirtsize();
+
+		assertEquals("[shirtsize] has not been set correctly!", expected, actual);
 	}
 
 	@Test
