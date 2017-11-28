@@ -20,6 +20,7 @@ import com.relayd.attributes.EventDay;
 import com.relayd.attributes.Eventname;
 import com.relayd.attributes.Forename;
 import com.relayd.attributes.RelayCount;
+import com.relayd.attributes.Shirtsize;
 import com.relayd.entity.ParticipantEntity;
 import com.relayd.entity.PersonEntity;
 import com.relayd.entity.RelayEntity;
@@ -142,8 +143,13 @@ public class EntityToRelayEventMapperTest {
 		relayEventEntity.setMaxNumberOfRelays(13);
 
 		ParticipantEntity participantEntity = ParticipantEntity.newInstance();
+
 		String expectedComment = "A comment";
 		participantEntity.setComment(expectedComment);
+
+		Shirtsize expectedShirtSize = Shirtsize.DamenS;
+		participantEntity.setShirtsize(expectedShirtSize.getSize());
+
 		relayEventEntity.addParticipant(participantEntity);
 
 		PersonEntity persontEntity = PersonEntity.newInstance();
@@ -163,10 +169,12 @@ public class EntityToRelayEventMapperTest {
 		Participant expected = Participant.newInstance(person);
 		expected.setUuid(UUID.fromString(participantEntity.getId()));
 		expected.setComment(Comment.newInstance(expectedComment));
-
+		expected.setShirtsize(expectedShirtSize);
 		Participant actual = someParticipants.iterator().next();
 
 		assertEquals("Mapping of [Participants] is not correct!", expected, actual);
 		assertEquals("Comment of [Participants] is not correct!", expected.getComment(), actual.getComment());
+		assertEquals("Shirtsize of [Participants] is not correct!", expected.getShirtsize(), actual.getShirtsize());
+
 	}
 }
