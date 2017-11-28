@@ -55,7 +55,7 @@ public class RelayBrowsePageBean implements Serializable {
 	private RelayEventBridge relayEventBridge;
 	private ParticipantBridge participantBridge;
 
-	private List<Participant> searchResult = new ArrayList<>();
+	private List<Participant> participants = new ArrayList<>();
 	private List<Participant> filteredParticipants;
 	private List<Participant> selectedParticipants;
 
@@ -88,7 +88,17 @@ public class RelayBrowsePageBean implements Serializable {
 			setRelayEventDisplay(relayEventDisplayInit);
 			break;
 		}
-		root = relayBridge.convertToTreeNode(getSelectedRelayEvent().getRelays());
+		refreshRelays();
+	}
+
+	void refreshParticipants() {
+		for (RelayEvent eachRelayEvent : relayEventBridge.all()) {
+			if (selectedRelayEvent.equals(eachRelayEvent)) {
+				selectedRelayEvent = eachRelayEvent;
+			}
+		}
+		participants = new ArrayList<>(getSelectedRelayEvent().getParticipants());
+		refreshRelays();
 	}
 
 	private void refreshRelays() {
@@ -263,7 +273,7 @@ public class RelayBrowsePageBean implements Serializable {
 	}
 
 	public List<Participant> getParticipants() {
-		return searchResult;
+		return participants;
 	}
 
 	public List<Participant> getSelectedParticipants() {
@@ -280,10 +290,6 @@ public class RelayBrowsePageBean implements Serializable {
 
 	public int sortBySurename(Surename name1, Surename name2) {
 		return Surename.sortBySurename(name1, name2);
-	}
-
-	void refreshParticipants() {
-		searchResult = new ArrayList<>(getSelectedRelayEvent().getParticipants());
 	}
 
 	private boolean isOnlyOneParticipantRowSelected() {
