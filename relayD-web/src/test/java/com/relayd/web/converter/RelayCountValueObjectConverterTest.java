@@ -26,36 +26,36 @@ public class RelayCountValueObjectConverterTest {
 	@Test
 	public void testGetAsObject_ForNullValue() {
 		String nullValue = null;
-		Object result = sut.getAsObject(null, null, nullValue);
+		Object object = sut.getAsObject(null, null, nullValue);
 
-		assertNull("Expected valid instance.", result);
+		assertNull("Expected valid instance!", object);
 	}
 
 	@Test
 	public void testGetAsObject_ForEmptyValue() {
 		String emptyValue = "";
-		Object result = sut.getAsObject(null, null, emptyValue);
+		Object object = sut.getAsObject(null, null, emptyValue);
 
-		assertNull("Expected valid instance.", result);
+		assertNull("Expected valid instance!", object);
 	}
 
 	@Test
 	public void testGetAsObject_ForValue() {
-		Object result = sut.getAsObject(null, null, value);
+		Object object = sut.getAsObject(null, null, value);
 
-		assertNotNull("Expected valid instance.", result);
-		assertEquals(RelayCount.class, result.getClass());
-		RelayCount relayCount = (RelayCount) result;
-		assertEquals("Attribute not correct.", value, relayCount.toString());
+		assertNotNull("Expected valid instance!", object);
+		assertEquals("Class not correct!", RelayCount.class, object.getClass());
+		RelayCount relayCount = (RelayCount) object;
+		assertEquals("Attribute not correct!", value, relayCount.toString());
 	}
 
 	@Test
 	public void testGetAsString() {
 		RelayCount relayCount = RelayCount.newInstance(Integer.valueOf(value));
 
-		String result = sut.getAsString(null, null, relayCount);
+		String object = sut.getAsString(null, null, relayCount);
 
-		assertNotNull("Expected valid instance.", result);
-		assertEquals("Attribute not correct.", value, result);
+		assertNotNull("Expected valid instance!", object);
+		assertEquals("Attribute not correct!", value, object);
 	}
 }

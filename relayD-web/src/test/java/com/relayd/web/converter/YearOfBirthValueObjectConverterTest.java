@@ -9,6 +9,10 @@ import org.junit.runners.MethodSorters;
 import com.relayd.attributes.YearOfBirth;
 
 /**
+ * The unit tests are documents.
+ * They describe the lowest-level design of the system.
+ *  - Robert C. Martin
+ *
  * @author schmollc (Christian@relayd.de)
  * @since 22.09.2016
  *
@@ -22,28 +26,29 @@ public class YearOfBirthValueObjectConverterTest {
 	@Test
 	public void testGetAsObject_ForNullValue() {
 		String nullValue = null;
-		Object result = sut.getAsObject(null, null, nullValue);
+		Object object = sut.getAsObject(null, null, nullValue);
 
-		assertNull("Expected valid instance.", result);
+		assertNull("Expected valid instance!", object);
 	}
 
 	@Test
 	public void testGetAsObject_ForEmptyValue() {
 		String emptyValue = "";
-		Object result = sut.getAsObject(null, null, emptyValue);
+		Object object = sut.getAsObject(null, null, emptyValue);
 
-		assertNull("Expected valid instance.", result);
+		assertNull("Expected valid instance!", object);
 	}
 
 	@Test
 	public void testGetAsObject_ForValue() {
 
-		Object result = sut.getAsObject(null, null, EXPECTED_YEAR);
+		Object object = sut.getAsObject(null, null, EXPECTED_YEAR);
 
-		assertNotNull("Expected valid instance.", result);
-		assertEquals(YearOfBirth.class, result.getClass());
-		YearOfBirth yearOfBirth = (YearOfBirth) result;
-		assertEquals("Attribute not correct.", EXPECTED_YEAR, yearOfBirth.toString());
+		assertNotNull("Expected valid instance!", object);
+		assertEquals("Class not correct!", YearOfBirth.class, object.getClass());
+
+		YearOfBirth yearOfBirth = (YearOfBirth) object;
+		assertEquals("Attribute not correct!", EXPECTED_YEAR, yearOfBirth.toString());
 	}
 
 	@Test
@@ -51,9 +56,9 @@ public class YearOfBirthValueObjectConverterTest {
 		Integer year = Integer.valueOf(EXPECTED_YEAR);
 		YearOfBirth yearOfBirth = YearOfBirth.newInstance(year);
 
-		String result = sut.getAsString(null, null, yearOfBirth);
+		String object = sut.getAsString(null, null, yearOfBirth);
 
-		assertNotNull("Expected valid instance.", result);
-		assertEquals("Attribute not correct.", EXPECTED_YEAR, result);
+		assertNotNull("Expected valid instance!", object);
+		assertEquals("Attribute not correct!", EXPECTED_YEAR, object);
 	}
 }

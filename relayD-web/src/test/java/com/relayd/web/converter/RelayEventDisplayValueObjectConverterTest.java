@@ -11,6 +11,12 @@ import org.junit.runners.MethodSorters;
 import com.relayd.web.pagebean.RelayEventDisplay;
 
 /**
+ * The first rule of functions is that they should be small.
+ * The second rule of functions is that they should be smaller than that.
+ *  - Robert C. Martin
+ *
+ * @author  schmollc (Christian@relayd.de)
+ * @since   10.11.2017
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -20,28 +26,28 @@ public class RelayEventDisplayValueObjectConverterTest {
 	@Test
 	public void testGetAsObject_ForNullValue() {
 		String nullValue = null;
-		Object actual = sut.getAsObject(null, null, nullValue);
+		Object object = sut.getAsObject(null, null, nullValue);
 
-		assertNull("Expected valid instance.", actual);
+		assertNull("Expected valid instance!", object);
 	}
 
 	@Test
 	public void testGetAsObject_ForEmptyValue() {
 		String emptyValue = "";
-		Object actual = sut.getAsObject(null, null, emptyValue);
+		Object object = sut.getAsObject(null, null, emptyValue);
 
-		assertNull("Expected valid instance.", actual);
+		assertNull("Expected valid instance!", object);
 	}
 
 	@Test
 	public void testGetAsObject_ForValidValue() {
 		String validString = new String("2697d710-8967-4b2d-9ab2-8fc50ddc6138");
-		Object actual = sut.getAsObject(null, null, validString);
+		Object object = sut.getAsObject(null, null, validString);
 
-		assertNotNull("Expected valid instance.", actual);
-		assertEquals(RelayEventDisplay.class, actual.getClass());
-		RelayEventDisplay relayEventDisplay = (RelayEventDisplay) actual;
-		assertEquals("Attribute not correct.", validString, relayEventDisplay.toString());
+		assertNotNull("Expected valid instance!", object);
+		assertEquals("Class not corret!", RelayEventDisplay.class, object.getClass());
+		RelayEventDisplay relayEventDisplay = (RelayEventDisplay) object;
+		assertEquals("Attribute not correct!", validString, relayEventDisplay.toString());
 	}
 
 	@Test
@@ -49,9 +55,9 @@ public class RelayEventDisplayValueObjectConverterTest {
 		String expected = new String("2697d710-8967-4b2d-9ab2-8fc50ddc6138");
 		RelayEventDisplay email = RelayEventDisplay.newInstance(UUID.fromString(expected), "Test Event");
 
-		String actual = sut.getAsString(null, null, email);
+		String object = sut.getAsString(null, null, email);
 
-		assertNotNull("Expected valid instance.", actual);
-		assertEquals("Attribute not correct.", expected, actual);
+		assertNotNull("Expected valid instance!", object);
+		assertEquals("Attribute not correct!", expected, object);
 	}
 }

@@ -28,27 +28,27 @@ public class EventDayValueObjectConverterTest {
 	@Test
 	public void testGetAsObject_ForNullValue() {
 		String nullValue = null;
-		Object result = sut.getAsObject(null, null, nullValue);
+		Object object = sut.getAsObject(null, null, nullValue);
 
-		assertNull("Expected valid instance.", result);
+		assertNull("Expected valid instance!", object);
 	}
 
 	@Test
 	public void testGetAsObject_ForEmptyValue() {
 		String emptyValue = "";
-		Object result = sut.getAsObject(null, null, emptyValue);
+		Object object = sut.getAsObject(null, null, emptyValue);
 
-		assertNull("Expected valid instance.", result);
+		assertNull("Expected valid instance!", object);
 	}
 
 	@Test
 	public void testGetAsObject_ForValue() {
-		Object result = sut.getAsObject(null, null, EXPECTED_DAY);
+		Object object = sut.getAsObject(null, null, EXPECTED_DAY);
 
-		assertNotNull("Expected valid instance.", result);
-		assertEquals(EventDay.class, result.getClass());
-		EventDay eventDay = (EventDay) result;
-		assertEquals("Attribute not correct.", EXPECTED_DAY, eventDay.toString());
+		assertNotNull("Expected valid instance!", object);
+		assertEquals("Class not correct!", EventDay.class, object.getClass());
+		EventDay eventDay = (EventDay) object;
+		assertEquals("Attribute not correct!", EXPECTED_DAY, eventDay.toString());
 	}
 
 	@Test
@@ -56,9 +56,9 @@ public class EventDayValueObjectConverterTest {
 		LocalDate localDate = LocalDate.of(2015, Month.DECEMBER, 31);
 		EventDay eventDay = EventDay.newInstance(localDate);
 
-		String result = sut.getAsString(null, null, eventDay);
+		String object = sut.getAsString(null, null, eventDay);
 
-		assertNotNull("Expected valid instance.", result);
-		assertEquals("Attribute not correct.", EXPECTED_DAY, result);
+		assertNotNull("Expected valid instance!", object);
+		assertEquals("Attribute not correct!", EXPECTED_DAY, object);
 	}
 }

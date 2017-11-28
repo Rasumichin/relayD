@@ -9,6 +9,11 @@ import org.junit.runners.MethodSorters;
 import com.relayd.attributes.Surename;
 
 /**
+ * What makes a clean test?
+ * Three things.
+ * Readability, readability, and readability.
+ *  - Robert C. Martin
+ *
  * @author  schmollc (Christian@relayd.de)
  * @author  Rasumichin (Erik@relayd.de)
  * @since   26.06.2016
@@ -28,28 +33,28 @@ public class SurenameValueObjectConverterTest extends NameValueObjectConverterTe
 	@Test
 	public void testGetName() {
 		Surename expected = Surename.newInstance(name);
-		Surename result = sut.getName(name);
+		Surename actual = sut.getName(name);
 
-		assertEquals("Surename has not been correctly created.", expected, result);
+		assertEquals("Surename has not been correctly created!", expected, actual);
 	}
 
 	@Test
 	public void testGetAsObject_ForValue() {
-		Object result = sut.getAsObject(null, null, name);
+		Object object = sut.getAsObject(null, null, name);
 
-		assertNotNull("Expected valid instance.", result);
-		assertEquals(Surename.class, result.getClass());
-		Surename surename = (Surename) result;
-		assertEquals("Attribute not correct.", name, surename.toString());
+		assertNotNull("Expected valid instance!", object);
+		assertEquals("Class not correct!", Surename.class, object.getClass());
+		Surename surename = (Surename) object;
+		assertEquals("Attribute not correct!", name, surename.toString());
 	}
 
 	@Test
 	public void testGetAsString() {
 		Surename surename = Surename.newInstance(name);
 
-		String result = sut.getAsString(null, null, surename);
+		String actual = sut.getAsString(null, null, surename);
 
-		assertNotNull("Expected valid instance.", result);
-		assertEquals("Attribute not correct.", name, result);
+		assertNotNull("Expected valid instance!", actual);
+		assertEquals("Attribute not correct!", name, actual);
 	}
 }
