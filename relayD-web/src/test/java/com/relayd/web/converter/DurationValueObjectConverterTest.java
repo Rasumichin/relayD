@@ -25,40 +25,40 @@ public class DurationValueObjectConverterTest {
 	@Test
 	public void testGetAsObject_ForNullValue() {
 		String nullValue = null;
-		Object result = sut.getAsObject(null, null, nullValue);
+		Object object = sut.getAsObject(null, null, nullValue);
 
-		assertNotNull("Expected valid instance.", result);
+		assertNotNull("Expected valid instance!", object);
 	}
 
 	@Test
 	public void testGetAsObject_ForEmptyValue() {
 		String emptyValue = "";
-		Object result = sut.getAsObject(null, null, emptyValue);
+		Object object = sut.getAsObject(null, null, emptyValue);
 
-		assertNotNull("Expected valid instance.", result);
+		assertNotNull("Expected valid instance!", object);
 	}
 
 	@Test
 	public void testGetAsObject_ForValue() {
 		Duration expected = Duration.ofHours(3).plusMinutes(17).plusSeconds(43);
 
-		Object result = sut.getAsObject(null, null, durationAsString);
+		Object object = sut.getAsObject(null, null, durationAsString);
 
-		assertNotNull("Expected valid instance.", result);
-		assertEquals(Duration.class, result.getClass());
+		assertNotNull("Expected valid instance!", object);
+		assertEquals("Class not correct!", Duration.class, object.getClass());
 
-		Duration duration = (Duration) result;
+		Duration duration = (Duration) object;
 
-		assertEquals("Attribute not correct.", expected, duration);
+		assertEquals("Attribute not correct!", expected, duration);
 	}
 
 	@Test
 	public void testGetAsString() {
 		Duration duration = Duration.ofHours(3).plusMinutes(17).plusSeconds(43);
 
-		String result = sut.getAsString(null, null, duration);
+		String object = sut.getAsString(null, null, duration);
 
-		assertNotNull("Expected valid instance.", result);
-		assertEquals("Attribute not correct.", durationAsString, result);
+		assertNotNull("Expected valid instance!", object);
+		assertEquals("Attribute not correct!", durationAsString, object);
 	}
 }

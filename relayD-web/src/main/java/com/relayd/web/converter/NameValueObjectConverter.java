@@ -11,17 +11,16 @@ import javax.faces.convert.Converter;
  */
 public abstract class NameValueObjectConverter implements Converter {
 
+	abstract Object getName(String nameValue);
+
 	@Override
 	public Object getAsObject(@SuppressWarnings("unused") FacesContext facesContext, @SuppressWarnings("unused") UIComponent uiComponent, String nameValue) {
 		Object name = null;
-		if (!nameValue.trim().isEmpty()) {
+		if (nameValue != null && !nameValue.trim().isEmpty()) {
 			name = getName(nameValue);
 		}
-
 		return name;
 	}
-
-	abstract Object getName(String nameValue);
 
 	@Override
 	public String getAsString(@SuppressWarnings("unused") FacesContext facesContext, @SuppressWarnings("unused") UIComponent uiComponent, Object nameValue) {

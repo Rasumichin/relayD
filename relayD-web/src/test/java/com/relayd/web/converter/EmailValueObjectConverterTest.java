@@ -11,6 +11,9 @@ import org.junit.runners.MethodSorters;
 import com.relayd.attributes.Email;
 
 /**
+ * No matter what the problem is, it's always a people problem.
+ *  - Gerald M. Weinberg
+ *
  * @author schmollc (Christian@relayd.de)
  * @since 29.06.2016
  *
@@ -25,27 +28,27 @@ public class EmailValueObjectConverterTest {
 	@Test
 	public void testGetAsObject_ForNullValue() {
 		String nullValue = null;
-		Object result = sut.getAsObject(null, null, nullValue);
+		Object object = sut.getAsObject(null, null, nullValue);
 
-		assertNull("Expected valid instance.", result);
+		assertNull("Expected valid instance!", object);
 	}
 
 	@Test
 	public void testGetAsObject_ForEmptyValue() {
 		String emptyValue = "";
-		Object result = sut.getAsObject(null, null, emptyValue);
+		Object object = sut.getAsObject(null, null, emptyValue);
 
-		assertNull("Expected valid instance.", result);
+		assertNull("Expected valid instance!", object);
 	}
 
 	@Test
 	public void testGetAsObject_ForValidValue() {
-		Object result = sut.getAsObject(null, null, VALID_STRING);
+		Object object = sut.getAsObject(null, null, VALID_STRING);
 
-		assertNotNull("Expected valid instance.", result);
-		assertEquals(Email.class, result.getClass());
-		Email email = (Email) result;
-		assertEquals("Attribute not correct.", VALID_STRING, email.toString());
+		assertNotNull("Expected valid instance!", object);
+		assertEquals("Class not correct!", Email.class, object.getClass());
+		Email email = (Email) object;
+		assertEquals("Attribute not correct!", VALID_STRING, email.toString());
 	}
 
 	@Test(expected = ConverterException.class)
@@ -57,9 +60,9 @@ public class EmailValueObjectConverterTest {
 	public void testGetAsString() {
 		Email email = Email.newInstance(VALID_STRING);
 
-		String result = sut.getAsString(null, null, email);
+		String object = sut.getAsString(null, null, email);
 
-		assertNotNull("Expected valid instance.", result);
-		assertEquals("Attribute not correct.", VALID_STRING, result);
+		assertNotNull("Expected valid instance!", object);
+		assertEquals("Attribute not correct!", VALID_STRING, object);
 	}
 }

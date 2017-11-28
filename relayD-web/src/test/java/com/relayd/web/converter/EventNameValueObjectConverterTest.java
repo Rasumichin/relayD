@@ -25,18 +25,18 @@ public class EventNameValueObjectConverterTest {
 	@Test
 	public void testGetAsObject_ForEmptyValue() {
 		String emptyValue = "";
-		Object result = sut.getAsObject(null, null, emptyValue);
+		Object object = sut.getAsObject(null, null, emptyValue);
 
-		assertNull("Expected valid instance.", result);
+		assertNull("Expected valid instance.", object);
 	}
 
 	@Test
 	public void testGetAsObject_ForValue() {
-		Object result = sut.getAsObject(null, null, name);
+		Object object = sut.getAsObject(null, null, name);
 
-		assertNotNull("Expected valid instance.", result);
-		assertEquals(Eventname.class, result.getClass());
-		Eventname eventName = (Eventname) result;
+		assertNotNull("Expected valid instance.", object);
+		assertEquals("Class not correct!", Eventname.class, object.getClass());
+		Eventname eventName = (Eventname) object;
 		assertEquals("Attribute not correct.", name, eventName.toString());
 	}
 
@@ -44,9 +44,9 @@ public class EventNameValueObjectConverterTest {
 	public void testGetAsString() {
 		Eventname eventName = Eventname.newInstance(name);
 
-		String result = sut.getAsString(null, null, eventName);
+		String object = sut.getAsString(null, null, eventName);
 
-		assertNotNull("Expected valid instance.", result);
-		assertEquals("Attribute not correct.", name, result);
+		assertNotNull("Expected valid instance.", object);
+		assertEquals("Attribute not correct.", name, object);
 	}
 }

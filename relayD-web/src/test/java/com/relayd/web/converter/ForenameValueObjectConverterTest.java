@@ -9,6 +9,9 @@ import org.junit.runners.MethodSorters;
 import com.relayd.attributes.Forename;
 
 /**
+ * The goal of software architecture is to minimize the human resources requiered to build an maintain the required system.
+ *  - Robert C. Martin, Clean Architecture
+ *
  * @author schmollc (Christian@relayd.de)
  * @author Rasumichin (Erik@relayd.de)
  * @since 20.06.2016
@@ -28,28 +31,28 @@ public class ForenameValueObjectConverterTest extends NameValueObjectConverterTe
 	@Test
 	public void testGetName() {
 		Forename expected = Forename.newInstance(name);
-		Forename result = sut.getName(name);
+		Forename object = sut.getName(name);
 
-		assertEquals("Forename has not been correctly created.", expected, result);
+		assertEquals("Forename has not been correctly created!", expected, object);
 	}
 
 	@Test
 	public void testGetAsObject_ForValue() {
-		Object result = sut.getAsObject(null, null, name);
+		Object object = sut.getAsObject(null, null, name);
 
-		assertNotNull("Expected valid instance.", result);
-		assertEquals(Forename.class, result.getClass());
-		Forename forename = (Forename) result;
-		assertEquals("Attribute is not correct.", name, forename.toString());
+		assertNotNull("Expected valid instance!", object);
+		assertEquals("Class not correct!", Forename.class, object.getClass());
+		Forename forename = (Forename) object;
+		assertEquals("Attribute is not correct!", name, forename.toString());
 	}
 
 	@Test
 	public void testGetAsString() {
 		Forename forename = Forename.newInstance(name);
 
-		String result = sut.getAsString(null, null, forename);
+		String object = sut.getAsString(null, null, forename);
 
-		assertNotNull("Expected valid instance.", result);
-		assertEquals("Attribute is not correct.", name, result);
+		assertNotNull("Expected valid instance!", object);
+		assertEquals("Attribute is not correct!", name, object);
 	}
 }
