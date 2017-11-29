@@ -141,7 +141,6 @@ public class RelayEvent implements Serializable {
 		return Collections.unmodifiableCollection(participants);
 	}
 
-	//TODO getCompleteRelays!
 	public Integer completeRelays() {
 		Integer completeRelays = 0;
 		for (Relay eachRelay : relays) {
@@ -150,6 +149,14 @@ public class RelayEvent implements Serializable {
 			}
 		}
 		return completeRelays;
+	}
+
+	public boolean isRelayFull() {
+		boolean isFull = false;
+		if (getMaxNumberOfRelays().intValue() == getNumberOfRelays()) {
+			isFull = true;
+		}
+		return isFull;
 	}
 
 	@Override
