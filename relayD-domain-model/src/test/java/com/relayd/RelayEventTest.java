@@ -179,6 +179,25 @@ public class RelayEventTest {
 		sut.addRelay(dieVierFragezeichen);
 	}
 
+	@Test
+	public void testIsRelayFull_ForSpace() {
+		sut.setMaxNumberOfRelays(RelayCount.newInstance(1));
+
+		boolean condition = sut.isRelayFull();
+
+		assertFalse("[isRelayFull] not correct!", condition);
+	}
+
+	@Test
+	public void testIsRelayFull_ForFull() {
+		sut.setMaxNumberOfRelays(RelayCount.newInstance(1));
+		sut.addRelay(Relay.newInstance());
+
+		boolean condition = sut.isRelayFull();
+
+		assertTrue("[isRelayFull] not correct!", condition);
+	}
+
 	@Test(expected = UnsupportedOperationException.class)
 	public void testGetRelay_ForUnmodifiable() {
 		Set<Relay> relays = sut.getRelays();
