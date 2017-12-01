@@ -58,9 +58,10 @@ public class RelayBrowsePageBean implements Serializable {
 	private List<Participant> participants = new ArrayList<>();
 	private List<Participant> filteredParticipants;
 	private List<Participant> selectedParticipants;
+	private List<RelayEventDisplay> relayEvents;
 
 	private RelayEvent selectedRelayEvent;
-	private RelayEventDisplay relayEventDisplay;
+	private RelayEventDisplay selectedRelayEventDisplay;
 
 	@ManagedProperty(value = "#{relayEditPageBean}")
 	private RelayEditPageBean relayEditPageBean;
@@ -77,27 +78,24 @@ public class RelayBrowsePageBean implements Serializable {
 		relayEventBridge = new RelayEventBridgeImpl();
 		participantBridge = new ParticipantBridgeImpl();
 
+		relayEvents = relayEventBridge.allDisplays();
+		selectedRelayEventDisplay = relayEvents.get(0);
+
 		initRelays();
 		refreshParticipants();
 	}
 
 	private void initRelays() {
-		for (RelayEvent eachRelayEvent : relayEventBridge.all()) {
-			setSelectedRelayEvent(eachRelayEvent);
-			RelayEventDisplay relayEventDisplayInit = RelayEventDisplay.newInstance(eachRelayEvent.getUuid(), eachRelayEvent.toString());
-			setRelayEventDisplay(relayEventDisplayInit);
-			break;
-		}
+		RelayEvent relayEvent = relayEventBridge.get(getRelayEventDisplay().getUuid());
+		setSelectedRelayEvent(relayEvent);
 		refreshRelays();
 	}
 
 	void refreshParticipants() {
-		for (RelayEvent eachRelayEvent : relayEventBridge.all()) {
-			if (selectedRelayEvent.equals(eachRelayEvent)) {
-				selectedRelayEvent = eachRelayEvent;
-			}
-		}
+		setSelectedRelayEvent(relayEventBridge.get(getRelayEventDisplay().getUuid()));
+
 		participants = new ArrayList<>(getSelectedRelayEvent().getParticipants());
+
 		refreshRelays();
 	}
 
@@ -138,7 +136,7 @@ public class RelayBrowsePageBean implements Serializable {
 	}
 
 	public boolean addRelayPossible() {
-		if (selectedRelayEvent.getMaxNumberOfRelays().intValue() == selectedRelayEvent.getNumberOfRelays()) {
+		if (selectedRelayEvent.isRelayFull()) {
 			return true;
 		}
 		return false;
@@ -382,31 +380,25 @@ public class RelayBrowsePageBean implements Serializable {
 	}
 
 	public RelayEventDisplay getRelayEventDisplay() {
-		return relayEventDisplay;
+		return selectedRelayEventDisplay;
 	}
 
 	public void setRelayEventDisplay(RelayEventDisplay aRelayEventDisplay) {
-		relayEventDisplay = aRelayEventDisplay;
+		selectedRelayEventDisplay = aRelayEventDisplay;
 	}
 
 	public List<RelayEventDisplay> getRelayEventDisplays() {
-		List<RelayEventDisplay> someDisplays = new ArrayList<>();
-		for (RelayEvent eachRelayEvent : relayEventBridge.all()) {
-			RelayEventDisplay display = RelayEventDisplay.newInstance(eachRelayEvent.getUuid(), eachRelayEvent.toString());
-			someDisplays.add(display);
-		}
-		return someDisplays;
-
+		return relayEvents;
 	}
 
 	public void switchRelayEventDisplay(AjaxBehaviorEvent ajax) {
 		SelectOneMenu selectOneMenu = (SelectOneMenu) ajax.getSource();
-		RelayEventDisplay selectedRelayEventDisplay = (RelayEventDisplay) selectOneMenu.getValue();
-		for (RelayEvent eachRelayEvent : relayEventBridge.all()) {
-			if (eachRelayEvent.getUuid().equals(selectedRelayEventDisplay.getUuid())) {
-				setSelectedRelayEvent(eachRelayEvent);
-			}
-		}
+		RelayEventDisplay relayEventDisplay = (RelayEventDisplay) selectOneMenu.getValue();
+		setRelayEventDisplay(relayEventDisplay);
+
+		RelayEvent relayEvent = relayEventBridge.get(relayEventDisplay.getUuid());
+		setSelectedRelayEvent(relayEvent);
+
 		refreshRelays();
 		refreshParticipants();
 	}
