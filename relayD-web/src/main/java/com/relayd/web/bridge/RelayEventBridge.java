@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import com.relayd.RelayEvent;
+import com.relayd.web.pagebean.RelayEventDisplay;
 
 /**
  * @author schmollc (Christian@relayd.de)
@@ -12,6 +13,8 @@ import com.relayd.RelayEvent;
  */
 public interface RelayEventBridge {
 	List<RelayEvent> all();
+
+	List<RelayEventDisplay> allDisplays();
 
 	void set(RelayEvent relayEvent);
 
