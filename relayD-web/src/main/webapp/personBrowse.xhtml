@@ -96,12 +96,12 @@
 			value="#{personBrowsePageBean.persons}"
 			selection="#{personBrowsePageBean.selectedPersons}"
 			scrollable="true"
-			scrollHeight="350"
+			scrollHeight="500"
 			sortBy="#{person.surename.toString()}"
 			rowKey="#{person.uuid}"
 			resizableColumns="true">
 			<f:facet name="header">
-	     		List of Persons
+	        	In total there are #{personBrowsePageBean.getNumberOfResults()} persons.
 				<p:outputPanel>
 					<h:outputText value="&nbsp;" />
 				</p:outputPanel>
@@ -189,10 +189,6 @@
 				</p:panelGrid>
 
 			</p:rowExpansion>
-
-			<f:facet name="footer">
-	        	In total there are #{personBrowsePageBean.getNumberOfResults()} persons.
-	    	</f:facet>
 		</p:dataTable>
 
 		<ui:include src="/dock.xhtml" />
