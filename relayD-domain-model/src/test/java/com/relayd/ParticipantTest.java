@@ -15,6 +15,7 @@ import com.relayd.attributes.Email;
 import com.relayd.attributes.Forename;
 import com.relayd.attributes.Shirtsize;
 import com.relayd.attributes.Surename;
+import com.relayd.attributes.YearOfBirth;
 
 /**
  * Wer sichere Schritte tun will, muß sie langsam tun.
@@ -185,6 +186,36 @@ public class ParticipantTest {
 
 		Shirtsize actual = sut.getShirtsize();
 		assertEquals("[shirtsize] not correct!", expected, actual);
+	}
+
+	@Test
+	public void testGetInitialYearOfBirth() {
+		Participant sut = Participant.newInstance();
+
+		YearOfBirth actual = sut.getYearOfBirth();
+
+		assertNotNull("[yearOfBirth] not correct!", actual);
+	}
+
+	@Test
+	public void testSetYearOfBirth() {
+		Person person = Person.newInstance();
+		YearOfBirth expected = YearOfBirth.newInstance(1972);
+		person.setYearOfBirth(expected);
+		Participant sut = Participant.newInstance(person);
+
+		YearOfBirth actual = sut.getYearOfBirth();
+		assertEquals("[yearOfBirth] not correct!", expected, actual);
+	}
+
+	@Test
+	public void testSetYearOfBirth_ForNullValue() {
+		Person person = Person.newInstance();
+		person.setYearOfBirth(null);
+		Participant sut = Participant.newInstance(person);
+
+		YearOfBirth actual = sut.getYearOfBirth();
+		assertNotNull("[yearOfBirth] not correct!", actual);
 	}
 
 	@Test

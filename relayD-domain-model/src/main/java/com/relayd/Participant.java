@@ -8,6 +8,7 @@ import com.relayd.attributes.Email;
 import com.relayd.attributes.Forename;
 import com.relayd.attributes.Shirtsize;
 import com.relayd.attributes.Surename;
+import com.relayd.attributes.YearOfBirth;
 
 /**
  * @author schmollc (Christian@relayd.de)
@@ -23,19 +24,22 @@ public class Participant implements Serializable {
 	private Forename forename = Forename.newInstance();
 	private Surename surename = Surename.newInstance();
 	private Email email = Email.newInstance();
+	private YearOfBirth yearOfBirth = YearOfBirth.newInstance();
 	private Comment comment = Comment.newInstance();
 	private Shirtsize shirtsize = Shirtsize.UNKNOWN;
 
 	private Participant() {
 	}
 
-	private Participant(Forename aForename, Surename aSurename, Email anEmail, Shirtsize aShirtsize, UUID anUuid) {
+	private Participant(Forename aForename, Surename aSurename, Email anEmail, Shirtsize aShirtsize, YearOfBirth aYearOfBirth, UUID anUuid) {
 		uuid = UUID.randomUUID();
 		forename = aForename;
 		surename = aSurename;
 		email = anEmail;
 		shirtsize = aShirtsize;
+		yearOfBirth = aYearOfBirth;
 		uuidPerson = anUuid;
+
 	}
 
 	public static Participant newInstance() {
@@ -46,7 +50,7 @@ public class Participant implements Serializable {
 		if (person == null) {
 			return ParticipantNullObject.instance();
 		}
-		return new Participant(person.getForename(), person.getSurename(), person.getEmail(), person.getShirtsize(), person.getUuid());
+		return new Participant(person.getForename(), person.getSurename(), person.getEmail(), person.getShirtsize(), person.getYearOfBirth(), person.getUuid());
 	}
 
 	public boolean isEmpty() {
@@ -75,6 +79,10 @@ public class Participant implements Serializable {
 
 	public Email getEmail() {
 		return email;
+	}
+
+	public YearOfBirth getYearOfBirth() {
+		return yearOfBirth;
 	}
 
 	public Comment getComment() {
