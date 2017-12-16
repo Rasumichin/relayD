@@ -1,6 +1,7 @@
 package com.relayd.web.pagebean;
 
 import java.io.Serializable;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -282,6 +283,17 @@ public class RelayBrowsePageBean implements Serializable {
 		selectedParticipants = someSelectedParticipants;
 	}
 
+	public int sortByDuration(Object firstTreeNodeRow, Object secondTreeNodeRow) {
+		if ((firstTreeNodeRow instanceof TreeNodeRowRelay) && (secondTreeNodeRow instanceof TreeNodeRowRelay)) {
+			Duration firstDuration = ((TreeNodeRowRelay)firstTreeNodeRow).getRelay().getDuration();
+			Duration secondDuration = ((TreeNodeRowRelay)secondTreeNodeRow).getRelay().getDuration();
+			
+			return firstDuration.compareTo(secondDuration);
+		}
+		
+		return 0;
+	}
+	
 	public int sortByForename(Forename name1, Forename name2) {
 		return Forename.sortByForename(name1, name2);
 	}

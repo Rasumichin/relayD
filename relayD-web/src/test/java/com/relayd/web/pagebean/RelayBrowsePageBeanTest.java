@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 import static org.mockito.Matchers.*;
 
 import java.io.Serializable;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -13,9 +14,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.application.FacesMessage.Severity;
 import javax.faces.event.ActionEvent;
 
-import org.junit.Before;
-import org.junit.FixMethodOrder;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.mockito.InjectMocks;
@@ -33,8 +32,7 @@ import com.relayd.Relay;
 import com.relayd.attributes.Forename;
 import com.relayd.attributes.Position;
 import com.relayd.attributes.Surename;
-import com.relayd.web.bridge.RelayBridge;
-import com.relayd.web.bridge.TreeNodeRow;
+import com.relayd.web.bridge.*;
 import com.relayd.web.local.I18N;
 
 import static org.mockito.Mockito.*;
@@ -352,5 +350,83 @@ public class RelayBrowsePageBeanTest {
 	public void testShowAllWithoutRelay() {
 		sut.showAllWithoutRelay();
 		verify(sut).showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, "Not implemented yet!");
+	}
+	
+	@Test
+	public void testSortByDuration_both_sort_elements_have_wrong_type() {
+		int expected = 0;
+		TreeNodeRow firstTreeNodeRow = TreeNodeRowMember.newInstance(null, null);
+		TreeNodeRow secondTreeNodeRow = TreeNodeRowMember.newInstance(null, null);
+		
+		int actual = sut.sortByDuration(firstTreeNodeRow, secondTreeNodeRow);
+		
+		assertEquals("Sorting by 'duration' was not correct!", expected, actual);
+	}
+
+	@Test
+	public void testSortByDuration_first_sort_element_has_wrong_type() {
+		int expected = 0;
+		TreeNodeRow firstTreeNodeRow = TreeNodeRowMember.newInstance(null, null);
+		TreeNodeRow secondTreeNodeRow = TreeNodeRowRelay.newInstance(null);
+		
+		int actual = sut.sortByDuration(firstTreeNodeRow, secondTreeNodeRow);
+		
+		assertEquals("Sorting by 'duration' was not correct!", expected, actual);
+	}
+
+	@Test
+	public void testSortByDuration_second_sort_element_has_wrong_type() {
+		int expected = 0;
+		TreeNodeRow firstTreeNodeRow = TreeNodeRowRelay.newInstance(null);
+		TreeNodeRow secondTreeNodeRow = TreeNodeRowMember.newInstance(null, null);
+		
+		int actual = sut.sortByDuration(firstTreeNodeRow, secondTreeNodeRow);
+		
+		assertEquals("Sorting by 'duration' was not correct!", expected, actual);
+	}
+
+	@Test
+	public void testSortByDuration_both_sort_elements_are_equal() {
+		int expected = 0;
+		Relay firstRelay = Relay.newInstance();
+		firstRelay.setDuration(Duration.ZERO);
+		TreeNodeRow firstTreeNodeRow = TreeNodeRowRelay.newInstance(firstRelay);
+		Relay secondRelay = Relay.newInstance();
+		secondRelay.setDuration(Duration.ZERO);
+		TreeNodeRow secondTreeNodeRow = TreeNodeRowRelay.newInstance(secondRelay);
+		
+		int actual = sut.sortByDuration(firstTreeNodeRow, secondTreeNodeRow);
+		
+		assertEquals("Sorting by 'duration' was not correct!", expected, actual);
+	}
+
+	@Test
+	public void testSortByDuration_first_sort_element_is_greater() {
+		int expected = 1;
+		Relay firstRelay = Relay.newInstance();
+		firstRelay.setDuration(Duration.ofHours(1l));
+		TreeNodeRow firstTreeNodeRow = TreeNodeRowRelay.newInstance(firstRelay);
+		Relay secondRelay = Relay.newInstance();
+		secondRelay.setDuration(Duration.ZERO);
+		TreeNodeRow secondTreeNodeRow = TreeNodeRowRelay.newInstance(secondRelay);
+		
+		int actual = sut.sortByDuration(firstTreeNodeRow, secondTreeNodeRow);
+		
+		assertEquals("Sorting by 'duration' was not correct!", expected, actual);
+	}
+
+	@Test
+	public void testSortByDuration_second_sort_element_is_greater() {
+		int expected = -1;
+		Relay firstRelay = Relay.newInstance();
+		firstRelay.setDuration(Duration.ZERO);
+		TreeNodeRow firstTreeNodeRow = TreeNodeRowRelay.newInstance(firstRelay);
+		Relay secondRelay = Relay.newInstance();
+		secondRelay.setDuration(Duration.ofHours(1l));
+		TreeNodeRow secondTreeNodeRow = TreeNodeRowRelay.newInstance(secondRelay);
+		
+		int actual = sut.sortByDuration(firstTreeNodeRow, secondTreeNodeRow);
+		
+		assertEquals("Sorting by 'duration' was not correct!", expected, actual);
 	}
 }
