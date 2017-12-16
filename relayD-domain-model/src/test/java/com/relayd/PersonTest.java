@@ -152,7 +152,7 @@ public class PersonTest {
 	}
 
 	@Test
-	public void testGetInitialYearOfBirth() {
+	public void testGetYearOfBirth_ForInitialValue() {
 		Person sut = Person.newInstance();
 
 		YearOfBirth actual = sut.getYearOfBirth();

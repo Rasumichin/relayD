@@ -144,7 +144,7 @@ public class ParticipantTest {
 	}
 
 	@Test
-	public void testComment_ForValue() {
+	public void testGetComment_ForValue() {
 		Person person = Person.newInstance();
 		Participant sut = Participant.newInstance(person);
 		Comment expected = Comment.newInstance("What a runner!");
@@ -156,7 +156,7 @@ public class ParticipantTest {
 	}
 
 	@Test
-	public void testComment_ForNull() {
+	public void testGetComment_ForNull() {
 		Person person = Person.newInstance();
 		Participant sut = Participant.newInstance(person);
 		Comment comment = null;
@@ -189,7 +189,7 @@ public class ParticipantTest {
 	}
 
 	@Test
-	public void testGetInitialYearOfBirth() {
+	public void testGetYearOfBirth_ForInitialValue() {
 		Participant sut = Participant.newInstance();
 
 		YearOfBirth actual = sut.getYearOfBirth();
@@ -198,7 +198,7 @@ public class ParticipantTest {
 	}
 
 	@Test
-	public void testSetYearOfBirth() {
+	public void testGetYearOfBirth() {
 		Person person = Person.newInstance();
 		YearOfBirth expected = YearOfBirth.newInstance(1972);
 		person.setYearOfBirth(expected);
@@ -209,7 +209,7 @@ public class ParticipantTest {
 	}
 
 	@Test
-	public void testSetYearOfBirth_ForNullValue() {
+	public void testGetYearOfBirth_ForNullValue() {
 		Person person = Person.newInstance();
 		person.setYearOfBirth(null);
 		Participant sut = Participant.newInstance(person);
