@@ -284,7 +284,7 @@ public class RelayBrowsePageBean implements Serializable {
 	}
 
 	public int sortByDuration(TreeNodeRow firstTreeNodeRow, TreeNodeRow secondTreeNodeRow) {
-		if ((firstTreeNodeRow instanceof TreeNodeRowRelay) && (secondTreeNodeRow instanceof TreeNodeRowRelay)) {
+		if ((firstTreeNodeRow.getClass().equals(TreeNodeRowRelay.class)) && (secondTreeNodeRow.getClass().equals(TreeNodeRowRelay.class))) {
 			Duration firstDuration = ((TreeNodeRowRelay)firstTreeNodeRow).getRelay().getDuration();
 			Duration secondDuration = ((TreeNodeRowRelay)secondTreeNodeRow).getRelay().getDuration();
 			
