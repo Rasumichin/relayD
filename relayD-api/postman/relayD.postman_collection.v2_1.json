@@ -1,0 +1,184 @@
+{
+	"info": {
+		"name": "relayD",
+		"_postman_id": "ae887fb9-f83e-2293-657b-94bb20075d43",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get all events",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ac78d27b-d876-4c5e-a251-2ed67b1d8dd9",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"HTTP Status Code is OK\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response contains valid JSON\", function () {",
+							"    pm.response.to.be.json;",
+							"});",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://{{host}}:{{tomcatPort}}/relayD-api/resources/events",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{tomcatPort}}",
+					"path": [
+						"relayD-api",
+						"resources",
+						"events"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get Events/Ping",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "23bd2565-478a-45ec-86a0-79a05913a26b",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"HTTP Status Code is OK\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Body contains static expression\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"response from class EventsResource\");",
+							"});",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://{{host}}:{{tomcatPort}}/relayD-api/resources/events/ping",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{tomcatPort}}",
+					"path": [
+						"relayD-api",
+						"resources",
+						"events",
+						"ping"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get Event #4711",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8146d7d0-8095-4b40-a967-800d772e41a0",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"HTTP Status Code is OK\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response contains valid JSON\", function () {",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"Resource ID is correct\", function () {",
+							"    pm.expect(pm.response.json().id).to.equal(\"4711\");",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://{{host}}:{{tomcatPort}}/relayD-api/resources/events/4711",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{tomcatPort}}",
+					"path": [
+						"relayD-api",
+						"resources",
+						"events",
+						"4711"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get Person/Ping",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8c887bdd-c68c-4f08-a3bc-a103ef3a43c4",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"HTTP Status Code is OK\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Body contains static expression\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"response from class PersonResource\");",
+							"});",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://{{host}}:{{tomcatPort}}/relayD-api/resources/person/ping",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{tomcatPort}}",
+					"path": [
+						"relayD-api",
+						"resources",
+						"person",
+						"ping"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
