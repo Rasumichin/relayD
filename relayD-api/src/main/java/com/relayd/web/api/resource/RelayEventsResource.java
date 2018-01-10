@@ -31,22 +31,22 @@ import com.relayd.web.api.bridge.RelayEventDTOBridgeImpl;
  *
  */
 @Path("relayEvents")
-public class EventsResource {
+public class RelayEventsResource {
 	private RelayEventDTOBridge relayEventDTOBridge;
 
 	// Public constructor is required for JAX-RS.
-	public EventsResource() {
+	public RelayEventsResource() {
 	}
 
-	private EventsResource(RelayEventDTOBridge bridge) {
+	private RelayEventsResource(RelayEventDTOBridge bridge) {
 		relayEventDTOBridge = bridge;
 	}
 
-	public static EventsResource newInstance(RelayEventDTOBridge bridge) {
+	public static RelayEventsResource newInstance(RelayEventDTOBridge bridge) {
 		if (bridge == null) {
 			throw new IllegalArgumentException("[bridge] must not be 'null'.");
 		}
-		return new EventsResource(bridge);
+		return new RelayEventsResource(bridge);
 	}
 
 	public RelayEventDTOBridge getRelayEventDTOBridge() {
@@ -78,7 +78,7 @@ public class EventsResource {
 			// TODO - REL-284 - Find out whether there is away to explicitly avoid the path separator.
 			newEventUri = new URI(uriInfo.getAbsolutePath().toString() + "/" + anEvent.getId());
 		} catch (URISyntaxException ex) {
-			Logger.getLogger(EventsResource.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(RelayEventsResource.class.getName()).log(Level.SEVERE, null, ex);
 		}
 
 		return Response.status(201)

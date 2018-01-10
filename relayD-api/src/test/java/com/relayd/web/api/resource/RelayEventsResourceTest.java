@@ -22,7 +22,7 @@ import com.relayd.web.api.bridge.RelayEventDTOBridge;
  */
 public class RelayEventsResourceTest {
 	private RelayEventDTOBridge eventDTOBridgeMock = mock(RelayEventDTOBridge.class);
-	private EventsResource sut = EventsResource.newInstance(eventDTOBridgeMock);
+	private RelayEventsResource sut = RelayEventsResource.newInstance(eventDTOBridgeMock);
 	
 	@Test
 	public void testNewInstance() {
@@ -31,7 +31,7 @@ public class RelayEventsResourceTest {
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void testNewInstance_with_null() {
-		EventsResource.newInstance(null);
+		RelayEventsResource.newInstance(null);
 	}
 	
 	@Test
@@ -77,7 +77,7 @@ public class RelayEventsResourceTest {
 
 	@Test
 	public void testPing() {
-		String expected = "Pong response from class EventsResource.";
+		String expected = "Pong response from class RelayEventsResource.";
 		
 		String actual = sut.ping();
 		
