@@ -42,7 +42,7 @@ public class RelayEventsResourceTest {
 	}
 
 	@Test
-	public void testGetEvents() {
+	public void testGetRelayEvents() {
 		when(eventDTOBridgeMock.all()).thenReturn(new ArrayList<RelayEventDTO>());
 		
 		List<RelayEventDTO> actual = sut.getEvents();
@@ -51,7 +51,7 @@ public class RelayEventsResourceTest {
 	}
 
 	@Test
-	public void testAddEvent() throws URISyntaxException {
+	public void testAddRelayEvent() throws URISyntaxException {
 		RelayEventDTO eventDTO = RelayEventDTO.newInstance();
 		UriInfo uriInfoMock = Mockito.mock(UriInfo.class);
 		Mockito.when(uriInfoMock.getAbsolutePath()).thenReturn(new URI("http://mock.com"));
@@ -64,7 +64,7 @@ public class RelayEventsResourceTest {
 	}
 
 	@Test
-	public void testUpdateEvent() {
+	public void testUpdateRelayEvent() {
 		String id = UUID.randomUUID().toString();
 		RelayEventDTO eventDTO = RelayEventDTO.newInstance();
 		Status expected = Status.OK;
@@ -85,7 +85,7 @@ public class RelayEventsResourceTest {
 	}
 
 	@Test
-	public void testGetEvent() {
+	public void testGetRelayEvent() {
 		String expected = UUID.randomUUID().toString();
 		
 		RelayEventDTO result = sut.getEvent(expected);
@@ -95,7 +95,7 @@ public class RelayEventsResourceTest {
 	}
 
 	@Test
-	public void testDeleteEvent() {
+	public void testDeleteRelayEvent() {
 		String id = UUID.randomUUID().toString();
 		List<Status> expected = new ArrayList<>();
 		expected.add(Status.NO_CONTENT);
