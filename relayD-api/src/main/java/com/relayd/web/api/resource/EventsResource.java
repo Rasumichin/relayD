@@ -30,7 +30,7 @@ import com.relayd.web.api.bridge.RelayEventDTOBridgeImpl;
  * @since  27.03.2016
  *
  */
-@Path("events")
+@Path("relayEvents")
 public class EventsResource {
 	private RelayEventDTOBridge relayEventDTOBridge;
 

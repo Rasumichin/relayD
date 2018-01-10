@@ -32,7 +32,7 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://{{host}}:{{tomcatPort}}/relayD-api/resources/events",
+					"raw": "http://{{host}}:{{tomcatPort}}/relayD-api/resources/relayEvents",
 					"protocol": "http",
 					"host": [
 						"{{host}}"
@@ -41,7 +41,7 @@
 					"path": [
 						"relayD-api",
 						"resources",
-						"events"
+						"relayEvents"
 					]
 				},
 				"description": ""
@@ -74,7 +74,7 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://{{host}}:{{tomcatPort}}/relayD-api/resources/events/ping",
+					"raw": "http://{{host}}:{{tomcatPort}}/relayD-api/resources/relayEvents/ping",
 					"protocol": "http",
 					"host": [
 						"{{host}}"
@@ -83,7 +83,7 @@
 					"path": [
 						"relayD-api",
 						"resources",
-						"events",
+						"relayEvents",
 						"ping"
 					]
 				},
@@ -120,7 +120,7 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://{{host}}:{{tomcatPort}}/relayD-api/resources/events/4711",
+					"raw": "http://{{host}}:{{tomcatPort}}/relayD-api/resources/relayEvents/4711",
 					"protocol": "http",
 					"host": [
 						"{{host}}"
@@ -129,7 +129,7 @@
 					"path": [
 						"relayD-api",
 						"resources",
-						"events",
+						"relayEvents",
 						"4711"
 					]
 				},
