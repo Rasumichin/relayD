@@ -20,7 +20,7 @@ import com.relayd.web.api.bridge.RelayEventDTOBridge;
  * @since  18.06.2017
  *
  */
-public class EventsResourceTest {
+public class RelayEventsResourceTest {
 	private RelayEventDTOBridge eventDTOBridgeMock = mock(RelayEventDTOBridge.class);
 	private EventsResource sut = EventsResource.newInstance(eventDTOBridgeMock);
 	
