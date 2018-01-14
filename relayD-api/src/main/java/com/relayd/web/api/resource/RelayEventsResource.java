@@ -19,7 +19,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 import com.relayd.Settings;
-import com.relayd.client.jaxb.RelayEventDTO;
+import com.relayd.client.jaxb.*;
 import com.relayd.ejb.GatewayType;
 import com.relayd.ejb.RelayEventGatewayFactory;
 import com.relayd.web.api.bridge.RelayEventDTOBridge;
@@ -30,23 +30,23 @@ import com.relayd.web.api.bridge.RelayEventDTOBridgeImpl;
  * @since  27.03.2016
  *
  */
-@Path("events")
-public class EventsResource {
+@Path("relayEvents")
+public class RelayEventsResource {
 	private RelayEventDTOBridge relayEventDTOBridge;
 
 	// Public constructor is required for JAX-RS.
-	public EventsResource() {
+	public RelayEventsResource() {
 	}
 
-	private EventsResource(RelayEventDTOBridge bridge) {
+	private RelayEventsResource(RelayEventDTOBridge bridge) {
 		relayEventDTOBridge = bridge;
 	}
 
-	public static EventsResource newInstance(RelayEventDTOBridge bridge) {
+	public static RelayEventsResource newInstance(RelayEventDTOBridge bridge) {
 		if (bridge == null) {
 			throw new IllegalArgumentException("[bridge] must not be 'null'.");
 		}
-		return new EventsResource(bridge);
+		return new RelayEventsResource(bridge);
 	}
 
 	public RelayEventDTOBridge getRelayEventDTOBridge() {
@@ -60,8 +60,10 @@ public class EventsResource {
 
 	@GET
 	@Produces("application/json")
-	public List<RelayEventDTO> getEvents() {
-		List<RelayEventDTO> result = getRelayEventDTOBridge().all();
+	public RelayEventsDTO getRelayEvents() {
+		List<RelayEventDTO> relayEventDTOs = getRelayEventDTOBridge().all();
+		RelayEventsDTO result = new RelayEventsDTO();
+		result.addAllRelayEvents(relayEventDTOs);
 
 		return result;
 	}
@@ -78,7 +80,7 @@ public class EventsResource {
 			// TODO - REL-284 - Find out whether there is away to explicitly avoid the path separator.
 			newEventUri = new URI(uriInfo.getAbsolutePath().toString() + "/" + anEvent.getId());
 		} catch (URISyntaxException ex) {
-			Logger.getLogger(EventsResource.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(RelayEventsResource.class.getName()).log(Level.SEVERE, null, ex);
 		}
 
 		return Response.status(201)

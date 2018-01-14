@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "Get all events",
+			"name": "Get all RelayEvents",
 			"event": [
 				{
 					"listen": "test",
@@ -32,7 +32,7 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://{{host}}:{{tomcatPort}}/relayD-api/resources/events",
+					"raw": "http://{{host}}:{{tomcatPort}}/relayD-api/resources/relayEvents",
 					"protocol": "http",
 					"host": [
 						"{{host}}"
@@ -41,7 +41,7 @@
 					"path": [
 						"relayD-api",
 						"resources",
-						"events"
+						"relayEvents"
 					]
 				},
 				"description": ""
@@ -49,12 +49,12 @@
 			"response": []
 		},
 		{
-			"name": "Get Events/Ping",
+			"name": "Ping RelayEvents",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "23bd2565-478a-45ec-86a0-79a05913a26b",
+						"id": "0e1217ce-d742-44a9-9cbf-e3090dffe763",
 						"type": "text/javascript",
 						"exec": [
 							"pm.test(\"HTTP Status Code is OK\", function () {",
@@ -62,7 +62,7 @@
 							"});",
 							"",
 							"pm.test(\"Body contains static expression\", function () {",
-							"    pm.expect(pm.response.text()).to.include(\"response from class EventsResource\");",
+							"    pm.expect(pm.response.text()).to.include(\"response from class RelayEventsResource\");",
 							"});",
 							""
 						]
@@ -74,7 +74,7 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://{{host}}:{{tomcatPort}}/relayD-api/resources/events/ping",
+					"raw": "http://{{host}}:{{tomcatPort}}/relayD-api/resources/relayEvents/ping",
 					"protocol": "http",
 					"host": [
 						"{{host}}"
@@ -83,7 +83,7 @@
 					"path": [
 						"relayD-api",
 						"resources",
-						"events",
+						"relayEvents",
 						"ping"
 					]
 				},
@@ -92,7 +92,7 @@
 			"response": []
 		},
 		{
-			"name": "Get Event #4711",
+			"name": "Get RelayEvent #4711",
 			"event": [
 				{
 					"listen": "test",
@@ -120,7 +120,7 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://{{host}}:{{tomcatPort}}/relayD-api/resources/events/4711",
+					"raw": "http://{{host}}:{{tomcatPort}}/relayD-api/resources/relayEvents/4711",
 					"protocol": "http",
 					"host": [
 						"{{host}}"
@@ -129,7 +129,7 @@
 					"path": [
 						"relayD-api",
 						"resources",
-						"events",
+						"relayEvents",
 						"4711"
 					]
 				},
@@ -138,7 +138,7 @@
 			"response": []
 		},
 		{
-			"name": "Get Person/Ping",
+			"name": "Ping Person",
 			"event": [
 				{
 					"listen": "test",

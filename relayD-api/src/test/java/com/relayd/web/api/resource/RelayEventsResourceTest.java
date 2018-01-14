@@ -12,7 +12,7 @@ import org.junit.*;
 import org.mockito.Mockito;
 import static org.mockito.Mockito.*;
 
-import com.relayd.client.jaxb.RelayEventDTO;
+import com.relayd.client.jaxb.*;
 import com.relayd.web.api.bridge.RelayEventDTOBridge;
 
 /**
@@ -20,9 +20,9 @@ import com.relayd.web.api.bridge.RelayEventDTOBridge;
  * @since  18.06.2017
  *
  */
-public class EventsResourceTest {
+public class RelayEventsResourceTest {
 	private RelayEventDTOBridge eventDTOBridgeMock = mock(RelayEventDTOBridge.class);
-	private EventsResource sut = EventsResource.newInstance(eventDTOBridgeMock);
+	private RelayEventsResource sut = RelayEventsResource.newInstance(eventDTOBridgeMock);
 	
 	@Test
 	public void testNewInstance() {
@@ -31,7 +31,7 @@ public class EventsResourceTest {
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void testNewInstance_with_null() {
-		EventsResource.newInstance(null);
+		RelayEventsResource.newInstance(null);
 	}
 	
 	@Test
@@ -42,16 +42,17 @@ public class EventsResourceTest {
 	}
 
 	@Test
-	public void testGetEvents() {
+	public void testGetRelayEvents() {
 		when(eventDTOBridgeMock.all()).thenReturn(new ArrayList<RelayEventDTO>());
 		
-		List<RelayEventDTO> actual = sut.getEvents();
+		RelayEventsDTO relayEventsDTO = sut.getRelayEvents();
 		
-		assertTrue("Response from 'getEvents' is not correct!", actual.isEmpty());
+		List<RelayEventDTO> actual = relayEventsDTO.getRelayEvents();
+		assertTrue("Response from 'getRelayEvents' is not correct!", actual.isEmpty());
 	}
 
 	@Test
-	public void testAddEvent() throws URISyntaxException {
+	public void testAddRelayEvent() throws URISyntaxException {
 		RelayEventDTO eventDTO = RelayEventDTO.newInstance();
 		UriInfo uriInfoMock = Mockito.mock(UriInfo.class);
 		Mockito.when(uriInfoMock.getAbsolutePath()).thenReturn(new URI("http://mock.com"));
@@ -64,7 +65,7 @@ public class EventsResourceTest {
 	}
 
 	@Test
-	public void testUpdateEvent() {
+	public void testUpdateRelayEvent() {
 		String id = UUID.randomUUID().toString();
 		RelayEventDTO eventDTO = RelayEventDTO.newInstance();
 		Status expected = Status.OK;
@@ -77,7 +78,7 @@ public class EventsResourceTest {
 
 	@Test
 	public void testPing() {
-		String expected = "Pong response from class EventsResource.";
+		String expected = "Pong response from class RelayEventsResource.";
 		
 		String actual = sut.ping();
 		
@@ -85,7 +86,7 @@ public class EventsResourceTest {
 	}
 
 	@Test
-	public void testGetEvent() {
+	public void testGetRelayEvent() {
 		String expected = UUID.randomUUID().toString();
 		
 		RelayEventDTO result = sut.getEvent(expected);
@@ -95,7 +96,7 @@ public class EventsResourceTest {
 	}
 
 	@Test
-	public void testDeleteEvent() {
+	public void testDeleteRelayEvent() {
 		String id = UUID.randomUUID().toString();
 		List<Status> expected = new ArrayList<>();
 		expected.add(Status.NO_CONTENT);
