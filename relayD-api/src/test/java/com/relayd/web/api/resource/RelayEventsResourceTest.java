@@ -45,9 +45,9 @@ public class RelayEventsResourceTest {
 	public void testGetRelayEvents() {
 		when(eventDTOBridgeMock.all()).thenReturn(new ArrayList<RelayEventDTO>());
 		
-		List<RelayEventDTO> actual = sut.getEvents();
+		List<RelayEventDTO> actual = sut.getRelayEvents();
 		
-		assertTrue("Response from 'getEvents' is not correct!", actual.isEmpty());
+		assertTrue("Response from 'getRelayEvents' is not correct!", actual.isEmpty());
 	}
 
 	@Test

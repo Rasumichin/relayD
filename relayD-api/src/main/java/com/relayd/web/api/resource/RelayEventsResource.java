@@ -60,7 +60,7 @@ public class RelayEventsResource {
 
 	@GET
 	@Produces("application/json")
-	public List<RelayEventDTO> getEvents() {
+	public List<RelayEventDTO> getRelayEvents() {
 		List<RelayEventDTO> result = getRelayEventDTOBridge().all();
 
 		return result;
