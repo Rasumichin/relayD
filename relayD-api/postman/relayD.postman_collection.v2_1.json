@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "Get all events",
+			"name": "Get all RelayEvents",
 			"event": [
 				{
 					"listen": "test",
@@ -49,7 +49,7 @@
 			"response": []
 		},
 		{
-			"name": "Get Events/Ping",
+			"name": "Ping RelayEvents",
 			"event": [
 				{
 					"listen": "test",
@@ -92,7 +92,7 @@
 			"response": []
 		},
 		{
-			"name": "Get Event #4711",
+			"name": "Get RelayEvent #4711",
 			"event": [
 				{
 					"listen": "test",
@@ -138,7 +138,7 @@
 			"response": []
 		},
 		{
-			"name": "Get Person/Ping",
+			"name": "Ping Person",
 			"event": [
 				{
 					"listen": "test",
