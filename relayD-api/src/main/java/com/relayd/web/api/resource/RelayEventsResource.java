@@ -19,7 +19,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 import com.relayd.Settings;
-import com.relayd.client.jaxb.RelayEventDTO;
+import com.relayd.client.jaxb.*;
 import com.relayd.ejb.GatewayType;
 import com.relayd.ejb.RelayEventGatewayFactory;
 import com.relayd.web.api.bridge.RelayEventDTOBridge;
@@ -60,8 +60,10 @@ public class RelayEventsResource {
 
 	@GET
 	@Produces("application/json")
-	public List<RelayEventDTO> getRelayEvents() {
-		List<RelayEventDTO> result = getRelayEventDTOBridge().all();
+	public RelayEventsDTO getRelayEvents() {
+		List<RelayEventDTO> relayEventDTOs = getRelayEventDTOBridge().all();
+		RelayEventsDTO result = new RelayEventsDTO();
+		result.addAllRelayEvents(relayEventDTOs);
 
 		return result;
 	}

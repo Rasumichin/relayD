@@ -12,7 +12,7 @@ import org.junit.*;
 import org.mockito.Mockito;
 import static org.mockito.Mockito.*;
 
-import com.relayd.client.jaxb.RelayEventDTO;
+import com.relayd.client.jaxb.*;
 import com.relayd.web.api.bridge.RelayEventDTOBridge;
 
 /**
@@ -45,8 +45,9 @@ public class RelayEventsResourceTest {
 	public void testGetRelayEvents() {
 		when(eventDTOBridgeMock.all()).thenReturn(new ArrayList<RelayEventDTO>());
 		
-		List<RelayEventDTO> actual = sut.getRelayEvents();
+		RelayEventsDTO relayEventsDTO = sut.getRelayEvents();
 		
+		List<RelayEventDTO> actual = relayEventsDTO.getRelayEvents();
 		assertTrue("Response from 'getRelayEvents' is not correct!", actual.isEmpty());
 	}
 
