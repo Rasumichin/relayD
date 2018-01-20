@@ -6,11 +6,12 @@ import javax.ws.rs.Produces;
 
 /**
  * @author  schmollc (Christian@relayd.de)
+ * @author  Rasumichin (Erik@relayd.de)
  * @since   06.04.2016
  *
  */
-@Path("person")
-public class PersonResource {
+@Path("persons")
+public class PersonsResource {
 
 	@Path("ping")
 	@GET
