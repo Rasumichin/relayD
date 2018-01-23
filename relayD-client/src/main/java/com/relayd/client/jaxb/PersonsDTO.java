@@ -20,9 +20,13 @@ public class PersonsDTO implements Serializable {
 	public List<PersonDTO> getPersons() {
 		return persons;
 	}
+	
+	public void addAllPersons(List<PersonDTO> aPersonDTOList) {
+		getPersons().addAll(aPersonDTOList);
+	}
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + " []";
+		return getClass().getSimpleName() + " [personDTO elements=" + getPersons().size() + "]";
 	}
 }

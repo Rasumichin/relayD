@@ -1,7 +1,9 @@
 package com.relayd.client.jaxb;
 
 import static org.junit.Assert.*;
-import java.util.List;
+
+import java.util.*;
+
 import org.junit.Test;
 
 /**
@@ -20,8 +22,20 @@ public class PersonsDTOTest {
 	}
 
 	@Test
+	public void testAddAllPersons() {
+		List<PersonDTO> expected = new ArrayList<>();
+		expected.add(PersonDTO.newInstance());
+		expected.add(PersonDTO.newInstance());
+		
+		sut.addAllPersons(expected);
+		
+		List<PersonDTO> actual = sut.getPersons();
+		assertEquals("Content of 'persons' is not correct!", expected, actual);
+	}
+	
+	@Test
 	public void testToString() {
-		String expected = "PersonsDTO []";
+		String expected = "PersonsDTO [personDTO elements=0]";
 
 		String actual = sut.toString();
 
