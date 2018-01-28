@@ -17,6 +17,18 @@ import com.relayd.web.api.bridge.*;
 public class PersonsResource {
 	private PersonDTOBridge personDTOBridge;
 
+	public PersonsResource(PersonDTOBridge aPersonDTOBridge) {
+		personDTOBridge = aPersonDTOBridge;
+	}
+
+	public static PersonsResource newInstance(PersonDTOBridge aPersonDTOBridge) {
+		if (aPersonDTOBridge == null) {
+			throw new IllegalArgumentException("'aPersonDTOBridge' must not be 'null'.");
+		}
+		
+		return new PersonsResource(aPersonDTOBridge);
+	}
+
 	@Path("ping")
 	@GET
 	@Produces("text/plain")
