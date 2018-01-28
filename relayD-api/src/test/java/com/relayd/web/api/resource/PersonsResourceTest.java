@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import com.relayd.client.jaxb.PersonsDTO;
+import com.relayd.web.api.bridge.PersonDTOBridge;
 
 /**
  * @author  schmollc (Christian@relayd.de)
@@ -26,5 +27,12 @@ public class PersonsResourceTest {
 		PersonsDTO personDTO = sut.getPersons();
 		
 		assertNotNull("The 'personsDTO' must not be 'null'!", personDTO);
+	}
+	
+	@Test
+	public void testGetPersonDTOBridge() {
+		PersonDTOBridge personDTOBridge = sut.getPersonDTOBridge();
+		
+		assertNotNull("'personDTOBridge' must not be 'null'!", personDTOBridge);
 	}
 }
