@@ -4,7 +4,8 @@ import static org.junit.Assert.*;
 
 import java.time.LocalDate;
 
-import org.junit.Test;
+import org.junit.*;
+import org.junit.runners.MethodSorters;
 
 import com.relayd.*;
 import com.relayd.attributes.*;
@@ -15,6 +16,7 @@ import com.relayd.client.jaxb.RelayEventDTO;
  * @since  11.06.2016
  *
  */
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class RelayEventToDTOMapperTest {
 	private RelayEventToDTOMapper sut = RelayEventToDTOMapper.newInstance();
 

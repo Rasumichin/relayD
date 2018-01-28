@@ -2,7 +2,8 @@ package com.relayd.web.api.resource;
 
 import static org.junit.Assert.*;
 
-import org.junit.Test;
+import org.junit.*;
+import org.junit.runners.MethodSorters;
 
 import com.relayd.client.jaxb.PersonsDTO;
 import com.relayd.web.api.bridge.PersonDTOBridge;
@@ -13,6 +14,7 @@ import com.relayd.web.api.bridge.PersonDTOBridge;
  * @since   06.04.2016
  *
  */
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class PersonsResourceTest {
 	private PersonsResource sut = new PersonsResource();
 
