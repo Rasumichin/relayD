@@ -5,7 +5,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
 import com.relayd.client.jaxb.PersonsDTO;
-import com.relayd.web.api.bridge.PersonDTOBridge;
+import com.relayd.web.api.bridge.*;
 
 /**
  * @author  schmollc (Christian@relayd.de)
@@ -34,8 +34,7 @@ public class PersonsResource {
 
 	public PersonDTOBridge getPersonDTOBridge() {
 		if (personDTOBridge == null) {
-			personDTOBridge = new PersonDTOBridge() {
-			};
+			personDTOBridge = PersonDTOBridgeImpl.newInstance();
 		}
 		
 		return personDTOBridge;
