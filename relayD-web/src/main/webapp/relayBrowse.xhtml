@@ -166,6 +166,11 @@
 				<p:toolbar>
 					<f:facet name="right">
 						<p:commandButton
+							actionListener="#{relayBrowsePageBean.createPerson}"
+							icon="ui-icon-plus"
+							update="messages">
+						</p:commandButton>
+						<p:commandButton
 							actionListener="#{relayBrowsePageBean.showAllParticipants}"
 							icon="ui-icon-arrowrefresh-1-w"
 							update="participantTable">

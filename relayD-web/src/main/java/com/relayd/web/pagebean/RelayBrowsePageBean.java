@@ -285,15 +285,15 @@ public class RelayBrowsePageBean implements Serializable {
 
 	public int sortByDuration(TreeNodeRow firstTreeNodeRow, TreeNodeRow secondTreeNodeRow) {
 		if ((firstTreeNodeRow.getClass().equals(TreeNodeRowRelay.class)) && (secondTreeNodeRow.getClass().equals(TreeNodeRowRelay.class))) {
-			Duration firstDuration = ((TreeNodeRowRelay)firstTreeNodeRow).getRelay().getDuration();
-			Duration secondDuration = ((TreeNodeRowRelay)secondTreeNodeRow).getRelay().getDuration();
-			
+			Duration firstDuration = ((TreeNodeRowRelay) firstTreeNodeRow).getRelay().getDuration();
+			Duration secondDuration = ((TreeNodeRowRelay) secondTreeNodeRow).getRelay().getDuration();
+
 			return firstDuration.compareTo(secondDuration);
 		}
-		
+
 		return 0;
 	}
-	
+
 	public int sortByForename(Forename name1, Forename name2) {
 		return Forename.sortByForename(name1, name2);
 	}
@@ -437,5 +437,13 @@ public class RelayBrowsePageBean implements Serializable {
 
 	public Integer getRelaysSum() {
 		return selectedRelayEvent.getNumberOfRelays();
+	}
+
+	public void createPerson() {
+		notImplementedYet();
+	}
+
+	void notImplementedYet() {
+		showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, I18N.NOT_IMPLEMENTD_YET);
 	}
 }
