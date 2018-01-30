@@ -107,7 +107,8 @@
 						<h:outputText value="#{relayRow.duration}" />
 					</p:column>
 					
-					<p:column headerText="Member">
+					<p:column 
+						headerText="Member">
 						<h:outputText value="#{relayRow.member}" />
 						<div align="right">
 							<h:outputText styleClass="#{relayRow.status}" />
@@ -246,15 +247,16 @@
 
 					<p:column
 						headerText="Forename"
+						filterBy="#{participant.forename}"
 						sortBy="#{participant.forename}"
 						sortFunction="#{relayBrowsePageBean.sortByForename}"
-						width="18%">
+						width="23%">
 						<h:outputText value="#{participant.forename}" />
 					</p:column>
 
 					<p:column
 						headerText="Surename"
-						filterMatchMode="contains"
+						filterBy="#{participant.surename}"
 						sortBy="#{participant.surename}"
 						sortFunction="#{relayBrowsePageBean.sortBySurename}"
 						width="23%">
@@ -263,7 +265,7 @@
 
 					<p:column
 						headerText="Year of Birth"
-						width="23%">
+						width="18%">
 						<h:outputText value="#{participant.yearOfBirth}" />
 					</p:column>
 

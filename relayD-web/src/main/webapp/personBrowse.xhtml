@@ -116,6 +116,7 @@
 
 			<p:column
 				headerText="Forename"
+				filterBy="#{person.forename}"
 				visible="#{personBrowsePageBean.visibleColumns[1]}"
 				sortBy="#{person.forename}"
 				sortFunction="#{personBrowsePageBean.sortByForename}"
@@ -125,8 +126,8 @@
 
 			<p:column
 				headerText="Surename"
+				filterBy="#{person.surename}"
 				visible="#{personBrowsePageBean.visibleColumns[2]}"
-				filterMatchMode="contains"
 				sortBy="#{person.surename}"
 				sortFunction="#{personBrowsePageBean.sortBySurename}"
 				width="140">
@@ -135,6 +136,7 @@
 
 			<p:column
 				headerText="Year of Birth"
+				filterBy="#{person.yearOfBirth}"
 				visible="#{personBrowsePageBean.visibleColumns[4]}"
 				sortBy="#{person.yearOfBirth}"
 				sortFunction="#{personBrowsePageBean.sortByYearOfBirth}"
@@ -144,6 +146,7 @@
 
 			<p:column
 				headerText="Shirtsize"
+				filterBy="#{person.shirtsize}"				
 				visible="#{personBrowsePageBean.visibleColumns[5]}"
 				sortBy="#{person.shirtsize}"
 				sortFunction="#{personBrowsePageBean.sortByShirtsize}"
@@ -153,6 +156,7 @@
 
 			<p:column
 				headerText="E-Mail"
+				filterBy="#{person.email}"
 				visible="#{personBrowsePageBean.visibleColumns[6]}"
 				sortBy="#{person.email}"
 				sortFunction="#{personBrowsePageBean.sortByEmail}"
