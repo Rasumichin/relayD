@@ -1,6 +1,7 @@
 package com.relayd.web.api.resource;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 import org.junit.*;
 import org.junit.runners.MethodSorters;
@@ -16,7 +17,8 @@ import com.relayd.web.api.bridge.*;
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class PersonsResourceTest {
-	private PersonsResource sut = PersonsResource.newInstance(PersonDTOBridgeImpl.newInstance());
+	private PersonDTOBridge personDTOBridgeMock = mock(PersonDTOBridge.class);
+	private PersonsResource sut = PersonsResource.newInstance(personDTOBridgeMock);
 
 	@Test(expected=IllegalArgumentException.class)
 	public void testNewInstance_with_null() {

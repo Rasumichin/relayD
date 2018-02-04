@@ -4,7 +4,9 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
+import com.relayd.Settings;
 import com.relayd.client.jaxb.PersonsDTO;
+import com.relayd.ejb.*;
 import com.relayd.web.api.bridge.*;
 
 /**
@@ -46,7 +48,8 @@ public class PersonsResource {
 
 	public PersonDTOBridge getPersonDTOBridge() {
 		if (personDTOBridge == null) {
-			personDTOBridge = PersonDTOBridgeImpl.newInstance();
+			GatewayType gatewayType = Settings.getGatewayType();
+			personDTOBridge = PersonDTOBridgeImpl.newInstance(PersonGatewayFactory.get(gatewayType));
 		}
 		
 		return personDTOBridge;
