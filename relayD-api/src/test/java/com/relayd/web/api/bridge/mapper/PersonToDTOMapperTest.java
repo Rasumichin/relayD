@@ -127,4 +127,18 @@ public class PersonToDTOMapperTest {
 		Integer actual = personDTO.getYearOfBirth();
 		assertEquals("Mapping of 'person' (yearOfBirth) was not correct!", expected, actual);
 	}
+	
+	@Test
+	public void testMapPersonToDTO_properties_must_be_null() {
+		Person person = Person.newInstance();
+		
+		PersonDTO personDTO = sut.mapPersonToDTO(person);
+		
+		assertNull("Mapping of 'comment' was not correct!", personDTO.getComment());
+		assertNull("Mapping of 'email' was not correct!", personDTO.getEmail());
+		assertNull("Mapping of 'forename' was not correct!", personDTO.getForename());
+		assertNull("Mapping of 'shirtsize' was not correct!", personDTO.getShirtSize());
+		assertNull("Mapping of 'surename' was not correct!", personDTO.getSurename());
+		assertNull("Mapping of 'yearOfBirth' was not correct!", personDTO.getYearOfBirth());
+	}
 }
