@@ -3,10 +3,12 @@ package com.relayd.web.api.resource;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
+import java.util.*;
+
 import org.junit.*;
 import org.junit.runners.MethodSorters;
 
-import com.relayd.client.jaxb.PersonsDTO;
+import com.relayd.client.jaxb.*;
 import com.relayd.web.api.bridge.*;
 
 /**
@@ -31,10 +33,26 @@ public class PersonsResourceTest {
 	}
 	
 	@Test
-	public void testGetPersons_not_null() {
+	public void testGetPersons_when_result_size_equals_zero() {
+		int expected = 0;
+		
 		PersonsDTO personDTO = sut.getPersons();
 		
-		assertNotNull("The 'personsDTO' must not be 'null'!", personDTO);
+		int actual = personDTO.getPersons().size();
+		assertEquals("Initial size of 'personDTOs' is not correct!", expected, actual);
+	}
+	
+	@Test
+	public void testGetPersons_when_result_size_equals_one() {
+		List<PersonDTO> personDTOs = new ArrayList<>();
+		personDTOs.add(PersonDTO.newInstance());
+		when(personDTOBridgeMock.all()).thenReturn(personDTOs);
+		int expected = 1;
+		
+		PersonsDTO personDTO = sut.getPersons();
+		
+		int actual = personDTO.getPersons().size();
+		assertEquals("Result size of 'personDTOs' is not correct!", expected, actual);
 	}
 	
 	@Test

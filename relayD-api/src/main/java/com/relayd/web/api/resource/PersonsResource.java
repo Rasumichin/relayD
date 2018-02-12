@@ -1,11 +1,13 @@
 package com.relayd.web.api.resource;
 
+import java.util.List;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
 import com.relayd.Settings;
-import com.relayd.client.jaxb.PersonsDTO;
+import com.relayd.client.jaxb.*;
 import com.relayd.ejb.*;
 import com.relayd.web.api.bridge.*;
 
@@ -19,7 +21,11 @@ import com.relayd.web.api.bridge.*;
 public class PersonsResource {
 	private PersonDTOBridge personDTOBridge;
 
-	public PersonsResource(PersonDTOBridge aPersonDTOBridge) {
+	// Public constructor is required for JAX-RS.
+	public PersonsResource() {
+	}
+
+	private PersonsResource(PersonDTOBridge aPersonDTOBridge) {
 		personDTOBridge = aPersonDTOBridge;
 	}
 
@@ -42,6 +48,8 @@ public class PersonsResource {
 	@Produces("application/json")
 	public PersonsDTO getPersons() {
 		PersonsDTO result = new PersonsDTO();
+		List<PersonDTO> personDTOs = getPersonDTOBridge().all();
+		result.addAllPersons(personDTOs);
 		
 		return result;
 	}
