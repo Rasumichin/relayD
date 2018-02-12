@@ -1,9 +1,11 @@
 package com.relayd.web.api.bridge;
 
-import java.util.List;
+import java.util.*;
 
+import com.relayd.Person;
 import com.relayd.client.jaxb.PersonDTO;
 import com.relayd.ejb.PersonGateway;
+import com.relayd.web.api.bridge.mapper.PersonToDTOMapper;
 
 /**
  * @author Rasumichin (Erik@relayd.de)
@@ -27,7 +29,13 @@ public class PersonDTOBridgeImpl implements PersonDTOBridge {
 
 	@Override
 	public List<PersonDTO> all() {
-		return null;
+		List<PersonDTO> personDTOs = new ArrayList<>();
+		List<Person> persons = getPersonGateway().getAll();
+		
+		PersonToDTOMapper mapper = PersonToDTOMapper.newInstance();
+		persons.forEach(eachPerson -> personDTOs.add(mapper.mapPersonToDTO(eachPerson)));
+		
+		return personDTOs;
 	}
 
 	PersonGateway getPersonGateway() {

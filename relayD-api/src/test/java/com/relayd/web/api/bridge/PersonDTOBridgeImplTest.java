@@ -3,11 +3,12 @@ package com.relayd.web.api.bridge;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
-import java.util.List;
+import java.util.*;
 
 import org.junit.*;
 import org.junit.runners.MethodSorters;
 
+import com.relayd.Person;
 import com.relayd.client.jaxb.PersonDTO;
 import com.relayd.ejb.PersonGateway;
 
@@ -33,9 +34,16 @@ public class PersonDTOBridgeImplTest {
 	
 	@Test
 	public void testAll() {
-		List<PersonDTO> actual = sut.all();
+		List<Person> persons = new ArrayList<>();
+		persons.add(Person.newInstance());
+		persons.add(Person.newInstance());
+		when(personGatewayMock.getAll()).thenReturn(persons);
+		int expected = 2;
 		
-		assertNull("Assertion not longer valid!", actual);
+		List<PersonDTO> result = sut.all();
+		
+		int actual = result.size();
+		assertEquals("Result of fetching all 'persons' is not correct!", expected, actual);
 	}
 	
 	@Test
