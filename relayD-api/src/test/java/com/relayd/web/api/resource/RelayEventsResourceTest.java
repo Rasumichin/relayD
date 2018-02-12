@@ -9,6 +9,7 @@ import javax.ws.rs.core.*;
 import javax.ws.rs.core.Response.Status;
 
 import org.junit.*;
+import org.junit.runners.MethodSorters;
 import org.mockito.Mockito;
 import static org.mockito.Mockito.*;
 
@@ -20,6 +21,7 @@ import com.relayd.web.api.bridge.RelayEventDTOBridge;
  * @since  18.06.2017
  *
  */
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class RelayEventsResourceTest {
 	private RelayEventDTOBridge eventDTOBridgeMock = mock(RelayEventDTOBridge.class);
 	private RelayEventsResource sut = RelayEventsResource.newInstance(eventDTOBridgeMock);

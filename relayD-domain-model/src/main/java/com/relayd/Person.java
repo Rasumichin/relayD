@@ -18,6 +18,7 @@ import com.relayd.attributes.YearOfBirth;
  */
 public class Person implements Serializable {
 	private static final long serialVersionUID = -7937105233874151745L;
+	private static final Email defaultEmail = Email.createFromLocalAndDomainPart("forename.surename", "canda.com");
 
 	UUID uuid;
 	private Surename surename = Surename.newInstance();
@@ -39,10 +40,10 @@ public class Person implements Serializable {
 		return new Person();
 	}
 
-	Email getDefaultEmail() {
-		return Email.newInstance("forename.surename@canda.com");
+	public static Email getDefaultEmail() {
+		return defaultEmail.clone();
 	}
-
+	
 	public UUID getUuid() {
 		return uuid;
 	}

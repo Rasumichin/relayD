@@ -6,6 +6,7 @@ import static org.mockito.Mockito.*;
 import java.util.*;
 
 import org.junit.*;
+import org.junit.runners.MethodSorters;
 
 import com.relayd.RelayEvent;
 import com.relayd.client.jaxb.RelayEventDTO;
@@ -16,6 +17,7 @@ import com.relayd.ejb.RelayEventGateway;
  * @since  24.06.2017
  *
  */
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class RelayEventDTOBridgeImplTest {
 	RelayEventDTOBridgeImpl sut;
 	RelayEventGateway gatewayMock = mock(RelayEventGateway.class);

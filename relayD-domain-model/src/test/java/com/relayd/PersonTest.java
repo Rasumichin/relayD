@@ -25,6 +25,11 @@ import com.relayd.attributes.YearOfBirth;
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class PersonTest {
+	private static final Email expectedDefaultEmail = Email.createFromLocalAndDomainPart("forename.surename", "canda.com");
+
+	private static Email getExpectedDefaultEmail() {
+		return expectedDefaultEmail.clone();
+	}
 
 	@Test
 	public void testToString() {
@@ -373,23 +378,20 @@ public class PersonTest {
 	public void testPrepareNewPerson() {
 		Person sut = Person.newInstance();
 
-		Email expected = sut.getDefaultEmail();
+		Email expected = getExpectedDefaultEmail();
 
 		Email result = sut.lastCalculatedEmail;
 		assertEquals("[lastCalculatedEmail] is not correct.", expected, result);
 	}
 
 	@Test
-	public void testGetDefaultEmail() {
+	public void testGetEmail() {
 		Person sut = Person.newInstance();
-
 		Email expected = getExpectedDefaultEmail();
-		Email result = sut.getDefaultEmail();
-		assertEquals("Default email address is not correct.", expected, result);
-	}
 
-	private Email getExpectedDefaultEmail() {
-		return Email.createFromLocalAndDomainPart("forename.surename", "canda.com");
+		Email result = sut.getEmail();
+
+		assertEquals("Default email address is not correct.", expected, result);
 	}
 
 	@Test
@@ -464,7 +466,7 @@ public class PersonTest {
 	@Test
 	public void testRecalculateEmail() {
 		Person sut = Person.newInstance();
-		sut.setEmail(sut.getDefaultEmail());
+		sut.setEmail(Person.getDefaultEmail());
 		Email expected = Email.createFromLocalAndDomainPart("john", "canda.com");
 		sut.setForename(Forename.newInstance("john"));
 
@@ -559,5 +561,14 @@ public class PersonTest {
 		boolean actual = sut.equals(secondSut);
 
 		assertTrue(actual);
+	}
+	
+	@Test
+	public void testGetDefaultEmail() {
+		Email expected = getExpectedDefaultEmail();
+		
+		Email actual = Person.getDefaultEmail();
+		
+		assertEquals("Default Email is not correct!", expected, actual);
 	}
 }
