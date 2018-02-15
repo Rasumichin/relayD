@@ -29,7 +29,12 @@
 			],
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{myRelaydCredentials}}"
+					}
+				],
 				"body": {},
 				"url": {
 					"raw": "http://{{host}}:{{tomcatPort}}/relayD-api/resources/relayEvents",
@@ -71,7 +76,12 @@
 			],
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{myRelaydCredentials}}"
+					}
+				],
 				"body": {},
 				"url": {
 					"raw": "http://{{host}}:{{tomcatPort}}/relayD-api/resources/relayEvents/ping",
@@ -117,7 +127,12 @@
 			],
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{myRelaydCredentials}}"
+					}
+				],
 				"body": {},
 				"url": {
 					"raw": "http://{{host}}:{{tomcatPort}}/relayD-api/resources/relayEvents/4711",
@@ -159,8 +174,16 @@
 				}
 			],
 			"request": {
+				"auth": {
+					"type": "noauth"
+				},
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{myRelaydCredentials}}"
+					}
+				],
 				"body": {},
 				"url": {
 					"raw": "http://{{host}}:{{tomcatPort}}/relayD-api/resources/persons/ping",
@@ -203,7 +226,12 @@
 			],
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{myRelaydCredentials}}"
+					}
+				],
 				"body": {},
 				"url": {
 					"raw": "http://{{host}}:{{tomcatPort}}/relayD-api/resources/persons",
@@ -216,6 +244,49 @@
 						"relayD-api",
 						"resources",
 						"persons"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Request Resource without Authentication",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4984f52b-5124-4f00-84f4-de8cec9cc3da",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"HTTP Status Code is OK\", function () {",
+							"    pm.response.to.have.status(401);",
+							"});",
+							"",
+							"pm.test(\"Body contains requirement for HTTP BasicAuth\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"This request requires HTTP authentication\");",
+							"});",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://{{host}}:{{tomcatPort}}/relayD-api/resources/persons/ping",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{tomcatPort}}",
+					"path": [
+						"relayD-api",
+						"resources",
+						"persons",
+						"ping"
 					]
 				},
 				"description": ""
