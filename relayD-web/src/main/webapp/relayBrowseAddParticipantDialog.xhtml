@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title>Relay Browse Add Persons</title>
+	<style type="text/css">
+.ui-widget {
+	font-size: 90%;
+}
+</style>
+</h:head>
+
+<h:body>
+	<h:form id="form">
+		<p:growl
+			id="growl"
+			showDetail="true" />
+		<p:focus />
+		<h:panelGrid
+			columns="2"
+			id="inputgrid"
+			cellpadding="5">
+			<p:outputLabel
+				value="Persons" />
+		</h:panelGrid>
+		<p:dataTable
+			id="personTable"
+			var="person"
+			widgetVar="personTable"
+			value="#{relayBrowseAddParticipantPageBean.persons}"
+			selection="#{relayBrowseAddParticipantPageBean.selectedPersons}"
+			selectionMode="multiple"
+			scrollable="true"
+			scrollHeight="270"
+			rowKey="#{person.uuid}"
+			resizableColumns="true">
+
+			<p:column
+				headerText="Forename"
+				sortBy="#{person.forename}"
+				sortFunction="#{relayBrowseAddParticipantPageBean.sortByForename}"
+				width="140">
+				<h:outputText value="#{person.forename}" />
+			</p:column>
+
+			<p:column
+				headerText="Surename"
+				sortBy="#{person.surename}"
+				sortFunction="#{relayBrowseAddParticipantPageBean.sortBySurename}"
+				width="140">
+				<h:outputText value="#{person.surename}" />
+			</p:column>
+		</p:dataTable>
+
+	<p:commandButton
+			actionListener="#{relayBrowseAddParticipantPageBean.cancel}"
+			icon="ui-icon-close"
+			style="float:left;" />
+		<p:commandButton
+			update="form"
+			actionListener="#{relayBrowseAddParticipantPageBean.save}"
+			icon="ui-icon-check"
+			style="float:right;" />
+	</h:form>
+</h:body>
+</html>
