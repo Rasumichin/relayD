@@ -73,6 +73,9 @@ public class RelayBrowsePageBean implements Serializable {
 	@ManagedProperty(value = "#{participantEditPageBean}")
 	private ParticipantEditPageBean participantEditPageBean;
 
+	@ManagedProperty(value = "#{relayBrowseAddParticipantPageBean}")
+	private RelayBrowseAddParticipantPageBean relayBrowseAddParticipantPagenBean;
+
 	@PostConstruct
 	public void init() {
 		relayBridge = new RelayBridgeImpl();
@@ -439,11 +442,15 @@ public class RelayBrowsePageBean implements Serializable {
 		return selectedRelayEvent.getNumberOfRelays();
 	}
 
-	public void createPerson() {
-		notImplementedYet();
+	public void addParticipant(@SuppressWarnings("unused") ActionEvent actionEvent) {
+		getRelayBrowseAddParticipantPagenBean().openDialogFor(getSelectedRelayEvent());
 	}
 
-	void notImplementedYet() {
-		showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, I18N.NOT_IMPLEMENTD_YET);
+	public RelayBrowseAddParticipantPageBean getRelayBrowseAddParticipantPagenBean() {
+		return relayBrowseAddParticipantPagenBean;
+	}
+
+	public void setRelayBrowseAddParticipantPagenBean(RelayBrowseAddParticipantPageBean aRelayBrowseAddParticipantPagenBean) {
+		relayBrowseAddParticipantPagenBean = aRelayBrowseAddParticipantPagenBean;
 	}
 }
