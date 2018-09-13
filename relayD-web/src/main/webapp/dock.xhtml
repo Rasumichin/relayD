@@ -3,7 +3,8 @@
 		xmlns:p="http://primefaces.org/ui"
 		xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 	
-		<p:dock position="bottom">
+		<p:dock id="dockMenu"
+		 		position="bottom">
 			<p:menuitem
 				value="Home"
 				icon="/images/dock/home.png"
@@ -19,7 +20,8 @@
 			<p:menuitem
 				value="Relay"
 				icon="/images/dock/relay.png"
-				url="relayBrowse.xhtml" />
+				url="relayBrowse.xhtml" 
+				disabled="#{dockPageBean.noEventExist()}"/>
 			<p:menuitem
 				value="Settings"
 				icon="/images/dock/settings.png"
