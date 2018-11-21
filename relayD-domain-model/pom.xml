@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.relayd</groupId>
 		<artifactId>relayD-parent</artifactId>
-		<version>1.8</version>
+		<version>1.9-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>relayD-domain-model</artifactId>
@@ -19,7 +19,7 @@
 		<dependency>
 			<groupId>com.relayd</groupId>
 			<artifactId>relayD-entity-model</artifactId>
-			<version>1.8</version>
+			<version>1.9-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.commons</groupId>
