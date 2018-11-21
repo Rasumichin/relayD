@@ -4,13 +4,13 @@
 
 	<groupId>com.relayd</groupId>
 	<artifactId>relayD-parent</artifactId>
-	<version>1.8-SNAPSHOT</version>
+	<version>1.8</version>
 	<packaging>pom</packaging>
 
 	<name>relayD-parent</name>
 	<scm>
 		<connection>scm:git:https://github.com/Rasumichin/relayD.git</connection>
-		<tag>HEAD</tag>
+		<tag>relayD-parent-1.8</tag>
 	</scm>
 
 	<modules>
