@@ -24,7 +24,8 @@
 			id="messages"
 			showDetail="true" />
 
-			<h:outputText value="#{statisticsPageBean.toDo}" />
+			<p:chart type="bar" model="#{statisticsPageBean.horizontalBarModel}" style="height:300px"/>
+		
 		<ui:include src="/dock.xhtml" />
 
 	</h:form>
