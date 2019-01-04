@@ -34,7 +34,7 @@ public class SettingsTest {
 	@Test
 	public void testGetVersion() {
 		String actual = sut.getVersion();
-		assertEquals("[getVersion] not correct!", "1.8 - Codename Intrinsisches Augustiner", actual);
+		assertEquals("[getVersion] not correct!", "1.9 - Codename Jungfräuliches Augustiner", actual);
 	}
 
 	@Test
