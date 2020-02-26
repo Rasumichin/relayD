@@ -8,7 +8,9 @@ import org.apache.commons.lang3.time.DurationFormatUtils;
 
 import com.relayd.attributes.Email;
 import com.relayd.attributes.Forename;
+import com.relayd.attributes.Shirtsize;
 import com.relayd.attributes.Surename;
+import com.relayd.attributes.YearOfBirth;
 
 /**
  * @author schmollc (Christian@relayd.de)
@@ -22,6 +24,8 @@ public class Member implements Serializable {
 	private UUID uuidPerson;
 	private Forename forename = Forename.newInstance();
 	private Surename surename = Surename.newInstance();
+	private Shirtsize shirtsize = Shirtsize.UNKNOWN;
+	private YearOfBirth yearOfBirth = YearOfBirth.newInstance();
 	private Email email = Email.newInstance();
 	private Duration duration = Duration.ZERO;
 
@@ -29,12 +33,14 @@ public class Member implements Serializable {
 		uuid = UUID.randomUUID();
 	}
 
-	private Member(Forename aForename, Surename aSurename, Email anEmail, UUID anUuid) {
+	private Member(Forename aForename, Surename aSurename, Shirtsize aShirtsize, Email anEmail, UUID anUuid, YearOfBirth aYearOfBirth) {
 		uuid = UUID.randomUUID();
 		forename = aForename;
 		surename = aSurename;
+		shirtsize = aShirtsize;
 		email = anEmail;
 		uuidPerson = anUuid;
+		yearOfBirth = aYearOfBirth;
 	}
 
 	public static Member newInstance() {
@@ -45,7 +51,7 @@ public class Member implements Serializable {
 		if (participant == null) {
 			return MemberNullObject.instance();
 		}
-		return new Member(participant.getForename(), participant.getSurename(), participant.getEmail(), participant.getUuidPerson());
+		return new Member(participant.getForename(), participant.getSurename(), participant.getShirtsize(), participant.getEmail(), participant.getUuidPerson(), participant.getYearOfBirth());
 	}
 
 	public boolean isEmpty() {
@@ -70,6 +76,10 @@ public class Member implements Serializable {
 
 	public Surename getSurename() {
 		return surename;
+	}
+
+	public Shirtsize getShirtsize() {
+		return shirtsize;
 	}
 
 	public Email getEmail() {
@@ -157,5 +167,9 @@ public class Member implements Serializable {
 
 	public boolean hasMail() {
 		return !getEmail().isEmpty();
+	}
+
+	public YearOfBirth getYearOfBirth() {
+		return yearOfBirth;
 	}
 }

@@ -110,10 +110,21 @@
 					<p:column 
 						headerText="Member">
 						<h:outputText value="#{relayRow.member}" />
+					</p:column>
+
+					<p:column 
+						headerText="Year of Birth">
+						<h:outputText value="#{relayRow.yearOfBirth}" />
+					</p:column>
+
+					<p:column 
+						headerText="Shirtsize">
+						<h:outputText value="#{relayRow.shirtsize}" />
 						<div align="right">
 							<h:outputText styleClass="#{relayRow.status}" />
 						</div>
 					</p:column>
+
 				</p:treeTable>
 
 			</p:layoutUnit>

@@ -40,6 +40,16 @@ public class TreeNodeRowMember extends TreeNodeRow {
 	}
 
 	@Override
+	public String getShirtsize() {
+		return member.getShirtsize().getDescription();
+	}
+
+	@Override
+	public String getYearOfBirth() {
+		return member.getYearOfBirth().toString();
+	}
+
+	@Override
 	public String getDuration() {
 		return member.getDurationFormatted();
 	}

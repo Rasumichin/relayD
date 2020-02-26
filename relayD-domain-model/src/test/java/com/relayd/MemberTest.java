@@ -1,6 +1,9 @@
 package com.relayd;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.io.Serializable;
 import java.time.Duration;
@@ -13,11 +16,12 @@ import org.junit.runners.MethodSorters;
 import com.relayd.Member.MemberNullObject;
 import com.relayd.attributes.Email;
 import com.relayd.attributes.Forename;
+import com.relayd.attributes.Shirtsize;
 import com.relayd.attributes.Surename;
+import com.relayd.attributes.YearOfBirth;
 
 /**
- * Verlasse dich auf nichts.
- *  - Miyamoto Musashi
+ * Verlasse dich auf nichts. - Miyamoto Musashi
  *
  * @author schmollc (Christian@relayd.de)
  * @since 02.02.2017
@@ -130,6 +134,36 @@ public class MemberTest {
 		Surename actual = sut.getSurename();
 
 		assertEquals("[surename] not correct!", expected, actual);
+	}
+
+	@Test
+	public void testGetShirtsize() {
+		Shirtsize expected = Shirtsize.HerrenM;
+
+		Person person = Person.newInstance();
+		person.setUuid(UUID.randomUUID());
+		person.setShirtsize(expected);
+		Participant participant = Participant.newInstance(person);
+		Member sut = Member.newInstance(participant);
+
+		Shirtsize actual = sut.getShirtsize();
+
+		assertEquals("[shirtsize] not correct!", expected, actual);
+	}
+
+	@Test
+	public void testGetYearOfBirth() {
+		YearOfBirth expected = YearOfBirth.newInstance(1971);
+
+		Person person = Person.newInstance();
+		person.setUuid(UUID.randomUUID());
+		person.setYearOfBirth(expected);
+		Participant participant = Participant.newInstance(person);
+		Member sut = Member.newInstance(participant);
+
+		YearOfBirth actual = sut.getYearOfBirth();
+
+		assertEquals("[yearOfBirth] not correct!", expected, actual);
 	}
 
 	@Test

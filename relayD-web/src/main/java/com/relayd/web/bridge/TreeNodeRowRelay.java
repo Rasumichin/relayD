@@ -32,6 +32,11 @@ public class TreeNodeRowRelay extends TreeNodeRow {
 	}
 
 	@Override
+	public String getShirtsize() {
+		return "";
+	}
+
+	@Override
 	public String getDuration() {
 		return relay.getDurationFormatted();
 	}

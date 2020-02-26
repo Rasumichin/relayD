@@ -5,6 +5,7 @@ import java.io.Serializable;
 import com.relayd.Member;
 import com.relayd.Relay;
 import com.relayd.attributes.Position;
+import com.relayd.attributes.Shirtsize;
 
 /**
  * Klasse übernommen aus dem Primefaces-Beispiel.
@@ -43,8 +44,18 @@ public abstract class TreeNodeRow implements Serializable {
 	}
 
 	public void setMember(@SuppressWarnings("unused") Member member) {
-		// TODO - REL-307 - Idee ist diese abstract zu machen, so daß beim klicken auf Member Zeile genau dort eingefügt wird,
-		// bei klicken auf RelayZeile die nächste freie stelle befüllt wird. Somit haben beide mit dieser Methode zu tun.
+		// TODO - REL-307 - Idee ist diese abstract zu machen, so daß beim klicken auf
+		// Member Zeile genau dort eingefügt wird,
+		// bei klicken auf RelayZeile die nächste freie stelle befüllt wird. Somit haben
+		// beide mit dieser Methode zu tun.
+	}
+
+	public String getShirtsize() {
+		return Shirtsize.UNKNOWN.getDescription();
+	}
+
+	public String getYearOfBirth() {
+		return "";
 	}
 
 	public Position getPosition() {
