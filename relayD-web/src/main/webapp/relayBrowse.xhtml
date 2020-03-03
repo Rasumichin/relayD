@@ -41,7 +41,7 @@
 					id="toolbarWest">
 					<f:facet name="left">
 						<p:commandButton
-							actionListener="#{relayBrowsePageBean.showAllRelays}"
+							actionListener="#{relayBrowsePageBean.refreshRelays}"
 							icon="ui-icon-arrowrefresh-1-w"
 							update="relayTable">
 						</p:commandButton>
@@ -182,7 +182,7 @@
 							update="messages">
 						</p:commandButton>
 						<p:commandButton
-							actionListener="#{relayBrowsePageBean.showAllParticipants}"
+							actionListener="#{relayBrowsePageBean.refreshParticipants}"
 							icon="ui-icon-arrowrefresh-1-w"
 							update="participantTable">
 						</p:commandButton>

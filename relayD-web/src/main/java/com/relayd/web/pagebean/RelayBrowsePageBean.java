@@ -95,7 +95,7 @@ public class RelayBrowsePageBean implements Serializable {
 		refreshRelays();
 	}
 
-	void refreshParticipants() {
+	public void refreshParticipants() {
 		setSelectedRelayEvent(relayEventBridge.get(getRelayEventDisplay().getUuid()));
 
 		participants = new ArrayList<>(getSelectedRelayEvent().getParticipants());
@@ -103,7 +103,7 @@ public class RelayBrowsePageBean implements Serializable {
 		refreshRelays();
 	}
 
-	private void refreshRelays() {
+	public void refreshRelays() {
 		root = relayBridge.convertToTreeNode(getSelectedRelayEvent().getRelays());
 	}
 
@@ -231,14 +231,6 @@ public class RelayBrowsePageBean implements Serializable {
 	}
 
 	public void onParticpantEditClosed(@SuppressWarnings("unused") SelectEvent event) {
-		refreshParticipants();
-	}
-
-	public void showAllRelays() {
-		refreshRelays();
-	}
-
-	public void showAllParticipants() {
 		refreshParticipants();
 	}
 
